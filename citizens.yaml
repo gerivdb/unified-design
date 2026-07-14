@@ -1,0 +1,16 @@
+# citizens.yaml — schéma RSS-v2
+version: "1.0"
+repo: "unified-design"
+type: "consumer"
+concepts:
+  - id: "meta-design"
+    status: "actif"
+    nexus_index: "gerivdb/NEXUS/concepts/meta-design"
+    last_updated: "2026-07-15"
+  - id: "unified-design-atlas"
+    status: "actif"
+    nexus_index: "gerivdb/NEXUS/concepts/unified-design-atlas"
+    last_updated: "2026-07-15"
+ontology_lifecycle: "SPEC/ontology-lifecycle-protocol.md"
+nexus_indexer: "SPEC/nexus-concept-indexer-protocol.md"
+argus_wiring: "SPEC/argus-wiring-protocol.md"

@@ -1,0 +1,33 @@
+# RSS ignore patterns
+*.tmp
+*.log
+.env
+node_modules/
+__pycache__/
+*.pyc
+*.zip
+*.tar.gz
+
+# Build artifacts
+*.b64
+.coverage
+.htmlcov
+
+# Cache directories
+.zig-cache/
+.pytest_cache/
+
+# Temporary directories
+time_machine/
+vibe-loop-out/
+wal/
+trix/
+.kilo/
+.swarm/
+.cron-out/
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

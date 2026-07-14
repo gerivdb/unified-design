@@ -3,6 +3,8 @@ name: unified-design
 slug: unified-design
 strate: L0-CANON
 intent_hash: 0xUNIFIED_DESIGN_20260715
+rss_depth: 4
+type: core
 description: |
   Meta-Design (MDU) — L'atlas global des invariants architecturaux de l'écosystème gerivdb.
   Constitution technique définissant les 4 piliers : Sonar-Driven Design, Triadic Compound Eye,
@@ -11,6 +13,16 @@ owner: gerivdb
 status: active
 created: 2026-07-15
 last_updated: 2026-07-15
+
+# RSS-v2 compliance
+profile: CRITICAL
+enforcement_mode:
+  ci: full
+  branch_protection: full
+  hooks: full
+  rss_lint: all-checks
+  vyoa: full
+  brgs: full
 
 # Livrables associés
 adrs:
@@ -28,3 +40,9 @@ crosslinks:
 # Standards
 standards:
   - meta-design.yaml
+
+# Concepts ontologiques
+ontology_concepts:
+  - meta-design
+  - unified-design-atlas
+  - architectural-invariances

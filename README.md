@@ -46,15 +46,20 @@ gerivdb connard validate
 
 ## Fichiers
 
-- `META-DESIGN.md` — Atlas des invariants architecturaux
-- `meta-design.yaml` — Schéma de validation YAML
-- `ADR-013.md` — Protocole de validation
+| Fichier | Description |
+|---------|-------------|
+| `docs/META-DESIGN.md` | Atlas des invariants architecturaux |
+| `meta-design.yaml` | Schéma de validation YAML |
+| `REPO.yaml` | Métadonnées du repository |
+| `citizens.yaml` | Déclaration des concepts (RSS-v2) |
+| `ONTOLOGY_DECLARATION.yaml` | Déclaration ontologique (RSS-v2.3) |
 
 ## Références
 
-- ADR-013 : Meta-Design Validation Protocol
+- **ADR** : [ADR-013 — Meta-Design Validation Protocol](https://github.com/gerivdb/GOVERNANCE-HUB/blob/main/ADR/ADR-013-meta-design-validation-protocol.md)
 - ADR-2026-06-28-001 : Logical Architecture N1-N4
 - ADR-CONNARD-001 : Connard Design Protocol
+- RSS-v2 : Repo Structure Standard
 
 ## License
 
