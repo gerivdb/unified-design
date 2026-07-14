@@ -1,0 +1,30 @@
+type: Meta-Design Repository
+name: unified-design
+slug: unified-design
+strate: L0-CANON
+intent_hash: 0xUNIFIED_DESIGN_20260715
+description: |
+  Meta-Design (MDU) — L'atlas global des invariants architecturaux de l'écosystème gerivdb.
+  Constitution technique définissant les 4 piliers : Sonar-Driven Design, Triadic Compound Eye,
+  MorphoHDL Anamorphic Growth, et Connard Design.
+owner: gerivdb
+status: active
+created: 2026-07-15
+last_updated: 2026-07-15
+
+# Livrables associés
+adrs:
+  - ADR-013
+
+# Références croisées
+crosslinks:
+  - GOVERNANCE-HUB
+  - REPO-STANDARDS
+  - connard-design
+  - sonar-driven-design
+  - triadic-compound-eye
+  - morphohdl-anamorphic-growth
+
+# Standards
+standards:
+  - meta-design.yaml

@@ -1,0 +1,155 @@
+# Meta-Design Schema (MDU)
+# Schéma de validation YAML pour l'architecture gerivdb
+
+version: "1.0.0"
+intent_hash: 0xMDU_SCHEMA_20260715
+status: active
+
+# Architecture des quatre piliers
+piliers:
+  - nom: "Sonar-Driven Design"
+    abbr: "SDD"
+    role: "Observabilité"
+    couleur: "#4CAF50"
+    invariants:
+      - nom: "Ping/Echo"
+        description: "Message minimal avec ID unique + timestamp"
+      - nom: "Sonar Map"
+        description: "Structure partagée d'état temps réel"
+      - nom: "PRF"
+        description: "Pulse Repetition Frequency"
+      - nom: "Latence P99"
+        valeur: 45
+        unite: "ms"
+      - nom: "Puissance"
+        valeur: 12
+        unite: "W"
+
+  - nom: "Triadic Compound Eye"
+    abbr: "TCE"
+    role: "Orchestration Agents"
+    couleur: "#2196F3"
+    invariants:
+      - nom: "Triade C-E-Obs"
+        description: "Communication → Exécution → Observation"
+      - nom: "Swarm Intelligence"
+        description: "Agents autonomes évolutifs"
+      - nom: "HITL Gate"
+        description: "Validation humaine pour modifications critiques"
+
+  - nom: "MorphoHDL Anamorphic Growth"
+    abbr: "MAG"
+    role: "Optimisation Matérielle"
+    couleur: "#9C27B0"
+    invariants:
+      - nom: "Croissance Expérimentale"
+        description: "Circuits adaptatifs"
+      - nom: "Base 243"
+        description: "Structure ternaire native 3^5"
+      - nom: "RVBA"
+        description: "Canaux de couleur sémantique"
+      - nom: "O(1) Index"
+        description: "Accès constant via index ternaire"
+
+  - nom: "Connard Design"
+    abbr: "CD"
+    role: "Contrôle Qualité"
+    couleur: "#F44336"
+    invariants:
+      - nom: "Héritage"
+        max: 3
+        description: "Profondeur d'abstraction"
+      - nom: "Latence P99"
+        valeur: 45
+        unite: "ms"
+      - nom: "Puissance"
+        valeur: 12
+        unite: "W"
+      - nom: "Roast Automatique"
+        description: "Feedback négatif constructif"
+
+# Règles transversales
+regles_transversales:
+  - nom: "Composition"
+    description: "Profondeur dépendance ≤ 3 niveaux"
+    action: "Wall of Shame"
+
+  - nom: "Latence"
+    description: "P99 ≤ 45ms pour opérations critiques"
+    action: "Roast automatique"
+
+  - nom: "Puissance"
+    description: "≤ 12W par inférence"
+    action: "Optimisation PIANO"
+
+  - nom: "Observation"
+    description: "Tout système critique doit être observable"
+    action: "Ajout de probes Sonar"
+
+  - nom: "Validation"
+    description: "Toute modification passe par Connard"
+    commandes:
+      - "gerivdb connard validate <path>"
+      - "gerivdb connard roast <path>"
+      - "gerivdb connard watch <path>"
+
+# Couche de gouvernance
+couche_gouvernance:
+  L0_CANONICAL:
+    - "GOVERNANCE-HUB"
+    - "ONTOLOGY"
+    - "BRAIN"
+    - "unified-design"
+  L1_CAUSALITY:
+    - "NEXUS"
+    - "KIVA"
+    - "GATEWAY-MANAGER"
+  L2_COMPOSITION:
+    - "ECOS-CLI"
+    - "KIVA-CLI"
+    - "DevTools"
+  L3_EMERGENCE:
+    - "FLUENCE"
+    - "CANDIDATOR"
+    - "ARGUS"
+  L4_TOOLS:
+    - "CTULU"
+    - "WAZAA"
+    - "TRIX"
+
+# Agents associés par pilier
+agents_par_pilier:
+  SDD:
+    - "NEXUS"
+    - "ECOYSTEM"
+    - "BRAIN"
+  TCE:
+    - "FLUENCE"
+    - "CANDIDATOR"
+    - "KRONOS"
+    - "IRIS"
+  MAG:
+    - "LADYBIRD"
+    - "PIANO"
+    - "KEEL"
+  CD:
+    - "CoPaw"
+    - "SABRE"
+    - "Alfred"
+
+# Validation
+validation:
+  schema: "meta-design.yaml"
+  adr: "ADR-012"
+  cli: "gerivdb meta validate"
+  hooks:
+    pre_commit: true
+    pre_push: true
+
+# Références
+references:
+  - ADR-012-meta-design-validation-protocol
+  - ADR-2026-06-28-001-logical-architecture-n1-n4
+  - ADR-CONNARD-001-connard-design-protocol
+  - INT-CONNARD-001
+  - EPIC-CONNARD-001
