@@ -1,0 +1,11 @@
+---
+name: conversation-forensics-analyzer
+description: "Analyse forensique des conversations pour détecter frictions, bugs, ruptures de chaîne."
+parameters:
+  scan_targets:
+    - tool_calls
+    - message_chains
+    - error_patterns
+  output: forensics_report
+inherits: [artifact-synced-loop, scoped-loop]
+---

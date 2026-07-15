@@ -1,0 +1,9 @@
+---
+name: phi-cps-regression-guard
+description: "Gate CI phi-CPS : bloque le merge si phi-CPS < 4.4 et génère un rapport de conformité."
+parameters:
+  threshold: 4.4
+  block_merge: true
+  report: phi-cps-compliance
+inherits: [continuous-design-validation, formal-verification]
+---

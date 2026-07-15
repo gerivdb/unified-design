@@ -1,0 +1,9 @@
+---
+name: focus-beam-activator
+description: "Mode focus-beam sur gap critique : verrouillage swarm exclusif sur un problème prioritaire."
+parameters:
+  activation_mode: exclusive_swarm
+  target: critical_gap
+  scope_lock: true
+inherits: [coherence-attractor, closed-loop-goal]
+---
