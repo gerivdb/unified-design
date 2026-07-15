@@ -1,0 +1,12 @@
+---
+name: proactive-friction-sensor
+description: "Détection prédictive de friction avant implémentation avec score 0.0-1.0."
+parameters:
+  scoring_range: 0.0-1.0
+  trigger_points:
+    - pre-commit hook
+    - CLI validation
+    - CI/CD pipeline
+  action_threshold: 0.7
+inherits: [friction-governance, closed-loop-goal]
+---
