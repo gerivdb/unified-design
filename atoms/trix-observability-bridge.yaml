@@ -1,0 +1,14 @@
+---
+name: trix-observability-bridge
+description: "Bridge d'observabilité runtime pour méta-outils avec spans et décorateur @observe_tool."
+parameters:
+  instrumentation: @observe_tool
+  span_emission: true
+  targets:
+    - INTENT-258
+    - INTENT-261
+    - INTENT-262
+    - INTENT-263
+    - INTENT-264
+inherits: [artifact-synced-loop, ecosystem-dashboard]
+---
