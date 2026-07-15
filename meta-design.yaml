@@ -1,9 +1,45 @@
-# Meta-Design Schema (MDU)
+# Meta-Design Schema (MDU) v2
 # Schéma de validation YAML pour l'architecture gerivdb
+# Version 2.0 : ajout des capacités, détection de boucles et industrialisation
 
-version: "1.0.0"
-intent_hash: 0xMDU_SCHEMA_20260715
+version: "2.0.0"
+intent_hash: 0xMDU_SCHEMA_20260715_V2
 status: active
+
+# Héritage multiple de designs abstraits
+inherits: []
+
+# Capacités héritées (mixins)
+capabilities:
+  - name: latency-bound
+    description: "Le design impose une limite de latence"
+    parameters:
+      max_latency_ms: 10
+  - name: power-capped
+    description: "Le design impose une limite de puissance"
+    parameters:
+      max_power_w: 150
+
+# Détection de boucles de dépendances sémantiques
+loop_detection:
+  enable: true
+  max_cycle_length: 5        # détecte les cycles jusqu'à 5 niveaux
+  allow_virtuous_loops: true  # autorise les boucles vertueuses documentées
+
+# Règles de validation du graphe de dépendances
+design_rules:
+  - name: "no-circular-inheritance"
+    check: "graph_is_acyclic"
+  - name: "capability-conflict"
+    check: "no_conflicting_capabilities"
+
+# Industrialisation : génération et validation de designs
+industrialization:
+  generator:
+    template_repo: "https://github.com/gerivdb/unified-design-template"
+    output_dir: "../generated-designs"
+  validator:
+    command: "connard-validator --strict"
 
 # Architecture des quatre piliers
 piliers:
@@ -140,7 +176,7 @@ agents_par_pilier:
 # Validation
 validation:
   schema: "meta-design.yaml"
-  adr: "ADR-012"
+  adr: "ADR-012, ADR-015"
   cli: "gerivdb meta validate"
   hooks:
     pre_commit: true
@@ -161,6 +197,7 @@ git_policy:
 # Références
 references:
   - ADR-012-meta-design-validation-protocol
+  - ADR-015-unified-design-v2
   - ADR-2026-06-28-001-logical-architecture-n1-n4
   - ADR-CONNARD-001-connard-design-protocol
   - INT-CONNARD-001
