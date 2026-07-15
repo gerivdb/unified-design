@@ -1,0 +1,11 @@
+---
+name: artefact-id-registry-sot
+description: "Registre SOT des artefacts/citoyens/outils pour hypothèses AUTO-DEV et TQL bridge."
+parameters:
+  registry_types:
+    - artefacts
+    - citoyens
+    - outils
+  integration: TQL
+inherits: [citizen-registry, artifact-synced-loop]
+---

@@ -1,0 +1,12 @@
+---
+name: collision-id-auto-renamer
+description: "Détection + résolution automatique de collisions d'IDs INTENT/EPIC via git mv + références."
+parameters:
+  collision_types:
+    - INTENT
+    - EPIC
+    - ADR
+  resolution: git_mv
+  reference_update: true
+inherits: [frontmatter-parser, github-integration]
+---
