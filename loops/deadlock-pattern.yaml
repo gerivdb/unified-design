@@ -1,0 +1,57 @@
+---
+name: deadlock-pattern
+type: loop
+cycle_length: 2
+virtuous: false
+description: "Boucle vicieuse d'incohérence entre contraintes"
+nodes:
+  - id: constraint-a
+    type: capability
+    name: latency-bound
+    parameters:
+      max_latency_ms: 1
+  - id: constraint-b
+    type: capability
+    name: power-capped
+    parameters:
+      max_power_w: 1
+edges:
+  - from: constraint-a
+    to: constraint-b
+    label: "latence min → puissance min"
+  - from: constraint-b
+    to: constraint-a
+    label: "puissance min → latence min"
+conflict:
+  type: unsatisfiable
+  description: "max_latency_ms=1 et max_power_w=1 sont mutuellement exclusifs sur le matériel cible"
+resolution:
+  - "Augmenter max_latency_ms"
+  - "Augmenter max_power_w"
+  - "Introduire un pilier d'arbitrage (CD)"
+---
+
+# Deadlock Pattern Loop
+
+Pattern de boucle vicieuse (incohérence) entre contraintes mutuellement exclusives.
+
+## Description
+
+Cette boucle documente un cas où deux capacités imposent des contraintes qui ne peuvent être satisfaites simultanément sur le matériel cible.
+
+## Propriétés
+
+- `virtuous: false` — boucle interdite par le détecteur.
+- `cycle_length: 2` — 2 nœuds dans le cycle.
+- `conflict: unsatisfiable` — aucune instanciation ne résout le conflit sans modification des paramètres.
+
+## Résolution
+
+Le méta-design doit signaler cette boucle et proposer :
+1. L'augmentation d'un des paramètres.
+2. L'introduction d'un pilier d'arbitrage (ex: Connard Design) pour trancher.
+
+## Références
+
+- ADR-015-unified-design-v2
+- Loop Engineering — détection de deadlocks
