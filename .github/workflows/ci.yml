@@ -31,3 +31,4 @@ jobs:
           test -f docs/META-DESIGN.md && echo "✅ docs/META-DESIGN.md exists"
           test -f .gitignore && echo "✅ .gitignore exists"
           test -f .rssignore && echo "✅ .rssignore exists"
+
