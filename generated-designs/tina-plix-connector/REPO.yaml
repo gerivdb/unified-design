@@ -1,0 +1,17 @@
+name: TINA-PLIX-CONNECTOR
+full_name: gerivdb/TINA-PLIX-CONNECTOR
+local_path: D:/DO/WEB/TOOLS/L3-CITIZENS/TINA-PLIX-CONNECTOR
+parents:
+  - plix-codec
+  - sandbox-isolation
+  - citizen-routing
+status: active
+stratum: L3_CITIZENS
+description: Connecteur TINA ↔ PLIX pour orchestration cognitivo-technique
+capabilities:
+  - plix-codec
+  - sandbox-isolation
+  - citizen-routing
+created_at: '2026-07-15T21:39:00'
+generated_by: unified-design/create_design.py
+intent_hash: 0xTINA_Plix_CONNECTOR_20260715
