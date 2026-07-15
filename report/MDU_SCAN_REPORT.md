@@ -133,6 +133,16 @@ Les `design.yaml` suivants ont été créés pour ancrer les dépôts dans le MD
 14. **auto-dev** (`D:\DO\WEB\TOOLS\L2-PLATFORM\auto-dev\design.yaml`) — 3 atomes hérités
 15. **GeriCode** (`D:\DO\WEB\TOOLS\L2-PLATFORM\GeriCode\design.yaml`) — 3 atomes hérités
 16. **PLIX** (`D:\DO\WEB\TOOLS\L2-PLATFORM\PLIX\design.yaml`) — 4 atomes hérités
+17. **TINA-PLIX-CONNECTOR** (`unified-design\generated-designs\tina-plix-connector\design.yaml`) — 5 atomes hérités (TEST)
+
+## Validation exécutée
+
+### Test workflow TINA-PLIX-CONNECTOR
+
+- **Inheritance check** : ✅ PASS (plix-codec, sandbox-isolation, citizen-routing)
+- **Loop check** : ✅ PASS (0 cycles)
+- **Connard validator** : ✅ PASS
+- **Atom inventory** : Mis à jour dans `atoms/index.md`
 
 ## Dépôts analysés
 
