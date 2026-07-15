@@ -11,24 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Validate meta-design.yaml
         run: |
-          python -c "import yaml; yaml.safe_load(open('meta-design.yaml'))"
-          echo "✅ meta-design.yaml is valid YAML"
-      
+          python3 -c "import yaml; yaml.safe_load(open('meta-design.yaml'))"
+          echo "meta-design.yaml is valid YAML"
+
       - name: Validate META-DESIGN.md frontmatter
         run: |
           head -10 docs/META-DESIGN.md | grep -q "---"
-          echo "✅ META-DESIGN.md has valid frontmatter"
-      
+          echo "META-DESIGN.md has valid frontmatter"
+
       - name: Check required files
         run: |
-          test -f README.md && echo "✅ README.md exists"
-          test -f REPO.yaml && echo "✅ REPO.yaml exists"
-          test -f citizens.yaml && echo "✅ citizens.yaml exists"
-          test -f ONTOLOGY_DECLARATION.yaml && echo "✅ ONTOLOGY_DECLARATION.yaml exists"
-          test -f docs/META-DESIGN.md && echo "✅ docs/META-DESIGN.md exists"
-          test -f .gitignore && echo "✅ .gitignore exists"
-          test -f .rssignore && echo "✅ .rssignore exists"
-
+          test -f README.md && echo "README.md exists"
+          test -f REPO.yaml && echo "REPO.yaml exists"
+          test -f citizens.yaml && echo "citizens.yaml exists"
+          test -f ONTOLOGY_DECLARATION.yaml && echo "ONTOLOGY_DECLARATION.yaml exists"
+          test -f docs/META-DESIGN.md && echo "docs/META-DESIGN.md exists"
+          test -f .gitignore && echo ".gitignore exists"
+          test -f .rssignore && echo ".rssignore exists"
