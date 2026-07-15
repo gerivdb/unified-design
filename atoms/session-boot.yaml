@@ -1,0 +1,10 @@
+---
+name: session-boot
+description: "Script de boot session : génère context.yaml < 5 Ko pour boot session LLM."
+parameters:
+  output: context.yaml
+  max_size_kb: 5
+  replaces_mcp_calls: 10
+  bootstrap_sequence: gated
+inherits: [gated-boot-sequence, kilo-mayor-context-pump]
+---

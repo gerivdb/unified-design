@@ -1,0 +1,14 @@
+---
+name: kilo-workflow-binder
+description: "Sélecteur de mode Kilo + Gas Station + activation des chemins d'exécution."
+parameters:
+  modes:
+    - architect
+    - code
+    - debug
+    - ask
+    - orchestrator
+  gas_station: true
+  activation: GeriCode
+inherits: [kilocode-modes-registry, gated-boot-sequence]
+---
