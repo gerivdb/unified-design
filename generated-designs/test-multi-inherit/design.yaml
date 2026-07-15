@@ -1,0 +1,14 @@
+version: 1.0.0
+name: test-multi-inherit
+inherits:
+- GOVERNANCE-HUB
+- REPO-STANDARDS
+capabilities:
+  latency-bound:
+    max_latency_ms: 10
+  power-capped:
+    max_power_w: 150
+generated_by: unified-design/create_design.py
+generated_at: '2026-07-15T19:42:37.584426'
+parent_mdu: unified-design
+intent_hash: 0xTEST_MULTI_INHERIT_DESIGN_20260715

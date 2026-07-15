@@ -1,0 +1,38 @@
+---
+name: absolute-rules-enforcement
+description: "Règles absolues (interdictions/obligations) avec tags automatiques pour hypothèses non confirmées."
+inherits: []
+---
+
+# Absolute Rules Enforcement Atom
+
+Pattern de règles absolues avec enforcement automatique.
+
+## Rôle
+
+Définit des interdictions et obligations catégoriques, avec un système de tags pour marquer les hypothèses non confirmées.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `forbidden_keywords` | list | `[]` | Mots-clés déclenchant un blocage |
+| `auto_tags` | list | `[]` | Tags appliqués automatiquement (ex: [HYPOTHESE_NON_CONFIRMEE], [DERIVE]) |
+
+## Invariants
+
+- Toute règle absolue est vérifiée par un hook pre-commit/pre-push.
+- Les dérogations doivent être tracées via un ADR.
+- Les données non validées sont systématiquement taggées.
+
+## Exemple d'usage
+
+```yaml
+inherits:
+  - absolute-rules-enforcement
+```
+
+## Références
+
+- GOVERNANCE-HUB (règles BDCP, hitl-clone-gate, etc.)
+- ADR-2026-05-14-004-KILO-CODE-HOTL-OPERATIONAL-STD

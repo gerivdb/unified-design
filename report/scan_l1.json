@@ -1,0 +1,137 @@
+{
+  "scan_date": "2026-07-15T07:08:31.332718",
+  "strates": [
+    {
+      "strate": "L1_CAUSALITY",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA",
+      "repos": [
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\BOINC-LLM-P2P",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECIT-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECO-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOYSTEM",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\FLUENCE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\GATEWAY-MANAGER",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\LLM-REPO",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\loopany-platform",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\TOPOS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        }
+      ],
+      "design_candidates": 0,
+      "total_repos": 13
+    }
+  ],
+  "summary": {
+    "total_repos": 13,
+    "design_candidates": 0,
+    "strates_scanned": 1
+  }
+}

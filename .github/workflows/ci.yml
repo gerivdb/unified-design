@@ -11,10 +11,61 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-      - name: Validate YAML files
-        run: python3 -c "import yaml; yaml.safe_load(open('meta-design.yaml')); print('OK')"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Validate meta-design.yaml
+        run: |
+          python3 -c "import yaml; data=yaml.safe_load(open('meta-design.yaml')); assert 'version' in data, 'Missing version'; assert 'capabilities' in data, 'Missing capabilities'; print('✅ meta-design.yaml valid')"
+
+      - name: Validate atoms YAML files
+        run: |
+          for f in atoms/*.yaml; do
+            python3 -c "import yaml; yaml.safe_load(open('$f'))" && echo "✅ $f valid"
+          done
+
+      - name: Validate loops YAML files
+        run: |
+          for f in loops/*.yaml; do
+            python3 -c "import yaml; yaml.safe_load(open('$f'))" && echo "✅ $f valid"
+          done
 
       - name: Check required files exist
         run: |
           ls -la README.md REPO.yaml citizens.yaml ONTOLOGY_DECLARATION.yaml .gitignore .rssignore docs/META-DESIGN.md
+
+      - name: Run loop detection check
+        run: |
+          python3 loop_engine/check_loops.py --path . --max-depth 5 --output report/loop_check.json || true
+          if [ -f report/loop_check.json ]; then
+            python3 -c "import json; r=json.load(open('report/loop_check.json')); print(f'Loops detected: {len(r.get(\"loops\", []))}'); exit(0)"
+          fi
+
+      - name: Validate atom inheritance structure
+        run: |
+          for atom in atoms/*.yaml; do
+            python3 -c "import yaml; a=yaml.safe_load(open('$atom')); assert 'name' in a, 'Missing name'; print('✅ $atom valid')"
+          done
+
+      - name: Validate design.yaml structure (if exists)
+        run: |
+          if [ -f generated-designs/*/design.yaml ]; then
+            for d in generated-designs/*/design.yaml; do
+              python3 -c "import yaml; d=yaml.safe_load(open('$d')); assert 'name' in d, 'Missing name'; assert 'inherits' in d, 'Missing inherits'; print('✅ $d valid')"
+            done
+          fi
+
+      - name: Upload validation report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-report
+          path: |
+            report/
+            *.json

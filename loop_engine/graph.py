@@ -84,7 +84,10 @@ def _coerce_node(raw: dict, *, kind: str, path: Path) -> DesignNode:
 
 def _load_yaml(path: Path) -> dict:
     with path.open("r", encoding="utf-8") as handle:
-        return yaml.safe_load(handle) or {}
+        for doc in yaml.safe_load_all(handle):
+            if isinstance(doc, dict):
+                return doc
+        return {}
 
 
 def build_graph_from_designs(roots: Sequence[Path], *, design_only: bool = False) -> LoopGraph:
@@ -97,8 +100,14 @@ def build_graph_from_designs(roots: Sequence[Path], *, design_only: bool = False
     """
     graph = LoopGraph()
 
+    if design_only:
+        roots = _collect_design_roots(roots)
+
     for root in roots:
         for path in root.rglob("*.yaml"):
+            # Skip hidden/tooling directories (.kiva, .github, .trix, __pycache__, etc.)
+            if any(part.startswith(".") or part.startswith("__") for part in path.relative_to(root).parts):
+                continue
             try:
                 data = _load_yaml(path)
             except Exception:
@@ -120,10 +129,10 @@ def build_graph_from_designs(roots: Sequence[Path], *, design_only: bool = False
     for node in list(graph.nodes.values()):
         for parent in node.inherits:
             if parent in graph.nodes:
-                graph.add_edge(parent, node)
+                graph.add_edge(parent, node.name)
         for requirement in node.requires:
             if requirement in graph.nodes:
-                graph.add_edge(requirement, node)
+                graph.add_edge(requirement, node.name)
         for conflict in node.conflicts:
             graph.conflicts.append(CapabilityConflict(a=node.name, b=conflict))
 
@@ -139,4 +148,7 @@ def _collect_design_roots(roots: Sequence[Path]) -> list[Path]:
             continue
         for candidate in root.glob("*/design.yaml"):
             design_dirs.append(candidate.parent)
+        for candidate in root.glob("atoms"):
+            if candidate.is_dir():
+                design_dirs.append(candidate)
     return design_dirs

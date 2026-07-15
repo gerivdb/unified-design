@@ -14,7 +14,6 @@ from .graph import (
     build_graph_from_designs,
 )
 from .reporter import (
-    ReportFormat,
     Reporter,
     classify_cycle,
     export_report,

@@ -1,0 +1,59 @@
+---
+name: deadlock-pattern
+version: "1.0.0"
+status: active
+type: pattern
+---
+
+# Deadlock Pattern
+
+Un pattern de deadlock est une boucle de dépendance qui empêche le progrès du système.
+
+## Caractéristiques
+
+- **Bloquage mutuel** : Les nœuds attendent mutuellement
+- **Absence de feedback** : Pas de signal d'amélioration
+- **Instabilité** : Le système est bloqué dans un état
+- **Détérioration** : Les métriques se dégradent
+
+## Structure
+
+```
+A → B → C → A  (avec blocage)
+```
+
+## Signaux d'alerte
+
+1. Latence croissante sans amélioration
+2. Ressources bloquées
+3. Aucun feedback positif
+4. Cycles de dépendance non résolus
+
+## Détection
+
+- Utiliser `loop_engine/check_loops.py`
+- Vérifier les temps de boucle > seuil critique
+- Analyser les métriques trend
+
+## Remediation
+
+1. Identifier le point de blocage
+2. Briser le cycle via une interface
+3. Introduire un timeout ou fallback
+4. Re-structurer l'héritage
+
+## Exemple
+
+```yaml
+pattern: deadlock-pattern
+nodes:
+  - monitor: collecte métriques
+  - analyze: analyse les écarts
+  - adapt: tente d'ajuster (échoue)
+  - block: cycle bloqué
+```
+
+## Références
+
+- ADR-016-loop-engine
+- ADR-CONNARD-001-connard-design-protocol

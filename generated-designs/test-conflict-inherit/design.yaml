@@ -1,0 +1,14 @@
+version: 1.0.0
+name: test-conflict-inherit
+inherits:
+- GOVERNANCE-HUB
+- REPO-STANDARDS
+capabilities:
+  latency-bound:
+    max_latency_ms: 1
+  power-capped:
+    max_power_w: 1
+generated_by: test-conflict
+generated_at: '2026-07-15T19:51:00'
+parent_mdu: unified-design
+intent_hash: 0xTEST_CONFLICT_INHERIT_20260715

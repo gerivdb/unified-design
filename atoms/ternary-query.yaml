@@ -1,0 +1,57 @@
+---
+name: ternary-query
+description: "Langage de requête fractal ternaire pour NEXUS. Paradigme Think-Do-Check avec récursion auto-similaire."
+parameters:
+  paradigm: Think-Do-Check
+  recursion: true
+  max_depth: 10
+  short_circuit: NEUTRE
+  operators: 12
+inherits: [b243-vector]
+---
+
+# Ternary Query Atom
+
+Pattern de langage de requête fractal ternaire.
+
+## Rôle
+
+Langage de requête pour NEXUS basé sur le paradigme ternaire :
+- **Paradigme** : Think-Do-Check
+- **Récursion** : auto-similaire, max_depth=10
+- **Short-circuit** : NEUTRE (ADR-0013)
+- **Opérateurs** : 12 cognitifs
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `paradigm` | string | `Think-Do-Check` | Paradigme de requête |
+| `recursion` | bool | `true` | Récursion auto-similaire |
+| `max_depth` | int | `10` | Profondeur max de récursion |
+| `short_circuit` | string | `NEUTRE` | Mode short-circuit |
+| `operators` | int | `12` | Nombre d'opérateurs cognitifs |
+
+## Invariants
+
+- La récursion DOIT avoir une profondeur max
+- Le short-circuit NEUTRE EST obligatoire (ADR-0013)
+- Les opérateurs DOIVENT être couverts par les tests
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: ternary-query
+    parameters:
+      paradigm: Think-Do-Check
+      recursion: true
+      max_depth: 10
+      short_circuit: NEUTRE
+      operators: 12
+```
+
+## Références
+
+- TQL (gerivdb/TQL)
+- ADR-0013 (short-circuit NEUTRE)

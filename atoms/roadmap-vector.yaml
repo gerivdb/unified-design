@@ -1,0 +1,81 @@
+---
+name: roadmap-vector
+description: "Vecteur de direction stratégique d'un dépôt. Définit l'horizon temporel, la direction, la vélocité observée et la masse."
+parameters:
+  required_fields:
+    - type
+    - version
+    - intent_hash
+    - date
+    - repo
+    - strate
+    - vector
+  vector_fields:
+    - horizon
+    - direction
+    - velocity_observed
+    - mass
+    - last_amended
+  optional_fields:
+    - _inferred
+    - _inference_source
+inherits: [closed-loop-goal]
+---
+
+# Roadmap Vector Atom
+
+Pattern de vecteur de direction stratégique par dépôt.
+
+## Rôle
+
+Chaque dépôt possède un fichier `ROADMAPS/vector.yaml` qui définit sa trajectoire stratégique :
+- horizon : période couverte (ex: 90d)
+- direction : liste des objectifs stratégiques
+- velocity_observed : vélocité observée (0.0 = pas encore mesurée)
+- mass : masse stratégique (0.0-1.0)
+- last_amended : date de dernière modification
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `horizon` | string | "90d" | Horizon temporel du vecteur |
+| `direction` | list | `[]` | Objectifs stratégiques |
+| `velocity_observed` | float | 0.0 | Vélocité observée |
+| `mass` | float | 0.5 | Masse stratégique |
+| `last_amended` | datetime | - | Date de dernière modification |
+
+## Invariants
+
+- Tout dépôt actif DOIT avoir un vector.yaml dans ROADMAPS/
+- Le champ `intent_hash` DOIT être unique par version
+- La vélocité DOIT être recalculée après chaque sprint
+
+## Exemple d'usage
+
+```yaml
+type: ROADMAP_VECTOR
+version: '1.0'
+intent_hash: 0XCANDIDATOR_ROADMAP_V1_20260626
+date: '2026-06-26'
+repo: gerivdb/CANDIDATOR
+strate: L3-CITIZENS
+vector:
+  horizon: 90d
+  direction:
+    - 'maintenir role: Gestion candidatures, CV, lettres'
+  velocity_observed: 0.0
+  mass: 0.5
+  last_amended: '2026-06-26T02:08:00.301966'
+  _inferred: true
+```
+
+## Références
+
+- CANDIDATOR/ROADMAPS/vector.yaml
+- GERIBOOKING/ROADMAPS/vector.yaml
+- BANK-BUSTER/ROADMAPS/vector.yaml
+- racines/ROADMAPS/vector.yaml
+- strix/ROADMAPS/vector.yaml
+- BRAIN/ROADMAPS/vector.yaml
+- FLUENCE/ROADMAPS/vector.yaml

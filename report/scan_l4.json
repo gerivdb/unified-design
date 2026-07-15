@@ -1,0 +1,1097 @@
+{
+  "scan_date": "2026-07-15T20:11:41.232955",
+  "strates": [
+    {
+      "strate": "L1_CAUSALITY",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA",
+      "repos": [
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\BOINC-LLM-P2P",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECIT-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECO-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOYSTEM",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\FLUENCE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\GATEWAY-MANAGER",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\LLM-REPO",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\loopany-platform",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\TOPOS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        }
+      ],
+      "design_candidates": 0,
+      "total_repos": 13
+    },
+    {
+      "strate": "L2_COMPOSITION",
+      "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM",
+      "repos": [
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\auto-dev",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml",
+            "ONTOLOGY_DECLARATION.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\BDCP-CORE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml",
+            "ONTOLOGY_DECLARATION.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\BIRDY",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\BRAIN-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\DevTools",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\EMIT",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\GeriCode",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml",
+            "ONTOLOGY_DECLARATION.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KEEL",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\PLIX",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\PULSE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\VERSES",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        }
+      ],
+      "design_candidates": 0,
+      "total_repos": 11
+    },
+    {
+      "strate": "L3_EMERGENCE",
+      "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS",
+      "repos": [
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\ARGUS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "ONTOLOGY_DECLARATION.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\BANK-BUSTER",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\BATVERSE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\CANDIDATOR",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\CITIZENS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\COMET-BOT",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\CoPaw",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\DAG-3",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\ECOS-VISION",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\email-sender-1",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\email-sender-2",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\FLUX",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\GERIBOOKING",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\INTENT-ENCODER",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\IRIS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\JOURNALISTE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\KEEL",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\KRONOS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LLUX",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\MIMIR",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\MirrorFish",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\OpenClaw",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\racines",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\strix",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\STYX",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\TINA",
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
+          "parent": null,
+          "atomes_possibles": [
+            "design.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\triadic-compound-eye",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\UAE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        }
+      ],
+      "design_candidates": 1,
+      "total_repos": 28
+    },
+    {
+      "strate": "L4_TOOLS",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS",
+      "repos": [
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\BatMCP",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CAPTA-4D",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CLINE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CodeDB-E5620",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\connard-design",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU-test-selina-sabre",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\DAG-3",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\DATA-MINER",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\diff0-fork",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\diffscope-fork",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\ecos-sync",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\FLUENCE-CLI",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\GERI-VON-DER-BITSH",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\Gitnote",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml",
+            "ONTOLOGY_DECLARATION.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\GOVERNANCE-HUB",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\HERMES-NousResearch",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\HOLMES",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KALA",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\llama.cpp",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\LYCOS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\Mnemo",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\Mnemo-SRC",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\morphohdl-anamorphic-growth",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\OBSCURA",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\opensrc",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\PHOTON",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\PIANO",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\PITCH-1",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\PRIMUS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\REPO-STANDARDS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml",
+            "ONTOLOGY_DECLARATION.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\REPOMIX-FORK",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\SKILLS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\sonar-driven-design",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TEST-REPO",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TOOL-FACTORY-1",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TQL",
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
+          "parent": null,
+          "atomes_possibles": [
+            "design.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\triadic-compound-eye",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VDB",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES",
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
+          "parent": null,
+          "atomes_possibles": [
+            "design.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSUS",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\vscode-lm-proxy",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\vsix-ai-orchestrator",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        }
+      ],
+      "design_candidates": 2,
+      "total_repos": 45
+    },
+    {
+      "strate": "L5_ARCHIVE",
+      "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE",
+      "repos": [
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-0303-GERI CMS V2",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-0402-DEEPSITE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-0902-optimiser-Perplexity",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-0903-comparateur-IA-code",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-0905-FRUSTRATION",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-0906-JP-PETIT",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-0909-DMR",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-0920-BOOKING",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-1003-GERIBOOKING",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\2025-1103-DOC-UNIV-DEV",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\dt-069-temporal-reasoning",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\ECOS-C_cli",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\ONTOLOGY_MC",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\RESILIENCE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [
+            "REPO.yaml"
+          ],
+          "issues": []
+        },
+        {
+          "path": "D:\\DO\\WEB\\TOOLS\\L5-ARCHIVE\\TRANSCENDANCE",
+          "is_design_candidate": false,
+          "has_design_yaml": false,
+          "has_parent": false,
+          "parent": null,
+          "atomes_possibles": [],
+          "issues": []
+        }
+      ],
+      "design_candidates": 0,
+      "total_repos": 15
+    }
+  ],
+  "summary": {
+    "total_repos": 112,
+    "design_candidates": 3,
+    "strates_scanned": 5
+  }
+}

@@ -1,0 +1,53 @@
+---
+name: auto-correction
+description: "Auto-correction intelligente des tests et des incohérences détectées. Utilise friction_detector pour détecter et post_implement_check pour corriger."
+parameters:
+  detector: friction_detector
+  corrector: post_implement_check
+  auto_fix: true
+  human_review_required: false
+inherits: [absolute-rules-enforcement]
+---
+
+# Auto-Correction Atom
+
+Pattern d'auto-correction intelligente.
+
+## Rôle
+
+Détecte et corrige automatiquement les incohérences :
+- **Détecteur** : `friction_detector.py`
+- **Correcteur** : `post_implement_check.py`
+- **Auto-fix** : activé par défaut
+- **Review humaine** : optionnelle
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `detector` | string | `friction_detector` | Détecteur d'incohérences |
+| `corrector` | string | `post_implement_check` | Correcteur automatique |
+| `auto_fix` | bool | `true` | Correction automatique |
+| `human_review_required` | bool | `false` | Review humaine requise |
+
+## Invariants
+
+- Les corrections automatiques DOIVENT être tracées dans le WAL
+- Une review humaine EST requise pour les changements critiques
+- Le correcteur NE DOIT PAS introduire de nouvelles incohérences
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: auto-correction
+    parameters:
+      detector: friction_detector
+      corrector: post_implement_check
+      auto_fix: true
+      human_review_required: false
+```
+
+## Références
+
+- TINA (friction_detector.py, post_implement_check.py)

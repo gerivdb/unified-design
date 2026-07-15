@@ -1,0 +1,59 @@
+---
+name: ontology-audit
+description: "Audit ontologique pour vérifier la cohérence des connaissances entre les strates N, N+1, N+2. Couverture cible >95% sur BRAIN-DOCS."
+parameters:
+  strata:
+    - N
+    - N+1
+    - N+2
+  coverage_target: 95
+  max_time_ms: 30000
+  sources:
+    - BRAIN-DOCS
+    - ONTOLOGY
+inherits: [stratified-repository-registry]
+---
+
+# Ontology Audit Atom
+
+Pattern d'audit ontologique entre strates.
+
+## Rôle
+
+Vérifie la cohérence des connaissances entre les strates N, N+1, N+2 :
+- **Strates** : N, N+1, N+2
+- **Couverture cible** : >95% sur BRAIN-DOCS
+- **Temps max** : 30s
+- **Sources** : BRAIN-DOCS, ONTOLOGY
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `strata` | list | `[N, N+1, N+2]` | Strates auditées |
+| `coverage_target` | int | `95` | Couverture cible (%) |
+| `max_time_ms` | int | `30000` | Temps max d'audit |
+| `sources` | list | `[]` | Sources de connaissances |
+
+## Invariants
+
+- La couverture DOIT être >95% sur BRAIN-DOCS
+- L'audit DOIT être exécuté dans le pipeline CI
+- Les incohérences DOIVENT être corrigées avant merge
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: ontology-audit
+    parameters:
+      strata: [N, N+1, N+2]
+      coverage_target: 95
+      max_time_ms: 30000
+      sources: [BRAIN-DOCS, ONTOLOGY]
+```
+
+## Références
+
+- TINA (scripts/ontology_audit_brain_docs.ps1)
+- BRAIN-DOCS

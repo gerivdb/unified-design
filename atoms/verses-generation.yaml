@@ -1,0 +1,10 @@
+---
+name: verses-generation
+description: "Generation of constrained symbolic verses and content with coherence validation."
+parameters:
+  max_verses_per_cycle: 10
+  coherence_threshold: 0.8
+  grammar_constrained: true
+  regeneration_on_drift: true
+inherits: [absolute-rules-enforcement]
+---

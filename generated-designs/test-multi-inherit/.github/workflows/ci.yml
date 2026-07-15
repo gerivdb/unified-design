@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Validate design.yaml
+        run: |
+          python3 -c "import yaml; d=yaml.safe_load(open('design.yaml')); assert 'name' in d, 'Missing name'; assert 'inherits' in d, 'Missing inherits'; print('[OK] design.yaml valid')"
+
+      - name: Validate YAML files
+        run: |
+          for f in atoms/*.yaml loops/*.yaml; do
+            python3 -c "import yaml; yaml.safe_load(open('$f'))" && echo "[OK] $f valid"
+          done

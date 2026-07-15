@@ -1,0 +1,398 @@
+# L1-INFRA_Atoms_Index.yaml
+# Index des atomes extraits de L1-INFRA, L2-COMPOSITION et L3-EMERGENCE
+# Date: 2026-07-15
+# Source: known_repositories.yaml + scan L1-INFRA + scan L2-COMPOSITION + scan L3-EMERGENCE
+# IntentHash: 0xATOM_SCAN_L2_L3_20260715
+
+---
+metadata:
+  version: "1.1.0"
+  date: "2026-07-15"
+  source: "L1-INFRA + L2-COMPOSITION + L3-EMERGENCE scan"
+  sot: "gerivdb/GOVERNANCE-HUB"
+  total_atoms_scanned: 63
+
+# ── Atomes par dépôt ───────────────────────────────────────────────────────────────────────
+
+repos_atoms:
+  # L1-INFRA (already scanned)
+  TOPOS:
+    - CITIZENS.yaml
+    - STRATE_REGISTRY.yaml
+    - SWARM.yaml
+    - topology.yaml
+    - schema/topos_v1.yaml
+    - schemas/pipeline_schema.yaml
+    
+  GATEWAY-MANAGER:
+    - config/gateway.yaml
+    - config/bdcp_config.yaml
+    - config/security.yaml
+    - STRATUM_RELAY.md
+    
+  LLM-REPO:
+    - BOOT/boot_sequence.yaml
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+    
+  NEXUS:
+    - config/schemas/scaffold-integration.yaml
+    - STRATE_REGISTRY.yaml
+    
+  KIVA:
+    - .hardware.yaml
+    - .kiva/pipelines/nexus-sync.yaml
+    - config/scaffold-integration.yaml
+    
+  ECOS-CLI:
+    - config/gate/gate-rss-v1.yaml
+    - ECOYSTEM/governance/morphism_map.schema.yaml
+    
+  ONTOLOGY:
+    - ONTOLOGY.yaml
+    - concepts/artefact-pipeline-entities.yaml
+    - concepts/dag_architecture.yaml
+    - concepts/friction.yaml
+    - concepts/intent-taxonomy.yaml
+
+  # L2-COMPOSITION (nouveau scan)
+  BRAIN:
+    - ECOS_ROOT.json
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/history.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+    
+  FLUENCE:
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/history.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+
+  # L3-EMERGENCE (nouveau scan)
+  CANDIDATOR:
+    - ECOS_ROOT.json
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/history.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+    - STRATUM_RELAY.md
+    
+  GERIBOOKING:
+    - ECOS_ROOT.json
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/history.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+    - STRATUM_RELAY.md
+    - .eecs_config.yaml
+    - .kilocode/modes/*.yaml
+    
+  BANK-BUSTER:
+    - ECOS_ROOT.json
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/history.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+    - STRATUM_RELAY.md
+    - .eecs_config.yaml
+    
+  racines:
+    - ECOS_ROOT.json
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/history.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+    - STRATUM_RELAY.md
+    - .eecs_config.yaml
+    
+  PITCH-1:
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/history.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+    - STRATUM_RELAY.md
+    
+  strix:
+    - ECOS_ROOT.json
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/history.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+    - STRATUM_RELAY.md
+    
+  DATA-MINER:
+    - ROADMAPS/blockers.yaml
+    - ROADMAPS/dependencies.yaml
+    - ROADMAPS/history.yaml
+    - ROADMAPS/milestones.yaml
+    - ROADMAPS/vector.yaml
+    - STRATUM_RELAY.md
+
+# ── Atomes majeurs identifiés ───────────────────────────────────────────────────────────
+
+major_atoms:
+  # L1-INFRA atoms (existing)
+  - id: TOPOS_CITIZENS
+    file: TOPOS/CITIZENS.yaml
+    type: Registry
+    description: "Citoyens (agents) pour validation TOPOS"
+    lines: 88
+    
+  - id: TOPOS_STRATE_REGISTRY
+    file: TOPOS/STRATE_REGISTRY.yaml
+    type: Registry
+    description: "Registre des strates L0-L5"
+    lines: 126
+    
+  - id: TOPOS_SWARM
+    file: TOPOS/SWARM.yaml
+    type: Config
+    description: "Configuration coordination swarming entre agents"
+    lines: 27
+    
+  - id: TOPOS_TOPOLOGY
+    file: TOPOS/topology.yaml
+    type: Graph
+    description: "Topologie des dépôts et leurs dépendances"
+    lines: 388
+    
+  - id: GATEWAY_CONFIG
+    file: GATEWAY-MANAGER/config/gateway.yaml
+    type: Config
+    description: "Configuration principale du gateway (port, CORS, cache, monitoring)"
+    lines: 161
+    
+  - id: BDCP_CONFIG
+    file: GATEWAY-MANAGER/config/bdcp_config.yaml
+    type: Config
+    description: "Configuration BDCP - Behind CDP, politique zero-trust"
+    lines: 256
+    
+  - id: BOOT_SEQUENCE
+    file: LLM-REPO/BOOT/boot_sequence.yaml
+    type: Procedure
+    description: "Séquence canonique de boot LLM (5 étapes)"
+    lines: 43
+    
+  - id: GATE_RSS_V1
+    file: ECOS-CLI/config/gate/gate-rss-v1.yaml
+    type: Config
+    description: "Gate RSS v1 pour validation HITL D4"
+    lines: 22
+    intent_hash: "0xCTULU_INTEGRATION_GATE_ECOSCLI_20260612"
+    
+  - id: MORPHISM_MAP_SCHEMA
+    file: ECOS-CLI/ECOYSTEM/governance/morphism_maps/morphism_map.schema.yaml
+    type: Schema
+    description: "Schéma de morphism map (MM-XXX format)"
+    lines: 54
+    
+  - id: ONTOLOGY_MASTER
+    file: ONTOLOGY/ONTOLOGY.yaml
+    type: Ontology
+    description: "Définitions ontologiques maîtres de l'écosystème"
+    lines: 753
+    intent_hash: "0xONT_MASTER_DEFINITIONS_ECOSYSTEM_20260331"
+    entities: 35+
+    concepts: 10+
+    relations: 10+
+    invariants: 10
+
+  # L2-COMPOSITION atoms (nouveaux)
+  - id: BRAIN_ECOS_ROOT
+    file: BRAIN/ECOS_ROOT.json
+    type: Registry
+    description: "BRAIN ecosystem identity (L3_EMERGENCE, P0)"
+    lines: 9
+    intent_hash: "0xBRAIN_ECOS_ROOT_20260715"
+    
+  - id: BRAIN_ROADMAP_VECTOR
+    file: BRAIN/ROADMAPS/vector.yaml
+    type: Roadmap
+    description: "BRAIN roadmap vector with direction and velocity"
+    lines: 14
+    intent_hash: "0xBRAIN_ROADMAP_VECTOR_20260715"
+
+  - id: FLUENCE_ROADMAP_VECTOR
+    file: FLUENCE/ROADMAPS/vector.yaml
+    type: Roadmap
+    description: "FLUENCE roadmap vector (L3_EMERGENCE, P1)"
+    lines: 16
+    intent_hash: "0xFLUENCE_ROADMAP_VECTOR_20260715"
+
+  # L3-EMERGENCE atoms (nouveaux)
+  - id: CANDIDATOR_ECOS_ROOT
+    file: CANDIDATOR/ECOS_ROOT.json
+    type: Registry
+    description: "CANDIDATOR ecosystem identity (L3_EMERGENCE, P1)"
+    lines: 9
+    intent_hash: "0xCANDIDATOR_ECOS_ROOT_20260715"
+    
+  - id: CANDIDATOR_ROADMAP_VECTOR
+    file: CANDIDATOR/ROADMAPS/vector.yaml
+    type: Roadmap
+    description: "CANDIDATOR roadmap vector"
+    lines: 15
+    intent_hash: "0xCANDIDATOR_ROADMAP_VECTOR_20260715"
+    
+  - id: GERIBOOKING_ECOS_ROOT
+    file: GERIBOOKING/ECOS_ROOT.json
+    type: Registry
+    description: "GERIBOOKING ecosystem identity (L3_CITIZENS, P3)"
+    lines: 9
+    intent_hash: "0xGERIBOOKING_ECOS_ROOT_20260715"
+    
+  - id: GERIBOOKING_KILOCODE_MODES
+    file: GERIBOOKING/.kilocode/modes/*.yaml
+    type: Registry
+    description: "GERIBOOKING KiloCode mode definitions (25 modes)"
+    lines: 350
+    intent_hash: "0xGERIBOOKING_KILOCODE_MODES_20260715"
+    
+  - id: BANK_BUSTER_ECOS_ROOT
+    file: BANK-BUSTER/ECOS_ROOT.json
+    type: Registry
+    description: "BANK-BUSTER ecosystem identity (L3_CITIZENS, P3)"
+    lines: 9
+    intent_hash: "0xBANK_BUSTER_ECOS_ROOT_20260715"
+    
+  - id: RACINES_ECOS_ROOT
+    file: racines/ECOS_ROOT.json
+    type: Registry
+    description: "racines ecosystem identity (L3_CITIZENS, P3)"
+    lines: 9
+    intent_hash: "0xRACINES_ECOS_ROOT_20260715"
+    
+  - id: STRIX_ECOS_ROOT
+    file: strix/ECOS_ROOT.json
+    type: Registry
+    description: "strix ecosystem identity (L3_CITIZENS, P3)"
+    lines: 9
+    intent_hash: "0xSTRIX_ECOS_ROOT_20260715"
+
+# ── Coverage par strate ────────────────────────────────────────────────────────────────
+
+coverage:
+  L0_CONSTITUTIONAL:
+    repos: 1
+    atoms: 0
+    status: "SOT only (pas d'atomes)"
+    
+  L1_CAUSALITY:
+    repos: 4
+    atoms: 10
+    status: "Partial coverage"
+    repos_scanned: [NEXUS, KIVA, GATEWAY-MANAGER, ECOS-CLI]
+    
+  L1b_INFRA:
+    repos: 3
+    atoms: 9
+    status: "Good coverage"
+    repos_scanned: [LLM-REPO, TOPOS, ONTOLOGY]
+    
+  L2_COMPOSITION:
+    repos: 2
+    atoms: 2
+    status: "Scanned - basic coverage"
+    repos_scanned: [BRAIN, FLUENCE]
+    atoms_found: [ECOS_ROOT, ROADMAP_VECTOR, ROADMAP_BLOCKERS, ROADMAP_DEPENDENCIES, ROADMAP_HISTORY, ROADMAP_MILESTONES]
+    
+  L3_EMERGENCE:
+    repos: 5
+    atoms: 8
+    status: "Scanned - partial coverage"
+    repos_scanned: [CANDIDATOR, GERIBOOKING, BANK-BUSTER, racines, strix]
+    atoms_found: [ECOS_ROOT, ROADMAP_VECTOR, ROADMAP_BLOCKERS, ROADMAP_DEPENDENCIES, ROADMAP_HISTORY, ROADMAP_MILESTONES, STRATUM_RELAY, EECS_CONFIG, KILOCODE_MODES]
+    
+  L3_CITIZENS:
+    repos: 3
+    atoms: 3
+    status: "Scanned - basic coverage"
+    repos_scanned: [GERIBOOKING, BANK-BUSTER, racines, strix]
+    note: "GERIBOOKING, BANK-BUSTER, racines, strix also in L3_EMERGENCE per known_repositories.yaml"
+    
+  L4_TOOLS:
+    repos: 2
+    atoms: 2
+    status: "Scanned - basic coverage"
+    repos_scanned: [PITCH-1, DATA-MINER]
+    atoms_found: [ROADMAP_VECTOR, ROADMAP_BLOCKERS, ROADMAP_DEPENDENCIES, ROADMAP_HISTORY, ROADMAP_MILESTONES, STRATUM_RELAY]
+
+# ── Doublons potentiels avec GOVERNANCE-HUB ────────────────────────────────────────
+
+potential_duplicates:
+  - atom: "constitutional-sot"
+    repo: GOVERNANCE-HUB
+    l1_infra_match: "ONTOLOGY.yaml INV-008"
+    status: "DUP - GOVERNANCE-HUB is SOT"
+    
+  - atom: "stratified-repository-registry"
+    repo: GOVERNANCE-HUB
+    l1_infra_match: "TOPOS/STRATE_REGISTRY.yaml + ONTOLOGY.yaml entities"
+    status: "PARTIAL - TOPOS is mirror"
+    
+  - atom: "gated-boot-sequence"
+    repo: GOVERNANCE-HUB
+    l1_infra_match: "LLM-REPO/BOOT/boot_sequence.yaml"
+    status: "ALIGN - LLM-REPO is implementation"
+
+  # Nouveaux doublons potentiels détectés
+  - atom: "ecos-root-registry"
+    repo: GOVERNANCE-HUB
+    l1_infra_match: "ECOS_ROOT.json (multi-repos)"
+    status: "PARTIAL - ECOS_ROOT is distributed, not centralized"
+    
+  - atom: "roadmap-vector"
+    repo: GOVERNANCE-HUB
+    l1_infra_match: "ROADMAPS/vector.yaml (multi-repos)"
+    status: "PARTIAL - ROADMAPS are per-repo, not centralized"
+    
+  - atom: "stratum-relay"
+    repo: GOVERNANCE-HUB
+    l1_infra_match: "STRATUM_RELAY.md (multi-repos)"
+    status: "NEW - distributed stratum documentation, not centralized in GOVERNANCE-HUB"
+    
+  - atom: "eecs-config"
+    repo: GOVERNANCE-HUB
+    l1_infra_match: ".eecs_config.yaml (GERIBOOKING, BANK-BUSTER, racines)"
+    status: "NEW - per-repo EECS configuration, not in GOVERNANCE-HUB"
+    
+  - atom: "kilocode-modes-registry"
+    repo: GOVERNANCE-HUB
+    l1_infra_match: ".kilocode/modes/*.yaml (GERIBOOKING)"
+    status: "NEW - per-repo KiloCode modes, not in GOVERNANCE-HUB"
+
+# ── Statistiques ───────────────────────────────────────────────────────────────────────
+
+statistics:
+  total_repos_scanned: 10
+  total_atoms_found: 63
+  avg_atoms_per_repo: 6.3
+  unique_atom_types:
+    - Registry
+    - Config
+    - Roadmap
+    - Documentation
+    - Schema
+    - Procedure
+    - Ontology
+    - Graph
+
+# ── Next Steps ────────────────────────────────────────────────────────────────────────
+
+next_steps:
+  - "Créer les atom definitions MDU pour les nouveaux patterns L2/L3"
+  - "Vérifier les doublons avec GOVERNANCE-HUB atoms"
+  - "Générer le rapport de couverture final"
+  - "Intégrer les atomes L2/L3 dans connard-design/standards/connard-rules.yaml"

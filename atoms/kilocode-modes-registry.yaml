@@ -1,0 +1,69 @@
+---
+name: kilocode-modes-registry
+description: "Registre des modes KiloCode pour un dépôt. Définit les modes d'opération de l'agent IA (accessibility-checker, analytics-integrator, etc.)."
+parameters:
+  required_fields:
+    - mode_id
+    - name
+    - description
+    - tools
+  optional_fields:
+    - constraints
+    - intent_hash
+    - version
+  mode_categories:
+    - development
+    - review
+    - deployment
+    - analysis
+    - integration
+inherits: [absolute-rules-enforcement]
+---
+
+# KiloCode Modes Registry Atom
+
+Pattern de registre des modes KiloCode par dépôt.
+
+## Rôle
+
+Le répertoire `.kilocode/modes/` contient les définitions YAML des modes d'opération de l'agent IA pour un dépôt spécifique. Chaque mode définit :
+- mode_id : identifiant unique
+- name : nom lisible
+- description : description du mode
+- tools : outils autorisés
+- constraints : contraintes spécifiques
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `mode_id` | string | - | Identifiant unique du mode |
+| `name` | string | - | Nom lisible |
+| `description` | string | - | Description du mode |
+| `tools` | list | `[]` | Outils autorisés |
+| `constraints` | list | `[]` | Contraintes spécifiques |
+
+## Invariants
+
+- Chaque mode DOIT avoir un mode_id unique
+- Les outils listés DOIVENT être disponibles dans l'environnement
+- Les contraintes DOIVENT être respectées lors de l'activation du mode
+
+## Exemple d'usage
+
+```yaml
+mode_id: accessibility-checker
+name: Accessibility Checker
+description: "Vérifie la conformité WCAG du code"
+tools:
+  - read
+  - grep
+  - bash
+constraints:
+  - "Ne pas modifier le code"
+  - "Signaler les violations uniquement"
+```
+
+## Références
+
+- GERIBOOKING/.kilocode/modes/*.yaml (25 modes)

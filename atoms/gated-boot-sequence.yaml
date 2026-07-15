@@ -1,0 +1,50 @@
+---
+name: gated-boot-sequence
+description: "Séquence de boot canonique ordonnée (gates) pour initialiser un sous-système."
+inherits: []
+---
+
+# Gated Boot Sequence Atom
+
+Pattern de séquence de boot ordonnée par gates.
+
+## Rôle
+
+Définit une séquence d'étapes obligatoires pour initialiser un sous-système ou une session multi-repo.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `gates` | list | `[]` | Liste ordonnée des gates (ex: BOOT-0, BOOT-1, ..., BOOT-7) |
+
+## États
+
+| État | Description |
+|------|-------------|
+| `BOOT-0` | Friction Sensor + Stub Detector |
+| `BOOT-1` | Sonde ENV (env-capability-probe) |
+| `BOOT-2` | Sonde outils (devtools-probe) |
+| `BOOT-3` | Audit branches |
+| `BOOT-4` | Audit remotes |
+| `BOOT-5` | Vérification SOT |
+| `BOOT-6` | Pre-merge gate |
+| `BOOT-7` | Clôture (session-closeout D5) |
+
+## Invariants
+
+- BOOT-1 + BOOT-4 + BOOT-7 sont obligatoires pour toute session.
+- BOOT-2/3/5/6 sont optionnels pour les sessions atomiques (< 2 repos).
+- Si friction > 0.7 ou stub_count > 0 → STOP.
+
+## Exemple d'usage
+
+```yaml
+inherits:
+  - gated-boot-sequence
+```
+
+## Références
+
+- GOVERNANCE-HUB session-boot-sequence.md
+- ADR-015-unified-design-v2

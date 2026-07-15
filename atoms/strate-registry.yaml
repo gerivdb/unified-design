@@ -1,0 +1,72 @@
+---
+name: strate-registry
+description: "Classification L0-L5 des dépôts avec règles de gouvernance"
+parameters:
+  strates:
+    L0_CANON:
+      description: "Repos sources de vérité (SOT). Non négociable."
+      max_repos: 10
+    L1_CAUSALITY:
+      description: "Infrastructure runtime, agents, scheduler, WAL."
+      max_repos: 15
+    L1b_INFRA:
+      description: "Outils infra transverses."
+      max_repos: 10
+    L2_COMPOSITION:
+      description: "Repos de composition et orchestration."
+      max_repos: 20
+    L2_PLATFORM:
+      description: "Plateformes et cadres d'exécution."
+      max_repos: 15
+    L3_EMERGENCE:
+      description: "Repos citoyens et d'émergence."
+      max_repos: 30
+    L4_TOOLS:
+      description: "Outils de développement."
+      max_repos: 50
+    L5_ARCHIVE:
+      description: "Repos archives. Read-only."
+      max_repos: 100
+  global_rules:
+    - "TOPOS/topology.yaml est la SOT des dépendances inter-repos"
+    - "Chaque repo avec ECOS_ROOT.json doit être dans topology.yaml"
+    - "Les divergences doivent être résolues"
+inherits: []
+---
+
+# Strate Registry Atom
+
+Capacité de design définissant la classification hiérarchique des dépôts.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `strates` | dict | {} | Classification L0-L5 avec règles |
+| `global_rules` | list | [] | Règles de gouvernance transverses |
+
+## Invariants
+
+- Chaque dépôt doit appartenir à exactement une strate
+- Les règles de gouvernance sont strictes par strate
+- Les modifications de strate nécessitent un ADR
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: strate-registry
+    parameters:
+      strates:
+        L0_CANON:
+          max_repos: 10
+        L4_TOOLS:
+          max_repos: 50
+      global_rules:
+        - "TOPOS/topology.yaml est la SOT"
+```
+
+## Références
+
+- TOPOS STRATE_REGISTRY.yaml
+- Meta-Design MDU v2

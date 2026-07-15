@@ -1,0 +1,13 @@
+name: test-multi-inherit
+full_name: gerivdb/test-multi-inherit
+local_path: D:/DO/WEB/TOOLS/L0-CANON/test-multi-inherit
+parents:
+- GOVERNANCE-HUB
+- REPO-STANDARDS
+status: active
+stratum: L0-CANON
+description: Design unifié hérité de GOVERNANCE-HUB, REPO-STANDARDS
+capabilities:
+- latency-bound
+- power-capped
+created_at: '2026-07-15T19:42:37.600419'

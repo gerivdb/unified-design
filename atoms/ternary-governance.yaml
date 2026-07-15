@@ -1,0 +1,38 @@
+---
+name: ternary-governance
+description: "Gouvernance ternaire basée sur des trits {-1, 0, +1} avec organes de vote et escalades."
+inherits: []
+---
+
+# Ternary Governance Atom
+
+Pattern de gouvernance basé sur des trits ternaires.
+
+## Rôle
+
+Structure les décisions via des trits {-1, 0, +1}, définit des organes de vote et des mécanismes d'escalade.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `trits` | list | `[-1, 0, +1]` | Valeurs possibles d'un trit |
+| `quorum` | int | `null` | Nombre minimum de votants pour valider une décision |
+
+## Invariants
+
+- Toute décision architecturale est tracée via un ADR.
+- Les conflits inter-couches (N+1/N+2/N+3/N+4) sont arbitrés par N+4.
+- Aucune modification de repo N+1 sans ADR backing.
+
+## Exemple d'usage
+
+```yaml
+inherits:
+  - ternary-governance
+```
+
+## Références
+
+- GOVERNANCE-HUB OrgansRegistry.yaml
+- ADR-2026-06-28-001-logical-architecture-n1-n4

@@ -1,0 +1,49 @@
+---
+name: b243-vector
+description: "Vecteur ternaire 3^5=243 dimensions pour l'état du système"
+parameters:
+  dimensions: 243
+  base: 3
+  flags:
+    - 0: absent
+    - 1: partiel
+    - 2: actif
+inherits: []
+---
+
+# B243 Vector Atom
+
+Capacité de design définissant un vecteur d'état ternaire pour le système.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `dimensions` | int | 243 | Nombre total de dimensions |
+| `base` | int | 3 | Base ternaire (0, 1, 2) |
+| `flags` | list | [] | Mapping des valeurs ternaires |
+
+## Invariants
+
+- Chaque dimension est un flag ternaire (0=absent, 1=partiel, 2=actif)
+- Le vecteur encode l'état complet du système en O(1) par dimension
+- La base 3^5 = 243 permet une densité optimale de métadonnées
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: b243-vector
+    parameters:
+      dimensions: 243
+      base: 3
+      flags:
+        - dim_000_strate_L0_canon: 2
+        - dim_001_strate_L1_causality: 2
+        - dim_010_topology_exists: 2
+```
+
+## Références
+
+- TOPOS repo-manifest.yaml
+- Meta-Design MDU v2

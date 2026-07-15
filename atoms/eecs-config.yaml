@@ -1,0 +1,69 @@
+---
+name: eecs-config
+description: "Configuration EECS (Ecosystem Environment Configuration). Définit les paramètres d'environnement, les modes d'exécution et les contraintes de déploiement."
+parameters:
+  required_fields:
+    - environment
+    - mode
+    - constraints
+  optional_fields:
+    - dependencies
+    - bridges
+    - intent_hash
+  modes:
+    - development
+    - staging
+    - production
+    - testing
+inherits: [absolute-rules-enforcement]
+---
+
+# EECS Config Atom
+
+Pattern de configuration EECS par dépôt.
+
+## Rôle
+
+Le fichier `.eecs_config.yaml` définit la configuration environnementale d'un dépôt :
+- environment : environnement cible (dev/staging/prod)
+- mode : mode d'exécution
+- constraints : contraintes de déploiement
+- dependencies : dépendances EECS
+- bridges : connexions EECS
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `environment` | string | - | Environnement cible |
+| `mode` | string | - | Mode d'exécution |
+| `constraints` | list | `[]` | Contraintes de déploiement |
+| `dependencies` | list | `[]` | Dépendances EECS |
+| `bridges` | list | `[]` | Connexions EECS |
+
+## Invariants
+
+- Tout dépôt avec des déploiements automatisés DOIT avoir un .eecs_config.yaml
+- Le mode DOIT être cohérent avec le pipeline CI/CD
+- Les contraintes DOIVENT être respectées lors du déploiement
+
+## Exemple d'usage
+
+```yaml
+environment: production
+mode: blue-green
+constraints:
+  - "BDCP mode must be active"
+  - "No direct access to NEXUS"
+dependencies:
+  - gerivdb/GATEWAY-MANAGER
+bridges:
+  - type: MCP
+    target: gerivdb/ECOS-CLI
+```
+
+## Références
+
+- GERIBOOKING/.eecs_config.yaml
+- BANK-BUSTER/.eecs_config.yaml
+- racines/.eecs_config.yaml
