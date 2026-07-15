@@ -1,0 +1,11 @@
+---
+name: dag3-conversation-forensics
+description: "Integration DAG-3 Forensic Analyzer + conversation parser pour détection d'impenses."
+parameters:
+  components:
+    - DAG-3 Forensic Analyzer
+    - conversation parser
+  output: impense_report
+  replay: supported
+inherits: [conversation-forensics-analyzer, triadic-graph-engine]
+---

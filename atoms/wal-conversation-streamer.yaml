@@ -1,0 +1,13 @@
+---
+name: wal-conversation-streamer
+description: "Streaming temps réel des conversations Kilo vers WAL + WAZAA-BUS."
+parameters:
+  stream_targets:
+    - WAL
+    - WAZAA-BUS
+  capture:
+    - tool_calls
+    - message_chains
+  format: events
+inherits: [artifact-synced-loop, pipeline-orchestrator]
+---
