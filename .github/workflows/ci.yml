@@ -19,7 +19,7 @@ jobs:
       
       - name: Validate META-DESIGN.md frontmatter
         run: |
-          head -10 META-DESIGN.md | grep -q "---"
+          head -10 docs/META-DESIGN.md | grep -q "---"
           echo "✅ META-DESIGN.md has valid frontmatter"
       
       - name: Check required files
@@ -28,5 +28,6 @@ jobs:
           test -f REPO.yaml && echo "✅ REPO.yaml exists"
           test -f citizens.yaml && echo "✅ citizens.yaml exists"
           test -f ONTOLOGY_DECLARATION.yaml && echo "✅ ONTOLOGY_DECLARATION.yaml exists"
+          test -f docs/META-DESIGN.md && echo "✅ docs/META-DESIGN.md exists"
           test -f .gitignore && echo "✅ .gitignore exists"
           test -f .rssignore && echo "✅ .rssignore exists"
