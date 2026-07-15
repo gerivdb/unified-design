@@ -1,0 +1,12 @@
+---
+name: session-cluster-builder
+description: "Clustering automatique de repos en sessions thématiques prêtes à exécuter."
+parameters:
+  clustering_criteria:
+    - domain
+    - layer
+    - dependency_graph
+  output: session_manifest
+  ready_to_execute: true
+inherits: [ecos-root-registry, closed-loop-goal]
+---

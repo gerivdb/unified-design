@@ -1,0 +1,12 @@
+---
+name: bat-family-agents
+description: "Agents Batman/Alfred/Riddler/Lucius/Harvey pour orchestration stratégique du metacluster."
+parameters:
+  agents:
+    - Batman: strategy
+    - Alfred: execution
+    - Riddler: analysis
+    - Lucius: engineering
+    - Harvey: governance
+inherits: [collaborative-horizontal-protocol, closed-loop-goal]
+---
