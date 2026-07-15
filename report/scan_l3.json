@@ -1,5 +1,5 @@
 {
-  "scan_date": "2026-07-15T20:11:41.222740",
+  "scan_date": "2026-07-15T20:26:34.876980",
   "strates": [
     {
       "strate": "L1_CAUSALITY",
@@ -288,11 +288,13 @@
         },
         {
           "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\CITIZENS",
-          "is_design_candidate": false,
-          "has_design_yaml": false,
-          "has_parent": false,
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
           "parent": null,
-          "atomes_possibles": [],
+          "atomes_possibles": [
+            "design.yaml"
+          ],
           "issues": []
         },
         {
@@ -378,11 +380,13 @@
         },
         {
           "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\IRIS",
-          "is_design_candidate": false,
-          "has_design_yaml": false,
-          "has_parent": false,
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
           "parent": null,
-          "atomes_possibles": [],
+          "atomes_possibles": [
+            "design.yaml"
+          ],
           "issues": []
         },
         {
@@ -423,11 +427,13 @@
         },
         {
           "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\MIMIR",
-          "is_design_candidate": false,
-          "has_design_yaml": false,
-          "has_parent": false,
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
           "parent": null,
-          "atomes_possibles": [],
+          "atomes_possibles": [
+            "design.yaml"
+          ],
           "issues": []
         },
         {
@@ -507,7 +513,7 @@
           "issues": []
         }
       ],
-      "design_candidates": 1,
+      "design_candidates": 4,
       "total_repos": 28
     },
     {
@@ -1091,7 +1097,7 @@
   ],
   "summary": {
     "total_repos": 112,
-    "design_candidates": 3,
+    "design_candidates": 6,
     "strates_scanned": 5
   }
 }

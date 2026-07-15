@@ -6,8 +6,8 @@
 |--------|-------|-------------------|-------------------|
 | L0-CANON | 4 | 1 (GOVERNANCE-HUB) | - |
 | L1-CAUSALITY | 13 | 0 | 2 (TOPOS, ECOYSTEM) |
-| L3-EMERGENCE | 28 | 0 | 2 (ARGUS, triadic-compound-eye) |
-| L4-TOOLS | 45 | 3 (TQL, VERSES, REPO-STANDARDS) | 7 (Gitnote, KALA, PIANO, REPO-STANDARDS, sonar-driven-design, triadic-compound-eye) |
+| L3-EMERGENCE | 28 | 4 (TINA, IRIS, CITIZENS, MIMIR) | 2 (ARGUS, triadic-compound-eye) |
+| L4-TOOLS | 45 | 2 (TQL, VERSES) | 7 (Gitnote, KALA, PIANO, REPO-STANDARDS, sonar-driven-design, triadic-compound-eye) |
 | L5-ARCHIVE | 14 | 0 | 1 (RESILIENCE) |
 
 ## Atomes extraits de REPO-STANDARDS
@@ -46,6 +46,24 @@ Analyse des fichiers `repo-manifest.yaml` et `STRATE_REGISTRY.yaml` :
 | `auto-correction` | Détection friction + correction | TINA |
 | `citizen-routing` | Routage citoyens via CITIZENS.yaml | TINA |
 
+## Atomes extraits de IRIS (L3-CITIZENS)
+
+| Atome | Description | Source |
+|-------|-------------|--------|
+| `friction-based-governance` | Gouvernance par friction + auto-correction | IRIS |
+
+## Atomes extraits de CITIZENS (L3-CITIZENS)
+
+| Atome | Description | Source |
+|-------|-------------|--------|
+| `citizen-registry` | Registre canonique des citoyens | CITIZENS |
+
+## Atomes extraits de MIMIR (L3-CITIZENS)
+
+| Atome | Description | Source |
+|-------|-------------|--------|
+| `memory-curator` | Mémoire longue durée + IntentHash | MIMIR |
+
 ## Atomes extraits de TQL (L4-TOOLS)
 
 | Atome | Description | Source |
@@ -65,8 +83,11 @@ Analyse des fichiers `repo-manifest.yaml` et `STRATE_REGISTRY.yaml` :
 Les `design.yaml` suivants ont été créés pour ancrer les dépôts dans le MDU :
 
 1. **TINA** (`D:\DO\WEB\TOOLS\L3-CITIZENS\TINA\design.yaml`) — 5 atomes hérités
-2. **TQL** (`D:\DO\WEB\TOOLS\L4-TOOLS\TQL\design.yaml`) — 3 atomes hérités
-3. **VERSES** (`D:\DO\WEB\TOOLS\L4-TOOLS\VERSES\design.yaml`) — 1 atome hérité
+2. **IRIS** (`D:\DO\WEB\TOOLS\L3-CITIZENS\IRIS\design.yaml`) — 3 atomes hérités
+3. **CITIZENS** (`D:\DO\WEB\TOOLS\L3-CITIZENS\CITIZENS\design.yaml`) — 2 atomes hérités
+4. **MIMIR** (`D:\DO\WEB\TOOLS\L3-CITIZENS\MIMIR\design.yaml`) — 2 atomes hérités
+5. **TQL** (`D:\DO\WEB\TOOLS\L4-TOOLS\TQL\design.yaml`) — 3 atomes hérités
+6. **VERSES** (`D:\DO\WEB\TOOLS\L4-TOOLS\VERSES\design.yaml`) — 1 atome hérité
 
 ## Dépôts analysés
 

@@ -1,0 +1,10 @@
+---
+name: citizen-registry
+description: "Registre canonique des citoyens du metacluster gerivdb."
+parameters:
+  schema_version: "2.1"
+  total_repos: 193
+  priorities: [P0, P1, P2, P3]
+  invoke_when_template: ["task_type"]
+inherits: [stratified-repository-registry]
+---
