@@ -6,13 +6,36 @@
 |--------|-------|-------------------|-------------------|
 | L0-CANON | 4 | 1 (GOVERNANCE-HUB) | - |
 | L1-CAUSALITY | 13 | 0 | 2 (TOPOS, ECOYSTEM) |
+| L2-PLATFORM | 18 | 2 (auto-dev, GeriCode) | 3 (auto-dev, GeriCode, BDCP-CORE) |
 | L3-EMERGENCE | 28 | 8 (TINA, IRIS, CITIZENS, MIMIR, STYX, INTENT-ENCODER, racines, strix) | 2 (ARGUS, triadic-compound-eye) |
 | L4-TOOLS | 45 | 2 (TQL, VERSES) | 7 (Gitnote, KALA, PIANO, REPO-STANDARDS, sonar-driven-design, triadic-compound-eye) |
 | L5-ARCHIVE | 14 | 0 | 1 (RESILIENCE) |
 
-## Atomes extraits de REPO-STANDARDS
+## Atomes extraits de auto-dev (L2-PLATFORM)
 
-Analyse du fichier `meta-design.yaml` de REPO-STANDARDS :
+| Atome | Description | Source |
+|-------|-------------|--------|
+| `auto-dev-cycle` | Cycle scientifique fermé : hypothesis, experiment, champion, dead_end, meta_loop | auto-dev |
+
+## Atomes extraits de GeriCode (L2-PLATFORM)
+
+| Atome | Description | Source |
+|-------|-------------|--------|
+| `psy-citizen-governance` | Citoyens psychologiques avec états dégradés, relapse monitoring, pattern Bat-Family | GeriCode |
+
+## Atomes extraits de auto-dev (L2-PLATFORM)
+
+| Atome | Description | Source |
+|-------|-------------|--------|
+| `auto-dev-cycle` | Cycle scientifique fermé : hypothesis, experiment, champion, dead_end, meta_loop | auto-dev |
+
+## Atomes extraits de GeriCode (L2-PLATFORM)
+
+| Atome | Description | Source |
+|-------|-------------|--------|
+| `psy-citizen-governance` | Citoyens psychologiques avec états dégradés, relapse monitoring, pattern Bat-Family | GeriCode |
+
+## Atomes extraits de REPO-STANDARDS
 
 | Atome | Valeur | Source |
 |-------|--------|--------|
@@ -104,6 +127,8 @@ Les `design.yaml` suivants ont été créés pour ancrer les dépôts dans le MD
 8. **strix** (`D:\DO\WEB\TOOLS\L3-CITIZENS\strix\design.yaml`) — 2 atomes hérités
 9. **TQL** (`D:\DO\WEB\TOOLS\L4-TOOLS\TQL\design.yaml`) — 3 atomes hérités
 10. **VERSES** (`D:\DO\WEB\TOOLS\L4-TOOLS\VERSES\design.yaml`) — 1 atome hérité
+11. **auto-dev** (`D:\DO\WEB\TOOLS\L2-PLATFORM\auto-dev\design.yaml`) — 3 atomes hérités
+12. **GeriCode** (`D:\DO\WEB\TOOLS\L2-PLATFORM\GeriCode\design.yaml`) — 3 atomes hérités
 
 ## Dépôts analysés
 
@@ -134,8 +159,13 @@ Les `design.yaml` suivants ont été créés pour ancrer les dépôts dans le MD
 - `atoms/memory-curator.yaml` - Mémoire longue durée (MIMIR)
 - `atoms/citizen-registry.yaml` - Registre citoyens (CITIZENS)
 - `atoms/verses-generation.yaml` - Génération de vers (VERSES)
-- `generated-designs/test-multi-inherit/design.yaml` - Design test héritage multiple
-- `generated-designs/test-conflict-inherit/design.yaml` - Design test conflit
+- `atoms/auto-dev-cycle.yaml` - Cycle auto-développement (auto-dev)
+- `atoms/psy-citizen-governance.yaml` - Citoyens psychologiques (GeriCode)
+- `atoms/friction-governance.yaml` - Pattern friction générique
+- `atoms/hitl-expulsion-governance.yaml` - Gouvernance HITL expulsion (STYX)
+- `atoms/friction-based-governance.yaml` - Gouvernance par friction (IRIS/TINA)
+- `atoms/memory-curator.yaml` - Mémoire longue durée (MIMIR)
+- `atoms/citizen-registry.yaml` - Registre citoyens (CITIZENS)
 - `L3-CITIZENS/TINA/design.yaml` - Design TINA
 - `L3-CITIZENS/IRIS/design.yaml` - Design IRIS
 - `L3-CITIZENS/CITIZENS/design.yaml` - Design CITIZENS
@@ -146,3 +176,5 @@ Les `design.yaml` suivants ont été créés pour ancrer les dépôts dans le MD
 - `L3-CITIZENS/strix/design.yaml` - Design strix
 - `L4-TOOLS/TQL/design.yaml` - Design TQL
 - `L4-TOOLS/VERSES/design.yaml` - Design VERSES
+- `L2-PLATFORM/auto-dev/design.yaml` - Design auto-dev
+- `L2-PLATFORM/GeriCode/design.yaml` - Design GeriCode

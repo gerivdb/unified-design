@@ -1,5 +1,5 @@
 {
-  "scan_date": "2026-07-15T20:37:41.008705",
+  "scan_date": "2026-07-15T20:46:58.918355",
   "strates": [
     {
       "strate": "L1_CAUSALITY",
@@ -134,12 +134,13 @@
       "repos": [
         {
           "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\auto-dev",
-          "is_design_candidate": false,
-          "has_design_yaml": false,
-          "has_parent": false,
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
           "parent": null,
           "atomes_possibles": [
             "REPO.yaml",
+            "design.yaml",
             "ONTOLOGY_DECLARATION.yaml"
           ],
           "issues": []
@@ -194,12 +195,13 @@
         },
         {
           "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\GeriCode",
-          "is_design_candidate": false,
-          "has_design_yaml": false,
-          "has_parent": false,
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
           "parent": null,
           "atomes_possibles": [
             "REPO.yaml",
+            "design.yaml",
             "ONTOLOGY_DECLARATION.yaml"
           ],
           "issues": []
@@ -241,7 +243,7 @@
           "issues": []
         }
       ],
-      "design_candidates": 0,
+      "design_candidates": 2,
       "total_repos": 11
     },
     {
@@ -1105,7 +1107,7 @@
   ],
   "summary": {
     "total_repos": 112,
-    "design_candidates": 10,
+    "design_candidates": 12,
     "strates_scanned": 5
   }
 }

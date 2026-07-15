@@ -1,8 +1,8 @@
 {
   "path": ".",
   "max_depth": 5,
-  "nodes_count": 8,
-  "edges_count": 9,
+  "nodes_count": 10,
+  "edges_count": 13,
   "loops": [],
   "status": "OK"
 }
