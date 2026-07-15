@@ -140,25 +140,26 @@ regles_transversales:
   - nom: "Composition"
     description: "Profondeur dépendance ≤ 3 niveaux"
     action: "Wall of Shame"
-
+  
   - nom: "Latence"
     description: "P99 ≤ 45ms pour opérations critiques"
     action: "Roast automatique"
-
+  
   - nom: "Puissance"
     description: "≤ 12W par inférence"
     action: "Optimisation PIANO"
-
+  
   - nom: "Observation"
     description: "Tout système critique doit être observable"
     action: "Ajout de probes Sonar"
-
+  
   - nom: "Validation"
     description: "Toute modification passe par Connard"
     commandes:
       - "gerivdb connard validate <path>"
       - "gerivdb connard roast <path>"
       - "gerivdb connard watch <path>"
+      - "gerivdb design validate [--path <path>] [--strict] [--output text|json]"
 
 # Couche de gouvernance
 couche_gouvernance:
@@ -242,5 +243,6 @@ references:
   - ADR-018-governance-hub-mdu-extraction
   - ADR-2026-06-28-001-logical-architecture-n1-n4
   - ADR-CONNARD-001-connard-design-protocol
+  - ADR-20260715-002-DESIGN-VALIDATE-CLI
   - INT-CONNARD-001
   - EPIC-CONNARD-001
