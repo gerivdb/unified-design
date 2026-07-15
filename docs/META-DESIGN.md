@@ -1,7 +1,7 @@
 ---
 type: META-DESIGN
 status: active
-version: "2.0.0"
+version: "2.1.0"
 date: "2026-07-15"
 intent_hash: 0xMDU_UNIFIED_DESIGN_20260715
 ---
@@ -293,9 +293,79 @@ Le workflow GitHub Actions (`.github/workflows/ci.yml`) inclut :
 | 2.0.0 | 2026-07-15 | Version complète — Scan L4/L5, 18 atomes, 17 designs, pipeline KIVA |
 | 1.0.0 | 2026-07-15 | Version initiale — Migration depuis REPO-STANDARDS |
 
-## 10. Prochaines Étapes
+## 10. Exemple Concret — TINA-PLIX-CONNECTOR
 
-1. **Exercer le MDU** — Créer un nouveau design concret pour tester le workflow complet
-2. **Documenter la méthodologie** — Ce document
-3. **Automatiser l'intégration continue** — Brancher le pipeline KIVA sur les événements de commit
-4. **Ancrer les designs dans leurs dépôts** — Pousser les design.yaml dans les repos distants (TINA, IRIS, CITIZENS)
+Ce section documente le test workflow complet du design `TINA-PLIX-CONNECTOR`, un connecteur entre l'architecture TINA (neurosymbolique) et le codec PLIX (binaire ternaire).
+
+### 10.1 Contexte
+
+**Objectif** : Créer un design qui orchestre les flux de données entre l'architecture cognitive TINA et le codec binaire ternaire PLIX, en isolant les environnements d'exécution.
+
+### 10.2 Atomes utilisés
+
+| Atome | Rôle |
+|-------|------|
+| `plix-codec` | Codec binaire ternaire avec GPU decode |
+| `sandbox-isolation` | Isolation des environnements via CubeSandbox |
+| `citizen-routing` | Routage via CITIZENS.yaml avec fallback Kilo Agent |
+
+### 10.3 Fichier design.yaml
+
+```yaml
+---
+name: TINA-PLIX-CONNECTOR
+description: Connecteur TINA ↔ PLIX - interface cognitivo-technique
+version: "1.0.0"
+parent: unified-design
+inherits:
+  - plix-codec
+  - sandbox-isolation
+  - citizen-routing
+capabilities:
+  - name: plix-codec
+    parameters:
+      codecs: [mirror_lens, clusterwave, piano_runtime, verses_resolver]
+      registry: schema_registry
+      gpu_decode: nvdec_wrapper
+      sync_pipeline: required
+      mcp_server: required
+      clients: [tina_client, brain_client]
+  - name: sandbox-isolation
+    parameters:
+      engine: CubeSandbox
+      lifespan: ephemeral
+      namespaces: [pid, mnt, net, user]
+      cleanup: automatic
+  - name: citizen-routing
+    parameters:
+      registry: CITIZENS.yaml
+      fallback: Kilo Agent
+      steps: [BDCP, match, execute]
+stratum: L3_CITIZENS
+status: active
+intent_hash: 0xTINA_Plix_CONNECTOR_20260715
+---
+```
+
+### 10.4 Validation exécutée
+
+```
+[OK] Inheritance check: PASS (plix-codec, sandbox-isolation, citizen-routing)
+[OK] Loop check: PASS (0 cycles)
+[OK] Connard validator: PASS
+[OK] Push to unified-design/generated-designs/tina-plix-connector/
+```
+
+### 10.5 Résultats
+
+- **Props** : Aucun conflit d'atomes
+- **Cycles** : Aucun cycle détecté dans le graphe d'héritage
+- **Push** : Design poussé avec succès vers `unified-design/generated-designs/`
+
+Ce design sert d'exemple concret pour valider le workflow MDU complet.
+
+## 11. Prochaines Étapes
+
+1. **Exercer le MDU** — Créer un nouveau design concret pour tester le workflow complet (ex: orchestrateur multi-agents)
+2. **Automatiser l'intégration continue** — Brancher le pipeline KIVA sur les événements de commit
+3. **Ancrer les designs dans leurs dépôts** — Pousser les design.yaml dans les repos distants (TINA, IRIS, CITIZENS)
