@@ -1,5 +1,5 @@
 {
-  "scan_date": "2026-07-15T20:52:20.980618",
+  "scan_date": "2026-07-15T20:57:58.635687",
   "strates": [
     {
       "strate": "L1_CAUSALITY",
@@ -217,11 +217,13 @@
         },
         {
           "path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\PLIX",
-          "is_design_candidate": false,
-          "has_design_yaml": false,
-          "has_parent": false,
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
           "parent": null,
-          "atomes_possibles": [],
+          "atomes_possibles": [
+            "design.yaml"
+          ],
           "issues": []
         },
         {
@@ -243,7 +245,7 @@
           "issues": []
         }
       ],
-      "design_candidates": 2,
+      "design_candidates": 3,
       "total_repos": 11
     },
     {
@@ -1111,7 +1113,7 @@
   ],
   "summary": {
     "total_repos": 112,
-    "design_candidates": 15,
+    "design_candidates": 16,
     "strates_scanned": 5
   }
 }

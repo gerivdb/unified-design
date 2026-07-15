@@ -1,0 +1,10 @@
+---
+name: gpu-decoder
+description: "Décodage GPU via NVDEC — wrapper CUDA/NVDEC pour PLIX codec."
+parameters:
+  wrapper: nvdec_wrapper
+  build: [build_nvdec.bat, build_nvdec_wrapper_vs.bat]
+  exports: nvdec_wrapper.lib
+  runtime: cuda.lib, cudart.lib
+inherits: [thermal-capped]
+---
