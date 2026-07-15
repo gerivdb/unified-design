@@ -87,8 +87,14 @@ def _load_yaml(path: Path) -> dict:
         return yaml.safe_load(handle) or {}
 
 
-def build_graph_from_designs(roots: Sequence[Path]) -> LoopGraph:
-    """Build a LoopGraph from design/atom/loop YAML files."""
+def build_graph_from_designs(roots: Sequence[Path], *, design_only: bool = False) -> LoopGraph:
+    """Build a LoopGraph from design/atom/loop YAML files.
+
+    When ``design_only`` is True, only YAML files inside directories that
+    contain a ``design.yaml`` are considered. This keeps the scan focused on
+    actual design repos instead of ingesting every governance document in the
+    tree.
+    """
     graph = LoopGraph()
 
     for root in roots:
@@ -98,7 +104,7 @@ def build_graph_from_designs(roots: Sequence[Path]) -> LoopGraph:
             except Exception:
                 continue
 
-            name = data.get("name")
+            name = data.get("name") if isinstance(data, dict) else None
             if not name:
                 continue
 
@@ -122,3 +128,15 @@ def build_graph_from_designs(roots: Sequence[Path]) -> LoopGraph:
             graph.conflicts.append(CapabilityConflict(a=node.name, b=conflict))
 
     return graph
+
+
+def _collect_design_roots(roots: Sequence[Path]) -> list[Path]:
+    """Return directories under ``roots`` that contain a ``design.yaml``."""
+    design_dirs: list[Path] = []
+    for root in roots:
+        if root.joinpath("design.yaml").exists():
+            design_dirs.append(root)
+            continue
+        for candidate in root.glob("*/design.yaml"):
+            design_dirs.append(candidate.parent)
+    return design_dirs
