@@ -1,0 +1,12 @@
+---
+name: verse-generation-api
+description: "Interface de VERSES pour accepter un persona, une section et un prompt, et produire une verse."
+parameters:
+  input:
+    - persona: string
+    - section: string
+    - problem: string
+  output: markdown
+  style_constrained: true
+inherits: [verses-generation, persona-conditioned-generation]
+---

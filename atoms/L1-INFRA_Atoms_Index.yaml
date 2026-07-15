@@ -347,7 +347,146 @@ potential_duplicates:
     l1_infra_match: "LLM-REPO/BOOT/boot_sequence.yaml"
     status: "ALIGN - LLM-REPO is implementation"
 
-  # Nouveaux doublons potentiels détectés
+    # Nouveaux atomes MDU (2026-07-16)
+  - id: COLLABORATIVE_HORIZONTAL_PROTOCOL
+    file: unified-design/atoms/collaborative-horizontal-protocol.yaml
+    type: Protocol
+    description: "Méthodologie d'orchestration d'agents horizontaux avec sections, gardien et délibération flash."
+    intent_hash: "0xATOM_COLLABORATIVE_HORIZONTAL_PROTOCOL_20260716"
+    
+  - id: DESIGN_VERSE_FEEDBACK_LOOP
+    file: unified-design/atoms/design-verse-feedback-loop.yaml
+    type: Loop
+    description: "Cycle itératif où un design est instancié en verse, puis la verse nourrit un nouveau design."
+    intent_hash: "0xATOM_DESIGN_VERSE_FEEDBACK_LOOP_20260716"
+    
+  - id: HITL_GATE
+    file: unified-design/atoms/hitl-gate.yaml
+    type: Governance
+    description: "Mécanisme de blocage pour création de dépôt, clone illégitime, et autres opérations sensibles."
+    intent_hash: "0xATOM_HITL_GATE_20260716"
+    
+  - id: CONTINUOUS_DESIGN_VALIDATION
+    file: unified-design/atoms/continuous-design-validation.yaml
+    type: Pipeline
+    description: "Déploiement de hooks pre-commit et CLI de validation sur l'ensemble des dépôts MDU."
+    intent_hash: "0xATOM_CONTINUOUS_DESIGN_VALIDATION_20260716"
+    
+  - id: STRATIFIED_ABSTRACTION
+    file: unified-design/atoms/stratified-abstraction.yaml
+    type: Architecture
+    description: "Architecture en couches N+0/N+1/N+2 : designs concrets, personae, âmes."
+    intent_hash: "0xATOM_STRATIFIED_ABSTRACTION_20260716"
+    
+  - id: PIPELINE_ORCHESTRATOR
+    file: unified-design/atoms/pipeline-orchestrator.yaml
+    type: Pipeline
+    description: "Pipeline automatisé : âme → équipe → verses → validation → rapport consolidé."
+    intent_hash: "0xATOM_PIPELINE_ORCHESTRATOR_20260716"
+    
+  - id: BATCH_VERSE_GENERATION
+    file: unified-design/atoms/batch-verse-generation.yaml
+    type: Generation
+    description: "Génération par lots de verses : 10 personae × 9 sections en une exécution."
+    intent_hash: "0xATOM_BATCH_VERSE_GENERATION_20260716"
+    
+  - id: SOUL_SELECTION_STRATEGY
+    file: unified-design/atoms/soul-selection-strategy.yaml
+    type: Strategy
+    description: "Stratégie de sélection dynamique d'âme en fonction du contexte de problème."
+    intent_hash: "0xATOM_SOUL_SELECTION_STRATEGY_20260716"
+    
+  - id: PERSONA_CONDITIONED_GENERATION
+    file: unified-design/atoms/persona-conditioned-generation.yaml
+    type: Generation
+    description: "Génération conditionnée par persona : VERSES utilise le style d'un persona pour instancier une verse."
+    intent_hash: "0xATOM_PERSONA_CONDITIONED_GENERATION_20260716"
+    
+  - id: ECOSYSTEM_DASHBOARD
+    file: unified-design/atoms/ecosystem-dashboard.yaml
+    type: Visualization
+    description: "Tableau de bord de visualisation en temps réel des designs, relations et état de validation."
+    intent_hash: "0xATOM_ECOSYSTEM_DASHBOARD_20260716"
+    
+  - id: DESIGN_WIZARD
+    file: unified-design/atoms/design-wizard.yaml
+    type: Tool
+    description: "Assistant de création de design : guide l'utilisateur à travers choix d'âme, héritage d'atomes, paramètres."
+    intent_hash: "0xATOM_DESIGN_WIZARD_20260716"
+    
+  - id: DESIGN_DOCUMENTATION_GENERATOR
+    file: unified-design/atoms/design-documentation-generator.yaml
+    type: Tool
+    description: "Documentation auto-générée à partir des designs MDU."
+    intent_hash: "0xATOM_DESIGN_DOCUMENTATION_GENERATOR_20260716"
+    
+  - id: GITHUB_INTEGRATION
+    file: unified-design/atoms/github-integration.yaml
+    type: Integration
+    description: "Interfaçage avec GitHub : création de PR, merge, push, vérification de remotes."
+    intent_hash: "0xATOM_GITHUB_INTEGRATION_20260716"
+    
+  - id: FRONTMATTER_PARSER
+    file: unified-design/atoms/frontmatter-parser.yaml
+    type: Parser
+    description: "Parsing du frontmatter YAML des documents de gouvernance."
+    intent_hash: "0xATOM_FRONTMATTER_PARSER_20260716"
+    
+  - id: DEPENDENCY_GRAPH_CACHE
+    file: unified-design/atoms/dependency-graph-cache.yaml
+    type: Cache
+    description: "Cache pour le graphe de dépendances entre designs, atomes et personae."
+    intent_hash: "0xATOM_DEPENDENCY_GRAPH_CACHE_20260716"
+    
+  - id: SCAN_REPORT_FORMAT
+    file: unified-design/atoms/scan-report-format.yaml
+    type: Format
+    description: "Format de rapport JSON pour les résultats de scan."
+    intent_hash: "0xATOM_SCAN_REPORT_FORMAT_20260716"
+    
+  - id: DESIGN_SCHEMA
+    file: unified-design/atoms/design-schema.yaml
+    type: Schema
+    description: "Schéma de design.yaml : champs obligatoires, héritage, invariants."
+    intent_hash: "0xATOM_DESIGN_SCHEMA_20260716"
+    
+  - id: VERSE_GENERATION_API
+    file: unified-design/atoms/verse-generation-api.yaml
+    type: API
+    description: "Interface de VERSES pour accepter un persona, une section et un prompt."
+    intent_hash: "0xATOM_VERSE_GENERATION_API_20260716"
+    
+  - id: TEAM_GENERATION_API
+    file: unified-design/atoms/team-generation-api.yaml
+    type: API
+    description: "Interface de HERMES pour dériver une équipe depuis une âme et un méta-design d'équipe."
+    intent_hash: "0xATOM_TEAM_GENERATION_API_20260716"
+    
+  - id: DESIGN_VALIDATE_CLI
+    file: unified-design/atoms/design-validate-cli.yaml
+    type: CLI
+    description: "Spécification de la CLI gerivdb design validate."
+    intent_hash: "0xATOM_DESIGN_VALIDATE_CLI_20260716"
+    
+  - id: COHERENCE_ATTRACTOR
+    file: unified-design/atoms/coherence-attractor.yaml
+    type: Attractor
+    description: "Attracteur étrange qui pousse le système vers l'absence de cycles et de contradictions."
+    intent_hash: "0xATOM_COHERENCE_ATTRACTOR_20260716"
+    
+  - id: INCREMENTAL_GROWTH
+    file: unified-design/atoms/incremental-growth.yaml
+    type: Attractor
+    description: "Attracteur d'incrémentalité : les designs s'enrichissent par héritage sans se détruire."
+    intent_hash: "0xATOM_INCREMENTAL_GROWTH_20260716"
+    
+  - id: CONTEXTUAL_ADAPTATION
+    file: unified-design/atoms/contextual-adaptation.yaml
+    type: Attractor
+    description: "Attracteur d'adaptation : le système choisit les personae et âmes en fonction du contexte."
+    intent_hash: "0xATOM_CONTEXTUAL_ADAPTATION_20260716"
+
+# Nouveaux doublons potentiels détectés
   - atom: "ecos-root-registry"
     repo: GOVERNANCE-HUB
     l1_infra_match: "ECOS_ROOT.json (multi-repos)"
@@ -396,3 +535,4 @@ next_steps:
   - "Vérifier les doublons avec GOVERNANCE-HUB atoms"
   - "Générer le rapport de couverture final"
   - "Intégrer les atomes L2/L3 dans connard-design/standards/connard-rules.yaml"
+

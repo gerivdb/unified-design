@@ -1,0 +1,12 @@
+---
+name: design-wizard
+description: "Assistant de création de design : guide l'utilisateur à travers choix d'âme, héritage d'atomes, paramètres."
+parameters:
+  steps:
+    - choose_soul
+    - select_atoms
+    - configure_parameters
+    - generate_design_yaml
+  output: design.yaml
+inherits: [closed-loop-goal, design-schema]
+---

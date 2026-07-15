@@ -1,0 +1,9 @@
+---
+name: design-verse-feedback-loop
+description: "Cycle itératif où un design est instancié en verse, puis la verse nourrit un nouveau design."
+parameters:
+  max_iterations: 5
+  drift_threshold: 0.2
+  validation: connard-design
+inherits: [artifact-synced-loop, scoped-loop]
+---

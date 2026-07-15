@@ -1,0 +1,10 @@
+---
+name: continuous-design-validation
+description: "Déploiement de hooks pre-commit et CLI de validation sur l'ensemble des dépôts MDU."
+parameters:
+  coverage: L0-L4
+  hook_type: pre-commit
+  validator: gerivdb design validate
+  report: consolidated
+inherits: [scheduled-loop, gated-boot-sequence]
+---

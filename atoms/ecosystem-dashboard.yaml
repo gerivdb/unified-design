@@ -1,0 +1,12 @@
+---
+name: ecosystem-dashboard
+description: "Tableau de bord de visualisation en temps réel des designs, relations et état de validation."
+parameters:
+  refresh_interval: 60
+  data_sources:
+    - unified-design/atoms
+    - personae/
+    - known_repositories.yaml
+  visualization: graph
+inherits: [ecos-root-registry, artifact-synced-loop]
+---

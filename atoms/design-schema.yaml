@@ -1,0 +1,18 @@
+---
+name: design-schema
+description: "Schéma de design.yaml : champs obligatoires (name, version, layer, role), héritage, invariants."
+parameters:
+  required_fields:
+    - name
+    - version
+    - layer
+    - role
+  optional_fields:
+    - parent
+    - inherits
+    - capabilities
+    - soul
+    - team
+  validation: yaml_frontmatter_only
+inherits: [formal-verification, stratified-abstraction]
+---

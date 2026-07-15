@@ -1,0 +1,10 @@
+---
+name: batch-verse-generation
+description: "Génération par lots de verses : 10 personae × 9 sections en une exécution."
+parameters:
+  max_personae: 20
+  max_sections: 20
+  parallelism: true
+  output_pattern: "{persona}-{section}.md"
+inherits: [verses-generation, scoped-loop]
+---

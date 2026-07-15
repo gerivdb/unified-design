@@ -1,0 +1,14 @@
+---
+name: frontmatter-parser
+description: "Parsing du frontmatter YAML des documents de gouvernance : ADR, EPIC, PRD, DESIGN."
+parameters:
+  formats:
+    - ADR
+    - EPIC
+    - PRD
+    - DESIGN
+    - INTENT
+  validation: required_fields
+  extraction: first_document_only
+inherits: [formal-verification, design-schema]
+---

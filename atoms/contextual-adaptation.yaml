@@ -1,0 +1,9 @@
+---
+name: contextual-adaptation
+description: "Attracteur d'adaptation : le système choisit les personae et âmes en fonction du contexte de problème."
+parameters:
+  selection_mode: context-aware
+  reconfiguration_cost_ms: 200
+  fallback_soul: canonical
+inherits: [coherence-attractor, soul-selection-strategy]
+---

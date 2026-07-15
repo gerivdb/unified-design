@@ -1,0 +1,11 @@
+---
+name: team-generation-api
+description: "Interface de HERMES pour dériver une équipe depuis une âme et un méta-design d'équipe."
+parameters:
+  input:
+    - soul: string
+    - team: string
+  output: team.yaml
+  instanciation: persona-aware
+inherits: [pipeline-orchestrator, soul-selection-strategy]
+---

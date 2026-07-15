@@ -1,0 +1,13 @@
+---
+name: pipeline-orchestrator
+description: "Pipeline automatisé : âme → équipe → verses → validation → rapport consolidé."
+parameters:
+  stages:
+    - hermes generate
+    - verses instantiation
+    - design validate
+    - report generation
+  max_runtime_seconds: 30
+  output: pipeline-report.md
+inherits: [scheduled-loop, closed-loop-goal]
+---
