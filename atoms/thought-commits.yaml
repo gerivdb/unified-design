@@ -1,0 +1,9 @@
+---
+name: thought-commits
+description: "Thought-commits KEEL : sérialisation DAG causal en commits Git avec traçabilité."
+parameters:
+  serialization: DAG_to_commit
+  traceability: full
+  integration: KEEL
+inherits: [artifact-synced-loop, design-verse-feedback-loop]
+---

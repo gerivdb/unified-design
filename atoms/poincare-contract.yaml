@@ -1,0 +1,10 @@
+---
+name: poincare-contract
+description: "Contrat Poincaré : validation β₀=1, β₁=0 sur DAGs, invariants post-transport."
+parameters:
+  beta0: 1
+  beta1: 0
+  validation_target: DAG
+  post_transport_invariants: true
+inherits: [formal-verification, design-schema]
+---

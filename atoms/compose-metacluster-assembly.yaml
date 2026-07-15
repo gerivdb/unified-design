@@ -1,0 +1,10 @@
+---
+name: compose-metacluster-assembly
+description: "Langage déclaratif COMPOSE.yaml pour méta-assemblage cross-repos du metacluster."
+parameters:
+  format: COMPOSE.yaml
+  composition_mode: declarative
+  scope: cross-repo
+  validation: connard-design
+inherits: [pipeline-orchestrator, stratified-abstraction]
+---
