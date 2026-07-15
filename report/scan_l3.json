@@ -1,5 +1,5 @@
 {
-  "scan_date": "2026-07-15T20:46:58.918355",
+  "scan_date": "2026-07-15T20:52:20.980618",
   "strates": [
     {
       "strate": "L1_CAUSALITY",
@@ -504,12 +504,13 @@
         },
         {
           "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\triadic-compound-eye",
-          "is_design_candidate": false,
-          "has_design_yaml": false,
-          "has_parent": false,
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
           "parent": null,
           "atomes_possibles": [
-            "REPO.yaml"
+            "REPO.yaml",
+            "design.yaml"
           ],
           "issues": []
         },
@@ -523,7 +524,7 @@
           "issues": []
         }
       ],
-      "design_candidates": 8,
+      "design_candidates": 9,
       "total_repos": 28
     },
     {
@@ -658,12 +659,13 @@
         },
         {
           "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\Gitnote",
-          "is_design_candidate": false,
-          "has_design_yaml": false,
-          "has_parent": false,
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
           "parent": null,
           "atomes_possibles": [
             "REPO.yaml",
+            "design.yaml",
             "ONTOLOGY_DECLARATION.yaml"
           ],
           "issues": []
@@ -921,11 +923,13 @@
         },
         {
           "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSUS",
-          "is_design_candidate": false,
-          "has_design_yaml": false,
-          "has_parent": false,
+          "is_design_candidate": true,
+          "has_design_yaml": true,
+          "has_parent": true,
           "parent": null,
-          "atomes_possibles": [],
+          "atomes_possibles": [
+            "design.yaml"
+          ],
           "issues": []
         },
         {
@@ -956,7 +960,7 @@
           "issues": []
         }
       ],
-      "design_candidates": 2,
+      "design_candidates": 4,
       "total_repos": 45
     },
     {
@@ -1107,7 +1111,7 @@
   ],
   "summary": {
     "total_repos": 112,
-    "design_candidates": 12,
+    "design_candidates": 15,
     "strates_scanned": 5
   }
 }

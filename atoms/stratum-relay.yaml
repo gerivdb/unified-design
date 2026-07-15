@@ -1,71 +1,12 @@
 ---
 name: stratum-relay
-description: "Documentation de relais de strate. Explique comment un dépôt s'inscrit dans la hiérarchie des strates et ses relations avec les autres dépôts."
+description: "Règles locales de strate, lifecycle, dépendances et auto-conformité par repo."
 parameters:
-  required_fields:
-    - strate
-    - role
-    - dependencies
-    - dependents
-  optional_fields:
-    - bridges
-    - constraints
-    - intent_hash
-inherits: [strate-registry]
+  relay_version: 5
+  lifecycle: ACTIVE
+  hub: GOVERNANCE-HUB
+  rules: required
+  dependencies: required
+  auto_conformity: required
+inherits: [absolute-rules-enforcement]
 ---
-
-# Stratum Relay Atom
-
-Pattern de documentation de relais de strate par dépôt.
-
-## Rôle
-
-Chaque dépôt peut avoir un fichier `STRATUM_RELAY.md` qui documente :
-- Sa position dans la hiérarchie des strates
-- Ses dépendances vers d'autres dépôts
-- Les dépôts qui dépendent de lui
-- Les bridges (connexions transverses)
-- Les contraintes spécifiques
-
-## Paramètres
-
-| Paramètre | Type | Défaut | Description |
-|-----------|------|--------|-------------|
-| `strate` | string | - | Strates du dépôt (ex: L3-CITIZENS) |
-| `role` | string | - | Rôle fonctionnel |
-| `dependencies` | list | `[]` | Dépendances vers d'autres dépôts |
-| `dependents` | list | `[]` | Dépôts dépendants |
-| `bridges` | list | `[]` | Bridges transverses |
-| `constraints` | list | `[]` | Contraintes spécifiques |
-
-## Invariants
-
-- Tout dépôt avec des dépendances cross-repo DOIT avoir un STRATUM_RELAY.md
-- Le fichier DOIT être cohérent avec known_repositories.yaml
-- Les bridges DOivent être documentés dans BRIDGES.yaml
-
-## Exemple d'usage
-
-```yaml
-strate: L3-CITIZENS
-role: Gestion candidatures, CV, lettres
-dependencies:
-  - gerivdb/ONTOLOGY
-dependents:
-  - gerivdb/FLUENCE
-bridges:
-  - type: MCP
-    target: gerivdb/GATEWAY-MANAGER
-constraints:
-  - "Pas d'accès direct à NEXUS sans passer par GATEWAY-MANAGER"
-```
-
-## Références
-
-- GERIBOOKING/STRATUM_RELAY.md
-- BANK-BUSTER/STRATUM_RELAY.md
-- racines/STRATUM_RELAY.md
-- strix/STRATUM_RELAY.md
-- DATA-MINER/STRATUM_RELAY.md
-- PITCH-1/STRATUM_RELAY.md
-- GATEWAY-MANAGER/STRATUM_RELAY.md
