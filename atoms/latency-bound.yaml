@@ -1,0 +1,36 @@
+---
+name: latency-bound
+description: "Le design impose une limite de latence"
+parameters:
+  max_latency_ms: 10
+inherits: []
+---
+
+# Latency Bound Atom
+
+Capacité de design imposant une limite de latence P99.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `max_latency_ms` | int | `10` | Latence P99 maximale autorisée (ms) |
+
+## Invariants
+
+- Toute opération critique du design doit respecter `max_latency_ms`.
+- En cas de dépassement, le design doit inclure un mécanisme de rétroaction (ex: backpressure, cache, ou optimisation PIANO).
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: latency-bound
+    parameters:
+      max_latency_ms: 45
+```
+
+## Références
+
+- ADR-015-unified-design-v2
+- Pilier SDD (Sonar-Driven Design)

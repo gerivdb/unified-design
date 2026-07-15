@@ -1,0 +1,62 @@
+---
+name: virtuous-cycle
+type: loop
+cycle_length: 3
+virtuous: true
+description: "Boucle de rétroaction positive sur la performance"
+nodes:
+  - id: observation
+    type: pillar
+    name: Sonar-Driven Design
+    role: "Collecte de métriques"
+  - id: adaptation
+    type: capability
+    name: latency-bound
+    role: "Ajustement des paramètres"
+  - id: optimisation
+    type: pillar
+    name: Connard Design
+    role: "Validation et optimisation"
+edges:
+  - from: observation
+    to: adaptation
+    label: "metrics → params"
+  - from: adaptation
+    to: optimisation
+    label: "params → validation"
+  - from: optimisation
+    to: observation
+    label: "improved → metrics"
+---
+
+# Virtuous Cycle Loop
+
+Pattern de boucle de rétroaction positive sur la performance.
+
+## Description
+
+Cette boucle documente comment l'observation (SDD) alimente l'adaptation (capabilities), qui à son tour déclenche l'optimisation (CD), refermant la boucle sur l'observation avec des métriques améliorées.
+
+## Propriétés
+
+- `virtuous: true` — boucle autorisée par le détecteur.
+- `cycle_length: 3` — 3 nœuds dans le cycle.
+- Aucun conflit sémantique détecté.
+
+## Utilisation
+
+Dans un design instanciant cette boucle :
+
+```yaml
+loops:
+  - name: virtuous-cycle
+    nodes:
+      observation: SDD
+      adaptation: latency-bound
+      optimisation: CD
+```
+
+## Références
+
+- ADR-015-unified-design-v2
+- Pilier SDD, Pilier CD

@@ -1,0 +1,36 @@
+---
+name: power-capped
+description: "Le design impose une limite de puissance"
+parameters:
+  max_power_w: 150
+inherits: []
+---
+
+# Power Capped Atom
+
+Capacité de design imposant une limite de consommation de puissance.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `max_power_w` | int | `150` | Puissance maximale autorisée (W) |
+
+## Invariants
+
+- Toute inférence ou opération matérielle doit respecter `max_power_w`.
+- En cas de dépassement, le design doit inclure un mécanisme de régulation (ex:Dynamic Voltage Scaling, throttling).
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: power-capped
+    parameters:
+      max_power_w: 12
+```
+
+## Références
+
+- ADR-015-unified-design-v2
+- Pilier CD (Connard Design)
