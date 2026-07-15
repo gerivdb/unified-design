@@ -1,0 +1,27 @@
+---
+name: scheduled-loop
+description: "Une loop est déclenchée par un scheduler cron avec catch-up misfire"
+inherits: []
+---
+
+# Scheduled Loop Atom
+
+Capacité de design pour les loops planifiées.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `cron` | string | `null` | Expression cron |
+| `timezone` | string | `null` | Fuseau horaire |
+| `catchup_on_boot` | bool | `true` | Rattraper les occurrences manquées au boot |
+
+## Invariants
+
+- Un cron invalide ⇒ loop non schedulée, erreur loggée.
+- Le scheduler est mono-processus ; `addLoop`/`removeLoop` sont sérialisés.
+
+## Références
+
+- ADR-016-loop-engine
+- loopany-platform: scheduler/index.ts

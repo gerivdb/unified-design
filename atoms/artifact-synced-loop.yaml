@@ -1,0 +1,26 @@
+---
+name: artifact-synced-loop
+description: "Une loop synchronise des artifacts par run (fichiers, blobs)"
+inherits: []
+---
+
+# Artifact Synced Loop Atom
+
+Capacité de design pour les loops à artifacts synchronisés.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `artifact_kind` | string | `null` | Kind d'artifact (`file`/`html`) |
+| `sync_scope` | string | `run` | `run` ou `loop` |
+
+## Invariants
+
+- Les artifacts sont taggés par `loopId` + `runId`.
+- Un snapshot de run capture le manifest + blobs pour diff ultérieur.
+
+## Références
+
+- ADR-016-loop-engine
+- loopany-platform: artifactFiles + runDiff

@@ -1,0 +1,27 @@
+---
+name: scoped-loop
+description: "Une loop est scopée par machine et/ou équipe"
+inherits: []
+---
+
+# Scoped Loop Atom
+
+Capacité de design pour le scope d'exécution d'une loop.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `machine_id` | string | `null` | Machine d'exécution |
+| `team_id` | string | `null` | Team propriétaire |
+
+## Invariants
+
+- `machine_id` requis pour l'exécution.
+- `team_id` requis pour la propriété et le scope admin.
+- Un run requiert un `machine_id` valide et online.
+
+## Références
+
+- ADR-016-loop-engine
+- loopany-platform: gateway + team scoping
