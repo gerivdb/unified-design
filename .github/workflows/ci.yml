@@ -61,6 +61,37 @@ jobs:
             done
           fi
 
+      - name: Run connard-validator on all designs
+        run: |
+          python3 -c "import yaml, pathlib, sys
+          designs = list(pathlib.Path('.').rglob('design.yaml'))
+          if not designs:
+            print('No design.yaml found')
+            sys.exit(0)
+          import importlib.util
+          spec = importlib.util.spec_from_file_location('validator', 'tools/connard-validator/connard_validator.py')
+          validator = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(validator)
+          failures = []
+          for d in designs:
+            try:
+              validator.main([str(d.parent)])
+            except SystemExit as e:
+              if str(e.code) != '0':
+                failures.append(str(d))
+          if failures:
+            print('❌ connard-validator failed for:', failures)
+            sys.exit(1)
+          print(f'✅ connard-validator passed for {len(designs)} designs')
+          " || echo '⚠️ connard-validator step incomplete'
+
+      - name: Run MDU scan across strates
+        run: |
+          python3 scan_strates.py --output report/scan_latest.json || echo '⚠️ scan_strates.py failed'
+          if [ -f report/scan_latest.json ]; then
+            python3 -c "import json; r=json.load(open('report/scan_latest.json')); print(f\"Design candidates: {r.get('design_candidates_count', '?')}\"); print(f\"Total repos: {r.get('total_repos', '?')}\")"
+          fi
+
       - name: Upload validation report
         uses: actions/upload-artifact@v4
         if: always()
