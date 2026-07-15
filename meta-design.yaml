@@ -25,6 +25,7 @@ loop_detection:
   enable: true
   max_cycle_length: 5        # détecte les cycles jusqu'à 5 niveaux
   allow_virtuous_loops: true  # autorise les boucles vertueuses documentées
+  engine: loop_engine        # module Python de détection (unified-design/loop_engine/)
 
 # Règles de validation du graphe de dépendances
 design_rules:
