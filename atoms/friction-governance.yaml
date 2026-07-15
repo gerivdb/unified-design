@@ -1,0 +1,12 @@
+---
+name: friction-governance
+description: "Pattern de gouvernance générique par détection de friction et auto-correction post-implémentation."
+parameters:
+  detector: friction_detector
+  corrector: post_implement_check
+  registry: CITIZENS.yaml
+  fallback: Kilo Agent
+  scan_modes: [pre-commit, post-implementation, continuous]
+  severity_levels: [critical, warning, info]
+inherits: [auto-correction]
+---

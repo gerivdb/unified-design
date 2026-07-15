@@ -6,7 +6,7 @@
 |--------|-------|-------------------|-------------------|
 | L0-CANON | 4 | 1 (GOVERNANCE-HUB) | - |
 | L1-CAUSALITY | 13 | 0 | 2 (TOPOS, ECOYSTEM) |
-| L3-EMERGENCE | 28 | 4 (TINA, IRIS, CITIZENS, MIMIR) | 2 (ARGUS, triadic-compound-eye) |
+| L3-EMERGENCE | 28 | 8 (TINA, IRIS, CITIZENS, MIMIR, STYX, INTENT-ENCODER, racines, strix) | 2 (ARGUS, triadic-compound-eye) |
 | L4-TOOLS | 45 | 2 (TQL, VERSES) | 7 (Gitnote, KALA, PIANO, REPO-STANDARDS, sonar-driven-design, triadic-compound-eye) |
 | L5-ARCHIVE | 14 | 0 | 1 (RESILIENCE) |
 
@@ -64,6 +64,18 @@ Analyse des fichiers `repo-manifest.yaml` et `STRATE_REGISTRY.yaml` :
 |-------|-------------|--------|
 | `memory-curator` | Mémoire longue durée + IntentHash | MIMIR |
 
+## Atomes extraits de STYX (L3-CITIZENS)
+
+| Atome | Description | Source |
+|-------|-------------|--------|
+| `hitl-expulsion-governance` | Gouvernance HITL pour verdicts d'expulsion irréversibles | STYX |
+
+## Atomes extraits de INTENT-ENCODER/racines/strix (L3-CITIZENS)
+
+| Atome | Description | Source |
+|-------|-------------|--------|
+| `friction-governance` | Pattern générique de gouvernance par friction + auto-correction | INTENT-ENCODER, racines, strix |
+
 ## Atomes extraits de TQL (L4-TOOLS)
 
 | Atome | Description | Source |
@@ -86,8 +98,12 @@ Les `design.yaml` suivants ont été créés pour ancrer les dépôts dans le MD
 2. **IRIS** (`D:\DO\WEB\TOOLS\L3-CITIZENS\IRIS\design.yaml`) — 3 atomes hérités
 3. **CITIZENS** (`D:\DO\WEB\TOOLS\L3-CITIZENS\CITIZENS\design.yaml`) — 2 atomes hérités
 4. **MIMIR** (`D:\DO\WEB\TOOLS\L3-CITIZENS\MIMIR\design.yaml`) — 2 atomes hérités
-5. **TQL** (`D:\DO\WEB\TOOLS\L4-TOOLS\TQL\design.yaml`) — 3 atomes hérités
-6. **VERSES** (`D:\DO\WEB\TOOLS\L4-TOOLS\VERSES\design.yaml`) — 1 atome hérité
+5. **STYX** (`D:\DO\WEB\TOOLS\L3-CITIZENS\STYX\design.yaml`) — 2 atomes hérités
+6. **INTENT-ENCODER** (`D:\DO\WEB\TOOLS\L3-CITIZENS\INTENT-ENCODER\design.yaml`) — 2 atomes hérités
+7. **racines** (`D:\DO\WEB\TOOLS\L3-CITIZENS\racines\design.yaml`) — 2 atomes hérités
+8. **strix** (`D:\DO\WEB\TOOLS\L3-CITIZENS\strix\design.yaml`) — 2 atomes hérités
+9. **TQL** (`D:\DO\WEB\TOOLS\L4-TOOLS\TQL\design.yaml`) — 3 atomes hérités
+10. **VERSES** (`D:\DO\WEB\TOOLS\L4-TOOLS\VERSES\design.yaml`) — 1 atome hérité
 
 ## Dépôts analysés
 
@@ -112,17 +128,21 @@ Les `design.yaml` suivants ont été créés pour ancrer les dépôts dans le MD
 - `report/scan_l5.json` - Scan de la strate L5
 - `atoms/b243-vector.yaml` - Atome ternaire
 - `atoms/strate-registry.yaml` - Classification des strates
-- `atoms/sandbox-isolation.yaml` - Isolation NeSy (TINA)
-- `atoms/formal-verification.yaml` - Preuves Z3 (TINA)
-- `atoms/ontology-audit.yaml` - Audit ontologique (TINA)
-- `atoms/auto-correction.yaml` - Auto-correction (TINA)
-- `atoms/citizen-routing.yaml` - Routage citoyens (TINA)
-- `atoms/ternary-query.yaml` - Requête fractal (TQL)
-- `atoms/fractal-recursion.yaml` - Récursion (TQL)
-- `atoms/think-do-check.yaml` - Paradigme ternaire (TQL)
+- `atoms/friction-based-governance.yaml` - Gouvernance par friction (IRIS/TINA)
+- `atoms/friction-governance.yaml` - Pattern friction générique
+- `atoms/hitl-expulsion-governance.yaml` - Gouvernance HITL expulsion (STYX)
+- `atoms/memory-curator.yaml` - Mémoire longue durée (MIMIR)
+- `atoms/citizen-registry.yaml` - Registre citoyens (CITIZENS)
 - `atoms/verses-generation.yaml` - Génération de vers (VERSES)
 - `generated-designs/test-multi-inherit/design.yaml` - Design test héritage multiple
 - `generated-designs/test-conflict-inherit/design.yaml` - Design test conflit
 - `L3-CITIZENS/TINA/design.yaml` - Design TINA
+- `L3-CITIZENS/IRIS/design.yaml` - Design IRIS
+- `L3-CITIZENS/CITIZENS/design.yaml` - Design CITIZENS
+- `L3-CITIZENS/MIMIR/design.yaml` - Design MIMIR
+- `L3-CITIZENS/STYX/design.yaml` - Design STYX
+- `L3-CITIZENS/INTENT-ENCODER/design.yaml` - Design INTENT-ENCODER
+- `L3-CITIZENS/racines/design.yaml` - Design racines
+- `L3-CITIZENS/strix/design.yaml` - Design strix
 - `L4-TOOLS/TQL/design.yaml` - Design TQL
 - `L4-TOOLS/VERSES/design.yaml` - Design VERSES
