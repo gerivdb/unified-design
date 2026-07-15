@@ -146,6 +146,18 @@ validation:
     pre_commit: true
     pre_push: true
 
+# Politique Git
+git_policy:
+  default_branch: main
+  protected: true
+  feature_prefix: "feat/"
+  hotfix_prefix: "hotfix/"
+  require_pr: true
+  require_ci_passing: true
+  min_approvals: 1
+  disallow_direct_push_to_main: true
+  disallow_direct_push_to_master: true
+
 # Références
 references:
   - ADR-012-meta-design-validation-protocol
