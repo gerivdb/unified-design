@@ -45,6 +45,8 @@ Ce dépôt contient les conventions de développement standardisées pour l'éco
 | 036 | VERSES Mapping | Modèles d'interaction double canal |
 | 037 | TINA Specification | Langage machine interne |
 | 038 | TQL Interface Contract | Interface de requête ontologique |
+| 039 | Design-Seeker Pipeline | Méta-outil d'analyse des designs |
+| 040 | Distributed Seeker Agents | Agents sondes distribués |
 
 ## Structure des dossiers
 
@@ -91,10 +93,15 @@ unified-design/
 │   │   └── ATOM-036-VERSES_MAPPING.md
 │   ├── tina/
 │   │   └── ATOM-037-TINA_SPECIFICATION.md
-│   └── tql/
-│       └── ATOM-038-TQL_INTERFACE_CONTRACT.md
+│   ├── tql/
+│   │   └── ATOM-038-TQL_INTERFACE_CONTRACT.md
+│   └── design-seeker/
+│       ├── ATOM-039-DESIGN_SEEKER_PIPELINE.md
+│       └── ATOM-040-DISTRIBUTED_SEEKER_AGENTS.md
 ├── workflows/                   # Templates CI/CD
 │   └── ci-template.yml
+├── scripts/                     # Scripts utilitaires
+│   └── design_seeker_mvp.py
 └── templates/                   # Templates génériques
     ├── CONTRIBUTING.md
     ├── PULL_REQUEST_TEMPLATE.md
