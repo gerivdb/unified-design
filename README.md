@@ -1,6 +1,6 @@
 ---
 type: README
-version: 1.0.0
+version: 1.1.0
 status: active
 intent_hash: 0xATOM_SOTA_CONVENTIONS
 ---
@@ -31,12 +31,27 @@ Ce dépôt contient les conventions de développement standardisées pour l'éco
 | 022 | Code Quality | Formatage et linting |
 | 023 | Minimal CI | Pipeline CI automatisé |
 | 024 | Templates | Templates PR/Issue |
+| 025 | Loop Engineering | Pile à 4 couches (Prompt/Context/Harness/Loop) |
+| 026 | Maker-Checker | Double validation |
+| 027 | Default-FAIL | Sécurité par défaut |
+| 028 | Evidence Required | Évidence tangible requise |
+| 029 | TRIX Architecture | Architecture TRIX |
+| 030 | Bilevel Autoresearch | Recherche automatique bicouche |
+| 031 | Five Movements | Cinq mouvements de débat |
+| 032 | Six Organes | Six organes de gouvernance |
+| 033 | TOPOS Merge | Fusion souveraine TOPOS |
+| 034 | Anti-Patterns | Anti-patterns interdits |
+| 035 | Ontology Anchoring | Ancrage ontologique requis |
+| 036 | VERSES Mapping | Modèles d'interaction |
+| 037 | TINA Specification | Langage machine interne |
+| 038 | TQL Interface Contract | Interface de requête ontologique |
 
 ## Structure des dossiers
 
 ```
 unified-design/
 ├── README.md                    # Ce fichier
+├── ONTOLOGY_MAP.md              # Cartographie ONTOLOGY ↔ ATOMs
 ├── docs/                        # Documentation principale
 │   └── GIT_BRANCH_CONVENTION.md
 ├── conventions/                 # Conventions SOTA
@@ -50,10 +65,34 @@ unified-design/
 │   │   └── CODE_QUALITY.md
 │   ├── ci/
 │   │   └── MINIMAL_CI.md
-│   └── templates/
-│       ├── CONTRIBUTING.md
-│       ├── PULL_REQUEST_TEMPLATE.md
-│       └── ISSUE_TEMPLATE.md
+│   ├── loop/
+│   │   └── LOOP_ENGINEERING.md
+│   ├── maker-checker/
+│   │   └── MAKER_CHECKER.md
+│   ├── default-fail/
+│   │   └── DEFAULT_FAIL.md
+│   ├── evidence/
+│   │   └── EVIDENCE_REQUIRED.md
+│   ├── trix/
+│   │   └── TRIX_ARCHITECTURE.md
+│   ├── autoresearch/
+│   │   └── BILEVEL_AUTORESEARCH.md
+│   ├── movements/
+│   │   └── FIVE_MOVEMENTS.md
+│   ├── organs/
+│   │   └── SIX_ORGANS.md
+│   ├── topos/
+│   │   └── TOPOS_MERGE.md
+│   ├── anti-patterns/
+│   │   └── ANTI_PATTERNS.md
+│   ├── ontology/
+│   │   └── ATOM-035-ONTOLOGY_ANCHORING.md
+│   ├── verses/
+│   │   └── ATOM-036-VERSES_MAPPING.md
+│   ├── tina/
+│   │   └── ATOM-037-TINA_SPECIFICATION.md
+│   └── tql/
+│       └── ATOM-038-TQL_INTERFACE_CONTRACT.md
 ├── workflows/                   # Templates CI/CD
 │   └── ci-template.yml
 └── templates/                   # Templates génériques
