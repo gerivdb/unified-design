@@ -1,0 +1,129 @@
+---
+type: YAML
+version: 1.0.0
+status: active
+intent_hash: 0xATOM_023_MINIMAL_CI
+---
+
+# CI Template - À adapter selon le langage
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff pytest
+
+      - name: Lint (ruff format)
+        run: ruff format --check .
+
+      - name: Lint (ruff check)
+        run: ruff check .
+
+      - name: Run tests
+        run: pytest -v
+
+      - name: Build
+        run: |
+          # Ajouter les étapes de build ici
+          echo "Build OK"
+```
+
+## Adaptation pour Zig
+
+```yaml
+name: CI (Zig)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Zig
+        uses: egor-tensin/setup-zig@v1
+        with:
+          version: '0.15.0'
+
+      - name: Format check
+        run: zig fmt --check
+
+      - name: Build
+        run: zig build
+
+      - name: Test
+        run: zig test
+```
+
+## Adaptation pour Node.js
+
+```yaml
+name: CI (Node.js)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+```

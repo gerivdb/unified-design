@@ -5,9 +5,9 @@ status: active
 intent_hash: 0xATOM_SOTA_CONVENTIONS
 ---
 
-# Unified Design – Conventions SOTA du développement MDU
+# Conventions SOTA du développement MDU
 
-Ce dépôt contient les conventions de développement standardisées pour l'écosystème MDU.
+Ce répertoire contient les conventions de développement standardisées pour l'écosystème MDU.
 
 ## ATOM codifiés
 
@@ -26,40 +26,32 @@ Ce dépôt contient les conventions de développement standardisées pour l'éco
 | 017 | Working Mode | Contexte solo/team |
 | 018 | Auto-ancrage | Ancrage implicite |
 | 019 | Git Branch | Convention de branche |
-| 020 | Conventional Commits | Format de commit structuré |
-| 021 | SemVer + Changelog | Versionnement sémantique |
-| 022 | Code Quality | Formatage et linting |
-| 023 | Minimal CI | Pipeline CI automatisé |
+| 020 | Conventional Commits | Format de commit |
+| 021 | SemVer + Changelog | Versionnement |
+| 022 | Code Quality | Formatage et lint |
+| 023 | Minimal CI | Pipeline CI |
 | 024 | Templates | Templates PR/Issue |
 
 ## Structure des dossiers
 
 ```
-unified-design/
-├── README.md                    # Ce fichier
-├── docs/                        # Documentation principale
-│   └── GIT_BRANCH_CONVENTION.md
-├── conventions/                 # Conventions SOTA
-│   ├── README.md
-│   ├── commit/
-│   │   ├── CONVENTIONAL_COMMITS.md
-│   │   └── .commitlintrc.yml
-│   ├── versioning/
-│   │   └── SEMVER_AND_CHANGELOG.md
-│   ├── lint/
-│   │   └── CODE_QUALITY.md
-│   ├── ci/
-│   │   └── MINIMAL_CI.md
-│   └── templates/
-│       ├── CONTRIBUTING.md
-│       ├── PULL_REQUEST_TEMPLATE.md
-│       └── ISSUE_TEMPLATE.md
-├── workflows/                   # Templates CI/CD
-│   └── ci-template.yml
-└── templates/                   # Templates génériques
+conventions/
+├── commit/           # ATOM-020 : Conventional Commits
+│   └── CONVENTIONAL_COMMITS.md
+├── versioning/       # ATOM-021 : SemVer + Changelog
+│   └── SEMVER_AND_CHANGELOG.md
+├── lint/             # ATOM-022 : Formatage et linting
+│   └── CODE_QUALITY.md
+├── ci/               # ATOM-023 : Pipeline CI minimal
+│   └── MINIMAL_CI.md
+└── templates/        # ATOM-024 : Templates de contribution
     ├── CONTRIBUTING.md
     ├── PULL_REQUEST_TEMPLATE.md
     └── ISSUE_TEMPLATE.md
+
+workflows/              # Templates CI/CD
+docs/                 # Documentation principale
+templates/            # Templates génériques
 ```
 
 ## Adoption dans un nouveau repo
