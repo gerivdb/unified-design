@@ -6,5 +6,30 @@ parameters:
   build: [build_nvdec.bat, build_nvdec_wrapper_vs.bat]
   exports: nvdec_wrapper.lib
   runtime: cuda.lib, cudart.lib
-inherits: [thermal-capped]
+inherits: []
 ---
+
+# GPU Decoder Atom
+
+Décodeur GPU multi-backend pour PLIX Suite.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `wrapper` | string | `nvdec_wrapper` | Backend CUDA/NVDEC |
+| `build` | list | [] | Scripts de build |
+| `exports` | list | [] | Bibliothèques exportées |
+| `runtime` | list | [] | Dépendances runtime CUDA |
+
+## Backends supportés
+
+- **NVDEC_DLL** : NVIDIA NVDEC hardware decode (<5ms cible)
+- **NVDEC_PYAV** : PyAV/FFmpeg avec CUDA hwaccel (~15ms)
+- **OPENCV** : CPU fallback (validé ~15ms)
+
+## Références
+
+- ATOM-007-error-tree-diagnostics
+- INTENT-301: GPU decode
+- ADR-0013: Short-circuit NEUTRE

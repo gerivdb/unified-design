@@ -43,6 +43,7 @@ Cette bibliothèque regroupe les **atomes N+3** — principes méthodologiques u
 | ATOM-004 | Cache Invalidation Hygiene | Purge systématique du cache après changements structurels |
 | ATOM-005 | Interface Contract | Formalisation explicite des exports C pour FFI |
 | ATOM-006 | Error Diagnostic Tree | Transformation des bugs en arbre de décision pour diagnostic |
+| ATOM-007 | Error Tree Diagnostics | Implémentation concrète de l'arbre de diagnostic d'erreurs |
 
 ## Prochaines étapes
 

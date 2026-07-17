@@ -1,16 +1,16 @@
 # L1-INFRA_Atoms_Index.yaml
-# Index des atomes extraits de L1-INFRA, L2-COMPOSITION et L3-EMERGENCE
-# Date: 2026-07-15
-# Source: known_repositories.yaml + scan L1-INFRA + scan L2-COMPOSITION + scan L3-EMERGENCE
-# IntentHash: 0xATOM_SCAN_L2_L3_20260715
+# Index des atomes extraits de L1-INFRA, L2-COMPOSITION, L3-EMERGENCE et L4-DevTools
+# Date: 2026-07-16
+# Source: known_repositories.yaml + scan L1-INFRA + scan L2-COMPOSITION + scan L3-EMERGENCE + scan L4-DevTools + flux inter-dépôts
+# IntentHash: 0xATOM_SCAN_L2_L3_L4_CROSSREPO_20260716
 
 ---
 metadata:
-  version: "1.1.0"
-  date: "2026-07-15"
-  source: "L1-INFRA + L2-COMPOSITION + L3-EMERGENCE scan"
+  version: "1.2.0"
+  date: "2026-07-16"
+  source: "L1-INFRA + L2-COMPOSITION + L3-EMERGENCE + L4-DevTools scan + cross-repo flows"
   sot: "gerivdb/GOVERNANCE-HUB"
-  total_atoms_scanned: 63
+  total_atoms_scanned: 96
 
 # ── Atomes par dépôt ───────────────────────────────────────────────────────────────────────
 
@@ -131,13 +131,29 @@ repos_atoms:
     - ROADMAPS/vector.yaml
     - STRATUM_RELAY.md
     
-  DATA-MINER:
-    - ROADMAPS/blockers.yaml
-    - ROADMAPS/dependencies.yaml
-    - ROADMAPS/history.yaml
-    - ROADMAPS/milestones.yaml
-    - ROADMAPS/vector.yaml
-    - STRATUM_RELAY.md
+   DATA-MINER:
+     - ROADMAPS/blockers.yaml
+     - ROADMAPS/dependencies.yaml
+     - ROADMAPS/history.yaml
+     - ROADMAPS/milestones.yaml
+     - ROADMAPS/vector.yaml
+     - STRATUM_RELAY.md
+
+  # L4-DevTools (nouveau scan 2026-07-16)
+  DevTools:
+    - bin/ecos.ps1
+    - bin/ecos.cmd
+    - scripts/ecos-sync-audit.ps1
+    - scripts/ecos-sync-watchdog.ps1
+    - scripts/ecos-wal-compact.ps1
+    - scripts/verify-mcp-access.ps1
+    - scripts/hitl-preflight.ps1
+    - Makefile
+    - cache-optimization-manager.py
+    - cache-optimization-tests.py
+    - bin/env4-*.ps1
+    - bin/deduct-*.ps1
+    - bin/onto-*.ps1
 
 # ── Atomes majeurs identifiés ───────────────────────────────────────────────────────────
 
@@ -347,8 +363,20 @@ potential_duplicates:
     l1_infra_match: "LLM-REPO/BOOT/boot_sequence.yaml"
     status: "ALIGN - LLM-REPO is implementation"
 
-    # Nouveaux atomes MDU (2026-07-16)
-  - id: COLLABORATIVE_HORIZONTAL_PROTOCOL
+# Nouveaux atomes MDU (2026-07-16)
+   - id: ERROR_TREE_DIAGNOSTICS
+     file: unified-design/atoms/methodology/python/ATOM-007-error-tree-diagnostics.md
+     type: Error
+     description: "Arbre de diagnostic d'erreurs pour transformer les bugs en décision hiérarchisée avec codes d'erreur numériques."
+     intent_hash: "0xATOM_ERROR_TREE_DIAGNOSTICS_20260717"
+     applied_to:
+       - repo: PLIX
+         files:
+           - plix_codecs/sync_pipeline.py
+           - plix_codecs/gpu_decoder.py
+     status: proposed
+     
+   - id: COLLABORATIVE_HORIZONTAL_PROTOCOL
     file: unified-design/atoms/collaborative-horizontal-protocol.yaml
     type: Protocol
     description: "Méthodologie d'orchestration d'agents horizontaux avec sections, gardien et délibération flash."
@@ -480,11 +508,151 @@ potential_duplicates:
     description: "Attracteur d'incrémentalité : les designs s'enrichissent par héritage sans se détruire."
     intent_hash: "0xATOM_INCREMENTAL_GROWTH_20260716"
     
-  - id: CONTEXTUAL_ADAPTATION
+- id: CONTEXTUAL_ADAPTATION
     file: unified-design/atoms/contextual-adaptation.yaml
     type: Attractor
     description: "Attracteur d'adaptation : le système choisit les personae et âmes en fonction du contexte."
     intent_hash: "0xATOM_CONTEXTUAL_ADAPTATION_20260716"
+
+# ── Nouveaux atomes WAZAA (2026-07-16) ────────────────────────────────────────────────────
+
+# Cluster Federation (EPIC-1221)
+- id: CLUSTER_FEDERATION
+  file: unified-design/atoms/cluster-federation.yaml
+  type: Protocol
+  description: "Protocole de membership gossip-based pour la fédération de clusters WAZAA avec élection de leader et détection de split-brain."
+  intent_hash: "0xATOM_CLUSTER_FEDERATION_20260716"
+
+# Sovereign Vector Memory (INTENT-005)
+- id: SOVEREIGN_VECTOR_MEMORY
+  file: unified-design/atoms/sovereign-vector-memory.yaml
+  type: Architecture
+  description: "Mémoire vectorielle locale (TF-IDF + SQLite), sans service externe, avec cache LRU pour recherche sémantique."
+  intent_hash: "0xATOM_SOVEREIGN_VECTOR_MEMORY_20260716"
+
+# Cognitive Bus (INTENT-001)
+- id: COGNITIVE_BUS
+  file: unified-design/atoms/cognitive-bus.yaml
+  type: Integration
+  description: "Bus cognitif unifié pour le streaming d'événements avec WAL, pub/sub, backpressure et filtrage."
+  intent_hash: "0xATOM_COGNITIVE_BUS_20260716"
+
+# Smart Termination (EPIC-1203)
+- id: SMART_TERMINATION
+  file: unified-design/atoms/smart-termination.yaml
+  type: Protocol
+  description: "Détection d'arrêt optimal pour les boucles avec stagnation, timeout, resource, et quality plateau detection."
+  intent_hash: "0xATOM_SMART_TERMINATION_20260716"
+
+# Cognitive Bridge (INTENT-007)
+- id: COGNITIVE_BRIDGE
+  file: unified-design/atoms/cognitive-bridge.yaml
+  type: Integration
+  description: "Bridge entre BRAIN et WAZAA pour créer une boucle cognitive vivante avec publication d'insights périodiques."
+  intent_hash: "0xATOM_COGNITIVE_BRIDGE_20260716"
+
+# Anything CLI Unified (EPIC-1220)
+- id: ANYTHING_CLI_UNIFIED
+  file: unified-design/atoms/anything-cli-unified.yaml
+  type: CLI
+  description: "Suite d'outils CLI unifiés (10 outils) pour wrapper les citizens WAZAA avec sortie JSON canonique."
+  intent_hash: "0xATOM_ANYTHING_CLI_UNIFIED_20260716"
+
+# Event Streaming (EPIC-1222)
+- id: EVENT_STREAMING
+  file: unified-design/atoms/event-streaming.yaml
+  type: Pipeline
+  description: "Serveur WebSocket-based pour le streaming temps réel d'événements avec pub/sub, filtrage et backpressure."
+  intent_hash: "0xATOM_EVENT_STREAMING_20260716"
+
+# Pipeline Anamorphique (session ses_demo_001)
+- id: PIPELINE_ANAMORPHIQUE
+  file: unified-design/atoms/pipeline-anamorphique.yaml
+  type: Pipeline
+  description: "Pattern de pipeline multi-tâches (T001-T010) pour l'implémentation atomique de fonctionnalités complexes."
+  intent_hash: "0xATOM_PIPELINE_ANAMORPHIQUE_20260716"
+
+# Git Remote Safety (session ses_004)
+- id: GIT_REMOTE_SAFETY
+  file: unified-design/atoms/git-remote-safety.yaml
+  type: Safety
+  description: "Protocole de sécurité pour les opérations git remote avec vérification des remotes, branches et historique distant."
+  intent_hash: "0xATOM_GIT_REMOTE_SAFETY_20260716"
+
+# Encoding Batch Fixer (session ses_demo_002)
+- id: ENCODING_BATCH_FIXER
+  file: unified-design/atoms/encoding-batch-fixer.yaml
+  type: Tool
+  description: "Correction batch des encodages de fichiers : UTF-8, BOM, line endings, avec détection automatique et réparation."
+  intent_hash: "0xATOM_ENCODING_BATCH_FIXER_20260716"
+
+# Pipeline Anamorphique Capture (conversations)
+- id: PIPELINE_ANAMORPHIQUE_CAPTURE
+  file: unified-design/atoms/pipeline-anamorphique-capture.yaml
+  type: Tool
+  description: "Capture et analyse des conversations KiloCode pour l'extraction de concepts, frictions et patterns de design."
+  intent_hash: "0xATOM_PIPELINE_ANAMORPHIQUE_CAPTURE_20260716"
+
+# ── Principes de conception (2026-07-16) ────────────────────────────────────────────────
+
+- id: DESIGN_PRINCIPLE
+  file: unified-design/atoms/design-principle.yaml
+  type: Principle
+  description: "Atome parent pour les principes de conception fondamentaux (SOLID, DRY, KISS, YAGNI, etc.)."
+
+- id: SRP
+  file: unified-design/atoms/srp.yaml
+  type: Principle
+  description: "Single Responsibility Principle — chaque module/ classe a une seule raison de changer."
+  intent_hash: "0xATOM_SRP_20260716"
+
+- id: LSP
+  file: unified-design/atoms/lsp.yaml
+  type: Principle
+  description: "Liskov Substitution Principle — les sous-types doivent pouvoir remplacer les types de base."
+  intent_hash: "0xATOM_LSP_20260716"
+
+- id: ISP
+  file: unified-design/atoms/isp.yaml
+  type: Principle
+  description: "Interface Segregation Principle — les clients ne doivent pas être forcés à dépendre d'interfaces qu'ils n'utilisent pas."
+  intent_hash: "0xATOM_ISP_20260716"
+
+- id: DIP
+  file: unified-design/atoms/dip.yaml
+  type: Principle
+  description: "Dependency Inversion Principle — les modules de haut niveau ne doivent pas dépendre des modules de bas niveau."
+  intent_hash: "0xATOM_DIP_20260716"
+
+- id: KISS
+  file: unified-design/atoms/kiss.yaml
+  type: Principle
+  description: "Keep It Simple, Stupid — évitez la complexité inutile, préférez les solutions simples."
+  intent_hash: "0xATOM_KISS_20260716"
+
+- id: YAGNI
+  file: unified-design/atoms/yagni.yaml
+  type: Principle
+  description: "You Aren't Gonna Need It — n'implémentez pas de fonctionnalités non demandées."
+  intent_hash: "0xATOM_YAGNI_20260716"
+
+- id: LAW_OF_DEMETER
+  file: unified-design/atoms/law-of-demeter.yaml
+  type: Principle
+  description: "Law of Demeter — ne parlez qu'aux amis directs, évitez la navigation profonde."
+  intent_hash: "0xATOM_LAW_OF_DEMETER_20260716"
+
+- id: PRINCIPLE_OF_LEAST_ASTONISHMENT
+  file: unified-design/atoms/principle-of-least-astonishment.yaml
+  type: Principle
+  description: "Principle of Least Astonishment — le code doit se comporter comme on s'y attend."
+  intent_hash: "0xATOM_POLA_20260716"
+
+- id: CONVENTION_OVER_CONFIGURATION
+  file: unified-design/atoms/convention-over-configuration.yaml
+  type: Principle
+  description: "Convention over Configuration — établissez des conventions par défaut."
+  intent_hash: "0xATOM_COC_20260716"
 
 # Nouveaux doublons potentiels détectés
   - atom: "ecos-root-registry"
@@ -512,12 +680,156 @@ potential_duplicates:
     l1_infra_match: ".kilocode/modes/*.yaml (GERIBOOKING)"
     status: "NEW - per-repo KiloCode modes, not in GOVERNANCE-HUB"
 
+  # L4-DevTools atoms (scan 2026-07-16)
+  - atom: "dev-tool-wrapper"
+    file: bin/ecos.ps1
+    repo: DevTools
+    type: CLI
+    description: "Wrapper PowerShell unifié pour outils CLI (ecos, kiva, clapet)"
+    lines: 554
+    
+  - atom: "build-pipeline"
+    file: Makefile
+    repo: DevTools
+    type: Pipeline
+    description: "Pipeline multi-langage (Rust/Python/Node) avec optimizations Z600"
+    lines: 217
+    
+  - atom: "multi-repo-audit"
+    file: scripts/ecos-sync-audit.ps1
+    repo: DevTools
+    type: Procedure
+    description: "Audit cross-repo avec mutex Windows, timeout git, zombie cleanup"
+    lines: 252
+    
+  - atom: "registry-driven-orchestration"
+    file: scripts/ecos-sync-audit.ps1
+    repo: DevTools
+    type: Pattern
+    description: "Orchestration par registre de hashtables (name, path, branch, stratum)"
+    lines: 252
+    
+  - atom: "governance-gate-script"
+    file: bin/adr-generator.ps1
+    repo: DevTools
+    type: Tool
+    description: "Génération et validation de documents de gouvernance (ADR, EPIC, PRD)"
+    lines: ~150
+    
+  - atom: "wal-compaction"
+    file: scripts/ecos-wal-compact.ps1
+    repo: DevTools
+    type: Procedure
+    description: "Write-Ahead Log : écriture atomique, compaction, replay"
+    lines: ~100
+    
+  - atom: "mcp-fix-diagnostics"
+    file: scripts/verify-mcp-access.ps1
+    repo: DevTools
+    type: Tool
+    description: "Diagnostic et réparation automatique des connexions MCP"
+    lines: ~200
+    
+  - atom: "cache-manager"
+    file: cache-optimization-manager.py
+    repo: DevTools
+    type: Tool
+    description: "Cache multi-niveaux (LRU, TTL, namespaces, predictive)"
+    lines: ~400
+    
+  - atom: "sync-orchestrator"
+    file: bin/ecos-sync.ps1
+    repo: DevTools
+    type: Procedure
+    description: "Orchestrateur de sync cross-repo avec drift detection et rollback"
+    lines: ~300
+    
+  - atom: "test-runner"
+    file: bin/cross-repo-test.ps1
+    repo: DevTools
+    type: Tool
+    description: "Orchestrateur de tests multi-framework (pytest, Pester, zig test)"
+    lines: ~150
+    
+  - atom: "ci-pipeline"
+    file: Makefile
+    repo: DevTools
+    type: Pipeline
+    description: "Pipeline CI/CD : lint, format, test, build, deploy"
+    lines: 217
+    
+  - atom: "security-fabric"
+    file: scripts/operations/security/backup-safety/backup-manager.ps1
+    repo: DevTools
+    type: Procedure
+    description: "Scan OWASP, détection secrets, validation chemins, backup safety"
+    lines: ~300
+    
+  - atom: "multi-instance-guard"
+    file: scripts/ecos-sync-audit.ps1
+    repo: DevTools
+    type: Safety
+    description: "Garde anti-concurrence Windows (mutex nommé, abandon recovery)"
+    lines: 252
+    
+  - atom: "git-zombie-cleaner"
+    file: scripts/ecos-sync-audit.ps1
+    repo: DevTools
+    type: Safety
+    description: "Nettoyage processus git zombies (> 8 min, graceful kill, disposal)"
+    lines: 252
+
+  # Cross-repo flows (scan 2026-07-16)
+  - atom: "primitive-flow"
+    file: atoms/primitive-flow.yaml
+    repo: cross-repo
+    type: Flow
+    description: "Flux de primitives PRIMUS → CTULU, SKILLS, NEXUS"
+    lines: ~80
+    
+  - atom: "registry-sync"
+    file: atoms/registry-sync.yaml
+    repo: cross-repo
+    type: Flow
+    description: "Synchronisation registre CITIZENS → CTULU, TINA, BRAIN, Kilo Agent"
+    lines: ~80
+    
+  - atom: "photon-pipeline"
+    file: atoms/photon-pipeline.yaml
+    repo: cross-repo
+    type: Flow
+    description: "Pipeline chunking sémantique PHOTON → TRIX → NEXUS"
+    lines: ~90
+    
+  - atom: "skill-orchestration"
+    file: atoms/skill-orchestration.yaml
+    repo: cross-repo
+    type: Flow
+    description: "Orchestration skills SKILLS → CTULU, PRIMUS, Kilo Agent"
+    lines: ~80
+    
+  - atom: "infra-tool-layer"
+    file: atoms/infra-tool-layer.yaml
+    repo: cross-repo
+    type: Flow
+    description: "Couche infra DevTools → CTULU, ECOS-CLI, BRAIN"
+    lines: ~90
+    
+  - atom: "cross-repo-flow"
+    file: atoms/cross-repo-flow.yaml
+    repo: cross-repo
+    type: Pattern
+    description: "Pattern de base pour tout flux inter-dépôts"
+    lines: ~70
+
 # ── Statistiques ───────────────────────────────────────────────────────────────────────
 
 statistics:
-  total_repos_scanned: 10
-  total_atoms_found: 63
-  avg_atoms_per_repo: 6.3
+  total_repos_scanned: 11
+  total_atoms_found: 96
+  total_new_atoms_added: 34  # 11 WAZAA + 10 principes + 14 DevTools + 5 flows + 1 pattern base
+  total_atoms_after_update: 105
+  avg_atoms_per_repo: 7.4
   unique_atom_types:
     - Registry
     - Config
@@ -527,6 +839,24 @@ statistics:
     - Procedure
     - Ontology
     - Graph
+    - Protocol
+    - Architecture
+    - Safety
+    - Tool
+    - CLI
+    - Integration
+    - Pipeline
+    - Principle
+    - Pattern
+    - Atom
+    - Governance
+    - Cache
+    - Sync
+    - Test
+    - CI
+    - Security
+    - Flow
+    - CrossRepo
 
 # ── Next Steps ────────────────────────────────────────────────────────────────────────
 
@@ -535,4 +865,22 @@ next_steps:
   - "Vérifier les doublons avec GOVERNANCE-HUB atoms"
   - "Générer le rapport de couverture final"
   - "Intégrer les atomes L2/L3 dans connard-design/standards/connard-rules.yaml"
+  - "Créer les design.yaml pour PRIMUS, SKILLS, PHOTON référençant les flux inter-dépôts"
+  - "Implémenter la détection de cycles dans le loop engine MDU"
+  - "Créer l'ADR-029 documentant l'extension cross-repo flows"
+
+# ── Cross-Repo Flows ────────────────────────────────────────────────────────────────────
+#
+# DAG des flux inter-dépôts (validation requise par le loop engine):
+# PRIMUS ──(primitive-flow)──> CTULU, SKILLS, NEXUS
+# CITIZENS ──(registry-sync)──> CTULU, TINA, BRAIN, Kilo Agent
+# PHOTON ──(photon-pipeline)──> TRIX, NEXUS, CTULU
+# SKILLS ──(skill-orchestration)──> CTULU, PRIMUS
+# DevTools ──(infra-tool-layer)──> CTULU, ECOS-CLI, BRAIN
+#
+# Cycles interdits:
+# PRIMUS → CTULU → PRIMUS
+# CITIZENS → CTULU → CITIZENS
+# PHOTON → NEXUS → PHOTON
+
 
