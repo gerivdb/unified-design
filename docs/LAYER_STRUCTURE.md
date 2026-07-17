@@ -13,6 +13,7 @@ intent_hash: 0xATOM_025_LAYER_STRUCTURE
 |---------|-------------|-------------------------------------------------|
 | `L0-CANON` | Canon | Vérité unique, spécifications, conventions |
 | `L1-INFRA` | Infrastructure | Gouvernance, hooks, CI, outils de base |
+| `L1-GOVERNANCE` | Governance Hub | Registre global des dépôts gerivdb |
 | `L2-PLATFORM` | Plateforme | Services, API, modèles déployés |
 | `L3-CITIZENS` | Citoyens | Applications et agents autonomes |
 | `L4-TOOLS` | Outils | Scripts, expériences, prototypes |
@@ -30,6 +31,7 @@ intent_hash: 0xATOM_025_LAYER_STRUCTURE
 ```
 L0-CANON
 L1-INFRA
+L1-GOVERNANCE
 L2-PLATFORM
 L3-CITIZENS
 L4-TOOLS
@@ -42,9 +44,9 @@ L5-ARCHIVE
 |---------|--------|------------------|
 | `L0-CANAN` | ✅ CORRIGÉ | Supprimé - doublon de L0-CANON/ONTOLOGY |
 | `L3_EMERGENCE` | ✅ CORRIGÉ | Supprimé - dossier ARGUS vide |
-| `L1b` | ⚠️ À OBSERVER | Conservé - utilisé par certains workflows |
+| `L1b` | ✅ CORRIGÉ | Renommé en `L1-GOVERNANCE` |
 
-**Note sur L1b** : Ce dossier contient `GOVERNANCE-HUB` et est utilisé par certains workflows internes. Il ne respecte pas la nomenclature `L<numéro>-XXX` mais est maintenu temporairement. À surveiller pour éventuelle migration vers L1-GOVERNANCE.
+**Note sur L1-GOVERNANCE** : Ce dossier contient `GOVERNANCE-HUB` (fichier de registre central des dépôts gerivdb). Il a été renommé de `L1b` pour respecter la nomenclature canonique `L<numéro>-XXX`.
 
 ## Utilisation par l'IA
 
