@@ -31,6 +31,16 @@ Ce répertoire contient les conventions de développement standardisées pour l'
 | 022 | Code Quality | Formatage et lint |
 | 023 | Minimal CI | Pipeline CI |
 | 024 | Templates | Templates PR/Issue |
+| 025 | Loop Engineering | Pile Prompt→Context→Harness→Loop |
+| 026 | Maker-Checker | Séparation Analyst/Critic |
+| 027 | Default-FAIL | Rejet par défaut |
+| 028 | Evidence Required | Preuve tangible obligatoire |
+| 029 | TRIX Architecture | Logique ternaire b1.58 |
+| 030 | Bilevel Autoresearch | Méta-recherche sécurisée |
+| 031 | Five Movements | Disco, Handoff, Verification, Persistence, Scheduling |
+| 032 | Six Organes | Automations, Worktrees, Skills, Connectors, Sub-agents, Mémoire |
+| 033 | TOPOS Merge Souverain | Merge uniquement sur ENV2 |
+| 034 | Anti-Patterns | Nodding Loop, Comprehension Rot, Reddition Cognitive |
 
 ## Structure des dossiers
 
