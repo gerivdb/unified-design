@@ -1,17 +1,13 @@
 {
-  "last_action": "merge_pr_12_registry_validation",
-  "timestamp": "2026-07-26T00:45:00+02:00",
+  "last_action": "merge_pr_13_adr_024_kiva_sovereign",
+  "timestamp": "2026-07-26T00:59:00+02:00",
   "branches": {
-    "main": "ef33289",
-    "origin/main": "ef33289"
+    "main": "63af959",
+    "origin/main": "63af959"
   },
   "untracked_count": 0,
-  "remote_branches_pruned": [
-    "origin/feat/ci-registry-validation"
-  ],
-  "deleted_remote_branches": [
-    "origin/feat/ci-registry-validation"
-  ],
+  "remote_branches_pruned": [],
+  "deleted_remote_branches": [],
   "deleted_local_branches": [],
   "cleanup": {
     "fetch_prune_executed": true,
@@ -20,11 +16,20 @@
     "alias_cleanup_repo_added": true,
     "git_maintenance_workflow_present": true
   },
+  "kiva_pipeline": {
+    "path": ".kiva/pipelines/unified-design.yaml",
+    "status": "active",
+    "steps": [
+      "Validate meta-design schema",
+      "Validate atoms registry",
+      "Extract atom dependencies"
+    ]
+  },
   "pr": {
-    "number": 12,
-    "title": "ci(unified-design): add atoms registry validation step",
-    "url": "https://github.com/gerivdb/unified-design/pull/12",
-    "merge_commit": "ef33289"
+    "number": 13,
+    "title": "feat(adr): add ADR-024 KIVA-CLI souverainete validation + pipeline local",
+    "url": "https://github.com/gerivdb/unified-design/pull/13",
+    "merge_commit": "63af959"
   },
   "merged_prs": [
     {
@@ -49,6 +54,12 @@
       "number": 12,
       "title": "ci(unified-design): add atoms registry validation step",
       "merge_commit": "ef33289",
+      "status": "merged"
+    },
+    {
+      "number": 13,
+      "title": "feat(adr): add ADR-024 KIVA-CLI souverainete validation + pipeline local",
+      "merge_commit": "63af959",
       "status": "merged"
     }
   ]
