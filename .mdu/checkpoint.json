@@ -1,11 +1,11 @@
 {
   "last_action": "repo_cleanup_industrialized",
-  "timestamp": "2026-07-25T21:58:44+02:00",
+  "timestamp": "2026-07-25T22:00:10+02:00",
   "branches": {
-    "main": "fbf7f1d",
+    "main": "d93f2a9",
     "origin/main": "fbf7f1d"
   },
-  "untracked_count": 51,
+  "untracked_count": 0,
   "remote_branches_pruned": [
     "origin/feat/loop-detection-engine",
     "origin/feat/ontology-verses-tina-tql-anchoring",
@@ -24,5 +24,10 @@
     "cleanup_scripts_present": true,
     "alias_cleanup_repo_added": true,
     "git_maintenance_workflow_present": true
+  },
+  "pr": {
+    "number": 7,
+    "title": "feat(mdu): add cleanup automation, hooks, DAG, registry",
+    "url": "https://github.com/gerivdb/unified-design/pull/7"
   }
 }
