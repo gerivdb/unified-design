@@ -1,0 +1,42 @@
+---
+name: attention-mechanism
+description: "Mécanisme d'attention universelle inspiré du projet UAE"
+parameters:
+  scaling_factor: "1/sqrt(d)"
+  temperature: 1.0
+  num_heads: 8
+inherits: []
+---
+
+# Attention Mechanism Atom
+
+Atome de design capturant les contraintes génériques d'un moteur d'attention
+universelle, inspiré du citizen `UAE` (L3-CITIZENS/N3).
+
+## Capacités
+
+| Capacité | Paramètres | Description |
+|----------|-----------|-------------|
+| `universal-attention` | `scaling_factor`, `temperature` | Distribution d'attention sur entités |
+| `multi-head` | `num_heads` | Support attention multi-tête |
+
+## Règles de design
+
+- `scaling-rule` : scaling par défaut `1/sqrt(d)`, ajustable.
+- `head-independence` : chaque tête est indépendante et calculée en parallèle.
+
+## Contraintes
+
+- Doit pouvoir être intégré dans un pipeline de bout en bout.
+- Doit être compatible avec des représentations vectorielles de dimension variable.
+
+## Source
+
+- **Implémentation** : `gerivdb/UAE`
+- **Couche** : L3_EMERGENCE
+- **Logical layer** : N3
+
+## Références
+
+- ADR-017-attention-mechanism-atom
+- ADR-015-unified-design-v2
