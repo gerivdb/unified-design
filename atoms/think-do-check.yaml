@@ -1,0 +1,65 @@
+---
+name: think-do-check
+description: "Paradigme ternaire Think-Do-Check pour TQL. 3 phases principales : diagnostic/vision/recherche (THINK), acquis/besoin/stratégie (DO), écart/révision/alignement (CHECK)."
+parameters:
+  phases:
+    think:
+      - diagnostic
+      - vision
+      - recherche
+    do:
+      - acquis
+      - besoin
+      - strategie
+    check:
+      - ecart
+      - revision
+      - alignement
+  recursion: true
+  max_depth: 10
+inherits: [ternary-query]
+---
+
+# Think-Do-Check Atom
+
+Pattern de paradigme ternaire Think-Do-Check.
+
+## Rôle
+
+Structure les requêtes TQL en 3 phases ternaires :
+- **THINK** : diagnostic, vision, recherche
+- **DO** : acquis, besoin, stratégie
+- **CHECK** : écart, révision, alignement
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `phases` | dict | - | Phases du paradigme |
+| `recursion` | bool | `true` | Récursion auto-similaire |
+| `max_depth` | int | `10` | Profondeur max |
+
+## Invariants
+
+- Chaque phase DOIT avoir 3 sous-phases
+- La récursion EST optionnelle mais recommandée
+- La profondeur max DOIT être respectée
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: think-do-check
+    parameters:
+      phases:
+        think: [diagnostic, vision, recherche]
+        do: [acquis, besoin, strategie]
+        check: [ecart, revision, alignement]
+      recursion: true
+      max_depth: 10
+```
+
+## Références
+
+- TQL (gerivdb/TQL)
+- ADR-0013 (triptyque ternaire normatif)

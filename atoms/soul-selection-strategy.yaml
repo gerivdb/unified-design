@@ -1,0 +1,12 @@
+---
+name: soul-selection-strategy
+description: "Stratégie de sélection dynamique d'âme en fonction du contexte de problème."
+parameters:
+  souls:
+    - canonical
+    - critical
+    - pedagogical
+  selection_mode: context-aware
+  fallback: canonical
+inherits: [closed-loop-goal, stratified-abstraction]
+---

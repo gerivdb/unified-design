@@ -1,0 +1,84 @@
+---
+name: photon-pipeline
+description: "Pipeline de chunking sémantique PHOTON → TRIX → NEXUS. Captures les dépendances de preprocessing sémantique."
+parameters:
+  provider: PHOTON
+  consumers:
+    - TRIX
+    - NEXUS
+    - CTULU
+  stages:
+    - semantic_boundary_detection
+    - chunking
+    - validation
+    - indexing
+  formats:
+    - chunk_json
+    - nexus_api_payload
+  runtime: python
+inherits: [cross-repo-flow, pipeline-anamorphique]
+---
+
+# Photon Pipeline Atom
+
+Pipeline de chunking sémantique PHOTON vers les consommateurs.
+
+## Rôle
+
+Documenter et valider le pipeline de preprocessing sémantique :
+- **PHOTON** : détection des frontières sémantiques et chunking
+- **TRIX** : contenant naturel, sous-module git (`TRIX/tools/photon/`)
+- **NEXUS** : indexation des chunks via API REST
+- **CTULU** : exécution des intents PHOTON
+
+## Structure canonique
+
+```yaml
+cross_repo_flow:
+  name: photon-pipeline
+  provider: PHOTON
+  consumers: [TRIX, NEXUS, CTULU]
+  stages:
+    - detect_semantic_boundary
+    - chunk
+    - validate_ontology
+    - push_nexus
+  formats:
+    input: markdown|html|code
+    output: chunk_json
+  integration:
+    trix: submodule
+    nexus: rest_api_v1
+    ctulu: intent_executor
+```
+
+## Invariants
+
+- PHOTON DOIT fournir des chunks **sémantiquement cohérents**
+- TRIX DOIT embarquer PHOTON comme sous-module optionnel
+- NEXUS DOIT valider le format de chunk avant indexation
+- CTULU DOIT exécuter les intents PHOTON via le pipeline canonique
+- Aucun chunk ne DOIT traverser les frontières de repo sans métadonnées
+
+## Validation
+
+Le loop engine MDU DOIT vérifier :
+1. `PHOTON` possède l'atome `semantic-chunking-provider`
+2. `TRIX` possède l'atome `photon-submodule-consumer`
+3. `NEXUS` possède l'atome `chunk-indexing-consumer`
+4. Aucune dépendance cyclique n'existe
+
+## Exemples
+
+| Stage | Outil | Repo | Format |
+|-------|-------|------|--------|
+| Détection frontière | `detect_semantic_boundary.py` | PHOTON | Python |
+| Chunking | `photon_triage.py` | PHOTON | JSON |
+| Validation | `ontology_validator.py` | PHOTON | YAML |
+| Indexation | `nexus_connector.py` | PHOTON | REST API |
+
+## Références
+
+- `D:\DO\WEB\TOOLS\L4-TOOLS\PHOTON\README.md`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\PHOTON\EPICS\EPIC-PHOTON-12-TRIX-MODULE.md`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\PHOTON\EPICS\EPIC-PHOTON-07-NEXUS-CONNECTOR.md`

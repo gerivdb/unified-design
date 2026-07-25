@@ -1,0 +1,12 @@
+---
+name: stratum-relay
+description: "Règles locales de strate, lifecycle, dépendances et auto-conformité par repo."
+parameters:
+  relay_version: 5
+  lifecycle: ACTIVE
+  hub: GOVERNANCE-HUB
+  rules: required
+  dependencies: required
+  auto_conformity: required
+inherits: [absolute-rules-enforcement]
+---

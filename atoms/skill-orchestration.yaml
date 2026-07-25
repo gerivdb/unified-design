@@ -1,0 +1,73 @@
+---
+name: skill-orchestration
+description: "Flux d'orchestration des skills depuis SKILLS vers les consommateurs. Captures les dépendances SKILLS → CTULU, Kilo Agent."
+parameters:
+  provider: SKILLS
+  consumers:
+    - CTULU
+    - Kilo Agent
+  skill_types:
+    - foundational
+    - domain
+    - external
+  orchestration_modes:
+    - tool_invocation
+    - primitive_consumption
+    - workflow_assembly
+  registry: REGISTRY.yaml
+inherits: [cross-repo-flow, registry-driven-orchestration]
+---
+
+# Skill Orchestration Atom
+
+Flux d'orchestration des skills depuis SKILLS vers les consommateurs.
+
+## Rôle
+
+Documenter et valider le flux d'orchestration depuis `gerivdb/SKILLS` vers :
+- **CTULU** : invocation des tools via skills
+- **Kilo Agent** : chargement dynamique des skills
+
+## Structure canonique
+
+```yaml
+cross_repo_flow:
+  name: skill-orchestration
+  provider: SKILLS
+  consumers: [CTULU, Kilo Agent]
+  registry: REGISTRY.yaml
+  skill_types: [foundational, domain, external]
+  orchestration_modes:
+    - tool_invocation: CTULU tools
+    - workflow_assembly: Kilo Agent
+```
+
+## Invariants
+
+- SKILLS DOIT être le **registre unique** des skills
+- Chaque skill DOIT avoir un `trit_primitive` référençant PRIMUS
+- CTULU DOIT pouvoir invoquer les skills via le registry
+- Kilo Agent DOIT charger les skills depuis SKILLS sans duplication
+- Les skills externes DOIVENT être versionnés et validés
+
+## Validation
+
+Le loop engine MDU DOIT vérifier :
+1. `SKILLS` possède l'atome `skill-registry-provider`
+2. Chaque consommateur déclaré possède le contrat d'orchestration
+3. Aucun skill orphelin n'existe sans `trit_primitive`
+
+## Exemples
+
+| Skill | trit_primitive | Provider | Consumer |
+|-------|----------------|----------|----------|
+| `skill-trit-patcher` | TritDocumentClassify | PRIMUS | SKILLS |
+| `scaffold-scanner` | TritIsolate | PRIMUS | SKILLS |
+| `nexus-core` | TritObserve | PRIMUS | SKILLS |
+| `kiva-pipeline` | TritIsolate | PRIMUS | SKILLS |
+
+## Références
+
+- `D:\DO\WEB\TOOLS\L4-TOOLS\SKILLS\README.md`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\SKILLS\REGISTRY.yaml`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\SKILLS\skills\skill-trit-patcher\SKILL.md`

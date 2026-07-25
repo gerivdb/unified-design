@@ -1,0 +1,56 @@
+---
+name: event-streaming
+description: "Serveur WebSocket-based pour le streaming temps réel d'événements avec pub/sub, filtrage et backpressure."
+parameters:
+  protocol: WebSocket
+  heartbeat_interval_seconds: 30
+  max_connections: 1000
+  message_queue_size: 10000
+  compression_enabled: true
+constraints:
+  - "Débit ≥ 1000 événements/seconde"
+  - "Latence < 50 ms"
+  - "99.9% uptime"
+  - "Gestion backpressure automatique"
+inherits: [real-time-system, websocket-server]
+---
+
+# Atom : event-streaming
+
+## Contexte
+Basé sur EPIC-1222 REAL-TIME EVENT STREAMING SERVER. Serveur WebSocket pour le streaming temps réel des événements WAZAA.
+
+## Fonctionnalités
+- **Pub/Sub** : Publication et abonnement aux événements
+- **Filtrage** : Filtrage sélectif des événements par type
+- **Backpressure** : Gestion du débordement avec file d'attente
+- **Compression** : Compression des messages volumineux
+- **Heartbeat** : Détection des connexions mortes
+
+## Architecture
+```
+┌─────────────────────────────────────────────┐
+│         EVENT STREAMING SERVER              │
+├─────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌───────┐ │
+│  │  Pub/Sub    │  │   Filter    │  │ Queue │ │
+│  │   Engine    │  │   Engine    │  │ Engine│ │
+│  └─────────────┘  └─────────────┘  └───────┘ │
+│           │                         │        │
+│           ▼                         ▼        │
+│  ┌─────────────────────────────────────────┐ │
+│  │           WebSocket Server              │ │
+│  │  - Connection management                │ │
+│  │  - Message routing                      │ │
+│  │  - Compression                          │ │
+│  └─────────────────────────────────────────┘ │
+└─────────────────────────────────────────────┘
+```
+
+## Événements supportés
+- `event.stream.started` - Le streaming a démarré
+- `event.stream.stopped` - Le streaming s'est arrêté
+- `event.published` - Un événement a été publié
+- `event.subscribed` - Un client s'est abonné
+- `event.filtered` - Un événement a été filtré
+- `event.backpressure.triggered` - Le backpressure est déclenché

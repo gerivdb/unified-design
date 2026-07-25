@@ -60,7 +60,13 @@ def detect_cycles(design: dict[str, Any], meta: dict[str, Any]) -> list[list[str
 def validate_conflicts(design: dict[str, Any]) -> list[str]:
     """Valide qu'aucune capacité n'est en conflit avec une autre."""
     conflicts = []
-    caps = {c["name"]: c.get("parameters", {}) for c in design.get("capabilities", [])}
+    raw_caps = design.get("capabilities", [])
+    if isinstance(raw_caps, dict):
+        caps = raw_caps
+    elif isinstance(raw_caps, list):
+        caps = {c["name"]: c.get("parameters", {}) for c in raw_caps}
+    else:
+        caps = {}
     lat = caps.get("latency-bound", {}).get("max_latency_ms")
     pow_ = caps.get("power-capped", {}).get("max_power_w")
     if lat is not None and pow_ is not None and lat <= 1 and pow_ <= 1:
@@ -89,20 +95,20 @@ def main() -> int:
 
     ok = True
     if cycles:
-        print("❌ Cycles détectés :")
+        print("[FAIL] Cycles detected:")
         for cycle in cycles:
-            print(f"  {' → '.join(cycle)}")
+            print(f"  {' -> '.join(cycle)}")
         ok = False
     else:
-        print("✅ Aucun cycle d'héritage détecté.")
+        print("[OK] No inheritance cycles detected.")
 
     if conflicts:
-        print("❌ Conflits de capacités :")
+        print("[FAIL] Capability conflicts:")
         for c in conflicts:
             print(f"  - {c}")
         ok = False
     else:
-        print("✅ Aucun conflit de capacités.")
+        print("[OK] No capability conflicts.")
 
     return 0 if ok else 1
 

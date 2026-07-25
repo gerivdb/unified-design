@@ -1,0 +1,10 @@
+---
+name: cron-centralized-registry
+description: "Registre centralisé cron avec schéma YAML déclaratif, NT Job Objects, mutex."
+parameters:
+  schema: ecos-sync-registry.yaml
+  platform: windows
+  mutex: true
+  declarative: true
+inherits: [scheduled-loop, eecs-config]
+---

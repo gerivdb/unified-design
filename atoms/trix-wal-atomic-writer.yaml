@@ -1,0 +1,10 @@
+---
+name: trix-wal-atomic-writer
+description: "Écriture atomique cross-repos via WAL avec rollback automatique."
+parameters:
+  wal_path: WAL/wal.jsonl
+  rollback_on_failure: true
+  max_batch_size: 10
+  atomicity: all_or_nothing
+inherits: [artifact-synced-loop, absolute-rules-enforcement]
+---

@@ -1,0 +1,12 @@
+---
+name: fpick-functor
+description: "Primitive fonctionnelle canonique de sélection cross-repos par pattern."
+parameters:
+  selection_mode: pattern_match
+  cross_repo: true
+  output: file_list
+  integration:
+    - ecos compose
+    - morphism maps
+inherits: [fractal-recursion, scoped-loop]
+---

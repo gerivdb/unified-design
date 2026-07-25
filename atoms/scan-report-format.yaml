@@ -1,0 +1,15 @@
+---
+name: scan-report-format
+description: "Format de rapport JSON pour les résultats de scan : checks, errors, warnings."
+parameters:
+  schema:
+    path: string
+    checks: array
+    passed: boolean
+    errors: array
+    warnings: array
+  output_modes:
+    - text
+    - json
+inherits: [formal-verification, artifact-synced-loop]
+---

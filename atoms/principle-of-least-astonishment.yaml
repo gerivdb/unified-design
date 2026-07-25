@@ -1,0 +1,54 @@
+---
+name: principle-of-least-astonishment
+description: "Principle of Least Astonishment — le code doit se comporter comme on s'y attend, suivant les conventions du domaine."
+parameters:
+  domain_conventions: required
+  predictable_behavior: true
+  naming_consistency: strict
+constraints:
+  - "Comportement prévisible pour les utilisateurs familiers"
+  - "Nommage cohérent avec les conventions du domaine"
+  - "Les API doivent être intuitives"
+inherits: [design-principle]
+---
+
+# Atom : Principle of Least Astonishment (POLA)
+
+## Contexte
+Principe de conception : un programmeur qui utilise votre code ne devrait pas être surpris par son comportement.
+
+## Application dans MDU
+- **CLI** : Commandes intuitives et cohérentes
+- **API** : Comportement prévisible
+- **Atomes** : Nommage et comportement cohérents
+
+## Conventions du domaine
+- **KiloCode** : Mode `architect` pour conception, `code` pour implémentation
+- **Git** : `git push` vs `git push --force`
+- **YAML** : Indentation cohérente, ordre des clés logique
+
+## Vérification
+```bash
+# Vérifier POLA dans une API
+ctulu validate-pola --api src/wazaa_bus_citizens/
+```
+
+## Principes
+1. **Intuitivité** : Les API doivent être faciles à prévoir
+2. **Cohérence** : Même pattern = même comportement
+3. **Convention** : Suivre les conventions établies
+
+## Exemple
+```yaml
+# Mauvaise pratique (surprenant)
+operations:
+  create_repo: "créer un dépôt"
+  delete_repo: "supprimer un dépôt"
+  remove_repo: "effacer un dépôt"  # Incohérent!
+
+# Bonne pratique (cohérent)
+operations:
+  create_repo: "créer un dépôt"
+  delete_repo: "supprimer un dépôt"
+  remove_repo: "supprimer un dépôt (alias)"  # Même sens, alias explicite
+```

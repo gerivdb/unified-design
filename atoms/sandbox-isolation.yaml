@@ -1,0 +1,57 @@
+---
+name: sandbox-isolation
+description: "Isolation des environnements NeSy via CubeSandbox. Garantit l'exécution sécurisée des agents dans des conteneurs éphémères avec namespaces isolés."
+parameters:
+  engine: CubeSandbox
+  lifespan: ephemeral
+  namespaces:
+    - pid
+    - mnt
+    - net
+    - user
+  cleanup: automatic
+inherits: [absolute-rules-enforcement]
+---
+
+# Sandbox Isolation Atom
+
+Pattern d'isolation des environnements neurosymboliques (NeSy).
+
+## Rôle
+
+Toute exécution NeSy doit être isolée dans un CubeSandbox éphémère :
+- **Isolation** : pid, mnt, net, user namespaces
+- **Durée de vie** : éphémère (créé/détruit à la demande)
+- **Nettoyage** : automatique après exécution
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `engine` | string | `CubeSandbox` | Moteur de sandbox |
+| `lifespan` | string | `ephemeral` | Durée de vie |
+| `namespaces` | list | `[pid, mnt, net, user]` | Namespaces isolés |
+| `cleanup` | string | `automatic` | Nettoyage automatique |
+
+## Invariants
+
+- Toute exécution NeSy DOIT être dans un CubeSandbox
+- Les namespaces DOIVENT être isolés
+- Le nettoyage DOIT être automatique
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: sandbox-isolation
+    parameters:
+      engine: CubeSandbox
+      lifespan: ephemeral
+      namespaces: [pid, mnt, net, user]
+      cleanup: automatic
+```
+
+## Références
+
+- TINA (Trusted Intelligent Neurosymbolic Architecture)
+- CITIZEN_ROUTER.md

@@ -1,0 +1,10 @@
+---
+name: time-machine-state-snapshotting
+description: "Snapshots d'état 243 avec entropie, checkpoint-décision et replay."
+parameters:
+  state_space: 243
+  entropy_tracking: true
+  checkpoint_decision: automatic
+  replay: supported
+inherits: [scoped-loop, closed-loop-goal]
+---

@@ -1,0 +1,40 @@
+---
+name: adr-prd-epics-intents
+description: "Gestion des ADR, PRD, EPICS, INTENTS comme artefacts décisionnels tracés."
+inherits: []
+---
+
+# ADR/PRD/EPICS/INTENTS Atom
+
+Pattern de traçabilité des décisions via artefacts de gouvernance.
+
+## Rôle
+
+Structure la création, la validation et la traçabilité des documents décisionnels (ADR, PRD, EPICS, INTENTS).
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `artifact_types` | list | `[]` | Types d'artefacts supportés (ADR, PRD, EPIC, INTENT, REPORT, RPT, GUI, RUN) |
+| `frontmatter_required` | list | `[]` | Champs obligatoires dans le frontmatter YAML |
+
+## Invariants
+
+- Tout artefact de gouvernance possède un frontmatter YAML valide (validé par `frontmatter-guardian`).
+- Chaque ADR est lié à un intent_hash unique.
+- Les PRD/EPICS sont décomposés en INTENTS avant implémentation.
+- Aucune décision d'impact transverse n'est implémentée sans ADR backing.
+
+## Exemple d'usage
+
+```yaml
+inherits:
+  - adr-prd-epics-intents
+```
+
+## Références
+
+- GOVERNANCE-HUB governance-doc-writer skill
+- ADR-012-meta-design-validation-protocol
+- frontmatter-guardian skill

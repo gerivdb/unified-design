@@ -1,123 +1,123 @@
-# Unified Design (MDU)
+---
+type: README
+version: 1.1.0
+status: active
+intent_hash: 0xATOM_SOTA_CONVENTIONS
+---
 
-> **Le Gentil** — L'atlas global des invariants architecturaux de l'écosystème gerivdb
+# Unified Design – Conventions SOTA du développement MDU
 
-## Vision
+Ce dépôt contient les conventions de développement standardisées pour l'écosystème MDU.
 
-Le **Méta-Design (MDU)** est la **constitution architecturale** de l'écosystème gerivdb. Il définit les invariants topo-logiques qui gouvernent l'interaction entre les couches, les patterns, et les agents.
+## ATOM codifiés
 
-## Les Quatre Piliers
+| ATOM | Nom | Description |
+|------|-----|-------------|
+| 001 | FFI Convention | Convention d'interface C |
+| 002 | Definition Order | Ordre des définitions |
+| 003 | Namespace Convention | Convention de nommage |
+| 004 | Cache Convention | Gestion du cache |
+| 005 | Interface Contract | Contrat d'interface |
+| 006 | Error Diagnostic Tree | Arborescence d'erreurs |
+| 007-013 | Conventions par domaine | Langages, DevOps, Sécurité |
+| 014 | Self-modification | Méta-atome |
+| 015 | Semantic Drift | Détecteur de dérive |
+| 016 | ADR Quorum | Vote sur ADR |
+| 017 | Working Mode | Contexte solo/team |
+| 018 | Auto-ancrage | Ancrage implicite |
+| 019 | Git Branch | Convention de branche |
+| 020 | Conventional Commits | Format de commit structuré |
+| 021 | SemVer + Changelog | Versionnement sémantique |
+| 022 | Code Quality | Formatage et linting |
+| 023 | Minimal CI | Pipeline CI automatisé |
+| 024 | Templates | Templates PR/Issue |
+| 025 | Loop Engineering | Pile à 4 couches (Prompt/Context/Harness/Loop) |
+| 026 | Maker-Checker | Double validation |
+| 027 | Default-FAIL | Sécurité par défaut |
+| 028 | Evidence Required | Évidence tangible requise |
+| 029 | TRIX Architecture | Architecture TRIX |
+| 030 | Bilevel Autoresearch | Recherche automatique bicouche |
+| 031 | Five Movements | Cinq mouvements de débat |
+| 032 | Six Organes | Six organes de gouvernance |
+| 033 | TOPOS Merge | Fusion souveraine TOPOS |
+| 034 | Anti-Patterns | Anti-patterns interdits |
+| 035 | Ontology Anchoring | Ancrage ontologique requis |
+| 036 | VERSES Mapping | Modèles d'interaction double canal |
+| 037 | TINA Specification | Langage machine interne |
+| 038 | TQL Interface Contract | Interface de requête ontologique |
+| 039 | Design-Seeker Pipeline | Méta-outil d'analyse des designs |
+| 040 | Distributed Seeker Agents | Agents sondes distribués |
 
-| Pilier | Abbr | Rôle | Couleur |
-|--------|------|------|---------|
-| Sonar-Driven Design | SDD | Observabilité | #4CAF50 |
-| Triadic Compound Eye | TCE | Orchestration Agents | #2196F3 |
-| MorphoHDL Anamorphic Growth | MAG | Optimisation Matérielle | #9C27B0 |
-| Connard Design | CD | Contrôle Qualité | #F44336 |
-
-## Structure
+## Structure des dossiers
 
 ```
 unified-design/
-├── meta-design.yaml            # Schéma de validation YAML v2
-├── atoms/                      # Design atoms réutilisables
-│   ├── latency-bound.yaml
-│   └── power-capped.yaml
-├── loops/                      # Patterns de boucles documentés
-│   ├── virtuous-cycle.yaml
-│   └── deadlock-pattern.yaml
-├── generator/                  # Scripts d'industrialisation
-│   ├── create_design.py
-│   └── validate_inheritance.py
-├── docs/                       # Documentation détaillée
-├── README.md                   # Ce fichier
-└── REPO.yaml                   # Métadonnées du repository
+├── README.md                    # Ce fichier
+├── ONTOLOGY_MAP.md              # Cartographie ONTOLOGY ↔ ATOMs
+├── docs/                        # Documentation principale
+│   └── GIT_BRANCH_CONVENTION.md
+├── conventions/                 # Conventions SOTA
+│   ├── README.md
+│   ├── commit/
+│   │   ├── CONVENTIONAL_COMMITS.md
+│   │   └── .commitlintrc.yml
+│   ├── versioning/
+│   │   └── SEMVER_AND_CHANGELOG.md
+│   ├── lint/
+│   │   └── CODE_QUALITY.md
+│   ├── ci/
+│   │   └── MINIMAL_CI.md
+│   ├── loop/
+│   │   └── LOOP_ENGINEERING.md
+│   ├── maker-checker/
+│   │   └── MAKER_CHECKER.md
+│   ├── default-fail/
+│   │   └── DEFAULT_FAIL.md
+│   ├── evidence/
+│   │   └── EVIDENCE_REQUIRED.md
+│   ├── trix/
+│   │   └── TRIX_ARCHITECTURE.md
+│   ├── autoresearch/
+│   │   └── BILEVEL_AUTORESEARCH.md
+│   ├── movements/
+│   │   └── FIVE_MOVEMENTS.md
+│   ├── organs/
+│   │   └── SIX_ORGANS.md
+│   ├── topos/
+│   │   └── TOPOS_MERGE.md
+│   ├── anti-patterns/
+│   │   └── ANTI_PATTERNS.md
+│   ├── ontology/
+│   │   └── ATOM-035-ONTOLOGY_ANCHORING.md
+│   ├── verses/
+│   │   └── ATOM-036-VERSES_MAPPING.md
+│   ├── tina/
+│   │   └── ATOM-037-TINA_SPECIFICATION.md
+│   ├── tql/
+│   │   └── ATOM-038-TQL_INTERFACE_CONTRACT.md
+│   └── design-seeker/
+│       ├── ATOM-039-DESIGN_SEEKER_PIPELINE.md
+│       └── ATOM-040-DISTRIBUTED_SEEKER_AGENTS.md
+├── workflows/                   # Templates CI/CD
+│   └── ci-template.yml
+├── scripts/                     # Scripts utilitaires
+│   └── design_seeker_mvp.py
+└── templates/                   # Templates génériques
+    ├── CONTRIBUTING.md
+    ├── PULL_REQUEST_TEMPLATE.md
+    └── ISSUE_TEMPLATE.md
 ```
 
-## Méthodologie : Créer un design hérité
+## Adoption dans un nouveau repo
 
-### 1. Comprendre le méta-design
-
-Lisez `meta-design.yaml` pour identifier :
-- Les **capacités** disponibles dans `capabilities/`.
-- Les **règles** de validation dans `design_rules/`.
-- Les **boucles** connues dans `loops/`.
-
-### 2. Générer un nouveau design
-
-```bash
-# Depuis la racine du repo unified-design
-python generator/create_design.py mon-nouveau-design \
-  --parent morphohdl-anamorphic-growth \
-  --capability latency-bound \
-  --capability power-capped
-```
-
-Cela génère un fichier `generated-designs/mon-nouveau-design/design.yaml` contenant :
-- Les paramètres hérités du parent.
-- Les capacités sélectionnées avec leurs paramètres par défaut.
-- Une checklist des boucles potentielles à vérifier.
-
-### 3. Valider l'héritage et détecter les boucles
-
-```bash
-python generator/validate_inheritance.py generated-designs/mon-nouveau-design/design.yaml
-```
-
-Le validateur vérifie :
-- L'**acyclicité** du graphe d'héritage.
-- L'**absence de conflits** entre capacités (ex: `latency-bound <= 1ms` + `power-capped <= 1W`).
-
-### 4. Déployer
-
-Une fois validé, le `design.yaml` peut être déployé dans un nouveau dépôt ou intégré à un existant.
-
-## Validation
-
-```bash
-gerivdb meta validate
-gerivdb connard validate
-```
-
-## Fichiers
-
-| Fichier | Description |
-|---------|-------------|
-| `docs/META-DESIGN.md` | Atlas des invariants architecturaux |
-| `meta-design.yaml` | Schéma de validation YAML v2 (capacités, boucles, industrialisation) |
-| `atoms/*.yaml` | Design atoms réutilisables |
-| `loops/*.yaml` | Patterns de boucles documentés |
-| `generator/*.py` | Scripts de génération et de validation |
-| `REPO.yaml` | Métadonnées du repository |
-| `citizens.yaml` | Déclaration des concepts (RSS-v2) |
-| `ONTOLOGY_DECLARATION.yaml` | Déclaration ontologique (RSS-v2.3) |
-
-## Concepts clés
-
-### Design Atoms
-
-Les plus petites unités de design réutilisables. Exemples :
-- `latency-bound` — impose une limite de latence.
-- `power-capped` — impose une limite de puissance.
-
-### Loop Engineering
-
-Le méta-design peut analyser le graphe de dépendances et identifier les boucles de design :
-- **Vertueuses** — autorégulation, documentées dans `loops/virtuous-cycle.yaml`.
-- **Vicieuses** — incohérence, documentées dans `loops/deadlock-pattern.yaml`.
-
-### Incrémentalité
-
-Un design incrémental est un design qui peut être étendu sans redéfinir l'existant, uniquement par ajout de contraintes ou spécialisation de paramètres. Le score d'incrémentalité cible est > 80 %.
+1. Copier les conventions depuis ce répertoire
+2. Ajouter les fichiers de configuration (ruff, eslint, etc.)
+3. Installer les hooks pre-commit
+4. Configurer le CI GitHub Actions
+5. Ajouter les templates dans `.github/`
 
 ## Références
 
-- **ADR** : [ADR-013 — Meta-Design Validation Protocol](https://github.com/gerivdb/GOVERNANCE-HUB/blob/main/ADR/ADR-013-meta-design-validation-protocol.md)
-- **ADR** : [ADR-015 — Unified Design v2](https://github.com/gerivdb/GOVERNANCE-HUB/blob/main/ADR/ADR-015-unified-design-v2.md)
-- ADR-2026-06-28-001 : Logical Architecture N1-N4
-- ADR-CONNARD-001 : Connard Design Protocol
-- RSS-v2 : Repo Structure Standard
-
-## License
-
-MIT
+- [Conventional Commits](https://www.conventionalcommits.org/)
+- [Semantic Versioning](https://semver.org/)
+- [Pre-commit](https://pre-commit.com/)

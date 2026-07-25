@@ -1,0 +1,45 @@
+---
+name: virtuous-cycle
+version: "1.0.0"
+status: active
+type: pattern
+---
+
+# Virtuous Cycle Pattern
+
+Un pattern de boucle vertueuse est une boucle de feedback autorégulatrice qui améliore le système au fil du temps.
+
+## Caractéristiques
+
+- **Auto-régulation** : Le système s'ajuste automatiquement
+- **Amélioration continue** : Chaque itération améliore l'état
+- **Stabilité** : Le système converge vers un état optimal
+- **Observabilité** : Les métriques sont visibles et mesurables
+
+## Structure
+
+```
+A → B → C → A  (avec amélioration)
+```
+
+## Conditions d'application
+
+1. Chaque nœud doit produire un feedback utile
+2. Le temps de boucle doit être inférieur à un seuil critique
+3. Les métriques doivent être mesurables et comparables
+
+## Exemple
+
+```yaml
+pattern: virtuous-cycle
+nodes:
+  - monitor: collecte métriques
+  - analyze: analyse les écarts
+  - adapt: ajuste les paramètres
+  - verify: vérifie l'amélioration
+```
+
+## Références
+
+- loop_engine/patterns/deadlock-pattern.yaml
+- ADR-016-loop-engine

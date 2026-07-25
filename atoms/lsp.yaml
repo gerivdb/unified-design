@@ -1,0 +1,48 @@
+---
+name: lsp
+description: "Liskov Substitution Principle — les sous-types doivent pouvoir remplacer les types de base sans modification."
+parameters:
+  substitutability_test: true
+  behavioral_contracts: required
+  pre_condition_weakening: allowed
+  post_condition_strengthening: allowed
+constraints:
+  - "Les sous-types remplacent les types de base"
+  - "Les contrats comportementaux sont préservés"
+  - "Les pré-conditions peuvent être affaiblies"
+  - "Les post-conditions peuvent être renforcées"
+inherits: [design-principle]
+---
+
+# Atom : LSP (Liskov Substitution Principle)
+
+## Contexte
+Principe SOLID : les objets dérivés doivent être interchangeables avec leurs objets de base sans altérer le comportement correct du programme.
+
+## Application dans MDU
+- **Citoyens** : Les citizens dérivés remplacent les bases sans rupture
+- **Pipelines** : Les pipelines spécialisés remplacent les génériques
+- **Atomes** : Les atomes spécialisés héritent des bases
+
+## Vérification
+```bash
+# Vérifier LSP sur un pipeline
+ctulu validate-lsp --pipeline trix-wal-atomic-writer
+```
+
+## Contrats comportementaux
+- **Pré-conditions** : Les sous-types peuvent affaiblir les pré-conditions
+- **Post-conditions** : Les sous-types peuvent renforcer les post-conditions
+- **Exceptions** : Les sous-types ne doivent pas lever plus d'exceptions
+
+## Exemple
+```yaml
+# Pipeline de base
+pipeline-orchestrator:
+  stages: [validate, execute, report]
+
+# Pipeline spécialisé (LSP compliant)
+trix-wal-atomic-writer:
+  inherits: [pipeline-orchestrator]
+  stages: [validate, atomic_write, wal_sync, report]  # Ajout sans rupture
+```

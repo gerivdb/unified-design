@@ -1,0 +1,80 @@
+---
+name: cognitive-bridge
+description: "Bridge entre BRAIN et WAZAA pour créer une boucle cognitive vivante avec publication d'insights périodiques."
+parameters:
+  insight_interval_minutes: 60
+  pattern_detection_window_hours: 24
+  pattern_frequency_threshold: 3
+  confidence_score_threshold: 0.8
+constraints:
+  - "Aucun événement perdu"
+  - "Retry + dead-letter queue"
+  - "Latence insight < 1s"
+inherits: [event-streaming, pattern-detection]
+---
+
+# Atom : cognitive-bridge
+
+## Contexte
+Basé sur INTENT-007 BRAIN-WAZAA BRIDGE. Création d'une boucle cognitive vivante où les patterns récurrents alimentent BRAIN, qui publie des `brain.insight` consommables par l'écosystème.
+
+## Fonctionnement
+1. **Consommation d'événements** : Abonne aux 6 événements critiques WAZAA
+2. **Stockage** : Chaque événement stocké dans `BRAIN/cognitive_vectors/`
+3. **Détection de pattern** : Si même event_type > 3 occurrences en 24h
+4. **Publication d'insight** : `brain.insight` avec `confidence_score` calculé
+
+## Événements consumés
+```yaml
+Consomme:
+  - branch.naming.violation
+  - branch.orphan.detected
+  - branch.ghost.detected
+  - scaffold.citizen.generated
+  - scaffold.citizen.failed
+  - intent.accepted
+```
+
+## Événements publiés
+```yaml
+Emits:
+  - brain.insight
+    payload: { pattern_type, frequency, repos_affected, suggested_action, confidence_score }
+  - brain.pattern.new
+    payload: { pattern_id, pattern_name, first_seen, occurrences, vector }
+  - brain.alert
+    payload: { severity: critical|warning, pattern_id, message }
+```
+
+## Architecture
+```
+WAZAA bus (événements critiques)
+     │
+     ▼
+┌─────────────────────────────┐
+│  brain_wazaa_bridge_citizen │
+│                             │
+│  ┌────────────────────────┐ │
+│  │  Event Storage         │ │
+│  │  BRAIN/cognitive_vectors/│ │
+│  └────────────────────────┘ │
+│            │                 │
+│            ▼                 │
+│  ┌────────────────────────┐ │
+│  │  Pattern Detection     │ │
+│  │  (sklearn, frequency)  │ │
+│  └────────────────────────┘ │
+│            │                 │
+│            ▼                 │
+│  ┌────────────────────────┐ │
+│  │  Insight Publisher     │ │
+│  │  publie brain.insight  │ │
+│  └────────────────────────┘ │
+└─────────────────────────────┘
+     │
+     ▼
+WAZAA bus (insights)
+     │
+     ▼
+LLM-REPO (AGENT_RAM.yaml)
+```

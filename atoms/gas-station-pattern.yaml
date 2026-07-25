@@ -1,0 +1,12 @@
+---
+name: gas-station-pattern
+description: "Pattern Mayor : séquence boot session (rules → contexte → activation agents)."
+parameters:
+  sequence:
+    - rules
+    - context
+    - agent_activation
+  pattern: Mayor
+  scope: Kilo session startup
+inherits: [gated-boot-sequence, session-boot]
+---

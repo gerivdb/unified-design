@@ -1,0 +1,14 @@
+---
+name: design-documentation-generator
+description: "Documentation auto-générée à partir des designs MDU : META-DESIGN.md, rapports, indexes."
+parameters:
+  sources:
+    - design.yaml
+    - atoms/
+    - personae/
+  outputs:
+    - META-DESIGN.md
+    - reports/
+  auto_update: true
+inherits: [artifact-synced-loop, closed-loop-goal]
+---

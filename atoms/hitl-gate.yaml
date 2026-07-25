@@ -1,0 +1,13 @@
+---
+name: hitl-gate
+description: "Mécanisme de blocage pour création de dépôt, clone illégitime, et autres opérations sensibles."
+parameters:
+  trigger_operations:
+    - git clone
+    - git init
+    - create_repo
+    - delete_branch
+  confirmation_required: true
+  audit_log: true
+inherits: [absolute-rules-enforcement, friction-governance]
+---

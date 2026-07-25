@@ -1,0 +1,12 @@
+---
+name: metacluster-living-organism
+description: "Méta-cluster comme organisme vivant : causalité, holographie, polymorphisme, MoE."
+parameters:
+  properties:
+    - causality
+    - holography
+    - polymorphism
+    - mixture_of_experts
+  scope: full metacluster
+inherits: [stratified-abstraction, coherence-attractor]
+---

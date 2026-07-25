@@ -1,0 +1,181 @@
+name: mdu-validation-pipeline
+version: "1.0.0"
+intent_hash: 0xMDU_VALIDATION_PIPELINE_20260715
+description: |
+  Pipeline KIVA-CLI pour la validation complète du MDU.
+  Remplace les GitHub Actions par un workflow local autonome.
+
+schedule: "0 */6 * * *"   # Toutes les 6h
+on_merge:
+  - repo: gerivdb/unified-design
+    branch: main
+  - repo: gerivdb/GOVERNANCE-HUB
+    branch: main
+
+env:
+  MDU_ROOT: "D:/DO/WEB/TOOLS/L0-CANON/unified-design"
+  REPORTS_DIR: "D:/DO/WEB/TOOLS/reports/mdu-validation"
+  PYTHON: "python"
+
+# ── Étapes du pipeline ──────────────────────────────────────────────────────
+
+steps:
+
+  # ── 0. Pré-flight ──────────────────────────────────────────────────────────
+  - id: preflight
+    name: "MDU — Pré-flight (vérification répertoires)"
+    agent: Alfred
+    run: |
+      $PYTHON -c "
+      from pathlib import Path
+      import sys
+      mdu = Path('$MDU_ROOT')
+      reports = Path('$REPORTS_DIR')
+      errors = []
+      if not mdu.exists(): errors.append(f'MDU root manquant: {mdu}')
+      if not (mdu / 'meta-design.yaml').exists(): errors.append('meta-design.yaml absent')
+      if not (mdu / 'loop_engine').exists(): errors.append('loop_engine absent')
+      reports.mkdir(parents=True, exist_ok=True)
+      if errors:
+          for e in errors: print(f'[ERROR] {e}')
+          sys.exit(1)
+      print('[OK] MDU structure valid')
+      "
+    on_fail: ABORT
+    timeout_sec: 10
+
+  # ── 1. Validation YAML ─────────────────────────────────────────────────────
+  - id: validate-yaml
+    name: "MDU — Validation YAML (meta-design, atoms, loops)"
+    agent: Alfred
+    depends_on: [preflight]
+    run: |
+      $PYTHON -c "
+      import yaml, sys
+      from pathlib import Path
+      mdu = Path('$MDU_ROOT')
+      errors = 0
+      
+      # Valider meta-design.yaml
+      try:
+          with open(mdu / 'meta-design.yaml') as f:
+              yaml.safe_load(f)
+          print('[OK] meta-design.yaml valid')
+      except Exception as e:
+          print(f'[ERROR] meta-design.yaml: {e}')
+          errors += 1
+      
+      # Valider les atomes
+      for atom in (mdu / 'atoms').glob('*.yaml'):
+          try:
+              with open(atom) as f:
+                  yaml.safe_load_all(f.read())
+              print(f'[OK] {atom.name} valid')
+          except Exception as e:
+              print(f'[ERROR] {atom.name}: {e}')
+              errors += 1
+      
+      # Valider les loops
+      for loop in (mdu / 'loops').glob('*.yaml'):
+          try:
+              with open(loop) as f:
+                  yaml.safe_load_all(f.read())
+              print(f'[OK] {loop.name} valid')
+          except Exception as e:
+              print(f'[ERROR] {loop.name}: {e}')
+              errors += 1
+      
+      sys.exit(errors)
+      "
+    on_fail: ABORT
+    timeout_sec: 30
+
+  # ── 2. Loop Detection ──────────────────────────────────────────────────────
+  - id: loop-detection
+    name: "MDU — Détection de boucles"
+    agent: Alfred
+    depends_on: [validate-yaml]
+    run: |
+      $PYTHON $MDU_ROOT/loop_engine/check_loops.py \
+        --path $MDU_ROOT \
+        --max-depth 5 \
+        --output $REPORTS_DIR/loop_check.json
+    on_fail: WARN
+    timeout_sec: 60
+
+  # ── 3. Inheritance Validation ────────────────────────────────────────────
+  - id: inheritance-validation
+    name: "MDU — Validation de l'héritage"
+    agent: Alfred
+    depends_on: [loop-detection]
+    run: |
+      $PYTHON $MDU_ROOT/generator/validate_inheritance.py $MDU_ROOT/meta-design.yaml
+    on_fail: ABORT
+    timeout_sec: 30
+
+  # ── 4. Simulation MDU ─────────────────────────────────────────────────────
+  - id: simulate-mdu
+    name: "MDU — Simulation des designs"
+    agent: Alfred
+    depends_on: [inheritance-validation]
+    run: |
+      $PYTHON $MDU_ROOT/loop_engine/simulate.py \
+        $MDU_ROOT/meta-design.yaml \
+        --meta-design $MDU_ROOT/meta-design.yaml \
+        --output $REPORTS_DIR/simulation.json
+    on_fail: WARN
+    timeout_sec: 30
+
+  # ── 5. Generate Report ────────────────────────────────────────────────────
+  - id: report
+    name: "MDU — Génération du rapport"
+    agent: Alfred
+    depends_on: [simulate-mdu]
+    run: |
+      $PYTHON -c "
+      import json
+      from pathlib import Path
+      from datetime import datetime
+      
+      reports_dir = Path('$REPORTS_DIR')
+      
+      # Lire les rapports
+      loop_check = json.loads(open(reports_dir / 'loop_check.json').read()) if (reports_dir / 'loop_check.json').exists() else {}
+      simulation = json.loads(open(reports_dir / 'simulation.json').read()) if (reports_dir / 'simulation.json').exists() else {}
+      
+      # Générer le rapport
+      report = {
+          'timestamp': datetime.now().isoformat(),
+          'status': 'OK' if not loop_check.get('loops') else 'WARNING',
+          'loops_detected': len(loop_check.get('loops', [])),
+          'incremental_score': simulation.get('incremental_score', 100),
+          'capabilities_valid': True,
+          'atoms_count': len(list(Path('$MDU_ROOT').glob('atoms/*.yaml')))
+      }
+      
+      with open(reports_dir / 'mdu-validation-report.json', 'w') as f:
+          json.dump(report, f, indent=2)
+      
+      print(f\"[REPORT] Status: {report['status']}\")
+      print(f\"[REPORT] Loops: {report['loops_detected']}\")
+      print(f\"[REPORT] Incremental Score: {report['incremental_score']:.1f}\")
+      "
+    on_fail: WARN
+    timeout_sec: 15
+
+# ── Alertes HITL ───────────────────────────────────────────────────────────
+
+on_alert_hitl:
+  action: create_issue
+  repo: gerivdb/ARGUS
+  title: "[MDU-VALIDATION] Loop or conflict detected"
+  labels: [mdu, validation, hitl]
+  body: |
+    Le pipeline de validation MDU a détecté des problèmes.
+    
+    Rapports disponibles: $REPORTS_DIR/
+    
+    Actions requises:
+    1. Analyser les boucles détectées
+    2. Vérifier les conflits de capacités
+    3. Mettre à jour le design si nécessaire

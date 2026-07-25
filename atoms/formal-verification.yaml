@@ -1,0 +1,56 @@
+---
+name: formal-verification
+description: "Vérification formelle avec Z3 pour valider les invariants critiques. Preuves automatiques sur les contraintes logiques de l'écosystème."
+parameters:
+  solver: Z3
+  invariants:
+    - strata_consistency
+    - bdcp
+  verification_timeout_ms: 30000
+  proof_generation: true
+inherits: [absolute-rules-enforcement]
+---
+
+# Formal Verification Atom
+
+Pattern de vérification formelle avec Z3.
+
+## Rôle
+
+Valide les invariants critiques de l'écosystème via des preuves formelles :
+- **Solver** : Z3 (SMT solver)
+- **Invariants** : strata_consistency, bdcp, etc.
+- **Timeout** : 30s par vérification
+- **Preuves** : génération automatique
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `solver` | string | `Z3` | Solver de vérification |
+| `invariants` | list | `[]` | Invariants à vérifier |
+| `verification_timeout_ms` | int | `30000` | Timeout par vérification |
+| `proof_generation` | bool | `true` | Génération de preuves |
+
+## Invariants
+
+- Les invariants critiques DOIVENT être vérifiés avant tout merge
+- Le timeout DOIT être respecté pour éviter les blocages
+- Les preuves DOIVENT être conservées pour audit
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: formal-verification
+    parameters:
+      solver: Z3
+      invariants: [strata_consistency, bdcp]
+      verification_timeout_ms: 30000
+      proof_generation: true
+```
+
+## Références
+
+- TINA (scripts/formal_verification_z3.py)
+- NEXUS (agrégation cross-repo)

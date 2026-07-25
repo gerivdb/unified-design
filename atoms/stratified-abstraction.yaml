@@ -1,0 +1,12 @@
+---
+name: stratified-abstraction
+description: "Architecture en couches N+0/N+1/N+2 : designs concrets, personae, âmes."
+parameters:
+  layers:
+    - N+0: designs
+    - N+1: personae
+    - N+2: âmes
+  inheritance: allowed
+  cross_layer_rules: ADR-backed
+inherits: [strate-registry, stratified-repository-registry]
+---

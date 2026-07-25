@@ -1,0 +1,17 @@
+---
+name: design-validate-cli
+description: "Spécification de la CLI gerivdb design validate et ses options."
+parameters:
+  command: gerivdb design validate
+  options:
+    - --strict
+    - --output json|text
+  checks:
+    - design_yaml
+    - inheritance_depth
+    - latency_p99
+    - power_w
+    - git_policy
+    - semantic_loops
+inherits: [continuous-design-validation, formal-verification]
+---

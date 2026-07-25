@@ -1,0 +1,12 @@
+---
+name: cron-autonomous-nervous-system
+description: "CRON comme système nerveux autonome : périodiques, event-driven, HITL-gated."
+parameters:
+  categories:
+    - periodic
+    - event_driven
+    - hitl_gated
+  scheduler: cron
+  integration: CTULU
+inherits: [scheduled-loop, gated-boot-sequence]
+---

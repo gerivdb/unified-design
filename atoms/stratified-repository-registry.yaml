@@ -1,0 +1,39 @@
+---
+name: stratified-repository-registry
+description: "Registre hiérarchique de dépôts organisés par strates (L0–L9) avec validation d'appartenance."
+inherits: []
+---
+
+# Stratified Repository Registry Atom
+
+Pattern de registre de dépôts organisé par strates logiques.
+
+## Rôle
+
+Maintient une cartographie des repos par strates (L0–L9) avec validation d'appartenance et chemins locaux normalisés.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `strata` | list | `[]` | Liste des strates valides (ex: L0-CANON, L1-INFRA, L4-TOOLS) |
+| `registry_file` | string | `null` | Chemin du fichier registre (ex: known_repositories.yaml) |
+
+## Invariants
+
+- Chaque repo possède un `local_path` conforme à sa strate.
+- Aucun clone hors strate n'est autorisé (règle `hitl-clone-gate`).
+- Le registre est la Source of Truth (SOT) — l'API GitHub n'est utilisée que pour lecture.
+
+## Exemple d'usage
+
+```yaml
+inherits:
+  - stratified-repository-registry
+```
+
+## Références
+
+- GOVERNANCE-HUB/known_repositories.yaml
+- ECOS-CLI launcher (multirepo pattern)
+- ADR-091-hitl-gate-for-clone

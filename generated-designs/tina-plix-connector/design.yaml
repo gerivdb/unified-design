@@ -1,0 +1,34 @@
+---
+name: TINA-PLIX-CONNECTOR
+description: "Connecteur TINA-PLIX - interface cognitivo-technique pour l'orchestration des flux de donnees ternaires."
+version: "1.0.0"
+parent: unified-design
+inherits:
+  - plix-codec
+  - sandbox-isolation
+  - citizen-routing
+capabilities:
+  - name: plix-codec
+    parameters:
+      codecs: [mirror_lens, clusterwave, piano_runtime, verses_resolver]
+      registry: schema_registry
+      gpu_decode: nvdec_wrapper
+      sync_pipeline: required
+      mcp_server: required
+      clients: [tina_client, brain_client]
+  - name: sandbox-isolation
+    parameters:
+      engine: CubeSandbox
+      lifespan: ephemeral
+      namespaces: [pid, mnt, net, user]
+      cleanup: automatic
+  - name: citizen-routing
+    parameters:
+      registry: CITIZENS.yaml
+      fallback: Kilo Agent
+      steps: [BDCP, match, execute]
+stratum: L3_CITIZENS
+status: active
+generated_by: unified-design/create_design.py
+generated_at: "2026-07-15T21:39:00"
+intent_hash: 0xTINA_Plix_CONNECTOR_20260715

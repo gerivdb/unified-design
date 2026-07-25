@@ -2,9 +2,12 @@
 # Schéma de validation YAML pour l'architecture gerivdb
 # Version 2.0 : ajout des capacités, détection de boucles et industrialisation
 
+$schema: "https://json-schema.org/draft/2020-12/schema"
 version: "2.0.0"
 intent_hash: 0xMDU_SCHEMA_20260715_V2
 status: active
+
+$schema: "schemas/meta-design.schema.json"
 
 # Héritage multiple de designs abstraits
 inherits: []
@@ -26,18 +29,49 @@ capabilities:
       temperature: 1.0
       num_heads: 8
 
-# Détection de boucles de dépendances sémantiques
-loop_detection:
-  enable: true
-  max_cycle_length: 5        # détecte les cycles jusqu'à 5 niveaux
-  allow_virtuous_loops: true  # autorise les boucles vertueuses documentées
-
 # Règles de validation du graphe de dépendances
 design_rules:
   - name: "no-circular-inheritance"
     check: "graph_is_acyclic"
   - name: "capability-conflict"
     check: "no_conflicting_capabilities"
+
+# Schéma étendu pour les fichiers design.yaml générés
+design_schema:
+  # Champs obligatoires
+  required_fields:
+    - version
+    - name
+    - inherits
+    - capabilities
+    - design_version
+    - intent_hash
+  
+  # Champs optionnels avec valeurs par défaut
+  optional_fields:
+    deprecated_capabilities: []
+    priority_resolution: "order"
+    deprecation_period_days: 90
+  
+  # Versionnage sémantique des designs
+  versioning:
+    major: "Breaking changes (removed capabilities)"
+    minor: "Added capabilities or new optional fields"
+    patch: "Bug fixes, parameter adjustments"
+  
+  # Héritage multiple
+  multiple_inheritance:
+    supported: true
+    conflict_resolution: "priority"  # priority = ordre d'héritage
+    parameter_merge: "override"    # override = dernier paramètre gagne
+  
+  # Gestion des capacités dépréciées
+  deprecation_policy:
+    warning_days: 30
+    error_days: 90
+    removal_strategy: "soft-delete"
+
+# Détection de boucles de dépendances sémantiques
 
 # Industrialisation : génération et validation de designs
 industrialization:
@@ -115,25 +149,26 @@ regles_transversales:
   - nom: "Composition"
     description: "Profondeur dépendance ≤ 3 niveaux"
     action: "Wall of Shame"
-
+  
   - nom: "Latence"
     description: "P99 ≤ 45ms pour opérations critiques"
     action: "Roast automatique"
-
+  
   - nom: "Puissance"
     description: "≤ 12W par inférence"
     action: "Optimisation PIANO"
-
+  
   - nom: "Observation"
     description: "Tout système critique doit être observable"
     action: "Ajout de probes Sonar"
-
+  
   - nom: "Validation"
     description: "Toute modification passe par Connard"
     commandes:
       - "gerivdb connard validate <path>"
       - "gerivdb connard roast <path>"
       - "gerivdb connard watch <path>"
+      - "gerivdb design validate [--path <path>] [--strict] [--output text|json]"
 
 # Couche de gouvernance
 couche_gouvernance:
@@ -158,6 +193,15 @@ couche_gouvernance:
     - "CTULU"
     - "WAZAA"
     - "TRIX"
+
+# Atomes de gouvernance (extraits de GOVERNANCE-HUB)
+governance_atoms:
+  - constitutional-sot
+  - stratified-repository-registry
+  - ternary-governance
+  - gated-boot-sequence
+  - absolute-rules-enforcement
+  - adr-prd-epics-intents
 
 # Agents associés par pilier
 agents_par_pilier:
@@ -206,7 +250,9 @@ references:
   - ADR-015-unified-design-v2
   - ADR-016-loop-engine
   - ADR-017-attention-mechanism-atom
+  - ADR-018-governance-hub-mdu-extraction
   - ADR-2026-06-28-001-logical-architecture-n1-n4
   - ADR-CONNARD-001-connard-design-protocol
+  - ADR-20260715-002-DESIGN-VALIDATE-CLI
   - INT-CONNARD-001
   - EPIC-CONNARD-001

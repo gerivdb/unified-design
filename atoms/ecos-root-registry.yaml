@@ -1,0 +1,69 @@
+---
+name: ecos-root-registry
+description: "Registre d'identité écosystémique par dépôt. Définit la strate, le rôle, le statut et la section de chaque citoyen."
+parameters:
+  required_fields:
+    - strate
+    - citizen
+    - name
+    - role
+    - status
+    - layer
+    - section
+  optional_fields:
+    - intent_hash
+    - phi_cps
+    - logical_layers
+inherits: [stratified-repository-registry]
+---
+
+# ECOS_ROOT Registry Atom
+
+Pattern d'identité écosystémique décentralisé par dépôt.
+
+## Rôle
+
+Chaque dépôt de l'écosystème possède un fichier `ECOS_ROOT.json` qui définit son identité canonique :
+- strate : classification hiérarchique (L0-L5)
+- citizen : nom du citoyen/repo
+- name : nom complet
+- role : rôle fonctionnel
+- status : statut (active/dormant/deprecated)
+- layer : couche logique (N1-N4)
+- section : section P0-P5
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `required_fields` | list | `[]` | Champs obligatoires dans ECOS_ROOT.json |
+| `optional_fields` | list | `[]` | Champs optionnels |
+
+## Invariants
+
+- Tout dépôt actif DOIT avoir un ECOS_ROOT.json valide
+- Le champ `layer` DOIT correspondre à la strate dans known_repositories.yaml
+- Le champ `section` DOIT être cohérent avec la priorité P0-P5
+
+## Exemple d'usage
+
+```json
+{
+  "strate": "L3_EMERGENCE",
+  "citizen": "CANDIDATOR",
+  "name": "CANDIDATOR",
+  "role": "Gestion candidatures, CV, lettres",
+  "status": "active",
+  "layer": "L3_EMERGENCE",
+  "section": "P1_STRATEGIC"
+}
+```
+
+## Références
+
+- CANDIDATOR/ECOS_ROOT.json
+- GERIBOOKING/ECOS_ROOT.json
+- BANK-BUSTER/ECOS_ROOT.json
+- racines/ECOS_ROOT.json
+- strix/ECOS_ROOT.json
+- BRAIN/ECOS_ROOT.json

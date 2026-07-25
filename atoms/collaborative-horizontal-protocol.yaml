@@ -1,0 +1,26 @@
+---
+name: collaborative-horizontal-protocol
+description: "Méthodologie d'orchestration d'agents horizontaux avec sections, gardien et délibération flash."
+parameters:
+  roles:
+    - Poincaré: architecture
+    - Musk: performance
+    - LeCun: méta-apprentissage
+    - Karpathy: parcours utilisateur
+    - Bellard: implémentation
+    - Steinberger: SDK
+    - Maxwell: dynamique
+  sections:
+    - archi
+    - perf
+    - ml
+    - usecase
+    - code
+    - sdk
+    - grad
+    - assert
+    - merge
+  guard: connard-design
+  deliberation: flash
+inherits: [fractal-recursion, closed-loop-goal]
+---

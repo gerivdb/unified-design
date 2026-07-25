@@ -1,0 +1,13 @@
+---
+name: kiva-auto-pr-workflow
+description: "Workflow PR automatique : rollback point, review, merge, WAL update, citizen promotion."
+parameters:
+  stages:
+    - rollback_point
+    - review
+    - merge
+    - wal_update
+    - citizen_promotion
+  automation: high
+inherits: [github-integration, trix-wal-atomic-writer]
+---

@@ -1,0 +1,9 @@
+---
+name: coherence-attractor
+description: "Attracteur étrange qui pousse le système vers l'absence de cycles et de contradictions."
+parameters:
+  target_state: zero_contradiction
+  damping: 0.8
+  validation: connard-design
+inherits: [closed-loop-goal, artifact-synced-loop]
+---

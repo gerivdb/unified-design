@@ -1,0 +1,80 @@
+---
+name: primitive-flow
+description: "Flux de primitives exécutables depuis PRIMUS vers ses consommateurs. Captures les dépendances orientées PRIMUS → CTULU, SKILLS, NEXUS."
+parameters:
+  provider: PRIMUS
+  consumers:
+    - CTULU
+    - SKILLS
+    - NEXUS
+  primitive_constraints:
+    stateless: true
+    max_lines: 100
+    zero_side_effects: true
+    deterministic: true
+  contract_validation: required
+inherits: [cross-repo-flow, formal-verification]
+---
+
+# Primitive Flow Atom
+
+Flux de primitives atomiques depuis PRIMUS vers les consommateurs.
+
+## Rôle
+
+Documenter et valider le flux de primitives depuis `gerivdb/PRIMUS` vers :
+- **CTULU** : assemble les primitives en outils multi-repo
+- **SKILLS** : appelle les primitives dans les skills cognitifs
+- **NEXUS** : importe les primitives dans les engines métier
+
+## Structure canonique
+
+```yaml
+cross_repo_flow:
+  name: primitive-flow
+  provider: PRIMUS
+  consumers: [CTULU, SKILLS, NEXUS]
+  primitives:
+    - id: phi-calc
+      spec: phi-calcul
+      consumers: [CTULU]
+    - id: temporal-range
+      spec: raisonnement temporel
+      consumers: [CTULU]
+    - id: semantic-monitor
+      spec: monitoring sémantique
+      consumers: [CTULU]
+    - id: topology-router
+      spec: routage topologies
+      consumers: [CTULU]
+```
+
+## Invariants
+
+- PRIMUS DOIT fournir des primitives **stateless** et **déterministes**
+- Chaque primitive DOIT avoir un contrat d'input/output typé
+- CTULU NE DOIT PAS inventer de primitives non déclarées dans PRIMUS
+- SKILLS DOIT référencer les primitives via `trit_primitive` dans le frontmatter
+- NEXUS DOIT valider les schémas avant import
+
+## Validation
+
+Le loop engine MDU DOIT vérifier :
+1. `PRIMUS` possède l'atome `primitive-provider`
+2. Chaque consommateur déclaré possède le contrat correspondant
+3. Aucune dépendance cyclique n'existe via ces flux
+
+## Exemples
+
+| Primitive | Provider | Consumers | Usage |
+|-----------|----------|-----------|-------|
+| `phi-calc` | PRIMUS | CTULU | Calcul φ-CPS |
+| `temporal-range` | PRIMUS | CTULU | Raisonnement temporel |
+| `TritScanRegistry` | PRIMUS | SKILLS | Scan registre |
+| `TritDocumentClassify` | PRIMUS | SKILLS | Classification documents |
+
+## Références
+
+- `D:\DO\WEB\TOOLS\L4-TOOLS\PRIMUS\README.md`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\EPICS\EPIC-092-primus-primitives-gap.md`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\EPICS\EPIC-122-primus-primitives-delivery.md`

@@ -1,0 +1,79 @@
+---
+name: infra-tool-layer
+description: "Couche infrastructurelle DevTools : fournit des scripts opérationnels à CTULU, ECOS-CLI, BRAIN. N'importe pas PRIMUS (règle de juridiction)."
+parameters:
+  provider: DevTools
+  consumers:
+    - CTULU
+    - ECOS-CLI
+    - BRAIN
+  tool_categories:
+    - cli_wrapper
+    - build_pipeline
+    - sync_orchestrator
+    - test_runner
+    - ci_pipeline
+    - security_fabric
+    - mcp_diagnostics
+  jurisdiction_rule: no_primus_dependency
+inherits: [cross-repo-flow, registry-driven-orchestration]
+---
+
+# Infra Tool Layer Atom
+
+Couche infrastructurelle DevTools vers les consommateurs opérationnels.
+
+## Rôle
+
+Documenter et valider le flux d'outils opérationnels depuis `gerivdb/DevTools` vers :
+- **CTULU** : scheduled tasks, scripts utilitaires
+- **ECOS-CLI** : point d'entrée CLI unifié (`ecos.ps1`)
+- **BRAIN** : intégration des managers via scripts
+
+## Structure canonique
+
+```yaml
+cross_repo_flow:
+  name: infra-tool-layer
+  provider: DevTools
+  consumers: [CTULU, ECOS-CLI, BRAIN]
+  tool_categories:
+    - cli_wrapper: ecos.ps1, kiva.ps1, clapet.ps1
+    - build_pipeline: Makefile
+    - sync_orchestrator: ecos-sync.ps1, ecos-sync-audit.ps1
+    - test_runner: cross-repo-test.ps1
+    - ci_pipeline: .github/workflows/
+    - security_fabric: SecurityManager.ps1
+    - mcp_diagnostics: verify-mcp-access.ps1
+  jurisdiction_rule: no_primus_dependency
+```
+
+## Invariants
+
+- DevTools NE DOIT PAS importer PRIMUS (règle de juridiction)
+- DevTools fournit des scripts **opérationnels**, pas de la logique métier
+- CTULU référence DevTools pour les scheduled tasks
+- ECOS-CLI est le point d'entrée unique vers tous les outils DevTools
+- BRAIN consomme DevTools via les managers synchronisés
+
+## Validation
+
+Le loop engine MDU DOIT vérifier :
+1. `DevTools` possède l'atome `infra-tool-provider`
+2. Aucun consommateur ne dépend de PRIMUS via DevTools
+3. Les chemins des scheduled tasks sont valides
+
+## Exemples
+
+| Outil | Catégorie | Consumer | Usage |
+|-------|-----------|----------|-------|
+| `ecos.ps1` | cli_wrapper | ECOS-CLI | Point d'entrée unifié |
+| `ecos-sync-audit.ps1` | sync_orchestrator | CTULU | Audit 47 repos |
+| `verify-mcp-access.ps1` | mcp_diagnostics | CTULU | Diagnostic MCP |
+| `Makefile` | build_pipeline | BRAIN | Build multi-langage |
+
+## Références
+
+- `D:\DO\WEB\TOOLS\L2-PLATFORM\DevTools\README.md`
+- `D:\DO\WEB\TOOLS\L2-PLATFORM\DevTools\bin\ecos.ps1`
+- `D:\DO\WEB\TOOLS\L2-PLATFORM\DevTools\scripts\ecos-sync-audit.ps1`

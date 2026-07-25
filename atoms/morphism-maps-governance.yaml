@@ -1,0 +1,13 @@
+---
+name: morphism-maps-governance
+description: "Cartes de transport causal entre repos : schéma YAML + cycle de vie + règles de transport."
+parameters:
+  schema: MM-XXX
+  lifecycle:
+    - create
+    - validate
+    - transport
+    - verify
+  governance: HITL
+inherits: [design-schema, fpick-functor]
+---

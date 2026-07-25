@@ -1,0 +1,10 @@
+---
+name: friction-based-governance
+description: "Gouvernance par détection de friction et auto-correction post-implémentation."
+parameters:
+  detector: friction_detector
+  corrector: post_implement_check
+  registry: CITIZENS.yaml
+  fallback: Kilo Agent
+inherits: [auto-correction]
+---

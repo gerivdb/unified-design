@@ -1,0 +1,85 @@
+---
+name: build-pipeline
+description: "Pipeline de build multi-langage via Makefile : orchestration conditionnelle, variables d'optimisation hardware, targets de test/bench/CI."
+parameters:
+  languages:
+    - rust
+    - python
+    - node
+    - zig
+  targets:
+    - help
+    - install
+    - build
+    - test
+    - bench
+    - ci
+    - clean
+    - status
+  optimization:
+    cpu: native
+    rustflags: "-C target-cpu=native -C target-feature=+sse4.1 -C opt-level=3"
+    lto: true
+    codegen_units: 1
+inherits: [kiss, srp]
+---
+
+# Build Pipeline Atom
+
+Pattern d'orchestration de build multi-langage via Makefile.
+
+## Rôle
+
+Centraliser les commandes de build, test, bench et CI pour un écosystème hétérogène :
+- Détection conditionnelle des composants (`if [ -d "FLUENCE" ]`)
+- Optimisations hardware-aware (Z600, Westmere)
+- Pipeline CI unifiée (`make ci`)
+- Status visuel de l'écosystème
+
+## Structure canonique
+
+```makefile
+.PHONY: all build test bench ci clean install deps help
+
+RUSTFLAGS := -C target-cpu=native -C target-feature=+sse4.1 -C opt-level=3
+CARGO_PROFILE_RELEASE_LTO := true
+CARGO_PROFILE_RELEASE_CODEGEN_UNITS := 1
+
+build: ## Build tous les composants
+	@if [ -d "FLUENCE" ]; then \
+		cd FLUENCE && cargo build --release -p fluence-core && cd ..; \
+	fi
+
+test: ## Exécute tous les tests
+	@if [ -d "FLUENCE" ]; then \
+		cd FLUENCE && cargo test --release -p fluence-core && cd ..; \
+	fi
+
+ci: deps build test ## Pipeline complète CI
+	bash scripts/validate_all.sh
+
+status: ## Affiche le statut
+	@echo "FLUENCE Core: $$([ -d 'FLUENCE' ] && echo '✓' || echo '✗') Found"
+```
+
+## Invariants
+
+- Chaque target DOIT avoir un commentaire `##` pour l'aide automatique
+- Les builds DOIVENT être conditionnels (présence du répertoire)
+- Le pipeline CI DOIT inclure : deps → build → test → validate
+- Le hardware target DOIT être détectable et configurable
+
+## Exemples
+
+| Target | Description | Langage |
+|--------|-------------|---------|
+| `make build` | Build release | Rust/Node/Python |
+| `make test` | Tests avec coverage | Rust/pytest |
+| `make bench` | Benchmarks | Rust cargo bench |
+| `make ci` | Pipeline complète | Bash |
+| `make status` | Health-check | Bash |
+
+## Références
+
+- `C:\DevTools\Makefile`
+- `C:\DevTools\scripts\validate_all.sh`

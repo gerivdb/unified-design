@@ -1,0 +1,39 @@
+---
+name: constitutional-sot
+description: "Source de vérité constitutionnelle définissant des règles immuables, une hiérarchie de documents et un mécanisme de boot."
+inherits: []
+---
+
+# Constitutional SOT Atom
+
+Pattern d'une source de vérité constitutionnelle (ex: GOVERNANCE-HUB).
+
+## Rôle
+
+Définit les règles immuables de l'écosystème, maintient une hiérarchie de documents et expose un mécanisme de boot canonique.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `boot_gates` | list | `[]` | Séquence ordonnée des gates de boot (ex: GATE-0 → GATE-1b.9) |
+| `required_files` | list | `[]` | Fichiers constitutionnels obligatoires (ex: AGENT_RAM.yaml, known_repositories.yaml) |
+
+## Invariants
+
+- Aucune action sur L3+ ne peut être entreprise sans L0 chargé.
+- Les données non validées sont taggées `[DERIVE]` ou `[HYPOTHESE_NON_CONFIRMEE]`.
+- Le boot sequence est obligatoire avant toute session multi-repo.
+
+## Exemple d'usage
+
+```yaml
+inherits:
+  - constitutional-sot
+```
+
+## Références
+
+- GOVERNANCE-HUB (L0-CANON)
+- ADR-015-unified-design-v2
+- `LLM_BOOT_PROTOCOL.md`

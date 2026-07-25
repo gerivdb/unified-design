@@ -1,0 +1,11 @@
+---
+name: psy-citizen-governance
+description: "Gouvernance de citoyens psychologiques avec états dégradés, relapse monitoring et pattern Bat-Family."
+parameters:
+  psy_patterns: [dual_symmetric, progressive_cascade, oscillating_equilibrium, resilient_baseline, multi_attractor_chaos, trauma_chaos_redemption]
+  states: [NOMINAL, DEGRADED, CHAOS, SYNTHESIS, SURVIVAL]
+  relapse_rule: Tout citoyen avec relapse_risk > 0 doit être surveillé par Alfred
+  disambiguation: required
+  conformity: CONFORME_NEXUS
+inherits: [citizen-registry, absolute-rules-enforcement]
+---

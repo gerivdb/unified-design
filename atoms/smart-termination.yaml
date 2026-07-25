@@ -1,0 +1,58 @@
+---
+name: smart-termination
+description: "Détection d'arrêt optimal pour les boucles avec stagnation, timeout, resource, et quality plateau detection."
+parameters:
+  stagnation_threshold: 3
+  timeout_seconds: 300
+  resource_threshold_percent: 80
+  quality_plateau_window: 5
+  grace_period_seconds: 30
+constraints:
+  - "Détection stagnation < 1s"
+  - "Arrêt optimal garanti"
+  - "Évite boucles infinies"
+inherits: [loop-engineering, resource-monitoring]
+---
+
+# Atom : smart-termination
+
+## Contexte
+Basé sur EPIC-1203 SMART TERMINATION & OPTIMAL STOP FRAMEWORK. Système intelligent de terminaison qui détermine le moment optimal d'arrêt d'une génération.
+
+## Mécanismes de détection
+
+### 1. Stagnation Detection
+- Détecte les itérations sans amélioration significative
+- Seuil configurable (défaut: 3 itérations)
+
+### 2. Timeout Detection
+- Arrêt après durée maximale configurée
+- Prévient les boucles infinies
+
+### 3. Resource Detection
+- Surveille usage CPU, mémoire, disque
+- Arrêt si seuil critique atteint
+
+### 4. Quality Plateau Detection
+- Détecte les plateaux qualité
+- Arrêt quand amélioration < seuil
+
+## Architecture
+```
+┌─────────────────────────────────────────────┐
+│         SMART TERMINATION ENGINE            │
+├─────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐         │
+│  │ Stagnation  │  │   Quality   │         │
+│  │  Detector   │  │  Plateau    │         │
+│  └─────────────┘  └─────────────┘         │
+│           │                               │
+│           ▼                               │
+│  ┌─────────────────────────────────────┐  │
+│  │        Decision Engine              │  │
+│  │  - Consolidate detections           │  │
+│  │  - Calculate stop score             │  │
+│  │  - Trigger termination              │  │
+│  └─────────────────────────────────────┘  │
+└─────────────────────────────────────────────┘
+```

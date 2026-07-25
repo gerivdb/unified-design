@@ -1,0 +1,57 @@
+---
+name: citizen-routing
+description: "Algorithme de routage des tâches vers les citoyens spécialisés. 4 étapes : BDCP check, lecture registre, matching par spécificité, fallback Kilo Agent."
+parameters:
+  registry: CITIZENS.yaml
+  fallback: Kilo Agent
+  steps:
+    - bdcp_check
+    - registry_load
+    - match_specificity
+    - fallback
+  max_specificity: 3
+inherits: [absolute-rules-enforcement]
+---
+
+# Citizen Routing Atom
+
+Pattern de routage des tâches vers les citoyens.
+
+## Rôle
+
+Délègue les tâches aux agents spécialisés via un algorithme de matching :
+1. **BDCP Check** : Si `bdcp_mode == true` et accès réseau requis → STOP
+2. **Registry Load** : Chargement de `CITIZENS.yaml`
+3. **Match Specificity** : Sélection du citoyen avec la plus haute spécificité
+4. **Fallback** : Si aucun match → Kilo Agent
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| `registry` | string | `CITIZENS.yaml` | Registre des citoyens |
+| `fallback` | string | `Kilo Agent` | Agent de fallback |
+| `steps` | list | `[bdcp_check, registry_load, match_specificity, fallback]` | Étapes de routage |
+| `max_specificity` | int | `3` | Spécificité max |
+
+## Invariants
+
+- Le BDCP check EST la première étape
+- Le registre DOIT être chargé avant matching
+- Le fallback EST l'agent principal
+
+## Exemple d'usage
+
+```yaml
+capabilities:
+  - name: citizen-routing
+    parameters:
+      registry: CITIZENS.yaml
+      fallback: Kilo Agent
+      steps: [bdcp_check, registry_load, match_specificity, fallback]
+      max_specificity: 3
+```
+
+## Références
+
+- TINA (CITIZEN_ROUTER.md, CITIZENS.yaml)

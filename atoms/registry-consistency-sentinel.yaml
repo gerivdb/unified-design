@@ -1,0 +1,12 @@
+---
+name: registry-consistency-sentinel
+description: "Sentinelle de cohérence des registres cross-repos : détecte incohérences et alertes."
+parameters:
+  registries:
+    - known_repositories.yaml
+    - ECOS_ROOT.json
+    - TOPOS registry
+  check_frequency: on_change
+  alert_on_drift: true
+inherits: [coherence-attractor, artifact-synced-loop]
+---

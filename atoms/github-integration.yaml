@@ -1,0 +1,15 @@
+---
+name: github-integration
+description: "Interfaçage avec GitHub : création de PR, merge, push, vérification de remotes."
+parameters:
+  commands:
+    - gh pr create
+    - gh pr merge
+    - git push
+    - git remote -v
+  safety_checks:
+    - verify_remote
+    - verify_branch
+    - verify_ci
+inherits: [absolute-rules-enforcement, gated-boot-sequence]
+---

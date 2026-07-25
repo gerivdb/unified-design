@@ -1,0 +1,14 @@
+---
+name: ecosystem-health-dashboard
+description: "Dashboard opérationnel CTULU : stubs, ADRs, collisions, phi-CPS, vélocité."
+parameters:
+  metrics:
+    - stubs
+    - adrs
+    - collisions
+    - phi_cps
+    - velocity
+  format: html/json
+  refresh_interval: 60
+inherits: [ecosystem-dashboard, continuous-design-validation]
+---
