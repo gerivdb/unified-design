@@ -1,10 +1,22 @@
 {
-  "last_action": "extract_atom_deps_added",
-  "timestamp": "2026-07-25T23:55:00+02:00",
+  "last_action": "merge_prs_9_10_11",
+  "timestamp": "2026-07-26T00:12:00+02:00",
   "branches": {
-    "main": "b3ed269",
-    "origin/main": "b3ed269"
+    "main": "c9ccc48",
+    "origin/main": "c9ccc48"
   },
+  "untracked_count": 0,
+  "remote_branches_pruned": [
+    "origin/feat/ci-schema-validation",
+    "origin/feat/extract-atom-deps",
+    "origin/feat/readme-1page"
+  ],
+  "deleted_remote_branches": [
+    "origin/feat/ci-schema-validation",
+    "origin/feat/extract-atom-deps",
+    "origin/feat/readme-1page"
+  ],
+  "deleted_local_branches": [],
   "cleanup": {
     "fetch_prune_executed": true,
     "post_merge_hook_active": true,
@@ -12,17 +24,30 @@
     "alias_cleanup_repo_added": true,
     "git_maintenance_workflow_present": true
   },
-  "validation": {
-    "meta_design_schema": "schemas/meta-design.schema.json",
-    "validate_script": "scripts/validate_meta_design.py",
-    "ci_step_added": true,
-    "pr_number": 9,
-    "pr_url": "https://github.com/gerivdb/unified-design/pull/9"
+  "pr": {
+    "number": 11,
+    "title": "docs(readme): reduce to 1 page with DAG + commands",
+    "url": "https://github.com/gerivdb/unified-design/pull/11",
+    "merge_commit": "c9ccc48"
   },
-  "atoms_registry": {
-    "extract_script": "scripts/extract_atom_deps.py",
-    "pr_number": 10,
-    "pr_url": "https://github.com/gerivdb/unified-design/pull/10",
-    "entries_with_deps": 28
-  }
+  "merged_prs": [
+    {
+      "number": 9,
+      "title": "ci(unified-design): add meta-design.yaml schema validation",
+      "merge_commit": "e3e2c55",
+      "status": "merged"
+    },
+    {
+      "number": 10,
+      "title": "feat(atoms): add extract_atom_deps.py and auto-update registry with deps",
+      "merge_commit": "4a0d09b",
+      "status": "merged"
+    },
+    {
+      "number": 11,
+      "title": "docs(readme): reduce to 1 page with DAG + commands",
+      "merge_commit": "c9ccc48",
+      "status": "merged"
+    }
+  ]
 }
