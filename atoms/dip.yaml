@@ -1,0 +1,58 @@
+---
+name: dip
+description: "Dependency Inversion Principle — les modules de haut niveau ne doivent pas dépendre des modules de bas niveau, mais des abstractions."
+parameters:
+  abstractions_depended: true
+  concrete_impl_hidden: true
+  dependency_direction: inward
+constraints:
+  - "Les dépendances pointent vers les abstractions"
+  - "Les implémentations concrètes sont cachées"
+  - "Les abstractions n'ont pas de dépendances externes"
+inherits: [design-principle]
+---
+
+# Atom : DIP (Dependency Inversion Principle)
+
+## Contexte
+Principe SOLID : les modules de haut niveau ne dépendent pas des modules de bas niveau, mais des abstractions. Les abstractions ne dépendent pas des implémentations, les implémentations dépendent des abstractions.
+
+## Application dans MDU
+- **Citizens** : Les citizens dépendent des interfaces, pas des implémentations
+- **Pipelines** : Les pipelines orchestrent via abstractions, pas d'implémentations concrètes
+- **Atomes** : Les atomes dépendent des abstractions de design
+
+## Architecture en couches
+```
+┌─────────────────────────────────────────────┐
+│              Haut Niveau                   │
+│  (orchestrateur, pipeline, agent)          │
+├─────────────────────────────────────────────┤
+│              Abstraction                     │
+│  (interface, contrat, schéma)              │
+├─────────────────────────────────────────────┤
+│              Bas Niveau                      │
+│  (implémentation concrète)                 │
+└─────────────────────────────────────────────┘
+```
+
+## Vérification
+```bash
+# Vérifier DIP dans un module
+ctulu validate-dip --module src/wazaa_bus_citizens/orchestrator.py
+```
+
+## Exemple
+```yaml
+# Mauvaise pratique
+class Orchestrator:
+    def __init__(self):
+        self.memory = MemoryCitizen()  # Dépendance concrète
+        self.router = RouterCitizen()  # Dépendance concrète
+
+# Bonne pratique
+class Orchestrator:
+    def __init__(self, memory: MemoryInterface, router: RouterInterface):
+        self.memory = memory  # Dépendance abstraite
+        self.router = router  # Dépendance abstraite
+```

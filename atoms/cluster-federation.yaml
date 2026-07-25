@@ -1,0 +1,35 @@
+---
+name: cluster-federation
+description: "Protocole de membership gossip-based pour la fédération de clusters WAZAA avec élection de leader et détection de split-brain."
+parameters:
+  discovery_mode: gossip
+  election_timeout_ms: 500
+  split_brain_threshold: 2
+  sync_interval_ms: 100
+  backpressure_limit: 1000
+constraints:
+  - "Détection de panne < 200 ms"
+  - "Élection de leader < 500 ms"
+  - "Synchronisation cross-nœuds < 10 ms"
+inherits: [cognitive-bus, distributed-systems]
+---
+
+# Atom : cluster-federation
+
+## Contexte
+Basé sur EPIC-1221 WAZAA Bus Cluster Federation. Permet à plusieurs instances WAZAA Bus de former un cluster résilient avec synchronisation d'état et basculement automatique.
+
+## Architecture
+```
+WAZAA Bus (nœud 1) ──┐
+WAZAA Bus (nœud 2) ──┼── Gossip Network ── Leader Election
+WAZAA Bus (nœud 3) ──┘
+```
+
+## Événements importants
+- `cluster.member.discovered` - Nouveau nœud rejoint
+- `cluster.member.healthy` - Nœud en bonne santé
+- `cluster.member.failed` - Nœud en panne
+- `cluster.splitbrain.detected` - Détection split-brain
+- `cluster.leaderelection.started` - Élection en cours
+- `cluster.leaderelection.completed` - Élection terminée

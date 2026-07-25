@@ -1,0 +1,67 @@
+---
+name: mcp-fix-diagnostics
+description: "Diagnostic et réparation automatique des connexions MCP : vérification, redémarrage, logging, watchdog."
+parameters:
+  modes:
+    - verify
+    - fix
+    - restart
+    - status
+  targets:
+    - filesystem
+    - github
+    - notion
+    - memory
+  auto_restart: true
+  logging: structured
+inherits: [proactive-friction-sensor, registry-consistency-sentinel]
+---
+
+# MCP Fix Diagnostics Atom
+
+Pattern de diagnostic et réparation automatique des serveurs MCP.
+
+## Rôle
+
+Maintenir la connectivité MCP opérationnelle :
+- Vérifier la disponibilité de chaque serveur MCP
+- Redémarrer les serveurs en échec
+- Logger les interventions pour audit
+- Watchdog automatique avec seuil de panne
+
+## Structure canonique
+
+```powershell
+# verify-mcp-access.ps1
+$servers = @("filesystem","github","notion","memory")
+foreach ($server in $servers) {
+    $status = Test-McpConnection -Server $server
+    if (-not $status) {
+        Write-Warning "[MCP] $server down, restarting..."
+        Restart-McpServer -Server $server
+        Log-McpIntervention -Server $server -Action "restart"
+    }
+}
+```
+
+## Invariants
+
+- Toute intervention DOIT être loggée avec timestamp et action
+- Le redémarrage DOIT être limité à N tentatives avant escalade
+- Le mode `-Fix` DOIT être explicite (pas de auto-fix silencieux)
+- Le status DOIT inclure : uptime, last_error, restart_count
+
+## Scripts existants
+
+| Script | Mode | Chemin |
+|--------|------|--------|
+| `verify-mcp-access.ps1` | verify/fix | `C:\DevTools\SCRIPTS\` |
+| `Fix-MCPConnection.ps1` | fix | `C:\DevTools\` |
+| `Deploy-MCPFix.ps1` | deploy | `C:\DevTools\` |
+| `Monitor-MCPHealth.ps1` | monitor | `C:\DevTools\` |
+
+## Références
+
+- `C:\DevTools\SCRIPTS\verify-mcp-access.ps1`
+- `C:\DevTools\Fix-MCPConnection.ps1`
+- `C:\DevTools\Monitor-MCPHealth.ps1`

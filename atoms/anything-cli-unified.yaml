@@ -1,0 +1,89 @@
+---
+name: anything-cli-unified
+description: "Suite d'outils CLI unifiés (10 outils) pour wrapper les citizens WAZAA avec sortie JSON canonique."
+parameters:
+  tools_count: 10
+  output_format: JSON
+  concurrency_limit: 5
+  timeout_seconds: 30
+constraints:
+  - "100% tests passants"
+  - "Latence < 10 ms par commande"
+  - "Sortie JSON standardisée"
+inherits: [cli-toolkit, json-interface]
+---
+
+# Atom : anything-cli-unified
+
+## Contexte
+Basé sur EPIC-1220 ANYTHING-CLI SUITE v1.0. Toolkit de 10 outils `*-anything` wrappant les citizens existants dans une interface CLI unifiée.
+
+## Outils
+
+### T01 `route-anything`
+- **Fonction** : Calculer la route optimale entre deux citizens
+- **Input** : `{"source": str, "destination": str, "mode": "standard|balanced|quantum"}`
+- **Output** : JSON avec transport_mode, primary_bus, reason
+- **Latence** : < 10ms
+
+### T02 `dispatch-anything`
+- **Fonction** : Mettre un message sur le bus WAZAA
+- **Input** : `{"payload": str, "destination": str, "mode": "bdcp|standard"}`
+- **Output** : JSON avec status, bytes_sent
+
+### T03 `resolve-intent-anything`
+- **Fonction** : Résoudre une intention via consensus collectif
+- **Input** : `{"command": str, "requester": str, "authority_level": int}`
+- **Output** : JSON avec official_action, consensus_score, method
+
+### T04 `broadcast-anything`
+- **Fonction** : Diffuser un message multi-citizens
+- **Input** : `{"payload": str, "targets": [str], "mode": "fanout|consensus"}`
+- **Output** : JSON avec broadcast_id, targets_reached
+
+### T05 `cache-anything`
+- **Fonction** : Lire/écrire dans le cache symétrique WAZAA
+- **Input** : `{"action": "get|put|clear", "key": str, "value": any}`
+- **Output** : JSON avec cache_hit, value
+
+### T06 `sign-anything`
+- **Fonction** : Signer un message JWS
+- **Input** : `{"payload": str, "agent_id": str}`
+- **Output** : JSON avec jws_signature, algorithm
+
+### T07 `predict-anything`
+- **Fonction** : Prédire la prochaine séquence
+- **Input** : `{"sequence": [str], "num_predictions": int}`
+- **Output** : JSON avec predictions, confidence
+
+### T08 `recall-memory-anything`
+- **Fonction** : Lire la mémoire vectorielle d'un citizen
+- **Input** : `{"citizen_id": str, "query": str, "top_k": int}`
+- **Output** : JSON avec memories[] (score, content, timestamp)
+
+### T09 `detect-loop-anything`
+- **Fonction** : Détecter les boucles d'intention
+- **Input** : `{"citizen_id": str, "intent_history": [str], "window_size": int}`
+- **Output** : JSON avec loop_detected, loop_type, recommendation
+
+### T10 `terminate-anything`
+- **Fonction** : Arrêter un citizen de manière optimale
+- **Input** : `{"citizen_id": str, "reason": "optimal|timeout|error", "grace_period_s": int}`
+- **Output** : JSON avec terminated, final_state_persisted
+
+## Architecture
+```
+WAZAA/cli_tools/anything/
+├── __init__.py
+├── cli.py                   # Point d'entrée unifié
+├── route_anything.py
+├── dispatch_anything.py
+├── resolve_intent_anything.py
+├── broadcast_anything.py
+├── cache_anything.py
+├── sign_anything.py
+├── predict_anything.py
+├── recall_memory_anything.py
+├── detect_loop_anything.py
+└── terminate_anything.py
+```

@@ -1,0 +1,89 @@
+---
+name: ci-pipeline
+description: "Pipeline CI/CD : lint, format, test, build, deploy, validation statique, hooks pre-commit."
+parameters:
+  stages:
+    - lint
+    - format
+    - test
+    - build
+    - deploy
+  languages:
+    - python
+    - powershell
+    - rust
+    - node
+  validators:
+    - flake8
+    - black
+    - pester
+    - cargo_clippy
+    - eslint
+  artifacts:
+    - coverage
+    - build
+    - logs
+inherits: [build-pipeline, test-runner]
+---
+
+# CI Pipeline Atom
+
+Pattern de pipeline CI/CD multi-stage.
+
+## Rôle
+
+Garantir la qualité et la traçabilité de chaque commit :
+- **Lint** : détection de code smell et erreurs statiques
+- **Format** : uniformisation du style (black, prettier, rustfmt)
+- **Test** : exécution avec coverage minimum
+- **Build** : compilation et packaging
+- **Deploy** : déploiement blue-green ou canary
+
+## Structure canonique
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: flake8 src/ --count --statistics
+      - run: black src/ --check
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pytest tests/ -v --cov=src/ --cov-report=xml
+
+  build:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - run: docker build -t app:${{ github.sha }} .
+```
+
+## Invariants
+
+- Chaque stage DOIT échouer fast (pas de build si lint échoue)
+- Le coverage DOIT avoir un seuil minimum (ex: 80%)
+- Les artifacts DOIVENT être publiés (coverage, logs)
+- Le deploy DOIT être manuel ou protégé par approval
+
+## Hooks existants
+
+| Hook | Trigger | Action |
+|------|---------|--------|
+| `pre-commit` | git commit | lint + format |
+| `pre-push` | git push | test + build |
+| `commit-msg` | git commit | conventional commits |
+| `post-merge` | git merge | sync + audit |
+
+## Références
+
+- `C:\DevTools\.pre-commit-config.yaml`
+- `C:\DevTools\.github/workflows/`
+- `C:\DevTools\Makefile` (target `ci`)

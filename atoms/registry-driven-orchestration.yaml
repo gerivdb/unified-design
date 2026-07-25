@@ -1,0 +1,70 @@
+---
+name: registry-driven-orchestration
+description: "Orchestration par registre : tableau de hashtables définit les cibles, boucle unique applique l'opération à chaque cible."
+parameters:
+  registry_structure:
+    - name: string
+    - path: string
+    - branch: string
+    - stratum: string
+  operations:
+    - status
+    - pull
+    - push
+    - validate
+    - audit
+  loop_pattern: foreach
+inherits: [srp]
+---
+
+# Registry-Driven Orchestration Atom
+
+Pattern d'orchestration d'opérations sur N cibles via un registre central.
+
+## Rôle
+
+Éviter la duplication de code pour les opérations répétées sur plusieurs dépôts :
+- Définir les cibles dans un tableau de hashtables
+- Boucler sur le registre pour appliquer l'opération
+- Gérer les erreurs par cible sans arrêter tout le pipeline
+
+## Structure canonique
+
+```powershell
+$Repos = @(
+    @{n="GOVERNANCE-HUB";p="D:\DO\WEB\TOOLS\L0-CANON\GOVERNANCE-HUB";b="main";s="L0"}
+    @{n="BRAIN";p="D:\DO\WEB\TOOLS\L0-CANON\BRAIN";b="main";s="L0"}
+    @{n="NEXUS";p="D:\DO\WEB\TOOLS\L1-INFRA\NEXUS";b="main";s="L1"}
+)
+
+foreach ($repo in $Repos) {
+    Write-Host "[$($repo.n)] Processing..."
+    try {
+        $result = Invoke-Operation -Repo $repo
+        Write-Host "[$($repo.n)] OK"
+    } catch {
+        Write-Host "[$($repo.n)] FAILED: $_"
+    }
+}
+```
+
+## Invariants
+
+- Chaque entrée du registre DOIT avoir : `n` (name), `p` (path), `b` (branch), `s` (stratum)
+- Le registre DOIT être triable par strate ou priorité
+- Les erreurs DOIVENT être isolées par cible
+- Le script DOIT supporter un mode `-Quiet` pour filtering
+
+## Exemples
+
+| Script | Opérations | Nb repos |
+|--------|-----------|----------|
+| `ecos-sync-audit.ps1` | pull/push/status | 47 |
+| `ecos-health.ps1` | health-check | 47 |
+| `ecos-registry.ps1` | registry listing | 47 |
+| `ecos-classify.ps1` | classification | 47 |
+
+## Références
+
+- `C:\DevTools\scripts\ecos-sync-audit.ps1`
+- `C:\DevTools\bin\ecos.ps1`

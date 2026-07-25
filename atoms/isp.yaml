@@ -1,0 +1,51 @@
+---
+name: isp
+description: "Interface Segregation Principle — les clients ne doivent pas être forcés à dépendre d'interfaces qu'ils n'utilisent pas."
+parameters:
+  client_specific_interfaces: true
+  fat_interface_detection: true
+  interface_split_threshold: 2
+constraints:
+  - "Interfaces fines et spécifiques aux clients"
+  - "Pas d'interfaces 'gourmandes'"
+  - "Séparation des responsabilités"
+inherits: [design-principle]
+---
+
+# Atom : ISP (Interface Segregation Principle)
+
+## Contexte
+Principe SOLID : créez des interfaces spécifiques aux clients plutôt qu'attendus par tous.
+
+## Application dans MDU
+- **Interfaces CLI** : Chaque outil a son interface spécifique
+- **API citizens** : Chaque citizen expose seulement les méthodes nécessaires
+- **Atomes** : Chaque atome a une interface cohérente avec son rôle
+
+## Détection des interfaces "gourmandes"
+```bash
+# Détecter les interfaces fat
+ctulu detect-fat-interface --module src/wazaa_bus_citizens/
+```
+
+## Principes
+1. **Interface client spécifique** : Créez des interfaces pour chaque type de client
+2. **Pas de force-dependency** : Les clients ne dépendent que des méthodes qu'ils utilisent
+3. **Séparation des responsabilités** : Chaque interface a un domaine fonctionnel
+
+## Exemple
+```yaml
+# Mauvaise pratique (interface gourmande)
+interface Citizen:
+  methods: [read_memory, write_memory, route_message, validate_intent, ...]
+
+# Bonne pratique (interfaces fines)
+interface MemoryCitizen:
+  methods: [read_memory, write_memory]
+
+interface RouterCitizen:
+  methods: [route_message]
+
+interface ValidationCitizen:
+  methods: [validate_intent]
+```

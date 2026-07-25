@@ -1,0 +1,475 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gerivdb.github.io/unified-design/schemas/meta-design.schema.json",
+  "title": "Meta-Design Schema (MDU) v2",
+  "type": "object",
+  "required": [
+    "version",
+    "intent_hash",
+    "status",
+    "capabilities",
+    "design_rules",
+    "design_schema",
+    "piliers",
+    "regles_transversales",
+    "couche_gouvernance",
+    "governance_atoms",
+    "agents_par_pilier",
+    "validation",
+    "git_policy",
+    "references"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "intent_hash": {
+      "type": "string",
+      "pattern": "^0x[a-zA-Z0-9_]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "deprecated",
+        "draft"
+      ]
+    },
+    "inherits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "parameters"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "design_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "check"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "check": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "design_schema": {
+      "type": "object",
+      "required": [
+        "required_fields",
+        "optional_fields",
+        "versioning",
+        "multiple_inheritance",
+        "deprecation_policy"
+      ],
+      "properties": {
+        "required_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optional_fields": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "versioning": {
+          "type": "object",
+          "required": [
+            "major",
+            "minor",
+            "patch"
+          ],
+          "properties": {
+            "major": {
+              "type": "string"
+            },
+            "minor": {
+              "type": "string"
+            },
+            "patch": {
+              "type": "string"
+            }
+          }
+        },
+        "multiple_inheritance": {
+          "type": "object",
+          "required": [
+            "supported",
+            "conflict_resolution",
+            "parameter_merge"
+          ],
+          "properties": {
+            "supported": {
+              "type": "boolean"
+            },
+            "conflict_resolution": {
+              "type": "string",
+              "enum": [
+                "priority",
+                "order",
+                "override"
+              ]
+            },
+            "parameter_merge": {
+              "type": "string",
+              "enum": [
+                "override",
+                "merge"
+              ]
+            }
+          }
+        },
+        "deprecation_policy": {
+          "type": "object",
+          "required": [
+            "warning_days",
+            "error_days",
+            "removal_strategy"
+          ],
+          "properties": {
+            "warning_days": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "error_days": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "removal_strategy": {
+              "type": "string",
+              "enum": [
+                "soft-delete",
+                "hard-delete",
+                "archive"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "industrialization": {
+      "type": "object",
+      "required": [
+        "generator",
+        "validator"
+      ],
+      "properties": {
+        "generator": {
+          "type": "object",
+          "required": [
+            "template_repo",
+            "output_dir"
+          ],
+          "properties": {
+            "template_repo": {
+              "type": "string",
+              "format": "uri"
+            },
+            "output_dir": {
+              "type": "string"
+            }
+          }
+        },
+        "validator": {
+          "type": "object",
+          "required": [
+            "command"
+          ],
+          "properties": {
+            "command": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "piliers": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": [
+          "nom",
+          "abbr",
+          "role",
+          "couleur",
+          "invariants"
+        ],
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "abbr": {
+            "type": "string",
+            "maxLength": 10
+          },
+          "role": {
+            "type": "string"
+          },
+          "couleur": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$"
+          },
+          "invariants": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "nom"
+              ],
+              "properties": {
+                "nom": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "valeur": {
+                  "type": [
+                    "number",
+                    "string",
+                    "null"
+                  ]
+                },
+                "unite": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "max": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "regles_transversales": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "nom",
+          "description"
+        ],
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "couche_gouvernance": {
+      "type": "object",
+      "required": [
+        "L0_CANONICAL",
+        "L1_CAUSALITY",
+        "L2_COMPOSITION",
+        "L3_EMERGENCE",
+        "L4_TOOLS"
+      ],
+      "properties": {
+        "L0_CANONICAL": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "L1_CAUSALITY": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "L2_COMPOSITION": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "L3_EMERGENCE": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "L4_TOOLS": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "governance_atoms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "agents_par_pilier": {
+      "type": "object",
+      "required": [
+        "SDD",
+        "TCE",
+        "MAG",
+        "CD"
+      ],
+      "properties": {
+        "SDD": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "TCE": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "MAG": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CD": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "schema",
+        "adr",
+        "cli",
+        "hooks"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "adr": {
+          "type": "string"
+        },
+        "cli": {
+          "type": "string"
+        },
+        "hooks": {
+          "type": "object",
+          "required": [
+            "pre_commit",
+            "pre_push"
+          ],
+          "properties": {
+            "pre_commit": {
+              "type": "boolean"
+            },
+            "pre_push": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "git_policy": {
+      "type": "object",
+      "required": [
+        "default_branch",
+        "protected",
+        "feature_prefix",
+        "hotfix_prefix",
+        "require_pr",
+        "require_ci_passing",
+        "min_approvals",
+        "disallow_direct_push_to_main",
+        "disallow_direct_push_to_master"
+      ],
+      "properties": {
+        "default_branch": {
+          "type": "string"
+        },
+        "protected": {
+          "type": "boolean"
+        },
+        "feature_prefix": {
+          "type": "string"
+        },
+        "hotfix_prefix": {
+          "type": "string"
+        },
+        "require_pr": {
+          "type": "boolean"
+        },
+        "require_ci_passing": {
+          "type": "boolean"
+        },
+        "min_approvals": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "disallow_direct_push_to_main": {
+          "type": "boolean"
+        },
+        "disallow_direct_push_to_master": {
+          "type": "boolean"
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

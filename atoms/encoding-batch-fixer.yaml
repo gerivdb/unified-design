@@ -1,0 +1,80 @@
+---
+name: encoding-batch-fixer
+description: "Correction batch des encodages de fichiers : UTF-8, BOM, line endings, avec détection automatique et réparation."
+parameters:
+  target_encoding: UTF-8
+  bom_handling: add_if_missing
+  line_ending: LF
+  batch_size: 100
+constraints:
+  - "Détection encodage fiable"
+  - "Aucune corruption du contenu"
+  - "Rollback possible en cas d'erreur"
+inherits: [file-processing, encoding-utils]
+---
+
+# Atom : encoding-batch-fixer
+
+## Contexte
+Basé sur la session `ses_demo_002` (INTENT-11103FA2F9EC7E92). Incident d'encodage cp1252 dans un fichier PowerShell. Ce pattern automatise la correction de ces problèmes.
+
+## Fonctionnalités
+- **Détection automatique** : Analyse des fichiers pour identifier les encodages problématiques
+- **Correction UTF-8** : Conversion vers UTF-8 sans perte de données
+- **Gestion BOM** : Ajout/suppression du Byte Order Mark selon configuration
+- **Normalisation line endings** : Conversion vers LF (Unix) ou CRLF (Windows)
+
+## Workflow
+```
+┌─────────────┐
+│  Scan       │
+│  (fichiers) │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Detect     │
+│  Encoding   │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Validate   │
+│  Content    │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Convert    │
+│  to UTF-8   │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Verify     │
+│  (checksum) │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Report     │
+│  + Rollback │
+└─────────────┘
+```
+
+## Commandes CLI
+```bash
+# Scanner les fichiers avec problème d'encodage
+ctulu scan-encodings --path ./src --format json
+
+# Corriger les encodages en batch
+ctulu fix-encodings --path ./src --target utf-8 --dry-run
+
+# Appliquer les corrections
+ctulu fix-encodings --path ./src --target utf-8 --apply
+```
+
+## Incidents traités
+- **Incident 2026-06-22** : Fichier PowerShell corrompu `cp1252`
+  - Message d'erreur : `UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9`
+  - Solution : Conversion cp1252 → UTF-8 avec préservation du contenu

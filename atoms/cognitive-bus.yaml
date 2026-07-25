@@ -1,0 +1,57 @@
+---
+name: cognitive-bus
+description: "Bus cognitif unifié pour le streaming d'événements avec WAL, pub/sub, backpressure et filtrage."
+parameters:
+  protocol: WebSocket
+  pubsub_pattern: publish-subscribe
+  backpressure_strategy: sliding-window
+  message_compression: true
+  max_message_size_kb: 1024
+  event_rate_limit: 1000_per_second
+constraints:
+  - "Débit ≥ 1000 événements/seconde"
+  - "Latence < 50 ms pour messages critiques"
+  - "WAL persistance garantie"
+  - "Backpressure automatique"
+inherits: [event-streaming, distributed-systems]
+---
+
+# Atom : cognitive-bus
+
+## Contexte
+Basé sur INTENT-001 WAZAA BUS COGNITIF UNIFIÉ. Architecture consolidée du bus cognitif WAZAA avec WAL, pub/sub, et validation des messages.
+
+## Invariant
+- WAZAA est le seul bus cognitif (pas de doublon NEXUS/wazaa_bus/)
+- Tous les messages sont journalisés dans le WAL
+- Les agents se registrent via contracts/
+
+## Architecture
+```
+WAZAA Bus (événements critiques)
+     bus_runner.py
+         │
+         ▼
+┌─────────────────────────────────────────────┐
+│  ┌─────────────┐  ┌─────────────┐  ┌───────┐ │
+│  │  Pub/Sub    │  │   Filter    │  │ Queue │ │
+│  │   Engine    │  │   Engine    │  │ Engine│ │
+│  └─────────────┘  └─────────────┘  └───────┘ │
+│           │                         │        │
+│           ▼                         ▼        │
+│  ┌─────────────────────────────────────────┐ │
+│  │           WAL (Write-Ahead Log)           │ │
+│  │  Persistance garantie, rollback possible  │ │
+│  └─────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────┘
+```
+
+## Événements bus
+```yaml
+Emits:
+  - bus.message.published
+  - bus.message.subscribed
+  - bus.message.failed
+  - bus.event.compressed
+  - bus.backpressure.triggered
+```

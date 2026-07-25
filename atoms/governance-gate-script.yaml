@@ -1,0 +1,68 @@
+---
+name: governance-gate-script
+description: "Script de validation de gouvernance : vérification frontmatter, ADR, hooks pre-commit, conformité strates."
+parameters:
+  validations:
+    - frontmatter_yaml
+    - adr_presence
+    - stratum_path
+    - intent_hash
+    - citizen_registry
+  enforcement: strict
+  auto_correction: optional
+inherits: [formal-verification, design-schema]
+---
+
+# Governance Gate Script Atom
+
+Pattern de script de validation de conformité écosystémique.
+
+## Rôle
+
+Vérifier qu'un dépôt, un fichier ou un PR respecte les règles de gouvernance :
+- Frontmatter YAML valide (type, status, date, intent_hash)
+- ADR backing pour décisions transverses
+- Chemin conforme à la strate (L0-L5)
+- IntentHash unique et référencé
+
+## Structure canonique
+
+```powershell
+function Test-Frontmatter {
+    param([string]$File)
+    $content = Get-Content $File -Raw
+    if ($content -notmatch '^---\n.*?\n---') { return $false }
+    $yaml = $content -replace '^---\n.*?\n---', ''
+    # Validate required fields
+    return $yaml -match 'type:' -and $yaml -match 'status:' -and $yaml -match 'intent_hash:'
+}
+
+function Test-StratumPath {
+    param([string]$Path)
+    $strates = @("L0-CANON","L1-INFRA","L2-PLATFORM","L3-CITIZENS","L4-TOOLS","L5-ARCHIVE")
+    foreach ($s in $strates) { if ($Path -like "*\$s\*") { return $true } }
+    return $false
+}
+```
+
+## Invariants
+
+- Toute décision transverse NÉCESSITE un ADR accepted
+- Le champ `intent_hash` DOIT être unique globalement
+- Le chemin DOIT correspondre à la strate déclarée
+- Les corrections automatiques DOIVENT être tracées
+
+## Scripts existants
+
+| Script | Validation | Auto-correct |
+|--------|-----------|--------------|
+| `frontmatter-guardian` | Oui | Oui |
+| `adr-generator.ps1` | Oui | Non |
+| `ecos-strata-audit.ps1` | Oui | Non |
+| `onto-gap-detector.ps1` | Oui | Non |
+
+## Références
+
+- `C:\DevTools\bin\adr-generator.ps1`
+- `C:\DevTools\scripts\ecos-strata-audit.ps1`
+- `C:\DevTools\scripts\hitl-preflight.ps1`

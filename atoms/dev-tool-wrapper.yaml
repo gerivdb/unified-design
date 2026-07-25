@@ -1,0 +1,78 @@
+---
+name: dev-tool-wrapper
+description: "Wrapper PowerShell pour outils CLI : auto-découverte de chemins, Help unifiée, dispatch par sous-commandes, intégration MCP."
+parameters:
+  entry_point: "ps1"
+  dispatcher: param($Command, $CommandArgs)
+  paths:
+    - DEVTOOLS
+    - WEB_ROOT
+  error_handling: Stop
+  help_sections:
+    - status
+    - health
+    - registry
+    - sync
+    - validate
+    - audit
+    - metrics
+    - security
+inherits: [kiss, srp]
+---
+
+# Dev Tool Wrapper Atom
+
+Pattern d'encapsulation d'outils CLI dans un script PowerShell unifié.
+
+## Rôle
+
+Réduire la friction d'accès aux outils écosystémiques en fournissant :
+- Un point d'entrée unique (`ecos.ps1`, `kiva.ps1`, etc.)
+- Une aide contextuelle par sous-commande
+- Une validation des chemins avant exécution
+- Une gestion d'erreur cohérente (`$ErrorActionPreference = "Stop"`)
+
+## Structure canonique
+
+```powershell
+param(
+    [Parameter(Position=0)][string]$Command = "help",
+    [Parameter(Position=1)][string[]]$CommandArgs = @()
+)
+
+$ErrorActionPreference = "Stop"
+$DEVTOOLS = "C:\DevTools"
+$WEB_ROOT = "D:\DO\WEB"
+
+function Show-Help { ... }
+function Test-Paths { ... }
+function Invoke-StatusCommand { ... }
+# ... autres commandes
+
+switch ($Command) {
+    "status" { Invoke-StatusCommand }
+    "health" { Invoke-HealthCommand }
+    default { Show-Help; exit 1 }
+}
+```
+
+## Invariants
+
+- Tous les chemins DOIVENT être absolus
+- L'aide DOIT être la commande par défaut
+- Toute erreur DOIT être trapée et loggée
+- Le script NE DOIT PAS avoir d'effet de bord sans confirmation
+
+## Exemples
+
+| Wrapper | Chemin | Usage |
+|---------|--------|-------|
+| ECOS CLI | `C:\DevTools\bin\ecos.ps1` | `ecos status`, `ecos health` |
+| KIVA CLI | `C:\DevTools\bin\kiva.ps1` | `kiva run`, `kiva stop` |
+| Clapet | `C:\DevTools\bin\clapet.ps1` | `clapet open`, `clapet close` |
+
+## Références
+
+- `C:\DevTools\bin\ecos.ps1`
+- `C:\DevTools\bin\clapet.ps1`
+- `C:\DevTools\bin\ecos.cmd`

@@ -2,9 +2,12 @@
 # Schéma de validation YAML pour l'architecture gerivdb
 # Version 2.0 : ajout des capacités, détection de boucles et industrialisation
 
+$schema: "https://json-schema.org/draft/2020-12/schema"
 version: "2.0.0"
 intent_hash: 0xMDU_SCHEMA_20260715_V2
 status: active
+
+$schema: "schemas/meta-design.schema.json"
 
 # Héritage multiple de designs abstraits
 inherits: []

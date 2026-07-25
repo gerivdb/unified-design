@@ -1,0 +1,47 @@
+---
+name: design-principle
+description: "Atome parent pour les principes de conception fondamentaux (SOLID, DRY, KISS, YAGNI, etc.)."
+parameters:
+  principle_categories:
+    - SOLID
+    - DRY
+    - KISS
+    - YAGNI
+    - Architectural
+constraints:
+  - "Les principes sont des lois fondamentales de conception"
+  - "Ils transcendent les langages et les paradigmes"
+  - "Ils forment l'esprit du MDU"
+---
+
+# Atom : design-principle
+
+## Contexte
+Atome parent pour tous les principes de conception logicielle. Les principes sont des lois fondamentales qui transcendent les langages et les paradigmes.
+
+## Catégories
+- **SOLID** : SRP, OCP, LSP, ISP, DIP
+- **DRY** : Don't Repeat Yourself
+- **KISS** : Keep It Simple, Stupid
+- **YAGNI** : You Aren't Gonna Need It
+- **Architectural** : LoD, POLA, CoC
+
+## Héritage
+Les atomes principes héritent de `design-principle` :
+- `srp`
+- `lsp`
+- `isp`
+- `dip`
+- `kiss`
+- `yagni`
+- `law-of-demeter`
+- `principle-of-least-astonishment`
+- `convention-over-configuration`
+
+## Utilisation
+```yaml
+# Un atome peut déclarer ses principes
+capabilities:
+  - name: pipeline-anamorphique
+    principles_applied: [SRP, KISS, YAGNI]
+```

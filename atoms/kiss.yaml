@@ -1,0 +1,76 @@
+---
+name: kiss
+description: "Keep It Simple, Stupid — évitez la complexité inutile, préférez les solutions simples et directes."
+parameters:
+  complexity_threshold: 3
+  cyclomatic_complexity_max: 10
+  lines_per_function_max: 50
+constraints:
+  - "Éviter la complexité inutile"
+  - "Préférer les solutions simples"
+  - "Une fonction = une responsabilité"
+inherits: [design-principle]
+---
+
+# Atom : KISS (Keep It Simple, Stupid)
+
+## Contexte
+Principe de conception : ne faites pas plus complexe que nécessaire. Les solutions simples sont plus maintenables et moins sujettes aux bugs.
+
+## Application dans MDU
+- **Atomes** : Chaque atome a une responsabilité claire
+- **Pipelines** : Étapes simples et chaînées
+- **CLI** : Commandes directes sans sur-couches
+
+## Métriques de complexité
+- **Cyclomatique** : ≤ 10 par fonction
+- **Lignes par fonction** : ≤ 50
+- **Niveaux d'imbrication** : ≤ 3
+
+## Vérification
+```bash
+# Vérifier la complexité d'un module
+ctulu validate-kiss --module src/wazaa_bus_citizens/
+```
+
+## Anti-patterns
+- Code surchargé (God function)
+- Sur-chaînage de conditions
+- Abstractions inutiles
+- Over-engineering
+
+## Exemple
+```python
+# Mauvaise pratique (trop complexe)
+def process_event(event):
+    if event.type == "message":
+        if event.source == "kilo":
+            if event.timestamp > last_processed:
+                if event.payload:
+                    data = json.loads(event.payload)
+                    if "intent_hash" in data:
+                        return process_intent(data)
+                    elif "user" in data:
+                        return process_user_message(data)
+                    else:
+                        return {"error": "unknown format"}
+                else:
+                    return {"error": "empty payload"}
+            else:
+                return {"status": "skipped"}
+        else:
+            return process_external_message(event)
+    else:
+        return {"error": "unknown event type"}
+
+# Bonne pratique (simple)
+def process_event(event):
+    if event.type != "message":
+        return {"error": "unknown event type"}
+    
+    if not event.payload:
+        return {"error": "empty payload"}
+    
+    data = json.loads(event.payload)
+    return route_message(data)
+```
