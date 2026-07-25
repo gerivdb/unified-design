@@ -1,6 +1,6 @@
 {
-  "last_action": "merge_prs_9_10_11",
-  "timestamp": "2026-07-26T00:12:00+02:00",
+  "last_action": "merge_pr_12_registry_validation",
+  "timestamp": "2026-07-26T00:40:00+02:00",
   "branches": {
     "main": "c9ccc48",
     "origin/main": "c9ccc48"
@@ -25,10 +25,9 @@
     "git_maintenance_workflow_present": true
   },
   "pr": {
-    "number": 11,
-    "title": "docs(readme): reduce to 1 page with DAG + commands",
-    "url": "https://github.com/gerivdb/unified-design/pull/11",
-    "merge_commit": "c9ccc48"
+    "number": 12,
+    "title": "ci(unified-design): add atoms registry validation step",
+    "url": "https://github.com/gerivdb/unified-design/pull/12"
   },
   "merged_prs": [
     {
