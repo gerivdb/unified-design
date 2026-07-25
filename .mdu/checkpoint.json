@@ -1,20 +1,16 @@
 {
   "last_action": "merge_pr_12_registry_validation",
-  "timestamp": "2026-07-26T00:40:00+02:00",
+  "timestamp": "2026-07-26T00:45:00+02:00",
   "branches": {
-    "main": "c9ccc48",
-    "origin/main": "c9ccc48"
+    "main": "ef33289",
+    "origin/main": "ef33289"
   },
   "untracked_count": 0,
   "remote_branches_pruned": [
-    "origin/feat/ci-schema-validation",
-    "origin/feat/extract-atom-deps",
-    "origin/feat/readme-1page"
+    "origin/feat/ci-registry-validation"
   ],
   "deleted_remote_branches": [
-    "origin/feat/ci-schema-validation",
-    "origin/feat/extract-atom-deps",
-    "origin/feat/readme-1page"
+    "origin/feat/ci-registry-validation"
   ],
   "deleted_local_branches": [],
   "cleanup": {
@@ -27,7 +23,8 @@
   "pr": {
     "number": 12,
     "title": "ci(unified-design): add atoms registry validation step",
-    "url": "https://github.com/gerivdb/unified-design/pull/12"
+    "url": "https://github.com/gerivdb/unified-design/pull/12",
+    "merge_commit": "ef33289"
   },
   "merged_prs": [
     {
@@ -46,6 +43,12 @@
       "number": 11,
       "title": "docs(readme): reduce to 1 page with DAG + commands",
       "merge_commit": "c9ccc48",
+      "status": "merged"
+    },
+    {
+      "number": 12,
+      "title": "ci(unified-design): add atoms registry validation step",
+      "merge_commit": "ef33289",
       "status": "merged"
     }
   ]
