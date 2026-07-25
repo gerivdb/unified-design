@@ -1,24 +1,10 @@
 {
-  "last_action": "repo_cleanup_industrialized",
-  "timestamp": "2026-07-25T22:02:10+02:00",
+  "last_action": "extract_atom_deps_added",
+  "timestamp": "2026-07-25T23:55:00+02:00",
   "branches": {
-    "main": "d93f2a9",
-    "origin/main": "fbf7f1d",
-    "feat/industrialize-git-maintenance": "d57a3f8"
+    "main": "b3ed269",
+    "origin/main": "b3ed269"
   },
-  "untracked_count": 0,
-  "remote_branches_pruned": [
-    "origin/feat/loop-detection-engine",
-    "origin/feat/ontology-verses-tina-tql-anchoring",
-    "origin/feat/unified-design-v2-capabilities-loops"
-  ],
-  "deleted_remote_branches": [
-    "origin/feat/design-seeker-pipeline",
-    "origin/feat/loop-detection-engine"
-  ],
-  "deleted_local_branches": [
-    "feat/loop-detection-engine"
-  ],
   "cleanup": {
     "fetch_prune_executed": true,
     "post_merge_hook_active": true,
@@ -26,9 +12,17 @@
     "alias_cleanup_repo_added": true,
     "git_maintenance_workflow_present": true
   },
-  "pr": {
-    "number": 8,
-    "title": "feat(mdu): add cleanup automation, hooks, DAG, registry",
-    "url": "https://github.com/gerivdb/unified-design/pull/8"
+  "validation": {
+    "meta_design_schema": "schemas/meta-design.schema.json",
+    "validate_script": "scripts/validate_meta_design.py",
+    "ci_step_added": true,
+    "pr_number": 9,
+    "pr_url": "https://github.com/gerivdb/unified-design/pull/9"
+  },
+  "atoms_registry": {
+    "extract_script": "scripts/extract_atom_deps.py",
+    "pr_number": 10,
+    "pr_url": "https://github.com/gerivdb/unified-design/pull/10",
+    "entries_with_deps": 28
   }
 }
