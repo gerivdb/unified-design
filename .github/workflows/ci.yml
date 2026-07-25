@@ -46,6 +46,9 @@ jobs:
       - name: Validate atom inheritance structure
         run: python scripts/validate_yaml.py --assert name "atoms/*.yaml"
 
+      - name: Validate atoms registry
+        run: python scripts/validate_atom_registry.py
+
       - name: Validate design.yaml structure (if exists)
         run: |
           if [ -f generated-designs/*/design.yaml ]; then
