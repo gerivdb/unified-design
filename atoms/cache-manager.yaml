@@ -1,0 +1,75 @@
+---
+name: cache-manager
+description: "Gestionnaire de cache multi-niveaux : LRU, TTL, namespaces, stats, invalidation prédictive."
+parameters:
+  modes:
+    - get
+    - set
+    - invalidate
+    - stats
+  backends:
+    - memory
+    - file
+    - redis
+  eviction:
+    - lru
+    - ttl
+    - predictive
+inherits: [kiss, dip]
+---
+
+# Cache Manager Atom
+
+Pattern de cache multi-niveaux avec éviction intelligente.
+
+## Rôle
+
+Accélérer les accrés répétés dans l'écosystème :
+- **LRU** :Least Recently Used pour mémoire bornée
+- **TTL** : Time-To-Live pour données volatiles
+- **Namespaces** : isolation par contexte (repo, couche, citizen)
+- **Stats** : hit_rate, miss_rate, evictions
+- **Predictive** : préchargement basé sur patterns d'accès
+
+## Structure canonique
+
+```python
+class CacheManager:
+    def __init__(self, namespace: str, max_size: int = 1000, ttl: int = 3600):
+        self.namespace = namespace
+        self.cache = LRUCache(max_size)
+        self.ttl = ttl
+        self.stats = {"hits": 0, "misses": 0, "evictions": 0}
+    
+    def get(self, key: str) -> Any:
+        if key in self.cache:
+            self.stats["hits"] += 1
+            return self.cache[key]
+        self.stats["misses"] += 1
+        return None
+    
+    def set(self, key: str, value: Any, ttl: int = None):
+        self.cache[key] = value
+        if ttl: schedule_expiry(key, ttl)
+```
+
+## Invariants
+
+- Les keys DOIVENT être namespacées (`repo:file:path`)
+- Le TTL DOIT être supporté par entrée
+- Les stats DOIVENT être exposées via métriques
+- L'éviction DOIT être déterministe (LRU ou TTL, pas aléatoire)
+
+## Scripts existants
+
+| Script | Langage | Chemin |
+|--------|---------|--------|
+| `cache-optimization-manager.py` | Python | `C:\DevTools\` |
+| `cache-optimization-tests.py` | Python | `C:\DevTools\` |
+| `env4-predictive-cache.ps1` | PowerShell | `C:\DevTools\bin\` |
+| `env4-cache-l0.ps1` | PowerShell | `C:\DevTools\bin\` |
+
+## Références
+
+- `C:\DevTools\cache-optimization-manager.py`
+- `C:\DevTools\bin\env4-predictive-cache.ps1`

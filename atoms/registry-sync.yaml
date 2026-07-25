@@ -1,0 +1,80 @@
+---
+name: registry-sync
+description: "Flux de synchronisation du registre CITIZENS vers ses miroirs. Captures les dépendances CITIZENS → CTULU, TINA, BRAIN, Kilo Agent."
+parameters:
+  provider: CITIZENS
+  mirrors:
+    - CTULU
+    - TINA
+    - BRAIN
+    - Kilo Agent
+  sync_modes:
+    - push
+    - pull
+    - bidirectional
+  source_of_truth: CITIZENS.yaml
+  validation: required
+inherits: [cross-repo-flow, artifact-synced-loop]
+---
+
+# Registry Sync Atom
+
+Flux de synchronisation du registre citoyens vers les miroirs.
+
+## Rôle
+
+Documenter et valider le flux de synchronisation depuis `gerivdb/CITIZENS` vers :
+- **CTULU** : miroir `src/citizens/citizens.yaml`
+- **TINA** : copie locale `CITIZENS.yaml`
+- **BRAIN** : consommation du registre
+- **Kilo Agent** : routage des commandes
+
+## Structure canonique
+
+```yaml
+cross_repo_flow:
+  name: registry-sync
+  provider: CITIZENS
+  mirrors:
+    - repo: CTULU
+      path: src/citizens/citizens.yaml
+      mode: push
+    - repo: TINA
+      path: CITIZENS.yaml
+      mode: push
+    - repo: BRAIN
+      path: CITIZENS.yaml
+      mode: pull
+    - consumer: Kilo Agent
+      mode: read
+  source_of_truth: CITIZENS.yaml
+```
+
+## Invariants
+
+- `CITIZENS.yaml` est la **source de vérité** unique
+- Les miroirs DOIVENT être en lecture seule sauf pour le provider
+- La synchronisation DOIT être tracée dans WAL
+- Tout écart entre source et miroir DOIT générer une alerte
+
+## Validation
+
+Le loop engine MDU DOIT vérifier :
+1. `CITIZENS` possède l'atome `registry-source`
+2. Chaque miroir déclaré possède le contrat de synchronisation
+3. Aucun miroir ne peut écrire dans la source de vérité
+
+## Exemples
+
+| Mirror | Path | Mode | Fréquence |
+|--------|------|------|-----------|
+| CTULU | `src/citizens/citizens.yaml` | push | temps réel |
+| TINA | `CITIZENS.yaml` | push | temps réel |
+| BRAIN | `CITIZENS.yaml` | pull | à la demande |
+| Kilo Agent | mémoire/routage | read | chaque session |
+
+## Références
+
+- `D:\DO\WEB\TOOLS\L3-CITIZENS\CITIZENS\README.md`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\CITIZEN-POLICY.md`
+- `D:\DO\WEB\TOOLS\L3-CITIZENS\CITIZENS\bridges\CITIZENS-TINA.yaml`

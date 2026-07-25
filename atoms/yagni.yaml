@@ -1,0 +1,55 @@
+---
+name: yagni
+description: "You Aren't Gonna Need It — n'implémentez pas de fonctionnalités non demandées, écoutez les besoins réels."
+parameters
+  premature_optimization: blocked
+  feature_requests_only: true
+  speculative_code: forbidden
+constraints:
+  - "Implémenter uniquement ce qui est demandé"
+  - "Éviter l'optimisation prématurée"
+  - "Le code spéculatif est interdit"
+inherits: [design-principle]
+---
+
+# Atom : YAGNI (You Aren't Gonna Need It)
+
+## Contexte
+Principe de développement : n'implémentez pas de fonctionnalités que les utilisateurs n'ont pas demandées. Évitez l'optimisation prématurée et le code spéculatif.
+
+## Application dans MDU
+- **Atomes** : Créez les atomes demandés par les besoins réels
+- **Citizens** : Implémentez les fonctionnalités demandées
+- **Pipelines** : Ajoutez les étapes nécessaires, pas possibles
+
+## Règles
+1. **Demande client** : Fonctionnalité doit être demandée par un utilisateur
+2. **Optimisation** : Ne profilez pas avant d'avoir un problème
+3. **Code spéculatif** : Interdit - tout code doit avoir une utilité prouvée
+
+## Vérification
+```bash
+# Vérifier YAGNI dans un module
+ctulu validate-yagni --module src/wazaa_bus_citizens/
+```
+
+## Anti-patterns
+- Code commenté "pour plus tard"
+- Méthodes non utilisées
+- Optimisations spéculatives
+- Fonctionnalités "peut-être utiles"
+
+## Exemple
+```yaml
+# Mauvaise pratique (code spéculatif)
+features:
+  - name: advanced_search
+    description: "Recherche avancée avec filtres complexes"
+    status: implemented  # Jamais demandé!
+
+# Bonne pratique (réponds à un besoin)
+features:
+  - name: basic_search
+    description: "Recherche par mot-clé"
+    status: implemented  # Demandé par l'utilisateur
+```

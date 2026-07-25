@@ -1,0 +1,68 @@
+---
+name: multi-instance-guard
+description: "Garde anti-concurrence Windows : mutex nommé, détection d'instance existante, expulsion HITL si conflit."
+parameters:
+  mutex_type: named
+  mutex_scope: Global
+  wait_timeout_ms: 0
+  zombie_detection: process_age_minutes
+  zombie_threshold: 8
+inherits: [hitl-gate]
+---
+
+# Multi-Instance Guard Atom
+
+Pattern de garde contre les exécutions concurrentes sur Windows.
+
+## Rôle
+
+Prévenir les corruption de données et les race conditions lorsque :
+- Un script long risque d'être lancé plusieurs fois
+- Un processus zombie peut bloquer un mutex abandonné
+- Plusieurs agents KiloCode opèrent sur le même dépôt
+
+## Structure canonique
+
+```powershell
+# GUARD — Anti-multi-instance (Windows named mutex)
+$mutexName = "Global\EcoSyncAudit_Mutex"
+$mutex = New-Object System.Threading.Mutex($false, $mutexName)
+$ownsMutex = $false
+try {
+    $ownsMutex = $mutex.WaitOne(0)
+} catch {
+    # Abandoned mutex from crashed prior run — retry once
+    Start-Sleep -Milliseconds 500
+    try { $ownsMutex = $mutex.WaitOne(0) } catch { $ownsMutex = $true }
+}
+if (-not $ownsMutex) {
+    Write-Output "[SCRIPT] Une instance est déjà en cours. Abandon."
+    exit 2
+}
+
+trap {
+    try { if ($mutex) { $mutex.ReleaseMutex() } } catch {}
+    try { if ($mutx) { $mutex.Dispose() } } catch {}
+    break
+}
+```
+
+## Invariants
+
+- Le mutex DOIT être nommé `Global\` pour être visible inter-sessions
+- Le timeout DOIT être 0 (non-bloquant) par défaut
+- Un mutex abandonné DOIT être récupéré après 500ms de sleep
+- Le cleanup DOIT être dans un `trap` ou `finally`
+
+## Cas d'usage
+
+| Script | Mutex | Timeout | Action si occupé |
+|--------|-------|---------|------------------|
+| `ecos-sync-audit.ps1` | `Global\EcoSyncAudit_Mutex` | 0 | exit 2 |
+| `ecos-sync-watchdog.ps1` | `Global\EcoSyncWatchdog_Mutex` | 0 | exit 2 |
+| `hitl-preflight.ps1` | `Global\HitlPreflight_Mutex` | 0 | wait + retry |
+
+## Références
+
+- `C:\DevTools\scripts\ecos-sync-audit.ps1`
+- `C:\DevTools\scripts\ecos-sync-watchdog.ps1`

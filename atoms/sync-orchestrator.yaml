@@ -1,0 +1,70 @@
+---
+name: sync-orchestrator
+description: "Orchestrateur de synchronisation cross-repo : pull, push, drift detection, WAL, rollback automatique."
+parameters:
+  operations:
+    - pull
+    - push
+    - drift_detect
+    - rollback
+  wal_integration: required
+  conflict_strategy:
+    - stash_pull_pop
+    - rebase
+    - merge
+  rollback_trigger:
+    - postmerge_failure
+    - test_failure
+    - manual
+inherits: [wal-compaction, registry-driven-orchestration]
+---
+
+# Sync Orchestrator Atom
+
+Pattern d'orchestration de synchronisation avec rollback sécurisé.
+
+## Rôle
+
+Synchroniser N dépôts en garantissant :
+- **Traçabilité** : chaque opération tracée dans WAL
+- **Détection de drift** : comparaison local vs remote
+- **Rollback** : retour à l'état précédent en cas d'échec
+- **Stratégie de conflit** : configurable par repo
+
+## Structure canonique
+
+```yaml
+sync_config:
+  repositories:
+    - name: GOVERNANCE-HUB
+      path: D:\DO\WEB\TOOLS\L0-CANON\GOVERNANCE-HUB
+      branch: main
+      strategy: rebase
+      auto_rollback: true
+  global:
+    wal_path: C:\DevTools\var\wal\sync\
+    max_parallel: 3
+    timeout_seconds: 30
+```
+
+## Invariants
+
+- Toute sync DOIT être précédée d'un `git status` et d'un check de branche
+- Le drift DOIT être détecté avant toute écriture
+- Le rollback DOIT être testé avant le push
+- Le WAL DOIT être écrit avant l'opération (write-ahead)
+
+## Scripts existants
+
+| Script | Opération | Chemin |
+|--------|-----------|--------|
+| `ecos-sync.ps1` | sync | `C:\DevTools\bin\` |
+| `ecos-sync-audit.ps1` | audit | `C:\DevTools\scripts\` |
+| `selina_sync.py` | global scan | CTULU |
+| `post-merge-sync` | post-merge | Kilo rule |
+
+## Références
+
+- `C:\DevTools\bin\ecos-sync.ps1`
+- `C:\DevTools\scripts\ecos-sync-audit.ps1`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\selina_sync.py`

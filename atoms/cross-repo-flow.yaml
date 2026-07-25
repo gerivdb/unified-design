@@ -1,0 +1,72 @@
+---
+name: cross-repo-flow
+description: "Pattern de base pour tout flux inter-dépôts : provider, consumers, contrat, validation, détection de cycles."
+parameters:
+  name: string
+  provider: string
+  consumers: array_of_strings
+  contract_validation: required
+  cycle_detection: required
+  wal_logging: required
+inherits: [formal-verification, artifact-synced-loop]
+---
+
+# Cross-Repo Flow Atom
+
+Pattern de base pour la formalisation des flux inter-dépôts.
+
+## Rôle
+
+Fournir un patron réutilisable pour documenter les dépendances orientées entre dépôts :
+- **Provider** : dépôt source du flux
+- **Consumers** : dépôts consommateurs
+- **Contrat** : interface et invariants du flux
+- **Validation** : vérification par le loop engine MDU
+- **Cycle detection** : détection des dépendances cycliques
+
+## Structure canonique
+
+```yaml
+cross_repo_flow:
+  name: <flow-name>
+  provider: <repo-name>
+  consumers: [<repo1>, <repo2>, ...]
+  contract:
+    interface: <API|file|event>
+    format: <json|yaml|binary>
+    version: <semver>
+  validation:
+    - contract_exists
+    - no_cycle
+    - consumer_registered
+```
+
+## Invariants
+
+- Tout flux DOIT avoir un provider unique
+- Tout flux DOIT avoir au moins un consumer
+- Le contrat DOIT être versionné et documenté
+- La détection de cycles DOIT être obligatoire
+- Le WAL DOIT tracer chaque flux
+
+## Cycles interdits
+
+```
+PRIMUS → CTULU → PRIMUS        # INTERDIT
+CITIZENS → CTULU → CITIZENS    # INTERDIT
+PHOTON → NEXUS → PHOTON        # INTERDIT
+```
+
+## Validation
+
+Le loop engine MDU DOIT :
+1. Vérifier que le provider possède l'atome de flux
+2. Vérifier que chaque consumer possède le contrat correspondant
+3. Exécuter un DFS sur le graphe de flux pour détecter les cycles
+4. Logger chaque flux dans le WAL
+
+## Références
+
+- `D:\DO\WEB\TOOLS\L0-CANON\unified-design\atoms\primitive-flow.yaml`
+- `D:\DO\WEB\TOOLS\L0-CANON\unified-design\atoms\registry-sync.yaml`
+- `D:\DO\WEB\TOOLS\L0-CANON\unified-design\atoms\photon-pipeline.yaml`

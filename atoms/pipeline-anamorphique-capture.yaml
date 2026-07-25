@@ -1,0 +1,117 @@
+---
+name: pipeline-anamorphique-capture
+description: "Capture et analyse des conversations KiloCode pour l'extraction de concepts, frictions et patterns de design."
+parameters:
+  capture_format: JSON
+  concept_extraction: true
+  friction_detection: true
+  wal_persistence: true
+  retention_days: 90
+constraints:
+  - "Capture temps réel des conversations"
+  - "Extraction de concepts automatique"
+  - "Détection de frictions (F001-F020)"
+  - "WAL persistance garantie"
+inherits: [conversation-analytics, event-streaming]
+---
+
+# Atom : pipeline-anamorphique-capture
+
+## Contexte
+Basé sur les conversations capturées dans `CTULU/tools/pipeline-anamorphique/reports/conversations/`. Ce pattern capture les interactions utilisateur-assistant pour l'analyse de design.
+
+## Structure des données capturées
+```json
+{
+  "intent_hash": "0x...",
+  "source": "kilo_code",
+  "session_id": "ses_xxx",
+  "timestamp": "2026-06-22T01:24:20.369543+00:00",
+  "content": {
+    "user": "Implémente le pipeline anamorphique complet",
+    "assistant": "Je crée les 10 tâches T001-T010 dans CTULU."
+  },
+  "concepts_detected": ["pipeline", "ctulu"],
+  "friction_detected": false,
+  "tool_calls": ["read", "write", "edit"],
+  "metadata": {
+    "repo": "ECOYSTEM",
+    "agent": "OWL"
+  }
+}
+```
+
+## Pipeline de traitement
+```
+┌─────────────┐
+│  Capture    │
+│  (session)  │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Parse      │
+│  (JSON)     │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Extract    │
+│  Concepts   │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Detect     │
+│  Friction   │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Store in   │
+│  WAL        │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Update     │
+│  Ontology   │
+└─────────────┘
+```
+
+## Types de conversations
+- **implementation** : Demandes d'implémentation de code
+- **debug** : Problèmes techniques à résoudre
+- **design** : Questions architecturales
+- **review** : Revues de code
+
+## Frictions détectées
+- **F001** : Ambiguïté de la demande
+- **F002** : Incohérence avec l'architecture existante
+- **F003** : Problème de contexte manquant
+- **F004** : Conflit de patterns
+- **F005** : Violation des règles de gouvernance
+- **F006** : Échec de génération (0% succès)
+- **F007** : Timeout
+- **F008** : Ressources insuffisantes
+
+## Exemple de conversation
+```json
+{
+  "intent_hash": "0x2F35C94A811EC8C7",
+  "source": "kilo_code",
+  "session_id": "ses_004",
+  "timestamp": "2026-06-22T01:24:33.364284+00:00",
+  "content": {
+    "user": "L'agent a push vers le mauvais repo. Le remote était incorrect. Force push a écrasé CTULU.",
+    "assistant": "Je restaure le working tree. Le git state était incorrect. Conflit de contexte détecté."
+  },
+  "concepts_detected": [],
+  "friction_detected": false,
+  "tool_calls": ["bash", "git", "read"],
+  "metadata": {
+    "repo": "CTULU",
+    "agent": "OWL"
+  }
+}
+```

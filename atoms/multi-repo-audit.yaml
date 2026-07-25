@@ -1,0 +1,87 @@
+---
+name: multi-repo-audit
+description: "Audit cross-repo avec gardes anti-zombie, mutex Windows, timeout git, et stratégie auto-pull/push."
+parameters:
+  guards:
+    - windows_named_mutex
+    - git_zombie_cleanup
+    - timeout_per_repo
+  operations:
+    - status
+    - pull
+    - push
+    - drift_detection
+  registry: array_of_hashtables
+  timeout_seconds: 30
+inherits: [registry-driven-orchestration, multi-instance-guard]
+---
+
+# Multi-Repo Audit Atom
+
+Pattern d'audit synchronisé sur plusieurs dépôts avec gardes de sécurité.
+
+## Rôle
+
+Auditer et synchroniser N dépôts en garantissant :
+- **Anti-concurrence** : mutex Windows nommé pour éviter les instances multiples
+- **Anti-zombie** : nettoyage des processus git > 8 min
+- **Timeout** : chaque opération git a un deadline
+- **Traçabilité** : logs structurés par repo
+
+## Structure canonique
+
+```powershell
+# GUARD — Anti-multi-instance
+$mutexName = "Global\EcoSyncAudit_Mutex"
+$mutex = New-Object System.Threading.Mutex($false, $mutexName)
+$ownsMutex = $false
+try { $ownsMutex = $mutex.WaitOne(0) } catch { ... }
+if (-not $ownsMutex) { exit 2 }
+
+# GUARD — Clean git zombies
+Get-Process -Name "git" -ErrorAction SilentlyContinue |
+    Where-Object { $_.StartTime -and (Get-Date).Subtract($_.StartTime).TotalMinutes -gt 8 } |
+    ForEach-Object { $_.Kill() }
+
+# Helper — Invoke git with timeout
+function Invoke-GitSafe {
+    param([string[]]$Arguments, [string]$WorkingDirectory, [int]$TimeoutSec = 30)
+    $proc = Start-Process git -ArgumentList $Arguments -WorkingDirectory $WorkingDirectory -PassThru
+    $deadline = (Get-Date).AddSeconds($TimeoutSec)
+    while (-not $proc.HasExited) { if ((Get-Date) -gt $deadline) { $proc.Kill(); return TIMEOUT } }
+    return $proc.ExitCode
+}
+
+# Registry
+$Repos = @(
+    @{n="GOVERNANCE-HUB";p="D:\DO\WEB\TOOLS\L0-CANON\GOVERNANCE-HUB";b="main";s="L0"}
+    @{n="BRAIN";p="D:\DO\WEB\TOOLS\L0-CANON\BRAIN";b="main";s="L0"}
+)
+
+# Loop
+foreach ($repo in $Repos) {
+    $status = Invoke-GitSafe @("status","--short") -WorkingDirectory $repo.p
+    if ($status -match "behind") { Invoke-GitSafe @("pull") -WorkingDirectory $repo.p }
+}
+```
+
+## Invariants
+
+- Un mutex DOIT être utilisé pour les scripts longs (> 30s)
+- Les processus git zombies DOIVENT être tués après 8 min
+- Chaque repo DOIT avoir un chemin, une branche et une strate définis
+- Le timeout DOIT être configurable et par défaut à 30s
+
+## Exemples
+
+| Script | Chemin | Usage |
+|--------|--------|-------|
+| `ecos-sync-audit.ps1` | `C:\DevTools\scripts\` | Audit 47 repos |
+| `ecos-sync-watchdog.ps1` | `C:\DevTools\scripts\` | Surveillance continue |
+| `selina_sync.py` | `D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\` | Scan global |
+
+## Références
+
+- `C:\DevTools\scripts\ecos-sync-audit.ps1`
+- `C:\DevTools\scripts\ecos-sync-watchdog.ps1`
+- `C:\DevTools\scripts\ecos-wal-compact.ps1`

@@ -1,0 +1,59 @@
+---
+name: convention-over-configuration
+description: "Convention over Configuration — établissez des conventions par défaut et permettez la configuration uniquement pour les cas d'exception."
+parameters
+  default_conventions: required
+  explicit_configuration: exceptions_only
+  sensible_defaults: true
+constraints:
+  - "Conventions logiques par défaut"
+  - "Configuration minimale pour les cas standards"
+  - "Les conventions doivent être documentées"
+inherits: [design-principle]
+---
+
+# Atom : Convention over Configuration (CoC)
+
+## Contexte
+Principe de conception : établissez des conventions logiques par défaut et ne configurez que les cas d'exception.
+
+## Application dans MDU
+- **Stratification** : L0-CANON, L1-INFRA, L4-TOOLS, L5-ARCHIVE
+- **Atomes** : Nomination standardisée, structure YAML cohérente
+- **Citizens** : Structure de projet standardisée
+
+## Conventions établies
+1. **Chemins** : `D:\DO\WEB\TOOLS\L{stratification}`
+2. **Atomes** : `unified-design/atoms/{nom-slug}.yaml`
+3. **IntentHash** : `0x<SLUG_MAJUSCULES>_YYYYMMDD`
+4. **Statut** : `proposed`, `accepted`, `deprecated`, `superseded`
+
+## Configuration minimale
+```yaml
+# Cas standard - conventions par défaut
+name: my-atom
+type: atom
+description: "Mon atome"
+
+# Cas d'exception - configuration explicite
+name: custom-atom
+type: custom
+description: "Mon atome custom"
+category: special
+```
+
+## Vérification
+```bash
+# Vérifier CoC dans un projet
+ctulu validate-coc --path ./src/
+```
+
+## Avantages
+- **Réduction de la configuration** : Moins de fichiers à créer
+- **Cohérence** : Tous les projets suivent le même pattern
+- **Productivité** : Moins de décision à prendre
+
+## Anti-patterns
+- Configuration excessive pour des cas standards
+- Décisions de design répétées dans chaque projet
+- Nommage incohérent entre modules

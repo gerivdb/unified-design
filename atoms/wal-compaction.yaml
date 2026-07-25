@@ -1,0 +1,70 @@
+---
+name: wal-compaction
+description: "Write-Ahead Log (WAL) : écriture atomique, compaction, replay, intégrité cross-repo."
+parameters:
+  modes:
+    - write
+    - compact
+    - replay
+    - validate
+  atomicity: required
+  storage: file_system
+  replay_safety: verify_before_apply
+inherits: [formal-verification, artifact-synced-loop]
+---
+
+# WAL Compaction Atom
+
+Pattern de journal immuable pour opérations cross-repos.
+
+## Rôle
+
+Garantir la traçabilité et la récupération des opérations multi-repos :
+- **Écriture atomique** : une entrée = une opération = un fichier/line
+- **Compaction** : fusion des entrées anciennes sans perte
+- **Replay** : re-jouer les opérations pour reconstruire l'état
+- **Validation** : vérifier l'intégrité avant/après compactage
+
+## Structure canonique
+
+```
+WAL/
+  entries/
+    20260716-001-ecos-sync.yaml
+    20260716-002-pr-merge.yaml
+  compacted/
+    20260701-20260715.yaml
+  manifest.yaml
+```
+
+```yaml
+# entry format
+- timestamp: "2026-07-16T01:45:00Z"
+  repo: GOVERNANCE-HUB
+  operation: sync
+  source: main
+  target: feat/foo
+  status: completed
+  intent_hash: 0xABC123
+```
+
+## Invariants
+
+- Une entrée WAL NE DOIT JAMAIS être modifiée après écriture
+- Le compactage DOIT préserver toutes les entrées (append-only)
+- Le replay DOIT être idempotent
+- L'intégrité DOIT être vérifiée par hash ou signature
+
+## Scripts existants
+
+| Script | Opération | Chemin |
+|--------|-----------|--------|
+| `ecos-wal-compact.ps1` | compact | `C:\DevTools\scripts\` |
+| `init_wal.py` | init | `C:\DevTools\scripts\` |
+| `TrixWalAtomicWriter` | write | CTULU tool |
+
+## Références
+
+- `C:\DevTools\scripts\ecos-wal-compact.ps1`
+- `C:\DevTools\scripts\init_wal.py`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\tools\TrixWalAtomicWriter`

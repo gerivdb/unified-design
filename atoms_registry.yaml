@@ -1,0 +1,31 @@
+atoms:
+  - path: atoms/ATOM-042-REPOSITORY-CENSUS.md
+    hash: ""
+    description: "Repository Census"
+  - path: atoms/anything-cli-unified.yaml
+    hash: ""
+    description: "Anything CLI Unified"
+  - path: atoms/build-pipeline.yaml
+    hash: ""
+    description: "Build Pipeline"
+  - path: atoms/cache-manager.yaml
+    hash: ""
+    description: "Cache Manager"
+  - path: atoms/ci-pipeline.yaml
+    hash: ""
+    description: "CI Pipeline"
+  - path: atoms/cluster-federation.yaml
+    hash: ""
+    description: "Cluster Federation"
+  - path: atoms/cognitive-bridge.yaml
+    hash: ""
+    description: "Cognitive Bridge"
+  - path: atoms/cognitive-bus.yaml
+    hash: ""
+    description: "Cognitive Bus"
+  - path: atoms/convention-over-configuration.yaml
+    hash: ""
+    description: "Convention Over Configuration"
+  - path: atoms/cross-repo-flow.yaml
+    hash: ""
+    description: "Cross Repo Flow"

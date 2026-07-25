@@ -1,0 +1,68 @@
+---
+name: law-of-demeter
+description: "Law of Demeter — ne parlez qu'aux amis directs, évitez la navigation profonde dans les objets."
+parameters
+  max_method_calls: 1
+  chain_length_max: 3
+  forbidden_chains:
+    - "objet.prochain.amis.inconnu"
+    - "tableau.collection.élément.propriété"
+constraints:
+  - "Chaque méthode n'appelle que ses propres méthodes"
+  - "Chaque méthode n'accède qu'aux propriétés directes"
+  - "Chaîne de navigation limitée à 3 niveaux"
+inherits: [design-principle]
+---
+
+# Atom : Law of Demeter (LoD)
+
+## Contexte
+Principe de conception : "ne parlez qu'aux amis directs". Un objet ne doit pas connaître la structure interne d'autres objets.
+
+## Application dans MDU
+- **Citizens** : Chaque citizen expose ses méthodes directes
+- **Atomes** : Les atomes communiquent via des interfaces bien définies
+- **Pipelines** : Les étapes communiquent via des données, pas par navigation
+
+## Règles
+1. **Méthode** : Une méthode peut appeler :
+   - Ses propres méthodes
+   - Méthodes de ses paramètres
+   - Méthodes des attributs immédiats
+   - Méthodes des objets créés localement
+
+2. **Navigation** : Chaîne limitée à 3 niveaux max
+
+## Anti-patterns
+- `user.getOrder().getItems().get(0).getName()` ❌
+- `config.getDatabase().getConnection().getStats()` ❌
+
+## Bonnes pratiques
+- **Facade** : Créer des méthodes délégantes
+- **Builder** : Utiliser des builders pour la construction
+- **Service** : Inverser la dépendance
+
+## Exemple
+```python
+# Mauvaise pratique (violation LoD)
+class OrderProcessor:
+    def process(self, user):
+        order = user.getProfile().getPreferences().getDefaultOrder()
+        items = order.getItems()
+        total = 0
+        for item in items:
+            total += item.getPrice() * item.getQuantity()
+        return total
+
+# Bonne pratique (respect LoD)
+class OrderProcessor:
+    def process(self, user):
+        order = self.get_default_order(user)
+        return self.calculate_total(order)
+    
+    def get_default_order(self, user):
+        return user.get_default_order()
+    
+    def calculate_total(self, order):
+        return order.get_total()
+```

@@ -1,0 +1,76 @@
+---
+name: pipeline-anamorphique
+description: "Pattern de pipeline multi-tâches (T001-T010) pour l'implémentation atomique de fonctionnalités complexes."
+parameters:
+  task_count: 10
+  task_prefix: "T"
+  atomic_commit_threshold: 3
+  rollback_strategy: WAL
+constraints:
+  - "Chaque tâche commitée séparément"
+  - "Rollback automatique sur échec"
+  - "Maximum 3 fichiers par commit"
+inherits: [pipeline-orchestrator, atomic-commit]
+---
+
+# Atom : pipeline-anamorphique
+
+## Contexte
+Basé sur la session `ses_demo_001` (INTENT-8700C3C6ADA1A570). Pattern de pipeline pour l'implémentation de fonctionnalités complexes en découpant en tâches atomiques.
+
+## Structure des tâches
+```
+Pipeline Anamorphique (T001-T010)
+├── T001 : Analyse besoins
+├── T002 : Design architecture
+├── T003 : Setup environnement
+├── T004 : Implémentation core
+├── T005 : Tests unitaires
+├── T006 : Tests d'intégration
+├── T007 : Documentation
+├── T008 : Revue code
+├── T009 : Préparation release
+└── T010 : Déploiement
+```
+
+## Principes
+1. **Atomicité** : Chaque tâche est une unité de travail indépendante
+2. **Commit séparé** : Chaque tâche terminée est commitée
+3. **Rollback WAL** : En cas d'échec, rollback via Write-Ahead Log
+4. **Maximum 3 fichiers** : Par commit pour traçabilité
+
+## Workflow
+```
+┌─────────────┐
+│  User Init  │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Analyze    │
+│  (T001)     │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐
+│  Design     │
+│  (T002)     │
+└──────┬──────┘
+       │
+       ▼
+┌─────────────┐     ┌─────────────┐
+│  Implement  │────▶│   Test      │
+│  (T003-009)│     │  (T005-006) │
+└──────┬──────┘     └──────┬──────┘
+       │                   │
+       ▼                   ▼
+┌─────────────┐     ┌─────────────┐
+│  Document   │     │   Review    │
+│  (T007)     │     │  (T008)     │
+└──────┬──────┘     └──────┬──────┘
+       │                   │
+       ▼                   ▼
+┌─────────────────────────────────┐
+│  Release & Deploy (T010)        │
+└─────────────────────────────────┘
+```

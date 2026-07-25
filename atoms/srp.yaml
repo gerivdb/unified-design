@@ -1,0 +1,34 @@
+---
+name: srp
+description: "Single Responsibility Principle — chaque module/ classe a une seule raison de changer."
+parameters:
+  max_responsibilities: 1
+  change_reason_tracking: true
+  module_scope: function_class
+constraints:
+  - "Chaque entité a une seule responsabilité"
+  - "Une seule raison de changer par entité"
+  - "Les responsabilités doivent être cohérentes"
+inherits: [design-principle]
+---
+
+# Atom : SRP (Single Responsibility Principle)
+
+## Contexte
+Principe SOLID fondamental : chaque module, classe ou fonction a une seule responsabilité et une seule raison de changer.
+
+## Application dans MDU
+- **Modules** : Chaque citizen a un rôle unique (memory, routing, validation)
+- **Fonctions** : Chaque outil CLI a une seule fonction
+- **Designs** : Chaque atome a un domaine fonctionnel clair
+
+## Vérification
+```bash
+# Vérifier qu'un module n'a qu'une responsabilité
+ctulu validate-srp --module src/wazaa_bus_citizens/memory_citizen.py
+```
+
+## Anti-patterns
+- Module avec plusieurs responsabilités (ex: memory + routing + validation)
+- Fonction qui fait plusieurs choses
+- Classe avec plusieurs raisons de changer
