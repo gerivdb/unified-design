@@ -13,7 +13,7 @@ jobs:
   git-maintenance:
     name: Git Maintenance
     runs-on: self-hosted
-    timeout-minutes: 10
+    timeout-minutes: 15
     
     steps:
       - name: Checkout code
@@ -34,6 +34,18 @@ jobs:
           fi
           echo "✓ main is synced with origin/main"
       
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -q jsonschema pyyaml
+      
+      - name: Validate meta-design.yaml schema
+        run: python scripts/validate_meta_design.py --schema schemas/meta-design.schema.json meta-design.yaml
+      
       - name: Cleanup merged branches (local)
         run: python scripts/cleanup_merged_branches.py
       
@@ -43,4 +55,5 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Completed Checks" >> $GITHUB_STEP_SUMMARY
           echo "- ✓ main sync verified" >> $GITHUB_STEP_SUMMARY
+          echo "- ✓ meta-design.yaml schema validated" >> $GITHUB_STEP_SUMMARY
           echo "- ✓ merged branches cleaned" >> $GITHUB_STEP_SUMMARY

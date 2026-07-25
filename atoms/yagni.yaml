@@ -1,7 +1,7 @@
 ---
 name: yagni
 description: "You Aren't Gonna Need It — n'implémentez pas de fonctionnalités non demandées, écoutez les besoins réels."
-parameters
+parameters:
   premature_optimization: blocked
   feature_requests_only: true
   speculative_code: forbidden

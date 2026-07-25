@@ -1,7 +1,7 @@
 ---
 name: convention-over-configuration
 description: "Convention over Configuration — établissez des conventions par défaut et permettez la configuration uniquement pour les cas d'exception."
-parameters
+parameters:
   default_conventions: required
   explicit_configuration: exceptions_only
   sensible_defaults: true

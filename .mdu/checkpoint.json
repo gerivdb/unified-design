@@ -1,9 +1,10 @@
 {
   "last_action": "repo_cleanup_industrialized",
-  "timestamp": "2026-07-25T22:00:10+02:00",
+  "timestamp": "2026-07-25T22:02:10+02:00",
   "branches": {
     "main": "d93f2a9",
-    "origin/main": "fbf7f1d"
+    "origin/main": "fbf7f1d",
+    "feat/industrialize-git-maintenance": "d57a3f8"
   },
   "untracked_count": 0,
   "remote_branches_pruned": [
@@ -26,8 +27,8 @@
     "git_maintenance_workflow_present": true
   },
   "pr": {
-    "number": 7,
+    "number": 8,
     "title": "feat(mdu): add cleanup automation, hooks, DAG, registry",
-    "url": "https://github.com/gerivdb/unified-design/pull/7"
+    "url": "https://github.com/gerivdb/unified-design/pull/8"
   }
 }

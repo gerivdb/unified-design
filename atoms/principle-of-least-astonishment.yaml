@@ -1,7 +1,7 @@
 ---
 name: principle-of-least-astonishment
 description: "Principle of Least Astonishment — le code doit se comporter comme on s'y attend, suivant les conventions du domaine."
-parameters
+parameters:
   domain_conventions: required
   predictable_behavior: true
   naming_consistency: strict

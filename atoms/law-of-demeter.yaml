@@ -1,7 +1,7 @@
 ---
 name: law-of-demeter
 description: "Law of Demeter — ne parlez qu'aux amis directs, évitez la navigation profonde dans les objets."
-parameters
+parameters:
   max_method_calls: 1
   chain_length_max: 3
   forbidden_chains:
