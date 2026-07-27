@@ -1,0 +1,65 @@
+# ATOM-BOINC-KIVA-ORCHESTRATION - Orchestration tâches distribuées via KIVA broker
+# Version: 1.0.0
+# IntentHash: 0xATOM_BOINC_KIVA_ORCHESTRATION_20260726
+# Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
+
+atom:
+  id: ATOM-BOINC-KIVA-ORCHESTRATION
+  name: "BOINC -> KIVA Orchestration"
+  category: "orchestration/kiva"
+  status: active
+  version: "1.0.0"
+  description: |
+    Orchestration des tâches BOINC distribuées via KIVA-CLI broker local.
+    KIVA-CLI gère le WAL, la validation souveraine (ADR-024), et le rollback.
+  intent_hash: "0xATOM_BOINC_KIVA_ORCHESTRATION_20260726"
+  layer: L2_COMPOSITION
+  governance: BOUNC-ADR-0022
+
+parameters:
+  - name: job_id
+    type: string
+    required: true
+    description: "Identifiant unique du job BOINC"
+  - name: intent_hash
+    type: string
+    required: true
+    description: "IntentHash du design pour validation KIVA"
+  - name: priority
+    type: string
+    required: false
+    default: "normal"
+    enum: ["low", "normal", "high", "critical"]
+    description: "Priorité d'ordonnancement KIVA"
+  - name: timeout_sec
+    type: integer
+    required: false
+    default: 300
+    description: "Timeout max avant préemption"
+
+returns:
+  - name: scheduled_nodes
+    type: array
+    items:
+      type: string
+    description: "Liste des noeuds ENV2 assignés"
+  - name: status
+    type: string
+    enum: ["scheduled", "running", "completed", "failed", "preempted"]
+    description: "État du job KIVA"
+
+dependencies:
+  - ATOM-KIVA-AUTO-PR-WORKFLOW
+  - ATOM-QUIC-TRANSPORT
+  - ATOM-WAL-ATOMIC-WRITER
+
+validation:
+  - rule: "priority in ['low', 'normal', 'high', 'critical']"
+    severity: error
+
+references:
+  - "design.yaml: ATOM-BOINC-KIVA-ORCHESTRATION"
+  - "ADR-0022-boinc-llm-p2p.md"
+  - "ADR-024-kiva-cli-souverainete-validation.md"
+  - "unified-design/atoms/kiva-auto-pr-workflow.yaml"
+  - "unified-design/atoms/trix-wal-atomic-writer.yaml"

@@ -1,0 +1,58 @@
+# ATOM-BOINC-PLIX-STORAGE - Délégation stockage modèles vers PLIX
+# Version: 1.0.0
+# IntentHash: 0xATOM_BOINC_PLIX_STORAGE_20260726
+# Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
+
+atom:
+  id: ATOM-BOINC-PLIX-STORAGE
+  name: "BOINC -> PLIX Storage"
+  category: "storage/plix"
+  status: active
+  version: "1.0.0"
+  description: |
+    Délégation du stockage des modèles LLM (shards) vers PLIX codec.
+    PLIX assure format binaire ternaire, registry schémas, GPU decode NVDEC.
+  intent_hash: "0xATOM_BOINC_PLIX_STORAGE_20260726"
+  layer: L2_COMPOSITION
+  governance: BOUNC-ADR-0022
+
+parameters:
+  - name: shard_id
+    type: string
+    required: true
+    description: "Identifiant du shard modèle (ex: 'model_shard_0')"
+  - name: intent_hash
+    type: string
+    required: true
+    description: "IntentHash du design source pour traçabilité"
+  - name: codec
+    type: string
+    required: false
+    default: "plix_v2"
+    description: "Codec PLIX à utiliser (plix_v2, mirror_lens, clusterwave)"
+  - name: gpu_decode
+    type: string
+    required: false
+    default: "nvdec_wrapper"
+    description: "Wrapper GPU decode"
+
+returns:
+  - name: plix_ref
+    type: string
+    description: "Référence PLIX (hash + registry)"
+  - name: checksum
+    type: string
+    description: "Checksum SHA256 du shard stocké"
+
+dependencies:
+  - ATOM-BOINC-PLIX-CODEC
+  - ATOM-QUIC-TRANSPORT
+
+validation:
+  - rule: "codec in ['plix_v2', 'mirror_lens', 'clusterwave', 'piano_runtime']"
+    severity: error
+
+references:
+  - "design.yaml: ATOM-BOINC-PLIX-STORAGE"
+  - "ADR-0022-boinc-llm-p2p.md"
+  - "unified-design/atoms/plix-codec.yaml"

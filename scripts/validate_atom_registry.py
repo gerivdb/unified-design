@@ -83,4 +83,5 @@ def validate() -> bool:
 
 
 if __name__ == "__main__":
-    sys.exit(0 if validate())
+    result = validate()
+    sys.exit(0 if result else 1)

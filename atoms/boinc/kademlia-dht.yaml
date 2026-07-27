@@ -1,0 +1,63 @@
+# ATOM-KADEMLIA-DHT - Kademlia DHT pour lookup décentralisé
+# Version: 1.0.0
+# IntentHash: 0xATOM_KADEMLIA_DHT_20260726
+# Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
+
+atom:
+  id: ATOM-KADEMLIA-DHT
+  name: "Kademlia DHT"
+  category: "network/p2p"
+  status: active
+  version: "1.0.0"
+  description: |
+    Table de hachage distribuée pour la découverte de noeuds P2P.
+    Implémente le protocole Kademlia avec buckets k=20, 160-bit node IDs.
+  intent_hash: "0xATOM_KADEMLIA_DHT_20260726"
+  layer: L1_CAUSALITY
+  governance: BOUNC-ADR-0022
+
+parameters:
+  - name: node_id_bits
+    type: integer
+    required: true
+    default: 160
+    description: "Taille de l'identifiant de noeud en bits (SHA-1)"
+  - name: k_bucket_size
+    type: integer
+    required: true
+    default: 20
+    description: "Nombre max de contacts par bucket k"
+  - name: alpha_concurrency
+    type: integer
+    required: true
+    default: 3
+    description: "Parallélisme des requêtes FIND_NODE"
+  - name: refresh_interval_sec
+    type: integer
+    required: true
+    default: 3600
+    description: "Intervalle de rafraîchissement des buckets"
+
+returns:
+  - name: node_id
+    type: string
+    description: "Identifiant unique du noeud (hex)"
+  - name: peers
+    type: "list[string]"
+    description: "Liste des pairs découverts (node_id@address)"
+
+dependencies:
+  - ATOM-QUIC-TRANSPORT
+
+validation:
+  - rule: "node_id_bits >= 128"
+    severity: error
+  - rule: "k_bucket_size > 0"
+    severity: error
+  - rule: "alpha_concurrency > 0"
+    severity: error
+
+references:
+  - "design.yaml: ATOM-KADEMLIA-DHT"
+  - "ADR-0022-boinc-llm-p2p.md"
+  - "src/boinc_llm_p2p/kademlia_node.py"
