@@ -45,13 +45,13 @@ def main():
         # Load existing registry, update deps, preserve hash/description
         existing = {}
         if REGISTRY_FILE.exists():
-            existing = yaml.safe_load(REGISTRY_FILE.read_text()) or {}
+            existing = yaml.safe_load(REGISTRY_FILE.read_text(encoding='utf-8')) or {}
         for name, data in registry.items():
             if name in existing:
                 existing[name]["depends_on"] = data["depends_on"]
             else:
                 existing[name] = data
-        REGISTRY_FILE.write_text(yaml.dump(existing, sort_keys=False, allow_unicode=True))
+        REGISTRY_FILE.write_text(yaml.dump(existing, sort_keys=False, allow_unicode=True), encoding='utf-8')
         print(f"Updated {REGISTRY_FILE} with {len(existing)} entries")
     else:
         print("Use --dry-run to preview, --write to update registry.")
