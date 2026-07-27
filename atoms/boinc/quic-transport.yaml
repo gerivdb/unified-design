@@ -1,0 +1,63 @@
+# ATOM-QUIC-TRANSPORT — Transport QUIC + Noise pour P2P
+# Version: 1.0.0
+# IntentHash: 0xATOM_QUIC_TRANSPORT_20260726
+# Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
+
+atom:
+  id: ATOM-QUIC-TRANSPORT
+  name: "QUIC Transport"
+  category: "network/transport"
+  status: active
+  version: "1.0.0"
+  description: |
+    Transport réseau QUIC avec protocole Noise pour communication P2P chiffrée.
+    Fallback TCP désactivé par défaut (mode BDCP).
+  intent_hash: "0xATOM_QUIC_TRANSPORT_20260726"
+  layer: L1_CAUSALITY
+  governance: BOUNC-ADR-0022
+
+parameters:
+  - name: handshake
+    type: string
+    required: true
+    default: "Ed25519"
+    description: "Algorithme de handshake (Ed25519, X25519)"
+  - name: fallback_tcp
+    type: boolean
+    required: false
+    default: false
+    description: "Autoriser fallback TCP (INTERDIT en BDCP - 0xBDCP_INVIOLABLE_20260416)"
+  - name: max_idle_timeout_ms
+    type: integer
+    required: true
+    default: 30000
+    description: "Timeout maximal d'inactivité avant fermeture"
+  - name: keep_alive_interval_ms
+    type: integer
+    required: true
+    default: 10000
+    description: "Intervalle de keep-alive"
+
+returns:
+  - name: connection_id
+    type: string
+    description: "Identifiant de connexion QUIC"
+  - name: latency_ms
+    type: integer
+    description: "Latence mesurée (RTT)"
+
+dependencies:
+  - ATOM-KADEMLIA-DHT
+
+validation:
+  - rule: "handshake in ['Ed25519', 'X25519']"
+    severity: error
+  - rule: "fallback_tcp == false"
+    severity: error
+    message: "BDCP mode inviolable - fallback TCP interdit (ADR-0022)"
+
+references:
+  - "design.yaml: ATOM-QUIC-TRANSPORT"
+  - "ADR-0022-boinc-llm-p2p.md"
+  - "ADR-2026-04-16-001-BDCP-INVIOLABLE.md"
+  - "src/boinc_llm_p2p/transport_quic/quic_transport.py"

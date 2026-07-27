@@ -1,0 +1,65 @@
+# ATOM-WAVEFRONT-GOSSIP — Wavefront Gossip pour propagation épidémique
+# Version: 1.0.0
+# IntentHash: 0xATOM_WAVEFRONT_GOSSIP_20260726
+# Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
+
+atom:
+  id: ATOM-WAVEFRONT-GOSSIP
+  name: "Wavefront Gossip"
+  category: "network/p2p"
+  status: active
+  version: "1.0.0"
+  description: |
+    Protocole de dissémination épidémique par vague (flood) pour propagation d'état.
+    TTL max 3 sauts, fanout 10, ≤ 30s vers tous nœuds ENV2.
+  intent_hash: "0xATOM_WAVEFRONT_GOSSIP_20260726"
+  layer: L1_CAUSALITY
+  governance: BOUNC-ADR-0022
+
+parameters:
+  - name: fanout
+    type: integer
+    required: true
+    default: 10
+    description: "Nombre de voisins par nœud à propager"
+  - name: max_wavefront
+    type: integer
+    required: true
+    default: 3
+    description: "Nombre max de sauts (TTL) avant expiration"
+  - name: ttl_base
+    type: integer
+    required: true
+    default: 3
+    description: "TTL initial (décroît à chaque saut)"
+  - name: deduplication_window_sec
+    type: integer
+    required: true
+    default: 300
+    description: "Fenêtre de déduplication des messages (cache LRU)"
+
+returns:
+  - name: propagation_id
+    type: string
+    description: "Identifiant unique de la vague de propagation"
+  - name: reached_nodes
+    type: integer
+    description: "Nombre de nœuds atteints"
+
+dependencies:
+  - ATOM-KADEMLIA-DHT
+  - ATOM-QUIC-TRANSPORT
+
+validation:
+  - rule: "fanout > 0"
+    severity: error
+  - rule: "max_wavefront > 0"
+    severity: error
+  - rule: "ttl_base >= max_wavefront"
+    severity: error
+
+references:
+  - "design.yaml: ATOM-WAVEFRONT-GOSSIP"
+  - "ADR-0022-boinc-llm-p2p.md"
+  - "INTENT-2026-07-08-WAVEFRONT-IRRIGATION.md"
+  - "src/boinc_llm_p2p/propagation/gossip.py"

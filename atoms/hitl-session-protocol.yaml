@@ -1,0 +1,77 @@
+# ATOM-HITL-SESSION-PROTOCOL — Protocole normatif HITL avant toute action mutante
+# Version: 1.0.0
+# IntentHash: 0xATOM_HITL_SESSION_PROTOCOL_20260726
+# Source: ADR-030 (proposé) + Rétro-ingénierie session 2026-07-26
+
+atom:
+  id: ATOM-HITL-SESSION-PROTOCOL
+  name: "HITL Session Protocol"
+  category: "governance/hitl"
+  status: active
+  version: "1.0.0"
+  description: |
+    Protocole obligatoire que tout agent HITL doit suivre avant toute action mutante.
+    Dérive de l'analyse post-mortem de la session 2026-07-26 (6 erreurs récurrentes).
+  intent_hash: "0xATOM_HITL_SESSION_PROTOCOL_20260726"
+  layer: L1_CAUSALITY
+  governance: ADR-030
+
+parameters:
+  - name: boot_sequence
+    type: string
+    required: true
+    default: "kiva ci run --dry-run <repo>; cat meta-design.yaml | grep strates"
+    description: "Séquence de boot obligatoire avant mutation"
+  - name: dag_first
+    type: boolean
+    required: true
+    default: true
+    description: "DAG ASCII consolidé doit être produit AVANT toute action"
+  - name: external_ci_forbidden
+    type: boolean
+    required: true
+    default: true
+    description: "Interdiction formelle de proposer CI externe si KIVA-CLI spécifié"
+  - name: dry_run_mandatory
+    type: boolean
+    required: true
+    default: true
+    description: "sync-scripts.sh --dry-run + kiva ci run --dry-run avant exécution réelle"
+  - name: checkpoint_guard
+    type: boolean
+    required: true
+    default: true
+    description: "Lire checkpoints (kilo_local_recall) AVANT action critique, écrire APRÈS validation"
+
+returns:
+  - name: protocol_compliant
+    type: boolean
+    description: "True si toutes les étapes respectées"
+  - name: violations
+    type: "list[string]"
+    description: "Liste des violations détectées"
+
+dependencies:
+  - ATOM-HITL-GATE
+  - ATOM-KIVA-AUTO-PR-WORKFLOW
+  - ADR-024
+  - ADR-030
+
+validation:
+  - rule: "boot_sequence executed before any mutating action"
+    severity: error
+  - rule: "dag_first == true"
+    severity: error
+  - rule: "external_ci_forbidden == true"
+    severity: error
+  - rule: "dry_run_mandatory == true"
+    severity: error
+  - rule: "checkpoint_guard == true"
+    severity: error
+
+references:
+  - "ADR-030-hitl-session-protocol.md"
+  - "ADR-024-kiva-cli-souverainete-validation.md"
+  - "atoms/hitl-gate.yaml"
+  - "atoms/kiva-auto-pr-workflow.yaml"
+  - "conventions/hitl/SESSION_WORKFLOW.md"

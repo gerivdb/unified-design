@@ -1,0 +1,54 @@
+# ATOM-HOLOGRAPHIC-SWARM — Gnome de nœud holographique (.swarm/node.yaml)
+# Version: 1.0.0
+# IntentHash: 0xATOM_HOLOGRAPHIC_SWARM_20260726
+# Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
+
+atom:
+  id: ATOM-HOLOGRAPHIC-SWARM
+  name: "Holographic Swarm"
+  category: "swarm/state"
+  status: active
+  version: "1.0.0"
+  description: |
+    Représentation holographique de l'état du swarm via .swarm/node.yaml.
+    Chaque nœud maintient une copie locale cohérente (phi-CPS tracké).
+  intent_hash: "0xATOM_HOLOGRAPHIC_SWARM_20260726"
+  layer: L1_CAUSALITY
+  governance: BOUNC-ADR-0022
+
+parameters:
+  - name: genome_file
+    type: string
+    required: true
+    default: ".swarm/node.yaml"
+    description: "Chemin du fichier gnome holographique"
+  - name: sync_interval_sec
+    type: integer
+    required: true
+    default: 60
+    description: "Intervalle de synchronisation du gnome"
+  - name: phi_cps_threshold
+    type: number
+    required: true
+    default: 4.5
+    description: "Seuil φ-CPS pour validation d'état sain"
+
+returns:
+  - name: node_name
+    type: string
+    description: "Nom du nœud dans le swarm"
+  - name: phi_cps
+    type: number
+    description: "Score φ-CPS actuel du nœud"
+
+dependencies: []
+
+validation:
+  - rule: "phi_cps_threshold > 0"
+    severity: error
+
+references:
+  - "design.yaml: ATOM-HOLOGRAPHIC-SWARM"
+  - "ADR-0022-boinc-llm-p2p.md"
+  - ".swarm/node.yaml"
+  - "src/boinc_llm_p2p/swarm_manager.py"

@@ -1,0 +1,59 @@
+# ATOM-BOINC-FLUX-BEACON — Signal digestion cognitive vers FLUX
+# Version: 1.0.0
+# IntentHash: 0xATOM_BOINC_FLUX_BEACON_20260726
+# Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
+
+atom:
+  id: ATOM-BOINC-FLUX-BEACON
+  name: "BOINC → FLUX Beacon"
+  category: "beacon/flux"
+  status: active
+  version: "1.0.0"
+  description: |
+    Émission de beacon vers FLUX pour digestion cognitive post-exécution.
+    Permet le tracking φ-CPS, la détection d'anomalies, et l'irrigation wavefront.
+  intent_hash: "0xATOM_BOINC_FLUX_BEACON_20260726"
+  layer: L3_EMERGENCE
+  governance: BOUNC-ADR-0022
+
+parameters:
+  - name: event_type
+    type: string
+    required: true
+    enum: ["job_start", "job_complete", "job_failed", "phi_anomaly", "swarm_join", "swarm_leave"]
+    description: "Type d'événement beacon"
+  - name: node_id
+    type: string
+    required: true
+    description: "Identifiant du nœud BOINC émetteur"
+  - name: phi_cps
+    type: number
+    required: false
+    description: "Score φ-CPS actuel (si disponible)"
+  - name: payload
+    type: object
+    required: false
+    description: "Données additionnelles contextuelles"
+
+returns:
+  - name: beacon_id
+    type: string
+    description: "Identifiant unique du beacon FLUX"
+  - name: routed
+    type: boolean
+    description: "True si beacon correctement routé vers FLUX"
+
+dependencies:
+  - ATOM-FLUX-RECEIVER
+  - ATOM-WAVEFRONT-GOSSIP
+  - ATOM-QUIC-TRANSPORT
+
+validation:
+  - rule: "event_type in ['job_start', 'job_complete', 'job_failed', 'phi_anomaly', 'swarm_join', 'swarm_leave']"
+    severity: error
+
+references:
+  - "design.yaml: ATOM-BOINC-FLUX-BEACON"
+  - "ADR-0022-boinc-llm-p2p.md"
+  - "unified-design/atoms/flux-receiver.yaml"
+  - "unified-design/atoms/wavefront-gossip.yaml"

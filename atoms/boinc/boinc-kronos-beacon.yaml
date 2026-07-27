@@ -1,0 +1,60 @@
+# ATOM-BOINC-KRONOS-BEACON — Qualification signaux swarm par KRONOS
+# Version: 1.0.0
+# IntentHash: 0xATOM_BOINC_KRONOS_BEACON_20260726
+# Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
+
+atom:
+  id: ATOM-BOINC-KRONOS-BEACON
+  name: "BOINC → KRONOS Beacon"
+  category: "beacon/kronos"
+  status: active
+  version: "1.0.0"
+  description: |
+    Qualifications des signaux émis par le swarm BOINC via KRONOS.
+    Applique le gate φ-CPS, détecte les anomalies, qualifie pour irrigation wavefront.
+  intent_hash: "0xATOM_BOINC_KRONOS_BEACON_20260726"
+  layer: L2_COMPOSITION
+  governance: BOUNC-ADR-0022
+
+parameters:
+  - name: phi_cps
+    type: number
+    required: true
+    description: "Score φ-CPS du signal à qualifier"
+  - name: intent_hash
+    type: string
+    required: true
+    description: "IntentHash du design source pour traçabilité"
+  - name: source_node
+    type: string
+    required: true
+    description: "Nœud BOINC d'origine"
+  - name: signal_type
+    type: string
+    required: true
+    enum: ["inference", "compilation", "storage", "orchestration", "anomaly"]
+    description: "Type de signal swarm"
+
+returns:
+  - name: qualified
+    type: boolean
+    description: "True si signal qualifié pour propagation P1"
+  - name: phi_score
+    type: number
+    description: "Score φ-CPS final après qualification KRONOS"
+
+dependencies:
+  - ATOM-KRONOS-ENGINE
+  - ATOM-WAVEFRONT-GOSSIP
+  - ATOM-BOINC-FLUX-BEACON
+
+validation:
+  - rule: "qualified == true"
+    severity: warning
+    message: "Signal non qualifié par KRONOS - propagation bloquée"
+
+references:
+  - "design.yaml: ATOM-BOINC-KRONOS-BEACON"
+  - "ADR-0022-boinc-llm-p2p.md"
+  - "unified-design/atoms/kronos-engine.yaml"
+  - "unified-design/atoms/wavefront-gossip.yaml"

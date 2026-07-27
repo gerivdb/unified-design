@@ -1,0 +1,47 @@
+# ATOM-BOINC-ONTOLOGY-BRIDGE — Pont ontologique BOINC ↔ ECOS
+# Version: 1.0.0
+# IntentHash: 0xATOM_BOINC_ONTOLOGY_BRIDGE_20260726
+# Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
+
+atom:
+  id: ATOM-BOINC-ONTOLOGY-BRIDGE
+  name: "BOINC Ontology Bridge"
+  category: "ontology/bridge"
+  status: active
+  version: "1.0.0"
+  description: |
+    Pont de traduction bidirectionnelle entre concepts BOINC (projet, tâche, shard)
+    et ontologie ECOS (repos, strates, intent_hash, phi-CPS).
+  intent_hash: "0xATOM_BOINC_ONTOLOGY_BRIDGE_20260726"
+  layer: L2_COMPOSITION
+  governance: BOUNC-ADR-0022
+
+parameters:
+  - name: source_concept
+    type: string
+    required: true
+    description: "Concept source (ex: 'boinc:workunit', 'ecos:design')"
+  - name: target_concept
+    type: string
+    required: true
+    description: "Concept cible dans l'ontologie opposée"
+
+returns:
+  - name: mapping_id
+    type: string
+    description: "Identifiant du mapping créé"
+  - name: confidence
+    type: number
+    description: "Score de confiance du mapping (0.0-1.0)"
+
+dependencies:
+  - ATOM-QUIC-TRANSPORT
+
+validation:
+  - rule: "confidence >= 0.0 and confidence <= 1.0"
+    severity: error
+
+references:
+  - "design.yaml: ATOM-BOINC-ONTOLOGY-BRIDGE"
+  - "ADR-0022-boinc-llm-p2p.md"
+  - "tools/boinc_ontology_bridge.py"
