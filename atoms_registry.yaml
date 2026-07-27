@@ -1,22 +1,22 @@
 atoms:
 - path: atoms/absolute-rules-enforcement.yaml
   hash: 1657766cf932
-  description: 'description: "Règles absolues (interdictions/obligations) avec tags
-    automatiques pour hypothèses non confirmées."'
+  description: 'description: "Regles absolues (interdictions/obligations) avec tags
+    automatiques pour hypotheses non confirmees."'
   depends_on: []
 - path: atoms/adr-prd-epics-intents.yaml
   hash: 9e770e28bc64
   description: 'description: "Gestion des ADR, PRD, EPICS, INTENTS comme artefacts
-    décisionnels tracés."'
+    decisionnels traces."'
   depends_on: []
 - path: atoms/anything-cli-unified.yaml
   hash: c8294aef5d55
-  description: 'description: "Suite d''outils CLI unifiés (10 outils) pour wrapper
+  description: 'description: "Suite d''outils CLI unifies (10 outils) pour wrapper
     les citizens WAZAA avec sortie JSON canonique."'
   depends_on: []
 - path: atoms/artefact-id-registry-sot.yaml
   hash: 525dbb469436
-  description: 'description: "Registre SOT des artefacts/citoyens/outils pour hypothèses
+  description: 'description: "Registre SOT des artefacts/citoyens/outils pour hypotheses
     AUTO-DEV et TQL bridge."'
   depends_on: []
 - path: atoms/artifact-synced-loop.yaml
@@ -31,33 +31,33 @@ atoms:
   - ATOM-042
 - path: atoms/attention-mechanism.yaml
   hash: 6e08dceb3247
-  description: 'description: "Mécanisme d''attention universelle inspiré du projet
+  description: 'description: "Mecanisme d''attention universelle inspire du projet
     UAE"'
   depends_on: []
 - path: atoms/auto-correction.yaml
   hash: 413b67df0b5b
-  description: 'description: "Auto-correction intelligente des tests et des incohérences
-    détectées. Utilise friction_detector pour détec'
+  description: 'description: "Auto-correction intelligente des tests et des incoherences
+    detectees. Utilise friction_detector pour detec'
   depends_on: []
 - path: atoms/auto-dev-cycle.yaml
   hash: 6ad4adc10e6d
-  description: 'description: "Cycle d''auto-développement autonome : hypothesis, experiment,
+  description: 'description: "Cycle d''auto-developpement autonome : hypothesis, experiment,
     champion, dead_end, meta_loop."'
   depends_on: []
 - path: atoms/b243-vector.yaml
   hash: 8ddf93a0b4fe
-  description: 'description: "Vecteur ternaire 3^5=243 dimensions pour l''état du
-    système"'
+  description: 'description: "Vecteur ternaire 3^5=243 dimensions pour l''etat du
+    systeme"'
   depends_on: []
 - path: atoms/bat-family-agents.yaml
   hash: 8115d9dd9ba2
   description: 'description: "Agents Batman/Alfred/Riddler/Lucius/Harvey pour orchestration
-    stratégique du metacluster."'
+    strategique du metacluster."'
   depends_on: []
 - path: atoms/batch-verse-generation.yaml
   hash: b0f2fc8e2eaf
-  description: 'description: "Génération par lots de verses : 10 personae × 9 sections
-    en une exécution."'
+  description: 'description: "Generation par lots de verses : 10 personae  9 sections
+    en une execution."'
   depends_on: []
 - path: atoms/build-pipeline.yaml
   hash: 706daea6fc59
@@ -67,7 +67,7 @@ atoms:
 - path: atoms/cache-manager.yaml
   hash: c711134f5c00
   description: 'description: "Gestionnaire de cache multi-niveaux : LRU, TTL, namespaces,
-    stats, invalidation prédictive."'
+    stats, invalidation predictive."'
   depends_on: []
 - path: atoms/ci-pipeline.yaml
   hash: 5e16d100491a
@@ -80,107 +80,107 @@ atoms:
   depends_on: []
 - path: atoms/citizen-routing.yaml
   hash: 5db609552ed6
-  description: 'description: "Algorithme de routage des tâches vers les citoyens spécialisés.
-    4 étapes : BDCP check, lecture registre, m'
+  description: 'description: "Algorithme de routage des taches vers les citoyens specialises.
+    4 etapes : BDCP check, lecture registre, m'
   depends_on: []
 - path: atoms/closed-loop-goal.yaml
   hash: 4c8318b25725
-  description: 'description: "Une loop possède un goal fermé (CLOSED) avec stamps
-    de complétion"'
+  description: 'description: "Une loop possede un goal ferme (CLOSED) avec stamps
+    de completion"'
   depends_on: []
 - path: atoms/cluster-federation.yaml
   hash: c8c340fc2662
-  description: 'description: "Protocole de membership gossip-based pour la fédération
-    de clusters WAZAA avec élection de leader et détec'
+  description: 'description: "Protocole de membership gossip-based pour la federation
+    de clusters WAZAA avec election de leader et detec'
   depends_on: []
 - path: atoms/cognitive-bridge.yaml
   hash: f72f95636217
-  description: 'description: "Bridge entre BRAIN et WAZAA pour créer une boucle cognitive
-    vivante avec publication d''insights périodique'
+  description: 'description: "Bridge entre BRAIN et WAZAA pour creer une boucle cognitive
+    vivante avec publication d''insights periodique'
   depends_on: []
 - path: atoms/cognitive-bus.yaml
   hash: 13b9626e95f9
-  description: 'description: "Bus cognitif unifié pour le streaming d''événements
+  description: 'description: "Bus cognitif unifie pour le streaming d''evenements
     avec WAL, pub/sub, backpressure et filtrage."'
   depends_on: []
 - path: atoms/cognitive-sot.yaml
   hash: 3c8338965426
-  description: 'description: "Cognitive Source of Truth — hub cognitif avec cadastre,
+  description: 'description: "Cognitive Source of Truth -- hub cognitif avec cadastre,
     manifest, templates et agents locaux."'
   depends_on: []
 - path: atoms/coherence-attractor.yaml
   hash: abbc126502a2
-  description: 'description: "Attracteur étrange qui pousse le système vers l''absence
+  description: 'description: "Attracteur etrange qui pousse le systeme vers l''absence
     de cycles et de contradictions."'
   depends_on: []
 - path: atoms/collaborative-horizontal-protocol.yaml
   hash: f588b53a3b0b
-  description: 'description: "Méthodologie d''orchestration d''agents horizontaux
-    avec sections, gardien et délibération flash."'
+  description: 'description: "Methodologie d''orchestration d''agents horizontaux
+    avec sections, gardien et deliberation flash."'
   depends_on: []
 - path: atoms/collision-id-auto-renamer.yaml
   hash: 400421c2b2e8
-  description: 'description: "Détection + résolution automatique de collisions d''IDs
-    INTENT/EPIC via git mv + références."'
+  description: 'description: "Detection + resolution automatique de collisions d''IDs
+    INTENT/EPIC via git mv + references."'
   depends_on: []
 - path: atoms/compose-metacluster-assembly.yaml
   hash: 85f5a6d2932b
-  description: 'description: "Langage déclaratif COMPOSE.yaml pour méta-assemblage
+  description: 'description: "Langage declaratif COMPOSE.yaml pour meta-assemblage
     cross-repos du metacluster."'
   depends_on: []
 - path: atoms/constitutional-sot.yaml
   hash: 039968125074
-  description: 'description: "Source de vérité constitutionnelle définissant des règles
-    immuables, une hiérarchie de documents et un méc'
+  description: 'description: "Source de verite constitutionnelle definissant des regles
+    immuables, une hierarchie de documents et un mec'
   depends_on: []
 - path: atoms/contextual-adaptation.yaml
   hash: cd43f7b16323
-  description: 'description: "Attracteur d''adaptation : le système choisit les personae
-    et âmes en fonction du contexte de problème."'
+  description: 'description: "Attracteur d''adaptation : le systeme choisit les personae
+    et ames en fonction du contexte de probleme."'
   depends_on: []
 - path: atoms/continuous-design-validation.yaml
   hash: db272d209d7f
-  description: 'description: "Déploiement de hooks pre-commit et CLI de validation
-    sur l''ensemble des dépôts MDU."'
+  description: 'description: "Deploiement de hooks pre-commit et CLI de validation
+    sur l''ensemble des depts MDU."'
   depends_on: []
 - path: atoms/convention-over-configuration.yaml
   hash: fc69d4183674
-  description: 'description: "Convention over Configuration — établissez des conventions
-    par défaut et permettez la configuration unique'
+  description: 'description: "Convention over Configuration -- etablissez des conventions
+    par defaut et permettez la configuration unique'
   depends_on: []
 - path: atoms/conversation-forensics-analyzer.yaml
   hash: 69670adc9624
-  description: 'description: "Analyse forensique des conversations pour détecter frictions,
-    bugs, ruptures de chaîne."'
+  description: 'description: "Analyse forensique des conversations pour detecter frictions,
+    bugs, ruptures de chane."'
   depends_on: []
 - path: atoms/cron-autonomous-nervous-system.yaml
   hash: 165b08384d46
-  description: 'description: "CRON comme système nerveux autonome : périodiques, event-driven,
+  description: 'description: "CRON comme systeme nerveux autonome : periodiques, event-driven,
     HITL-gated."'
   depends_on: []
 - path: atoms/cron-centralized-registry.yaml
   hash: 8ea8e6b311c0
-  description: 'description: "Registre centralisé cron avec schéma YAML déclaratif,
+  description: 'description: "Registre centralise cron avec schema YAML declaratif,
     NT Job Objects, mutex."'
   depends_on: []
 - path: atoms/cross-repo-flow.yaml
   hash: 38e88cc880cc
-  description: 'description: "Pattern de base pour tout flux inter-dépôts : provider,
-    consumers, contrat, validation, détection de cycle'
+  description: 'description: "Pattern de base pour tout flux inter-depts : provider,
+    consumers, contrat, validation, detection de cycle'
   depends_on: []
 - path: atoms/dag3-conversation-forensics.yaml
   hash: 56de05449395
   description: 'description: "Integration DAG-3 Forensic Analyzer + conversation parser
-    pour détection d''impenses."'
+    pour detection d''impenses."'
   depends_on: []
 - path: atoms/dependency-graph-cache.yaml
   hash: f0721a5e29a0
-  description: 'description: "Cache pour le graphe de dépendances entre designs, atomes
+  description: 'description: "Cache pour le graphe de dependances entre designs, atomes
     et personae."'
   depends_on: []
 - path: atoms/design-documentation-generator.yaml
   hash: 63f8b4487ae9
-  description: 'description: "Documentation auto-générée à partir des designs MDU
+  description: 'description: "Documentation auto-generee a partir des designs MDU
     : META-DESIGN.md, rapports, indexes."'
   depends_on: []
 - path: atoms/design-principle.yaml
@@ -190,93 +190,93 @@ atoms:
   depends_on: []
 - path: atoms/design-schema.yaml
   hash: 1cf95a9a9720
-  description: 'description: "Schéma de design.yaml : champs obligatoires (name, version,
-    layer, role), héritage, invariants."'
+  description: 'description: "Schema de design.yaml : champs obligatoires (name, version,
+    layer, role), heritage, invariants."'
   depends_on: []
 - path: atoms/design-validate-cli.yaml
   hash: 582b55b12067
-  description: 'description: "Spécification de la CLI gerivdb design validate et ses
+  description: 'description: "Specification de la CLI gerivdb design validate et ses
     options."'
   depends_on: []
 - path: atoms/design-verse-feedback-loop.yaml
   hash: 07d732eee979
-  description: 'description: "Cycle itératif où un design est instancié en verse,
+  description: 'description: "Cycle iteratif o un design est instancie en verse,
     puis la verse nourrit un nouveau design."'
   depends_on: []
 - path: atoms/design-wizard.yaml
   hash: 02ea8d4dc3c1
-  description: 'description: "Assistant de création de design : guide l''utilisateur
-    à travers choix d''âme, héritage d''atomes, paramètres'
+  description: 'description: "Assistant de creation de design : guide l''utilisateur
+    a travers choix d''ame, heritage d''atomes, parametres'
   depends_on: []
 - path: atoms/dev-tool-wrapper.yaml
   hash: 29a9db4c0ad1
-  description: 'description: "Wrapper PowerShell pour outils CLI : auto-découverte
-    de chemins, Help unifiée, dispatch par sous-commandes'
+  description: 'description: "Wrapper PowerShell pour outils CLI : auto-decouverte
+    de chemins, Help unifiee, dispatch par sous-commandes'
   depends_on: []
 - path: atoms/dip.yaml
   hash: b95dc095eca9
-  description: 'description: "Dependency Inversion Principle — les modules de haut
-    niveau ne doivent pas dépendre des modules de bas niv'
+  description: 'description: "Dependency Inversion Principle -- les modules de haut
+    niveau ne doivent pas dependre des modules de bas niv'
   depends_on: []
 - path: atoms/ecos-root-registry.yaml
   hash: a9cb7ac74e1e
-  description: 'description: "Registre d''identité écosystémique par dépôt. Définit
-    la strate, le rôle, le statut et la section de chaque'
+  description: 'description: "Registre d''identite ecosystemique par dept. Definit
+    la strate, le rle, le statut et la section de chaque'
   depends_on: []
 - path: atoms/ecosystem-dashboard.yaml
   hash: 4ce193ce9c1b
-  description: 'description: "Tableau de bord de visualisation en temps réel des designs,
-    relations et état de validation."'
+  description: 'description: "Tableau de bord de visualisation en temps reel des designs,
+    relations et etat de validation."'
   depends_on: []
 - path: atoms/ecosystem-health-dashboard.yaml
   hash: f19f806807bf
-  description: 'description: "Dashboard opérationnel CTULU : stubs, ADRs, collisions,
-    phi-CPS, vélocité."'
+  description: 'description: "Dashboard operationnel CTULU : stubs, ADRs, collisions,
+    phi-CPS, velocite."'
   depends_on: []
 - path: atoms/eecs-config.yaml
   hash: e85aa7b20c14
   description: 'description: "Configuration EECS (Ecosystem Environment Configuration).
-    Définit les paramètres d''environnement, les mode'
+    Definit les parametres d''environnement, les mode'
   depends_on: []
 - path: atoms/encoding-batch-fixer.yaml
   hash: af00ab230004
   description: 'description: "Correction batch des encodages de fichiers : UTF-8,
-    BOM, line endings, avec détection automatique et répar'
+    BOM, line endings, avec detection automatique et repar'
   depends_on: []
 - path: atoms/event-streaming.yaml
   hash: e06d620bb2ee
-  description: 'description: "Serveur WebSocket-based pour le streaming temps réel
-    d''événements avec pub/sub, filtrage et backpressure."'
+  description: 'description: "Serveur WebSocket-based pour le streaming temps reel
+    d''evenements avec pub/sub, filtrage et backpressure."'
   depends_on: []
 - path: atoms/focus-beam-activator.yaml
   hash: 35cde318dc4a
   description: 'description: "Mode focus-beam sur gap critique : verrouillage swarm
-    exclusif sur un problème prioritaire."'
+    exclusif sur un probleme prioritaire."'
   depends_on: []
 - path: atoms/formal-verification.yaml
   hash: 9e5da3116265
-  description: 'description: "Vérification formelle avec Z3 pour valider les invariants
+  description: 'description: "Verification formelle avec Z3 pour valider les invariants
     critiques. Preuves automatiques sur les contrain'
   depends_on: []
 - path: atoms/fpick-functor.yaml
   hash: 926c03fb3421
-  description: 'description: "Primitive fonctionnelle canonique de sélection cross-repos
+  description: 'description: "Primitive fonctionnelle canonique de selection cross-repos
     par pattern."'
   depends_on: []
 - path: atoms/fractal-recursion.yaml
   hash: 8d4a8e3adbc4
-  description: 'description: "Récursion fractale auto-similaire pour les requêtes
+  description: 'description: "Recursion fractale auto-similaire pour les requetes
     TQL. Pattern auto-similaire avec short-circuit NEUTRE '
   depends_on: []
 - path: atoms/friction-based-governance.yaml
   hash: 0672df200c73
-  description: 'description: "Gouvernance par détection de friction et auto-correction
-    post-implémentation."'
+  description: 'description: "Gouvernance par detection de friction et auto-correction
+    post-implementation."'
   depends_on: []
 - path: atoms/friction-governance.yaml
   hash: 7ef95d42515b
-  description: 'description: "Pattern de gouvernance générique par détection de friction
-    et auto-correction post-implémentation."'
+  description: 'description: "Pattern de gouvernance generique par detection de friction
+    et auto-correction post-implementation."'
   depends_on: []
 - path: atoms/frontmatter-parser.yaml
   hash: bf0bc977bce5
@@ -285,83 +285,83 @@ atoms:
   depends_on: []
 - path: atoms/gas-station-pattern.yaml
   hash: d42c686fd4ad
-  description: 'description: "Pattern Mayor : séquence boot session (rules → contexte
-    → activation agents)."'
+  description: 'description: "Pattern Mayor : sequence boot session (rules  contexte
+     activation agents)."'
   depends_on: []
 - path: atoms/gated-boot-sequence.yaml
   hash: ecf4d4720287
-  description: 'description: "Séquence de boot canonique ordonnée (gates) pour initialiser
-    un sous-système."'
+  description: 'description: "Sequence de boot canonique ordonnee (gates) pour initialiser
+    un sous-systeme."'
   depends_on: []
 - path: atoms/git-remote-safety.yaml
   hash: bff1e68a8cd4
-  description: 'description: "Protocole de sécurité pour les opérations git remote
-    avec vérification des remotes, branches et historique'
+  description: 'description: "Protocole de securite pour les operations git remote
+    avec verification des remotes, branches et historique'
   depends_on: []
 - path: atoms/git-zombie-cleaner.yaml
   hash: d8498f34054b
-  description: 'description: "Nettoyage des processus git zombies : détection par
-    âge (> 8 min), kill gracieux, disposal, logging."'
+  description: 'description: "Nettoyage des processus git zombies : detection par
+    age (> 8 min), kill gracieux, disposal, logging."'
   depends_on: []
 - path: atoms/github-integration.yaml
   hash: c2fbc80012cc
-  description: 'description: "Interfaçage avec GitHub : création de PR, merge, push,
-    vérification de remotes."'
+  description: 'description: "Interfacage avec GitHub : creation de PR, merge, push,
+    verification de remotes."'
   depends_on: []
 - path: atoms/governance-gate-script.yaml
   hash: ea3768af6cbb
-  description: 'description: "Script de validation de gouvernance : vérification frontmatter,
-    ADR, hooks pre-commit, conformité strates.'
+  description: 'description: "Script de validation de gouvernance : verification frontmatter,
+    ADR, hooks pre-commit, conformite strates.'
   depends_on: []
 - path: atoms/gpu-decoder.yaml
   hash: f7a76f90f5b6
-  description: 'description: "Décodage GPU via NVDEC — wrapper CUDA/NVDEC pour PLIX
+  description: 'description: "Decodage GPU via NVDEC -- wrapper CUDA/NVDEC pour PLIX
     codec."'
   depends_on: []
 - path: atoms/hitl-expulsion-governance.yaml
   hash: 590e28362ee6
-  description: 'description: "Gouvernance HITL pour verdicts d''expulsion irréversibles
+  description: 'description: "Gouvernance HITL pour verdicts d''expulsion irreversibles
     avec WAL append-only et seuils de purge."'
   depends_on: []
 - path: atoms/hitl-gate.yaml
   hash: 309c84510fb9
-  description: 'description: "Mécanisme de blocage pour création de dépôt, clone illégitime,
-    et autres opérations sensibles."'
+  description: 'description: "Mecanisme de blocage pour creation de dept, clone illegitime,
+    et autres operations sensibles."'
   depends_on: []
 - path: atoms/incremental-growth.yaml
   hash: 230ac59f5600
-  description: 'description: "Attracteur d''incrémentalité : les designs s''enrichissent
-    par héritage sans se détruire."'
+  description: 'description: "Attracteur d''incrementalite : les designs s''enrichissent
+    par heritage sans se detruire."'
   depends_on: []
 - path: atoms/infra-tool-layer.yaml
   hash: 09d4eaa1b738
   description: 'description: "Couche infrastructurelle DevTools : fournit des scripts
-    opérationnels à CTULU, ECOS-CLI, BRAIN. N''importe '
+    operationnels a CTULU, ECOS-CLI, BRAIN. N''importe '
   depends_on: []
 - path: atoms/isp.yaml
   hash: 7bad4fdfc4e0
-  description: 'description: "Interface Segregation Principle — les clients ne doivent
-    pas être forcés à dépendre d''interfaces qu''ils n'''
+  description: 'description: "Interface Segregation Principle -- les clients ne doivent
+    pas etre forces a dependre d''interfaces qu''ils n'''
   depends_on: []
 - path: atoms/kilo-mayor-context-pump.yaml
   hash: 9a766f831a2f
   description: 'description: "Pompe contextuelle pour sessions Kilo : injecte le contexte
-    minimal nécessaire avant démarrage."'
+    minimal necessaire avant demarrage."'
   depends_on: []
 - path: atoms/kilo-workflow-binder.yaml
   hash: 4a7f80cdb3b8
-  description: 'description: "Sélecteur de mode Kilo + Gas Station + activation des
-    chemins d''exécution."'
+  description: 'description: "Selecteur de mode Kilo + Gas Station + activation des
+    chemins d''execution."'
   depends_on: []
 - path: atoms/kilocode-modes-registry.yaml
   hash: e48201db626b
-  description: 'description: "Registre des modes KiloCode pour un dépôt. Définit les
-    modes d''opération de l''agent IA (accessibility-chec'
+  description: 'description: "Registre des modes KiloCode pour un dept. Definit les
+    modes d''operation de l''agent IA (accessibility-chec'
   depends_on: []
 - path: atoms/kiss.yaml
   hash: 3718f2d7d9d6
-  description: 'description: "Keep It Simple, Stupid — évitez la complexité inutile,
-    préférez les solutions simples et directes."'
+  description: 'description: "Keep It Simple, Stupid -- evitez la complexite inutile,
+    preferez les solutions simples et directes."'
   depends_on: []
 - path: atoms/kiva-auto-pr-workflow.yaml
   hash: 6f358b589c15
@@ -378,68 +378,68 @@ atoms:
   depends_on: []
 - path: atoms/law-of-demeter.yaml
   hash: 311d41aadbd4
-  description: 'description: "Law of Demeter — ne parlez qu''aux amis directs, évitez
+  description: 'description: "Law of Demeter -- ne parlez qu''aux amis directs, evitez
     la navigation profonde dans les objets."'
   depends_on: []
 - path: atoms/lsp.yaml
   hash: 64ca59a303be
-  description: 'description: "Liskov Substitution Principle — les sous-types doivent
+  description: 'description: "Liskov Substitution Principle -- les sous-types doivent
     pouvoir remplacer les types de base sans modificati'
   depends_on: []
 - path: atoms/mcp-fix-diagnostics.yaml
   hash: 9846ee938ebc
-  description: 'description: "Diagnostic et réparation automatique des connexions
-    MCP : vérification, redémarrage, logging, watchdog."'
+  description: 'description: "Diagnostic et reparation automatique des connexions
+    MCP : verification, redemarrage, logging, watchdog."'
   depends_on: []
 - path: atoms/memory-curator.yaml
   hash: 4e334f4279ee
-  description: 'description: "Gestion de la mémoire longue durée — sessions, narratives,
+  description: 'description: "Gestion de la memoire longue duree -- sessions, narratives,
     historique, IntentHash."'
   depends_on: []
 - path: atoms/metacluster-living-organism.yaml
   hash: caef4cb7cfac
-  description: 'description: "Méta-cluster comme organisme vivant : causalité, holographie,
+  description: 'description: "Meta-cluster comme organisme vivant : causalite, holographie,
     polymorphisme, MoE."'
   depends_on: []
 - path: atoms/morphism-maps-governance.yaml
   hash: 80cbda4ad64a
-  description: 'description: "Cartes de transport causal entre repos : schéma YAML
-    + cycle de vie + règles de transport."'
+  description: 'description: "Cartes de transport causal entre repos : schema YAML
+    + cycle de vie + regles de transport."'
   depends_on: []
 - path: atoms/multi-instance-guard.yaml
   hash: 2917093dc9b1
-  description: 'description: "Garde anti-concurrence Windows : mutex nommé, détection
+  description: 'description: "Garde anti-concurrence Windows : mutex nomme, detection
     d''instance existante, expulsion HITL si conflit."'
   depends_on: []
 - path: atoms/multi-repo-audit.yaml
   hash: 9fbcf48aedd8
   description: 'description: "Audit cross-repo avec gardes anti-zombie, mutex Windows,
-    timeout git, et stratégie auto-pull/push."'
+    timeout git, et strategie auto-pull/push."'
   depends_on: []
 - path: atoms/ontology-audit.yaml
   hash: 05adffac1bdc
-  description: 'description: "Audit ontologique pour vérifier la cohérence des connaissances
+  description: 'description: "Audit ontologique pour verifier la coherence des connaissances
     entre les strates N, N+1, N+2. Couverture c'
   depends_on: []
 - path: atoms/pattern-citizen.yaml
   hash: 6a9e7c6b9bca
-  description: 'description: "Citoyen pattern architectural — responsabilité de définition
+  description: 'description: "Citoyen pattern architectural -- responsabilite de definition
     et de diffusion d''un pattern de design."'
   depends_on: []
 - path: atoms/persona-conditioned-generation.yaml
   hash: e97475f7e769
-  description: 'description: "Génération conditionnée par persona : VERSES utilise
+  description: 'description: "Generation conditionnee par persona : VERSES utilise
     le style d''un persona pour instancier une verse."'
   depends_on: []
 - path: atoms/phi-cps-regression-guard.yaml
   hash: d13ab2d4a322
   description: 'description: "Gate CI phi-CPS : bloque le merge si phi-CPS < 4.4 et
-    génère un rapport de conformité."'
+    genere un rapport de conformite."'
   depends_on: []
 - path: atoms/photon-pipeline.yaml
   hash: 67abc47cb57c
-  description: 'description: "Pipeline de chunking sémantique PHOTON → TRIX → NEXUS.
-    Captures les dépendances de preprocessing sémantiqu'
+  description: 'description: "Pipeline de chunking semantique PHOTON  TRIX  NEXUS.
+    Captures les dependances de preprocessing semantiqu'
   depends_on: []
 - path: atoms/pipeline-anamorphique-capture.yaml
   hash: 19f536eb87ee
@@ -448,22 +448,22 @@ atoms:
   depends_on: []
 - path: atoms/pipeline-anamorphique.yaml
   hash: c6067388fb5e
-  description: 'description: "Pattern de pipeline multi-tâches (T001-T010) pour l''implémentation
-    atomique de fonctionnalités complexes."'
+  description: 'description: "Pattern de pipeline multi-taches (T001-T010) pour l''implementation
+    atomique de fonctionnalites complexes."'
   depends_on: []
 - path: atoms/pipeline-orchestrator.yaml
   hash: 677cbb4b7c03
-  description: 'description: "Pipeline automatisé : âme → équipe → verses → validation
-    → rapport consolidé."'
+  description: 'description: "Pipeline automatise : ame  equipe  verses  validation
+     rapport consolide."'
   depends_on: []
 - path: atoms/plix-codec.yaml
   hash: f7bb1a6a7095
-  description: 'description: "Codec PLIX v2 — format binaire ternaire avec schéma
+  description: 'description: "Codec PLIX v2 -- format binaire ternaire avec schema
     registry, GPU decode et pipeline sync."'
   depends_on: []
 - path: atoms/poincare-contract.yaml
   hash: 6988bafd4ec2
-  description: 'description: "Contrat Poincaré : validation β₀=1, β₁=0 sur DAGs, invariants
+  description: 'description: "Contrat Poincare : validation =1, =0 sur DAGs, invariants
     post-transport."'
   depends_on: []
 - path: atoms/power-capped.yaml
@@ -472,136 +472,136 @@ atoms:
   depends_on: []
 - path: atoms/primitive-flow.yaml
   hash: 43698eb3a022
-  description: 'description: "Flux de primitives exécutables depuis PRIMUS vers ses
-    consommateurs. Captures les dépendances orientées PR'
+  description: 'description: "Flux de primitives executables depuis PRIMUS vers ses
+    consommateurs. Captures les dependances orientees PR'
   depends_on: []
 - path: atoms/principle-of-least-astonishment.yaml
   hash: bb886e38475b
-  description: 'description: "Principle of Least Astonishment — le code doit se comporter
+  description: 'description: "Principle of Least Astonishment -- le code doit se comporter
     comme on s''y attend, suivant les conventions d'
   depends_on: []
 - path: atoms/proactive-friction-sensor.yaml
   hash: e5d7a1707df2
-  description: 'description: "Détection prédictive de friction avant implémentation
+  description: 'description: "Detection predictive de friction avant implementation
     avec score 0.0-1.0."'
   depends_on: []
 - path: atoms/psy-citizen-governance.yaml
   hash: 2940b3a17539
-  description: 'description: "Gouvernance de citoyens psychologiques avec états dégradés,
+  description: 'description: "Gouvernance de citoyens psychologiques avec etats degrades,
     relapse monitoring et pattern Bat-Family."'
   depends_on: []
 - path: atoms/registry-consistency-sentinel.yaml
   hash: 4de48046eecc
-  description: 'description: "Sentinelle de cohérence des registres cross-repos :
-    détecte incohérences et alertes."'
+  description: 'description: "Sentinelle de coherence des registres cross-repos :
+    detecte incoherences et alertes."'
   depends_on: []
 - path: atoms/registry-driven-orchestration.yaml
   hash: ec23836f8f95
-  description: 'description: "Orchestration par registre : tableau de hashtables définit
-    les cibles, boucle unique applique l''opération '
+  description: 'description: "Orchestration par registre : tableau de hashtables definit
+    les cibles, boucle unique applique l''operation '
   depends_on: []
 - path: atoms/registry-sync.yaml
   hash: 624528d3f73a
   description: 'description: "Flux de synchronisation du registre CITIZENS vers ses
-    miroirs. Captures les dépendances CITIZENS → CTULU, '
+    miroirs. Captures les dependances CITIZENS  CTULU, '
   depends_on: []
 - path: atoms/resonance-driven-governance.yaml
   hash: a8c400e93c12
-  description: 'description: "Gouvernance par résonance : seuil phi-CPS dynamique,
+  description: 'description: "Gouvernance par resonance : seuil phi-CPS dynamique,
     focus-beam, residue_index, CRONs AM, hybrid mode."'
   depends_on: []
 - path: atoms/roadmap-vector.yaml
   hash: 0440aa064647
-  description: 'description: "Vecteur de direction stratégique d''un dépôt. Définit
-    l''horizon temporel, la direction, la vélocité observé'
+  description: 'description: "Vecteur de direction strategique d''un dept. Definit
+    l''horizon temporel, la direction, la velocite observe'
   depends_on: []
 - path: atoms/run-lifecycle.yaml
   hash: 410682d5e43e
-  description: 'description: "Une loop possède un run lifecycle fini : pending → running
-    → done/error"'
+  description: 'description: "Une loop possede un run lifecycle fini : pending  running
+     done/error"'
   depends_on: []
 - path: atoms/sandbox-isolation.yaml
   hash: 51a459fbe898
   description: 'description: "Isolation des environnements NeSy via CubeSandbox. Garantit
-    l''exécution sécurisée des agents dans des cont'
+    l''execution securisee des agents dans des cont'
   depends_on: []
 - path: atoms/scan-report-format.yaml
   hash: 64250f2a7c42
-  description: 'description: "Format de rapport JSON pour les résultats de scan :
+  description: 'description: "Format de rapport JSON pour les resultats de scan :
     checks, errors, warnings."'
   depends_on: []
 - path: atoms/scheduled-loop.yaml
   hash: e8aff9a285ec
-  description: 'description: "Une loop est déclenchée par un scheduler cron avec catch-up
+  description: 'description: "Une loop est declenchee par un scheduler cron avec catch-up
     misfire"'
   depends_on: []
 - path: atoms/scoped-loop.yaml
   hash: 55ce572623f5
-  description: 'description: "Une loop est scopée par machine et/ou équipe"'
+  description: 'description: "Une loop est scopee par machine et/ou equipe"'
   depends_on: []
 - path: atoms/security-fabric.yaml
   hash: fa3607132208
-  description: 'description: "Fabric de sécurité : scan OWASP, détection de secrets,
+  description: 'description: "Fabric de securite : scan OWASP, detection de secrets,
     politique de backup, validation de chemins sensible'
   depends_on: []
 - path: atoms/session-boot.yaml
   hash: dbd48f1bd405
-  description: 'description: "Script de boot session : génère context.yaml < 5 Ko
+  description: 'description: "Script de boot session : genere context.yaml < 5 Ko
     pour boot session LLM."'
   depends_on: []
 - path: atoms/session-cluster-builder.yaml
   hash: 461cbe4cc4f9
-  description: 'description: "Clustering automatique de repos en sessions thématiques
-    prêtes à exécuter."'
+  description: 'description: "Clustering automatique de repos en sessions thematiques
+    pretes a executer."'
   depends_on: []
 - path: atoms/session-continuity-bridge.yaml
   hash: 7c9c33d3592b
-  description: 'description: "Bridge de continuité inter-sessions via WAL + stashes
+  description: 'description: "Bridge de continuite inter-sessions via WAL + stashes
     + manifests."'
   depends_on: []
 - path: atoms/skill-orchestration.yaml
   hash: fc227a81b89f
   description: 'description: "Flux d''orchestration des skills depuis SKILLS vers
-    les consommateurs. Captures les dépendances SKILLS → CT'
+    les consommateurs. Captures les dependances SKILLS  CT'
   depends_on: []
 - path: atoms/smart-termination.yaml
   hash: b6f072e319a7
-  description: 'description: "Détection d''arrêt optimal pour les boucles avec stagnation,
+  description: 'description: "Detection d''arret optimal pour les boucles avec stagnation,
     timeout, resource, et quality plateau detectio'
   depends_on: []
 - path: atoms/soul-selection-strategy.yaml
   hash: 6ec4a5e6856f
-  description: 'description: "Stratégie de sélection dynamique d''âme en fonction
-    du contexte de problème."'
+  description: 'description: "Strategie de selection dynamique d''ame en fonction
+    du contexte de probleme."'
   depends_on: []
 - path: atoms/sovereign-vector-memory.yaml
   hash: 213e65834ba6
-  description: 'description: "Mémoire vectorielle locale (TF-IDF + SQLite), sans service
-    externe, avec cache LRU pour recherche sémantiq'
+  description: 'description: "Memoire vectorielle locale (TF-IDF + SQLite), sans service
+    externe, avec cache LRU pour recherche semantiq'
   depends_on: []
 - path: atoms/srp.yaml
   hash: 34adfea72b92
-  description: 'description: "Single Responsibility Principle — chaque module/ classe
+  description: 'description: "Single Responsibility Principle -- chaque module/ classe
     a une seule raison de changer."'
   depends_on: []
 - path: atoms/strate-registry.yaml
   hash: 4920e7831678
-  description: 'description: "Classification L0-L5 des dépôts avec règles de gouvernance"'
+  description: 'description: "Classification L0-L5 des depts avec regles de gouvernance"'
   depends_on: []
 - path: atoms/stratified-abstraction.yaml
   hash: e39368790c14
   description: 'description: "Architecture en couches N+0/N+1/N+2 : designs concrets,
-    personae, âmes."'
+    personae, ames."'
   depends_on: []
 - path: atoms/stratified-repository-registry.yaml
   hash: 6431f14792da
-  description: 'description: "Registre hiérarchique de dépôts organisés par strates
-    (L0–L9) avec validation d''appartenance."'
+  description: 'description: "Registre hierarchique de depts organises par strates
+    (L0-L9) avec validation d''appartenance."'
   depends_on: []
 - path: atoms/stratum-relay.yaml
   hash: d0973c5c26ce
-  description: 'description: "Règles locales de strate, lifecycle, dépendances et
-    auto-conformité par repo."'
+  description: 'description: "Regles locales de strate, lifecycle, dependances et
+    auto-conformite par repo."'
   depends_on: []
 - path: atoms/sync-orchestrator.yaml
   hash: 34facac610b1
@@ -610,23 +610,23 @@ atoms:
   depends_on: []
 - path: atoms/team-generation-api.yaml
   hash: f1872d005ab1
-  description: 'description: "Interface de HERMES pour dériver une équipe depuis une
-    âme et un méta-design d''équipe."'
+  description: 'description: "Interface de HERMES pour deriver une equipe depuis une
+    ame et un meta-design d''equipe."'
   depends_on: []
 - path: atoms/ternary-governance.yaml
   hash: 7eb25cce6519
-  description: 'description: "Gouvernance ternaire basée sur des trits {-1, 0, +1}
+  description: 'description: "Gouvernance ternaire basee sur des trits {-1, 0, +1}
     avec organes de vote et escalades."'
   depends_on: []
 - path: atoms/ternary-query.yaml
   hash: c70c82d64110
-  description: 'description: "Langage de requête fractal ternaire pour NEXUS. Paradigme
-    Think-Do-Check avec récursion auto-similaire."'
+  description: 'description: "Langage de requete fractal ternaire pour NEXUS. Paradigme
+    Think-Do-Check avec recursion auto-similaire."'
   depends_on: []
 - path: atoms/test-runner.yaml
   hash: aa4c7267e496
   description: 'description: "Orchestrateur de tests multi-framework : pytest, Pester,
-    Zig test, coverage, intégration CI."'
+    Zig test, coverage, integration CI."'
   depends_on: []
 - path: atoms/think-do-check.yaml
   hash: 56c4c2335409
@@ -635,27 +635,27 @@ atoms:
   depends_on: []
 - path: atoms/thought-commits.yaml
   hash: c28bd2ff353f
-  description: 'description: "Thought-commits KEEL : sérialisation DAG causal en commits
-    Git avec traçabilité."'
+  description: 'description: "Thought-commits KEEL : serialisation DAG causal en commits
+    Git avec tracabilite."'
   depends_on: []
 - path: atoms/time-machine-state-snapshotting.yaml
   hash: c4f12d7ef09a
-  description: 'description: "Snapshots d''état 243 avec entropie, checkpoint-décision
+  description: 'description: "Snapshots d''etat 243 avec entropie, checkpoint-decision
     et replay."'
   depends_on: []
 - path: atoms/trix-gateway-router.yaml
   hash: f0e767bd2388
-  description: 'description: "Routeur centralisé pour GitHub API avec rate-limit pooling,
-    auth unifiée, retry."'
+  description: 'description: "Routeur centralise pour GitHub API avec rate-limit pooling,
+    auth unifiee, retry."'
   depends_on: []
 - path: atoms/trix-observability-bridge.yaml
   hash: c1ec721a4d51
-  description: 'description: "Bridge d''observabilité runtime pour méta-outils avec
-    spans et décorateur @observe_tool."'
+  description: 'description: "Bridge d''observabilite runtime pour meta-outils avec
+    spans et decorateur @observe_tool."'
   depends_on: []
 - path: atoms/trix-wal-atomic-writer.yaml
   hash: 0a3424076aa8
-  description: 'description: "Écriture atomique cross-repos via WAL avec rollback
+  description: 'description: "criture atomique cross-repos via WAL avec rollback
     automatique."'
   depends_on: []
 - path: atoms/verse-generation-api.yaml
@@ -670,27 +670,36 @@ atoms:
   depends_on: []
 - path: atoms/vibe-graph-drift-guard.yaml
   hash: 1048b470bee9
-  description: 'description: "Guard de dérives sur graphe vibe : détecte divergences
-    sémantiques et signale."'
+  description: 'description: "Guard de derives sur graphe vibe : detecte divergences
+    semantiques et signale."'
   depends_on: []
 - path: atoms/wal-compaction.yaml
   hash: cb043a3880ad
-  description: 'description: "Write-Ahead Log (WAL) : écriture atomique, compaction,
-    replay, intégrité cross-repo."'
+  description: 'description: "Write-Ahead Log (WAL) : ecriture atomique, compaction,
+    replay, integrite cross-repo."'
   depends_on: []
 - path: atoms/wal-conversation-streamer.yaml
   hash: c0016a322153
-  description: 'description: "Streaming temps réel des conversations Kilo vers WAL
+  description: 'description: "Streaming temps reel des conversations Kilo vers WAL
     + WAZAA-BUS."'
   depends_on: []
 - path: atoms/yagni.yaml
   hash: e79fe62aa6d3
-  description: 'description: "You Aren''t Gonna Need It — n''implémentez pas de fonctionnalités
-    non demandées, écoutez les besoins réels."'
+  description: 'description: "You Aren''t Gonna Need It -- n''implementez pas de fonctionnalites
+    non demandees, ecoutez les besoins reels."'
   depends_on: []
+- path: atoms/hitl-session-protocol.yaml
+  hash: 96aacc8fd1b1
+  description: 'description: "Protocole normatif que tout agent HITL doit suivre avant
+    toute action mutante"'
+  depends_on:
+  - ATOM-HITL-GATE
+  - ATOM-KIVA-AUTO-PR-WORKFLOW
+  - ADR-024
+  - ADR-030
 - path: atoms/methodology\INDEX.md
   hash: 54a87fdc5fed
-  description: Index des Atomes N+3 — Bibliothèque Mémotechnique
+  description: Index des Atomes N+3 -- Bibliotheque Memotechnique
   depends_on:
   - ATOM-001
   - ATOM-006
@@ -700,7 +709,7 @@ atoms:
   - ATOM-005
 - path: atoms/methodology\PLIX_AUDIT_REPORT.md
   hash: 715a6eb5186a
-  description: Audit PLIX — Validation de la Méthodologie N+3
+  description: Audit PLIX -- Validation de la Methodologie N+3
   depends_on:
   - ATOM-001
   - ATOM-006
@@ -709,25 +718,25 @@ atoms:
   - ATOM-007
 - path: atoms/methodology\c\ATOM-001-c-memory-management.md
   hash: 4866f03d3e2f
-  description: ATOM-001 — C Memory Management
+  description: ATOM-001 -- C Memory Management
   depends_on:
   - ATOM-004
   - ATOM-001
 - path: atoms/methodology\c\ATOM-002-c-segfault-debugging.md
   hash: 72d6169af1a4
-  description: ATOM-002 — C Segfault Debugging
+  description: ATOM-002 -- C Segfault Debugging
   depends_on:
   - ATOM-002
   - ATOM-004
 - path: atoms/methodology\c\ATOM-003-c-makefile-pitfalls.md
   hash: c9784b9b0d8f
-  description: ATOM-003 — C Makefile Pitfalls
+  description: ATOM-003 -- C Makefile Pitfalls
   depends_on:
   - ATOM-004
   - ATOM-003
 - path: atoms/methodology\git\ATOM-045-git-arbiter-health-probe.md
   hash: 924120eb01bc
-  description: ATOM-045 — Git Arbiter Health Probe
+  description: ATOM-045 -- Git Arbiter Health Probe
   depends_on:
   - ATOM-043
   - ATOM-044
@@ -736,7 +745,7 @@ atoms:
   - ATOM-041
 - path: atoms/methodology\git\ATOM-046-wic-branch-prefix-validation.md
   hash: df1e81e407d1
-  description: ATOM-046 — WIC Branch Prefix Validation
+  description: ATOM-046 -- WIC Branch Prefix Validation
   depends_on:
   - ATOM-043
   - ATOM-044
@@ -745,7 +754,7 @@ atoms:
   - ATOM-046
 - path: atoms/methodology\git\ATOM-047-git-cleanup-remote-deletion-api.md
   hash: 69a4e6f57ba5
-  description: ATOM-047 — Git Cleanup Remote Deletion API
+  description: ATOM-047 -- Git Cleanup Remote Deletion API
   depends_on:
   - ATOM-047
   - ATOM-043
@@ -755,7 +764,7 @@ atoms:
   - ATOM-046
 - path: atoms/methodology\git\ATOM-048-vibe-git-graph-coherence-metric.md
   hash: cc5f49d9236a
-  description: ATOM-048 — Vibe Git Graph Coherence Metric
+  description: ATOM-048 -- Vibe Git Graph Coherence Metric
   depends_on:
   - ATOM-043
   - ATOM-048
@@ -764,7 +773,7 @@ atoms:
   - ATOM-041
 - path: atoms/methodology\git\ATOM-049-clusterwave-path-auto-resolver.md
   hash: 9c45964ed3d8
-  description: ATOM-049 — Clusterwave Path Auto-Resolver
+  description: ATOM-049 -- Clusterwave Path Auto-Resolver
   depends_on:
   - ATOM-043
   - ATOM-044
@@ -773,7 +782,7 @@ atoms:
   - ATOM-041
 - path: atoms/methodology\git\ATOM-050-duplicate-commit-detector.md
   hash: 6242f7f39779
-  description: ATOM-050 — Duplicate Commit Detector
+  description: ATOM-050 -- Duplicate Commit Detector
   depends_on:
   - ATOM-043
   - ATOM-044
@@ -782,7 +791,7 @@ atoms:
   - ATOM-041
 - path: atoms/methodology\git\ATOM-051-repo-locator-validator.md
   hash: d275446043f8
-  description: ATOM-051 — Repo Locator Validator
+  description: ATOM-051 -- Repo Locator Validator
   depends_on:
   - ATOM-043
   - ATOM-051
@@ -791,90 +800,141 @@ atoms:
   - ATOM-041
 - path: atoms/methodology\python\ATOM-001-python-ctypes-ffi.md
   hash: a4b7a01bfd5c
-  description: ATOM-001 — Python ctypes FFI
+  description: ATOM-001 -- Python ctypes FFI
   depends_on:
   - ATOM-005
   - ATOM-001
 - path: atoms/methodology\python\ATOM-002-python-asyncio-pitfalls.md
   hash: 1ac3207d7d17
-  description: ATOM-002 — Python asyncio Pitfalls
+  description: ATOM-002 -- Python asyncio Pitfalls
   depends_on:
   - ATOM-002
   - ATOM-004
 - path: atoms/methodology\python\ATOM-003-python-gil-limitations.md
   hash: b63df6dbbc62
-  description: ATOM-003 — Python GIL Limitations
+  description: ATOM-003 -- Python GIL Limitations
   depends_on:
   - ATOM-004
   - ATOM-003
 - path: atoms/methodology\python\ATOM-007-error-tree-diagnostics.md
   hash: 4a0adacdd85e
-  description: ATOM-007 — Error Diagnostic Tree
+  description: ATOM-007 -- Error Diagnostic Tree
   depends_on:
   - ATOM-006
   - ATOM-007
 - path: atoms/methodology\python\ATOM-008-devops-pipeline-validation.md
   hash: 6a6da5f5e813
-  description: ATOM-008 — DevOps Pipeline Validation
+  description: ATOM-008 -- DevOps Pipeline Validation
   depends_on:
   - ATOM-008
 - path: atoms/methodology\rust\ATOM-001-rust-borrow-checker.md
   hash: 54121879f30d
-  description: ATOM-001 — Rust Borrow Checker
+  description: ATOM-001 -- Rust Borrow Checker
   depends_on:
   - ATOM-002
   - ATOM-001
 - path: atoms/methodology\rust\ATOM-002-rust-unsafe-ffi.md
   hash: b41cb0515ba5
-  description: ATOM-002 — Rust unsafe FFI
+  description: ATOM-002 -- Rust unsafe FFI
   depends_on:
   - ATOM-002
   - ATOM-005
   - ATOM-001
 - path: atoms/methodology\rust\ATOM-003-rust-cargo-build-pitfalls.md
   hash: 99973400af59
-  description: ATOM-003 — Rust Cargo Build Pitfalls
+  description: ATOM-003 -- Rust Cargo Build Pitfalls
   depends_on:
   - ATOM-004
   - ATOM-003
 - path: atoms/methodology\universal\ATOM-001-ffi-abi-boundary.md
   hash: d6460a1fe157
-  description: ATOM-001 — FFI ABI Boundary
+  description: ATOM-001 -- FFI ABI Boundary
   depends_on:
   - ATOM-001
 - path: atoms/methodology\universal\ATOM-002-definition-order-constraint.md
   hash: 63e62dc27500
-  description: ATOM-002 — Definition Order Constraint
+  description: ATOM-002 -- Definition Order Constraint
   depends_on:
   - ATOM-002
 - path: atoms/methodology\universal\ATOM-003-namespace-collision-prevention.md
   hash: 9d08d7b01d9e
-  description: ATOM-003 — Namespace Collision Prevention
+  description: ATOM-003 -- Namespace Collision Prevention
   depends_on:
   - ATOM-003
 - path: atoms/methodology\universal\ATOM-004-cache-invalidation-hygiene.md
   hash: e9db2f394b44
-  description: ATOM-004 — Cache Invalidation Hygiene
+  description: ATOM-004 -- Cache Invalidation Hygiene
   depends_on:
   - ATOM-004
 - path: atoms/methodology\universal\ATOM-005-interface-contract.md
   hash: fcccccee42dd
-  description: ATOM-005 — Interface Contract
+  description: ATOM-005 -- Interface Contract
   depends_on:
   - ATOM-005
 - path: atoms/methodology\universal\ATOM-006-error-diagnostic-tree.md
   hash: 38873ffe54b4
-  description: ATOM-006 — Error Diagnostic Tree
+  description: ATOM-006 -- Error Diagnostic Tree
   depends_on:
   - ATOM-006
 - path: atoms/methodology\universal\INDEX.md
   hash: f680e5dd1c87
-  description: Bibliothèque Méthodologique Universelle
+  description: Bibliotheque Methodologique Universelle
   depends_on:
-  - ATOM-001
-  - ATOM-006
-  - ATOM-002
-  - ATOM-004
-  - ATOM-003
-  - ATOM-007
-  - ATOM-005
+    - ATOM-001
+    - ATOM-006
+    - ATOM-002
+    - ATOM-004
+    - ATOM-003
+    - ATOM-007
+    - ATOM-005
+- path: atoms/methodology/shell/ATOM-ENV-GUARD.md
+  hash: new-atom-env-guard
+  description: ATOM-ENV-GUARD: OS detection and atomic shell command enforcement
+  depends_on: []
+- path: atoms/methodology/git/ATOM-LOCK-GUARD.md
+  hash: new-atom-lock-guard
+  description: ATOM-LOCK-GUARD: .git/index.lock cleanup before git operations
+  depends_on: []
+- path: atoms/methodology/git/ATOM-CHERRY-PICK-STATE.md
+  hash: new-atom-cherry-pick-state
+  description: ATOM-CHERRY-PICK-STATE: Cherry-pick state verification before operations
+  depends_on: []
+- path: atoms/methodology/git/ATOM-CONFLICT-RESOLVE.md
+  hash: new-atom-conflict-resolve
+  description: ATOM-CONFLICT-RESOLVE: Mandatory conflict marker detection and resolution
+  depends_on: []
+- path: atoms/methodology/git/ATOM-ENCODING-PRE-COMMIT.md
+  hash: new-atom-encoding-pre-commit
+  description: ATOM-ENCODING-PRE-COMMIT: ASCII validation and auto-fix before commits
+  depends_on: []
+- path: atoms/methodology/git/ATOM-EMPTY-CHERRY-PICK.md
+  hash: new-atom-empty-cherry-pick
+  description: ATOM-EMPTY-CHERRY-PICK: Automatic skip of already-integrated cherry-picks
+  depends_on: []
+- path: atoms/governance/ATOM-EPIC-ID-UNIQUE.md
+  hash: new-atom-epic-id-unique
+  description: ATOM-EPIC-ID-UNIQUE: EPIC ID uniqueness validation before merge
+  depends_on: []
+- path: atoms/methodology/git/ATOM-BRANCH-DELETE-SAFE.md
+  hash: new-atom-branch-delete-safe
+  description: ATOM-BRANCH-DELETE-SAFE: Secure branch deletion with remote verification
+  depends_on: []
+- path: atoms/methodology/shell/ATOM-SHELL-ATOMIC.md
+  hash: new-atom-shell-atomic
+  description: ATOM-SHELL-ATOMIC: Enforce atomic shell command execution
+  depends_on: []
+- path: atoms/methodology/git/ATOM-PUSH-WORKFLOW.md
+  hash: new-atom-push-workflow
+  description: ATOM-PUSH-WORKFLOW: Branch delivery and PR enforcement for main branch protection
+  depends_on: []
+- path: atoms/methodology/git/ATOM-WORKTREE-GUARD.md
+  hash: new-atom-worktree-guard
+  description: ATOM-WORKTREE-GUARD: Working tree validation before critical operations
+  depends_on: []
+- path: atoms/methodology/git/ATOM-MERGE-PARENT-SELECT.md
+  hash: new-atom-merge-parent-select
+  description: ATOM-MERGE-PARENT-SELECT: Proper parent selection for merge commit cherry-picks
+  depends_on: []
+ATOM-042-REPOSITORY-CENSUS.md:
+  path: atoms\ATOM-042-REPOSITORY-CENSUS.md
+  depends_on: []
