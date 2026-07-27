@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# install-hooks.sh — Deploy REPO-STANDARDS hooks to target repo
+# install-hooks.sh - Deploy REPO-STANDARDS hooks to target repo
 # REPO-STANDARDS / scripts / install-hooks.sh
 # IntentHash: 0xINSTALL_HOOKS_SCRIPT_20260626
 # ============================================================
@@ -80,7 +80,7 @@ git -C "${TARGET}" config core.hooksPath .githooks
 
 # Rapport
 echo "============================================================"
-echo "install-hooks.sh — Report"
+echo "install-hooks.sh - Report"
 echo "============================================================"
 echo "Target       : ${TARGET}"
 echo "Source       : ${HOOKS_SRC}"

@@ -1,4 +1,4 @@
-# SESSION_WORKFLOW.md — Procédure Opératoire HITL Session
+# SESSION_WORKFLOW.md - Procédure Opératoire HITL Session
 # Version: 1.0.0
 # IntentHash: 0xSESSION_WORKFLOW_HITL_20260726
 # Source: ADR-030-hitl-session-protocol.md
@@ -6,7 +6,7 @@
 
 ---
 
-## 🔴 RÈGLE ZÉRO — Rien ne démarre sans Phase 0
+## 🔴 RÈGLE ZÉRO - Rien ne démarre sans Phase 0
 
 **Avant le premier token d'action mutante**, l'agent HITL **doit** exécuter :
 
@@ -25,7 +25,7 @@ kilo_local_recall search --query "<action_critique>"
 
 ---
 
-## PHASE 1 — DAG ASCII PREMIER (Non Négociable)
+## PHASE 1 - DAG ASCII PREMIER (Non Négociable)
 
 Le DAG consolidé **macro (REPO-STANDARDS) + micro (unified-design)** doit exister **avant** :
 
@@ -42,9 +42,9 @@ Le DAG consolidé **macro (REPO-STANDARDS) + micro (unified-design)** doit exist
 
 ---
 
-## PHASE 2 — VALIDATION LOCALE SEULE (ADR-024)
+## PHASE 2 - VALIDATION LOCALE SEULE (ADR-024)
 
-| ❌ INTERDIT | ✅ REQUIS |
+| [KO] INTERDIT | [OK] REQUIS |
 |-------------|-----------|
 | GitHub Actions pour valider design | `kiva ci run <repo>` |
 | GitLab CI / Jenkins / CircleCI | Pipeline `.kiva/pipelines/<repo>.yaml` |
@@ -54,7 +54,7 @@ Le DAG consolidé **macro (REPO-STANDARDS) + micro (unified-design)** doit exist
 
 ---
 
-## PHASE 3 — DRY-RUN SYSTÉMATIQUE
+## PHASE 3 - DRY-RUN SYSTÉMATIQUE
 
 **Tout script mutatif** doit avoir passé `--dry-run` avec succès avant exécution réelle :
 
@@ -74,7 +74,7 @@ kiva ci run --dry-run <repo>
 
 ---
 
-## PHASE 4 — CHECKPOINT POST-VALIDATION
+## PHASE 4 - CHECKPOINT POST-VALIDATION
 
 Le checkpoint s'écrit **après** la validation réussie, **jamais** après correction d'erreur.
 
@@ -95,13 +95,13 @@ timestamp: <ISO8601>
 
 ```markdown
 ## HITL SESSION CHECKLIST
-- [ ] Phase 0.1 : `kiva ci run --dry-run <target>` ✅
-- [ ] Phase 0.2 : Strates consultées (`meta-design.yaml`) ✅
-- [ ] Phase 0.3 : Checkpoints lus (`kilo_local_recall`) ✅
-- [ ] Phase 1 : DAG ASCII consolidé produit & validé ✅
-- [ ] Phase 2 : Aucune CI externe proposée (ADR-024) ✅
-- [ ] Phase 3 : Tous dry-run passés avant exécution ✅
-- [ ] Phase 4 : Checkpoint post-validation écrit ✅
+- [ ] Phase 0.1 : `kiva ci run --dry-run <target>` [OK]
+- [ ] Phase 0.2 : Strates consultées (`meta-design.yaml`) [OK]
+- [ ] Phase 0.3 : Checkpoints lus (`kilo_local_recall`) [OK]
+- [ ] Phase 1 : DAG ASCII consolidé produit & validé [OK]
+- [ ] Phase 2 : Aucune CI externe proposée (ADR-024) [OK]
+- [ ] Phase 3 : Tous dry-run passés avant exécution [OK]
+- [ ] Phase 4 : Checkpoint post-validation écrit [OK]
 ```
 
 ---
@@ -110,11 +110,11 @@ timestamp: <ISO8601>
 
 | Violation | Conséquence |
 |-----------|-------------|
-| Phase 0 omise | STOP immédiat — session en violation ADR-030 |
-| DAG après mutation | REVERT — refaire avec DAG d'abord |
-| CI externe proposée | REJET — violation ADR-024 + ADR-030 |
-| Dry-run absent | BLOCK — exécution interdite |
-| Checkpoint pré-validation | INVALID — réécrire post-validation |
+| Phase 0 omise | STOP immédiat - session en violation ADR-030 |
+| DAG après mutation | REVERT - refaire avec DAG d'abord |
+| CI externe proposée | REJET - violation ADR-024 + ADR-030 |
+| Dry-run absent | BLOCK - exécution interdite |
+| Checkpoint pré-validation | INVALID - réécrire post-validation |
 
 ---
 

@@ -1,8 +1,8 @@
 #!/bin/bash
-# stash-audit-cluster.sh — Audit stash cross-repos metacluster
+# stash-audit-cluster.sh - Audit stash cross-repos metacluster
 # SOT: gerivdb/REPO-STANDARDS/scripts/stash-audit-cluster.sh
 # Usage: bash scripts/stash-audit-cluster.sh [--zombies-only] [--json]
-# Version: 1.0.0 — 2026-06-29
+# Version: 1.0.0 - 2026-06-29
 
 set -euo pipefail
 
@@ -26,12 +26,12 @@ done
 
 # Fallback si pas de fichier metacluster
 if [ ! -f "$REPOS_FILE" ]; then
-  echo "⚠️  $REPOS_FILE introuvable — audit repo courant uniquement"
+  echo "[WARN]  $REPOS_FILE introuvable - audit repo courant uniquement"
   REPOS_FILE=$(mktemp)
   echo "$(pwd)" > "$REPOS_FILE"
 fi
 
-$JSON_OUTPUT || echo "=== STASH AUDIT METACLUSTER — $REPORT_DATE ==="
+$JSON_OUTPUT || echo "=== STASH AUDIT METACLUSTER - $REPORT_DATE ==="
 $JSON_OUTPUT && echo "{"
 $JSON_OUTPUT && echo "  \"date\": \"$REPORT_DATE\","
 $JSON_OUTPUT && echo "  \"repos\": ["
@@ -68,7 +68,7 @@ while IFS= read -r repo_path; do
       ICON="🟢"
       [ "$CLASS" = "STALE"  ] && ICON="🟡"
       [ "$CLASS" = "ZOMBIE" ] && ICON="🧟"
-      echo "  $ICON [$CLASS ${AGE_HOURS}h] $REPO_NAME :: $stash_id — $stash_msg"
+      echo "  $ICON [$CLASS ${AGE_HOURS}h] $REPO_NAME :: $stash_id - $stash_msg"
     fi
     TOTAL=$((TOTAL+1))
   done <<< "$STASH_LIST"
@@ -80,10 +80,10 @@ if $JSON_OUTPUT; then
   echo "}"
 else
   echo ""
-  echo "─────────────────────────────────────"
+  echo "-------------------------------------"
   echo "TOTAL: $TOTAL  🟢 FRESH: $FRESH  🟡 STALE: $STALE  🧟 ZOMBIE: $ZOMBIE"
-  [ $ZOMBIE -gt 0  ] && echo "🚨 ACTION REQUISE: $ZOMBIE ZOMBIE(s) — convertir avant push"
-  [ $TOTAL  -gt 10 ] && echo "🚨 ALERTE METACLUSTER: seuil 10 dépassé ($TOTAL) — HITL requis"
+  [ $ZOMBIE -gt 0  ] && echo "🚨 ACTION REQUISE: $ZOMBIE ZOMBIE(s) - convertir avant push"
+  [ $TOTAL  -gt 10 ] && echo "🚨 ALERTE METACLUSTER: seuil 10 dépassé ($TOTAL) - HITL requis"
   echo ""
   echo "Conversion zombie: git stash branch wip/recovery-\$(date +%Y%m%d)-<slug> stash@{N}"
   echo "Meta-tool complet: ecos run stash-lifecycle-manager"

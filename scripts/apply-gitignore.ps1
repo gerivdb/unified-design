@@ -1,5 +1,5 @@
 # ============================================================
-# apply-gitignore.ps1 — Applique un template .gitignore par strate
+# apply-gitignore.ps1 - Applique un template .gitignore par strate
 # REPO-STANDARDS / scripts / apply-gitignore.ps1
 # IntentHash: 0xAPPLY_GITIGNORE_PS1_20260626
 # ============================================================
@@ -64,7 +64,7 @@ if ($Added -gt 0) {
 
 # Rapport
 Write-Output "============================================================"
-Write-Output "apply-gitignore.ps1 — Rapport"
+Write-Output "apply-gitignore.ps1 - Rapport"
 Write-Output "============================================================"
 Write-Output "Repo        : $RepoPath"
 Write-Output "Strate      : $Strate"

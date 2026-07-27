@@ -1,4 +1,4 @@
-# ATOM-HOLOGRAPHIC-SWARM — Gnome de nœud holographique (.swarm/node.yaml)
+# ATOM-HOLOGRAPHIC-SWARM - Gnome de noeud holographique (.swarm/node.yaml)
 # Version: 1.0.0
 # IntentHash: 0xATOM_HOLOGRAPHIC_SWARM_20260726
 # Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
@@ -11,7 +11,7 @@ atom:
   version: "1.0.0"
   description: |
     Représentation holographique de l'état du swarm via .swarm/node.yaml.
-    Chaque nœud maintient une copie locale cohérente (phi-CPS tracké).
+    Chaque noeud maintient une copie locale cohérente (phi-CPS tracké).
   intent_hash: "0xATOM_HOLOGRAPHIC_SWARM_20260726"
   layer: L1_CAUSALITY
   governance: BOUNC-ADR-0022
@@ -31,15 +31,15 @@ parameters:
     type: number
     required: true
     default: 4.5
-    description: "Seuil φ-CPS pour validation d'état sain"
+    description: "Seuil phi-CPS pour validation d'état sain"
 
 returns:
   - name: node_name
     type: string
-    description: "Nom du nœud dans le swarm"
+    description: "Nom du noeud dans le swarm"
   - name: phi_cps
     type: number
-    description: "Score φ-CPS actuel du nœud"
+    description: "Score phi-CPS actuel du noeud"
 
 dependencies: []
 

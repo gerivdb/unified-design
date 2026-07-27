@@ -1,11 +1,11 @@
-# ATOM-BOINC-PLIX-STORAGE — Délégation stockage modèles vers PLIX
+# ATOM-BOINC-PLIX-STORAGE - Délégation stockage modèles vers PLIX
 # Version: 1.0.0
 # IntentHash: 0xATOM_BOINC_PLIX_STORAGE_20260726
 # Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
 
 atom:
   id: ATOM-BOINC-PLIX-STORAGE
-  name: "BOINC → PLIX Storage"
+  name: "BOINC -> PLIX Storage"
   category: "storage/plix"
   status: active
   version: "1.0.0"

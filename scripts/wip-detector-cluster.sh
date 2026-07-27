@@ -1,9 +1,9 @@
 #!/bin/bash
-# wip-detector-cluster.sh — Détection branches WIP cross-repos + validation ADR-011
+# wip-detector-cluster.sh - Détection branches WIP cross-repos + validation ADR-011
 # SOT: gerivdb/REPO-STANDARDS/scripts/wip-detector-cluster.sh
 # Ref: ADR-011 (branch naming convention), PRD-MAGISTRAL-004 (enforcement)
 # Usage: bash scripts/wip-detector-cluster.sh [--orphans-only] [--ghosts-only] [--json] [--cleanup] [--audit-only]
-# Version: 2.0.0 — 2026-06-30
+# Version: 2.0.0 - 2026-06-30
 # Exit code: 1 si ORPHAN ou GHOST détectés
 
 set -euo pipefail
@@ -32,11 +32,11 @@ for arg in "$@"; do
   esac
 done
 
-# ────────────────────────────────────────────────────────────────
+# ----------------------------------------------------------------
 # ADR-011 VALIDATION ENGINE
 # Pattern: <type>/epic{NNN}-{task}-{desc}
 # Exceptions: main, master, release/vX.Y.Z, hotfix/*, dependabot/*
-# ────────────────────────────────────────────────────────────────
+# ----------------------------------------------------------------
 
 # Regex du pattern ADR-011
 ADR_PATTERN='^(feature|fix|refactor|adr|chore)/epic[0-9]{3}-[a-z0-9]{1,20}(-[a-z0-9]{1,30})?$'
@@ -128,7 +128,7 @@ emit_branch_detected() {
 
 # Fallback mono-repo
 if [ ! -f "$REPOS_FILE" ]; then
-  echo "⚠️  $REPOS_FILE introuvable — audit repo courant uniquement"
+  echo "[WARN]  $REPOS_FILE introuvable - audit repo courant uniquement"
   REPOS_FILE=$(mktemp)
   echo "$(pwd)" > "$REPOS_FILE"
 fi
@@ -161,7 +161,7 @@ classify_branch() {
   fi
 }
 
-$JSON_OUTPUT || echo "=== WIP BRANCH DETECTOR — $REPORT_DATE ==="
+$JSON_OUTPUT || echo "=== WIP BRANCH DETECTOR - $REPORT_DATE ==="
 $AUDIT_ONLY && ! $JSON_OUTPUT && echo "=== MODE AUDIT-ONLY (ADR-011) ==="
 $JSON_OUTPUT && echo '{'
 $JSON_OUTPUT && echo '  "date": "'"$REPORT_DATE"'",'
@@ -195,7 +195,7 @@ while IFS= read -r repo_path; do
 
      CLASS=$(classify_branch "$repo_path" "$branch" "$AGE_SEC")
 
-     # ── ADR-011 Naming Validation ──
+     # -- ADR-011 Naming Validation --
      ADR_RESULT=$(validate_branch_naming "$branch" "$REPO_NAME")
      ADR_COMPLIANT=true
      ADR_SUGGESTED=""
@@ -211,9 +211,9 @@ while IFS= read -r repo_path; do
 
      # Mode audit-only: afficher uniquement le rapport ADR
      if $AUDIT_ONLY; then
-       ADR_ICON="✅"
-       $ADR_COMPLIANT || ADR_ICON="⚠️"
-       printf "%s [%-10s] %-50s → %s\n" "$ADR_ICON" \
+       ADR_ICON="[OK]"
+       $ADR_COMPLIANT || ADR_ICON="[WARN]"
+       printf "%s [%-10s] %-50s -> %s\n" "$ADR_ICON" \
          "$([ "$ADR_COMPLIANT" = true ] && echo "COMPLIANT" || echo "VIOLATION")" \
          "$branch" \
          "$([ "$ADR_COMPLIANT" = true ] && echo "" || echo "suggested: $ADR_SUGGESTED")"
@@ -240,7 +240,7 @@ while IFS= read -r repo_path; do
     # Cleanup mergées
     if $CLEANUP_MERGED && [ "$CLASS" = "MERGED" ]; then
       git -C "$repo_path" branch -d "$branch" 2>/dev/null && \
-        echo "  🗑️  Supprimé (mergée): $REPO_NAME/$branch" || true
+        echo "  🗑  Supprimé (mergée): $REPO_NAME/$branch" || true
       continue
     fi
 
@@ -256,7 +256,7 @@ while IFS= read -r repo_path; do
       [ "$CLASS" = "STALE"    ] || [ "$CLASS" = "STALE_PR" ] && ICON="🟡"
       [ "$CLASS" = "ORPHAN"   ] && ICON="🔴"
       [ "$CLASS" = "GHOST"    ] && ICON="👻"
-      [ "$CLASS" = "MERGED"   ] && ICON="✅"
+      [ "$CLASS" = "MERGED"   ] && ICON="[OK]"
       LABEL="${AGE_HOURS}h"
       [ $AGE_DAYS -ge 1 ] && LABEL="${AGE_DAYS}j"
       REPO_LINES="$REPO_LINES\n  $ICON [$CLASS $LABEL] $branch"
@@ -271,7 +271,7 @@ while IFS= read -r repo_path; do
 
 done < "$REPOS_FILE"
 
-# ── ADR-011 Compliance Summary ──
+# -- ADR-011 Compliance Summary --
 ADR_TOTAL=$((COMPLIANT + VIOLATIONS))
 if [ "$ADR_TOTAL" -gt 0 ]; then
   ADR_RATE=$(( (COMPLIANT * 100) / ADR_TOTAL ))
@@ -289,19 +289,19 @@ if $JSON_OUTPUT; then
   echo '}'
 else
   echo ""
-  echo "───────────────────────────────────────"
+  echo "---------------------------------------"
   if $AUDIT_ONLY; then
-    echo "ADR-011 AUDIT — $REPORT_DATE"
-    echo "✅ COMPLIANT: $COMPLIANT  ⚠️ VIOLATIONS: $VIOLATIONS  📊 TAUX: ${ADR_RATE}%"
-    [ $VIOLATIONS -gt 0 ] && echo "⚠️  $VIOLATIONS branche(s) hors-convention ADR-011 — events émis dans ~/.ecos/events/"
+    echo "ADR-011 AUDIT - $REPORT_DATE"
+    echo "[OK] COMPLIANT: $COMPLIANT  [WARN] VIOLATIONS: $VIOLATIONS  📊 TAUX: ${ADR_RATE}%"
+    [ $VIOLATIONS -gt 0 ] && echo "[WARN]  $VIOLATIONS branche(s) hors-convention ADR-011 - events émis dans ~/.ecos/events/"
   else
-    echo "TOTAL: $TOTAL  🟢 ACTIVE: $ACTIVE  🟡 STALE: $STALE  🔴 ORPHAN: $ORPHAN  👻 GHOST: $GHOST  ✅ MERGED_NON_NETTOYÉ: $MERGED"
-    [ $ORPHAN -gt 0 ] && echo "🚨 $ORPHAN ORPHAN(s): décision HITL requise — merger, archiver ou dropper"
-    [ $GHOST  -gt 0 ] && echo "👻 $GHOST GHOST(s): branches locales non pushées > 24h — push ou drop"
-    [ $MERGED -gt 0 ] && echo "⚠️  $MERGED branch(es) mergée(s) non nettoyée(s) — lancer avec --cleanup"
+    echo "TOTAL: $TOTAL  🟢 ACTIVE: $ACTIVE  🟡 STALE: $STALE  🔴 ORPHAN: $ORPHAN  👻 GHOST: $GHOST  [OK] MERGED_NON_NETTOYÉ: $MERGED"
+    [ $ORPHAN -gt 0 ] && echo "🚨 $ORPHAN ORPHAN(s): décision HITL requise - merger, archiver ou dropper"
+    [ $GHOST  -gt 0 ] && echo "👻 $GHOST GHOST(s): branches locales non pushées > 24h - push ou drop"
+    [ $MERGED -gt 0 ] && echo "[WARN]  $MERGED branch(es) mergée(s) non nettoyée(s) - lancer avec --cleanup"
     echo ""
-    echo "ADR-011 COMPLIANCE: $COMPLIANT ✅ | $VIOLATIONS ⚠️ | ${ADR_RATE}%"
-    [ $VIOLATIONS -gt 0 ] && echo "⚠️  Events branch.naming.violation émis dans ~/.ecos/events/branch_violations.jsonl"
+    echo "ADR-011 COMPLIANCE: $COMPLIANT [OK] | $VIOLATIONS [WARN] | ${ADR_RATE}%"
+    [ $VIOLATIONS -gt 0 ] && echo "[WARN]  Events branch.naming.violation émis dans ~/.ecos/events/branch_violations.jsonl"
     echo ""
     echo "Meta-tool complet: ecos run wip-branch-detector"
   fi

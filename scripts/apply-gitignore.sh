@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# apply-gitignore.sh — Applique un template .gitignore par strate
+# apply-gitignore.sh - Applique un template .gitignore par strate
 # REPO-STANDARDS / scripts / apply-gitignore.sh
 # IntentHash: 0xAPPLY_GITIGNORE_SCRIPT_20260626
 # ============================================================
@@ -75,7 +75,7 @@ rm -f "${TMPFILE}"
 
 # Rapport
 echo "============================================================"
-echo "apply-gitignore.sh — Rapport"
+echo "apply-gitignore.sh - Rapport"
 echo "============================================================"
 echo "Repo      : ${REPO_PATH}"
 echo "Strate    : ${STRATE}"
@@ -89,7 +89,7 @@ echo "============================================================"
 SECRET_FILES=$(git -C "${REPO_PATH}" ls-files 2>/dev/null | grep -E '\.env|\.key|\.pem' || true)
 if [ -n "${SECRET_FILES}" ]; then
     echo ""
-    echo "⚠️  ALERTE: Fichiers secrets trackés détectés :"
+    echo "[WARN]  ALERTE: Fichiers secrets trackés détectés :"
     echo "${SECRET_FILES}"
-    echo "→ Exécuter: git -C ${REPO_PATH} rm --cached <fichier>"
+    echo "-> Exécuter: git -C ${REPO_PATH} rm --cached <fichier>"
 fi

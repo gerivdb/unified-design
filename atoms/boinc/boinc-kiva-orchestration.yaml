@@ -1,11 +1,11 @@
-# ATOM-BOINC-KIVA-ORCHESTRATION — Orchestration tâches distribuées via KIVA broker
+# ATOM-BOINC-KIVA-ORCHESTRATION - Orchestration tâches distribuées via KIVA broker
 # Version: 1.0.0
 # IntentHash: 0xATOM_BOINC_KIVA_ORCHESTRATION_20260726
 # Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
 
 atom:
   id: ATOM-BOINC-KIVA-ORCHESTRATION
-  name: "BOINC → KIVA Orchestration"
+  name: "BOINC -> KIVA Orchestration"
   category: "orchestration/kiva"
   status: active
   version: "1.0.0"
@@ -42,7 +42,7 @@ returns:
     type: array
     items:
       type: string
-    description: "Liste des nœuds ENV2 assignés"
+    description: "Liste des noeuds ENV2 assignés"
   - name: status
     type: string
     enum: ["scheduled", "running", "completed", "failed", "preempted"]

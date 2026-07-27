@@ -107,7 +107,7 @@ piliers:
     couleur: "#2196F3"
     invariants:
       - nom: "Triade C-E-Obs"
-        description: "Communication → Exécution → Observation"
+        description: "Communication -> Exécution -> Observation"
       - nom: "Swarm Intelligence"
         description: "Agents autonomes évolutifs"
       - nom: "HITL Gate"
@@ -147,15 +147,15 @@ piliers:
 # Règles transversales
 regles_transversales:
   - nom: "Composition"
-    description: "Profondeur dépendance ≤ 3 niveaux"
+    description: "Profondeur dépendance <= 3 niveaux"
     action: "Wall of Shame"
   
   - nom: "Latence"
-    description: "P99 ≤ 45ms pour opérations critiques"
+    description: "P99 <= 45ms pour opérations critiques"
     action: "Roast automatique"
   
   - nom: "Puissance"
-    description: "≤ 12W par inférence"
+    description: "<= 12W par inférence"
     action: "Optimisation PIANO"
   
   - nom: "Observation"
