@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-swarm_node.py — Daemon de coordination SWARM par repo/node.
+swarm_node.py  Daemon de coordination SWARM par repo/node.
 
-Chaque instance KiloCode (ou agent) lance ce daemon au démarrage.
+Chaque instance KiloCode (ou agent) lance ce daemon au dmarrage.
 Le daemon :
 1. S'enregistre dans SWARM.yaml (GOVERNANCE-HUB) comme node actif
-2. Écoute les événements locaux (commit, push, merge, ADR, EPIC)
-3. Signale son heartbeat périodique
-4. Propage les événements aux autres nodes via holograph-anything
-5. Peut être interrogé pour connaître l'état global du swarm
+2. coute les vnements locaux (commit, push, merge, ADR, EPIC)
+3. Signale son heartbeat priodique
+4. Propage les vnements aux autres nodes via holograph-anything
+5. Peut tre interrog pour connatre l'tat global du swarm
 
 Usage:
     python swarm_node.py --action register --repo NEXUS --agent kilo-env2
@@ -34,19 +34,19 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-# ── Paths ──────────────────────────────────────────────────────────────────────
+#  Paths 
 GOVERNANCE_HUB = Path("D:/DO/WEB/TOOLS/L0-CANON/GOVERNANCE-HUB")
 SWARM_FILE = GOVERNANCE_HUB / "SWARM.yaml"
 SESSION_FILE = GOVERNANCE_HUB / ".swarm_session"
 HOLOGRAPH_SCRIPT = Path("D:/DO/WEB/TOOLS/L4-TOOLS/CTULU/tools/holograph-anything/holograph.py")
 
-# ── Constants ─────────────────────────────────────────────────────────────────
+#  Constants 
 HEARTBEAT_INTERVAL = 300  # seconds
 LOCK_TIMEOUT = 1800  # 30 minutes
 DEFAULT_BRANCH = "main"
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+#  Helpers 
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -72,7 +72,7 @@ def save_swarm(data: dict) -> None:
 
 
 def get_agent_id(agent_name: str) -> str:
-    """Génère un ID unique et persistant pour cet agent."""
+    """Gnre un ID unique et persistant pour cet agent."""
     hostname = socket.gethostname()
     if SESSION_FILE.exists():
         sid = SESSION_FILE.read_text(encoding="utf-8").strip()
@@ -85,7 +85,7 @@ def get_agent_id(agent_name: str) -> str:
 
 
 def git_run(repo_path: str, *args, check: bool = False) -> subprocess.CompletedProcess:
-    """Exécute une commande git dans un repo donné."""
+    """Excute une commande git dans un repo donn."""
     return subprocess.run(
         ["git", "-C", repo_path, *args],
         capture_output=True, text=True, check=check,
@@ -114,20 +114,20 @@ def git_get_last_commit(repo_path: str) -> dict:
 
 
 def git_has_uncommitted(repo_path: str) -> bool:
-    """Vérifie s'il y a des changements non commités."""
+    """Vrifie s'il y a des changements non commits."""
     r = git_run(repo_path, "status", "--porcelain")
     return bool(r.stdout.strip())
 
 
 def get_repo_phase(repo_path: str) -> str:
-    """Détecte la phase Epic depuis les fichiers EPIC locaux."""
+    """Dtecte la phase Epic depuis les fichiers EPIC locaux."""
     epics_dir = Path(repo_path) / "EPICS"
     if not epics_dir.exists():
         epics_dir = Path(repo_path) / "epics"
     if epics_dir.exists():
         epic_files = list(epics_dir.glob("*.md"))
         if epic_files:
-            # Extraire la phase depuis le dernier EPIC modifié
+            # Extraire la phase depuis le dernier EPIC modifi
             latest = max(epic_files, key=lambda f: f.stat().st_mtime)
             content = latest.read_text(encoding="utf-8", errors="ignore")
             for line in content.splitlines():
@@ -136,7 +136,7 @@ def get_repo_phase(repo_path: str) -> str:
     return "unknown"
 
 
-# ── Node Registration ────────────────────────────────────────────────────────
+#  Node Registration 
 
 def register_node(repo_name: str, repo_path: str, agent_name: str) -> dict:
     """Enregistre un node (repo + agent) dans SWARM.yaml."""
@@ -166,7 +166,7 @@ def register_node(repo_name: str, repo_path: str, agent_name: str) -> dict:
     # Enregistrer l'agent
     if "agents" not in data:
         data["agents"] = []
-    # Supprimer l'ancienne entrée si existe
+    # Supprimer l'ancienne entre si existe
     data["agents"] = [a for a in data["agents"] if a.get("id") != agent_id]
     data["agents"].append({
         "id": agent_id,
@@ -184,7 +184,7 @@ def register_node(repo_name: str, repo_path: str, agent_name: str) -> dict:
 
 
 def heartbeat_node(repo_name: str, agent_name: str) -> dict:
-    """Met à jour le heartbeat d'un node."""
+    """Met  jour le heartbeat d'un node."""
     data = load_swarm()
     now = _now()
 
@@ -207,7 +207,7 @@ def heartbeat_node(repo_name: str, agent_name: str) -> dict:
 
 
 def release_node(repo_name: str, agent_name: str) -> dict:
-    """Libère un node (désenregistrement)."""
+    """Libre un node (dsenregistrement)."""
     data = load_swarm()
 
     if "nodes" in data and repo_name in data["nodes"]:
@@ -225,10 +225,10 @@ def release_node(repo_name: str, agent_name: str) -> dict:
     return data
 
 
-# ── Conflict Detection ───────────────────────────────────────────────────────
+#  Conflict Detection 
 
 def detect_conflicts(repo_name: str, repo_path: str) -> list[dict]:
-    """Détecte les conflits potentiels entre ce node et les autres nodes actifs."""
+    """Dtecte les conflits potentiels entre ce node et les autres nodes actifs."""
     data = load_swarm()
     conflicts = []
     now = datetime.now(timezone.utc)
@@ -240,7 +240,7 @@ def detect_conflicts(repo_name: str, repo_path: str) -> list[dict]:
         if other_name == repo_name:
             continue
 
-        # Vérifier si l'autre node est stale (pas de heartbeat > 30 min)
+        # Vrifier si l'autre node est stale (pas de heartbeat > 30 min)
         last_hb = other_node.get("last_heartbeat", "")
         if last_hb:
             try:
@@ -256,7 +256,7 @@ def detect_conflicts(repo_name: str, repo_path: str) -> list[dict]:
             except (ValueError, TypeError):
                 pass
 
-        # Vérifier les ressources verrouillées
+        # Vrifier les ressources verrouilles
         locked = other_node.get("locked_resources", [])
         if locked:
             conflicts.append({
@@ -269,10 +269,10 @@ def detect_conflicts(repo_name: str, repo_path: str) -> list[dict]:
     return conflicts
 
 
-# ── Holographic Event Propagation ────────────────────────────────────────────
+#  Holographic Event Propagation 
 
 def propagate_event(event_type: str, repo_name: str, details: dict) -> dict:
-    """Propage un événement via holograph-anything (propagation causale cross-repo)."""
+    """Propage un vnement via holograph-anything (propagation causale cross-repo)."""
     event = {
         "type": event_type,
         "source_node": repo_name,
@@ -285,7 +285,7 @@ def propagate_event(event_type: str, repo_name: str, details: dict) -> dict:
     if "events" not in data:
         data["events"] = []
     data["events"].append(event)
-    # Garder seulement les 100 derniers événements
+    # Garder seulement les 100 derniers vnements
     data["events"] = data["events"][-100:]
     save_swarm(data)
 
@@ -306,10 +306,10 @@ def propagate_event(event_type: str, repo_name: str, details: dict) -> dict:
     return event
 
 
-# ── Ecosystem Status ──────────────────────────────────────────────────────────
+#  Ecosystem Status 
 
 def get_ecosystem_status() -> dict:
-    """Retourne l'état complet de l'écosystème (vue organisme)."""
+    """Retourne l'tat complet de l'cosystme (vue organisme)."""
     data = load_swarm()
     now = datetime.now(timezone.utc)
 
@@ -317,7 +317,7 @@ def get_ecosystem_status() -> dict:
     agents = data.get("agents", [])
     events = data.get("events", [])
 
-    # Calculer la santé globale
+    # Calculer la sant globale
     active_nodes = 0
     stale_nodes = 0
     total_uncommitted = 0
@@ -351,19 +351,19 @@ def get_ecosystem_status() -> dict:
     }
 
 
-# ── CLI ───────────────────────────────────────────────────────────────────────
+#  CLI 
 
 def main():
-    parser = argparse.ArgumentParser(description="SWARM Node Daemon — Coordination écosystémique")
+    parser = argparse.ArgumentParser(description="SWARM Node Daemon  Coordination cosystmique")
     parser.add_argument("--action", required=True,
                         choices=["register", "heartbeat", "release", "status", "detect-conflicts",
                                  "propagate", "ecosystem"],
-                        help="Action à effectuer")
+                        help="Action  effectuer")
     parser.add_argument("--repo", default="", help="Nom du repo (ex: NEXUS)")
     parser.add_argument("--repo-path", default="", help="Chemin local du repo")
     parser.add_argument("--agent", default="kilo", help="Nom de l'agent (ex: kilo-env2)")
-    parser.add_argument("--event-type", default="", help="Type d'événement (pour propagate)")
-    parser.add_argument("--event-details", default="{}", help="Détails JSON de l'événement")
+    parser.add_argument("--event-type", default="", help="Type d'vnement (pour propagate)")
+    parser.add_argument("--event-details", default="{}", help="Dtails JSON de l'vnement")
     args = parser.parse_args()
 
     if args.action == "register":
@@ -404,7 +404,7 @@ def main():
         repo_path = args.repo_path or ""
         conflicts = detect_conflicts(args.repo, repo_path)
         if conflicts:
-            print(f"[SWARM_NODE] {len(conflicts)} conflit(s) détecté(s):")
+            print(f"[SWARM_NODE] {len(conflicts)} conflit(s) dtect(s):")
             for c in conflicts:
                 print(f"  - [{c['type']}] {c['message']}")
         else:
@@ -422,11 +422,11 @@ def main():
         print(f"\n{'='*60}")
         print(f"  SWARM ECOSYSTEM STATUS")
         print(f"{'='*60}")
-        print(f"  Santé globale: {status['health'].upper()}")
+        print(f"  Sant globale: {status['health'].upper()}")
         print(f"  Phase globale: {status['global_phase']}")
         print(f"  Nodes: {status['active_nodes']} actifs / {status['stale_nodes']} stale / {status['total_nodes']} total")
         print(f"  Agents: {status['total_agents']}")
-        print(f"  Repos avec changements non commités: {status['uncommitted_changes']}")
+        print(f"  Repos avec changements non commits: {status['uncommitted_changes']}")
         print()
         for name, node in status.get("nodes", {}).items():
             print(f"  [{name}]")

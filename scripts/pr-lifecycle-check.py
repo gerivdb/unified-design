@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PR Lifecycle Check - Vérifie et ferme les PR orphelines.
+PR Lifecycle Check - Vrifie et ferme les PR orphelines.
 
 Usage:
     python scripts/pr-lifecycle-check.py --repo <path>

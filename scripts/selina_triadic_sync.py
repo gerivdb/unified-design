@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-selina_triadic_sync.py — Synchronisation triadique TOPOS/VERSES/ONTOLOGY.
+selina_triadic_sync.py  Synchronisation triadique TOPOS/VERSES/ONTOLOGY.
 
 SELINA = Symbolic Ecosystem Liaison & Intelligence Network Agent.
-Synchronisation complète des trois strates :
+Synchronisation complte des trois strates :
 - TOPOS : registre canonique des repos
 - VERSES : concepts et versets de gouvernance
 - ONTOLOGY : concepts ontologiques
 
-Triadic Sync = TOPOS → VERSES → ONTOLOGY → TOPOS (boucle de cohérence)
+Triadic Sync = TOPOS  VERSES  ONTOLOGY  TOPOS (boucle de cohrence)
 
 Usage:
-    python scripts/selina_triadic_sync.py --scan           # Scanner les écarts
+    python scripts/selina_triadic_sync.py --scan           # Scanner les carts
     python scripts/selina_triadic_sync.py --sync           # Synchroniser
-    python scripts/selina_triadic_sync.py --reconcile      # Réconcilier les gaps
-    python scripts/selina_triadic_sync.py --report         # Rapport de cohérence
+    python scripts/selina_triadic_sync.py --reconcile      # Rconcilier les gaps
+    python scripts/selina_triadic_sync.py --report         # Rapport de cohrence
 
 IntentHash: 0xSELINA_TRIADIC_SYNC_20260707
 """
@@ -42,7 +42,7 @@ GOV_HUB = Path("D:/DO/WEB/TOOLS/L0-CANON/GOVERNANCE-HUB")
 
 @dataclass
 class SyncResult:
-    """Résultat d'une opération de synchronisation."""
+    """Rsultat d'une opration de synchronisation."""
     source: str
     target: str
     files_synced: int = 0
@@ -104,17 +104,17 @@ class SelinaTriadicSync:
             "hash_mismatches": []
         }
         
-        # Vérifier les concepts TOPOS manquants dans VERSES
+        # Vrifier les concepts TOPOS manquants dans VERSES
         for concept_name in self.topos_registry.get("concepts", {}).keys():
             if concept_name not in self.verses_concepts:
                 gaps["topos_missing_verses"].append(concept_name)
         
-        # Vérifier les concepts VERSES manquants dans ONTOLOGY
+        # Vrifier les concepts VERSES manquants dans ONTOLOGY
         for concept_name in self.verses_concepts.keys():
             if concept_name not in self.ontology_terms:
                 gaps["verses_missing_ontology"].append(concept_name)
         
-        # Vérifier les concepts ONTOLOGY manquants dans TOPOS
+        # Vrifier les concepts ONTOLOGY manquants dans TOPOS
         for concept_name in self.ontology_terms.keys():
             if concept_name not in self.topos_registry.get("concepts", {}):
                 gaps["ontology_missing_topos"].append(concept_name)
@@ -122,7 +122,7 @@ class SelinaTriadicSync:
         return gaps
 
     def sync_topos_to_verses(self) -> SyncResult:
-        """Synchronise TOPOS → VERSES."""
+        """Synchronise TOPOS  VERSES."""
         result = SyncResult(
             source="TOPOS",
             target="VERSES",
@@ -132,26 +132,26 @@ class SelinaTriadicSync:
         gaps = self.scan_gaps()
         result.gaps_found = gaps["topos_missing_verses"]
         
-        # Créer les concepts manquants dans VERSES
+        # Crer les concepts manquants dans VERSES
         for concept_name in gaps["topos_missing_verses"]:
             concept_path = VERSES_DIR / f"{concept_name}.md"
             concept_path.parent.mkdir(parents=True, exist_ok=True)
             
-            # Générer le contenu du concept
+            # Gnrer le contenu du concept
             concept_data = self.topos_registry.get("concepts", {}).get(concept_name, {})
             content = f"""# {concept_name}
 
-## Définition
+## Dfinition
 {concept_data.get('definition', concept_name)}
 
 ## Contexte TOPOS
-{concept_data.get('context', 'Concept défini dans TOPOS')}
+{concept_data.get('context', 'Concept dfini dans TOPOS')}
 
 ## Statut
 {concept_data.get('status', 'draft')}
 
 ---
-*Généré par Selina Triadic Sync: {datetime.now().isoformat()}*
+*Gnr par Selina Triadic Sync: {datetime.now().isoformat()}*
 """
             concept_path.write_text(content, encoding='utf-8')
             result.files_synced += 1
@@ -160,7 +160,7 @@ class SelinaTriadicSync:
         return result
 
     def sync_verses_to_ontology(self) -> SyncResult:
-        """Synchronise VERSES → ONTOLOGY."""
+        """Synchronise VERSES  ONTOLOGY."""
         result = SyncResult(
             source="VERSES",
             target="ONTOLOGY",
@@ -170,7 +170,7 @@ class SelinaTriadicSync:
         gaps = self.scan_gaps()
         result.gaps_found = gaps["verses_missing_ontology"]
         
-        # Créer les concepts manquants dans ONTOLOGY
+        # Crer les concepts manquants dans ONTOLOGY
         for concept_name in gaps["verses_missing_ontology"]:
             concept_path = ONTOLOGY_DIR / "concepts" / f"{concept_name}.md"
             concept_path.parent.mkdir(parents=True, exist_ok=True)
@@ -181,13 +181,13 @@ class SelinaTriadicSync:
             
             content += f"""
 
-## Métadonnées ONTOLOGY
+## Mtadonnes ONTOLOGY
 - **Source**: VERSES
 - **Status**: draft
 - **Last sync**: {datetime.now().isoformat()}
 
 ---
-*Synchronisé par Selina Triadic Sync*
+*Synchronis par Selina Triadic Sync*
 """
             concept_path.write_text(content, encoding='utf-8')
             result.files_synced += 1
@@ -196,7 +196,7 @@ class SelinaTriadicSync:
         return result
 
     def sync_ontology_to_topos(self) -> SyncResult:
-        """Synchronise ONTOLOGY → TOPOS."""
+        """Synchronise ONTOLOGY  TOPOS."""
         result = SyncResult(
             source="ONTOLOGY",
             target="TOPOS",
@@ -206,7 +206,7 @@ class SelinaTriadicSync:
         gaps = self.scan_gaps()
         result.gaps_found = gaps["ontology_missing_topos"]
         
-        # Mettre à jour le registre TOPOS
+        # Mettre  jour le registre TOPOS
         for concept_name in gaps["ontology_missing_topos"]:
             self.topos_registry.setdefault("concepts", {})[concept_name] = {
                 "definition": concept_name,
@@ -225,7 +225,7 @@ class SelinaTriadicSync:
         return result
 
     def full_triadic_sync(self) -> Dict[str, Any]:
-        """Exécute la synchronisation triadique complète."""
+        """Excute la synchronisation triadique complte."""
         results = {
             "timestamp": datetime.now().isoformat(),
             "syncs": {},
@@ -233,16 +233,16 @@ class SelinaTriadicSync:
             "summary": {}
         }
         
-        # 1. TOPOS → VERSES
+        # 1. TOPOS  VERSES
         results["syncs"]["topos_to_verses"] = asdict(self.sync_topos_to_verses())
         
-        # 2. VERSES → ONTOLOGY
+        # 2. VERSES  ONTOLOGY
         results["syncs"]["verses_to_ontology"] = asdict(self.sync_verses_to_ontology())
         
-        # 3. ONTOLOGY → TOPOS
+        # 3. ONTOLOGY  TOPOS
         results["syncs"]["ontology_to_topos"] = asdict(self.sync_ontology_to_topos())
         
-        # Résumé
+        # Rsum
         results["summary"] = {
             "total_gaps": sum(len(g) for g in results["gaps"].values()),
             "files_synced": sum(s.get("files_synced", 0) for s in results["syncs"].values()),
@@ -252,7 +252,7 @@ class SelinaTriadicSync:
         return results
 
     def reconcile(self) -> Dict[str, Any]:
-        """Récupère les écarts et propose des corrections."""
+        """Rcupre les carts et propose des corrections."""
         gaps = self.scan_gaps()
         reconciliation = {
             "timestamp": datetime.now().isoformat(),
@@ -285,11 +285,11 @@ class SelinaTriadicSync:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="SELINA Triadic Sync — Synchronisation TOPOS/VERSES/ONTOLOGY")
+    parser = argparse.ArgumentParser(description="SELINA Triadic Sync  Synchronisation TOPOS/VERSES/ONTOLOGY")
     parser.add_argument("--scan", action="store_true", help="Scanner les gaps entre les strates")
     parser.add_argument("--sync", action="store_true", help="Synchroniser triadiquement")
     parser.add_argument("--reconcile", action="store_true", help="Analyser et recommander")
-    parser.add_argument("--report", action="store_true", help="Générer un rapport de cohérence")
+    parser.add_argument("--report", action="store_true", help="Gnrer un rapport de cohrence")
     parser.add_argument("--json", action="store_true", help="Output as JSON")
     
     args = parser.parse_args()
@@ -318,7 +318,7 @@ def main():
         if args.json:
             print(json.dumps(results, indent=2))
         else:
-            print(f"\n[SELINA-TRIADIC] Synchronisation complète:")
+            print(f"\n[SELINA-TRIADIC] Synchronisation complte:")
             print(f"  Files synced: {results['summary']['files_synced']}")
             print(f"  Total gaps: {results['summary']['total_gaps']}")
             for sync_name, sync_result in results['syncs'].items():
@@ -350,7 +350,7 @@ def main():
         if args.json:
             print(json.dumps(report, indent=2))
         else:
-            print(f"\n[SELINA-TRIADIC] Rapport de cohérence:")
+            print(f"\n[SELINA-TRIADIC] Rapport de cohrence:")
             print(f"  TOPOS concepts: {report['topos_count']}")
             print(f"  VERSES concepts: {report['verses_count']}")
             print(f"  ONTOLOGY concepts: {report['ontology_count']}")

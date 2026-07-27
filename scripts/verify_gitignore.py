@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Verify gitignore - Nettoie les fichiers non trackés et corrompus
+Verify gitignore - Nettoie les fichiers non tracks et corrompus
 """
 import subprocess
 import sys
@@ -55,7 +55,7 @@ def remove_corrupted_file(filepath):
         Path(filepath).unlink()
         return True
     except Exception as e:
-        print(f"  ✗ Failed to remove {filepath}: {e}")
+        print(f"   Failed to remove {filepath}: {e}")
         return False
 
 def main():
@@ -70,13 +70,13 @@ def main():
     if corrupted:
         print(f"[GITIGNORE] WARNING: Found {len(corrupted)} corrupted files")
         for f in corrupted:
-            print(f"  ⚠ Corrupted: {f}")
+            print(f"   Corrupted: {f}")
     
     # Remove corrupted files
     removed = 0
     for filepath in corrupted:
         if remove_corrupted_file(filepath):
-            print(f"  ✓ Removed corrupted: {filepath}")
+            print(f"   Removed corrupted: {filepath}")
             removed += 1
     
     # Report

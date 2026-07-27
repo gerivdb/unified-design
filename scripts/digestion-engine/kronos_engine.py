@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 KRONOS - Qualificateur des Signaux
-Consomme les signaux MUD d'IRIS pour prendre des décisions de citoyenisation/expulsion.
+Consomme les signaux MUD d'IRIS pour prendre des dcisions de citoyenisation/expulsion.
 """
 
 import json
@@ -12,7 +12,7 @@ from dataclasses import dataclass
 
 @dataclass
 class KronosRules:
-    """Règles de qualification KRONOS"""
+    """Rgles de qualification KRONOS"""
     citizen_threshold: Dict = None
     expulsion_threshold: Dict = None
     

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Cleanup merged branches - Supprime les branches locales et distantes qui ont été mergées
+Cleanup merged branches - Supprime les branches locales et distantes qui ont t merges
 """
 import subprocess
 import sys
@@ -45,10 +45,10 @@ def main():
     deleted = 0
     for branch in local_merged:
         if delete_local_branch(branch):
-            print(f"  ✓ Deleted local branch: {branch}")
+            print(f"   Deleted local branch: {branch}")
             deleted += 1
         else:
-            print(f"  ✗ Failed to delete: {branch}")
+            print(f"   Failed to delete: {branch}")
     
     # Get remote merged branches
     remote_merged = get_remote_merged_branches()
@@ -58,10 +58,10 @@ def main():
     for branch in remote_merged:
         branch_name = branch.replace('origin/', '')
         if delete_remote_branch('origin', branch_name):
-            print(f"  ✓ Deleted remote branch: {branch_name}")
+            print(f"   Deleted remote branch: {branch_name}")
             deleted += 1
         else:
-            print(f"  ✗ Failed to delete remote: {branch_name}")
+            print(f"   Failed to delete remote: {branch_name}")
     
     print(f"[CLEANUP] Total deleted: {deleted}")
     return 0

@@ -1,7 +1,7 @@
-"""Loop Detection Engine — Unified Design v2.
+"""Loop Detection Engine  Unified Design v2.
 
-Ce module construit le graphe de dépendances entre designs/atomes,
-détecte les cycles, les classe, et exporte des rapports.
+Ce module construit le graphe de dpendances entre designs/atomes,
+dtecte les cycles, les classe, et exporte des rapports.
 """
 
 from __future__ import annotations

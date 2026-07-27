@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Post-Merge Cleanup - Nettoyage automatique des branches après merge.
+Post-Merge Cleanup - Nettoyage automatique des branches aprs merge.
 
 Usage:
     python scripts/post_merge_cleanup.py --repo <path>

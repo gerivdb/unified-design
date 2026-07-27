@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-renumber_dupes.py -- Renumérotation des artefacts en double (F2)
+renumber_dupes.py -- Renumrotation des artefacts en double (F2)
 
-Résout les doublons de numéros en renommant les fichiers les plus récents
-avec des numéros disponibles.
+Rsout les doublons de numros en renommant les fichiers les plus rcents
+avec des numros disponibles.
 
 Usage:
     python scripts/renumber_dupes.py --repo . --dry-run
@@ -19,7 +19,7 @@ from pathlib import Path
 
 
 def find_dupes(repo_path):
-    """Trouve les fichiers avec doublons de numéro."""
+    """Trouve les fichiers avec doublons de numro."""
     dupes = {}
     for d in ("PRD", "ADR", "EPICS", "SPEC", "INTENTS"):
         dpath = Path(repo_path) / d
@@ -41,13 +41,13 @@ def find_dupes(repo_path):
 
 
 def find_available_numbers(repo_path, atype, used_nums):
-    """Trouve les numéros disponibles pour un type."""
+    """Trouve les numros disponibles pour un type."""
     max_num = max(used_nums) if used_nums else 0
     return [i for i in range(1, max_num + 10) if i not in used_nums]
 
 
 def renumber_file(filepath, new_num, dry_run=False):
-    """Renomme un fichier avec un nouveau numéro et met à jour le frontmatter."""
+    """Renomme un fichier avec un nouveau numro et met  jour le frontmatter."""
     old_name = filepath.name
     # Extraire le type et le slug
     m = re.match(r"(\w+)-\d{3}-(.+)", old_name)
@@ -61,7 +61,7 @@ def renumber_file(filepath, new_num, dry_run=False):
     if dry_run:
         return {"old": old_name, "new": new_name, "status": "dry_run"}
 
-    # Lire le contenu et mettre à jour le frontmatter
+    # Lire le contenu et mettre  jour le frontmatter
     content = filepath.read_text(encoding="utf-8")
     # Remplacer l'id dans le frontmatter
     content = re.sub(
@@ -72,7 +72,7 @@ def renumber_file(filepath, new_num, dry_run=False):
         flags=re.MULTILINE,
     )
 
-    # Écrire le nouveau fichier
+    # crire le nouveau fichier
     new_path.write_text(content, encoding="utf-8")
     # Supprimer l'ancien
     filepath.unlink()
@@ -81,18 +81,18 @@ def renumber_file(filepath, new_num, dry_run=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Renumérotation des doublons F2")
+    parser = argparse.ArgumentParser(description="Renumrotation des doublons F2")
     parser.add_argument("--repo", default=".")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
     dupes = find_dupes(args.repo)
     if not dupes:
-        print("Aucun doublon détecté.")
+        print("Aucun doublon dtect.")
         return
 
     print(f"\n{'='*60}")
-    print(f"Renumérotation doublons F2 : {args.repo}")
+    print(f"Renumrotation doublons F2 : {args.repo}")
     print(f"{'='*60}")
 
     for (atype, num), files in sorted(dupes.items()):
@@ -102,12 +102,12 @@ def main():
             print(f"  {f.name}{marker}")
 
     if args.dry_run:
-        print("\n[DRY RUN] Aucun changement effectué.")
+        print("\n[DRY RUN] Aucun changement effectu.")
         return
 
     # Effectuer les renommages
     for (atype, num), files in sorted(dupes.items()):
-        # Trouver les numéros utilisés par ce type
+        # Trouver les numros utiliss par ce type
         dpath = Path(args.repo) / (atype + "S" if atype == "EPIC" else atype + "S" if atype == "INTENT" else atype)
         used = set()
         for f in dpath.iterdir():
@@ -117,7 +117,7 @@ def main():
 
         available = find_available_numbers(args.repo, atype, used)
 
-        # Trier par date de modification (le plus ancien garde son numéro)
+        # Trier par date de modification (le plus ancien garde son numro)
         files_sorted = sorted(files, key=lambda x: os.path.getmtime(x))
         to_rename = files_sorted[1:]  # Tous sauf le premier
 

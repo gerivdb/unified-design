@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-selina_ci.py — SELINA Continuous Integration : orchestration complète injection RSS-v2.
+selina_ci.py  SELINA Continuous Integration : orchestration complte injection RSS-v2.
 
 Automatise :
-1. Découverte repos via RIDDLER
+1. Dcouverte repos via RIDDLER
 2. Injection workflow atomique
-3. Push + création PR via ALFRED
+3. Push + cration PR via ALFRED
 4. Sync post-merge
 
 IntentHash: 0xSELINA_CI_20260705
@@ -29,7 +29,7 @@ def run_git(args: list, cwd: str, timeout: int = 30) -> tuple[int, str, str]:
 
 
 def create_pr(repo: str, title: str, body: str, branch: str, token: str = None) -> str:
-    """Crée une PR via gh CLI."""
+    """Cre une PR via gh CLI."""
     cmd = [
         "gh", "pr", "create",
         "--repo", f"gerivdb/{repo}",
@@ -85,7 +85,7 @@ def inject_and_pr(repo_name: str, repo_path: str, source_path: Path, branch: str
             result["error"] = err[:200] if err else "No remote configured"
             return result
 
-        # Créer PR
+        # Crer PR
         pr_url = create_pr(repo_name,
             title=f"feat(workflow): inject RSS-v2 reusable workflow (EPIC-400)",
             body="Canary deployment of RSS-v2 reusable workflow. Part of EPIC-400 pipeline.",

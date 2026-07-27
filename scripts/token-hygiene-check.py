@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Token Hygiene Check - Détecte et purge les tokens exposés.
+Token Hygiene Check - Dtecte et purge les tokens exposs.
 
 Usage:
     python scripts/token-hygiene-check.py --repo <path>

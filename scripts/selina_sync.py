@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-selina_sync.py — Synchronisation intelligente post-merge (SELINA Layer).
+selina_sync.py  Synchronisation intelligente post-merge (SELINA Layer).
 
 SELINA = Symbolic Ecosystem Liaison & Intelligence Network Agent.
-Détecte les désynchronisations cross-repo après un merge et orchestre
-la récupération via fetch explicite + rebase.
+Dtecte les dsynchronisations cross-repo aprs un merge et orchestre
+la rcupration via fetch explicite + rebase.
 
-Problème résolu : le `git pull --rebase` peut échouer silencieusement
-si le merge commit distant a été créé APRÈS le fetch local.
+Problme rsolu : le `git pull --rebase` peut chouer silencieusement
+si le merge commit distant a t cr APRS le fetch local.
 
 SELINA :
-1. Détecte tous les repos locaux
+1. Dtecte tous les repos locaux
 2. Pour chaque repo : fetch + compare HEAD vs origin/main
-3. Si désynchronisé → rebase automatique
-4. Si conflit → signale pour HITL
+3. Si dsynchronis  rebase automatique
+4. Si conflit  signale pour HITL
 5. Log dans SWARM.yaml (events: selINA_sync)
 6. Retourne un rapport JSON
 
@@ -21,7 +21,7 @@ Usage:
     python scripts/selina_sync.py --scan          # Scan tous les repos
     python scripts/selina_sync.py --sync          # Sync tous les repos
     python scripts/selina_sync.py --repo REPO-STANDARDS  # Sync un repo
-    python scripts/selina_sync.py --status        # État uniquement
+    python scripts/selina_sync.py --status        # tat uniquement
 
 IntentHash: 0xSELINA_SYNC_20260629
 """
@@ -184,28 +184,28 @@ def sync_all(dry_run: bool = False) -> list[dict]:
     for name, path in sorted(repos.items()):
         result = sync_repo(name, path, dry_run=dry_run)
         results.append(result)
-        status_icon = "✅" if result["status"] in ("in_sync", "synced") else "⚠️"
+        status_icon = "" if result["status"] in ("in_sync", "synced") else ""
         print(f"  {status_icon} {name:25s} | {result['status']:15s} | behind={result['behind']} ahead={result['ahead']}")
     return results
 
 
 def main():
-    parser = argparse.ArgumentParser(description="SELINA Sync — Synchronisation intelligente cross-repo")
+    parser = argparse.ArgumentParser(description="SELINA Sync  Synchronisation intelligente cross-repo")
     parser.add_argument("--scan", action="store_true", help="Scanner tous les repos (dry-run)")
     parser.add_argument("--sync", action="store_true", help="Synchroniser tous les repos")
-    parser.add_argument("--repo", default="", help="Nom du repo ciblé")
+    parser.add_argument("--repo", default="", help="Nom du repo cibl")
     parser.add_argument("--dry-run", action="store_true", help="Simuler sans appliquer")
-    parser.add_argument("--status", action="store_true", help="État uniquement (scan + summary)")
+    parser.add_argument("--status", action="store_true", help="tat uniquement (scan + summary)")
     args = parser.parse_args()
 
     if args.scan or args.status:
-        print(f"\n[SELINA] Scan de l'écosystème...")
+        print(f"\n[SELINA] Scan de l'cosystme...")
         results = scan_all()
         synced = sum(1 for r in results if r["status"] == "in_sync")
         needs = sum(1 for r in results if r["status"] != "in_sync")
-        print(f"\n[SELINA] Résultat: {synced} synchronisés, {needs} à synchroniser")
+        print(f"\n[SELINA] Rsultat: {synced} synchroniss, {needs}  synchroniser")
         for r in results:
-            icon = "✅" if r["status"] == "in_sync" else "⚠️"
+            icon = "" if r["status"] == "in_sync" else ""
             print(f"  {icon} {r['repo']:25s} | {r['status']:15s} | behind={r['behind']} ahead={r['ahead']}")
         print()
         print(json.dumps(results, indent=2, ensure_ascii=False))
@@ -221,13 +221,13 @@ def main():
                 result = sync_repo(args.repo, repos[args.repo], dry_run=args.dry_run)
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
-                print(f"[SELINA] ❌ Repo '{args.repo}' non trouvé localement")
+                print(f"[SELINA]  Repo '{args.repo}' non trouv localement")
                 sys.exit(1)
         else:
             results = sync_all(dry_run=args.dry_run)
             failed = [r for r in results if r["status"] in ("fetch_failed", "rebase_failed")]
             if failed:
-                print(f"\n[SELINA] ⚠️  {len(failed)} repo(s) en erreur — intervention requise")
+                print(f"\n[SELINA]   {len(failed)} repo(s) en erreur  intervention requise")
                 sys.exit(1)
 
     else:

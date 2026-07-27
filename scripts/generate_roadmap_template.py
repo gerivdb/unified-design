@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-scripts/generate_roadmap_template.py — RSS-v3 ROADMAPS/ template generator v2.
+scripts/generate_roadmap_template.py  RSS-v3 ROADMAPS/ template generator v2.
 
-Crée le dossier ROADMAPS/ avec les 5 fichiers template standard :
+Cre le dossier ROADMAPS/ avec les 5 fichiers template standard :
   - blockers.yaml
   - dependencies.yaml
   - history.yaml
   - milestones.yaml
   - vector.yaml
 
-Schéma v2 (RSS-v3.1) — ajoute :
+Schma v2 (RSS-v3.1)  ajoute :
   - dimensions d0-d7 (VECTUS-03)
   - vision_layer (HOLOVISION / VISION FRACTALE / OMNIVISION)
   - thought_commits (vectorisation temporelle longue)
@@ -18,7 +18,7 @@ Optionnellement, fait automatiquement le git add + commit.
 
 Usage:
     python generate_roadmap_template.py <repo_path> [--commit] [--push]
-    python generate_roadmap_template.py <repo_path> --v1  # rétrocompatibilité
+    python generate_roadmap_template.py <repo_path> --v1  # rtrocompatibilit
 
 Exemple:
     python generate_roadmap_template.py /path/to/my/repo --commit
@@ -70,7 +70,7 @@ def generate_history_yaml(repo_name: str, version: str = None, intent_hash: str 
     v = version or TEMPLATE_VERSION
     ih = intent_hash or TEMPLATE_INTENT_HASH
     if v == TEMPLATE_VERSION:
-        # v2 schema — history.yaml est append-only, structure amendments[]
+        # v2 schema  history.yaml est append-only, structure amendments[]
         return f"""type: ROADMAP_HISTORY
 version: '{v}'
 intent_hash: {ih}
@@ -79,7 +79,7 @@ repo: {repo_name}
 amendments:
   - date: '{now}'
     event: init
-    description: ROADMAPS/ directory initialized (RSS-v3 v2 — VECTUS-03)
+    description: ROADMAPS/ directory initialized (RSS-v3 v2  VECTUS-03)
     actor: generate_roadmap_template.py
     causal_ref: ''
     significance: 0.0
@@ -127,7 +127,7 @@ def generate_vector_yaml(repo_name: str, strate: str = "UNKNOWN", version: str =
     v = version or TEMPLATE_VERSION
     ih = intent_hash or TEMPLATE_INTENT_HASH
     if v == TEMPLATE_VERSION:
-        # v2 schema — VECTUS-03 dimensions + triple vision + thought_commits
+        # v2 schema  VECTUS-03 dimensions + triple vision + thought_commits
         return f"""type: ROADMAP_VECTOR
 version: '{v}'
 intent_hash: {ih}
@@ -177,13 +177,13 @@ vector:
 
 
 def deploy_roadmaps(repo_path: str, commit: bool = False, push: bool = False, use_v1: bool = False) -> dict:
-    """Crée ROADMAPS/ dans le repo cible et optionnellement commit.
+    """Cre ROADMAPS/ dans le repo cible et optionnellement commit.
     
     Args:
         repo_path: Chemin vers le repo cible
         commit: Faire git add + commit
-        push: Push après commit
-        use_v1: Utiliser le schéma v1 (rétrocompatibilité)
+        push: Push aprs commit
+        use_v1: Utiliser le schma v1 (rtrocompatibilit)
     """
     repo = Path(repo_path).resolve()
     result = {"repo": str(repo), "files_created": [], "committed": False, "pushed": False, "errors": [], "schema_version": "v1" if use_v1 else "v2"}
@@ -192,7 +192,7 @@ def deploy_roadmaps(repo_path: str, commit: bool = False, push: bool = False, us
         result["errors"].append(f"Chemin inexistant: {repo}")
         return result
 
-    # Détecter le nom du repo depuis git remote ou dossier
+    # Dtecter le nom du repo depuis git remote ou dossier
     repo_name = repo.name
     try:
         os.chdir(str(repo))
@@ -207,7 +207,7 @@ def deploy_roadmaps(repo_path: str, commit: bool = False, push: bool = False, us
     except Exception:
         pass
 
-    # Détecter la strate depuis le chemin
+    # Dtecter la strate depuis le chemin
     strate = "UNKNOWN"
     parts = str(repo).split(os.sep)
     for p in parts:
@@ -215,7 +215,7 @@ def deploy_roadmaps(repo_path: str, commit: bool = False, push: bool = False, us
             strate = p
             break
 
-    # Sélection du schéma
+    # Slection du schma
     if use_v1:
         v = TEMPLATE_VERSION_V1
         ih = TEMPLATE_INTENT_HASH_V1
@@ -240,7 +240,7 @@ def deploy_roadmaps(repo_path: str, commit: bool = False, push: bool = False, us
             fpath.write_text(content, encoding="utf-8")
             result["files_created"].append(str(fpath.relative_to(repo)))
 
-    # Git add + commit si demandé
+    # Git add + commit si demand
     if commit and result["files_created"]:
         try:
             os.chdir(str(repo))
@@ -276,19 +276,19 @@ def main():
     )
     parser.add_argument(
         "repo_path", type=str, default=".",
-        help="Chemin vers le repo cible (défaut: .)"
+        help="Chemin vers le repo cible (dfaut: .)"
     )
     parser.add_argument(
         "--commit", action="store_true",
-        help="Faire le git add + commit après création"
+        help="Faire le git add + commit aprs cration"
     )
     parser.add_argument(
         "--push", action="store_true",
-        help="Push après commit (implique --commit)"
+        help="Push aprs commit (implique --commit)"
     )
     parser.add_argument(
         "--v1", action="store_true",
-        help="Utiliser le schéma v1 (rétrocompatibilité)"
+        help="Utiliser le schma v1 (rtrocompatibilit)"
     )
     args = parser.parse_args()
 

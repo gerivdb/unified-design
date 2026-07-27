@@ -1,6 +1,6 @@
 """
 ATOM-ASCII-AUTO-FIX
-Correcteur automatique des caractères non-ASCII avant commit.
+Correcteur automatique des caractres non-ASCII avant commit.
 """
 
 import sys
@@ -8,7 +8,7 @@ import os
 import re
 
 def fix_ascii(content: str) -> str:
-    """Remplace les caractères non-ASCII (ord > 127) par leur equivalent ASCII ou supprime."""
+    """Remplace les caractres non-ASCII (ord > 127) par leur equivalent ASCII ou supprime."""
     replacements = {
         '\u2018': "'", '\u2019': "'", '\u201c': '"', '\u201d': '"',
         '\u2013': '-', '\u2014': '--', '\u2026': '...',

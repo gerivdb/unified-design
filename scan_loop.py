@@ -11,9 +11,9 @@ graph = build_graph_from_designs(roots, design_only=True)
 cycles = detect_cycles(graph, max_cycle_length=5)
 
 design_count = sum(1 for n in graph.nodes.values() if n.kind == "design")
-print(f"Design repos détectés : {design_count}")
-print(f"Nœuds analysés : {len(graph.nodes)}")
-print(f"Cycles détectés : {len(cycles)}")
+print(f"Design repos dtects : {design_count}")
+print(f"Nuds analyss : {len(graph.nodes)}")
+print(f"Cycles dtects : {len(cycles)}")
 if cycles:
     for c in cycles:
         print(f"  Cycle: {c}")

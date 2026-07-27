@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-fetch-verify.py — Fetch explicite + vérification de synchronisation post-merge.
+fetch-verify.py  Fetch explicite + vrification de synchronisation post-merge.
 
-Problème résolu : après un `gh pr merge --squash` ou un merge distant,
-le `git pull --rebase` local peut ne pas récupérer le merge commit
-car le fetch a eu lieu AVANT la création du merge commit côté distant.
+Problme rsolu : aprs un `gh pr merge --squash` ou un merge distant,
+le `git pull --rebase` local peut ne pas rcuprer le merge commit
+car le fetch a eu lieu AVANT la cration du merge commit ct distant.
 
 Ce script :
 1. Fetch explicitement origin/main
 2. Compare HEAD local avec origin/main
-3. Si derrière  -> pull --rebase
-4. Si diverge  -> signale le problème
-5. Log l'événement dans SWARM.yaml (event: post_merge_sync)
+3. Si derrire  -> pull --rebase
+4. Si diverge  -> signale le problme
+5. Log l'vnement dans SWARM.yaml (event: post_merge_sync)
 
 Usage:
     python scripts/post-merge/fetch-verify.py --repo-path <path> --repo-name <name>
@@ -111,7 +111,7 @@ def fetch_verify(repo_path: str, repo_name: str) -> dict:
 
     if local_sha == remote_sha:
         result["status"] = "in_sync"
-        print(f"[FETCH-VERIFY] [OK] {repo_name} synchronisé ({local_sha[:12]})")
+        print(f"[FETCH-VERIFY] [OK] {repo_name} synchronis ({local_sha[:12]})")
         log_event("post_merge_sync_ok", repo_name, {"sha": local_sha[:12]})
         return result
 
@@ -122,11 +122,11 @@ def fetch_verify(repo_path: str, repo_name: str) -> dict:
 
     if behind == 0 and ahead > 0:
         result["status"] = "local_ahead"
-        print(f"[FETCH-VERIFY] [INFO]  {repo_name} local en avance ({ahead} commits) — OK")
+        print(f"[FETCH-VERIFY] [INFO]  {repo_name} local en avance ({ahead} commits)  OK")
         return result
 
     if behind > 0 and ahead == 0:
-        # Cas simple : local derrière  -> pull --rebase
+        # Cas simple : local derrire  -> pull --rebase
         print(f"[FETCH-VERIFY] {repo_name} en retard de {behind} commits  -> pull --rebase...")
         r = git_run(repo_path, "pull", "--rebase", "origin", "main", timeout=60)
         if r.returncode == 0:
@@ -134,7 +134,7 @@ def fetch_verify(repo_path: str, repo_name: str) -> dict:
             result["status"] = "synced_via_rebase"
             result["action_taken"] = "pull --rebase origin/main"
             result["local_sha"] = new_sha[:12]
-            print(f"[FETCH-VERIFY] [OK] Synchronisé via rebase  -> {new_sha[:12]}")
+            print(f"[FETCH-VERIFY] [OK] Synchronis via rebase  -> {new_sha[:12]}")
             log_event("post_merge_sync_rebase", repo_name, {
                 "behind": behind,
                 "new_sha": new_sha[:12],
@@ -147,15 +147,15 @@ def fetch_verify(repo_path: str, repo_name: str) -> dict:
         return result
 
     if behind > 0 and ahead > 0:
-        # Divergence — nécessite rebase
-        print(f"[FETCH-VERIFY] [WARN]  {repo_name} divergé (behind={behind}, ahead={ahead})  -> rebase...")
+        # Divergence  ncessite rebase
+        print(f"[FETCH-VERIFY] [WARN]  {repo_name} diverg (behind={behind}, ahead={ahead})  -> rebase...")
         r = git_run(repo_path, "pull", "--rebase", "origin", "main", timeout=60)
         if r.returncode == 0:
             new_sha = get_sha(repo_path, "HEAD")
             result["status"] = "synced_via_rebase_diverged"
             result["action_taken"] = "pull --rebase origin/main (diverged)"
             result["local_sha"] = new_sha[:12]
-            print(f"[FETCH-VERIFY] [OK] Divergence résolue via rebase  -> {new_sha[:12]}")
+            print(f"[FETCH-VERIFY] [OK] Divergence rsolue via rebase  -> {new_sha[:12]}")
             log_event("post_merge_sync_rebase_diverged", repo_name, {
                 "behind": behind,
                 "ahead": ahead,
@@ -164,12 +164,12 @@ def fetch_verify(repo_path: str, repo_name: str) -> dict:
         else:
             result["status"] = "rebase_conflict"
             result["error"] = r.stderr.strip()[:200]
-            print(f"[FETCH-VERIFY] [FAIL] Conflit de rebase — résolution manuelle requise")
+            print(f"[FETCH-VERIFY] [FAIL] Conflit de rebase  rsolution manuelle requise")
             log_event("post_merge_sync_failed", repo_name, {"error": "rebase_conflict"})
         return result
 
     result["status"] = "unknown_state"
-    print(f"[FETCH-VERIFY] [WARN]  État inconnu pour {repo_name}")
+    print(f"[FETCH-VERIFY] [WARN]  tat inconnu pour {repo_name}")
     return result
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ontology-aware Anachronism Detector - définit ce qu'est temporellement anachronique.
+Ontology-aware Anachronism Detector - dfinit ce qu'est temporellement anachronique.
 """
 
 from pathlib import Path
@@ -8,12 +8,12 @@ from datetime import datetime
 from typing import Literal
 
 
-# Types d'anachronisme définis sur 5 dimensions (triadiques)
+# Types d'anachronisme dfinis sur 5 dimensions (triadiques)
 AnachronismType = Literal["AN-A", "AN-B", "AN-C", "AN-D", "AN-E"]
 
 
 class AnachronismDetector:
-    """Détecteur ontologique des anomalies temporelles."""
+    """Dtecteur ontologique des anomalies temporelles."""
     
     # SOT des concepts temporels valides
     TEMPORAL_CONCEPTS = {
@@ -29,32 +29,32 @@ class AnachronismDetector:
     
     def detect(self, operation: str, prerequisites: list[str]) -> AnachronismType | None:
         """
-        Détecte si une opération est anachronique.
+        Dtecte si une opration est anachronique.
         
         Args:
-            operation: Nom de l'opération
-            prerequisites: Concepts requis avant exécution
+            operation: Nom de l'opration
+            prerequisites: Concepts requis avant excution
             
         Returns:
             Type d'anachronisme ou None si OK
         """
         # Check SOT registry
         if not self._concept_exists(operation):
-            return "AN-B"  # Concept non défini
+            return "AN-B"  # Concept non dfini
         
         # Check temporal ordering
         for prereq in prerequisites:
             if not self._prerequisite_met(prereq):
-                return "AN-A"  # Prerequis non créé
+                return "AN-A"  # Prerequis non cr
             
         return None  # OK
     
     def _concept_exists(self, concept: str) -> bool:
-        """Vérifie que le concept existe dans SOT."""
+        """Vrifie que le concept existe dans SOT."""
         return concept in self.TEMPORAL_CONCEPTS
     
     def _prerequisite_met(self, prereq: str) -> bool:
-        """Vérifie que le prerequis a été créé avant."""
+        """Vrifie que le prerequis a t cr avant."""
         prereq_date = self.TEMPORAL_CONCEPTS.get(prereq, {}).get("created")
         if not prereq_date:
             return False

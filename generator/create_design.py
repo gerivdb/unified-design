@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-create_design.py — Générateur de dépôt de design unifié.
+create_design.py  Gnrateur de dpt de design unifi.
 
-Lit le méta-design, fusionne les héritages, détecte les conflits,
-et génère un design.yaml valide prêt à être déployé.
+Lit le mta-design, fusionne les hritages, dtecte les conflits,
+et gnre un design.yaml valide prt  tre dploy.
 
 Usage:
     python create_design.py <design_name> --parent <parent_design> [--capability <cap> ...] [--template <template_path>]
@@ -26,7 +26,7 @@ def load_meta_design(meta_path: Path) -> dict[str, Any]:
 
 
 def resolve_capabilities(meta: dict[str, Any], requested: list[str]) -> dict[str, Any]:
-    """Fusionne les capacités héritées avec les paramètres demandés."""
+    """Fusionne les capacits hrites avec les paramtres demands."""
     caps = {}
     for cap in meta.get("capabilities", []):
         name = cap["name"]
@@ -36,9 +36,9 @@ def resolve_capabilities(meta: dict[str, Any], requested: list[str]) -> dict[str
 
 
 def detect_conflicts(caps: dict[str, Any]) -> list[str]:
-    """Détecte les conflits entre capacités (ex: latence vs puissance impossibles)."""
+    """Dtecte les conflits entre capacits (ex: latence vs puissance impossibles)."""
     conflicts = []
-    # Règle simple : si latency-bound <= 1ms ET power-capped <= 1W → conflit
+    # Rgle simple : si latency-bound <= 1ms ET power-capped <= 1W  conflit
     lat = caps.get("latency-bound", {}).get("max_latency_ms")
     pow_ = caps.get("power-capped", {}).get("max_power_w")
     if lat is not None and pow_ is not None and lat <= 1 and pow_ <= 1:
@@ -49,8 +49,8 @@ def detect_conflicts(caps: dict[str, Any]) -> list[str]:
 
 
 def create_template_structure(output_dir: Path, design_name: str) -> None:
-    """Crée la structure de base d'un dépôt de design."""
-    # Structure minimale d'un dépôt de design
+    """Cre la structure de base d'un dpt de design."""
+    # Structure minimale d'un dpt de design
     structure = [
         ".github/workflows/ci.yml",
         "docs/META-DESIGN.md",
@@ -66,7 +66,7 @@ def create_template_structure(output_dir: Path, design_name: str) -> None:
         else:
             item_path.parent.mkdir(parents=True, exist_ok=True)
             if not item_path.exists():
-                # Créer un fichier placeholder
+                # Crer un fichier placeholder
                 if item.endswith(".yml"):
                     item_path.write_text(f"# {design_name} - {item}\n")
 
@@ -74,7 +74,7 @@ def create_template_structure(output_dir: Path, design_name: str) -> None:
 def generate_design_yaml(
     name: str, parents: list[str], capabilities: dict[str, Any], output_dir: Path, meta: dict[str, Any]
 ) -> Path:
-    """Génère le fichier design.yaml dans le répertoire cible."""
+    """Gnre le fichier design.yaml dans le rpertoire cible."""
     design = {
         "version": "1.0.0",
         "name": name,
@@ -92,7 +92,7 @@ def generate_design_yaml(
 
 
 def generate_repo_yaml(output_dir: Path, design_name: str, parents: list[str]) -> Path:
-    """Génère le fichier REPO.yaml avec les métadonnées du dépôt."""
+    """Gnre le fichier REPO.yaml avec les mtadonnes du dpt."""
     repo = {
         "name": design_name,
         "full_name": f"gerivdb/{design_name}",
@@ -100,7 +100,7 @@ def generate_repo_yaml(output_dir: Path, design_name: str, parents: list[str]) -
         "parents": parents,
         "status": "active",
         "stratum": "L0-CANON",
-        "description": f"Design unifié hérité de {', '.join(parents)}" if parents else "Design unifié racine",
+        "description": f"Design unifi hrit de {', '.join(parents)}" if parents else "Design unifi racine",
         "capabilities": ["latency-bound", "power-capped"],
         "created_at": datetime.now().isoformat(),
     }
@@ -111,7 +111,7 @@ def generate_repo_yaml(output_dir: Path, design_name: str, parents: list[str]) -
 
 
 def generate_ci_workflow(output_dir: Path, design_name: str) -> Path:
-    """Génère le workflow CI pour ce design."""
+    """Gnre le workflow CI pour ce design."""
     ci_content = f"""name: CI
 
 on:
@@ -151,7 +151,7 @@ jobs:
 
 
 def generate_gitignore(output_dir: Path) -> Path:
-    """Génère le fichier .gitignore standard."""
+    """Gnre le fichier .gitignore standard."""
     content = """# Python
 __pycache__/
 *.py[cod]
@@ -182,26 +182,26 @@ Thumbs.db
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Génère un nouveau design unifié")
-    parser.add_argument("design_name", help="Nom du design à créer")
-    parser.add_argument("--parent", help="Design parent (héritage)", default=None)
+    parser = argparse.ArgumentParser(description="Gnre un nouveau design unifi")
+    parser.add_argument("design_name", help="Nom du design  crer")
+    parser.add_argument("--parent", help="Design parent (hritage)", default=None)
     parser.add_argument(
         "--parents",
         nargs="+",
-        help="Designs parents multiples pour héritage multiple (ordre = priorité)",
+        help="Designs parents multiples pour hritage multiple (ordre = priorit)",
         default=None,
     )
     parser.add_argument(
         "--capability",
         action="append",
         default=[],
-        help="Capacité à inclure (peut être répété)",
+        help="Capacit  inclure (peut tre rpt)",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
-        help="Répertoire de sortie (défaut: ../generated-designs)",
+        help="Rpertoire de sortie (dfaut: ../generated-designs)",
     )
     parser.add_argument(
         "--meta-design",
@@ -213,22 +213,22 @@ def main() -> int:
         "--template",
         type=Path,
         default=None,
-        help="Chemin vers un template de dépôt à utiliser",
+        help="Chemin vers un template de dpt  utiliser",
     )
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Affiche ce qui serait généré sans créer les fichiers",
+        help="Affiche ce qui serait gnr sans crer les fichiers",
     )
     args = parser.parse_args()
 
-    # Support héritage multiple : combiner --parent et --parents
+    # Support hritage multiple : combiner --parent et --parents
     parents = []
     if args.parent:
         parents.append(args.parent)
     if args.parents:
         parents.extend(args.parents)
-    parents = list(dict.fromkeys(parents))  # dédoublonner en préservant l'ordre
+    parents = list(dict.fromkeys(parents))  # ddoublonner en prservant l'ordre
 
     meta = load_meta_design(args.meta_design)
     capabilities = resolve_capabilities(meta, args.capability)
@@ -240,7 +240,7 @@ def main() -> int:
             print(f"  - {c}")
         return 1
 
-    # Déterminer le répertoire de sortie
+    # Dterminer le rpertoire de sortie
     output_dir = args.output_dir or Path(__file__).resolve().parent.parent / "generated-designs" / args.design_name
     
     if args.dry_run:
@@ -250,13 +250,13 @@ def main() -> int:
         print(f"   Capacities: {list(capabilities.keys())}")
         return 0
 
-    # Créer le répertoire de sortie
+    # Crer le rpertoire de sortie
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Créer la structure de base
+    # Crer la structure de base
     create_template_structure(output_dir, args.design_name)
     
-    # Générer les fichiers
+    # Gnrer les fichiers
     design_file = generate_design_yaml(args.design_name, parents, capabilities, output_dir, meta)
     repo_file = generate_repo_yaml(output_dir, args.design_name, parents)
     ci_file = generate_ci_workflow(output_dir, args.design_name)

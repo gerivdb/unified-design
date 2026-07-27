@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-inject_canary.py — Injection atomique du workflow RSS-v2 avec gestion d'état.
-Gère le stash, commit et push en une opération.
+inject_canary.py  Injection atomique du workflow RSS-v2 avec gestion d'tat.
+Gre le stash, commit et push en une opration.
 
 IntentHash: 0xINJECT_CANARY_20260705
 """
@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 def run_git(args: list, cwd: str, timeout: int = 30) -> tuple[int, str, str]:
-    """Exécute git -C dans le répertoire."""
+    """Excute git -C dans le rpertoire."""
     proc = subprocess.run(
         ["git", "-C", cwd] + args,
         capture_output=True, text=True, timeout=timeout
@@ -24,13 +24,13 @@ def run_git(args: list, cwd: str, timeout: int = 30) -> tuple[int, str, str]:
 
 
 def has_uncommitted_changes(repo_path: str) -> bool:
-    """Vérifie s'il y a des changements non commités."""
+    """Vrifie s'il y a des changements non commits."""
     code, out, _ = run_git(["status", "--porcelain"], repo_path)
     return bool(out)
 
 
 def stash_changes(repo_path: str, message: str) -> bool:
-    """Stashe les changements si présents."""
+    """Stashe les changements si prsents."""
     if not has_uncommitted_changes(repo_path):
         return True
     code, _, err = run_git(["stash", "push", "-m", message], repo_path)
@@ -63,7 +63,7 @@ def inject_workflow_atomic(repo_name: str, repo_path: str, source_path: Path, dr
         return result
 
     try:
-        # Créer le workflow
+        # Crer le workflow
         workflow_path.parent.mkdir(parents=True, exist_ok=True)
         workflow_path.write_text(source_path.read_text(encoding="utf-8"), encoding="utf-8")
 
@@ -99,7 +99,7 @@ def main():
     parser.add_argument("--limit", type=int, default=10, help="Max repos")
     args = parser.parse_args()
 
-    # Définir les racines selon la strate
+    # Dfinir les racines selon la strate
     layer_roots = {
         "L0": [Path("D:/DO/WEB/TOOLS/L0-CANON")],
         "L1": [Path("D:/DO/WEB/TOOLS/L0-CANON"), Path("D:/DO/WEB/TOOLS/L1-INFRA")],
@@ -111,7 +111,7 @@ def main():
     # Source workflow
     source_path = Path(__file__).parent.parent / ".github/workflows/rss-v2-reusable.yml"
 
-    # Découvrir les repos
+    # Dcouvrir les repos
     repos = {}
     for root in roots:
         if not root.exists():

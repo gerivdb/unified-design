@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-riddlar_citizens.py — RIDDLER-Citizens : Runtime Intelligence & Dispatch for Citizen Classification.
+riddlar_citizens.py  RIDDLER-Citizens : Runtime Intelligence & Dispatch for Citizen Classification.
 
-Détecte, classe et orchestre les citizens (agents) de l'écosystème gerivdb.
-Base de données locale des citizens avec métadonnées et relations.
+Dtecte, classe et orchestre les citizens (agents) de l'cosystme gerivdb.
+Base de donnes locale des citizens avec mtadonnes et relations.
 
 Usage:
     python scripts/riddlar_citizens.py --scan [--output-json]
@@ -36,7 +36,7 @@ KNOWN_CITIZENS_DB = REPO_ROOT / "ontolocal" / "citizens" / "citizens.db.json"
 
 @dataclass
 class Citizen:
-    """Représente un citoyen (agent/skill) de l'écosystème."""
+    """Reprsente un citoyen (agent/skill) de l'cosystme."""
     id: str
     title: str
     source: str
@@ -55,7 +55,7 @@ class Citizen:
 
 
 class RiddlerCitizens:
-    """Classifie et orchestre les citizens de l'écosystème gerivdb."""
+    """Classifie et orchestre les citizens de l'cosystme gerivdb."""
 
     def __init__(self, repo_root: Path = None):
         self.repo_root = repo_root or REPO_ROOT
@@ -63,11 +63,11 @@ class RiddlerCitizens:
         self.load_citizens_db()
 
     def load_citizens_db(self) -> None:
-        """Charge la base de données des citizens."""
+        """Charge la base de donnes des citizens."""
         if KNOWN_CITIZENS_DB.exists():
             with open(KNOWN_CITIZENS_DB, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                # Gérer les deux formats: direct ou avec 'citizens' key
+                # Grer les deux formats: direct ou avec 'citizens' key
                 if 'citizens' in data:
                     citizens_data = data['citizens']
                 else:
@@ -78,7 +78,7 @@ class RiddlerCitizens:
                         self.citizens[cid] = Citizen(**cdata)
 
     def save_citizens_db(self) -> None:
-        """Sauvegarde la base de données des citizens."""
+        """Sauvegarde la base de donnes des citizens."""
         KNOWN_CITIZENS_DB.parent.mkdir(parents=True, exist_ok=True)
         data = {cid: asdict(citizen) for cid, citizen in self.citizens.items()}
         with open(KNOWN_CITIZENS_DB, 'w', encoding='utf-8') as f:
@@ -112,7 +112,7 @@ class RiddlerCitizens:
         return citizens
 
     def scan_intents(self) -> Dict[str, List[str]]:
-        """Scanne le répertoire INTENTS et retourne les fichiers par type."""
+        """Scanne le rpertoire INTENTS et retourne les fichiers par type."""
         if not INTENTS_DIR.exists():
             return {}
         
@@ -179,21 +179,21 @@ class RiddlerCitizens:
         return classification
 
     def _extract_dependencies(self, content: str) -> List[str]:
-        """Extrait les dépendances d'un document."""
+        """Extrait les dpendances d'un document."""
         deps = []
         
-        # Chercher les références ADR
+        # Chercher les rfrences ADR
         adr_refs = re.findall(r'ADR-(\d+)', content)
         deps.extend([f"ADR-{adr}" for adr in adr_refs])
         
-        # Chercher les références d'autres docs
+        # Chercher les rfrences d'autres docs
         doc_refs = re.findall(r'(INTENT-\d+|EPIC-\d+|PRD-\d+)', content)
         deps.extend(doc_refs)
         
         return list(set(deps))
 
     def _determine_layer(self, fields: Dict) -> str:
-        """Détermine la couche logique d'un document."""
+        """Dtermine la couche logique d'un document."""
         # Logique N+1/N+2/N+3/N+4
         if fields.get('type') == 'ADR':
             return 'L1-INFRA'  # ADR = governance layer
@@ -204,7 +204,7 @@ class RiddlerCitizens:
         return 'L4_TOOLS'
 
     def _can_be_citizen(self, fields: Dict) -> bool:
-        """Détermine si un document peut devenir un citizen."""
+        """Dtermine si un document peut devenir un citizen."""
         # Un citizen doit avoir un intent_hash valide
         intent_hash = fields.get('intent_hash', '')
         if not intent_hash or not intent_hash.startswith('0x'):
@@ -215,7 +215,7 @@ class RiddlerCitizens:
         return fields.get('type') in valid_types
 
     def _suggest_citizen_id(self, fields: Dict) -> str:
-        """Génère un ID de citizen suggéré."""
+        """Gnre un ID de citizen suggr."""
         intent_hash = fields.get('intent_hash', '')
         if intent_hash:
             # Extraire un ID court de l'intent_hash
@@ -236,7 +236,7 @@ class RiddlerCitizens:
             "layer": citizen.layer
         }
         
-        # Trouver les citoyens qui dépendent de ce citoyen
+        # Trouver les citoyens qui dpendent de ce citoyen
         for cid, c in self.citizens.items():
             if citizen.id in c.dependencies:
                 relations["dependents"].append(cid)

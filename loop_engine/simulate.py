@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-simulate.py — Simulateur d'impact de nouveaux designs sur le graphe.
+simulate.py  Simulateur d'impact de nouveaux designs sur le graphe.
 
-Prend un design en projet et prédit :
-1. Les cycles créés
-2. Les conflits de capacités
-3. L'incrémentalité du design
+Prend un design en projet et prdit :
+1. Les cycles crs
+2. Les conflits de capacits
+3. L'incrmentalit du design
 4. L'impact sur les designs existants
 """
 
@@ -64,18 +64,18 @@ def build_mock_graph(design: dict[str, Any], meta: dict[str, Any]) -> dict[str, 
 
 
 def calculate_incremental_score(design: dict[str, Any], meta: dict[str, Any]) -> float:
-    """Calcule le score d'incrémentalité (0-100)."""
+    """Calcule le score d'incrmentalit (0-100)."""
     capabilities = design.get("capabilities", [])
     inherits = design.get("inherits", [])
     
     # Score de base
     score = 100.0
     
-    # Pénalité pour héritage profond
+    # Pnalit pour hritage profond
     if len(inherits) > 2:
         score -= 20 * (len(inherits) - 2)
     
-    # Pénalité pour nouvelles capacités non standard
+    # Pnalit pour nouvelles capacits non standard
     standard_caps = [cap.get("name") for cap in meta.get("capabilities", [])]
     for cap in capabilities:
         if isinstance(cap, dict):
@@ -87,7 +87,7 @@ def calculate_incremental_score(design: dict[str, Any], meta: dict[str, Any]) ->
 
 
 def suggest_fixes(result: SimulationResult) -> list[str]:
-    """Génère des suggestions pour corriger les problèmes."""
+    """Gnre des suggestions pour corriger les problmes."""
     suggestions = []
     
     if result.would_create_cycles:
@@ -113,10 +113,10 @@ def simulate(design_path: Path, meta_path: Path | None = None) -> SimulationResu
     # Construire le graphe factice
     graph = build_mock_graph(design, meta)
     
-    # Détecter les cycles
+    # Dtecter les cycles
     cycles = detect_cycles(graph, max_cycle_length=5)
     
-    # Vérifier les conflits de capacités
+    # Vrifier les conflits de capacits
     conflicts = []
     capabilities = design.get("capabilities", [])
     for cap in capabilities:
@@ -126,7 +126,7 @@ def simulate(design_path: Path, meta_path: Path | None = None) -> SimulationResu
             if name == "latency-bound" and params.get("max_latency_ms", 100) <= 1:
                 conflicts.append("latency-bound <= 1ms conflicts with power-capped <= 1W")
     
-    # Calculer le score d'incrémentalité
+    # Calculer le score d'incrmentalit
     incremental_score = calculate_incremental_score(design, meta)
     
     return SimulationResult(

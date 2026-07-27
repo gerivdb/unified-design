@@ -20,7 +20,7 @@ Governance checks (--check-governance ou --all-checks) :
                            (actif + stub superseded/deprecated = F2-PIPELINE, ignore)
   F3  folder_canonical  -- PRDs/, ADRS/ etc. non canoniques -> FAIL
   F4  superseded_chain  -- superseded_by pointe un actif, pas un stub
-  POST index_sync       -- index reflète exactement le contenu reel
+  POST index_sync       -- index reflte exactement le contenu reel
 
 Reference: docs/GOVERNANCE-MAINTENANCE-WORKFLOW.md
 """
@@ -1241,7 +1241,7 @@ def rebuild_index(repo_path: str, artifact_dir_name: str) -> bool:
 # ============================================================
 
 def _detect_strate(repo_path: str) -> str:
-    """Détecte la strate du repo depuis le chemin local."""
+    """Dtecte la strate du repo depuis le chemin local."""
     path_lower = repo_path.replace("\\", "/").lower()
     if "/l0-" in path_lower or "/l0/" in path_lower:
         return "L0"
@@ -1259,7 +1259,7 @@ def _detect_strate(repo_path: str) -> str:
 
 
 def _detect_profil(repo_path: str) -> str:
-    """Détecte le profil RSS-v2 du repo."""
+    """Dtecte le profil RSS-v2 du repo."""
     strate = _detect_strate(repo_path)
     strate_num = int(strate[1])
     if strate_num <= 2:
@@ -1274,8 +1274,8 @@ def _detect_profil(repo_path: str) -> str:
 
 def generate_repo_yaml(repo_path: str) -> dict:
     """
-    Génère un REPO.yaml pour le repo donné.
-    Retourne un dict représentant le REPO.yaml.
+    Gnre un REPO.yaml pour le repo donn.
+    Retourne un dict reprsentant le REPO.yaml.
     """
     repo = Path(repo_path)
     if not repo.exists():
@@ -1285,7 +1285,7 @@ def generate_repo_yaml(repo_path: str) -> dict:
     strate = _detect_strate(repo_path)
     profil = _detect_profil(repo_path)
 
-    # Lister les dossiers présents
+    # Lister les dossiers prsents
     dirs_present = []
     for item in sorted(repo.iterdir()):
         if item.is_dir() and not item.name.startswith("."):
@@ -1293,7 +1293,7 @@ def generate_repo_yaml(repo_path: str) -> dict:
         elif item.name == "README.md":
             dirs_present.append("README.md")
 
-    # Vérifier les dossiers manquants selon le profil
+    # Vrifier les dossiers manquants selon le profil
     profile_config = REPO_YAML_PROFILES.get(profil, REPO_YAML_PROFILES["CITIZEN"])
     required = profile_config["required_dirs"]
     dirs_missing = [d for d in required if d not in dirs_present]
@@ -1324,7 +1324,7 @@ def generate_repo_yaml(repo_path: str) -> dict:
 
 
 def write_repo_yaml(repo_path: str, repo_yaml: dict) -> str:
-    """Écrit REPO.yaml dans le repo. Retourne le chemin du fichier écrit."""
+    """crit REPO.yaml dans le repo. Retourne le chemin du fichier crit."""
     import yaml
     repo = Path(repo_path)
     yaml_path = repo / "REPO.yaml"
@@ -1335,24 +1335,24 @@ def write_repo_yaml(repo_path: str, repo_yaml: dict) -> str:
 
 
 # ============================================================
-# SOT Ref check (ADR-008) — FIN
+# SOT Ref check (ADR-008)  FIN
 # ============================================================
 
 
 # ============================================================
-# Profile-based checks (RSS-v2 §6)
+# Profile-based checks (RSS-v2 6)
 # ============================================================
 
 def check_profile_conformity(repo_path: str, profil: str = None) -> dict:
     """
-    Vérifie la conformité du repo selon son profil RSS-v2 (§6).
+    Vrifie la conformit du repo selon son profil RSS-v2 (6).
     
     Checks :
-      - required_dirs présents
+      - required_dirs prsents
       - forbidden_items absents
-      - max_depth respecté
-      - citizens.yaml présent (si profil CRITICAL/TOOL/CITIZEN)
-      - REPO.yaml présent (si profil CRITICAL/TOOL/CITIZEN)
+      - max_depth respect
+      - citizens.yaml prsent (si profil CRITICAL/TOOL/CITIZEN)
+      - REPO.yaml prsent (si profil CRITICAL/TOOL/CITIZEN)
       - CROSSLINKS/ conforme au profil
     """
     repo = Path(repo_path)
@@ -1364,9 +1364,9 @@ def check_profile_conformity(repo_path: str, profil: str = None) -> dict:
         "crosslinks_violation": False,
     }
 
-    # Détecter le profil si non fourni
+    # Dtecter le profil si non fourni
     if profil is None:
-        # Vérifier d'abord si le profil est forcé dans .rssignore
+        # Vrifier d'abord si le profil est forc dans .rssignore
         rssignore_path = Path(repo_path) / ".rssignore"
         forced_profil = None
         if rssignore_path.exists():
@@ -1382,7 +1382,7 @@ def check_profile_conformity(repo_path: str, profil: str = None) -> dict:
 
     profile_config = REPO_YAML_PROFILES.get(profil, REPO_YAML_PROFILES["CITIZEN"])
 
-    # Vérifier les dossiers requis
+    # Vrifier les dossiers requis
     present_dirs = [d.name for d in repo.iterdir() if d.is_dir()]
     present_files = [f.name for f in repo.iterdir() if f.is_file()]
     all_present = present_dirs + present_files
@@ -1390,7 +1390,7 @@ def check_profile_conformity(repo_path: str, profil: str = None) -> dict:
         if req_dir not in all_present:
             violations["missing_dirs"].append(req_dir)
 
-    # Véricher les fichiers interdits à la racine
+    # Vricher les fichiers interdits  la racine
     for item in repo.iterdir():
         if item.is_file():
             for forbidden_pat in profile_config.get("forbidden_items", []):
@@ -1401,7 +1401,7 @@ def check_profile_conformity(repo_path: str, profil: str = None) -> dict:
                 elif item.name == forbidden_pat:
                     violations["forbidden_items"].append(item.name)
 
-    # Vérifier la profondeur
+    # Vrifier la profondeur
     max_depth = profile_config.get("max_depth", 4)
     for root, dirs, files in os.walk(repo_path, topdown=True):
         rel_root = Path(root).relative_to(repo)
@@ -1417,17 +1417,17 @@ def check_profile_conformity(repo_path: str, profil: str = None) -> dict:
                 "max": max_depth,
             })
 
-    # Vérifier citizens.yaml (obligatoire pour CRITICAL/TOOL/CITIZEN)
+    # Vrifier citizens.yaml (obligatoire pour CRITICAL/TOOL/CITIZEN)
     if profil in ("CRITICAL", "TOOL", "CITIZEN"):
         if not (repo / "citizens.yaml").exists():
             violations["missing_files"].append("citizens.yaml")
 
-    # Vérifier REPO.yaml (obligatoire pour CRITICAL/TOOL/CITIZEN)
+    # Vrifier REPO.yaml (obligatoire pour CRITICAL/TOOL/CITIZEN)
     if profil in ("CRITICAL", "TOOL", "CITIZEN"):
         if not (repo / "REPO.yaml").exists():
             violations["missing_files"].append("REPO.yaml")
 
-    # Vérifier CROSSLINKS/ selon profil
+    # Vrifier CROSSLINKS/ selon profil
     has_crosslinks = (repo / "CROSSLINKS").exists()
     if profil == "CRITICAL" and not has_crosslinks:
         violations["crosslinks_violation"] = True
@@ -1463,14 +1463,14 @@ def push_to_blo(repo_path: str, repo_yaml: dict, dry_run: bool = False) -> dict:
     import base64
     content_b64 = base64.b64encode(content_bytes).decode("utf-8")
 
-    # Préparer la requête GitHub API
+    # Prparer la requte GitHub API
     token = os.environ.get("GITHUB_TOKEN", "")
     if not token:
-        return {"success": False, "message": "GITHUB_TOKEN non défini", "url": ""}
+        return {"success": False, "message": "GITHUB_TOKEN non dfini", "url": ""}
 
     url = f"https://api.github.com/repos/{BLO_WAL_REPO}/contents/{wal_path}"
 
-    # Vérifier si le fichier existe déjà (pour obtenir le SHA)
+    # Vrifier si le fichier existe dj (pour obtenir le SHA)
     sha = None
     try:
         req = urllib.request.Request(url, headers={
@@ -1484,7 +1484,7 @@ def push_to_blo(repo_path: str, repo_yaml: dict, dry_run: bool = False) -> dict:
         if e.code != 404:
             return {"success": False, "message": f"Erreur GitHub API: {e.code} {e.reason}", "url": ""}
 
-    # Créer ou mettre à jour
+    # Crer ou mettre  jour
     payload = {
         "message": f"chore: update REPO.yaml for {repo_name} (auto rss_lint)",
         "content": content_b64,
@@ -1504,7 +1504,7 @@ def push_to_blo(repo_path: str, repo_yaml: dict, dry_run: bool = False) -> dict:
         })
         resp = urllib.request.urlopen(req)
         result = _json.loads(resp.read())
-        return {"success": True, "message": "Pushé avec succès", "url": result.get("content", {}).get("html_url", "")}
+        return {"success": True, "message": "Push avec succs", "url": result.get("content", {}).get("html_url", "")}
     except urllib.error.HTTPError as e:
         error_body = e.read().decode() if e.fp else ""
         return {"success": False, "message": f"Erreur push: {e.code} {e.reason} {error_body[:200]}", "url": ""}
@@ -1513,7 +1513,7 @@ def push_to_blo(repo_path: str, repo_yaml: dict, dry_run: bool = False) -> dict:
 def batch_repos(repos_root: str, push_blo: bool = False) -> dict:
     """
     Audit batch de tous les repos dans repos_root.
-    Retourne un résumé par repo.
+    Retourne un rsum par repo.
     """
     import yaml as _yaml
     root = Path(repos_root)
@@ -1532,10 +1532,10 @@ def batch_repos(repos_root: str, push_blo: bool = False) -> dict:
                 "missing": yaml_data["dossiers_manquants"],
             }
 
-            # Écrire REPO.yaml localement
+            # crire REPO.yaml localement
             write_repo_yaml(str(repo), yaml_data)
 
-            # Push BLO si demandé
+            # Push BLO si demand
             if push_blo:
                 push_result = push_to_blo(str(repo), yaml_data, dry_run=True)
                 results[name]["blo"] = push_result.get("message", "ok")
@@ -1551,7 +1551,7 @@ def batch_repos(repos_root: str, push_blo: bool = False) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(description="RSS-v2 -- Gate de conformite")
-    parser.add_argument("--repo", default=".", nargs="?", help="Chemin du repo a verifier (défaut: .). Non requis avec --batch.")
+    parser.add_argument("--repo", default=".", nargs="?", help="Chemin du repo a verifier (dfaut: .). Non requis avec --batch.")
     parser.add_argument("--fix", action="store_true", help="Corriger automatiquement")
     parser.add_argument("--strict", action="store_true", help="Mode strict (WARN = FAIL)")
     parser.add_argument("--depth", type=int, choices=[2, 4], default=None,
@@ -1574,7 +1574,7 @@ def main():
     parser.add_argument("--check-sot-ref", action="store_true",
                          help="Verifier la presence de sot_ref sur blocs registre externe (ADR-008)")
     parser.add_argument("--check-profile", action="store_true",
-                         help="Verifier la conformite au profil RSS-v2 (§6) — required_dirs, forbidden_items, depth")
+                         help="Verifier la conformite au profil RSS-v2 (6)  required_dirs, forbidden_items, depth")
     parser.add_argument("--all-checks", action="store_true",
                          help="Activer toutes les verifications")
     parser.add_argument("--generate-repo-yaml", action="store_true",
@@ -1582,7 +1582,7 @@ def main():
     parser.add_argument("--push-blo", action="store_true",
                         help="Push REPO.yaml vers BLO/WAL/ (EPIC-017)")
     parser.add_argument("--dry-run", action="store_true",
-                        help="Mode dry-run (pas de push réel)")
+                        help="Mode dry-run (pas de push rel)")
     parser.add_argument("--batch", type=str, default=None, metavar="REPOS_ROOT",
                         help="Audit batch de tous les repos dans REPOS_ROOT (EPIC-017)")
     parser.add_argument("--index", choices=["rebuild"], default=None,
@@ -1841,10 +1841,10 @@ def main():
             for v in sot_ref_violations:
                 print(f"   {v['file']}: {v['block']} -- {v['error']}")
 
-    # -- Profile conformity check (RSS-v2 §6) --
+    # -- Profile conformity check (RSS-v2 6) --
     profile_violations = None
     if args.check_profile:
-        # Vérifier si profil forcé dans .rssignore
+        # Vrifier si profil forc dans .rssignore
         rssignore_path = Path(args.repo) / ".rssignore"
         forced_profil = None
         if rssignore_path.exists():
@@ -1863,7 +1863,7 @@ def main():
             len(profile_violations["missing_files"])
         )
         if total_profile == 0 and not profile_violations["crosslinks_violation"]:
-            print(f"[PASS] Profil {profil_detecte} (strate {strate_detectee}): conforme RSS-v2 §6")
+            print(f"[PASS] Profil {profil_detecte} (strate {strate_detectee}): conforme RSS-v2 6")
         else:
             sev = "FAIL" if args.strict else "WARN"
             print(f"[{sev}] Profil {profil_detecte} (strate {strate_detectee}): {total_profile} violation(s)")
@@ -1872,7 +1872,7 @@ def main():
             for f in profile_violations["forbidden_items"]:
                 print(f"   fichier interdit: {f}")
             for d in profile_violations["depth_exceeded"]:
-                print(f"   profondeur dépassée: {d['path']} ({d['depth']} > {d['max']})")
+                print(f"   profondeur dpasse: {d['path']} ({d['depth']} > {d['max']})")
             for f in profile_violations["missing_files"]:
                 print(f"   fichier requis manquant: {f}")
             if profile_violations["crosslinks_violation"]:
@@ -1966,18 +1966,18 @@ def main():
     # -- Generate REPO.yaml & Push BLO (avant exit) --
     if args.generate_repo_yaml:
         import yaml as _yaml
-        print(f"\n[GEN] Génération REPO.yaml pour: {args.repo}")
+        print(f"\n[GEN] Gnration REPO.yaml pour: {args.repo}")
         try:
             yaml_data = generate_repo_yaml(args.repo)
             yaml_path = write_repo_yaml(args.repo, yaml_data)
-            print(f"[OK] REPO.yaml généré: {yaml_path}")
+            print(f"[OK] REPO.yaml gnr: {yaml_path}")
             print(f"   repo: {yaml_data['repo']}")
             print(f"   strate: {yaml_data['strate']}, profil: {yaml_data['profil']}")
             print(f"   conformite: {yaml_data['conformite']}")
             if yaml_data["dossiers_manquants"]:
                 print(f"   dossiers_manquants: {', '.join(yaml_data['dossiers_manquants'])}")
         except Exception as e:
-            print(f"[FAIL] Erreur génération: {e}")
+            print(f"[FAIL] Erreur gnration: {e}")
 
     if args.push_blo:
         import yaml as _yaml

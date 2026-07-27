@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Clone Gate Check - Vérifie les 5 étapes avant tout git clone.
+Clone Gate Check - Vrifie les 5 tapes avant tout git clone.
 
 Usage:
     python scripts/clone-gate-check.py --repo gerivdb/CTULU

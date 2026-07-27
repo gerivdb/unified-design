@@ -8,7 +8,7 @@ from datetime import datetime
 
 
 def check_path_resolution(script_path: Path) -> dict:
-    """Vérifie que les scripts n'utilisent pas __file__ traversal erroné."""
+    """Vrifie que les scripts n'utilisent pas __file__ traversal erron."""
     content = script_path.read_text()
     
     # Pattern dangereux : __file__.parent.parent.parent (ou moins)
@@ -19,7 +19,7 @@ def check_path_resolution(script_path: Path) -> dict:
 
 
 def check_registry_drift(registry_path: Path, repo_name: str) -> dict:
-    """Vérifie que le repo existe dans known_repositories.yaml."""
+    """Vrifie que le repo existe dans known_repositories.yaml."""
     import yaml
     
     phases = ["P0_REPOS", "P1_REPOS", "P2_REPOS", "P3_REPOS", "P4_REPOS", "P5_REPOS"]
@@ -33,7 +33,7 @@ def check_registry_drift(registry_path: Path, repo_name: str) -> dict:
 
 
 def check_import_valid(module_path: Path) -> dict:
-    """Vérifie que le module Python importe correctement."""
+    """Vrifie que le module Python importe correctement."""
     # Test basique : fichier syntaxiquement valide
     import py_compile
     try:

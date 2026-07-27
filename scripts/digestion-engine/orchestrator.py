@@ -28,23 +28,23 @@ class DigestionOrchestrator:
         self.wal_path.mkdir(parents=True, exist_ok=True)
     
     async def run_single_cycle(self):
-        """Exécuter un cycle complet du pipeline"""
+        """Excuter un cycle complet du pipeline"""
         results = []
         
         for repo in self.iris.config["targets"]:
             print(f"[ORCHESTRATOR] Processing {repo}")
             
-            # Étape 1: IRIS - Collecte des signaux
+            # tape 1: IRIS - Collecte des signaux
             mud_signal = await self.iris.collect_signals(repo)
             signal_dict = mud_signal.to_dict()
             
-            # Étape 2: KRONOS - Qualification
+            # tape 2: KRONOS - Qualification
             verdict = self.kronos.qualify(signal_dict)
             
-            # Étape 3: STYX - Traitement des verdicts
+            # tape 3: STYX - Traitement des verdicts
             styx_result = self.styx.process_verdict(verdict)
             
-            # Log des résultats
+            # Log des rsultats
             result = {
                 "repo": repo,
                 "signal": signal_dict,
@@ -54,13 +54,13 @@ class DigestionOrchestrator:
             }
             results.append(result)
             
-            # Écriture dans le WAL
+            # criture dans le WAL
             self._write_to_wal(result)
         
         return results
     
     def _write_to_wal(self, result: Dict):
-        """Écrire le résultat dans le WAL"""
+        """crire le rsultat dans le WAL"""
         timestamp = result.get("timestamp", "").replace(":", "-").replace(".", "-")
         wal_file = self.wal_path / f"{timestamp}.jsonl"
         
@@ -68,15 +68,15 @@ class DigestionOrchestrator:
             f.write(json.dumps(result) + "\n")
     
     async def run(self):
-        """Exécuter le pipeline en continu"""
-        print("[ORCHESTRATOR] Démarrage du pipeline Digestion Engine")
+        """Excuter le pipeline en continu"""
+        print("[ORCHESTRATOR] Dmarrage du pipeline Digestion Engine")
         print(f"[ORCHESTRATOR] Cibles: {self.iris.config['targets']}")
         print(f"[ORCHESTRATOR] Intervalle: {self.iris.config['poll_interval']}s")
         
         while True:
             try:
                 results = await self.run_single_cycle()
-                print(f"[ORCHESTRATOR] Cycle terminé: {len(results)} repos traités")
+                print(f"[ORCHESTRATOR] Cycle termin: {len(results)} repos traits")
                 
                 # Statistiques
                 citizens = sum(1 for r in results if r["verdict"]["verdict"] == "CITIZEN")

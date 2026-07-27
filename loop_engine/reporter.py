@@ -38,7 +38,7 @@ class Reporter:
 
     def _render_console(self, report: CycleReport) -> str:
         lines = [
-            f"Cycle report — {len(report.cycles)} cycle(s) found",
+            f"Cycle report  {len(report.cycles)} cycle(s) found",
             f"Designs: {report.total_designs} | loops: {report.total_loops} | max length: {report.max_cycle_length}",
         ]
         for idx, cycle in enumerate(report.cycles, start=1):

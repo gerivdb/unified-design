@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Commit Discipline Check - Vérifie la discipline de commit atomique.
+Commit Discipline Check - Vrifie la discipline de commit atomique.
 
 Usage:
     python scripts/commit-discipline-check.py --repo <path>
