@@ -113,7 +113,7 @@ def normalize_frontmatter(fm, fname, dir_name, body):
         created = "2026-06-16"
 
     author = str(fm.get("author", fm.get("Auteur", "gerivdb"))).strip()
-    if author.lower() in ("hitl", "kilo agent", "gerivdb (assisté comet/env1)"):
+    if author.lower() in ("hitl", "kilo agent", "gerivdb (assist comet/env1)"):
         author = "gerivdb"
 
     intent_hash = str(fm.get("intent_hash", "")).strip()
@@ -129,14 +129,14 @@ def normalize_frontmatter(fm, fname, dir_name, body):
         superseded_by = None
 
     if not title:
-        m = re.search(r"^#\s+.+?—\s+(.+)$", body, re.MULTILINE)
+        m = re.search(r"^#\s+.+?\s+(.+)$", body, re.MULTILINE)
         if m:
             title = m.group(1).strip()
         else:
             m = re.search(r"^#\s+(.+)$", body, re.MULTILINE)
             if m:
                 raw = m.group(1).strip()
-                title = re.sub(r"^[A-Z]+-\d{3}\s*[—–-]\s*", "", raw).strip()
+                title = re.sub(r"^[A-Z]+-\d{3}\s*[-]\s*", "", raw).strip()
 
     if not title:
         title = fname.replace(".md", "").replace("-", " ").title()

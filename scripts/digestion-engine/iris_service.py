@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-IRIS - Investigateur en Récupération d'Informations Systémiques
-Service de surveillance proactive des dépôts upstream.
+IRIS - Investigateur en Rcupration d'Informations Systmiques
+Service de surveillance proactive des dpts upstream.
 """
 
 import asyncio
@@ -20,14 +20,14 @@ IRIS_CONFIG = {
         "gerivdb/BRAIN"
     ],
     "poll_interval": 86400,  # 24h en secondes
-    "github_token": None,  # À configurer via variable d'environnement
+    "github_token": None,  #  configurer via variable d'environnement
     "output_format": "MUD",
     "wal_path": "/wal/iris_signals"
 }
 
 
 class MudSignal:
-    """Format MUD (Métadonnées Universelles de Déploiement)"""
+    """Format MUD (Mtadonnes Universelles de Dploiement)"""
     
     def __init__(self, repo: str):
         self.version = "1.0"

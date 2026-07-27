@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-scan_strates.py — Scanner les strates pour identifier les dépôts candidats MDU.
+scan_strates.py  Scanner les strates pour identifier les dpts candidats MDU.
 
-Analyse les dépôts des strates L1-L5 pour identifier :
-1. Les dépôts qui pourraient être des designs (design.yaml, parent explicite)
-2. Les dépôts qui pourraient fournir des atomes (patterns de gouvernance)
-3. Les dépôts avec des boucles potentielles
+Analyse les dpts des strates L1-L5 pour identifier :
+1. Les dpts qui pourraient tre des designs (design.yaml, parent explicite)
+2. Les dpts qui pourraient fournir des atomes (patterns de gouvernance)
+3. Les dpts avec des boucles potentielles
 """
 
 import argparse
@@ -17,7 +17,7 @@ from typing import Any
 import yaml
 
 
-# Strates à scanner
+# Strates  scanner
 STRATES = {
     "L1_CAUSALITY": "D:/DO/WEB/TOOLS/L1-INFRA",
     "L2_COMPOSITION": "D:/DO/WEB/TOOLS/L2-PLATFORM",
@@ -28,7 +28,7 @@ STRATES = {
 
 
 def load_yaml_safe(path: Path) -> dict[str, Any] | None:
-    """Charge un fichier YAML en sécurité."""
+    """Charge un fichier YAML en scurit."""
     try:
         with open(path, "r", encoding="utf-8") as f:
             return yaml.safe_load(f)
@@ -37,7 +37,7 @@ def load_yaml_safe(path: Path) -> dict[str, Any] | None:
 
 
 def check_repo_is_design(repo_path: Path) -> dict[str, Any]:
-    """Vérifie si un dépôt est un candidat design."""
+    """Vrifie si un dpt est un candidat design."""
     result = {
         "path": str(repo_path),
         "is_design_candidate": False,
@@ -48,7 +48,7 @@ def check_repo_is_design(repo_path: Path) -> dict[str, Any]:
         "issues": [],
     }
     
-    # Vérifier design.yaml rapidement
+    # Vrifier design.yaml rapidement
     design_file = repo_path / "design.yaml"
     if design_file.exists():
         result["has_design_yaml"] = True
@@ -68,7 +68,7 @@ def extract_potential_atomes(repo_path: Path) -> list[str]:
     """Extrait les patterns potentiels qui pourraient devenir des atomes."""
     atomes = []
     
-    # Vérifier spécifiquement certains fichiers clés
+    # Vrifier spcifiquement certains fichiers cls
     key_files = ["REPO.yaml", "design.yaml", "schema.yaml", "ONTOLOGY_DECLARATION.yaml"]
     
     for filename in key_files:
@@ -80,7 +80,7 @@ def extract_potential_atomes(repo_path: Path) -> list[str]:
 
 
 def scan_strate(strate_name: str, strate_path: Path) -> dict[str, Any]:
-    """Scanne une strate entière."""
+    """Scanne une strate entire."""
     result = {
         "strate": strate_name,
         "path": str(strate_path),
@@ -93,10 +93,10 @@ def scan_strate(strate_name: str, strate_path: Path) -> dict[str, Any]:
         result["issues"] = ["Path does not exist"]
         return result
     
-    # Lister les dépôts (répertoires avec .git ou REPO.yaml)
+    # Lister les dpts (rpertoires avec .git ou REPO.yaml)
     for item in strate_path.iterdir():
         if item.is_dir() and not item.name.startswith("."):
-            # Vérifier si c'est un dépôt
+            # Vrifier si c'est un dpt
             is_repo = (item / ".git").exists() or (item / "REPO.yaml").exists()
             if is_repo:
                 result["total_repos"] += 1
@@ -115,7 +115,7 @@ def scan_strate(strate_name: str, strate_path: Path) -> dict[str, Any]:
 def main():
     parser = argparse.ArgumentParser(description="Scanne les strates pour les candidats MDU")
     parser.add_argument("--output", type=Path, default=None, help="Fichier de sortie JSON")
-    parser.add_argument("--strate", type=str, default=None, help="Strate à scanner (toutes si non spécifiée)")
+    parser.add_argument("--strate", type=str, default=None, help="Strate  scanner (toutes si non spcifie)")
     args = parser.parse_args()
     
     results = {
@@ -138,7 +138,7 @@ def main():
         results["summary"]["design_candidates"] += strate_result["design_candidates"]
         results["summary"]["strates_scanned"] += 1
     
-    # Afficher le résumé
+    # Afficher le rsum
     print("\n" + "=" * 60)
     print("MDU MULTI-STRATE SCAN REPORT")
     print("=" * 60)

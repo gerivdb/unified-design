@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-validate_inheritance.py — Valide le graphe d'héritage et détecte les cycles.
+validate_inheritance.py  Valide le graphe d'hritage et dtecte les cycles.
 
 Usage:
     python validate_inheritance.py <design.yaml> [--meta-design <meta_design.yaml>]
@@ -20,7 +20,7 @@ def load_design(design_path: Path) -> dict[str, Any]:
 
 
 def detect_cycles(design: dict[str, Any], meta: dict[str, Any]) -> list[list[str]]:
-    """Détecte les cycles dans le graphe d'héritage (DFS)."""
+    """Dtecte les cycles dans le graphe d'hritage (DFS)."""
     graph: dict[str, list[str]] = {}
     for d in meta.get("designs", []):
         name = d.get("name")
@@ -58,7 +58,7 @@ def detect_cycles(design: dict[str, Any], meta: dict[str, Any]) -> list[list[str
 
 
 def validate_conflicts(design: dict[str, Any]) -> list[str]:
-    """Valide qu'aucune capacité n'est en conflit avec une autre."""
+    """Valide qu'aucune capacit n'est en conflit avec une autre."""
     conflicts = []
     raw_caps = design.get("capabilities", [])
     if isinstance(raw_caps, dict):
@@ -77,7 +77,7 @@ def validate_conflicts(design: dict[str, Any]) -> list[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Valide l'héritage et détecte les cycles")
+    parser = argparse.ArgumentParser(description="Valide l'hritage et dtecte les cycles")
     parser.add_argument("design", type=Path, help="Chemin vers design.yaml")
     parser.add_argument(
         "--meta-design",

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-riddler_client.py — RIDDLER : Runtime Intelligence & Dispatch for Documentation Lifecycle Enforcement.
+riddler_client.py  RIDDLER : Runtime Intelligence & Dispatch for Documentation Lifecycle Enforcement.
 
-Détecte les repos manquant le workflow RSS-v2 réutilisable et orchestre l'injection.
+Dtecte les repos manquant le workflow RSS-v2 rutilisable et orchestre l'injection.
 
 IntentHash: 0xRIDDLER_CLIENT_20260705
 """
@@ -90,7 +90,7 @@ def inject_workflow(repo_name: str, repo_path: str, dry_run: bool = False) -> di
 
 
 def main():
-    parser = argparse.ArgumentParser(description="RIDDLER Client — Workflow injection")
+    parser = argparse.ArgumentParser(description="RIDDLER Client  Workflow injection")
     parser.add_argument("--scan", action="store_true", help="Scan repos for missing workflow")
     parser.add_argument("--inject", action="store_true", help="Inject workflow into missing repos")
     parser.add_argument("--dry-run", action="store_true", help="Simulate without applying")

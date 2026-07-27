@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Remote Safety Check - Vérifie la sécurité du remote avant push.
+Remote Safety Check - Vrifie la scurit du remote avant push.
 
 Usage:
     python scripts/remote-safety-check.py --repo <path>

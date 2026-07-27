@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Cross-Repo Flow Check - Détecte les violations de flow cross-repo.
+Cross-Repo Flow Check - Dtecte les violations de flow cross-repo.
 
 Usage:
     python scripts/cross-repo-flow-check.py --repo <path>

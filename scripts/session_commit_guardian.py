@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Session Commit Guardian - Détecte et traite les uncommitted changes
+Session Commit Guardian - Dtecte et traite les uncommitted changes
 en fin de conversation KiloCode.
 """
 
@@ -21,7 +21,7 @@ class RepoStatus:
     error: Optional[str] = None
 
 def load_active_repos(sot_path: str = "D:/DO/WEB/TOOLS/L1-INFRA/known_repositories.yaml") -> List[Dict]:
-    """Charge les dépôts actifs depuis SOT."""
+    """Charge les dpts actifs depuis SOT."""
     try:
         with open(sot_path) as f:
             data = yaml.safe_load(f)
@@ -30,7 +30,7 @@ def load_active_repos(sot_path: str = "D:/DO/WEB/TOOLS/L1-INFRA/known_repositori
         return []
 
 def check_repo_status(repo_path: str, repo_name: str) -> RepoStatus:
-    """Vérifie le status git d'un dépôt."""
+    """Vrifie le status git d'un dpt."""
     result = RepoStatus(
         path=repo_path,
         name=repo_name,
@@ -40,7 +40,7 @@ def check_repo_status(repo_path: str, repo_name: str) -> RepoStatus:
     )
     
     try:
-        # Vérifier les uncommitted changes
+        # Vrifier les uncommitted changes
         proc = subprocess.run(
             ["git", "status", "--porcelain"],
             cwd=repo_path,
@@ -54,7 +54,7 @@ def check_repo_status(repo_path: str, repo_name: str) -> RepoStatus:
                 if line.strip()
             ]
         
-        # Vérifier les branches à merger
+        # Vrifier les branches  merger
         proc = subprocess.run(
             ["git", "branch", "--merged"],
             cwd=repo_path,
@@ -69,7 +69,7 @@ def check_repo_status(repo_path: str, repo_name: str) -> RepoStatus:
         ]
         
     except subprocess.TimeoutExpired:
-        result.error = "Timeout lors de la vérification"
+        result.error = "Timeout lors de la vrification"
     except Exception as e:
         result.error = str(e)
     
@@ -80,12 +80,12 @@ def process_uncommitted(repo_status: RepoStatus, repo_info: Dict, dry_run: bool 
     if not repo_status.uncommitted:
         return "clean"
     
-    # Déterminer le feat thématique
+    # Dterminer le feat thmatique
     repo_name = repo_info.get('full_name', repo_status.name).split('/')[-1]
     feat_name = f"feat/session-{repo_name}"
     
     if dry_run:
-        return f"[DRY-RUN] uncommitted changes détectés, commit dans {feat_name}"
+        return f"[DRY-RUN] uncommitted changes dtects, commit dans {feat_name}"
     
     try:
         # Commit atomique
@@ -103,7 +103,7 @@ def process_uncommitted(repo_status: RepoStatus, repo_info: Dict, dry_run: bool 
         return f"error: {e}"
 
 def scan_all_repos(dry_run: bool = False) -> List[Dict]:
-    """Scanne tous les dépôts actifs."""
+    """Scanne tous les dpts actifs."""
     repos = load_active_repos()
     results = []
     
@@ -120,7 +120,7 @@ def scan_all_repos(dry_run: bool = False) -> List[Dict]:
             'repo': repo_name,
             'path': repo_path,
             'uncommitted_count': len(status.uncommitted),
-            'uncommitted': status.uncommitted[:5],  # Limité pour le rapport
+            'uncommitted': status.uncommitted[:5],  # Limit pour le rapport
             'branches_to_merge': status.branches_to_merge,
             'action': action,
             'error': status.error
@@ -129,10 +129,10 @@ def scan_all_repos(dry_run: bool = False) -> List[Dict]:
     return results
 
 def main():
-    """Point d'entrée principal."""
+    """Point d'entre principal."""
     dry_run = "--dry-run" in sys.argv
     
-    print("[SESSION_COMMIT_GUARDIAN] Vérification des uncommitted changes...")
+    print("[SESSION_COMMIT_GUARDIAN] Vrification des uncommitted changes...")
     
     results = scan_all_repos(dry_run)
     

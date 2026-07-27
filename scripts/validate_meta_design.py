@@ -12,7 +12,7 @@ from pathlib import Path
 try:
     import jsonschema
 except ImportError:
-    print("[ERR] jsonschema non installé. Installez avec: pip install jsonschema pyyaml")
+    print("[ERR] jsonschema non install. Installez avec: pip install jsonschema pyyaml")
     sys.exit(1)
 
 
@@ -31,10 +31,10 @@ def validate(meta_path: Path, schema_path: Path) -> bool:
         meta = load_yaml(meta_path)
         schema = load_json(schema_path)
         jsonschema.validate(meta, schema)
-        print(f"[OK] {meta_path} validé contre {schema_path}")
+        print(f"[OK] {meta_path} valid contre {schema_path}")
         return True
     except jsonschema.ValidationError as e:
-        print(f"[ERR] Validation échouée: {e.message}")
+        print(f"[ERR] Validation choue: {e.message}")
         print(f"      Chemin: {' -> '.join(str(p) for p in e.path)}")
         return False
     except Exception as e:
@@ -44,8 +44,8 @@ def validate(meta_path: Path, schema_path: Path) -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Valider meta-design.yaml contre JSON Schema")
-    parser.add_argument("--schema", required=True, help="Chemin vers le schéma JSON")
-    parser.add_argument("file", help="Fichier meta-design.yaml à valider")
+    parser.add_argument("--schema", required=True, help="Chemin vers le schma JSON")
+    parser.add_argument("file", help="Fichier meta-design.yaml  valider")
     args = parser.parse_args()
 
     meta_path = Path(args.file)
@@ -55,7 +55,7 @@ def main():
         print(f"[ERR] Fichier introuvable: {meta_path}")
         return 1
     if not schema_path.exists():
-        print(f"[ERR] Schéma introuvable: {schema_path}")
+        print(f"[ERR] Schma introuvable: {schema_path}")
         return 1
 
     ok = validate(meta_path, schema_path)

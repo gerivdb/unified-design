@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Loop Check - Wrapper pour la détection de boucles dans le MDU.
-Utilise le détecteur de cycles pour analyser les dépendances de design.
+Loop Check - Wrapper pour la dtection de boucles dans le MDU.
+Utilise le dtecteur de cycles pour analyser les dpendances de design.
 """
 
 import argparse
@@ -18,7 +18,7 @@ from detector import detect_cycles, Cycle
 
 
 def load_design_graph(path: Path) -> dict[str, Any]:
-    """Charge le graphe de dépendances depuis les fichiers YAML du design."""
+    """Charge le graphe de dpendances depuis les fichiers YAML du design."""
     graph: dict[str, Any] = {"edges_from": {}, "nodes": {}}
     
     # Charger meta-design.yaml
@@ -29,7 +29,7 @@ def load_design_graph(path: Path) -> dict[str, Any]:
                 meta = yaml.safe_load(f)
                 if meta:
                     graph["nodes"]["meta-design"] = meta
-                    # Les capacités peuvent avoir des dépendances
+                    # Les capacits peuvent avoir des dpendances
                     for cap in meta.get("capabilities", []):
                         cap_name = cap.get("name", "unknown")
                         graph["edges_from"].setdefault("meta-design", []).append(cap_name)
@@ -57,10 +57,10 @@ def load_design_graph(path: Path) -> dict[str, Any]:
                         for parent in atom.get("inherits", []):
                             graph["edges_from"].setdefault(atom_name, []).append(parent)
             except Exception as e:
-                # Ignorer les fichiers mal formés
+                # Ignorer les fichiers mal forms
                 pass
     
-    # Charger les loops documentés
+    # Charger les loops documents
     loops_dir = path / "loops"
     if loops_dir.exists():
         for loop_file in loops_dir.glob("*.yaml"):
@@ -77,8 +77,8 @@ def load_design_graph(path: Path) -> dict[str, Any]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Vérifie les boucles dans le graphe de design")
-    parser.add_argument("--path", type=Path, default=Path("."), help="Chemin vers le répertoire du design")
+    parser = argparse.ArgumentParser(description="Vrifie les boucles dans le graphe de design")
+    parser.add_argument("--path", type=Path, default=Path("."), help="Chemin vers le rpertoire du design")
     parser.add_argument("--max-depth", type=int, default=5, help="Profondeur maximale des cycles")
     parser.add_argument("--output", type=Path, default=None, help="Fichier de sortie JSON")
     args = parser.parse_args()
@@ -86,10 +86,10 @@ def main():
     # Charger le graphe
     graph = load_design_graph(args.path)
     
-    # Détecter les cycles
+    # Dtecter les cycles
     cycles = detect_cycles(graph, max_cycle_length=args.max_depth)
     
-    # Préparer le rapport
+    # Prparer le rapport
     report = {
         "path": str(args.path),
         "max_depth": args.max_depth,
@@ -99,7 +99,7 @@ def main():
         "status": "OK" if not cycles else "WARNING"
     }
     
-    # Afficher le résultat
+    # Afficher le rsultat
     print("Loop Check Report")
     print("=" * 50)
     print(f"Nodes: {report['nodes_count']}")
@@ -113,7 +113,7 @@ def main():
     else:
         print("\n[OK] No loops detected. Design is acyclic.")
     
-    # Sauvegarder le rapport JSON si demandé
+    # Sauvegarder le rapport JSON si demand
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         with open(args.output, "w") as f:
@@ -121,7 +121,7 @@ def main():
         print(f"\n[REPORT] Saved to: {args.output}")
     
     # Retourner le code de sortie
-    sys.exit(0 if not cycles else 0)  # 0 même avec des loops pour ne pas bloquer le CI
+    sys.exit(0 if not cycles else 0)  # 0 mme avec des loops pour ne pas bloquer le CI
 
 
 if __name__ == "__main__":

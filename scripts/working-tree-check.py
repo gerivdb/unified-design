@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Working Tree Check - Vérifie la discipline du working tree.
+Working Tree Check - Vrifie la discipline du working tree.
 
 Usage:
     python scripts/working-tree-check.py --repo <path>

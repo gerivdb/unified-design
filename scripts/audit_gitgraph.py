@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Audit gitgraph - Vérifie la cohérence de l'historique Git
+Audit gitgraph - Vrifie la cohrence de l'historique Git
 """
 import subprocess
 import sys

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-aggregate_checkpoints.py — Agrège tous les checkpoints .mdu de l'écosystème gerivdb
+aggregate_checkpoints.py  Agrge tous les checkpoints .mdu de l'cosystme gerivdb
 Usage: python aggregate_checkpoints.py [--output json|md] [--repos-root PATH]
 """
 import json
@@ -47,7 +47,7 @@ def read_checkpoint(repo_path: Path, filename: str) -> Optional[Dict]:
 
 
 def aggregate_checkpoints(repo_roots: List[Path]) -> Dict[str, Any]:
-    """Agrège tous les checkpoints trouvés"""
+    """Agrge tous les checkpoints trouvs"""
     result = {
         "generated_at": datetime.now().isoformat(),
         "total_repos_scanned": 0,

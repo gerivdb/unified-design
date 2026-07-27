@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """
-swarm_ecosystem.py — Orchestrateur Global SWARM (EPIC-214).
+swarm_ecosystem.py  Orchestrateur Global SWARM (EPIC-214).
 
-Vue organisme de l'écosystème geribdb :
+Vue organisme de l'cosystme geribdb :
 - Tous les repos sont des nodes (cellules)
-- SWARM.yaml est le système nerveux central
-- Chaque node a un état de santé, une phase, des connexions
+- SWARM.yaml est le systme nerveux central
+- Chaque node a un tat de sant, une phase, des connexions
 - La coordination est holographique (propagation causale)
 - Les CTULU lenses fournissent la perception (observe, depth, simulate)
 
 Cet orchestrateur ne remplace pas swarm_node.py (chaque node a son daemon).
-Il fournit la VUE GLOBALE et les opérations écosystémiques :
-- Scan de santé de tous les repos
-- Détection de conflits inter-repos
+Il fournit la VUE GLOBALE et les oprations cosystmiques :
+- Scan de sant de tous les repos
+- Dtection de conflits inter-repos
 - Synchronisation/pull de tous les repos
 - Projection holographique (holographique-anamorphique)
-- Rapport de vitalité de l'organisme
+- Rapport de vitalit de l'organisme
 
 Usage:
     python swarm_ecosystem.py --scan
@@ -41,7 +41,7 @@ GOVERNANCE_HUB = Path("D:/DO/WEB/TOOLS/L0-CANON/GOVERNANCE-HUB")
 SWARM_FILE = GOVERNANCE_HUB / "SWARM.yaml"
 REPORTS_DIR = GOVERNANCE_HUB / "REPORTS"
 
-# ── Topologie de l'organisme (depuis known_repositories.yaml) ────────────────
+#  Topologie de l'organisme (depuis known_repositories.yaml) 
 
 # Les repos actifs avec leur chemin local (scan dynamique)
 REPO_SCAN_ROOTS = [
@@ -57,7 +57,7 @@ def _now() -> str:
 
 
 def discover_repos() -> dict:
-    """Découvre tous les repos git locaux (scan filesystem)."""
+    """Dcouvre tous les repos git locaux (scan filesystem)."""
     repos = {}
     for root in REPO_SCAN_ROOTS:
         if not root.exists():
@@ -69,7 +69,7 @@ def discover_repos() -> dict:
 
 
 def git_run(repo_path: str, *args, check: bool = False, timeout: int = 30) -> subprocess.CompletedProcess:
-    """Exécute une commande git."""
+    """Excute une commande git."""
     return subprocess.run(
         ["git", "-C", repo_path, *args],
         capture_output=True, text=True, check=check, timeout=timeout,
@@ -77,7 +77,7 @@ def git_run(repo_path: str, *args, check: bool = False, timeout: int = 30) -> su
 
 
 def scan_repo_health(repo_name: str, repo_path: str) -> dict:
-    """Scanne la santé d'un repo (node)."""
+    """Scanne la sant d'un repo (node)."""
     health = {
         "name": repo_name,
         "path": repo_path,
@@ -110,7 +110,7 @@ def scan_repo_health(repo_name: str, repo_path: str) -> dict:
                 "subject": parts[4] if len(parts) > 4 else "",
             }
 
-        # Fichiers modifiés
+        # Fichiers modifis
         r = git_run(repo_path, "status", "--porcelain")
         if r.returncode == 0:
             for line in r.stdout.strip().splitlines():
@@ -134,7 +134,7 @@ def scan_repo_health(repo_name: str, repo_path: str) -> dict:
             if cr_path.is_file():
                 content = cr_path.read_text(encoding="utf-8", errors="ignore")
             elif cr_path.is_dir():
-                # Chercher dans les fichiers du répertoire
+                # Chercher dans les fichiers du rpertoire
                 content = ""
                 for f in cr_path.rglob("*.md"):
                     content += f.read_text(encoding="utf-8", errors="ignore")
@@ -144,7 +144,7 @@ def scan_repo_health(repo_name: str, repo_path: str) -> dict:
 
         # Issues
         if health["uncommitted"] > 20:
-            health["issues"].append(f"Beaucoup de fichiers modifiés ({health['uncommitted']})")
+            health["issues"].append(f"Beaucoup de fichiers modifis ({health['uncommitted']})")
         if health["behind"] > 0:
             health["issues"].append(f"En retard de {health['behind']} commits sur origin/main")
         if health["branch"] != "main" and health["branch"] != "unknown":
@@ -160,10 +160,10 @@ def scan_repo_health(repo_name: str, repo_path: str) -> dict:
     return health
 
 
-# ── Scan global ──────────────────────────────────────────────────────────────
+#  Scan global 
 
 def scan_all_repos() -> dict:
-    """Scanne tous les repos locaux et retourne un rapport de santé."""
+    """Scanne tous les repos locaux et retourne un rapport de sant."""
     repos = discover_repos()
     print(f"\n[ECOSYSTEM] Scan de {len(repos)} repos locaux...")
     print()
@@ -184,10 +184,10 @@ def scan_all_repos() -> dict:
     return results
 
 
-# ── Health Report ────────────────────────────────────────────────────────────
+#  Health Report 
 
 def health_report(results: dict) -> None:
-    """Génère un rapport de santé de l'écosystème."""
+    """Gnre un rapport de sant de l'cosystme."""
     total = len(results)
     reachable = sum(1 for h in results.values() if h["reachable"])
     healthy = sum(1 for h in results.values() if h["reachable"] and not h["issues"])
@@ -203,24 +203,24 @@ def health_report(results: dict) -> None:
     print(f"  Nodes accessibles:   {reachable}")
     print(f"  Nodes sains:         {healthy}")
     print(f"  Nodes avec SWARM:    {with_swarm}/{total}")
-    print(f"  Fichiers modifiés:   {total_uncommitted}")
+    print(f"  Fichiers modifis:   {total_uncommitted}")
     print(f"  Commits en retard:   {total_behind}")
     print()
 
     if healthy == total:
-        print(f"  [GREEN] ORGANISME SAIN — Tous les nodes sont en bonne santé")
+        print(f"  [GREEN] ORGANISME SAIN  Tous les nodes sont en bonne sant")
     elif healthy >= total * 0.7:
-        print(f"  [YELLOW] ORGANISME STABLE — {total - healthy} node(s) avec des alertes")
+        print(f"  [YELLOW] ORGANISME STABLE  {total - healthy} node(s) avec des alertes")
     else:
-        print(f"  [RED] ORGANISME EN DIFFICULTÉ — {total - healthy} node(s) problématiques")
+        print(f"  [RED] ORGANISME EN DIFFICULT  {total - healthy} node(s) problmatiques")
 
     print(f"{'='*70}")
 
 
-# ── Topology ─────────────────────────────────────────────────────────────────
+#  Topology 
 
 def show_topology() -> None:
-    """Affiche la topologie de l'écosystème (graphe des connexions)."""
+    """Affiche la topologie de l'cosystme (graphe des connexions)."""
     import yaml
     print(f"\n{'='*70}")
     print(f"  SWARM ECOSYSTEM TOPOLOGY")
@@ -235,7 +235,7 @@ def show_topology() -> None:
     nodes = data.get("nodes", {})
     agents = data.get("agents", [])
 
-    print(f"  Nodes enregistrés dans SWARM.yaml: {len(nodes)}")
+    print(f"  Nodes enregistrs dans SWARM.yaml: {len(nodes)}")
     for name, node in sorted(nodes.items()):
         print(f"    [*] {name}")
         print(f"      path:   {node.get('repo_path', '?')}")
@@ -252,11 +252,11 @@ def show_topology() -> None:
         print(f"    [>] {agent.get('name', '?')} @ {agent.get('repo', '?')} [{agent.get('status', '?')}]")
     print()
 
-    # Scanner les repos locaux non encore enregistrés
+    # Scanner les repos locaux non encore enregistrs
     local_repos = discover_repos()
     unregistered = set(local_repos.keys()) - set(nodes.keys())
     if unregistered:
-        print(f"  Repos locaux NON enregistrés dans SWARM: {len(unregistered)}")
+        print(f"  Repos locaux NON enregistrs dans SWARM: {len(unregistered)}")
         for name in sorted(unregistered):
             print(f"    [o] {name}  ({local_repos[name]})")
         print()
@@ -264,7 +264,7 @@ def show_topology() -> None:
     print(f"{'='*70}")
 
 
-# ── Sync all repos ───────────────────────────────────────────────────────────
+#  Sync all repos 
 
 def sync_repos(repo_filter: str = "all", dry_run: bool = True) -> dict:
     """Synchronise tous les repos (pull --rebase origin main)."""
@@ -313,28 +313,28 @@ def sync_repos(repo_filter: str = "all", dry_run: bool = True) -> dict:
     return results
 
 
-# ── CLI ───────────────────────────────────────────────────────────────────────
+#  CLI 
 
 def main():
-    parser = argparse.ArgumentParser(description="SWARM Ecosystem Orchestrator — Vue organisme")
+    parser = argparse.ArgumentParser(description="SWARM Ecosystem Orchestrator  Vue organisme")
     sub = parser.add_subparsers(dest="cmd")
 
     # scan
     sub.add_parser("scan", help="Scanner tous les repos locaux")
 
     # health
-    sub.add_parser("health", help="Rapport de santé de l'écosystème")
+    sub.add_parser("health", help="Rapport de sant de l'cosystme")
 
     # topology
     sub.add_parser("topology", help="Afficher la topologie (graphe des connexions)")
 
     # sync
     p_sync = sub.add_parser("sync", help="Synchroniser tous les repos")
-    p_sync.add_argument("--repos", default="all", help="Repos ciblés (all ou liste séparée par des virgules)")
+    p_sync.add_argument("--repos", default="all", help="Repos cibls (all ou liste spare par des virgules)")
     p_sync.add_argument("--apply", action="store_true", help="Appliquer (sinon dry-run)")
 
     # vitals
-    sub.add_parser("vitals", help="Signes vitaux de l'écosystème (scan + health combiné)")
+    sub.add_parser("vitals", help="Signes vitaux de l'cosystme (scan + health combin)")
 
     args = parser.parse_args()
 

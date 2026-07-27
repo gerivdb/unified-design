@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-BDCP Status Check - Vérifie l'état BDCP avant opérations git.
+BDCP Status Check - Vrifie l'tat BDCP avant oprations git.
 
 Usage:
     python scripts/bdcp-status-check.py

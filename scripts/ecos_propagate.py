@@ -9,11 +9,11 @@ Usage:
     python ecos_propagate.py --source REPO-STANDARDS --targets-root D:/DO/WEB --audit rss --all
     python ecos_propagate.py --source REPO-STANDARDS --targets-root D:/DO/WEB --audit rss --repo BRAIN
 
-Implémente les commandes :
+Implmente les commandes :
     ecos propagate citizens.yaml  -> tous repos actifs
-    ecos propagate templates       -> tous dérivés
+    ecos propagate templates       -> tous drivs
     ecos audit rss --all           -> rapport global
-    ecos audit rss --repo NOM     -> audit ciblé
+    ecos audit rss --repo NOM     -> audit cibl
 """
 
 import argparse
@@ -30,7 +30,7 @@ if sys.platform == "win32":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
-# Ajouter le répertoire scripts/ au path pour importer rss_lint
+# Ajouter le rpertoire scripts/ au path pour importer rss_lint
 SCRIPT_DIR = Path(__file__).parent / "scripts"
 sys.path.insert(0, str(SCRIPT_DIR))
 
@@ -41,16 +41,16 @@ from rss_lint import (
     REPO_YAML_PROFILES,
 )
 
-# Dépôts à exclure de la propagation (REPO-STANDARDS lui-même + gouvernance)
+# Dpts  exclure de la propagation (REPO-STANDARDS lui-mme + gouvernance)
 EXCLUDED_REPOS = {"REPO-STANDARDS", "GOVERNANCE-HUB", "ONTOLOGY", "TOPOS", "ECOYSTEM", "NEXUS", "LLM-REPO"}
 
-# Fichiers à propager depuis REPO-STANDARDS
+# Fichiers  propager depuis REPO-STANDARDS
 CITIZENS_SOURCE = "citizens.yaml"
 TEMPLATES_SOURCE_DIR = "templates"
 
 
 def find_repos(targets_root: str, include_archived: bool = False) -> list:
-    """Découvre tous les repos git dans targets_root."""
+    """Dcouvre tous les repos git dans targets_root."""
     root = Path(targets_root)
     repos = []
     for item in sorted(root.iterdir()):
@@ -61,7 +61,7 @@ def find_repos(targets_root: str, include_archived: bool = False) -> list:
         git_dir = item / ".git"
         if not git_dir.exists():
             continue
-        # Vérifier si c'est un repo gerivdb (a un remote gerivdb)
+        # Vrifier si c'est un repo gerivdb (a un remote gerivdb)
         repos.append(item)
     return repos
 
@@ -77,7 +77,7 @@ def propagate_citizens(source_repo: str, target_repo: str, dry_run: bool = False
     # Lire le citizens.yaml source
     content = source_path.read_text(encoding="utf-8")
 
-    # Adapter le contenu : remplacer les références à REPO-STANDARDS par le nom du target
+    # Adapter le contenu : remplacer les rfrences  REPO-STANDARDS par le nom du target
     repo_name = Path(target_repo).name
     adapted = content.replace("REPO-STANDARDS", repo_name)
     adapted = adapted.replace("<NOM>", repo_name)
@@ -89,7 +89,7 @@ def propagate_citizens(source_repo: str, target_repo: str, dry_run: bool = False
             "action": "would_create" if not target_path.exists() else "would_update",
         }
 
-    # Écrire le citizens.yaml adapté
+    # crire le citizens.yaml adapt
     target_path.write_text(adapted, encoding="utf-8")
     return {
         "status": "ok",
@@ -107,7 +107,7 @@ def propagate_templates(source_repo: str, target_repo: str, dry_run: bool = Fals
         return {"status": "error", "error": f"Source templates {source_templates} introuvable"}
 
     if target_templates.exists():
-        # Ne pas écraser les templates existants
+        # Ne pas craser les templates existants
         return {"status": "skipped", "reason": "templates already exist"}
 
     if dry_run:
@@ -226,13 +226,13 @@ def main():
     parser.add_argument("--audit", choices=["rss", "all"],
                         help="Type d'audit")
     parser.add_argument("--repo", type=str, default=None,
-                        help="Cibler un repo spécifique (nom)")
+                        help="Cibler un repo spcifique (nom)")
     parser.add_argument("--dry-run", action="store_true",
-                        help="Mode dry-run (pas d'écriture)")
+                        help="Mode dry-run (pas d'criture)")
     parser.add_argument("--output", type=str, default=None,
                         help="Chemin du fichier de sortie JSON pour le rapport")
     parser.add_argument("--include-archived", action="store_true",
-                        help="Inclure les repos archivés")
+                        help="Inclure les repos archivs")
 
     args = parser.parse_args()
 
@@ -262,7 +262,7 @@ def main():
             name = repo.name
             if args.propagate in ("citizens", "all"):
                 result = propagate_citizens(str(source), str(repo), dry_run=args.dry_run)
-                status_icon = "✅" if result["status"] in ("ok", "dry_run") else "⏭️" if result["status"] == "skipped" else "❌"
+                status_icon = "" if result["status"] in ("ok", "dry_run") else "" if result["status"] == "skipped" else ""
                 print(f"  {status_icon} {name}: {result['status']} ({result.get('action', result.get('reason', ''))})")
                 if result["status"] == "ok":
                     success += 1
@@ -273,10 +273,10 @@ def main():
 
             if args.propagate in ("templates", "all"):
                 result = propagate_templates(str(source), str(repo), dry_run=args.dry_run)
-                status_icon = "✅" if result["status"] in ("ok", "dry_run") else "⏭️" if result["status"] == "skipped" else "❌"
+                status_icon = "" if result["status"] in ("ok", "dry_run") else "" if result["status"] == "skipped" else ""
                 print(f"  {status_icon} {name}: templates {result['status']}")
 
-        print(f"\nRésumé: {success} OK, {skipped} skipped, {errors} errors")
+        print(f"\nRsum: {success} OK, {skipped} skipped, {errors} errors")
 
     elif args.audit:
         # Mode audit
@@ -291,7 +291,7 @@ def main():
             print(f"{'='*60}")
             print(f"  Strate: {report['strate']}")
             print(f"  Profil: {report['profil']}")
-            print(f"  Conformité: {report['conformite']}")
+            print(f"  Conformit: {report['conformite']}")
             print(f"  Violations: {report['total_violations']}")
             if report["structure"]["missing_dirs"]:
                 print(f"  Dossiers manquants: {', '.join(report['structure']['missing_dirs'])}")
@@ -324,13 +324,13 @@ def main():
                     continue
                 violations = report.get("total_violations", 0)
                 conf = report.get("conformite", "?")
-                icon = "✅" if conf == "PASS" else "❌"
+                icon = "" if conf == "PASS" else ""
                 print(f"  {icon} {name}: {conf} ({violations} violations)")
 
             if args.output:
                 with open(args.output, "w", encoding="utf-8") as f:
                     json.dump(results, f, indent=2, ensure_ascii=False)
-                print(f"\nRapport sauvegardé: {args.output}")
+                print(f"\nRapport sauvegard: {args.output}")
 
     else:
         parser.print_help()

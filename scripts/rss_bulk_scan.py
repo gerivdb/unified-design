@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-rss_bulk_scan.py — Scan RSS-v2 conformite pour tous les repos gerivdb locaux
+rss_bulk_scan.py  Scan RSS-v2 conformite pour tous les repos gerivdb locaux
 Utilise le parallelisme pour accelerer le scan
 """
 

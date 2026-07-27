@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Ajoute enforcement_mode + fork_source dans known_repositories.yaml
-Basé sur ADR-2026-07-12-005 (Constitutional CI), ADR-2026-07-12-006 (Fork Sync), ADR-2026-07-12-007 (External Forks)
+Bas sur ADR-2026-07-12-005 (Constitutional CI), ADR-2026-07-12-006 (Fork Sync), ADR-2026-07-12-007 (External Forks)
 """
 import yaml
 import shutil

@@ -2,7 +2,7 @@
 """
 rss_guardian_audit.py - Audit magistral RSS-v2 pour REPO-STANDARDS.
 
-Orchestré par RSS_GUARDIAN citoyen.
+Orchestr par RSS_GUARDIAN citoyen.
 Detecte et propose correction des repos non-conformes.
 
 Usage:
@@ -57,14 +57,14 @@ def get_non_compliant_repos() -> list[dict]:
 def main():
     parser = argparse.ArgumentParser(description="RSS Guardian Audit")
     parser.add_argument("--all", action="store_true", help="Audit tous les repos")
-    parser.add_argument("--target", help="Repo cible à auditer")
+    parser.add_argument("--target", help="Repo cible  auditer")
     parser.add_argument("--inject", action="store_true", help="Proposer injection (dry-run)")
     args = parser.parse_args()
 
     if args.all or not args.target:
         repos = get_non_compliant_repos()
         print(f"\n[RSS_GUARDIAN] Audit du metacluster...")
-        print(f"[RSS_GUARDIAN] {len(repos)} repos non-conformes detectés:\n")
+        print(f"[RSS_GUARDIAN] {len(repos)} repos non-conformes detects:\n")
         for r in repos[:20]:
             print(f"  - {r['name']:25s} ({r['layer']})")
         if len(repos) > 20:

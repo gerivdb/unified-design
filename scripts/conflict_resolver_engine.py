@@ -212,9 +212,9 @@ def resolve_conflict(filepath, repo_path):
         return False, filepath, reason
     
     if result:
-        print(f"[CONFLICT] ✓ Resolved {filepath}")
+        print(f"[CONFLICT]  Resolved {filepath}")
     else:
-        print(f"[CONFLICT] ✗ Failed to resolve {filepath}")
+        print(f"[CONFLICT]  Failed to resolve {filepath}")
     
     return result, filepath, reason
 

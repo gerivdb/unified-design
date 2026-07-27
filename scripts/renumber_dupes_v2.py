@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-renumber_dupes_v2.py -- Renumérotation des artefacts en double (F2) - v2
+renumber_dupes_v2.py -- Renumrotation des artefacts en double (F2) - v2
 
 Usage:
     python scripts/renumber_dupes_v2.py --repo . --dry-run
@@ -40,7 +40,7 @@ def find_all_files(repo_path):
 
 
 def find_used_numbers(files_dict, atype):
-    """Retourne l'ensemble des numéros utilisés pour un type."""
+    """Retourne l'ensemble des numros utiliss pour un type."""
     used = set()
     for (t, num) in files_dict:
         if t == atype:
@@ -82,7 +82,7 @@ def main():
         keeper = files_sorted[0]
         to_rename = files_sorted[1:]
 
-        # Trouver les numéros disponibles
+        # Trouver les numros disponibles
         used = find_used_numbers(files_dict, atype)
         available = sorted(set(range(1, max(used) + 10)) - used)
 
@@ -111,10 +111,10 @@ def main():
                 count=1,
                 flags=re.MULTILINE,
             )
-            # Mettre a jour aussi le titre si contient l'ancien numéro
+            # Mettre a jour aussi le titre si contient l'ancien numro
             content = re.sub(
-                rf"^#\s+{atype}-\d{{3}}\s*[—–-]",
-                f"# {atype}-{new_num:03d} —",
+                rf"^#\s+{atype}-\d{{3}}\s*[-]",
+                f"# {atype}-{new_num:03d} ",
                 content,
                 count=1,
                 flags=re.MULTILINE,

@@ -1,4 +1,4 @@
-# fix_git_eng_refs.py - Mettre à jour les références ADR-GIT-ENG-001 → ADR-007
+# fix_git_eng_refs.py - Mettre  jour les rfrences ADR-GIT-ENG-001  ADR-007
 import os
 
 base = r"D:\DO\WEB\TOOLS\L4-TOOLS\REPO-STANDARDS\git-engineering"
