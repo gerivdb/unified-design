@@ -1,0 +1,73 @@
+# CTULU L4 Master Intent
+Document ID: GERIVDB-GE-2026-07-29
+Status: Proposed
+Engineer: Bellard Protocol
+
+Objective:
+Create master intent to orchestrate Graph Engineering DAG-3 via CTULU L4 pipeline.
+
+Vision (N+4 layers):
+N+1: Governance (GOVERNANCE-HUB) - architectural decisions
+N+2: Gap Analysis (ARGUS) - identify gaps
+N+3: Orchestration (CTULU) - parallel execution
+N+4: Meta Assurance (GOVERNANCE-HUB/NEXUS) - validation
+
+Roadmap 12 months:
+M1: Kickoff & audit - ADA scan, gap analysis
+M2: Define sub-intents - ADR-001 scope, intent catalog
+M3: Prototype CTULU L4 - Graph-Engine v1 PoC, trix-test validation
+M4: Create governance ADRs - judgment rule, second opinion
+M5: Implement roles - fixing agent skill, CI gate
+M6: Launch Second Opinion (-p) - compliance dashboard
+M7-8: Optimize Headless Shell - token/memory benchmarks
+M9: Deploy Roadmap & EPICs - production
+M10: Thermonuclear Review - pre-release
+M11: Maturity assessment - Level 4 to 5 transition
+M12: Publication - final docs, git tag v1.0-CTULU-L4
+
+Sub-intents:
+1. INTENT-CTULU-L4-JUDGMENT: Opus for judgment nodes (Critical)
+2. INTENT-CTULU-L4-SECOND-OPINION: -p mechanism (High)
+3. INTENT-CTULU-L4-HEADLESS-OPT: Chrome headless shell (Medium)
+4. INTENT-CTULU-L4-FIXING-AGENT: Correction agent (High)
+5. INTENT-CTULU-L4-ORCHESTRATOR: Multi-specialist coordination (High)
+6. INTENT-CTULU-L4-THERMONUCLEAR: Pre-release gauntlet (Low)
+
+ADRs:
+- ADR-2026-07-29-001: Judgment rule (proposed)
+- ADR-2026-07-29-002: Second opinion protocol (proposed)
+- ADR-2026-07-29-003: Headless optimization (proposed)
+- ADR-2026-07-29-004: Fixing agent role (proposed)
+- ADR-2026-07-29-005: Thermonuclear gate (proposed)
+
+EPICs:
+- EPIC-CTULU-001: Graph Engine v1 parallel nodes
+- EPIC-CTULU-002: Second Opinion Service
+- EPIC-CTULU-003: Headless Shell Integration
+- EPIC-CTULU-004: Orchestrator Multi-Specialist
+- EPIC-CTULU-005: Thermonuclear Review Pipeline
+
+Issues:
+- ISSUE-CTULU-001: High false positives with Haiku
+- ISSUE-CTULU-002: -p latency >500ms
+- ISSUE-CTULU-003: Headless shell compatibility
+- ISSUE-CTULU-004: design.md merge conflicts
+- ISSUE-CTULU-005: OOM with >4 headless instances
+
+Risks & Mitigations:
+- Token explosion: node quotas + auto-scaling
+- Barrier deadlock: timeout fallback + alerting
+- Context bleed: memory auditing + process isolation
+- Design drift: file locking + approval workflow
+- Skill chain complexity: chain optimization
+- Headless incompatibility: compatibility matrix
+
+Validation Checklist:
+- All ADRs merged (proposed -> accepted)
+- Pipeline passes design-compliance (>=95%)
+- Second Opinion returns >=95%
+- Load test <=4 headless instances
+- No blocking issues open
+- Roadmap versioned at tag roadmap-v1.0
+- EPICs listed in EPICS.md
+
