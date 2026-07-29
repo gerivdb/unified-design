@@ -5,8 +5,12 @@
 - **ADR-014** : [Git Policy](ADR-014-git-policy.md)
 - **ADR-016** : [Unified Design Loop Detection Engine](ADR-016-loop-engine.md)
 - **ADR-018** : [Governance Hub MDU Extraction](ADR-018-governance-hub-mdu-extraction.md)
+<<<<<<< HEAD
 - **ADR-025** : [MEM-CORE Consolidation](ADR-025-mem-core-consolidation.md)
 - **ADR-031** : [Integration RLM <-> TLM via KIX](ADR-031-rlm-tlm-integration.md)
+=======
+- **ADR-031** : [RLM-TLM Integration via KIX](ADR-031-rlm-tlm-integration.md)
+>>>>>>> 88da000 (feat(ge): implement DAG-3 Graph Engineering design with CTULU L4 master intent)
 
 ## ADRs GOVERNANCE-HUB (méta-gouvernance)
 
