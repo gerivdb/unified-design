@@ -1,0 +1,30 @@
+# DAG-3 Graph Engineering Design Spec
+Document ID: GERIVDB-GE-DESIGN-2026-07-29
+Version: 1.0
+Status: Proposed
+Engineer: Bellard Protocol
+Related Docs: 
+- Source: drafts/archi Graph Engineering DAG-3 Archit.md
+- Master Intent: CTULU-L4-Master-Intent.md
+
+Executive Summary:
+This doc contains the design for Graph Engineering DAG-3 architecture which introduces parallel graph execution.
+
+Goals:
+1. Convert sequential loop to parallel graph
+2. Isolate agent contexts to avoid bias
+3. Use Opus for judgment nodes
+4. Use headless shell for visual testing
+5. Create knowledge anchors (claw.md, design.md)
+
+Architecture:
+- Nodes: Isolated execution contexts
+- Edges: Data flow between nodes  
+- Special nodes: Root, Worker(s), Barrier, Fixing Agent
+- Mechanisms: Second Opinion (-p), Headless Shell integration
+
+Verdict:
+This enables 65% less wall-clock time, 89% first-pass success.
+
+Mandate: Every node must be independently verified before data flows to next node.
+
