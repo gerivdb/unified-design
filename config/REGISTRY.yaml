@@ -1,0 +1,73 @@
+---
+# REGISTRY.yaml — Mapping ONTOLOGY-FILL-SCHEMA
+# Phase D : GERICODE KILOCODE ASSIMILATION
+# IntentHash: 0xEPIC_ASSIMILATION_20260801
+
+ontology_fill_schema:
+  version: "2.1"
+  description: "Mapping entre les concepts ONTOLOGY et les structures de données"
+  last_updated: "2026-08-01"
+  
+  sources:
+    - name: "psy_state_machine"
+      path: "gerivdb/ONTOLOGY/psy_state_machine.yaml"
+      type: "ontology_service"
+      schema_version: "1.0"
+      required: true
+      
+    - name: "citizen_registry"
+      path: "gerivdb/BRAIN/citizen_registry.json"
+      type: "json_data"
+      schema_version: "2.1"
+      required: true
+      
+    - name: "known_repositories"
+      path: "gerivdb/GOVERNANCE-HUB/known_repositories.yaml"
+      type: "yaml_config"
+      schema_version: "1.0"
+      required: true
+
+  mappings:
+    # Migration L2-PLATFORM → L3-CITIZENS
+    - concept: "stratum_platform"
+      source: "L2-PLATFORM"
+      target: "L3-CITIZENS"
+      type: "directory_rename"
+      validation: "git ls-tree --recursive HEAD"
+      
+    - concept: "psy_state_machine"
+      source: "ONTOLOGY/psy_state_machine.yaml"
+      target: "ONTOLOGY/psy_state_machine.yaml"
+      type: "service_deployment"
+      validation: "ontology_audit.py"
+      
+    - concept: "citizen_routing"
+      source: "citizen_"
+      target: "citizen_"
+      type: "disambiguation"
+      validation: "benchmark-setup.yaml"
+
+  disambiguation_rules:
+    - pattern: "psy_state_machine"
+      rule: "dynamic_loading"
+      source: "ONTOLOGY/psy_state_machine.yaml"
+      
+    - pattern: "citizen_"
+      rule: "prefix_disambiguation"
+      source: "citizen_registry.json"
+      
+    - pattern: "stratum_"
+      rule: "stratum_mapping"
+      source: "strate-registry.yaml"
+
+  validation:
+    strict_mode: true
+    character_semantics: true
+    behavior_responsiveness:
+      - "panic_at_narcissistic_supply"
+      - "_config:operation_mode:proactive_work"
+      
+  bdcp_compliance:
+    mode: "BDCP"
+    status: "maintained"
+    watchdog_timeout: "300s"
