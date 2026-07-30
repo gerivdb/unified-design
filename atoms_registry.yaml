@@ -940,16 +940,16 @@ ATOM-042-REPOSITORY-CENSUS.md:
   depends_on: []
 
 - path: atoms/structural-relations.yaml
-  hash: 1cf95a9a9720
+  hash: cf8327d86f74
   description: 'description: "Contrat des 6 kinds de relations structurelles MDU (ATOM-045)."'
   depends_on: []
 - path: atoms/clusterwave-operator.yaml
-  hash: a1ec4776846a
+  hash: 305b6d33dff5
   description: 'description: "Opérateur PSL (cw) pilotant les pulses fréquentiels."'
   depends_on:
     - frequency-engineering
 - path: atoms/fixpoint-validator.yaml
-  hash: a1ec4776846a
+  hash: 29cb4fec55bd
   description: 'description: "Validateur asynchrone de point fixe opposé à Clusterwave."'
   depends_on:
     - frequency-engineering
@@ -958,3 +958,4 @@ ATOM-042-REPOSITORY-CENSUS.md:
   hash: 1cf95a9a9720
   description: 'description: "Protocole de validation pre-action (ATOM-048)."'
   depends_on: []
+
