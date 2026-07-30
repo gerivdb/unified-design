@@ -1,0 +1,19 @@
+---
+name: incremental-growth
+version: "1.0.0"
+description: "Croissance incrémentale par héritage additif"
+status: active
+owner: Bellard
+inherits: []
+capabilities:
+  - name: incremental-growth
+    parameters:
+      merge_strategy: additive
+      conflict_resolution: ADR-backed
+      max_inheritance_depth: 3
+constraints:
+  - "La croissance DOIT etre additive"
+  - "Les conflits DOIVENT etre resolus par ADR"
+  - "La profondeur d'heritage DOIT rester <= 3"
+intent_hash: 0xINCREMENTAL_GROWTH_20260730
+---
