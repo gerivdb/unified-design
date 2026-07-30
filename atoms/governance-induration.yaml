@@ -1,0 +1,14 @@
+---
+name: governance-induration
+description: "CFMI Pipeline - Contrainte Flexible a Metrique d'Induration (ATOM-052)"
+level: N1
+inherits: [structural-relations, chain-engineering]
+family: governance
+parameters:
+  i_score: (bypass/total) * log(cost_obedience)
+  thresholds: {watch: 0.1, warning: 0.3, critical: 0.5}
+references:
+  - ADR-2026-07-31-001
+  - PRD-GOV-FLEXIBLE-CONSTRAINTS-2026-07-31
+  - SKILL-gov-induration-detector
+---

@@ -34,7 +34,7 @@ rules:
       known_repositories.yaml avec son chemin canonique.
       Pas de local_path = pas d'autorisation de clone.
   - name: do_not_create_lock
-    description: Le champ do_not_create: true bloque toute creation de clone
+    description: "Le champ do_not_create: true bloque toute creation de clone"
     check: |
       Si R a do_not_create: true dans known_repositories.yaml,
       aucun agent ne peut créer une copie. Le chemin canonical_path
@@ -42,12 +42,12 @@ rules:
   - name: stratum_hierarchy
     description: Les strates L0-L5 definiient l'emplacement canonique
     check: |
-      L0-CANON     → D:\\\\DO\\\\WEB\\\\TOOLS\\\\L0-CANON\\\\
-      L1-INFRA     → D:\\\\DO\\\\WEB\\\\TOOLS\\\\L1-INFRA\\\\
-      L2-PLATFORM  → D:\\\\DO\\\\WEB\\\\TOOLS\\\\L2-PLATFORM\\\\
-      L3-CITIZENS  → D:\\\\DO\\\\WEB\\\\TOOLS\\\\L3-CITIZENS\\\\
-      L4-TOOLS     → D:\\\\DO\\\\WEB\\\\TOOLS\\\\L4-TOOLS\\\\
-      L5-ARCHIVE   → D:\\\\DO\\\\WEB\\\\TOOLS\\\\L5-ARCHIVE\\\\
+      L0-CANON     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L0-CANON\\\\
+      L1-INFRA     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L1-INFRA\\\\
+      L2-PLATFORM  -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L2-PLATFORM\\\\
+      L3-CITIZENS  -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L3-CITIZENS\\\\
+      L4-TOOLS     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L4-TOOLS\\\\
+      L5-ARCHIVE   -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L5-ARCHIVE\\\\
       Un depot ne peut pas exister dans deux strates simultanément.
 enforcement:
   - pre_commit_hook: check_no_duplicates
@@ -72,4 +72,3 @@ performance:
   latency_p99: 10ms
   power_max: 1W
 intent_hash: 0xCLONE_GOVERNANCE_20260731
----

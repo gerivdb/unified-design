@@ -40,7 +40,7 @@ Ce dépôt contient les **conventions de développement standardisées** pour l'
 │       ▲                                                                              │
 │       │ validates                                                                    │
 │       │                                                                              │
-│  scripts/validate_atom_registry.py ◄── KIVA-CI step #2 (CI gate)                     │
+│  scripts/validate_yaml.py ◄── KIVA-CLI step #2 (CI gate)                             │
 │       ▲                                                                              │
 │       │ extracts                                                                     │
 │       │                                                                              │
@@ -177,14 +177,15 @@ Ce dépôt contient les **conventions de développement standardisées** pour l'
 ══════════════════════════════════════════════════════════════════════════════════════════
 
     ┌─────────────────────────────────────────────────────────────────────────────┐
-    │  kiva ci run unified-design                                                    │
+    │  kiva pipeline run unified-design                                            │
     │       │                                                                        │
     │       ├─► Step 1: validate_meta_design.py  ──► meta-design.yaml ✓/✗          │
-    │       ├─► Step 2: validate_atom_registry.py ──► atoms_registry.yaml ✓/✗      │
-    │       └─► Step 3: extract_atom_deps.py ──► atom_deps.json (DAG) ✓/✗          │
+    │       ├─► Step 2: validate_yaml.py atoms   ──► atoms/*.yaml ✓/✗              │
+    │       ├─► Step 3: validate_yaml.py designs ──► designs/*.yaml ✓/✗            │
+    │       └─► Step 4: validate_yaml.py ATOM-051 ──► relation-conflict ✓/✗        │
     │                                                                                 │
     │  Gate: TOUS steps = exit 0 requis pour merge                                  │
-    │  Hook: pre-commit → kiva ci run --dry-run                                     │
+    │  Hook: pre-commit → kiva pipeline run --dry-run                               │
     │  CI:   GitHub Actions INTERDIT pour validation design (ADR-024)               │
     └─────────────────────────────────────────────────────────────────────────────┘
 
@@ -278,7 +279,7 @@ cd ../KIVA-CLI && kiva ci run
 
 1. Copier `conventions/` et `scripts/`
 2. Installer hooks : `git config core.hooksPath .githooks`
-3. Configurer CI : copier `.github/workflows/ci.yml`
+3. Configurer CI souverain : copier `.kiva/pipelines/<repo>.yaml` et documenter `kiva pipeline run <repo>` comme CI locale obligatoire (ADR-024)
 4. Ajouter templates : `.github/PULL_REQUEST_TEMPLATE.md`, etc.
 
 ---
