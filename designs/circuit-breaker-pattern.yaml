@@ -1,0 +1,24 @@
+---
+name: circuit-breaker-pattern
+description: "Pattern d'arrêt automatique pour les chaînes défaillantes avec fallback."
+version: 1.0.0
+status: active
+inherits:
+  - loop-engineering
+  - design-principle
+parameters:
+  failure_threshold: 3
+  timeout: 60s
+  half_open_requests: 5
+  success_threshold: 2
+  health_check_interval: 30s
+constraints:
+  - "Open après failure_threshold échecs consécutifs"
+  - "Half-open après timeout avec probe limitée"
+  - "Closed après success_threshold succès en half-open"
+  - "Fallback obligatoire en état OPEN"
+performance:
+  latency_p99: 45ms
+  power_max: 12W
+intent_hash: 0xCIRCUIT_BREAKER_PATTERN_20260730
+---
