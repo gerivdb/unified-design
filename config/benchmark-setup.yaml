@@ -1,0 +1,83 @@
+benchmark:
+  # Phase C: Benchmarking and Comparative Analysis Configuration
+  # DOI: 10.6084/m9.figshare.25578396
+  # Version: 1.0.2 (2026-08-01)
+  
+  metrics:
+    latency:                    # Target: < 100ms
+      tolerance: 0.15    # 15% variance allowed
+      unit: ms
+      target: 75
+    error_rate:                 # Target: < 1%
+      tolerance: 0.05      # 5% variance allowed
+      unit: ""
+      target: 0.5
+    throughput:                 # Target: > 50 ops/sec
+      tolerance: 0.2       # 20% variance allowed
+      unit: ops/sec
+      target: 100
+
+  test_components:
+    - name: bat-family-chat
+      type: api-performance
+      test_method: simulate_chat_load
+      load_levels:
+        - 100
+        - 200
+        - 300
+      benchmark_duration: 15s
+      warm_up_duration: 5s
+    - name: ecos-cli-bridge
+      type: command-response
+      test_method: execute_command
+      load_levels:
+        - 100
+        - 200
+        - 300
+      benchmark_duration: 15s
+      warm_up_duration: 5s
+    - name: quality-check-runner
+      type: verification
+      test_method: run_quality_check
+      load_levels:
+        - 100
+        - 200
+        - 300
+      benchmark_duration: 15s
+      warm_up_duration: 5s
+
+  disambiguation_validation:
+    # Must conform to ONTOLOGY disambiguation rules
+    # Reference: gerivdb/GOVERNANCE-HUB/ONTOLOGY_DECLARATION.yaml
+    required_patterns:
+      - "psy_state_machine"
+      - "citizen_"
+      - "stratum_"
+      - "ontology_"
+      - "_governance_"
+    validate_character_semantics: true
+    strict_mode: true
+
+  reporting:
+    output_format: json
+    include_code_coverage: true
+    include_performance_traces: true
+    output_path: "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\reports\\benchmark-analysis.json"
+
+  data_sources:
+    - ONTOLOGY: "gerivdb/GOVERNANCE-HUB/known_repositories.yaml"
+    - ONTOLOGY: "gerivdb/BRAIN/citizen_registry.json"
+    - ONTOLOGY: "gerivdb/ONTOLOGY/psy_state_machine.yaml"
+    - BATVERSE: "product_design/PRD/bat-family-structure.md"
+
+  # Phase C Specific Requirements
+  phase_c_requirements:
+    dynamic_ontology_loading: true
+    behavior_responsiveness: 
+      - "panic at narcissistic supply"
+      - "signature _config: operation_mode: proactive_work"
+      - "\"Panic at narcissistic supply" 
+    ontological_consistency:
+      - "Character semantics must match ONTOLOGY_DECLARATION.yaml"
+      - "Disambiguation rules enforced at runtime"
+      - "Dynamic loading from ONTOLOGY/psy_state_machine.yaml"

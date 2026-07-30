@@ -1,0 +1,105 @@
+---
+# PHASE_E.yaml -- Configuration Phase E : Refactoring GeriCode vers L3-CITIZENS
+# DOI: 10.6084/m9.figshare.25578396
+# Version: 1.0.0 (2026-08-01)
+
+phase_e:
+  identifier: "phase_e"
+  name: "GERICODE REFACTORING VERS L3-CITIZENS"
+  version: "1.0.0"
+  date: "2026-08-01"
+  status: "planned"
+  parent_phase: "phase_d"
+
+refactoring:
+  gericode_migration:
+    source: "D:/DO/WEB/TOOLS/L2-PLATFORM/GeriCode"
+    target: "D:/DO/WEB/TOOLS/L3-CITIZENS/GeriCode/refactored"
+    type: "full_refactor"
+    modules:
+      - "bat-family-chat"
+      - "ecos-cli-bridge"
+      - "quality-check-runner"
+    validation:
+      - "package.json _kilo frontmatter present"
+      - "extension.ts modularized"
+      - "design.yaml updated"
+
+  structure:
+    target:
+      - "L3-CITIZENS/GeriCode/refactored/package.json"
+      - "L3-CITIZENS/GeriCode/refactored/extension.ts"
+      - "L3-CITIZENS/GeriCode/refactored/bat-family-chat/"
+      - "L3-CITIZENS/GeriCode/refactored/ecos-cli-bridge/"
+      - "L3-CITIZENS/GeriCode/refactored/quality-check-runner/"
+      - "L3-CITIZENS/GeriCode/refactored/design.yaml"
+
+authentication:
+  cds:
+    name: "Credential Delegation Service"
+    enabled: true
+    description: "Validation de la delegation des credentials pour GeriCode"
+    validation_method: "integration_test"
+    endpoints:
+      - "GET /cds/validate"
+      - "POST /cds/delegate"
+    target_environment: "L3-CITIZENS"
+    expected_result: "PASS"
+    
+  cid:
+    name: "Cross-Repo Identity Delegation"
+    enabled: true
+    description: "Validation de la delegation d identite cross-repo pour GeriCode"
+    validation_method: "cross_repo_test"
+    endpoints:
+      - "GET /cid/identity"
+      - "POST /cid/delegate"
+    target_environment: "L3-CITIZENS"
+    expected_result: "PASS"
+
+pattern_router_updates:
+  keywords:
+    - "gericode"
+    - "bat-family-chat"
+    - "ecos-cli-bridge"
+    - "quality-check-runner"
+  routing_rules:
+    - pattern: "gericode"
+      action: "invoke_gericode_module"
+    - pattern: "bat-family-chat"
+      action: "invoke_bat_family_chat"
+    - pattern: "ecos-cli-bridge"
+      action: "invoke_ecos_cli_bridge"
+    - pattern: "quality-check-runner"
+      action: "invoke_quality_check_runner"
+
+validation:
+  pre_refactoring:
+    - "git status --porcelain"
+    - "git remote -v"
+    - "python scripts/validate_atom_registry.py"
+    - "Test-Path D:/DO/WEB/TOOLS/L2-PLATFORM/GeriCode"
+  
+  post_refactoring:
+    - "Test-Path D:/DO/WEB/TOOLS/L3-CITIZENS/GeriCode/refactored"
+    - "ontology_consistency_check.py"
+    - "bdcp_status_check.py"
+    - "cds_authentication_test.py"
+    - "cid_identity_delegation_test.py"
+    - "pattern_router_validation.py"
+
+  compliance:
+    ontology: "ONTOLOGY_DECLARATION.yaml"
+    bdcp: "maintained"
+    git_safety: "atomic_commits"
+
+rollback:
+  enabled: true
+  strategy: "git reflog"
+  max_history: "72h"
+
+reporting:
+  output_dir: "reports/phase_e"
+  formats: ["json", "markdown"]
+  include_diffs: true
+  include_validation_results: true
