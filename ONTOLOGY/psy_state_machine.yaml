@@ -51,12 +51,12 @@ psy_state_machine:
   # Validation Rules
   validation:
     - rule_id: "ontology_disambiguation_coverage"
-      description: "100% des règles de désambiguïsation couvertes"
+      description: "100% des regles de desambiguisation couvertes"
       validation_method: "scan"
       required_coverage_percent: 100
       
     - rule_id: "character_semantics"
-      description: "Correspondance aux caractères avec ONTOLOGY"
+      description: "Correspondance aux caracteres avec ONTOLOGY"
       validation_method: "mapping_comparison"
       target_file: "ONTOLOGY_DECLARATION.yaml"
       
@@ -80,13 +80,13 @@ bdcp_context:
   compliance_maintained: true
   watchdog_timeout_seconds: 300
 
-# Chaines d'évolution
+# Chaines d'evolution
 chains:
   - chain_id: "assimilation_chain"
-    description: "Chaîne principale d'assimilation de GERICODE"
+    description: "Chaine principale d'assimilation de GERICODE"
     components:
       - "psy_state_machine"
-      - "L2-PLATFORM → L3-CITIZENS"
+      - "L2-PLATFORM -> L3-CITIZENS"
       - "REGISTRY.yaml"
     status: "initialized"
 
@@ -94,4 +94,4 @@ chains:
 phase_transitions:
   phase_c_result: "completed"
   phase_d_ready: true
-  phase_e_ready: false  # UGs nécessaires
+  phase_e_ready: false  # UGs necessaires

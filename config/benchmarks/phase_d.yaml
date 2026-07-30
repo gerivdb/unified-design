@@ -1,5 +1,5 @@
 ---
-# phase_d.yaml — Configuration Phase D : GERICODE KILOCODE ASSIMILATION
+# phase_d.yaml - Configuration Phase D : GERICODE KILOCODE ASSIMILATION
 # DOI: 10.6084/m9.figshare.25578396
 # Version: 1.0.0 (2026-08-01)
 
@@ -39,7 +39,7 @@ service_deployment:
     location: "ONTOLOGY/psy_state_machine.yaml"
     schema_version: "1.0"
     required: true
-    description: "Service d'état cognitif dynamique pour gestion des citoyens"
+    description: "Service d'etat cognitif dynamique pour gestion des citoyens"
 
 validation:
   pre_migration:

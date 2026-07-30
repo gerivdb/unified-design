@@ -1,4 +1,4 @@
-# citizens.yaml — schéma RSS-v2
+# citizens.yaml - schema RSS-v2
 version: "1.0"
 repo: "unified-design"
 type: "consumer"

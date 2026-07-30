@@ -1,0 +1,892 @@
+---
+type: REPOS_STRUCTURE
+version: "1.0.0"
+status: active
+intent_hash: 0xREPOS_STRUCTURE_20260730
+description: "Arborescence des repos par strate L* - alignee sur LAYER_STRUCTURE.md"
+---
+
+repositories:
+  # L0-CANONICAL: Verite unique, specifications, conventions
+  L0_CANONICAL:
+    description: "Canon - Verite unique, specifications, conventions, gouvernance"
+    path_prefix: "D:/DO/WEB/TOOLS/L0-CANON/"
+    repos:
+      - name: "KiloCode"
+        description: "Interface agente principale - LLM client"
+        status: "active"
+      
+      - name: "GOVERNANCE-HUB"
+        description: "Registre global des depots gerivdb, ADR, regles"
+        status: "active"
+      
+      - name: "ONTOLOGY"
+        description: "Dictionnaire, ontologies, termes canoniques"
+        status: "active"
+      
+      - name: "BRAIN"
+        description: "Memoire cognitive, MessageBus, NEXUS"
+        status: "active"
+      
+      - name: "unified-design"
+        description: "Conventions MDU, atomes, designs, validation KIVA-CI"
+        status: "active"
+      
+      - name: "REPO-STANDARDS"
+        description: "Standards macro du meta-cluster"
+        status: "active"
+      
+      - name: "atoms"
+        description: "Atomes MDU (138) - principes, governance, infrastructure"
+        status: "active"
+      
+      - name: "connard-design"
+        description: "Validateur qualite executoire (roast, wall of shame)"
+        status: "active"
+      
+      - name: "sonar-driven-design"
+        description: "Observabilite ping/echo, Sonar Map"
+        status: "active"
+      
+      - name: "triadic-compound-eye"
+        description: "Architecture agents triade (C-E-Obs)"
+        status: "active"
+      
+      - name: "morphohdl-anamorphic-growth"
+        description: "Optimisation materielle, base 243, RVBA"
+        status: "active"
+      
+      - name: "FERMI-EVER"
+        description: "Estimation fermienne, budgets"
+        status: "active"
+      
+      - name: "GOST"
+        description: "Gestion d'etat temporal"
+        status: "active"
+      
+      - name: "HERMES"
+        description: "Memoire secondaire, insights"
+        status: "active"
+      
+      - name: "PEL"
+        description: "Policy Evaluation Language"
+        status: "active"
+      
+      - name: "personae"
+        description: "Personae agents"
+        status: "active"
+      
+      - name: "BLO"
+        description: "Boundary Layer Object"
+        status: "active"
+      
+      - name: "Omega-Lexicon"
+        description: "Lexique ontologique"
+        status: "active"
+      
+      - name: "Omega-Register"
+        description: "Registre ontologique"
+        status: "active"
+
+  # L1-CAUSALITY: Infrastructure + Routage + Indexation
+  L1_CAUSALITY:
+    description: "Infrastructure - Gouvernance, hooks, CI, outils de base, routage, indexation"
+    path_prefix: "D:/DO/WEB/TOOLS/L1-INFRA/"
+    repos:
+      - name: "TOPOS"
+        description: "Registre canonique ENV, topologie"
+        status: "active"
+      
+      - name: "TQL"
+        description: "Grammaire + spec + fixtures TQL"
+        status: "active"
+      
+      - name: "ECOS-CLI"
+        description: "CLI multi-repo, registry, health"
+        status: "active"
+      
+      - name: "FLUENCE"
+        description: "Orchestration agents, swarm intelligence"
+        status: "active"
+      
+      - name: "KIVA"
+        description: "CLI souverain, validation, PR workflow"
+        status: "active"
+      
+      - name: "KIVA-CLI"
+        description: "CLI KIVA pour validation locale"
+        status: "active"
+      
+      - name: "GATEWAY-MANAGER"
+        description: "Routeur unifie multi-backend, circuit breaker, fallback"
+        status: "active"
+      
+      - name: "SPIDX"
+        description: "Indexation semantique, SPARQL, Knowledge Graph"
+        status: "active"
+      
+      - name: "KG-SPIDX"
+        description: "Knowledge Graph pour SPIDX"
+        status: "active"
+      
+      - name: "ECOYSTEM"
+        description: "Ecosysteme dashboard, alertes"
+        status: "active"
+      
+      - name: "ECIT-CLI"
+        description: "CLI ECIT"
+        status: "active"
+      
+      - name: "ECO-CLI"
+        description: "CLI ECO"
+        status: "active"
+      
+      - name: "BRAIN-DOCS"
+        description: "Documentation BRAIN"
+        status: "active"
+      
+      - name: "loopany-platform"
+        description: "Platform loops"
+        status: "active"
+      
+      - name: "NEPICS"
+        description: "Narrative Epics"
+        status: "active"
+      
+      - name: "STYX"
+        description: "Styx workflow"
+        status: "active"
+      
+      - name: "UAE"
+        description: "Universal Attention Engine"
+        status: "active"
+      
+      - name: "DevTools-Integrations"
+        description: "Integrations outils dev"
+        status: "active"
+      
+      - name: "BOINC-LLM-P2P"
+        description: "P2P LLM via BOINC"
+        status: "active"
+      
+      - name: "LLM-REPO"
+        description: "Repo LLM local"
+        status: "active"
+      
+      - name: "NEXUS"
+        description: "Orchestration, WAL, metriques"
+        status: "active"
+  
+  # L2-PLATFORM: Plateforme + Release + Features + Orchestration
+  L2_PLATFORM:
+    description: "Plateforme - Services, API, modeles deployes, RLM, KIX, TIMX, VERSES"
+    path_prefix: "D:/DO/WEB/TOOLS/L2-PLATFORM/"
+    repos:
+      - name: "KIX"
+        description: "Orchestrateur runners, kernel execution"
+        status: "active"
+      
+      - name: "RLM-CONFIG"
+        description: "Configuration centralisee, pipelines"
+        status: "active"
+      
+      - name: "RLM-DEPLOY"
+        description: "Scripts deploiement automatise, rollback"
+        status: "active"
+      
+      - name: "RLM-GRAPH"
+        description: "Graphe dependances, topologie"
+        status: "active"
+      
+      - name: "RLM-INCIDENT"
+        description: "Playbooks incident, fallback"
+        status: "active"
+      
+      - name: "RLM-MDU"
+        description: "Migration MDU, validation designs"
+        status: "active"
+      
+      - name: "RLM-METRICS"
+        description: "Collecte metriques, dashboards, alertes"
+        status: "active"
+      
+      - name: "RLM-RELEASE"
+        description: "Tags release, versioning, changelog"
+        status: "active"
+      
+      - name: "RLM-SECURE"
+        description: "Securite, secrets, compliance"
+        status: "active"
+      
+      - name: "TIMX-FEATURE-STORE"
+        description: "Feature store time-series"
+        status: "active"
+      
+      - name: "VERSES"
+        description: "Resolution requetes semantiques"
+        status: "active"
+      
+      - name: "auto-dev"
+        description: "Auto-dev cycle"
+        status: "active"
+      
+      - name: "BDCP-CORE"
+        description: "Core BDCP mode"
+        status: "active"
+      
+      - name: "BIRDY"
+        description: "Birdy tool"
+        status: "active"
+      
+      - name: "CTULU"
+        description: "Orchestrateur pipelines, resolver"
+        status: "active"
+      
+      - name: "BRAIN"
+        description: "Memoire cognitive (aussi L0)"
+        status: "active"
+      
+      - name: "VDB"
+        description: "Vector DB"
+        status: "active"
+      
+      - name: "PIANO"
+        description: "Orchestrateur Triade (aussi L4)"
+        status: "active"
+      
+      - name: "BRAIN-CLI"
+        description: "CLI BRAIN"
+        status: "active"
+      
+      - name: "BRAIN-DOCS"
+        description: "Docs BRAIN (aussi L1)"
+        status: "active"
+      
+      - name: "DevTools"
+        description: "Hub outils dev"
+        status: "active"
+      
+      - name: "EMIT"
+        description: "Event emission"
+        status: "active"
+      
+      - name: "GeriCode"
+        description: "GeriCode"
+        status: "active"
+      
+      - name: "GIT-SENSE"
+        description: "Git analysis"
+        status: "active"
+      
+      - name: "IRIS"
+        description: "Capteurs, parsing"
+        status: "active"
+      
+      - name: "KEEL"
+        description: "Encodage ternaire"
+        status: "active"
+      
+      - name: "PLIX"
+        description: "Codec binaire ternaire"
+        status: "active"
+      
+      - name: "PULSE"
+        description: "Pulse monitoring"
+        status: "active"
+      
+      - name: "SELINA"
+        description: "Sync cross-repo"
+        status: "active"
+      
+      - name: "auto-dev"
+        description: "Auto-dev cycle"
+        status: "active"
+
+  # L3-CITIZENS: Applications et agents autonomes
+  L3_CITIZENS:
+    description: "Citoyens - Applications et agents cognitifs autonomes"
+    path_prefix: "D:/DO/WEB/"
+    repos:
+      - name: "FLUENCE"
+        description: "Agent orchestration (aussi L1)"
+        status: "active"
+      
+      - name: "GERIBOOKING"
+        description: "Booking agent"
+        status: "active"
+      
+      - name: "BANK-BUSTER"
+        description: "Banking agent"
+        status: "active"
+      
+      - name: "RACINES"
+        description: "Racines symboliques (ROOTX)"
+        status: "active"
+      
+      - name: "CANDIDATOR"
+        description: "Gestion candidats"
+        status: "active"
+      
+      - name: "ARGUS"
+        description: "Detection gaps, contradictions"
+        status: "active"
+      
+      - name: "STYX"
+        description: "Workflow engine"
+        status: "active"
+      
+      - name: "KRONOS"
+        description: "Qualification, temporal"
+        status: "active"
+      
+      - name: "IRIS"
+        description: "Capteurs, forensic (aussi L2)"
+        status: "active"
+      
+      - name: "TINA"
+        description: "Neurosymbolique"
+        status: "active"
+      
+      - name: "MIMIR"
+        description: "Memoire connaissance"
+        status: "active"
+      
+      - name: "ECOS-VISION"
+        description: "Vision ecosysteme"
+        status: "active"
+      
+      - name: "JOURNALISTE"
+        description: "Agent journaliste"
+        status: "active"
+      
+      - name: "COMET-BOT"
+        description: "Bot comet"
+        status: "active"
+      
+      - name: "email-sender-1"
+        description: "Email sender 1"
+        status: "active"
+      
+      - name: "email-sender-2"
+        description: "Email sender 2"
+        status: "active"
+      
+      - name: "FLUX"
+        description: "Flux cognitifs"
+        status: "active"
+      
+      - name: "INTENT-ENCODER"
+        description: "Encoder intentions"
+        status: "active"
+      
+      - name: "SABRE"
+        description: "Securite"
+        status: "active"
+      
+      - name: "strix"
+        description: "Strix tool"
+        status: "active"
+      
+      - name: "CoPaw"
+        description: "Qualite code"
+        status: "active"
+      
+      - name: "BATVERSE"
+        description: "Batman agents family"
+        status: "active"
+      
+      - name: "OpenClaw"
+        description: "OpenClaw agent"
+        status: "active"
+      
+      - name: "MirrorFish"
+        description: "MirrorFish agent"
+        status: "active"
+      
+      - name: "CRONOS"
+        description: "Cron autonome"
+        status: "active"
+      
+      - name: "LLUX"
+        description: "Moteur BitNet 1.58b Zig natif"
+        status: "active"
+      
+      - name: "UAE"
+        description: "Universal Attention Engine (aussi L0)"
+        status: "active"
+      
+      - name: "triadic-compound-eye"
+        description: "Architecture triade (aussi L0)"
+        status: "active"
+      
+      - name: "AGENT-REGISTRY"
+        description: "Registre agents"
+        status: "active"
+      
+      - name: "DAG-3"
+        description: "DAG-3 forensic"
+        status: "active"
+      
+      - name: "CITIZENS"
+        description: "Registre citoyens"
+        status: "active"
+      
+      - name: "KEEL"
+        description: "Encodage (aussi L2)"
+        status: "active"
+
+  # L4-TOOLS: Outils, scripts, experiences, prototypes
+  L4_TOOLS:
+    description: "Outils - Scripts, experiences, prototypes, runtime"
+    path_prefix: "D:/DO/WEB/TOOLS/L4-TOOLS/"
+    repos:
+      - name: "TRIX"
+        description: "Runtime isole, WAL, health checks"
+        status: "active"
+      
+      - name: "PIANO"
+        description: "Orchestrateur Triade (aussi L2)"
+        status: "active"
+      
+      - name: "SPIDX"
+        description: "Indexation semantique (aussi L1)"
+        status: "active"
+      
+      - name: "SPIDX-gamma"
+        description: "Gamma index ternaire"
+        status: "active"
+      
+      - name: "TLM-LANG"
+        description: "Langage logique ternaire"
+        status: "active"
+      
+      - name: "FLUENCE-CLI"
+        description: "CLI FLUENCE"
+        status: "active"
+      
+      - name: "CTULU"
+        description: "Orchestrateur (aussi L2)"
+        status: "active"
+      
+      - name: "RLM-243"
+        description: "RLM base 243"
+        status: "active"
+      
+      - name: "ECOS-CLI"
+        description: "CLI ECOS (aussi L1)"
+        status: "active"
+      
+      - name: "ecos-sync"
+        description: "Sync ecosysteme"
+        status: "active"
+      
+      - name: "KIVA-CLI"
+        description: "CLI KIVA"
+        status: "active"
+      
+      - name: "HOLMES"
+        description: "Holmes agent (aussi L3)"
+        status: "active"
+      
+      - name: "HERMES"
+        description: "Memoire secondaire (aussi L0)"
+        status: "active"
+      
+      - name: "LYCOS"
+        description: "Lycos search"
+        status: "active"
+      
+      - name: "Mnemo-SRC"
+        description: "Mnemo source"
+        status: "active"
+      
+      - name: "OPENSRC"
+        description: "Open source tools"
+        status: "active"
+      
+      - name: "OUTPUT-WORKSPACE"
+        description: "Output workspace"
+        status: "active"
+      
+      - name: "REPO-STANDARDS"
+        description: "Standards repo (aussi L0)"
+        status: "active"
+      
+      - name: "SERVICES"
+        description: "Services"
+        status: "active"
+      
+      - name: "SKILLS"
+        description: "Skills KiloCode"
+        status: "active"
+      
+      - name: "TEST-REPO"
+        description: "Test repository"
+        status: "active"
+      
+      - name: "VDB"
+        description: "Vector DB (aussi L2)"
+        status: "active"
+      
+      - name: "WAZAA"
+        description: "Wazaa citizen"
+        status: "active"
+      
+      - name: "BANK-BUSTER"
+        description: "Bank buster (aussi L3)"
+        status: "active"
+      
+      - name: "CANDIDATOR"
+        description: "Candidator (aussi L3)"
+        status: "active"
+      
+      - name: "GERIBOOKING"
+        description: "GeriBooking (aussi L3)"
+        status: "active"
+      
+      - name: "JOURNALISTE"
+        description: "Journaliste (aussi L3)"
+        status: "active"
+      
+      - name: "KEEL"
+        description: "Keel (aussi L2/L3)"
+        status: "active"
+      
+      - name: "KRONOS"
+        description: "Kronos (aussi L3)"
+        status: "active"
+      
+      - name: "STYX"
+        description: "Styx (aussi L3)"
+        status: "active"
+      
+      - name: "TINA"
+        description: "Tina (aussi L3)"
+        status: "active"
+      
+      - name: "UAE"
+        description: "UAE (aussi L0/L3)"
+        status: "active"
+      
+      - name: "BATVERSE"
+        description: "BatVerse (aussi L3)"
+        status: "active"
+      
+      - name: "FLUX"
+        description: "Flux (aussi L3)"
+        status: "active"
+      
+      - name: "CoPaw"
+        description: "CoPaw (aussi L3)"
+        status: "active"
+      
+      - name: "MirrorFish"
+        description: "MirrorFish (aussi L3)"
+        status: "active"
+      
+      - name: "OpenClaw"
+        description: "OpenClaw (aussi L3)"
+        status: "active"
+      
+      - name: "CRONOS"
+        description: "Cronos (aussi L3)"
+        status: "active"
+      
+      - name: "LLUX"
+        description: "LLUX (aussi L3)"
+        status: "active"
+      
+      - name: "DEVTOOLS"
+        description: "DevTools hub (C:/DevTools)"
+        status: "active"
+        path: "C:/DevTools"
+      
+      - name: "TOOL-FACTORY-1"
+        description: "Tool factory"
+        status: "active"
+      
+      - name: "vscode-lm-proxy"
+        description: "VSCode LM proxy"
+        status: "active"
+      
+      - name: "vsix-ai-orchestrator"
+        description: "VSIX AI orchestrator"
+        status: "active"
+      
+      - name: "CLINE"
+        description: "Cline agent"
+        status: "active"
+      
+      - name: "BatMCP"
+        description: "BatMCP"
+        status: "active"
+      
+      - name: "COMET-BOT"
+        description: "Comet bot"
+        status: "active"
+      
+      - name: "ECIT-CLI"
+        description: "ECIT CLI (aussi L1)"
+        status: "active"
+      
+      - name: "ECO-CLI"
+        description: "ECO CLI (aussi L1)"
+        status: "active"
+      
+      - name: "ecos-diff"
+        description: "Ecos diff"
+        status: "active"
+      
+      - name: "LUKAS-PRESTATIONS"
+        description: "Lukas prestations"
+        status: "active"
+      
+      - name: "ONTOLOGY_MC"
+        description: "Ontology MC"
+        status: "active"
+      
+      - name: "PITCH-1"
+        description: "Pitch 1"
+        status: "active"
+      
+      - name: "GATEWAY-MANAGER"
+        description: "Gateway Manager (aussi L1)"
+        status: "active"
+      
+      - name: "strix"
+        description: "Strix (aussi L1)"
+        status: "active"
+      
+      - name: "DATA-MINER"
+        description: "Data miner"
+        status: "active"
+      
+      - name: "BRAIN-CLI"
+        description: "BRAIN CLI (aussi L2)"
+        status: "inactive"
+        note: "Non clone localement"
+
+  # L5-ARCHIVE: Projets geles, historique, documentation
+  L5_ARCHIVE:
+    description: "Archive - Projets geles, historique, documentation"
+    path_prefix: "D:/DO/WEB/TOOLS/L5-ARCHIVE/"
+    repos:
+      - name: "ARCHIVE_GERI_CMS"
+        description: "104 repos historiques dormants"
+        status: "archived"
+        count: 104
+      - name: "2025-0303-BRAIN"
+        description: "Archive BRAIN 2025-03"
+        status: "archived"
+      - name: "2025-0312-BRAIN2"
+        description: "Archive BRAIN2 2025-03"
+        status: "archived"
+      - name: "2025-0402-DEEPSITE"
+        description: "Archive DeepSite 2025-04"
+        status: "archived"
+      - name: "2025-0909-DMR"
+        description: "Archive DMR 2025-09"
+        status: "archived"
+      - name: "2025-0920-BOOKING"
+        description: "Archive Booking 2025-09"
+        status: "archived"
+      - name: "2025-1003-GERIBOOKING"
+        description: "Archive GeriBooking 2025-10"
+        status: "archived"
+      - name: "2025-0902-optimiser-Perplexity"
+        description: "Archive Perplexity 2025-09"
+        status: "archived"
+      - name: "2025-0903-comparateur-IA-code"
+        description: "Archive comparateur IA 2025-09"
+        status: "archived"
+      - name: "2025-0905-FRUSTRATION"
+        description: "Archive frustration 2025-09"
+        status: "archived"
+      - name: "2025-0906-JP-PETIT"
+        description: "Archive JP Petit 2025-09"
+        status: "archived"
+      - name: "2025-1103-DOC-UNIV-DEV"
+        description: "Archive DOC UNIV DEV 2025-11"
+        status: "archived"
+
+# Regles de nommage canoniques (depuis LAYER_STRUCTURE.md)
+naming_rules:
+  prefix: "L<numero>-"
+  separator: "-"
+  no_underscore: true
+  no_spaces: true
+  uppercase: true
+  valid_examples:
+    - "L0-CANON"
+    - "L1-INFRA"
+    - "L1-GOVERNANCE"
+    - "L2-PLATFORM"
+    - "L3-CITIZENS"
+    - "L4-TOOLS"
+    - "L5-ARCHIVE"
+
+# Anomalies corrigees (depuis LAYER_STRUCTURE.md)
+corrected_anomalies:
+  - folder: "L0-CANAN"
+    status: "CORRIGÉ"
+    action: "Supprime - doublon de L0-CANON/ONTOLOGY"
+    date: "2026-07-17"
+  
+  - folder: "L3_EMERGENCE"
+    status: "CORRIGÉ"
+    action: "Supprime - dossier ARGUS vide"
+    date: "2026-07-17"
+  
+  - folder: "L1b"
+    status: "CORRIGÉ"
+    action: "Renomme en L1-GOVERNANCE"
+    date: "2026-07-17"
+
+# Double presence notees (repos apparaissant dans plusieurs strates)
+double_presence:
+  - repo: "PIANO"
+    strata: ["L2-PLATFORM", "L4-TOOLS"]
+    note: "Orchestrateur de plateforme + outil runtime"
+  
+  - repo: "SPIDX"
+    strata: ["L1-INFRA", "L4-TOOLS"]
+    note: "Indexation infra + outil runtime"
+  
+  - repo: "GATEWAY-MANAGER"
+    strata: ["L1-INFRA", "L4-TOOLS"]
+    note: "Routeur infra + outil"
+  
+  - repo: "FLUENCE"
+    strata: ["L1-INFRA", "L3-CITIZENS"]
+    note: "Orchestration infra + agent citoyen"
+  
+  - repo: "BRAIN"
+    strata: ["L0-CANON", "L2-PLATFORM"]
+    note: "Memoire canonique + service plateforme"
+  
+  - repo: "BRAIN-DOCS"
+    strata: ["L1-INFRA", "L2-PLATFORM"]
+    note: "Documentation partagee"
+  
+  - repo: "KEEL"
+    strata: ["L2-PLATFORM", "L3-CITIZENS", "L4-TOOLS"]
+    note: "Encodage transversal"
+  
+  - repo: "ECOS-CLI"
+    strata: ["L1-INFRA", "L4-TOOLS"]
+    note: "CLI infra + outil"
+  
+  - repo: "KIVA-CLI"
+    strata: ["L1-INFRA", "L4-TOOLS"]
+    note: "CLI validation + outil"
+  
+  - repo: "CTULU"
+    strata: ["L2-PLATFORM", "L4-TOOLS"]
+    note: "Orchestrateur + outil"
+  
+  - repo: "HOLMES"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Agent + outil"
+  
+  - repo: "UAE"
+    strata: ["L0-CANON", "L3-CITIZENS", "L4-TOOLS"]
+    note: "Attention universelle - transversale"
+  
+  - repo: "LLUX"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Moteur LLM + runtime"
+  
+  - repo: "BANK-BUSTER"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Agent + outil"
+  
+  - repo: "CANDIDATOR"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Agent + outil"
+  
+  - repo: "GERIBOOKING"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Agent + outil"
+  
+  - repo: "JOURNALISTE"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Agent + outil"
+  
+  - repo: "COMET-BOT"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Agent + outil"
+  
+  - repo: "STYX"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Workflow + outil"
+  
+  - repo: "TINA"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Neurosymbolique + outil"
+  
+  - repo: "KRONOS"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Temporal + outil"
+  
+  - repo: "BATVERSE"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Famille agents + outils"
+  
+  - repo: "FLUX"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Flux cognitifs + outil"
+  
+  - repo: "CoPaw"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Qualite + outil"
+  
+  - repo: "MirrorFish"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Agent + outil"
+  
+  - repo: "OpenClaw"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Agent + outil"
+  
+  - repo: "CRONOS"
+    strata: ["L3-CITIZENS", "L4-TOOLS"]
+    note: "Cron autonome + outil"
+  
+  - repo: "HERMES"
+    strata: ["L0-CANON", "L4-TOOLS"]
+    note: "Memoire secondaire + outil"
+  
+  - repo: "REPO-STANDARDS"
+    strata: ["L0-CANON", "L4-TOOLS"]
+    note: "Standards macro + repo outils"
+  
+  - repo: "VDB"
+    strata: ["L2-PLATFORM", "L4-TOOLS"]
+    note: "Vector DB plateforme + outil"
+  
+  - name: "ECIT-CLI"
+    strata: ["L1-INFRA", "L4-TOOLS"]
+    note: "CLI infra + outil"
+  
+  - name: "ECO-CLI"
+    strata: ["L1-INFRA", "L4-TOOLS"]
+    note: "CLI infra + outil"
+  
+  - name: "strix"
+    strata: ["L1-INFRA", "L4-TOOLS"]
+    note: "Infra + outil"
+
+# Stats globales
+stats:
+  total_repos_active: 80
+  total_repos_archived: 104
+  total_repos_all: 184
+  by_stratum:
+    L0_CANONICAL: 23
+    L1_CAUSALITY: 23
+    L2_PLATFORM: 35
+    L3_CITIZENS: 35
+    L4_TOOLS: 52
+    L5_ARCHIVE: 16
+  double_counted: 32
+  unique_repos: 152

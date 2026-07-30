@@ -1,0 +1,238 @@
+---
+type: PIANO_LLUX_BINDING
+version: "1.0.0"
+status: active
+intent_hash: 0xPIANO_LLUX_BINDING_20260730
+description: "Client Zig pour LLUX - Binding utilise par PIANO pour orchestration triade"
+inherits: [circuit_breaker, retry_policy, cognitive-bridge]
+---
+
+llux_binding:
+  description: "Client Zig HTTP pour LLUX OpenAI-compatible API"
+  file: "src/llux_binding.zig"
+  repo: "L4-TOOLS/PIANO"
+  language: Zig
+  
+  # Configuration
+  config:
+    base_url: "http://localhost:47000"
+    timeout: 300s
+    connect_timeout: 10s
+    keep_alive: true
+    max_connections: 32
+    user_agent: "PIANO/1.0 (triade-orchestrator)"
+  
+  # Circuit Breaker (pattern existant trix-gateway-router)
+  circuit_breaker:
+    enabled: true
+    failure_threshold: 3
+    success_threshold: 2
+    timeout: 60s
+    half_open_requests: 5
+    health_check:
+      endpoint: "/health"
+      interval: 30s
+      expected_status: 200
+      expected_body: '{"status":"healthy"}'
+  
+  # Retry Policy
+  retry:
+    max_attempts: 3
+    base_delay: 1000ms
+    max_delay: 10000ms
+    exponential_base: 2
+    jitter: true
+    retry_on:
+      - status_codes: [500, 502, 503, 504]
+      - errors: ["connection_refused", "timeout", "connection_reset"]
+    no_retry_on:
+      - status_codes: [400, 401, 403, 404]
+      - errors: ["invalid_request"]
+  
+  # Fonctions API
+  functions:
+    chat:
+      description: "Chat completion OpenAI-compatible"
+      method: POST
+      endpoint: "/v1/chat/completions"
+      headers:
+        - "Content-Type: application/json"
+      request:
+        messages:
+          type: array
+          items:
+            role:
+              type: string
+              enum: ["system", "user", "assistant"]
+            content:
+              type: string
+        model:
+          type: string
+          default: "bitnet-1.58b"
+        temperature:
+          type: number
+          default: 0.7
+          minimum: 0
+          maximum: 2
+        max_tokens:
+          type: integer
+          default: 2048
+          minimum: 1
+          maximum: 4096
+        top_p:
+          type: number
+          default: 0.9
+        top_k:
+          type: integer
+          default: 40
+        stream:
+          type: boolean
+          default: false
+      response:
+        id: string
+        object: string
+        created: integer
+        model: string
+        choices:
+          type: array
+          items:
+            index: integer
+            message:
+              role: string
+              content: string
+            finish_reason: string
+        usage:
+          prompt_tokens: integer
+          completion_tokens: integer
+          total_tokens: integer
+      error_handling:
+        - status: 400
+          error: "invalid_request"
+        - status: 404
+          error: "model_not_found"
+        - status: 500
+          error: "internal_error"
+        - status: 503
+          error: "service_unavailable"
+    
+    embed:
+      description: "Generation d'embeddings"
+      method: POST
+      endpoint: "/v1/embeddings"
+      headers:
+        - "Content-Type: application/json"
+      request:
+        input:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+        model:
+          type: string
+          default: "nomic-embed-v1.5"
+        encoding_format:
+          type: string
+          default: "float"
+          enum: ["float", "base64"]
+        dimensions:
+          type: integer
+          optional: true
+      response:
+        object: string
+        data:
+          type: array
+          items:
+            object: string
+            embedding:
+              type: array
+              items:
+                type: number
+            index: integer
+        model: string
+        usage:
+          prompt_tokens: integer
+          total_tokens: integer
+      error_handling:
+        - status: 400
+          error: "invalid_input"
+        - status: 404
+          error: "model_not_found"
+    
+    health:
+      description: "Health check LLUX"
+      method: GET
+      endpoint: "/health"
+      response:
+        status:
+          type: string
+          enum: ["healthy", "unhealthy"]
+        model: string
+        backend: string
+        version: string
+        uptime_seconds: integer
+      timeout: 5s
+      expected_status: 200
+      circuit_breaker_check: true
+  
+  # Gestion erreurs
+  error_types:
+    - name: "ConnectionError"
+      description: "Impossible de se connecter a LLUX"
+      retryable: true
+      circuit_breaker: true
+    - name: "TimeoutError"
+      description: "Timeout requete"
+      retryable: true
+      circuit_breaker: true
+    - name: "HTTPError"
+      description: "Erreur HTTP (status >= 400)"
+      retryable: false
+      circuit_breaker: false
+    - name: "ParseError"
+      description: "Erreur parsing reponse JSON"
+      retryable: false
+      circuit_breaker: false
+    - name: "ValidationError"
+      description: "Reponse invalide (schema mismatch)"
+      retryable: false
+      circuit_breaker: false
+  
+  # Tests
+  tests:
+    - name: "binding_health"
+      command: "zig build test --test-filter llux_binding_health"
+    - name: "binding_chat"
+      command: "zig build test --test-filter llux_binding_chat"
+    - name: "binding_embed"
+      command: "zig build test --test-filter llux_binding_embed"
+    - name: "binding_circuit_breaker"
+      command: "zig build test --test-filter circuit_breaker"
+    - name: "binding_retry"
+      command: "zig build test --test-filter retry_policy"
+  
+  # Build
+  build:
+    command: "zig build -Dcpu=westmere -Drelease-fast"
+    output: "zig-out/bin/piano"
+    dependencies:
+      - "std.http.client"
+      - "std.json"
+      - "std.time"
+  
+  # Deploiement
+  deployment:
+    binary: "/opt/piano/bin/piano"
+    config: "/etc/piano/llux_binding.json"
+    health_check: "zig build test --test-filter llux"
+  
+  # Integration RLM-DEPLOY
+  rlm_deploy:
+    pre_deploy:
+      - "zig build test --test-filter llux"
+    post_deploy:
+      - "verify_binding_health"
+      - "run_integration_test"
+    rollback:
+      - "restore_previous_binary"
+      - "restart_piano_service"

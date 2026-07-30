@@ -1,0 +1,153 @@
+---
+type: LLUX_DEPENDENCIES
+version: "1.0.0"
+status: active
+intent_hash: 0xLLUX_DEPENDENCIES_20260730
+description: "Dependances du composant LLUX dans l'ecosysteme gerivdb"
+---
+
+llux_dependencies:
+  # Dependances directes (LLUX a besoin de ces composants)
+  requires:
+    - component: TRIX
+      version: ">=1.0.0"
+      type: runtime
+      contract:
+        - start_backend: "trix backend start llux"
+        - stop_backend: "trix backend stop llux"
+        - status_backend: "trix backend status llux"
+        - health_check: "curl http://localhost:47000/health"
+        - wal_logging: "/var/lib/trix/wal/llux.log"
+        - port_allocation: "47000-48000"
+      reason: "Runtime isole pour execution LLUX"
+    
+    - component: GATEWAY-MANAGER
+      version: ">=1.0.0"
+      type: routing
+      contract:
+        - backend_registration: "llux backend via trix_backend: llux"
+        - health_endpoint: "/health"
+        - chat_endpoint: "/v1/chat/completions"
+        - embedding_endpoint: "/v1/embeddings"
+        - circuit_breaker:
+            failures: 3
+            timeout: 60s
+            half_open: 5
+        - fallback_chain: ["ollama-env2", "openrouter-nemotron-free"]
+      reason: "Routeur unifie pour exposer LLUX aux clients"
+    
+    - component: PIANO
+      version: ">=1.0.0"
+      type: orchestration
+      contract:
+        - binding: "llux_binding.zig"
+        - chat_method: "POST /v1/chat/completions"
+        - embed_method: "POST /v1/embeddings"
+        - health_method: "GET /health"
+        - circuit_breaker:
+            enabled: true
+            failures: 3
+            timeout: 60s
+        - retry:
+            max_attempts: 3
+            delay: 1000ms
+      reason: "Client Zig pour orchestration triade"
+    
+    - component: SPIDX
+      version: ">=1.0.0"
+      type: indexing
+      contract:
+        - embedding_endpoint: "/v1/embeddings"
+        - model: "nomic-embed-v1.5"
+        - dimension: 768
+        - cache:
+            enabled: true
+            ttl: 3600s
+            max_size: 1000
+      reason: "Fournisseur d'embeddings pour indexation semantique"
+
+  # Composants qui dependent de LLUX
+  used_by:
+    - component: GATEWAY-MANAGER
+      usage: "Backend LLM principal (priorite haute)"
+      priority: 1
+    
+    - component: PIANO
+      usage: "Orchestration triade - inference LLM"
+      priority: 1
+    
+    - component: SPIDX
+      usage: "Generation d'embeddings pour indexation"
+      priority: 2
+    
+    - component: KIX
+      usage: "Pipeline execution via LLUX"
+      priority: 2
+    
+    - component: TIMX
+      usage: "Feature store - embeddings via LLUX"
+      priority: 3
+    
+    - component: VERSES
+      usage: "Resolution de requetes via LLUX"
+      priority: 3
+    
+    - component: ARGUS
+      usage: "Detection de gaps - analyse via LLUX"
+      priority: 3
+    
+    - component: KiloCode
+      usage: "Interface utilisateur - chat/embeddings"
+      priority: 1
+
+  # Backends de fallback si LLUX indisponible
+  fallback_backends:
+    - name: ollama-env2
+      url: "http://localhost:11434"
+      models: ["llama3.1:8b", "mistral:7b", "codellama:13b"]
+      rate_limit: 0
+      token_cost: 0
+      priority: 1
+    
+    - name: openrouter-nemotron-free
+      url: "https://openrouter.ai/api/v1"
+      models: ["nemotron-4-340b-free", "llama-3-70b-free"]
+      rate_limit: 32
+      token_cost: 0
+      priority: 2
+    
+    - name: groq
+      url: "https://api.groq.com/openai/v1"
+      models: ["llama-3.1-70b-versatile", "mixtral-8x7b-32768"]
+      rate_limit: 30
+      token_cost: 0
+      priority: 3
+    
+    - name: google-ai-studio
+      url: "https://generativelanguage.googleapis.com/v1beta"
+      models: ["gemini-1.5-pro", "gemini-1.5-flash"]
+      rate_limit: 60
+      token_cost: 0
+      priority: 4
+    
+    - name: github-models
+      url: "https://models.inference.ai.azure.com"
+      models: ["gpt-4o", "gpt-4o-mini", "codestral-latest"]
+      rate_limit: 50
+      token_cost: 0
+      priority: 5
+
+  # Dependances build-time
+  build_dependencies:
+    - zig: ">=0.15.0"
+    - cpu: "westmere"
+    - flags: ["-Dcpu=westmere", "-Drelease-fast"]
+    - memory: "24GB DDR3"
+  
+  # Contraintes runtime
+  runtime_constraints:
+    max_latency_ms: 45
+    max_power_w: 12
+    max_memory_mb: 8192
+    max_concurrent: 32
+    isolation: "hyperv (Windows) / cgroups v2 (Linux)"
