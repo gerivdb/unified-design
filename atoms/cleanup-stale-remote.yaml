@@ -1,0 +1,64 @@
+---
+name: cleanup-stale-remote
+description: "Nettoyage des branches distantes orphelines après merge de PR."
+parameters:
+  check_after_merge: true
+  delete_if_divergent: true
+  dry_run: false
+  max_branch_age_days: 7
+constraints:
+  - "Supprimer les branches distantes mergées qui ne sont pas dans main"
+  - "Ne jamais supprimer une branche sans vérifier qu'elle est mergée"
+  - "Les commits de documentation doivent être intégrés dans main avant merge"
+inherits: [git-remote-safety, session-closeout]
+---
+
+# Atom : cleanup-stale-remote
+
+Pattern de nettoyage post-merge des branches distantes orphelines.
+
+## Rôle
+
+Éviter que des branches de feature restent en avance sur `origin/main` après merge, créant une divergence artificielle.
+
+## Déclencheur
+
+Après chaque merge de PR, exécuter un cleanup systématique.
+
+## Protocol obligatoire après merge
+
+### Étape 1 - Vérifier l'état distant
+```bash
+git branch -r
+```
+-> Lister toutes les branches distantes
+-> Identifier les branches mergées qui ne sont pas dans main
+
+### Étape 2 - Vérifier la divergence
+```bash
+git log origin/main..origin/feat/<branch> --oneline
+```
+-> Si vide : la branche est mergée, peut être supprimée
+-> Si non vide : la branche a des commits hors main, investiguer
+
+### Étape 3 - Supprimer la branche distante
+```bash
+git push origin --delete feat/<branch>
+```
+-> Supprimer uniquement si divergence vérifiée
+-> Forcer avec `--no-verify` si nécessaire pour les gardes BRGS
+
+### Étape 4 - Nettoyer les branches locales
+```bash
+git branch --merged main | grep -v "main" | xargs git branch -d
+```
+
+## Anti-patterns bloquants
+- Laisser une branche mergée rester sur le remote
+- Pousser des commits de checkpoint sur une feature branch après merge
+- Supprimer une branche sans vérifier qu'elle est mergée
+
+## Incidents connus
+- **Incident 2026-07-30** : Branche `feat/env2-admg-fractal-001` restée en avance sur main après merge PR #24
+  - Cause : Commit de checkpoint poussé sur la feature branch après merge
+  - Résolution : Suppression de la branche distante orpheline
