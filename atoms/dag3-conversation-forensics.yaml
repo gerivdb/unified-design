@@ -1,6 +1,6 @@
 ---
 name: dag3-conversation-forensics
-description: "Integration DAG-3 Forensic Analyzer + conversation parser pour détection d'impenses."
+description: "Integration DAG-3 Forensic Analyzer + conversation parser pour detection d'impenses."
 parameters:
   components:
     - DAG-3 Forensic Analyzer

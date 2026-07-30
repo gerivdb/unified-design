@@ -1,6 +1,6 @@
 ---
 name: ecosystem-health-dashboard
-description: "Dashboard opérationnel CTULU : stubs, ADRs, collisions, phi-CPS, vélocité."
+description: "Dashboard operationnel CTULU : stubs, ADRs, collisions, phi-CPS, velocite."
 parameters:
   metrics:
     - stubs

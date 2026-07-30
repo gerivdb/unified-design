@@ -1,6 +1,6 @@
 # Meta-Design Schema (MDU) v2
-# Schéma de validation YAML pour l'architecture gerivdb
-# Version 2.0 : ajout des capacités, détection de boucles et industrialisation
+# Schema de validation YAML pour l'architecture gerivdb
+# Version 2.0 : ajout des capacites, detection de boucles et industrialisation
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
 version: "2.0.0"
@@ -9,10 +9,10 @@ status: active
 
 $schema: "schemas/meta-design.schema.json"
 
-# Héritage multiple de designs abstraits
+# Heritage multiple de designs abstraits
 inherits: []
 
-# Capacités héritées (mixins)
+# Capacites heritees (mixins)
 capabilities:
   - name: latency-bound
     description: "Le design impose une limite de latence"
@@ -23,20 +23,20 @@ capabilities:
     parameters:
       max_power_w: 150
   - name: attention-mechanism
-    description: "Mécanisme d'attention universelle inspiré d'UAE"
+    description: "Mecanisme d'attention universelle inspire d'UAE"
     parameters:
       scaling_factor: "1/sqrt(d)"
       temperature: 1.0
       num_heads: 8
 
-# Règles de validation du graphe de dépendances
+# Regles de validation du graphe de dependances
 design_rules:
   - name: "no-circular-inheritance"
     check: "graph_is_acyclic"
   - name: "capability-conflict"
     check: "no_conflicting_capabilities"
 
-# Schéma étendu pour les fichiers design.yaml générés
+# Schema etendu pour les fichiers design.yaml generes
 design_schema:
   # Champs obligatoires
   required_fields:
@@ -47,33 +47,33 @@ design_schema:
     - design_version
     - intent_hash
   
-  # Champs optionnels avec valeurs par défaut
+  # Champs optionnels avec valeurs par defaut
   optional_fields:
     deprecated_capabilities: []
     priority_resolution: "order"
     deprecation_period_days: 90
   
-  # Versionnage sémantique des designs
+  # Versionnage semantique des designs
   versioning:
     major: "Breaking changes (removed capabilities)"
     minor: "Added capabilities or new optional fields"
     patch: "Bug fixes, parameter adjustments"
   
-  # Héritage multiple
+  # Heritage multiple
   multiple_inheritance:
     supported: true
-    conflict_resolution: "priority"  # priority = ordre d'héritage
-    parameter_merge: "override"    # override = dernier paramètre gagne
+    conflict_resolution: "priority"  # priority = ordre d'heritage
+    parameter_merge: "override"    # override = dernier parametre gagne
   
-  # Gestion des capacités dépréciées
+  # Gestion des capacites depreciees
   deprecation_policy:
     warning_days: 30
     error_days: 90
     removal_strategy: "soft-delete"
 
-# Détection de boucles de dépendances sémantiques
+# Detection de boucles de dependances semantiques
 
-# Industrialisation : génération et validation de designs
+# Industrialisation : generation et validation de designs
 industrialization:
   generator:
     template_repo: "https://github.com/gerivdb/unified-design-template"
@@ -85,13 +85,13 @@ industrialization:
 piliers:
   - nom: "Sonar-Driven Design"
     abbr: "SDD"
-    role: "Observabilité"
+    role: "Observabilite"
     couleur: "#4CAF50"
     invariants:
       - nom: "Ping/Echo"
         description: "Message minimal avec ID unique + timestamp"
       - nom: "Sonar Map"
-        description: "Structure partagée d'état temps réel"
+        description: "Structure partagee d'etat temps reel"
       - nom: "PRF"
         description: "Pulse Repetition Frequency"
       - nom: "Latence P99"
@@ -107,32 +107,32 @@ piliers:
     couleur: "#2196F3"
     invariants:
       - nom: "Triade C-E-Obs"
-        description: "Communication -> Exécution -> Observation"
+        description: "Communication -> Execution -> Observation"
       - nom: "Swarm Intelligence"
-        description: "Agents autonomes évolutifs"
+        description: "Agents autonomes evolutifs"
       - nom: "HITL Gate"
         description: "Validation humaine pour modifications critiques"
 
   - nom: "MorphoHDL Anamorphic Growth"
     abbr: "MAG"
-    role: "Optimisation Matérielle"
+    role: "Optimisation Materielle"
     couleur: "#9C27B0"
     invariants:
-      - nom: "Croissance Expérimentale"
+      - nom: "Croissance Experimentale"
         description: "Circuits adaptatifs"
       - nom: "Base 243"
         description: "Structure ternaire native 3^5"
       - nom: "RVBA"
-        description: "Canaux de couleur sémantique"
+        description: "Canaux de couleur semantique"
       - nom: "O(1) Index"
-        description: "Accès constant via index ternaire"
+        description: "Acces constant via index ternaire"
 
   - nom: "Connard Design"
     abbr: "CD"
-    role: "Contrôle Qualité"
+    role: "Controle Qualite"
     couleur: "#F44336"
     invariants:
-      - nom: "Héritage"
+      - nom: "Heritage"
         max: 3
         description: "Profondeur d'abstraction"
       - nom: "Latence P99"
@@ -142,24 +142,24 @@ piliers:
         valeur: 12
         unite: "W"
       - nom: "Roast Automatique"
-        description: "Feedback négatif constructif"
+        description: "Feedback negatif constructif"
 
-# Règles transversales
+# Regles transversales
 regles_transversales:
   - nom: "Composition"
-    description: "Profondeur dépendance <= 3 niveaux"
+    description: "Profondeur dependance <= 3 niveaux"
     action: "Wall of Shame"
   
   - nom: "Latence"
-    description: "P99 <= 45ms pour opérations critiques"
+    description: "P99 <= 45ms pour operations critiques"
     action: "Roast automatique"
   
   - nom: "Puissance"
-    description: "<= 12W par inférence"
+    description: "<= 12W par inference"
     action: "Optimisation PIANO"
   
   - nom: "Observation"
-    description: "Tout système critique doit être observable"
+    description: "Tout systeme critique doit etre observable"
     action: "Ajout de probes Sonar"
   
   - nom: "Validation"
@@ -170,7 +170,7 @@ regles_transversales:
       - "gerivdb connard watch <path>"
       - "gerivdb design validate [--path <path>] [--strict] [--output text|json]"
 
-# Couche de gouvernance - Mise à jour pour refléter la réalité physique complète
+# Couche de gouvernance - Mise a jour pour refleter la realite physique complete
 couche_gouvernance:
   L0_CANONICAL:
     - "GOVERNANCE-HUB"
@@ -337,7 +337,7 @@ governance_atoms:
   - absolute-rules-enforcement
   - adr-prd-epics-intents
 
-# Agents associés par pilier
+# Agents associes par pilier
 agents_par_pilier:
   SDD:
     - "NEXUS"
@@ -378,7 +378,7 @@ git_policy:
   disallow_direct_push_to_main: true
   disallow_direct_push_to_master: true
 
-# Références
+# References
 references:
   - ADR-012-meta-design-validation-protocol
   - ADR-015-unified-design-v2

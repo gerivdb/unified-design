@@ -1,6 +1,6 @@
 ---
 name: bat-family-agents
-description: "Agents Batman/Alfred/Riddler/Lucius/Harvey pour orchestration stratégique du metacluster."
+description: "Agents Batman/Alfred/Riddler/Lucius/Harvey pour orchestration strategique du metacluster."
 parameters:
   agents:
     - Batman: strategy

@@ -1,6 +1,6 @@
 ---
 name: resonance-driven-governance
-description: "Gouvernance par résonance : seuil phi-CPS dynamique, focus-beam, residue_index, CRONs AM, hybrid mode."
+description: "Gouvernance par resonance : seuil phi-CPS dynamique, focus-beam, residue_index, CRONs AM, hybrid mode."
 parameters:
   mechanisms:
     - dynamic_phi_cps_threshold

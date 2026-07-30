@@ -1,4 +1,4 @@
-# ATOM-WAVEFRONT-GOSSIP - Wavefront Gossip pour propagation épidémique
+# ATOM-WAVEFRONT-GOSSIP - Wavefront Gossip pour propagation epidemique
 # Version: 1.0.0
 # IntentHash: 0xATOM_WAVEFRONT_GOSSIP_20260726
 # Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
@@ -10,7 +10,7 @@ atom:
   status: active
   version: "1.0.0"
   description: |
-    Protocole de dissémination épidémique par vague (flood) pour propagation d'état.
+    Protocole de dissemination epidemique par vague (flood) pour propagation d'etat.
     TTL max 3 sauts, fanout 10, <= 30s vers tous noeuds ENV2.
   intent_hash: "0xATOM_WAVEFRONT_GOSSIP_20260726"
   layer: L1_CAUSALITY
@@ -21,7 +21,7 @@ parameters:
     type: integer
     required: true
     default: 10
-    description: "Nombre de voisins par noeud à propager"
+    description: "Nombre de voisins par noeud a propager"
   - name: max_wavefront
     type: integer
     required: true
@@ -31,12 +31,12 @@ parameters:
     type: integer
     required: true
     default: 3
-    description: "TTL initial (décroît à chaque saut)"
+    description: "TTL initial (decroit a chaque saut)"
   - name: deduplication_window_sec
     type: integer
     required: true
     default: 300
-    description: "Fenêtre de déduplication des messages (cache LRU)"
+    description: "Fenetre de deduplication des messages (cache LRU)"
 
 returns:
   - name: propagation_id

@@ -1,6 +1,6 @@
 ---
 name: memory-curator
-description: "Gestion de la mémoire longue durée — sessions, narratives, historique, IntentHash."
+description: "Gestion de la memoire longue duree - sessions, narratives, historique, IntentHash."
 parameters:
   archive: session_archive
   context: context_retention

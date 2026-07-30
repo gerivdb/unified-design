@@ -10,8 +10,8 @@ atom:
   status: active
   version: "1.0.0"
   description: |
-    Transport réseau QUIC avec protocole Noise pour communication P2P chiffrée.
-    Fallback TCP désactivé par défaut (mode BDCP).
+    Transport reseau QUIC avec protocole Noise pour communication P2P chiffree.
+    Fallback TCP desactive par defaut (mode BDCP).
   intent_hash: "0xATOM_QUIC_TRANSPORT_20260726"
   layer: L1_CAUSALITY
   governance: BOUNC-ADR-0022
@@ -31,7 +31,7 @@ parameters:
     type: integer
     required: true
     default: 30000
-    description: "Timeout maximal d'inactivité avant fermeture"
+    description: "Timeout maximal d'inactivite avant fermeture"
   - name: keep_alive_interval_ms
     type: integer
     required: true
@@ -44,7 +44,7 @@ returns:
     description: "Identifiant de connexion QUIC"
   - name: latency_ms
     type: integer
-    description: "Latence mesurée (RTT)"
+    description: "Latence mesuree (RTT)"
 
 dependencies:
   - ATOM-KADEMLIA-DHT

@@ -30,14 +30,14 @@ inherits: [build-pipeline, test-runner]
 
 Pattern de pipeline CI/CD multi-stage.
 
-## Rôle
+## Role
 
-Garantir la qualité et la traçabilité de chaque commit :
-- **Lint** : détection de code smell et erreurs statiques
+Garantir la qualite et la tracabilite de chaque commit :
+- **Lint** : detection de code smell et erreurs statiques
 - **Format** : uniformisation du style (black, prettier, rustfmt)
-- **Test** : exécution avec coverage minimum
+- **Test** : execution avec coverage minimum
 - **Build** : compilation et packaging
-- **Deploy** : déploiement blue-green ou canary
+- **Deploy** : deploiement blue-green ou canary
 
 ## Structure canonique
 
@@ -68,10 +68,10 @@ jobs:
 
 ## Invariants
 
-- Chaque stage DOIT échouer fast (pas de build si lint échoue)
+- Chaque stage DOIT echouer fast (pas de build si lint echoue)
 - Le coverage DOIT avoir un seuil minimum (ex: 80%)
-- Les artifacts DOIVENT être publiés (coverage, logs)
-- Le deploy DOIT être manuel ou protégé par approval
+- Les artifacts DOIVENT etre publies (coverage, logs)
+- Le deploy DOIT etre manuel ou protege par approval
 
 ## Hooks existants
 
@@ -82,7 +82,7 @@ jobs:
 | `commit-msg` | git commit | conventional commits |
 | `post-merge` | git merge | sync + audit |
 
-## Références
+## References
 
 - `C:\DevTools\.pre-commit-config.yaml`
 - `C:\DevTools\.github/workflows/`

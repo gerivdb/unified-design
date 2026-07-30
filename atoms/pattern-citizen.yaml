@@ -1,14 +1,14 @@
 ---
 name: pattern-citizen
-description: "Citoyen pattern architectural — responsabilité de définition et de diffusion d'un pattern de design."
+description: "Citoyen pattern architectural - responsabilite de definition et de diffusion d'un pattern de design."
 parameters:
   role: Pattern architectural
   responsibilities:
-    - Définir le pattern
+    - Definir le pattern
     - Structurer les swarm de triades
-    - Intégrer MoE Router et Sonar-Driven Design
+    - Integrer MoE Router et Sonar-Driven Design
   goals:
     - EPIC pattern MVP
-    - INTENT accepté
+    - INTENT accepte
 inherits: [citizen-registry]
 ---

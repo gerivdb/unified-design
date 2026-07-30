@@ -1,6 +1,6 @@
 ---
 name: ecos-root-registry
-description: "Registre d'identité écosystémique par dépôt. Définit la strate, le rôle, le statut et la section de chaque citoyen."
+description: "Registre d'identite ecosystemique par depot. Definit la strate, le role, le statut et la section de chaque citoyen."
 parameters:
   required_fields:
     - strate
@@ -19,31 +19,31 @@ inherits: [stratified-repository-registry]
 
 # ECOS_ROOT Registry Atom
 
-Pattern d'identité écosystémique décentralisé par dépôt.
+Pattern d'identite ecosystemique decentralise par depot.
 
-## Rôle
+## Role
 
-Chaque dépôt de l'écosystème possède un fichier `ECOS_ROOT.json` qui définit son identité canonique :
-- strate : classification hiérarchique (L0-L5)
+Chaque depot de l'ecosysteme possede un fichier `ECOS_ROOT.json` qui definit son identite canonique :
+- strate : classification hierarchique (L0-L5)
 - citizen : nom du citoyen/repo
 - name : nom complet
-- role : rôle fonctionnel
+- role : role fonctionnel
 - status : statut (active/dormant/deprecated)
 - layer : couche logique (N1-N4)
 - section : section P0-P5
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
 | `required_fields` | list | `[]` | Champs obligatoires dans ECOS_ROOT.json |
 | `optional_fields` | list | `[]` | Champs optionnels |
 
 ## Invariants
 
-- Tout dépôt actif DOIT avoir un ECOS_ROOT.json valide
-- Le champ `layer` DOIT correspondre à la strate dans known_repositories.yaml
-- Le champ `section` DOIT être cohérent avec la priorité P0-P5
+- Tout depot actif DOIT avoir un ECOS_ROOT.json valide
+- Le champ `layer` DOIT correspondre a la strate dans known_repositories.yaml
+- Le champ `section` DOIT etre coherent avec la priorite P0-P5
 
 ## Exemple d'usage
 
@@ -59,7 +59,7 @@ Chaque dépôt de l'écosystème possède un fichier `ECOS_ROOT.json` qui défin
 }
 ```
 
-## Références
+## References
 
 - CANDIDATOR/ECOS_ROOT.json
 - GERIBOOKING/ECOS_ROOT.json

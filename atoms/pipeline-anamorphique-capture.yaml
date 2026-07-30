@@ -8,9 +8,9 @@ parameters:
   wal_persistence: true
   retention_days: 90
 constraints:
-  - "Capture temps réel des conversations"
+  - "Capture temps reel des conversations"
   - "Extraction de concepts automatique"
-  - "Détection de frictions (F001-F020)"
+  - "Detection de frictions (F001-F020)"
   - "WAL persistance garantie"
 inherits: [conversation-analytics, event-streaming]
 ---
@@ -18,9 +18,9 @@ inherits: [conversation-analytics, event-streaming]
 # Atom : pipeline-anamorphique-capture
 
 ## Contexte
-Basé sur les conversations capturées dans `CTULU/tools/pipeline-anamorphique/reports/conversations/`. Ce pattern capture les interactions utilisateur-assistant pour l'analyse de design.
+Base sur les conversations capturees dans `CTULU/tools/pipeline-anamorphique/reports/conversations/`. Ce pattern capture les interactions utilisateur-assistant pour l'analyse de design.
 
-## Structure des données capturées
+## Structure des donnees capturees
 ```json
 {
   "intent_hash": "0x...",
@@ -28,8 +28,8 @@ Basé sur les conversations capturées dans `CTULU/tools/pipeline-anamorphique/r
   "session_id": "ses_xxx",
   "timestamp": "2026-06-22T01:24:20.369543+00:00",
   "content": {
-    "user": "Implémente le pipeline anamorphique complet",
-    "assistant": "Je crée les 10 tâches T001-T010 dans CTULU."
+    "user": "Implemente le pipeline anamorphique complet",
+    "assistant": "Je cree les 10 taches T001-T010 dans CTULU."
   },
   "concepts_detected": ["pipeline", "ctulu"],
   "friction_detected": false,
@@ -43,55 +43,55 @@ Basé sur les conversations capturées dans `CTULU/tools/pipeline-anamorphique/r
 
 ## Pipeline de traitement
 ```
-┌─────────────┐
-│  Capture    │
-│  (session)  │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│  Parse      │
-│  (JSON)     │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│  Extract    │
-│  Concepts   │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│  Detect     │
-│  Friction   │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│  Store in   │
-│  WAL        │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│  Update     │
-│  Ontology   │
-└─────────────┘
++-------------+
+|  Capture    |
+|  (session)  |
++------+------+
+       |
+       v
++-------------+
+|  Parse      |
+|  (JSON)     |
++------+------+
+       |
+       v
++-------------+
+|  Extract    |
+|  Concepts   |
++------+------+
+       |
+       v
++-------------+
+|  Detect     |
+|  Friction   |
++------+------+
+       |
+       v
++-------------+
+|  Store in   |
+|  WAL        |
++------+------+
+       |
+       v
++-------------+
+|  Update     |
+|  Ontology   |
++-------------+
 ```
 
 ## Types de conversations
-- **implementation** : Demandes d'implémentation de code
-- **debug** : Problèmes techniques à résoudre
+- **implementation** : Demandes d'implementation de code
+- **debug** : Problemes techniques a resoudre
 - **design** : Questions architecturales
 - **review** : Revues de code
 
-## Frictions détectées
-- **F001** : Ambiguïté de la demande
-- **F002** : Incohérence avec l'architecture existante
-- **F003** : Problème de contexte manquant
+## Frictions detectees
+- **F001** : Ambiguite de la demande
+- **F002** : Incoherence avec l'architecture existante
+- **F003** : Probleme de contexte manquant
 - **F004** : Conflit de patterns
-- **F005** : Violation des règles de gouvernance
-- **F006** : Échec de génération (0% succès)
+- **F005** : Violation des regles de gouvernance
+- **F006** : Échec de generation (0% succes)
 - **F007** : Timeout
 - **F008** : Ressources insuffisantes
 
@@ -103,8 +103,8 @@ Basé sur les conversations capturées dans `CTULU/tools/pipeline-anamorphique/r
   "session_id": "ses_004",
   "timestamp": "2026-06-22T01:24:33.364284+00:00",
   "content": {
-    "user": "L'agent a push vers le mauvais repo. Le remote était incorrect. Force push a écrasé CTULU.",
-    "assistant": "Je restaure le working tree. Le git state était incorrect. Conflit de contexte détecté."
+    "user": "L'agent a push vers le mauvais repo. Le remote etait incorrect. Force push a ecrase CTULU.",
+    "assistant": "Je restaure le working tree. Le git state etait incorrect. Conflit de contexte detecte."
   },
   "concepts_detected": [],
   "friction_detected": false,

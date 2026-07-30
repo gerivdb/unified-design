@@ -1,28 +1,28 @@
 ---
 name: convention-over-configuration
-description: "Convention over Configuration — établissez des conventions par défaut et permettez la configuration uniquement pour les cas d'exception."
+description: "Convention over Configuration - etablissez des conventions par defaut et permettez la configuration uniquement pour les cas d'exception."
 parameters:
   default_conventions: required
   explicit_configuration: exceptions_only
   sensible_defaults: true
 constraints:
-  - "Conventions logiques par défaut"
+  - "Conventions logiques par defaut"
   - "Configuration minimale pour les cas standards"
-  - "Les conventions doivent être documentées"
+  - "Les conventions doivent etre documentees"
 inherits: [design-principle]
 ---
 
 # Atom : Convention over Configuration (CoC)
 
 ## Contexte
-Principe de conception : établissez des conventions logiques par défaut et ne configurez que les cas d'exception.
+Principe de conception : etablissez des conventions logiques par defaut et ne configurez que les cas d'exception.
 
 ## Application dans MDU
 - **Stratification** : L0-CANON, L1-INFRA, L4-TOOLS, L5-ARCHIVE
-- **Atomes** : Nomination standardisée, structure YAML cohérente
-- **Citizens** : Structure de projet standardisée
+- **Atomes** : Nomination standardisee, structure YAML coherente
+- **Citizens** : Structure de projet standardisee
 
-## Conventions établies
+## Conventions etablies
 1. **Chemins** : `D:\DO\WEB\TOOLS\L{stratification}`
 2. **Atomes** : `unified-design/atoms/{nom-slug}.yaml`
 3. **IntentHash** : `0x<SLUG_MAJUSCULES>_YYYYMMDD`
@@ -30,7 +30,7 @@ Principe de conception : établissez des conventions logiques par défaut et ne 
 
 ## Configuration minimale
 ```yaml
-# Cas standard - conventions par défaut
+# Cas standard - conventions par defaut
 name: my-atom
 type: atom
 description: "Mon atome"
@@ -42,18 +42,18 @@ description: "Mon atome custom"
 category: special
 ```
 
-## Vérification
+## Verification
 ```bash
-# Vérifier CoC dans un projet
+# Verifier CoC dans un projet
 ctulu validate-coc --path ./src/
 ```
 
 ## Avantages
-- **Réduction de la configuration** : Moins de fichiers à créer
-- **Cohérence** : Tous les projets suivent le même pattern
-- **Productivité** : Moins de décision à prendre
+- **Reduction de la configuration** : Moins de fichiers a creer
+- **Coherence** : Tous les projets suivent le meme pattern
+- **Productivite** : Moins de decision a prendre
 
 ## Anti-patterns
 - Configuration excessive pour des cas standards
-- Décisions de design répétées dans chaque projet
-- Nommage incohérent entre modules
+- Decisions de design repetees dans chaque projet
+- Nommage incoherent entre modules

@@ -21,15 +21,15 @@ inherits: [wal-compaction, registry-driven-orchestration]
 
 # Sync Orchestrator Atom
 
-Pattern d'orchestration de synchronisation avec rollback sécurisé.
+Pattern d'orchestration de synchronisation avec rollback securise.
 
-## Rôle
+## Role
 
-Synchroniser N dépôts en garantissant :
-- **Traçabilité** : chaque opération tracée dans WAL
-- **Détection de drift** : comparaison local vs remote
-- **Rollback** : retour à l'état précédent en cas d'échec
-- **Stratégie de conflit** : configurable par repo
+Synchroniser N depots en garantissant :
+- **Tracabilite** : chaque operation tracee dans WAL
+- **Detection de drift** : comparaison local vs remote
+- **Rollback** : retour a l'etat precedent en cas d'echec
+- **Strategie de conflit** : configurable par repo
 
 ## Structure canonique
 
@@ -49,21 +49,21 @@ sync_config:
 
 ## Invariants
 
-- Toute sync DOIT être précédée d'un `git status` et d'un check de branche
-- Le drift DOIT être détecté avant toute écriture
-- Le rollback DOIT être testé avant le push
-- Le WAL DOIT être écrit avant l'opération (write-ahead)
+- Toute sync DOIT etre precedee d'un `git status` et d'un check de branche
+- Le drift DOIT etre detecte avant toute ecriture
+- Le rollback DOIT etre teste avant le push
+- Le WAL DOIT etre ecrit avant l'operation (write-ahead)
 
 ## Scripts existants
 
-| Script | Opération | Chemin |
+| Script | Operation | Chemin |
 |--------|-----------|--------|
 | `ecos-sync.ps1` | sync | `C:\DevTools\bin\` |
 | `ecos-sync-audit.ps1` | audit | `C:\DevTools\scripts\` |
 | `selina_sync.py` | global scan | CTULU |
 | `post-merge-sync` | post-merge | Kilo rule |
 
-## Références
+## References
 
 - `C:\DevTools\bin\ecos-sync.ps1`
 - `C:\DevTools\scripts\ecos-sync-audit.ps1`

@@ -1,6 +1,6 @@
 ---
 name: gpu-decoder
-description: "Décodage GPU via NVDEC — wrapper CUDA/NVDEC pour PLIX codec."
+description: "Decodage GPU via NVDEC - wrapper CUDA/NVDEC pour PLIX codec."
 parameters:
   wrapper: nvdec_wrapper
   build: [build_nvdec.bat, build_nvdec_wrapper_vs.bat]
@@ -11,24 +11,24 @@ inherits: []
 
 # GPU Decoder Atom
 
-Décodeur GPU multi-backend pour PLIX Suite.
+Decodeur GPU multi-backend pour PLIX Suite.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
 | `wrapper` | string | `nvdec_wrapper` | Backend CUDA/NVDEC |
 | `build` | list | [] | Scripts de build |
-| `exports` | list | [] | Bibliothèques exportées |
-| `runtime` | list | [] | Dépendances runtime CUDA |
+| `exports` | list | [] | Bibliotheques exportees |
+| `runtime` | list | [] | Dependances runtime CUDA |
 
-## Backends supportés
+## Backends supportes
 
 - **NVDEC_DLL** : NVIDIA NVDEC hardware decode (<5ms cible)
 - **NVDEC_PYAV** : PyAV/FFmpeg avec CUDA hwaccel (~15ms)
-- **OPENCV** : CPU fallback (validé ~15ms)
+- **OPENCV** : CPU fallback (valide ~15ms)
 
-## Références
+## References
 
 - ATOM-007-error-tree-diagnostics
 - INTENT-301: GPU decode

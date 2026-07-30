@@ -1,6 +1,6 @@
 ---
 name: primitive-flow
-description: "Flux de primitives exécutables depuis PRIMUS vers ses consommateurs. Captures les dépendances orientées PRIMUS → CTULU, SKILLS, NEXUS."
+description: "Flux de primitives executables depuis PRIMUS vers ses consommateurs. Captures les dependances orientees PRIMUS -> CTULU, SKILLS, NEXUS."
 parameters:
   provider: PRIMUS
   consumers:
@@ -20,12 +20,12 @@ inherits: [cross-repo-flow, formal-verification]
 
 Flux de primitives atomiques depuis PRIMUS vers les consommateurs.
 
-## Rôle
+## Role
 
 Documenter et valider le flux de primitives depuis `gerivdb/PRIMUS` vers :
 - **CTULU** : assemble les primitives en outils multi-repo
 - **SKILLS** : appelle les primitives dans les skills cognitifs
-- **NEXUS** : importe les primitives dans les engines métier
+- **NEXUS** : importe les primitives dans les engines metier
 
 ## Structure canonique
 
@@ -42,7 +42,7 @@ cross_repo_flow:
       spec: raisonnement temporel
       consumers: [CTULU]
     - id: semantic-monitor
-      spec: monitoring sémantique
+      spec: monitoring semantique
       consumers: [CTULU]
     - id: topology-router
       spec: routage topologies
@@ -51,29 +51,29 @@ cross_repo_flow:
 
 ## Invariants
 
-- PRIMUS DOIT fournir des primitives **stateless** et **déterministes**
-- Chaque primitive DOIT avoir un contrat d'input/output typé
-- CTULU NE DOIT PAS inventer de primitives non déclarées dans PRIMUS
-- SKILLS DOIT référencer les primitives via `trit_primitive` dans le frontmatter
-- NEXUS DOIT valider les schémas avant import
+- PRIMUS DOIT fournir des primitives **stateless** et **deterministes**
+- Chaque primitive DOIT avoir un contrat d'input/output type
+- CTULU NE DOIT PAS inventer de primitives non declarees dans PRIMUS
+- SKILLS DOIT referencer les primitives via `trit_primitive` dans le frontmatter
+- NEXUS DOIT valider les schemas avant import
 
 ## Validation
 
-Le loop engine MDU DOIT vérifier :
-1. `PRIMUS` possède l'atome `primitive-provider`
-2. Chaque consommateur déclaré possède le contrat correspondant
-3. Aucune dépendance cyclique n'existe via ces flux
+Le loop engine MDU DOIT verifier :
+1. `PRIMUS` possede l'atome `primitive-provider`
+2. Chaque consommateur declare possede le contrat correspondant
+3. Aucune dependance cyclique n'existe via ces flux
 
 ## Exemples
 
 | Primitive | Provider | Consumers | Usage |
 |-----------|----------|-----------|-------|
-| `phi-calc` | PRIMUS | CTULU | Calcul φ-CPS |
+| `phi-calc` | PRIMUS | CTULU | Calcul phi-CPS |
 | `temporal-range` | PRIMUS | CTULU | Raisonnement temporel |
 | `TritScanRegistry` | PRIMUS | SKILLS | Scan registre |
 | `TritDocumentClassify` | PRIMUS | SKILLS | Classification documents |
 
-## Références
+## References
 
 - `D:\DO\WEB\TOOLS\L4-TOOLS\PRIMUS\README.md`
 - `D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\EPICS\EPIC-092-primus-primitives-gap.md`

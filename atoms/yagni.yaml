@@ -1,55 +1,55 @@
 ---
 name: yagni
-description: "You Aren't Gonna Need It — n'implémentez pas de fonctionnalités non demandées, écoutez les besoins réels."
+description: "You Aren't Gonna Need It - n'implementez pas de fonctionnalites non demandees, ecoutez les besoins reels."
 parameters:
   premature_optimization: blocked
   feature_requests_only: true
   speculative_code: forbidden
 constraints:
-  - "Implémenter uniquement ce qui est demandé"
-  - "Éviter l'optimisation prématurée"
-  - "Le code spéculatif est interdit"
+  - "Implementer uniquement ce qui est demande"
+  - "Éviter l'optimisation prematuree"
+  - "Le code speculatif est interdit"
 inherits: [design-principle]
 ---
 
 # Atom : YAGNI (You Aren't Gonna Need It)
 
 ## Contexte
-Principe de développement : n'implémentez pas de fonctionnalités que les utilisateurs n'ont pas demandées. Évitez l'optimisation prématurée et le code spéculatif.
+Principe de developpement : n'implementez pas de fonctionnalites que les utilisateurs n'ont pas demandees. Évitez l'optimisation prematuree et le code speculatif.
 
 ## Application dans MDU
-- **Atomes** : Créez les atomes demandés par les besoins réels
-- **Citizens** : Implémentez les fonctionnalités demandées
-- **Pipelines** : Ajoutez les étapes nécessaires, pas possibles
+- **Atomes** : Creez les atomes demandes par les besoins reels
+- **Citizens** : Implementez les fonctionnalites demandees
+- **Pipelines** : Ajoutez les etapes necessaires, pas possibles
 
-## Règles
-1. **Demande client** : Fonctionnalité doit être demandée par un utilisateur
-2. **Optimisation** : Ne profilez pas avant d'avoir un problème
-3. **Code spéculatif** : Interdit - tout code doit avoir une utilité prouvée
+## Regles
+1. **Demande client** : Fonctionnalite doit etre demandee par un utilisateur
+2. **Optimisation** : Ne profilez pas avant d'avoir un probleme
+3. **Code speculatif** : Interdit - tout code doit avoir une utilite prouvee
 
-## Vérification
+## Verification
 ```bash
-# Vérifier YAGNI dans un module
+# Verifier YAGNI dans un module
 ctulu validate-yagni --module src/wazaa_bus_citizens/
 ```
 
 ## Anti-patterns
-- Code commenté "pour plus tard"
-- Méthodes non utilisées
-- Optimisations spéculatives
-- Fonctionnalités "peut-être utiles"
+- Code commente "pour plus tard"
+- Methodes non utilisees
+- Optimisations speculatives
+- Fonctionnalites "peut-etre utiles"
 
 ## Exemple
 ```yaml
-# Mauvaise pratique (code spéculatif)
+# Mauvaise pratique (code speculatif)
 features:
   - name: advanced_search
-    description: "Recherche avancée avec filtres complexes"
-    status: implemented  # Jamais demandé!
+    description: "Recherche avancee avec filtres complexes"
+    status: implemented  # Jamais demande!
 
-# Bonne pratique (réponds à un besoin)
+# Bonne pratique (reponds a un besoin)
 features:
   - name: basic_search
-    description: "Recherche par mot-clé"
-    status: implemented  # Demandé par l'utilisateur
+    description: "Recherche par mot-cle"
+    status: implemented  # Demande par l'utilisateur
 ```

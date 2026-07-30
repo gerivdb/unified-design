@@ -1,13 +1,13 @@
 ---
 name: cognitive-bridge
-description: "Bridge entre BRAIN et WAZAA pour créer une boucle cognitive vivante avec publication d'insights périodiques."
+description: "Bridge entre BRAIN et WAZAA pour creer une boucle cognitive vivante avec publication d'insights periodiques."
 parameters:
   insight_interval_minutes: 60
   pattern_detection_window_hours: 24
   pattern_frequency_threshold: 3
   confidence_score_threshold: 0.8
 constraints:
-  - "Aucun événement perdu"
+  - "Aucun evenement perdu"
   - "Retry + dead-letter queue"
   - "Latence insight < 1s"
 inherits: [event-streaming, pattern-detection]
@@ -16,15 +16,15 @@ inherits: [event-streaming, pattern-detection]
 # Atom : cognitive-bridge
 
 ## Contexte
-Basé sur INTENT-007 BRAIN-WAZAA BRIDGE. Création d'une boucle cognitive vivante où les patterns récurrents alimentent BRAIN, qui publie des `brain.insight` consommables par l'écosystème.
+Base sur INTENT-007 BRAIN-WAZAA BRIDGE. Creation d'une boucle cognitive vivante ou les patterns recurrents alimentent BRAIN, qui publie des `brain.insight` consommables par l'ecosysteme.
 
 ## Fonctionnement
-1. **Consommation d'événements** : Abonne aux 6 événements critiques WAZAA
-2. **Stockage** : Chaque événement stocké dans `BRAIN/cognitive_vectors/`
-3. **Détection de pattern** : Si même event_type > 3 occurrences en 24h
-4. **Publication d'insight** : `brain.insight` avec `confidence_score` calculé
+1. **Consommation d'evenements** : Abonne aux 6 evenements critiques WAZAA
+2. **Stockage** : Chaque evenement stocke dans `BRAIN/cognitive_vectors/`
+3. **Detection de pattern** : Si meme event_type > 3 occurrences en 24h
+4. **Publication d'insight** : `brain.insight` avec `confidence_score` calcule
 
-## Événements consumés
+## Évenements consumes
 ```yaml
 Consomme:
   - branch.naming.violation
@@ -35,7 +35,7 @@ Consomme:
   - intent.accepted
 ```
 
-## Événements publiés
+## Évenements publies
 ```yaml
 Emits:
   - brain.insight
@@ -48,33 +48,33 @@ Emits:
 
 ## Architecture
 ```
-WAZAA bus (événements critiques)
-     │
-     ▼
-┌─────────────────────────────┐
-│  brain_wazaa_bridge_citizen │
-│                             │
-│  ┌────────────────────────┐ │
-│  │  Event Storage         │ │
-│  │  BRAIN/cognitive_vectors/│ │
-│  └────────────────────────┘ │
-│            │                 │
-│            ▼                 │
-│  ┌────────────────────────┐ │
-│  │  Pattern Detection     │ │
-│  │  (sklearn, frequency)  │ │
-│  └────────────────────────┘ │
-│            │                 │
-│            ▼                 │
-│  ┌────────────────────────┐ │
-│  │  Insight Publisher     │ │
-│  │  publie brain.insight  │ │
-│  └────────────────────────┘ │
-└─────────────────────────────┘
-     │
-     ▼
+WAZAA bus (evenements critiques)
+     |
+     v
++-----------------------------+
+|  brain_wazaa_bridge_citizen |
+|                             |
+|  +------------------------+ |
+|  |  Event Storage         | |
+|  |  BRAIN/cognitive_vectors/| |
+|  +------------------------+ |
+|            |                 |
+|            v                 |
+|  +------------------------+ |
+|  |  Pattern Detection     | |
+|  |  (sklearn, frequency)  | |
+|  +------------------------+ |
+|            |                 |
+|            v                 |
+|  +------------------------+ |
+|  |  Insight Publisher     | |
+|  |  publie brain.insight  | |
+|  +------------------------+ |
++-----------------------------+
+     |
+     v
 WAZAA bus (insights)
-     │
-     ▼
+     |
+     v
 LLM-REPO (AGENT_RAM.yaml)
 ```

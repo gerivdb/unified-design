@@ -1,6 +1,6 @@
 ---
 name: hitl-gate
-description: "Mécanisme de blocage pour création de dépôt, clone illégitime, et autres opérations sensibles."
+description: "Mecanisme de blocage pour creation de depot, clone illegitime, et autres operations sensibles."
 parameters:
   trigger_operations:
     - git clone

@@ -1,6 +1,6 @@
 ---
 name: scan-report-format
-description: "Format de rapport JSON pour les résultats de scan : checks, errors, warnings."
+description: "Format de rapport JSON pour les resultats de scan : checks, errors, warnings."
 parameters:
   schema:
     path: string

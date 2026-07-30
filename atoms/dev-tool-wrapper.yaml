@@ -1,6 +1,6 @@
 ---
 name: dev-tool-wrapper
-description: "Wrapper PowerShell pour outils CLI : auto-découverte de chemins, Help unifiée, dispatch par sous-commandes, intégration MCP."
+description: "Wrapper PowerShell pour outils CLI : auto-decouverte de chemins, Help unifiee, dispatch par sous-commandes, integration MCP."
 parameters:
   entry_point: "ps1"
   dispatcher: param($Command, $CommandArgs)
@@ -22,15 +22,15 @@ inherits: [kiss, srp]
 
 # Dev Tool Wrapper Atom
 
-Pattern d'encapsulation d'outils CLI dans un script PowerShell unifié.
+Pattern d'encapsulation d'outils CLI dans un script PowerShell unifie.
 
-## Rôle
+## Role
 
-Réduire la friction d'accès aux outils écosystémiques en fournissant :
-- Un point d'entrée unique (`ecos.ps1`, `kiva.ps1`, etc.)
+Reduire la friction d'acces aux outils ecosystemiques en fournissant :
+- Un point d'entree unique (`ecos.ps1`, `kiva.ps1`, etc.)
 - Une aide contextuelle par sous-commande
-- Une validation des chemins avant exécution
-- Une gestion d'erreur cohérente (`$ErrorActionPreference = "Stop"`)
+- Une validation des chemins avant execution
+- Une gestion d'erreur coherente (`$ErrorActionPreference = "Stop"`)
 
 ## Structure canonique
 
@@ -58,9 +58,9 @@ switch ($Command) {
 
 ## Invariants
 
-- Tous les chemins DOIVENT être absolus
-- L'aide DOIT être la commande par défaut
-- Toute erreur DOIT être trapée et loggée
+- Tous les chemins DOIVENT etre absolus
+- L'aide DOIT etre la commande par defaut
+- Toute erreur DOIT etre trapee et loggee
 - Le script NE DOIT PAS avoir d'effet de bord sans confirmation
 
 ## Exemples
@@ -71,7 +71,7 @@ switch ($Command) {
 | KIVA CLI | `C:\DevTools\bin\kiva.ps1` | `kiva run`, `kiva stop` |
 | Clapet | `C:\DevTools\bin\clapet.ps1` | `clapet open`, `clapet close` |
 
-## Références
+## References
 
 - `C:\DevTools\bin\ecos.ps1`
 - `C:\DevTools\bin\clapet.ps1`

@@ -1,6 +1,6 @@
 ---
 name: persona-conditioned-generation
-description: "Génération conditionnée par persona : VERSES utilise le style d'un persona pour instancier une verse."
+description: "Generation conditionnee par persona : VERSES utilise le style d'un persona pour instancier une verse."
 parameters:
   conditioning: persona-style
   style_injection: true

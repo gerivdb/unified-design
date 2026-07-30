@@ -1,6 +1,6 @@
 ---
 name: wal-compaction
-description: "Write-Ahead Log (WAL) : écriture atomique, compaction, replay, intégrité cross-repo."
+description: "Write-Ahead Log (WAL) : ecriture atomique, compaction, replay, integrite cross-repo."
 parameters:
   modes:
     - write
@@ -15,15 +15,15 @@ inherits: [formal-verification, artifact-synced-loop]
 
 # WAL Compaction Atom
 
-Pattern de journal immuable pour opérations cross-repos.
+Pattern de journal immuable pour operations cross-repos.
 
-## Rôle
+## Role
 
-Garantir la traçabilité et la récupération des opérations multi-repos :
-- **Écriture atomique** : une entrée = une opération = un fichier/line
-- **Compaction** : fusion des entrées anciennes sans perte
-- **Replay** : re-jouer les opérations pour reconstruire l'état
-- **Validation** : vérifier l'intégrité avant/après compactage
+Garantir la tracabilite et la recuperation des operations multi-repos :
+- **Écriture atomique** : une entree = une operation = un fichier/line
+- **Compaction** : fusion des entrees anciennes sans perte
+- **Replay** : re-jouer les operations pour reconstruire l'etat
+- **Validation** : verifier l'integrite avant/apres compactage
 
 ## Structure canonique
 
@@ -50,20 +50,20 @@ WAL/
 
 ## Invariants
 
-- Une entrée WAL NE DOIT JAMAIS être modifiée après écriture
-- Le compactage DOIT préserver toutes les entrées (append-only)
-- Le replay DOIT être idempotent
-- L'intégrité DOIT être vérifiée par hash ou signature
+- Une entree WAL NE DOIT JAMAIS etre modifiee apres ecriture
+- Le compactage DOIT preserver toutes les entrees (append-only)
+- Le replay DOIT etre idempotent
+- L'integrite DOIT etre verifiee par hash ou signature
 
 ## Scripts existants
 
-| Script | Opération | Chemin |
+| Script | Operation | Chemin |
 |--------|-----------|--------|
 | `ecos-wal-compact.ps1` | compact | `C:\DevTools\scripts\` |
 | `init_wal.py` | init | `C:\DevTools\scripts\` |
 | `TrixWalAtomicWriter` | write | CTULU tool |
 
-## Références
+## References
 
 - `C:\DevTools\scripts\ecos-wal-compact.ps1`
 - `C:\DevTools\scripts\init_wal.py`

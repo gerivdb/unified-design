@@ -1,4 +1,4 @@
-# ATOM-BOINC-KEEL-COMPILATION - Compilation IR ternaire distribuée via KEEL-CORE
+# ATOM-BOINC-KEEL-COMPILATION - Compilation IR ternaire distribuee via KEEL-CORE
 # Version: 1.0.0
 # IntentHash: 0xATOM_BOINC_KEEL_COMPILATION_20260726
 # Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
@@ -10,8 +10,8 @@ atom:
   status: active
   version: "1.0.0"
   description: |
-    Compilation distribuée d'IR ternaire (base-243) via KEEL-CORE.
-    Validation phi-CPS automatique, output base243 blob pour exécution P2P.
+    Compilation distribuee d'IR ternaire (base-243) via KEEL-CORE.
+    Validation phi-CPS automatique, output base243 blob pour execution P2P.
   intent_hash: "0xATOM_BOINC_KEEL_COMPILATION_20260726"
   layer: L2_COMPOSITION
   governance: BOUNC-ADR-0022
@@ -24,7 +24,7 @@ parameters:
   - name: intent_hash
     type: string
     required: true
-    description: "IntentHash pour traçabilité KEEL"
+    description: "IntentHash pour tracabilite KEEL"
   - name: optimization_level
     type: string
     required: false
@@ -35,10 +35,10 @@ parameters:
 returns:
   - name: phi_valid
     type: boolean
-    description: "True si phi-CPS >= seuil (4.5 par défaut)"
+    description: "True si phi-CPS >= seuil (4.5 par defaut)"
   - name: base243_blob
     type: string
-    description: "Blob binaire base-243 prêt pour exécution"
+    description: "Blob binaire base-243 pret pour execution"
 
 dependencies:
   - ATOM-KEEL-CORE
@@ -48,7 +48,7 @@ dependencies:
 validation:
   - rule: "phi_valid == true"
     severity: error
-    message: "Compilation rejetée: phi-CPS insuffisant"
+    message: "Compilation rejetee: phi-CPS insuffisant"
 
 references:
   - "design.yaml: ATOM-BOINC-KEEL-COMPILATION"

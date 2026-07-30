@@ -1,6 +1,6 @@
 ---
 name: security-fabric
-description: "Fabric de sécurité : scan OWASP, détection de secrets, politique de backup, validation de chemins sensibles."
+description: "Fabric de securite : scan OWASP, detection de secrets, politique de backup, validation de chemins sensibles."
 parameters:
   scanners:
     - owasp_zap
@@ -20,16 +20,16 @@ inherits: [formal-verification, registry-consistency-sentinel]
 
 # Security Fabric Atom
 
-Pattern de sécurité défensive multi-couche.
+Pattern de securite defensive multi-couche.
 
-## Rôle
+## Role
 
-Détecter et prévenir les vulnérabilités dans l'écosystème :
-- **OWASP** : scan des dépendances et endpoints
-- **Secrets** : détection de clés API, tokens, passwords
+Detecter et prevenir les vulnerabilites dans l'ecosysteme :
+- **OWASP** : scan des dependances et endpoints
+- **Secrets** : detection de cles API, tokens, passwords
 - **Path Traversal** : validation des chemins utilisateur
-- **SQL Injection** : analyse des requêtes dynamiques
-- **Backup Safety** : stratégie de sauvegarde des données sensibles
+- **SQL Injection** : analyse des requetes dynamiques
+- **Backup Safety** : strategie de sauvegarde des donnees sensibles
 
 ## Structure canonique
 
@@ -51,10 +51,10 @@ function Invoke-SecurityManagerScan {
 
 ## Invariants
 
-- Aucun secret NE DOIT être loggé en clair
-- Les chemins DOIVENT être validés contre la traversal (`..`, chemins absolus)
-- Les rapports DOIVENT être horodatés et signés
-- Les alertes critiques DOIVENT déclencher une intervention HITL
+- Aucun secret NE DOIT etre logge en clair
+- Les chemins DOIVENT etre valides contre la traversal (`..`, chemins absolus)
+- Les rapports DOIVENT etre horodates et signes
+- Les alertes critiques DOIVENT declencher une intervention HITL
 
 ## Scripts existants
 
@@ -65,7 +65,7 @@ function Invoke-SecurityManagerScan {
 | `Test-SecretsDetection.ps1` | Secrets | `scripts\operations\symlinks\backups\` |
 | `backup-manager.ps1` | Backup | `scripts\operations\security\backup-safety\` |
 
-## Références
+## References
 
 - `C:\DevTools\scripts\operations\security\backup-safety\backup-manager.ps1`
 - `C:\DevTools\scripts\operations\symlinks\backups\migration_2025-09-22_10-39-10\Invoke-OWASPScan.ps1`

@@ -1,6 +1,6 @@
 ---
 name: continuous-design-validation
-description: "Déploiement de hooks pre-commit et CLI de validation sur l'ensemble des dépôts MDU."
+description: "Deploiement de hooks pre-commit et CLI de validation sur l'ensemble des depots MDU."
 parameters:
   coverage: L0-L4
   hook_type: pre-commit

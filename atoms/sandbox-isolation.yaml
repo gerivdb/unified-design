@@ -1,6 +1,6 @@
 ---
 name: sandbox-isolation
-description: "Isolation des environnements NeSy via CubeSandbox. Garantit l'exécution sécurisée des agents dans des conteneurs éphémères avec namespaces isolés."
+description: "Isolation des environnements NeSy via CubeSandbox. Garantit l'execution securisee des agents dans des conteneurs ephemeres avec namespaces isoles."
 parameters:
   engine: CubeSandbox
   lifespan: ephemeral
@@ -17,27 +17,27 @@ inherits: [absolute-rules-enforcement]
 
 Pattern d'isolation des environnements neurosymboliques (NeSy).
 
-## Rôle
+## Role
 
-Toute exécution NeSy doit être isolée dans un CubeSandbox éphémère :
+Toute execution NeSy doit etre isolee dans un CubeSandbox ephemere :
 - **Isolation** : pid, mnt, net, user namespaces
-- **Durée de vie** : éphémère (créé/détruit à la demande)
-- **Nettoyage** : automatique après exécution
+- **Duree de vie** : ephemere (cree/detruit a la demande)
+- **Nettoyage** : automatique apres execution
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
 | `engine` | string | `CubeSandbox` | Moteur de sandbox |
-| `lifespan` | string | `ephemeral` | Durée de vie |
-| `namespaces` | list | `[pid, mnt, net, user]` | Namespaces isolés |
+| `lifespan` | string | `ephemeral` | Duree de vie |
+| `namespaces` | list | `[pid, mnt, net, user]` | Namespaces isoles |
 | `cleanup` | string | `automatic` | Nettoyage automatique |
 
 ## Invariants
 
-- Toute exécution NeSy DOIT être dans un CubeSandbox
-- Les namespaces DOIVENT être isolés
-- Le nettoyage DOIT être automatique
+- Toute execution NeSy DOIT etre dans un CubeSandbox
+- Les namespaces DOIVENT etre isoles
+- Le nettoyage DOIT etre automatique
 
 ## Exemple d'usage
 
@@ -51,7 +51,7 @@ capabilities:
       cleanup: automatic
 ```
 
-## Références
+## References
 
 - TINA (Trusted Intelligent Neurosymbolic Architecture)
 - CITIZEN_ROUTER.md

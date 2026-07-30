@@ -2,7 +2,7 @@ name: mdu-validation-pipeline
 version: "1.0.0"
 intent_hash: 0xMDU_VALIDATION_PIPELINE_20260715
 description: |
-  Pipeline KIVA-CLI pour la validation complète du MDU.
+  Pipeline KIVA-CLI pour la validation complete du MDU.
   Remplace les GitHub Actions par un workflow local autonome.
 
 schedule: "0 */6 * * *"   # Toutes les 6h
@@ -17,13 +17,13 @@ env:
   REPORTS_DIR: "D:/DO/WEB/TOOLS/reports/mdu-validation"
   PYTHON: "python"
 
-# ── Étapes du pipeline ──────────────────────────────────────────────────────
+# -- Étapes du pipeline ------------------------------------------------------
 
 steps:
 
-  # ── 0. Pré-flight ──────────────────────────────────────────────────────────
+  # -- 0. Pre-flight ----------------------------------------------------------
   - id: preflight
-    name: "MDU — Pré-flight (vérification répertoires)"
+    name: "MDU - Pre-flight (verification repertoires)"
     agent: Alfred
     run: |
       $PYTHON -c "
@@ -44,9 +44,9 @@ steps:
     on_fail: ABORT
     timeout_sec: 10
 
-  # ── 1. Validation YAML ─────────────────────────────────────────────────────
+  # -- 1. Validation YAML -----------------------------------------------------
   - id: validate-yaml
-    name: "MDU — Validation YAML (meta-design, atoms, loops)"
+    name: "MDU - Validation YAML (meta-design, atoms, loops)"
     agent: Alfred
     depends_on: [preflight]
     run: |
@@ -90,9 +90,9 @@ steps:
     on_fail: ABORT
     timeout_sec: 30
 
-  # ── 2. Loop Detection ──────────────────────────────────────────────────────
+  # -- 2. Loop Detection ------------------------------------------------------
   - id: loop-detection
-    name: "MDU — Détection de boucles"
+    name: "MDU - Detection de boucles"
     agent: Alfred
     depends_on: [validate-yaml]
     run: |
@@ -103,9 +103,9 @@ steps:
     on_fail: WARN
     timeout_sec: 60
 
-  # ── 3. Inheritance Validation ────────────────────────────────────────────
+  # -- 3. Inheritance Validation --------------------------------------------
   - id: inheritance-validation
-    name: "MDU — Validation de l'héritage"
+    name: "MDU - Validation de l'heritage"
     agent: Alfred
     depends_on: [loop-detection]
     run: |
@@ -113,9 +113,9 @@ steps:
     on_fail: ABORT
     timeout_sec: 30
 
-  # ── 4. Simulation MDU ─────────────────────────────────────────────────────
+  # -- 4. Simulation MDU -----------------------------------------------------
   - id: simulate-mdu
-    name: "MDU — Simulation des designs"
+    name: "MDU - Simulation des designs"
     agent: Alfred
     depends_on: [inheritance-validation]
     run: |
@@ -126,9 +126,9 @@ steps:
     on_fail: WARN
     timeout_sec: 30
 
-  # ── 5. Generate Report ────────────────────────────────────────────────────
+  # -- 5. Generate Report ----------------------------------------------------
   - id: report
-    name: "MDU — Génération du rapport"
+    name: "MDU - Generation du rapport"
     agent: Alfred
     depends_on: [simulate-mdu]
     run: |
@@ -143,7 +143,7 @@ steps:
       loop_check = json.loads(open(reports_dir / 'loop_check.json').read()) if (reports_dir / 'loop_check.json').exists() else {}
       simulation = json.loads(open(reports_dir / 'simulation.json').read()) if (reports_dir / 'simulation.json').exists() else {}
       
-      # Générer le rapport
+      # Generer le rapport
       report = {
           'timestamp': datetime.now().isoformat(),
           'status': 'OK' if not loop_check.get('loops') else 'WARNING',
@@ -163,7 +163,7 @@ steps:
     on_fail: WARN
     timeout_sec: 15
 
-# ── Alertes HITL ───────────────────────────────────────────────────────────
+# -- Alertes HITL -----------------------------------------------------------
 
 on_alert_hitl:
   action: create_issue
@@ -171,11 +171,11 @@ on_alert_hitl:
   title: "[MDU-VALIDATION] Loop or conflict detected"
   labels: [mdu, validation, hitl]
   body: |
-    Le pipeline de validation MDU a détecté des problèmes.
+    Le pipeline de validation MDU a detecte des problemes.
     
     Rapports disponibles: $REPORTS_DIR/
     
     Actions requises:
-    1. Analyser les boucles détectées
-    2. Vérifier les conflits de capacités
-    3. Mettre à jour le design si nécessaire
+    1. Analyser les boucles detectees
+    2. Verifier les conflits de capacites
+    3. Mettre a jour le design si necessaire

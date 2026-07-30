@@ -1,6 +1,6 @@
 ---
 name: test-runner
-description: "Orchestrateur de tests multi-framework : pytest, Pester, Zig test, coverage, intégration CI."
+description: "Orchestrateur de tests multi-framework : pytest, Pester, Zig test, coverage, integration CI."
 parameters:
   frameworks:
     - pytest
@@ -23,14 +23,14 @@ inherits: [build-pipeline]
 
 Pattern d'orchestration de tests multi-framework.
 
-## Rôle
+## Role
 
-Uniformiser l'exécution des tests across langages :
+Uniformiser l'execution des tests across langages :
 - **pytest** pour Python (coverage, async, fixtures)
 - **Pester** pour PowerShell (mocks, Should assertions)
 - **zig test** pour Zig (std.testing)
-- **Coverage** consolidé (HTML + XML + console)
-- **Intégration CI** : pipeline `deps → build → test → lint`
+- **Coverage** consolide (HTML + XML + console)
+- **Integration CI** : pipeline `deps -> build -> test -> lint`
 
 ## Structure canonique
 
@@ -55,10 +55,10 @@ if ($Mode -eq "integration") {
 
 ## Invariants
 
-- Les tests DOIVENT être isolés par framework (pas de mix pytest/Pester dans même process)
-- Le coverage DOIT être exigé pour les PRs
-- Les tests e2e DOIVENT être marqués et optionnels en CI
-- Le timeout DOIT être par test, pas global
+- Les tests DOIVENT etre isoles par framework (pas de mix pytest/Pester dans meme process)
+- Le coverage DOIT etre exige pour les PRs
+- Les tests e2e DOIVENT etre marques et optionnels en CI
+- Le timeout DOIT etre par test, pas global
 
 ## Scripts existants
 
@@ -69,7 +69,7 @@ if ($Mode -eq "integration") {
 | `industrial-test-suite.ps1` | Pester | `C:\DevTools\bin\` |
 | `trix-test` | skill | Kilo skill |
 
-## Références
+## References
 
 - `C:\DevTools\cache-optimization-tests.py`
 - `C:\DevTools\bin\cross-repo-test.ps1`

@@ -52,4 +52,5 @@ Thumbs.db
 .trix/
 .kilo/
 .swarm/
-.cron-out/
+.cron-out/scripts/clean_unicode.py
+fix-encoding.ps1

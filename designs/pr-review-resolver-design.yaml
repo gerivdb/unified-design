@@ -18,7 +18,7 @@ The `pr-review-resolver` skill is a universal cross-repo skill that orchestrates
 
 ### Pipeline Flow
 ```
-User Command: "review résoud PR"
+User Command: "review resoud PR"
   -> Pattern Router (pattern-router.md)
   -> pr-review-resolver skill
   -> Sub-skills:

@@ -1,6 +1,6 @@
 ---
 name: design-verse-feedback-loop
-description: "Cycle itératif où un design est instancié en verse, puis la verse nourrit un nouveau design."
+description: "Cycle iteratif ou un design est instancie en verse, puis la verse nourrit un nouveau design."
 parameters:
   max_iterations: 5
   drift_threshold: 0.2

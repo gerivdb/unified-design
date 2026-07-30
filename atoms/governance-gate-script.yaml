@@ -1,6 +1,6 @@
 ---
 name: governance-gate-script
-description: "Script de validation de gouvernance : vérification frontmatter, ADR, hooks pre-commit, conformité strates."
+description: "Script de validation de gouvernance : verification frontmatter, ADR, hooks pre-commit, conformite strates."
 parameters:
   validations:
     - frontmatter_yaml
@@ -15,15 +15,15 @@ inherits: [formal-verification, design-schema]
 
 # Governance Gate Script Atom
 
-Pattern de script de validation de conformité écosystémique.
+Pattern de script de validation de conformite ecosystemique.
 
-## Rôle
+## Role
 
-Vérifier qu'un dépôt, un fichier ou un PR respecte les règles de gouvernance :
+Verifier qu'un depot, un fichier ou un PR respecte les regles de gouvernance :
 - Frontmatter YAML valide (type, status, date, intent_hash)
-- ADR backing pour décisions transverses
-- Chemin conforme à la strate (L0-L5)
-- IntentHash unique et référencé
+- ADR backing pour decisions transverses
+- Chemin conforme a la strate (L0-L5)
+- IntentHash unique et reference
 
 ## Structure canonique
 
@@ -47,10 +47,10 @@ function Test-StratumPath {
 
 ## Invariants
 
-- Toute décision transverse NÉCESSITE un ADR accepted
-- Le champ `intent_hash` DOIT être unique globalement
-- Le chemin DOIT correspondre à la strate déclarée
-- Les corrections automatiques DOIVENT être tracées
+- Toute decision transverse NÉCESSITE un ADR accepted
+- Le champ `intent_hash` DOIT etre unique globalement
+- Le chemin DOIT correspondre a la strate declaree
+- Les corrections automatiques DOIVENT etre tracees
 
 ## Scripts existants
 
@@ -61,7 +61,7 @@ function Test-StratumPath {
 | `ecos-strata-audit.ps1` | Oui | Non |
 | `onto-gap-detector.ps1` | Oui | Non |
 
-## Références
+## References
 
 - `C:\DevTools\bin\adr-generator.ps1`
 - `C:\DevTools\scripts\ecos-strata-audit.ps1`

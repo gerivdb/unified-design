@@ -1,6 +1,6 @@
 ---
 name: gas-station-pattern
-description: "Pattern Mayor : séquence boot session (rules → contexte → activation agents)."
+description: "Pattern Mayor : sequence boot session (rules -> contexte -> activation agents)."
 parameters:
   sequence:
     - rules

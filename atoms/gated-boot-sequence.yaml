@@ -1,22 +1,22 @@
 ---
 name: gated-boot-sequence
-description: "Séquence de boot canonique ordonnée (gates) pour initialiser un sous-système."
+description: "Sequence de boot canonique ordonnee (gates) pour initialiser un sous-systeme."
 inherits: []
 ---
 
 # Gated Boot Sequence Atom
 
-Pattern de séquence de boot ordonnée par gates.
+Pattern de sequence de boot ordonnee par gates.
 
-## Rôle
+## Role
 
-Définit une séquence d'étapes obligatoires pour initialiser un sous-système ou une session multi-repo.
+Definit une sequence d'etapes obligatoires pour initialiser un sous-systeme ou une session multi-repo.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| `gates` | list | `[]` | Liste ordonnée des gates (ex: BOOT-0, BOOT-1, ..., BOOT-7) |
+| `gates` | list | `[]` | Liste ordonnee des gates (ex: BOOT-0, BOOT-1, ..., BOOT-7) |
 
 ## États
 
@@ -27,15 +27,15 @@ Définit une séquence d'étapes obligatoires pour initialiser un sous-système 
 | `BOOT-2` | Sonde outils (devtools-probe) |
 | `BOOT-3` | Audit branches |
 | `BOOT-4` | Audit remotes |
-| `BOOT-5` | Vérification SOT |
+| `BOOT-5` | Verification SOT |
 | `BOOT-6` | Pre-merge gate |
-| `BOOT-7` | Clôture (session-closeout D5) |
+| `BOOT-7` | Cloture (session-closeout D5) |
 
 ## Invariants
 
 - BOOT-1 + BOOT-4 + BOOT-7 sont obligatoires pour toute session.
 - BOOT-2/3/5/6 sont optionnels pour les sessions atomiques (< 2 repos).
-- Si friction > 0.7 ou stub_count > 0 → STOP.
+- Si friction > 0.7 ou stub_count > 0 -> STOP.
 
 ## Exemple d'usage
 
@@ -44,7 +44,7 @@ inherits:
   - gated-boot-sequence
 ```
 
-## Références
+## References
 
 - GOVERNANCE-HUB session-boot-sequence.md
 - ADR-015-unified-design-v2

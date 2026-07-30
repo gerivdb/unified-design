@@ -1,28 +1,28 @@
 ---
 name: run-lifecycle
-description: "Une loop possède un run lifecycle fini : pending → running → done/error"
+description: "Une loop possede un run lifecycle fini : pending -> running -> done/error"
 inherits: []
 ---
 
 # Run Lifecycle Atom
 
-Capacité de design pour le lifecycle d'exécution d'une loop.
+Capacite de design pour le lifecycle d'execution d'une loop.
 
 ## États
 
 | État | Transition |
 |------|-----------|
 | `pending` | initial |
-| `running` | déclenché par scheduler/cron |
-| `done` | succès |
-| `error` | échec |
+| `running` | declenche par scheduler/cron |
+| `done` | succes |
+| `error` | echec |
 
 ## Invariants
 
-- Une loop CLOSED ne peut être terminée que par un run EXEC.
-- Les runs terminés produisent un snapshot manifest + artifact files.
+- Une loop CLOSED ne peut etre terminee que par un run EXEC.
+- Les runs termines produisent un snapshot manifest + artifact files.
 
-## Références
+## References
 
 - ADR-016-loop-engine
 - loopany-platform: scheduler + run lifecycle

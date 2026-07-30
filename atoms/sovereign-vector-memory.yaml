@@ -1,6 +1,6 @@
 ---
 name: sovereign-vector-memory
-description: "Mémoire vectorielle locale (TF-IDF + SQLite), sans service externe, avec cache LRU pour recherche sémantique."
+description: "Memoire vectorielle locale (TF-IDF + SQLite), sans service externe, avec cache LRU pour recherche semantique."
 parameters:
   vectorizer: TF-IDF
   storage: SQLite
@@ -8,38 +8,38 @@ parameters:
   max_cache_size_mb: 100
   search_limit: 10
 constraints:
-  - "Aucune dépendance réseau"
+  - "Aucune dependance reseau"
   - "Latence de recherche < 10 ms"
   - "Cache miss rate < 5%"
-  - "Entropie croissante contrôlée"
+  - "Entropie croissante controlee"
 inherits: [memory-curator, local-storage]
 ---
 
 # Atom : sovereign-vector-memory
 
 ## Contexte
-Basé sur INTENT-005 MEMORY ARCHITECTURE SOVEREIGNTY. Mémoire conversationnelle agent avec persistance locale, conçue pour éviter les services externes (Qdrant, ChromaDB, Weaviate).
+Base sur INTENT-005 MEMORY ARCHITECTURE SOVEREIGNTY. Memoire conversationnelle agent avec persistance locale, concue pour eviter les services externes (Qdrant, ChromaDB, Weaviate).
 
 ## Architecture
 ```
-┌─────────────────────────────────────────────┐
-│                    MEMORY CITIZEN          │
-├─────────────────────────────────────────────┤
-│  ┌─────────────────┐    ┌─────────────────┐ │
-│  │   LRU Cache     │───▶│   SQLite DB     │ │
-│  │  (in-memory)    │    │ (persistence)   │ │
-│  └─────────────────┘    └─────────────────┘ │
-│           │                         │        │
-│           ▼                         ▼        │
-│  ┌─────────────────────────────────────────┐ │
-│  │           TF-IDF Vectorizer             │ │
-│  │  (similarité cosinus, calcul local)     │ │
-│  └─────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────┘
++---------------------------------------------+
+|                    MEMORY CITIZEN          |
++---------------------------------------------+
+|  +-----------------+    +-----------------+ |
+|  |   LRU Cache     |--->|   SQLite DB     | |
+|  |  (in-memory)    |    | (persistence)   | |
+|  +-----------------+    +-----------------+ |
+|           |                         |        |
+|           v                         v        |
+|  +-----------------------------------------+ |
+|  |           TF-IDF Vectorizer             | |
+|  |  (similarite cosinus, calcul local)     | |
+|  +-----------------------------------------+ |
++-------------------------------------------------+
 ```
 
 ## Principes
-1. **Souveraineté** : Toute la mémoire est stockée localement
-2. **Gratuité** : Aucun service externe, zéro coût
-3. **Maîtrise** : Le "nerf de la guerre" est la maîtrise des outils intégrés
-4. **Précaution** : L'addition de services externes est un piège financier
+1. **Souverainete** : Toute la memoire est stockee localement
+2. **Gratuite** : Aucun service externe, zero cout
+3. **Maitrise** : Le "nerf de la guerre" est la maitrise des outils integres
+4. **Precaution** : L'addition de services externes est un piege financier

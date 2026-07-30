@@ -1,6 +1,6 @@
 ---
 name: compose-metacluster-assembly
-description: "Langage déclaratif COMPOSE.yaml pour méta-assemblage cross-repos du metacluster."
+description: "Langage declaratif COMPOSE.yaml pour meta-assemblage cross-repos du metacluster."
 parameters:
   format: COMPOSE.yaml
   composition_mode: declarative

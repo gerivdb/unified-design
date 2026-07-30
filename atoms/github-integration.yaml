@@ -1,6 +1,6 @@
 ---
 name: github-integration
-description: "Interfaçage avec GitHub : création de PR, merge, push, vérification de remotes."
+description: "Interfacage avec GitHub : creation de PR, merge, push, verification de remotes."
 parameters:
   commands:
     - gh pr create

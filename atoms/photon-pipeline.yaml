@@ -1,6 +1,6 @@
 ---
 name: photon-pipeline
-description: "Pipeline de chunking sémantique PHOTON → TRIX → NEXUS. Captures les dépendances de preprocessing sémantique."
+description: "Pipeline de chunking semantique PHOTON -> TRIX -> NEXUS. Captures les dependances de preprocessing semantique."
 parameters:
   provider: PHOTON
   consumers:
@@ -21,15 +21,15 @@ inherits: [cross-repo-flow, pipeline-anamorphique]
 
 # Photon Pipeline Atom
 
-Pipeline de chunking sémantique PHOTON vers les consommateurs.
+Pipeline de chunking semantique PHOTON vers les consommateurs.
 
-## Rôle
+## Role
 
-Documenter et valider le pipeline de preprocessing sémantique :
-- **PHOTON** : détection des frontières sémantiques et chunking
+Documenter et valider le pipeline de preprocessing semantique :
+- **PHOTON** : detection des frontieres semantiques et chunking
 - **TRIX** : contenant naturel, sous-module git (`TRIX/tools/photon/`)
 - **NEXUS** : indexation des chunks via API REST
-- **CTULU** : exécution des intents PHOTON
+- **CTULU** : execution des intents PHOTON
 
 ## Structure canonique
 
@@ -54,30 +54,30 @@ cross_repo_flow:
 
 ## Invariants
 
-- PHOTON DOIT fournir des chunks **sémantiquement cohérents**
+- PHOTON DOIT fournir des chunks **semantiquement coherents**
 - TRIX DOIT embarquer PHOTON comme sous-module optionnel
 - NEXUS DOIT valider le format de chunk avant indexation
-- CTULU DOIT exécuter les intents PHOTON via le pipeline canonique
-- Aucun chunk ne DOIT traverser les frontières de repo sans métadonnées
+- CTULU DOIT executer les intents PHOTON via le pipeline canonique
+- Aucun chunk ne DOIT traverser les frontieres de repo sans metadonnees
 
 ## Validation
 
-Le loop engine MDU DOIT vérifier :
-1. `PHOTON` possède l'atome `semantic-chunking-provider`
-2. `TRIX` possède l'atome `photon-submodule-consumer`
-3. `NEXUS` possède l'atome `chunk-indexing-consumer`
-4. Aucune dépendance cyclique n'existe
+Le loop engine MDU DOIT verifier :
+1. `PHOTON` possede l'atome `semantic-chunking-provider`
+2. `TRIX` possede l'atome `photon-submodule-consumer`
+3. `NEXUS` possede l'atome `chunk-indexing-consumer`
+4. Aucune dependance cyclique n'existe
 
 ## Exemples
 
 | Stage | Outil | Repo | Format |
 |-------|-------|------|--------|
-| Détection frontière | `detect_semantic_boundary.py` | PHOTON | Python |
+| Detection frontiere | `detect_semantic_boundary.py` | PHOTON | Python |
 | Chunking | `photon_triage.py` | PHOTON | JSON |
 | Validation | `ontology_validator.py` | PHOTON | YAML |
 | Indexation | `nexus_connector.py` | PHOTON | REST API |
 
-## Références
+## References
 
 - `D:\DO\WEB\TOOLS\L4-TOOLS\PHOTON\README.md`
 - `D:\DO\WEB\TOOLS\L4-TOOLS\PHOTON\EPICS\EPIC-PHOTON-12-TRIX-MODULE.md`

@@ -10,22 +10,22 @@ inherits:
 
 # OUROBOUROS Atom
 
-Pattern récursif présent dans BRAIN, PLIX, PIANO, runners.
+Pattern recursif present dans BRAIN, PLIX, PIANO, runners.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
 | max_depth | int | 6 | Profondeur fractal max |
-| self_repair | bool | true | Auto-réparation active |
+| self_repair | bool | true | Auto-reparation active |
 
 ## Invariants
 
 - Pas de point central
 - Auto-organisation
-- Fractal loop interne à chaque runner
+- Fractal loop interne a chaque runner
 
-## Références
+## References
 
 - fractal-recursion
 - CTULU orchestration

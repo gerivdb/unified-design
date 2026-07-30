@@ -10,14 +10,14 @@ inherits: []
 
 # LLUX Atom
 
-Moteur système miroir pour inférence LLM quantifié BitNet 1.58b.
+Moteur systeme miroir pour inference LLM quantifie BitNet 1.58b.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| model | string | bitnet-1.58b | Modèle quantifié |
-| backend | string | trix | Backend d'exécution |
+| model | string | bitnet-1.58b | Modele quantifie |
+| backend | string | trix | Backend d'execution |
 | ports | list | [47000, 48000] | Plage ports dynamiques |
 
 ## Invariants
@@ -26,7 +26,7 @@ Moteur système miroir pour inférence LLM quantifié BitNet 1.58b.
 - Backend TRIX obligatoire
 - Ports dynamiques 47000-48000
 
-## Références
+## References
 
 - TRIX backend
 - PIANO binding

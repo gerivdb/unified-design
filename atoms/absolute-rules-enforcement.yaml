@@ -1,29 +1,29 @@
 ---
 name: absolute-rules-enforcement
-description: "Règles absolues (interdictions/obligations) avec tags automatiques pour hypothèses non confirmées."
+description: "Regles absolues (interdictions/obligations) avec tags automatiques pour hypotheses non confirmees."
 inherits: []
 ---
 
 # Absolute Rules Enforcement Atom
 
-Pattern de règles absolues avec enforcement automatique.
+Pattern de regles absolues avec enforcement automatique.
 
-## Rôle
+## Role
 
-Définit des interdictions et obligations catégoriques, avec un système de tags pour marquer les hypothèses non confirmées.
+Definit des interdictions et obligations categoriques, avec un systeme de tags pour marquer les hypotheses non confirmees.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| `forbidden_keywords` | list | `[]` | Mots-clés déclenchant un blocage |
-| `auto_tags` | list | `[]` | Tags appliqués automatiquement (ex: [HYPOTHESE_NON_CONFIRMEE], [DERIVE]) |
+| `forbidden_keywords` | list | `[]` | Mots-cles declenchant un blocage |
+| `auto_tags` | list | `[]` | Tags appliques automatiquement (ex: [HYPOTHESE_NON_CONFIRMEE], [DERIVE]) |
 
 ## Invariants
 
-- Toute règle absolue est vérifiée par un hook pre-commit/pre-push.
-- Les dérogations doivent être tracées via un ADR.
-- Les données non validées sont systématiquement taggées.
+- Toute regle absolue est verifiee par un hook pre-commit/pre-push.
+- Les derogations doivent etre tracees via un ADR.
+- Les donnees non validees sont systematiquement taggees.
 
 ## Exemple d'usage
 
@@ -32,7 +32,7 @@ inherits:
   - absolute-rules-enforcement
 ```
 
-## Références
+## References
 
-- GOVERNANCE-HUB (règles BDCP, hitl-clone-gate, etc.)
+- GOVERNANCE-HUB (regles BDCP, hitl-clone-gate, etc.)
 - ADR-2026-05-14-004-KILO-CODE-HOTL-OPERATIONAL-STD

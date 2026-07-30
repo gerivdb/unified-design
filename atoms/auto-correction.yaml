@@ -1,6 +1,6 @@
 ---
 name: auto-correction
-description: "Auto-correction intelligente des tests et des incohérences détectées. Utilise friction_detector pour détecter et post_implement_check pour corriger."
+description: "Auto-correction intelligente des tests et des incoherences detectees. Utilise friction_detector pour detecter et post_implement_check pour corriger."
 parameters:
   detector: friction_detector
   corrector: post_implement_check
@@ -13,28 +13,28 @@ inherits: [absolute-rules-enforcement]
 
 Pattern d'auto-correction intelligente.
 
-## Rôle
+## Role
 
-Détecte et corrige automatiquement les incohérences :
-- **Détecteur** : `friction_detector.py`
+Detecte et corrige automatiquement les incoherences :
+- **Detecteur** : `friction_detector.py`
 - **Correcteur** : `post_implement_check.py`
-- **Auto-fix** : activé par défaut
+- **Auto-fix** : active par defaut
 - **Review humaine** : optionnelle
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| `detector` | string | `friction_detector` | Détecteur d'incohérences |
+| `detector` | string | `friction_detector` | Detecteur d'incoherences |
 | `corrector` | string | `post_implement_check` | Correcteur automatique |
 | `auto_fix` | bool | `true` | Correction automatique |
 | `human_review_required` | bool | `false` | Review humaine requise |
 
 ## Invariants
 
-- Les corrections automatiques DOIVENT être tracées dans le WAL
+- Les corrections automatiques DOIVENT etre tracees dans le WAL
 - Une review humaine EST requise pour les changements critiques
-- Le correcteur NE DOIT PAS introduire de nouvelles incohérences
+- Le correcteur NE DOIT PAS introduire de nouvelles incoherences
 
 ## Exemple d'usage
 
@@ -48,6 +48,6 @@ capabilities:
       human_review_required: false
 ```
 
-## Références
+## References
 
 - TINA (friction_detector.py, post_implement_check.py)

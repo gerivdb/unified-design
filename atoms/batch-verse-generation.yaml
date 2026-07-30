@@ -1,6 +1,6 @@
 ---
 name: batch-verse-generation
-description: "Génération par lots de verses : 10 personae × 9 sections en une exécution."
+description: "Generation par lots de verses : 10 personae × 9 sections en une execution."
 parameters:
   max_personae: 20
   max_sections: 20

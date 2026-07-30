@@ -1,6 +1,6 @@
 ---
 name: morphism-maps-governance
-description: "Cartes de transport causal entre repos : schéma YAML + cycle de vie + règles de transport."
+description: "Cartes de transport causal entre repos : schema YAML + cycle de vie + regles de transport."
 parameters:
   schema: MM-XXX
   lifecycle:

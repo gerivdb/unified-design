@@ -1,4 +1,4 @@
-# ATOM-KADEMLIA-DHT - Kademlia DHT pour lookup décentralisé
+# ATOM-KADEMLIA-DHT - Kademlia DHT pour lookup decentralise
 # Version: 1.0.0
 # IntentHash: 0xATOM_KADEMLIA_DHT_20260726
 # Source: DESIGN-BOINC-001 (BOINC-LLM-P2P Governor F5)
@@ -10,8 +10,8 @@ atom:
   status: active
   version: "1.0.0"
   description: |
-    Table de hachage distribuée pour la découverte de noeuds P2P.
-    Implémente le protocole Kademlia avec buckets k=20, 160-bit node IDs.
+    Table de hachage distribuee pour la decouverte de noeuds P2P.
+    Implemente le protocole Kademlia avec buckets k=20, 160-bit node IDs.
   intent_hash: "0xATOM_KADEMLIA_DHT_20260726"
   layer: L1_CAUSALITY
   governance: BOUNC-ADR-0022
@@ -31,12 +31,12 @@ parameters:
     type: integer
     required: true
     default: 3
-    description: "Parallélisme des requêtes FIND_NODE"
+    description: "Parallelisme des requetes FIND_NODE"
   - name: refresh_interval_sec
     type: integer
     required: true
     default: 3600
-    description: "Intervalle de rafraîchissement des buckets"
+    description: "Intervalle de rafraichissement des buckets"
 
 returns:
   - name: node_id
@@ -44,7 +44,7 @@ returns:
     description: "Identifiant unique du noeud (hex)"
   - name: peers
     type: "list[string]"
-    description: "Liste des pairs découverts (node_id@address)"
+    description: "Liste des pairs decouverts (node_id@address)"
 
 dependencies:
   - ATOM-QUIC-TRANSPORT

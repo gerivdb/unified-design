@@ -1,44 +1,44 @@
 ---
 name: dip
-description: "Dependency Inversion Principle — les modules de haut niveau ne doivent pas dépendre des modules de bas niveau, mais des abstractions."
+description: "Dependency Inversion Principle - les modules de haut niveau ne doivent pas dependre des modules de bas niveau, mais des abstractions."
 parameters:
   abstractions_depended: true
   concrete_impl_hidden: true
   dependency_direction: inward
 constraints:
-  - "Les dépendances pointent vers les abstractions"
-  - "Les implémentations concrètes sont cachées"
-  - "Les abstractions n'ont pas de dépendances externes"
+  - "Les dependances pointent vers les abstractions"
+  - "Les implementations concretes sont cachees"
+  - "Les abstractions n'ont pas de dependances externes"
 inherits: [design-principle]
 ---
 
 # Atom : DIP (Dependency Inversion Principle)
 
 ## Contexte
-Principe SOLID : les modules de haut niveau ne dépendent pas des modules de bas niveau, mais des abstractions. Les abstractions ne dépendent pas des implémentations, les implémentations dépendent des abstractions.
+Principe SOLID : les modules de haut niveau ne dependent pas des modules de bas niveau, mais des abstractions. Les abstractions ne dependent pas des implementations, les implementations dependent des abstractions.
 
 ## Application dans MDU
-- **Citizens** : Les citizens dépendent des interfaces, pas des implémentations
-- **Pipelines** : Les pipelines orchestrent via abstractions, pas d'implémentations concrètes
-- **Atomes** : Les atomes dépendent des abstractions de design
+- **Citizens** : Les citizens dependent des interfaces, pas des implementations
+- **Pipelines** : Les pipelines orchestrent via abstractions, pas d'implementations concretes
+- **Atomes** : Les atomes dependent des abstractions de design
 
 ## Architecture en couches
 ```
-┌─────────────────────────────────────────────┐
-│              Haut Niveau                   │
-│  (orchestrateur, pipeline, agent)          │
-├─────────────────────────────────────────────┤
-│              Abstraction                     │
-│  (interface, contrat, schéma)              │
-├─────────────────────────────────────────────┤
-│              Bas Niveau                      │
-│  (implémentation concrète)                 │
-└─────────────────────────────────────────────┘
++---------------------------------------------+
+|              Haut Niveau                   |
+|  (orchestrateur, pipeline, agent)          |
++---------------------------------------------+
+|              Abstraction                     |
+|  (interface, contrat, schema)              |
++---------------------------------------------+
+|              Bas Niveau                      |
+|  (implementation concrete)                 |
++---------------------------------------------+
 ```
 
-## Vérification
+## Verification
 ```bash
-# Vérifier DIP dans un module
+# Verifier DIP dans un module
 ctulu validate-dip --module src/wazaa_bus_citizens/orchestrator.py
 ```
 
@@ -47,12 +47,12 @@ ctulu validate-dip --module src/wazaa_bus_citizens/orchestrator.py
 # Mauvaise pratique
 class Orchestrator:
     def __init__(self):
-        self.memory = MemoryCitizen()  # Dépendance concrète
-        self.router = RouterCitizen()  # Dépendance concrète
+        self.memory = MemoryCitizen()  # Dependance concrete
+        self.router = RouterCitizen()  # Dependance concrete
 
 # Bonne pratique
 class Orchestrator:
     def __init__(self, memory: MemoryInterface, router: RouterInterface):
-        self.memory = memory  # Dépendance abstraite
-        self.router = router  # Dépendance abstraite
+        self.memory = memory  # Dependance abstraite
+        self.router = router  # Dependance abstraite
 ```

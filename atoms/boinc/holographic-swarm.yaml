@@ -10,8 +10,8 @@ atom:
   status: active
   version: "1.0.0"
   description: |
-    Représentation holographique de l'état du swarm via .swarm/node.yaml.
-    Chaque noeud maintient une copie locale cohérente (phi-CPS tracké).
+    Representation holographique de l'etat du swarm via .swarm/node.yaml.
+    Chaque noeud maintient une copie locale coherente (phi-CPS tracke).
   intent_hash: "0xATOM_HOLOGRAPHIC_SWARM_20260726"
   layer: L1_CAUSALITY
   governance: BOUNC-ADR-0022
@@ -31,7 +31,7 @@ parameters:
     type: number
     required: true
     default: 4.5
-    description: "Seuil phi-CPS pour validation d'état sain"
+    description: "Seuil phi-CPS pour validation d'etat sain"
 
 returns:
   - name: node_name

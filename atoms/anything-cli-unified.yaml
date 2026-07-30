@@ -1,6 +1,6 @@
 ---
 name: anything-cli-unified
-description: "Suite d'outils CLI unifiés (10 outils) pour wrapper les citizens WAZAA avec sortie JSON canonique."
+description: "Suite d'outils CLI unifies (10 outils) pour wrapper les citizens WAZAA avec sortie JSON canonique."
 parameters:
   tools_count: 10
   output_format: JSON
@@ -9,14 +9,14 @@ parameters:
 constraints:
   - "100% tests passants"
   - "Latence < 10 ms par commande"
-  - "Sortie JSON standardisée"
+  - "Sortie JSON standardisee"
 inherits: [cli-toolkit, json-interface]
 ---
 
 # Atom : anything-cli-unified
 
 ## Contexte
-Basé sur EPIC-1220 ANYTHING-CLI SUITE v1.0. Toolkit de 10 outils `*-anything` wrappant les citizens existants dans une interface CLI unifiée.
+Base sur EPIC-1220 ANYTHING-CLI SUITE v1.0. Toolkit de 10 outils `*-anything` wrappant les citizens existants dans une interface CLI unifiee.
 
 ## Outils
 
@@ -32,7 +32,7 @@ Basé sur EPIC-1220 ANYTHING-CLI SUITE v1.0. Toolkit de 10 outils `*-anything` w
 - **Output** : JSON avec status, bytes_sent
 
 ### T03 `resolve-intent-anything`
-- **Fonction** : Résoudre une intention via consensus collectif
+- **Fonction** : Resoudre une intention via consensus collectif
 - **Input** : `{"command": str, "requester": str, "authority_level": int}`
 - **Output** : JSON avec official_action, consensus_score, method
 
@@ -42,7 +42,7 @@ Basé sur EPIC-1220 ANYTHING-CLI SUITE v1.0. Toolkit de 10 outils `*-anything` w
 - **Output** : JSON avec broadcast_id, targets_reached
 
 ### T05 `cache-anything`
-- **Fonction** : Lire/écrire dans le cache symétrique WAZAA
+- **Fonction** : Lire/ecrire dans le cache symetrique WAZAA
 - **Input** : `{"action": "get|put|clear", "key": str, "value": any}`
 - **Output** : JSON avec cache_hit, value
 
@@ -52,38 +52,38 @@ Basé sur EPIC-1220 ANYTHING-CLI SUITE v1.0. Toolkit de 10 outils `*-anything` w
 - **Output** : JSON avec jws_signature, algorithm
 
 ### T07 `predict-anything`
-- **Fonction** : Prédire la prochaine séquence
+- **Fonction** : Predire la prochaine sequence
 - **Input** : `{"sequence": [str], "num_predictions": int}`
 - **Output** : JSON avec predictions, confidence
 
 ### T08 `recall-memory-anything`
-- **Fonction** : Lire la mémoire vectorielle d'un citizen
+- **Fonction** : Lire la memoire vectorielle d'un citizen
 - **Input** : `{"citizen_id": str, "query": str, "top_k": int}`
 - **Output** : JSON avec memories[] (score, content, timestamp)
 
 ### T09 `detect-loop-anything`
-- **Fonction** : Détecter les boucles d'intention
+- **Fonction** : Detecter les boucles d'intention
 - **Input** : `{"citizen_id": str, "intent_history": [str], "window_size": int}`
 - **Output** : JSON avec loop_detected, loop_type, recommendation
 
 ### T10 `terminate-anything`
-- **Fonction** : Arrêter un citizen de manière optimale
+- **Fonction** : Arreter un citizen de maniere optimale
 - **Input** : `{"citizen_id": str, "reason": "optimal|timeout|error", "grace_period_s": int}`
 - **Output** : JSON avec terminated, final_state_persisted
 
 ## Architecture
 ```
 WAZAA/cli_tools/anything/
-├── __init__.py
-├── cli.py                   # Point d'entrée unifié
-├── route_anything.py
-├── dispatch_anything.py
-├── resolve_intent_anything.py
-├── broadcast_anything.py
-├── cache_anything.py
-├── sign_anything.py
-├── predict_anything.py
-├── recall_memory_anything.py
-├── detect_loop_anything.py
-└── terminate_anything.py
++-- __init__.py
++-- cli.py                   # Point d'entree unifie
++-- route_anything.py
++-- dispatch_anything.py
++-- resolve_intent_anything.py
++-- broadcast_anything.py
++-- cache_anything.py
++-- sign_anything.py
++-- predict_anything.py
++-- recall_memory_anything.py
++-- detect_loop_anything.py
++-- terminate_anything.py
 ```

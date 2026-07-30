@@ -1,6 +1,6 @@
 ---
 name: plix-codec
-description: "Codec PLIX v2 — format binaire ternaire avec schéma registry, GPU decode et pipeline sync."
+description: "Codec PLIX v2 - format binaire ternaire avec schema registry, GPU decode et pipeline sync."
 parameters:
   codecs: [mirror_lens, clusterwave, piano_runtime, verses_resolver]
   registry: schema_registry

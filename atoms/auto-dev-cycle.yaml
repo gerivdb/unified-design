@@ -1,6 +1,6 @@
 ---
 name: auto-dev-cycle
-description: "Cycle d'auto-développement autonome : hypothesis, experiment, champion, dead_end, meta_loop."
+description: "Cycle d'auto-developpement autonome : hypothesis, experiment, champion, dead_end, meta_loop."
 parameters:
   cycle_phases: [P1_Hypothesis, P2_Design, P3_Experiment, P4_Validation, P5_Champion, P6_Integration, P7_Self-org]
   max_cycles_per_axe: 10

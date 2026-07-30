@@ -1,41 +1,41 @@
 ---
 name: kiss
-description: "Keep It Simple, Stupid — évitez la complexité inutile, préférez les solutions simples et directes."
+description: "Keep It Simple, Stupid - evitez la complexite inutile, preferez les solutions simples et directes."
 parameters:
   complexity_threshold: 3
   cyclomatic_complexity_max: 10
   lines_per_function_max: 50
 constraints:
-  - "Éviter la complexité inutile"
-  - "Préférer les solutions simples"
-  - "Une fonction = une responsabilité"
+  - "Éviter la complexite inutile"
+  - "Preferer les solutions simples"
+  - "Une fonction = une responsabilite"
 inherits: [design-principle]
 ---
 
 # Atom : KISS (Keep It Simple, Stupid)
 
 ## Contexte
-Principe de conception : ne faites pas plus complexe que nécessaire. Les solutions simples sont plus maintenables et moins sujettes aux bugs.
+Principe de conception : ne faites pas plus complexe que necessaire. Les solutions simples sont plus maintenables et moins sujettes aux bugs.
 
 ## Application dans MDU
-- **Atomes** : Chaque atome a une responsabilité claire
-- **Pipelines** : Étapes simples et chaînées
+- **Atomes** : Chaque atome a une responsabilite claire
+- **Pipelines** : Étapes simples et chainees
 - **CLI** : Commandes directes sans sur-couches
 
-## Métriques de complexité
-- **Cyclomatique** : ≤ 10 par fonction
-- **Lignes par fonction** : ≤ 50
-- **Niveaux d'imbrication** : ≤ 3
+## Metriques de complexite
+- **Cyclomatique** : <= 10 par fonction
+- **Lignes par fonction** : <= 50
+- **Niveaux d'imbrication** : <= 3
 
-## Vérification
+## Verification
 ```bash
-# Vérifier la complexité d'un module
+# Verifier la complexite d'un module
 ctulu validate-kiss --module src/wazaa_bus_citizens/
 ```
 
 ## Anti-patterns
-- Code surchargé (God function)
-- Sur-chaînage de conditions
+- Code surcharge (God function)
+- Sur-chainage de conditions
 - Abstractions inutiles
 - Over-engineering
 

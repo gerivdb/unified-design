@@ -1,6 +1,6 @@
 ---
 name: proactive-friction-sensor
-description: "Détection prédictive de friction avant implémentation avec score 0.0-1.0."
+description: "Detection predictive de friction avant implementation avec score 0.0-1.0."
 parameters:
   scoring_range: 0.0-1.0
   trigger_points:

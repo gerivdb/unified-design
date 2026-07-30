@@ -1,6 +1,6 @@
 ---
 name: multi-repo-audit
-description: "Audit cross-repo avec gardes anti-zombie, mutex Windows, timeout git, et stratégie auto-pull/push."
+description: "Audit cross-repo avec gardes anti-zombie, mutex Windows, timeout git, et strategie auto-pull/push."
 parameters:
   guards:
     - windows_named_mutex
@@ -18,32 +18,32 @@ inherits: [registry-driven-orchestration, multi-instance-guard]
 
 # Multi-Repo Audit Atom
 
-Pattern d'audit synchronisé sur plusieurs dépôts avec gardes de sécurité.
+Pattern d'audit synchronise sur plusieurs depots avec gardes de securite.
 
-## Rôle
+## Role
 
-Auditer et synchroniser N dépôts en garantissant :
-- **Anti-concurrence** : mutex Windows nommé pour éviter les instances multiples
+Auditer et synchroniser N depots en garantissant :
+- **Anti-concurrence** : mutex Windows nomme pour eviter les instances multiples
 - **Anti-zombie** : nettoyage des processus git > 8 min
-- **Timeout** : chaque opération git a un deadline
-- **Traçabilité** : logs structurés par repo
+- **Timeout** : chaque operation git a un deadline
+- **Tracabilite** : logs structures par repo
 
 ## Structure canonique
 
 ```powershell
-# GUARD — Anti-multi-instance
+# GUARD - Anti-multi-instance
 $mutexName = "Global\EcoSyncAudit_Mutex"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 $ownsMutex = $false
 try { $ownsMutex = $mutex.WaitOne(0) } catch { ... }
 if (-not $ownsMutex) { exit 2 }
 
-# GUARD — Clean git zombies
+# GUARD - Clean git zombies
 Get-Process -Name "git" -ErrorAction SilentlyContinue |
     Where-Object { $_.StartTime -and (Get-Date).Subtract($_.StartTime).TotalMinutes -gt 8 } |
     ForEach-Object { $_.Kill() }
 
-# Helper — Invoke git with timeout
+# Helper - Invoke git with timeout
 function Invoke-GitSafe {
     param([string[]]$Arguments, [string]$WorkingDirectory, [int]$TimeoutSec = 30)
     $proc = Start-Process git -ArgumentList $Arguments -WorkingDirectory $WorkingDirectory -PassThru
@@ -67,10 +67,10 @@ foreach ($repo in $Repos) {
 
 ## Invariants
 
-- Un mutex DOIT être utilisé pour les scripts longs (> 30s)
-- Les processus git zombies DOIVENT être tués après 8 min
-- Chaque repo DOIT avoir un chemin, une branche et une strate définis
-- Le timeout DOIT être configurable et par défaut à 30s
+- Un mutex DOIT etre utilise pour les scripts longs (> 30s)
+- Les processus git zombies DOIVENT etre tues apres 8 min
+- Chaque repo DOIT avoir un chemin, une branche et une strate definis
+- Le timeout DOIT etre configurable et par defaut a 30s
 
 ## Exemples
 
@@ -80,7 +80,7 @@ foreach ($repo in $Repos) {
 | `ecos-sync-watchdog.ps1` | `C:\DevTools\scripts\` | Surveillance continue |
 | `selina_sync.py` | `D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\` | Scan global |
 
-## Références
+## References
 
 - `C:\DevTools\scripts\ecos-sync-audit.ps1`
 - `C:\DevTools\scripts\ecos-sync-watchdog.ps1`

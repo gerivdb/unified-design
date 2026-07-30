@@ -10,23 +10,23 @@ inherits: [b243-vector]
 
 # RLM-243 Atom
 
-Noyau récurrent ternaire à 243 neurones (3^5 états).
+Noyau recurrent ternaire a 243 neurones (3^5 etats).
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
 | neurons | int | 243 | Nombre de neurones |
 | base | int | 3 | Base ternaire |
-| recurrence | bool | true | Boucle récurrente |
+| recurrence | bool | true | Boucle recurrente |
 
 ## Invariants
 
-- État du système encodé dans vecteur b243
+- État du systeme encode dans vecteur b243
 - Chaque neuron est un trit
-- Récurrence via fractal loop
+- Recurrence via fractal loop
 
-## Références
+## References
 
 - b243-vector
 - OUROBOUROS pattern

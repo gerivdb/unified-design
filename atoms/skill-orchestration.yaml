@@ -1,6 +1,6 @@
 ---
 name: skill-orchestration
-description: "Flux d'orchestration des skills depuis SKILLS vers les consommateurs. Captures les dépendances SKILLS → CTULU, Kilo Agent."
+description: "Flux d'orchestration des skills depuis SKILLS vers les consommateurs. Captures les dependances SKILLS -> CTULU, Kilo Agent."
 parameters:
   provider: SKILLS
   consumers:
@@ -22,7 +22,7 @@ inherits: [cross-repo-flow, registry-driven-orchestration]
 
 Flux d'orchestration des skills depuis SKILLS vers les consommateurs.
 
-## Rôle
+## Role
 
 Documenter et valider le flux d'orchestration depuis `gerivdb/SKILLS` vers :
 - **CTULU** : invocation des tools via skills
@@ -44,17 +44,17 @@ cross_repo_flow:
 
 ## Invariants
 
-- SKILLS DOIT être le **registre unique** des skills
-- Chaque skill DOIT avoir un `trit_primitive` référençant PRIMUS
+- SKILLS DOIT etre le **registre unique** des skills
+- Chaque skill DOIT avoir un `trit_primitive` referencant PRIMUS
 - CTULU DOIT pouvoir invoquer les skills via le registry
 - Kilo Agent DOIT charger les skills depuis SKILLS sans duplication
-- Les skills externes DOIVENT être versionnés et validés
+- Les skills externes DOIVENT etre versionnes et valides
 
 ## Validation
 
-Le loop engine MDU DOIT vérifier :
-1. `SKILLS` possède l'atome `skill-registry-provider`
-2. Chaque consommateur déclaré possède le contrat d'orchestration
+Le loop engine MDU DOIT verifier :
+1. `SKILLS` possede l'atome `skill-registry-provider`
+2. Chaque consommateur declare possede le contrat d'orchestration
 3. Aucun skill orphelin n'existe sans `trit_primitive`
 
 ## Exemples
@@ -66,7 +66,7 @@ Le loop engine MDU DOIT vérifier :
 | `nexus-core` | TritObserve | PRIMUS | SKILLS |
 | `kiva-pipeline` | TritIsolate | PRIMUS | SKILLS |
 
-## Références
+## References
 
 - `D:\DO\WEB\TOOLS\L4-TOOLS\SKILLS\README.md`
 - `D:\DO\WEB\TOOLS\L4-TOOLS\SKILLS\REGISTRY.yaml`

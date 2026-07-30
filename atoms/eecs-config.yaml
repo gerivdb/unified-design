@@ -1,6 +1,6 @@
 ---
 name: eecs-config
-description: "Configuration EECS (Ecosystem Environment Configuration). Définit les paramètres d'environnement, les modes d'exécution et les contraintes de déploiement."
+description: "Configuration EECS (Ecosystem Environment Configuration). Definit les parametres d'environnement, les modes d'execution et les contraintes de deploiement."
 parameters:
   required_fields:
     - environment
@@ -20,32 +20,32 @@ inherits: [absolute-rules-enforcement]
 
 # EECS Config Atom
 
-Pattern de configuration EECS par dépôt.
+Pattern de configuration EECS par depot.
 
-## Rôle
+## Role
 
-Le fichier `.eecs_config.yaml` définit la configuration environnementale d'un dépôt :
+Le fichier `.eecs_config.yaml` definit la configuration environnementale d'un depot :
 - environment : environnement cible (dev/staging/prod)
-- mode : mode d'exécution
-- constraints : contraintes de déploiement
-- dependencies : dépendances EECS
+- mode : mode d'execution
+- constraints : contraintes de deploiement
+- dependencies : dependances EECS
 - bridges : connexions EECS
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
 | `environment` | string | - | Environnement cible |
-| `mode` | string | - | Mode d'exécution |
-| `constraints` | list | `[]` | Contraintes de déploiement |
-| `dependencies` | list | `[]` | Dépendances EECS |
+| `mode` | string | - | Mode d'execution |
+| `constraints` | list | `[]` | Contraintes de deploiement |
+| `dependencies` | list | `[]` | Dependances EECS |
 | `bridges` | list | `[]` | Connexions EECS |
 
 ## Invariants
 
-- Tout dépôt avec des déploiements automatisés DOIT avoir un .eecs_config.yaml
-- Le mode DOIT être cohérent avec le pipeline CI/CD
-- Les contraintes DOIVENT être respectées lors du déploiement
+- Tout depot avec des deploiements automatises DOIT avoir un .eecs_config.yaml
+- Le mode DOIT etre coherent avec le pipeline CI/CD
+- Les contraintes DOIVENT etre respectees lors du deploiement
 
 ## Exemple d'usage
 
@@ -62,7 +62,7 @@ bridges:
     target: gerivdb/ECOS-CLI
 ```
 
-## Références
+## References
 
 - GERIBOOKING/.eecs_config.yaml
 - BANK-BUSTER/.eecs_config.yaml
