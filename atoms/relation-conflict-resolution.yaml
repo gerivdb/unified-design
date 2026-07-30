@@ -1,0 +1,20 @@
+---
+name: relation-conflict-resolution
+description: "Protocole de détection et résolution des conflits entre relations structurelles (opposes, complements, requires, blocks, stabilizes). Acronyme ATOM-051."
+level: N1
+inherits: [structural-relations, chain-engineering]
+family: governance
+parameters:
+  conflict_types:
+    - opposing_and_complementing: "A opposes B et A complements B (relation contradictoire)"
+    - self_referential: "un noeud se déclare opposes/complements/blocks/requires/stabilizes avec lui-même"
+    - requires_blocks_cycle: "cycle mixte requires/blocks (ex: A requires B, B requires C, C blocks A)"
+    - multiple_relations_same_target: "plusieurs relations différentes (opposes, complements, blocks, requires, stabilizes) d'un même noeud vers une même cible"
+    - incompatible_symmetry: "une relation déclarée symétrique alors que le kind est asymétrique (déjà couvert par ATOM-045, mais on le rappelle)"
+  resolution_strategies:
+    - manual: "L'utilisateur doit corriger les déclarations ; aucune résolution automatique n'est appliquée."
+  validation: yaml_frontmatter_only
+references:
+  - ATOM-045
+  - ADR-2026-07-30-004
+---
