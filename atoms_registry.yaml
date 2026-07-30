@@ -959,3 +959,7 @@ ATOM-042-REPOSITORY-CENSUS.md:
   description: 'description: "Protocole de validation pre-action (ATOM-048)."'
   depends_on: []
 
+- path: atoms/meta-design-triad.yaml
+  hash: 1cf95a9a9720
+  description: 'description: "Metadesign triad: primitivism, structuralism, anamorphism (ATOM-050)."'
+  depends_on: []

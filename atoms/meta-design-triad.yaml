@@ -1,0 +1,54 @@
+---
+name: meta-design-triad
+description: "Metadesign triad: primitivism (Trit/atomes), structuralism (DAG-3/graphes), anamorphism (TALEX/projections). Three orthogonal pillars at each L0-L4 fractal level."
+parameters:
+  pillars:
+    - primitivism
+    - structuralism
+    - anamorphism
+  relations:
+    - anamorphism stabilizes primitivism
+    - anamorphism stabilizes structuralism
+    - primitivism requires structuralism
+    - structuralism requires primitivism
+  projections:
+    primitive: TRIX
+    structural: SPIDX
+    anamorphic: TALEX
+validation: yaml_frontmatter_only
+inherits: [poincare-contract, maxwell-triad]
+---
+
+# ATOM-050 -- Meta-Design Triad
+
+## Contexte
+
+La triade Primitivisme / Structuralisme / Anamorphisme forme un invariant topologique complet qui structure l'écosystème selon trois dimensions orthogonales, retrouvables à chaque niveau fractal L0-L4.
+
+## Piliers
+
+| Pilier | Concept | Artefact MDU | Runtime |
+|--------|---------|--------------|---------|
+| Primitivisme | Atomes, Trit, données brutes | ATOM-045, ATOM-047 | TRIX |
+| Structuralisme | Graphes, DAG-3, cycles | meta-design.yaml, atoms_registry.yaml | SPIDX |
+| Anamorphisme | Projections narratives, tissage | ATOM-048 (gatekeeper), TALEX | PIANO/PLIX |
+
+## Relations
+
+- `anamorphism stabilizes [primitivism, structuralism]`
+- `primitivism requires structuralism`
+- `structuralism requires primitivism`
+
+## Projections CLI
+
+- `plix inspect --mode primitive` -> atomes
+- `plix inspect --mode structural` -> graphes
+- `plix inspect --mode anamorphic` -> projections narratives
+
+## Références
+
+- ATOM-045 (structural-relations)
+- ATOM-047 (frequency-engineering)
+- ATOM-048 (pre-action-validation)
+- ADR-2026-07-30-004
+
