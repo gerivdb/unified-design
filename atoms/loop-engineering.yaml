@@ -1,0 +1,53 @@
+---
+name: loop-engineering
+description: "Mécanisme de contrôle itératif en 4 couches : Prompt, Context, Harness, Loop."
+parameters:
+  layers:
+    - Prompt
+    - Context
+    - Harness
+    - Loop
+  atomicity: true
+  observability: true
+constraints:
+  - "Prompt doit être atomique (une tâche, une réponse)"
+  - "Context doit être chargé avant toute exécution"
+  - "Harness doit être testable isolément"
+  - "Loop doit être observable et contrôlable"
+inherits: [design-principle]
+---
+
+# Atom : loop-engineering
+
+## Définition
+
+Le développement SOTA abandonne le prompting unique au profit de boucles autonomes. Tout agent ou workflow MDU doit respecter la pile à 4 couches.
+
+## Couches
+
+| Couche | Rôle | Exemple |
+|--------|------|---------|
+| **Prompt** (L0) | Phrase, intention atomique | "Analyser le repo LLM-REPO" |
+| **Context** (L1) | Fenêtre, artefacts chargés | `design.context`, checkpoint |
+| **Harness** (L2) | Exécution unique, script, commande | `analyze_repo.py` |
+| **Loop** (L3) | Automatisation, scheduler, récurrence | `.mdu/checkpoint.json`, cron |
+
+## Implémentation MDU
+
+- `design.context` = Context (L1)
+- `.mdu/checkpoint.json` = Loop state (L3)
+- `scripts/mdu_ancrage.sh` (abandonne) -> remplace par sonde implicite (Harness L2)
+- Futur : scheduler local (cron/task scheduler) pour relancer les boucles (Loop L3)
+
+## Règles
+
+- Prompt doit être atomique
+- Context doit être chargé avant toute exécution
+- Harness doit être testable isolément
+- Loop doit être observable et contrôlable
+
+## Références
+
+- ATOM-025 (LOOP_ENGINEERING)
+- ADR-016-loop-engine
+- ADR-019-phase3-incremental
