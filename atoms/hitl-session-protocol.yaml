@@ -3,6 +3,8 @@
 # IntentHash: 0xATOM_HITL_SESSION_PROTOCOL_20260726
 # Source: ADR-030 (propose) + Retro-ingenierie session 2026-07-26
 
+name: hitl-session-protocol
+
 atom:
   id: ATOM-HITL-SESSION-PROTOCOL
   name: "HITL Session Protocol"

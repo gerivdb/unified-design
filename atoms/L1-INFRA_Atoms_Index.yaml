@@ -4,6 +4,8 @@
 # Source: known_repositories.yaml + scan L1-INFRA + scan L2-COMPOSITION + scan L3-EMERGENCE + scan L4-DevTools + flux inter-depots
 # IntentHash: 0xATOM_SCAN_L2_L3_L4_CROSSREPO_20260716
 
+name: L1-INFRA_Atoms_Index
+
 ---
 metadata:
   version: "1.2.0"
