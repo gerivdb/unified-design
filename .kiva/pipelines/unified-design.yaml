@@ -3,10 +3,13 @@ description: Pipeline de validation souverain pour unified-design (KIVA-CLI loca
 
 steps:
   - name: Validate meta-design schema
-    run: python scripts/validate_meta_design.py --schema schemas/meta-design.schema.json meta-design.yaml
+    command: python scripts/validate_meta_design.py --schema schemas/meta-design.schema.json meta-design.yaml
 
-  - name: Validate atoms registry
-    run: python scripts/validate_atom_registry.py --registry atoms_registry.yaml --atoms-dir atoms
+  - name: Validate atoms YAML
+    command: python scripts/validate_yaml.py "atoms/*.yaml"
 
-  - name: Extract atom dependencies
-    run: python scripts/extract_atom_deps.py --write
+  - name: Validate designs YAML
+    command: python scripts/validate_yaml.py "designs/*.yaml"
+
+  - name: Validate ATOM-051 atom
+    command: python scripts/validate_yaml.py "atoms/relation-conflict-resolution.yaml"
