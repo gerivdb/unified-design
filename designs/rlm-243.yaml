@@ -1,0 +1,24 @@
+---
+name: rlm-243
+version: "1.0.0"
+description: "RLM-243 - noyau recurrent ternaire 243 neurones, Base 243"
+status: active
+owner: Bellard
+inherits:
+  - b243-vector
+capabilities:
+  - name: ternary-recurrence
+    parameters:
+      neurons: 243
+      base: 3
+      recurrence: true
+components:
+  - generator: RLM-243-Generator
+  - optimizer: RLM-243-Optimizer
+  - validator: RLM-243-Validator
+  - compiler: RLM-243-Compiler
+  - learner: RLM-243-Learner
+constraints:
+  - cpu_only: true
+  - memory: 243 * sizeof(float) * 3
+intent_hash: 0xRLM_243_DESIGN_20260730

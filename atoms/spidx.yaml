@@ -1,0 +1,30 @@
+---
+name: spidx
+description: "SPIDX - index sparse des coefficients non-nuls pour compression Q243"
+parameters:
+  max_coefficients: 1000000
+  compression_ratio: 10
+inherits: [b243-vector]
+---
+
+# SPIDX Atom
+
+Index sparse pour les coefficients non-nuls d'un signal Q243.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| max_coefficients | int | 1000000 | Nombre max de coefficients indexés |
+| compression_ratio | int | 10 | Ratio de compression attendu |
+
+## Invariants
+
+- Seuls les coefficients non-nuls sont stockés
+- L'index est trié par position croissante
+- Complexité O(1) par lookup
+
+## Références
+
+- PLIX codec
+- Q243 quantification

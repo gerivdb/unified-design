@@ -1,0 +1,35 @@
+---
+name: plix-audio
+description: "PLIX-AUDIO - extension audio de PLIX pour flux temporel 1D"
+parameters:
+  sample_rate: [44100, 48000]
+  channels: [1, 2]
+  bits_per_sample: [16, 24]
+inherits:
+  - plix-codec
+  - b243-vector
+---
+
+# PLIX-AUDIO Atom
+
+Extension audio de PLIX pour encodage ternaire de flux PCM.
+
+## Parametres
+
+| Parametre | Type | Defaut | Description |
+|-----------|------|--------|-------------|
+| sample_rate | list | [44100, 48000] | Frequences supportees |
+| channels | list | [1, 2] | Mono / Stereo |
+| bits_per_sample | list | [16, 24] | Resolution bits |
+
+## Invariants
+
+- Format .plixa pour frames audio Q243
+- Pipeline : PCM -> Q243 -> SPIDX -> PIANO-DIFF
+- Compression cible : 0.1% du PCM
+
+## References
+
+- PLIX codec
+- SPIDX compression
+- PIANO modulation

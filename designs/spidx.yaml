@@ -1,0 +1,21 @@
+---
+name: spidx
+version: "1.0.0"
+description: "SPIDX - index sparse des coefficients non-nuls pour compression Q243"
+status: active
+owner: Fabric Bellard
+inherits:
+  - b243-vector
+capabilities:
+  - name: sparse-index
+    parameters:
+      max_coefficients: 1000000
+      compression_ratio: 10
+components:
+  - indexer: spidx_index
+  - compressor: spidx_compress
+  - validator: spidx_validate
+constraints:
+  - memory: sparse index ne doit pas depasser 10% de la taille originale
+  - cpu_only: true
+intent_hash: 0xSPIDX_DESIGN_20260730

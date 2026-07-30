@@ -1,0 +1,23 @@
+---
+name: llux
+version: "1.0.0"
+description: "LLUX - moteur systeme miroir pour inference BitNet 1.58b"
+status: active
+owner: LLUX Team
+inherits:
+  - b243-vector
+capabilities:
+  - name: llm-inference
+    parameters:
+      model: bitnet-1.58b
+      backend: trix
+      ports: [47000, 48000]
+components:
+  - backend: trix
+  - tokenizer: tokenizer.json
+  - api: openai-compatible
+constraints:
+  - latency_p99_ms: 1000
+  - memory_mb: 8192
+  - error_rate: 0.1
+intent_hash: 0xLLUX_DESIGN_20260730
