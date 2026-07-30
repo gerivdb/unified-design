@@ -1,0 +1,211 @@
+---
+type: TRIX_LLUX_BACKEND
+version: "1.0.0"
+status: active
+intent_hash: 0xTRIX_LLUX_BACKEND_20260730
+description: "Backend LLUX pour TRIX - Configuration runtime isolee"
+inherits: [trix-wal-atomic-writer, trix-observability-bridge, absolute-rules-enforcement]
+---
+
+llux_backend:
+  trix:
+    description: "Backend LLUX pour TRIX"
+    binary: "/opt/trix/bin/llux"
+    args:
+      - "--http"
+      - "--model"
+      - "/opt/trix/models/bitnet-1.58b.gguf"
+      - "--tokenizer"
+      - "/opt/trix/models/tokenizer.json"
+      - "--port"
+      - "auto"  # 47000-48000
+      - "--host"
+      - "127.0.0.1"
+    env:
+      - "RUST_LOG=info"
+      - "LLUX_KV_CACHE_SIZE=4096"
+    resources:
+      memory: "4GB"
+      disk: "8GB"
+      cpu_cores: 4
+      memory_limit_hard: "8GB"
+    network:
+      loopback_only: true
+      ports: "47000-48000"
+      protocol: HTTP/1.1
+      keep_alive: true
+      max_connections: 32
+    isolation:
+      type: "hyperv"  # Windows / cgroups v2 sur Linux
+      namespace:
+        pid: true
+        mnt: true
+        net: true
+        user: true
+      capabilities:
+        drop:
+          - "ALL"
+        add:
+          - "NET_BIND_SERVICE"
+    wal:
+      enabled: true
+      path: "/var/lib/trix/wal/llux.log"
+      format: "jsonl"
+      max_size_mb: 100
+      rotation: "daily"
+      compression: "gzip"
+      fields:
+        - "timestamp"
+        - "event_type"
+        - "pid"
+        - "port"
+        - "status"
+        - "duration_ms"
+        - "memory_mb"
+        - "request_id"
+    health_check:
+      endpoint: "/health"
+      method: GET
+      interval: 15s
+      timeout: 5s
+      max_attempts: 30
+      expected_status: 200
+      expected_json:
+        status: "healthy"
+      startup_grace: 10s
+      failure_action: "restart"
+    lifecycle:
+      prestart:
+        - "mkdir -p /opt/trix/models"
+        - "cp /opt/trix/models/tokenizer.json /opt/trix/models/tokenizer.json.bak"
+        - "verify_model /opt/trix/models/bitnet-1.58b.gguf"
+      poststart:
+        - "wait_for_port 47000-48000"
+        - "curl -f http://localhost:47000/health"
+      prestop:
+        - "drain_connections 30s"
+      poststop:
+        - "cleanup_temp_files"
+    logging:
+      level: "info"
+      format: "json"
+      output: "/var/log/trix/llux-$(date +%Y%m%d).log"
+      rotation: "daily"
+      max_files: 30
+      structured_fields:
+        - "request_id"
+        - "backend"
+        - "model"
+        - "tokens_in"
+        - "tokens_out"
+        - "latency_ms"
+        - "status"
+    metrics:
+      enabled: true
+      port: 47001  # metriques separees
+      path: "/metrics"
+      format: "prometheus"
+      collectors:
+        - "process"
+        - "go"
+        - "http"
+        - "custom_llux"
+
+  # Commandes TRIX
+  trix_commands:
+    start:
+      command: "trix backend start llux"
+      timeout: 60s
+      description: "Demarre LLUX via TRIX"
+      steps:
+        - "allocate_port"
+        - "prepare_environment"
+        - "start_container"
+        - "wait_health"
+        - "register_gateway"
+    
+    stop:
+      command: "trix backend stop llux"
+      timeout: 30s
+      description: "Arrete LLUX proprement"
+      steps:
+        - "drain_requests"
+        - "stop_container"
+        - "release_port"
+        - "unregister_gateway"
+    
+    restart:
+      command: "trix backend restart llux"
+      timeout: 90s
+      description: "Redemarre LLUX"
+      steps:
+        - "stop"
+        - "start"
+    
+    status:
+      command: "trix backend status llux"
+      description: "Statut du backend"
+      output:
+        - "state: running|stopped|failed"
+        - "pid"
+        - "port"
+        - "uptime"
+        - "memory_mb"
+        - "requests_total"
+    
+    logs:
+      command: "trix backend logs llux"
+      description: "Logs du backend"
+      options:
+        - "--follow"
+        - "--tail 100"
+        - "--since 1h"
+    
+    cleanup:
+      command: "trix backend cleanup llux"
+      description: "Nettoie ressources orphelines"
+      steps:
+        - "kill_zombie_processes"
+        - "remove_temp_files"
+        - "release_ports"
+        - "cleanup_wal"
+
+  # Deploiement via RLM-DEPLOY
+  deployment:
+    managed_by: "RLM-DEPLOY"
+    script: "scripts/deploy_triade.sh"
+    backup_dir: "/opt/trix/backups"
+    rollback_on_failure: true
+    blue_green: true
+    health_verification: true
+    post_deploy_tests:
+      - "health_check"
+      - "chat_completion_test"
+      - "embedding_test"
+      - "gateway_route_test"
+
+  # Monitoring
+  monitoring:
+    alerts:
+      - name: "llux_down"
+        condition: "trix_backend_status{backend='llux'} != 'running'"
+        severity: "critical"
+        action: "page_oncall"
+      - name: "llux_high_latency"
+        condition: "llux_latency_ms > 1000"
+        severity: "warning"
+        action: "alert_slack"
+      - name: "llux_high_memory"
+        condition: "llux_memory_mb > 8192"
+        severity: "warning"
+        action: "alert_slack"
+      - name: "llux_high_error_rate"
+        condition: "llux_error_rate > 0.1"
+        severity: "critical"
+        action: "page_oncall"
+    dashboards:
+      - "triade_performance"
+      - "trix_backends"
+    logs:
+      - "/var/log/trix/llux-*.log"
+      - "/var/lib/trix/wal/llux.log"

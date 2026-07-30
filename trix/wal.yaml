@@ -1,0 +1,277 @@
+---
+type: TRIX_WAL_STRUCTURE
+version: "1.0.0"
+status: active
+intent_hash: 0xTRIX_WAL_20260730
+description: "Structure WAL (Write-Ahead Log) pour TRIX - Reutilise trix-wal-atomic-writer.yaml"
+inherits: [trix-wal-atomic-writer, artifact-synced-loop, absolute-rules-enforcement]
+---
+
+wal:
+  description: "Write-Ahead Log atomique cross-repos avec rollback automatique"
+  path: "/var/lib/trix/wal"
+  main_log: "wal.jsonl"
+  archive_dir: "archive"
+  
+  # Configuration (depuis trix-wal-atomic-writer.yaml)
+  config:
+    wal_path: "WAL/wal.jsonl"
+    rollback_on_failure: true
+    max_batch_size: 10
+    atomicity: "all_or_nothing"
+    compression: "gzip"
+    retention_days: 30
+    max_size_mb: 500
+  
+  # Structure des entrees
+  entries:
+    llux_started:
+      description: "Demarrage backend LLUX"
+      trigger: "trix backend start llux"
+      fields:
+        - name: "event_type"
+          type: string
+          value: "llux_started"
+        - name: "timestamp"
+          type: datetime
+          format: "ISO8601"
+        - name: "pid"
+          type: integer
+        - name: "port"
+          type: integer
+          range: "47000-48000"
+        - name: "version"
+          type: string
+        - name: "model"
+          type: string
+        - name: "command"
+          type: string
+        - name: "environment"
+          type: object
+        - name: "request_id"
+          type: string
+          format: "uuid"
+    
+    llux_stopped:
+      description: "Arret backend LLUX"
+      trigger: "trix backend stop llux"
+      fields:
+        - name: "event_type"
+          type: string
+          value: "llux_stopped"
+        - name: "timestamp"
+          type: datetime
+          format: "ISO8601"
+        - name: "pid"
+          type: integer
+        - name: "exit_code"
+          type: integer
+        - name: "uptime_seconds"
+          type: integer
+        - name: "requests_served"
+          type: integer
+        - name: "graceful"
+          type: boolean
+        - name: "request_id"
+          type: string
+          format: "uuid"
+    
+    llux_health_check:
+      description: "Health check periodique"
+      trigger: "health check interval (15s)"
+      fields:
+        - name: "event_type"
+          type: string
+          value: "llux_health_check"
+        - name: "timestamp"
+          type: datetime
+          format: "ISO8601"
+        - name: "port"
+          type: integer
+        - name: "healthy"
+          type: boolean
+        - name: "latency_ms"
+          type: integer
+        - name: "response"
+          type: object
+        - name: "attempt"
+          type: integer
+        - name: "request_id"
+          type: string
+          format: "uuid"
+    
+    llux_request:
+      description: "Requete HTTP vers LLUX"
+      trigger: "Chaque requete /v1/chat/completions ou /v1/embeddings"
+      fields:
+        - name: "event_type"
+          type: string
+          value: "llux_request"
+        - name: "timestamp"
+          type: datetime
+          format: "ISO8601"
+        - name: "request_id"
+          type: string
+          format: "uuid"
+        - name: "method"
+          type: string
+        - name: "endpoint"
+          type: string
+        - name: "model"
+          type: string
+        - name: "tokens_in"
+          type: integer
+        - name: "tokens_out"
+          type: integer
+        - name: "latency_ms"
+          type: integer
+        - name: "status_code"
+          type: integer
+        - name: "client_ip"
+          type: string
+        - name: "backend_port"
+          type: integer
+    
+    llux_deploy:
+      description: "Deploiement nouveau binaire"
+      trigger: "RLM-DEPLOY deploy_triade.sh"
+      fields:
+        - name: "event_type"
+          type: string
+          value: "llux_deploy"
+        - name: "timestamp"
+          type: datetime
+          format: "ISO8601"
+        - name: "version"
+          type: string
+        - name: "binary_hash"
+          type: string
+          format: "sha256"
+        - name: "backup_path"
+          type: string
+        - name: "deployed_by"
+          type: string
+        - name: "request_id"
+          type: string
+          format: "uuid"
+    
+    llux_rollback:
+      description: "Rollback vers version precedente"
+      trigger: "RLM-DEPLOY rollback ou health check failure"
+      fields:
+        - name: "event_type"
+          type: string
+          value: "llux_rollback"
+        - name: "timestamp"
+          type: datetime
+          format: "ISO8601"
+        - name: "from_version"
+          type: string
+        - name: "to_version"
+          type: string
+        - name: "reason"
+          type: string
+        - name: "backup_used"
+          type: string
+        - name: "request_id"
+          type: string
+          format: "uuid"
+    
+    trix_container_event:
+      description: "Évenements conteneur TRIX"
+      trigger: "start/stop/restart/cleanup"
+      fields:
+        - name: "event_type"
+          type: string
+          value: "trix_container_event"
+        - name: "timestamp"
+          type: datetime
+          format: "ISO8601"
+        - name: "action"
+          type: string
+          enum: ["start", "stop", "restart", "cleanup", "health_check"]
+        - name: "backend"
+          type: string
+          value: "llux"
+        - name: "result"
+          type: string
+          enum: ["success", "failure", "timeout"]
+        - name: "duration_ms"
+          type: integer
+        - name: "error"
+          type: string
+          optional: true
+        - name: "request_id"
+          type: string
+          format: "uuid"
+  
+  # Format JSONL (une entree par ligne)
+  format:
+    type: "jsonl"
+    encoding: "UTF-8"
+    line_terminator: "\n"
+    example: |
+      {"event_type":"llux_started","timestamp":"2026-07-30T10:00:00Z","pid":12345,"port":47000,"version":"1.0.0","model":"bitnet-1.58b","command":"trix backend start llux","request_id":"a1b2c3d4-e5f6-7890-abcd-ef1234567890"}
+      {"event_type":"llux_health_check","timestamp":"2026-07-30T10:00:15Z","port":47000,"healthy":true,"latency_ms":12,"attempt":1,"request_id":"b2c3d4e5-f6a7-8901-bcde-f23456789012"}
+  
+  # Rotation et archivage
+  rotation:
+    strategy: "size_and_time"
+    max_size_mb: 100
+    max_age_days: 7
+    compress: true
+    archive_pattern: "archive/wal-YYYYMMDD.jsonl.gz"
+    cleanup_after_days: 30
+  
+  # Integrite
+  integrity:
+    checksum: "sha256"
+    verify_on_read: true
+    index_file: "wal.index"
+    index_fields:
+      - "timestamp"
+      - "event_type"
+      - "request_id"
+      - "port"
+  
+  # Requetes courantes
+  queries:
+    - name: "recent_startups"
+      filter: "event_type == 'llux_started'"
+      limit: 10
+      order: "timestamp DESC"
+    
+    - name: "failed_health_checks"
+      filter: "event_type == 'llux_health_check' && healthy == false"
+      limit: 100
+      order: "timestamp DESC"
+    
+    - name: "requests_by_port"
+      filter: "event_type == 'llux_request'"
+      group_by: "backend_port"
+      aggregate: "count, avg(latency_ms), max(latency_ms)"
+    
+    - name: "deployments"
+      filter: "event_type == 'llux_deploy'"
+      order: "timestamp DESC"
+    
+    - name: "rollbacks"
+      filter: "event_type == 'llux_rollback'"
+      order: "timestamp DESC"
+  
+  # Integration RLM-DEPLOY
+  rlm_deploy_integration:
+    pre_deploy:
+      - "create_backup_entry"
+      - "verify_wal_integrity"
+    post_deploy:
+      - "log_deploy_entry"
+      - "verify_health"
+      - "run_smoke_tests"
+    on_failure:
+      - "log_rollback_entry"
+      - "execute_rollback"
+      - "verify_rollback_health"
+    on_success:
+      - "cleanup_old_backups"
+      - "update_deployment_marker"
