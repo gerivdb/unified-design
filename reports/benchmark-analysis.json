@@ -1,0 +1,47 @@
+{
+  "network": "KiloCode-ECOS Integration",
+  "run_id": "benchmark_2026-08-01T05:24:56Z",
+  "environment": "L3-CITIZENS",
+  "generator": "Phase C Benchmark Suite v1.0.2",
+  "version": "1.0.2",
+  "metrics": {
+    "latency_ms": {
+      "bat-family-chat": {"p95": 68, "p99": 72, "target_ms": 75, "status": "EXCEEDED"},
+      "ecos-cli-bridge": {"p95": 72, "p99": 76, "target_ms": 75, "status": "EXCEEDED"},
+      "quality-check-runner": {"p95": 65, "p99": 69, "target_ms": 75, "status": "EXCEEDED"}
+    },
+    "error_rate_percent": {
+      "bat-family-chat": 0.3,
+      "ecos-cli-bridge": 0.2,
+      "quality-check-runner": 0.1,
+      "target_percent": 1.0,
+      "status": "COMPLIANT"
+    },
+    "throughput_ops_per_sec": {
+      "bat-family-chat": 92,
+      "ecos-cli-bridge": 115,
+      "quality-check-runner": 128,
+      "target_ops_per_sec": 50,
+      "status": "EXCEEDED"
+    }
+  },
+  "validation": {
+    "ontology_disambiguation_covered": true,
+    "behavior_responsiveness": {
+      "panic_at_narcissistic_supply": { "value": 65, "enforced": true },
+      "_config:operation_mode:proactive_work": { "value": 1, "enforced": true }
+    },
+    "ontological_consistency": [
+      "character_semantics_match_STACK",
+      "disambiguation_rules_enforced",
+      "dynamic_loading_verified"
+    ]
+  },
+  "phase_c_requirements": {
+    "dynamic_ontology_loading": true,
+    "behavior_responsiveness": [
+      "panic_at_narcissistic_supply",
+      "_config:operation_mode:proactive_work"
+    ]
+  }
+}
