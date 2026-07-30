@@ -9,7 +9,7 @@ structural_relations:
     target: structural-relations
   - kind: requires
     target: fixpoint-validator
-syntax: detect_blocks_cycles(graph: Graph) -> Result<List[Cycle], Error>
+syntax: "detect_blocks_cycles(graph: Graph) -> Result<List[Cycle], Error>"
 implementation: piano/inference.py (_detect_blocks_cycles)
 references:
   - ATOM-045
