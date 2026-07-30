@@ -1,0 +1,19 @@
+---
+name: admg-dag3-hierarchy
+description: "Hiérarchie des designs dans ADMG/DAG-3 avec ancrage SOLID/DRY/KISS"
+version: 1.0.0
+status: active
+inherits:
+  - fractal-recursion
+  - incremental-growth
+  - design-principle
+parameters:
+  max_depth: 4
+  short_circuit: NEUTRE
+  inheritance_depth: 3
+  strata: [L0, L1, L2, L3, L4]
+performance:
+  latency_p99: 45ms
+  power_max: 12W
+intent_hash: 0xADMG_DAG3_HIERARCHY_20260730
+---
