@@ -1,1 +1,35 @@
-{"cleanup":{"fetch_prune_executed":true,"cleanup_scripts_present":true,"git_maintenance_workflow_present":true,"alias_cleanup_repo_added":true,"post_merge_hook_active":true},"kiva_pipeline":{"path":".kiva/pipelines/unified-design.yaml","steps":["Validate meta-design schema","Validate atoms registry","Extract atom dependencies"],"status":"active"},"timestamp":"2026-07-26T00:59:00+02:00","hitl_validation_20260726_021708":{"status":"success","validation":"2026-07-26T02:17:08.8274377+02:00","details":{"phase1":{"extract_deps":"PASS","meta_design_schema":"PASS","atoms_registry":"PASS_167"},"phase0":{"unified_design":"PASS","repo_standards":"NO_PIPELINE","kiva_cli":"NO_PIPELINE","kiva":"NO_PIPELINE","governance_hub":"NO_PIPELINE"},"phase3":{"repos_skipped":"38","sync_dry_run":"COMPLETED","repos_processed":"52"},"phase2":{"test_atom_created":"YES","registry_validated":"PASS"},"phase4":{"checkpoint_written":"PENDING","checkpoint_read":"PASS"}},"phases":["phase0_boot","phase1_dag","phase2_atom","phase3_sync","phase4_checkpoint"]},"untracked_count":0,"pr":{"title":"feat(adr): add ADR-024 KIVA-CLI souverainete validation + pipeline local","number":13,"merge_commit":"63af959","url":"https://github.com/gerivdb/unified-design/pull/13"},"deleted_remote_branches":[],"deleted_local_branches":[],"last_action":"merge_pr_13_adr_024_kiva_sovereign","remote_branches_pruned":[],"branches":{"origin/main":"63af959","main":"63af959"},"merged_prs":[{"title":"ci(unified-design): add meta-design.yaml schema validation","number":9,"merge_commit":"e3e2c55","status":"merged"},{"title":"feat(atoms): add extract_atom_deps.py and auto-update registry with deps","number":10,"merge_commit":"4a0d09b","status":"merged"},{"title":"docs(readme): reduce to 1 page with DAG + commands","number":11,"merge_commit":"c9ccc48","status":"merged"},{"title":"ci(unified-design): add atoms registry validation step","number":12,"merge_commit":"ef33289","status":"merged"},{"title":"feat(adr): add ADR-024 KIVA-CLI souverainete validation + pipeline local","number":13,"merge_commit":"63af959","status":"merged"}],"rlm_mdu_proposal":{"phase":"4.0","intent_hash":"0xMASTER_INTENT_COGNITIVE_ECOSYSTEM_20260726","status":"rlm_mdu_proposed","runners":7,"description":"Runner cognitif dédié au design MDU et à la correction de friction","atoms_count":14,"errs_covered":"ERR-001 through ERR-014","components":["friction-governance","friction-based-governance","proactive-friction-sensor","friction_detector","post_implement_check"]}}
+{
+  "timestamp": "2026-07-30T23:08:12+02:00",
+  "status": "frequency-engineering-completed",
+  "unified_design": {
+    "pr_29": "merged",
+    "pr_30": "merged",
+    "sha": "d14a888"
+  },
+  "fluence": {
+    "pr_189": "merged",
+    "pr_190": "merged",
+    "sha": "d4d568a13"
+  },
+  "governance_hub": {
+    "pr_156": "merged"
+  },
+  "artifacts": [
+    "ATOM-045-structural-relations",
+    "ATOM-047-frequency-engineering",
+    "ATOM-048-pre-action-validation",
+    "unified-design/meta-design.yaml",
+    "unified-design/atoms_registry.yaml",
+    "FLUENCE/piano/{time_machine.py,inference.py,__init__.py}",
+    "FLUENCE/plix/{cli.py,__init__.py}",
+    "FLUENCE/tests/test_piano.py",
+    "FLUENCE/docs/clusterwave.md"
+  ],
+  "validations": {
+    "meta_design_schema": "OK",
+    "inheritance_cycles": "OK",
+    "pytest": "10 passed",
+    "cli_wave": "OK",
+    "cli_validate": "OK"
+  }
+}
