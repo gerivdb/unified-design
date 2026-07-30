@@ -1,11 +1,44 @@
 ---
-# REGISTRY.yaml — Mapping ONTOLOGY-FILL-SCHEMA
+# REGISTRY.yaml - Mapping ONTOLOGY-FILL-SCHEMA
 # Phase D : GERICODE KILOCODE ASSIMILATION
+# Phase E : REFACTORING VERS L3-CITIZENS
 # IntentHash: 0xEPIC_ASSIMILATION_20260801
 
+phase_d:
+  status: completed
+  migration: L2-PLATFORM -> L3-CITIZENS
+  psy_state_machine: deployed
+  intent_hash: 0xEPIC_ASSIMILATION_20260801
+  move_item: failed_access_denied
+  copy_item: core_files_deployed
+
+phase_e:
+  status: active
+  action: refactoring_gericode_l3_citizens
+  intent_hash: 0xEPIC_REFACTOR_GERICODE_20260801
+  gericode:
+    source: D:/DO/WEB/TOOLS/L2-PLATFORM/GeriCode
+    target: D:/DO/WEB/TOOLS/L3-CITIZENS/GeriCode/refactored
+    type: full_refactor
+    stratum_update: L2_COMPOSITION -> L3_CITIZENS
+    modules:
+      - bat-family-chat
+      - ecos-cli-bridge
+      - quality-check-runner
+    psy_state_machine_integration: true
+    authentication:
+      cds:
+        enabled: true
+        validation: credential_delegation
+        target: L3-CITIZENS
+      cid:
+        enabled: true
+        validation: cross_repo_identity
+        target: L3-CITIZENS
+
 ontology_fill_schema:
-  version: "2.1"
-  description: "Mapping entre les concepts ONTOLOGY et les structures de données"
+  version: "2.2"
+  description: "Mapping entre les concepts ONTOLOGY et les structures de donnees"
   last_updated: "2026-08-01"
   
   sources:
@@ -14,6 +47,7 @@ ontology_fill_schema:
       type: "ontology_service"
       schema_version: "1.0"
       required: true
+      phase_e_integration: true
       
     - name: "citizen_registry"
       path: "gerivdb/BRAIN/citizen_registry.json"
@@ -28,24 +62,56 @@ ontology_fill_schema:
       required: true
 
   mappings:
-    # Migration L2-PLATFORM → L3-CITIZENS
+    # Migration L2-PLATFORM -> L3-CITIZENS (Phase D)
     - concept: "stratum_platform"
       source: "L2-PLATFORM"
       target: "L3-CITIZENS"
       type: "directory_rename"
       validation: "git ls-tree --recursive HEAD"
+      phase: "D"
       
     - concept: "psy_state_machine"
       source: "ONTOLOGY/psy_state_machine.yaml"
       target: "ONTOLOGY/psy_state_machine.yaml"
       type: "service_deployment"
       validation: "ontology_audit.py"
+      phase: "D"
       
     - concept: "citizen_routing"
       source: "citizen_"
       target: "citizen_"
       type: "disambiguation"
       validation: "benchmark-setup.yaml"
+      phase: "D"
+
+    # Refactoring GeriCode L3-CITIZENS (Phase E)
+    - concept: "gericode_refactor"
+      source: "L2-PLATFORM/GeriCode"
+      target: "L3-CITIZENS/GeriCode/refactored"
+      type: "refactor_move"
+      validation: "git status --porcelain"
+      phase: "E"
+      
+    - concept: "gericode_stratum"
+      source: "L2_COMPOSITION"
+      target: "L3_CITIZENS"
+      type: "stratum_update"
+      validation: "design.yaml"
+      phase: "E"
+      
+    - concept: "gericode_psy_integration"
+      source: "ONTOLOGY/psy_state_machine.yaml"
+      target: "L3-CITIZENS/GeriCode/refactored/citizens.yaml"
+      type: "service_integration"
+      validation: "citizens.yaml"
+      phase: "E"
+      
+    - concept: "gericode_authentication"
+      source: "CDS+CID"
+      target: "L3-CITIZENS"
+      type: "auth_validation"
+      validation: "cds_authentication_test.py"
+      phase: "E"
 
   disambiguation_rules:
     - pattern: "psy_state_machine"

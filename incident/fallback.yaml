@@ -1,0 +1,322 @@
+---
+type: INCIDENT_FALLBACK
+version: "1.0.0"
+status: active
+intent_hash: 0xINCIDENT_FALLBACK_20260730
+description: "Playbook d'incident et fallback pour la Triade Cognitive"
+inherits: [hitl-gate, hitl-expulsion-governance, absolute-rules-enforcement]
+---
+
+fallback_playbook:
+  name: "triade_fallback"
+  version: "1.0.0"
+  description: "Procedures de degradation et fallback pour LLUX + PIANO + SPIDX + TRIX + GATEWAY-MANAGER"
+  components: ["LLUX", "PIANO", "SPIDX", "TRIX", "GATEWAY-MANAGER"]
+  contact:
+    team: "DevOps Team"
+    slack: "#infra-alerts"
+    pagerduty: "oncall"
+  
+  # Scenarios d'incident
+  scenarios:
+    llux_unhealthy:
+      name: "LLUX Unhealthy"
+      severity: "critical"
+      symptoms:
+        - "curl http://localhost:47000/health retourne unhealthy"
+        - "GATEWAY-MANAGER detecte health check echoue"
+        - "Circuit breaker LLUX OPEN"
+        - "Metriques: llux_health_status != healthy"
+      diagnosis:
+        - command: "trix backend status llux"
+          expect: "running"
+        - command: "tail -f /var/log/trix/llux-*.log"
+          look_for: "ERROR|panic|OOM|SIGKILL"
+        - command: "curl -v http://localhost:47000/health"
+          expect: "200 OK + {\"status\":\"healthy\"}"
+      immediate_actions:
+        - order: 1
+          command: "trix backend stop llux"
+          description: "Arret propre LLUX"
+          timeout: 30s
+        - order: 2
+          command: "trix backend start llux"
+          description: "Redemarrage LLUX via TRIX"
+          timeout: 60s
+        - order: 3
+          command: "curl -f http://localhost:47000/health"
+          description: "Verification sante"
+          timeout: 10s
+          retries: 5
+          retry_delay: 5s
+      fallback:
+        - order: 1
+          description: "Basculement vers ollama-env2"
+          command: "kubectl set env deployment/gateway-manager DEFAULT_BACKEND=ollama-env2"
+          verify: "curl -f http://localhost:9000/mcp/llux/llm/chat/health"
+        - order: 2
+          description: "Basculement vers openrouter-nemotron-free"
+          command: "kubectl set env deployment/gateway-manager DEFAULT_BACKEND=openrouter-nemotron-free"
+          verify: "curl -f http://localhost:9000/mcp/llux/llm/chat/health"
+      escalation:
+        - level: "L1"
+          contact: "DevOps On-Call"
+          delay: "5min"
+        - level: "L2"
+          contact: "SRE Team"
+          delay: "15min"
+        - level: "L3"
+          contact: "Platform Team"
+          delay: "30min"
+        - level: "L4"
+          contact: "Architecture Team"
+          delay: "1h"
+    
+    trix_container_failed:
+      name: "TRIX Container Failed"
+      severity: "critical"
+      symptoms:
+        - "trix backend status llux => failed"
+        - "Port 47000-48000 non alloue"
+        - "WAL entries: trix_container_event{result='failure'}"
+      diagnosis:
+        - command: "cat /var/lib/trix/wal/llux.log"
+          look_for: "trix_container_event.*result=failure"
+        - command: "trix backend status llux --verbose"
+          expect: "detailed error"
+      immediate_actions:
+        - order: 1
+          command: "cat /var/lib/trix/wal/llux.log | grep trix_container_event | tail -20"
+          description: "Analyse WAL pour cause racine"
+        - order: 2
+          command: "trix backend cleanup llux"
+          description: "Nettoyage ressources orphelines"
+          timeout: 30s
+        - order: 3
+          command: "trix backend start llux"
+          description: "Redemarrage backend"
+          timeout: 60s
+      fallback:
+        - description: "Basculement GATEWAY vers fallback"
+          command: "kubectl set env deployment/gateway-manager DEFAULT_BACKEND=ollama-env2"
+      escalation:
+        - level: "L1"
+          delay: "5min"
+        - level: "L2"
+          delay: "15min"
+    
+    gateway_router_down:
+      name: "GATEWAY-MANAGER Router Down"
+      severity: "critical"
+      symptoms:
+        - "/mcp/llux/llm/chat timeout"
+        - "503 errors sur endpoints Gateway"
+        - "Admin endpoint /admin/backends inaccessible"
+      diagnosis:
+        - command: "systemctl status gateway-manager"
+        - command: "curl -f http://localhost:9000/admin/backends"
+        - command: "curl -f http://localhost:9000/health"
+      immediate_actions:
+        - order: 1
+          command: "systemctl restart gateway-manager"
+          description: "Redemarrage service Gateway"
+          timeout: 30s
+        - order: 2
+          command: "curl -X POST http://localhost:9000/admin/reload"
+          description: "Rechargement configuration"
+          timeout: 10s
+        - order: 3
+          command: "curl -f http://localhost:9000/admin/backends"
+          description: "Verification backends enregistres"
+          timeout: 10s
+      fallback:
+        - order: 1
+          description: "Bypass direct vers LLUX"
+          command: "curl -X POST http://localhost:47000/v1/chat/completions -H 'Content-Type: application/json' -d '{\"messages\":[{\"role\":\"user\",\"content\":\"test\"}]}'"
+          verify: "Response contains 'choices'"
+        - order: 2
+          description: "Bypass vers ollama-env2"
+          command: "curl -X POST http://localhost:11434/v1/chat/completions -H 'Content-Type: application/json' -d '{\"messages\":[{\"role\":\"user\",\"content\":\"test\"}]}'"
+      escalation:
+        - level: "L1"
+          delay: "5min"
+        - level: "L2"
+          delay: "15min"
+    
+    piano_orchestration_failed:
+      name: "PIANO Orchestration Failed"
+      severity: "warning"
+      symptoms:
+        - "zig build test --test-filter llux echoue"
+        - "PIANO ne peut pas binder vers LLUX"
+        - "Orchestrations echouent"
+      diagnosis:
+        - command: "cd D:/DO/WEB/TOOLS/L4-TOOLS/PIANO && zig build test --test-filter llux"
+        - command: "curl -f http://localhost:47000/health"
+      immediate_actions:
+        - order: 1
+          command: "cd D:/DO/WEB/TOOLS/L4-TOOLS/PIANO && zig build test --test-filter llux"
+          description: "Tests binding LLUX"
+        - order: 2
+          command: "cd D:/DO/WEB/TOOLS/L4-TOOLS/PIANO && zig build -Dcpu=westmere -Drelease-fast"
+          description: "Rebuild PIANO"
+        - order: 3
+          command: "systemctl restart piano"
+          description: "Redemarrage service PIANO"
+      escalation:
+        - level: "L1"
+          delay: "10min"
+        - level: "L2"
+          delay: "30min"
+    
+    spidx_embeddings_failed:
+      name: "SPIDX Embeddings Failed"
+      severity: "warning"
+      symptoms:
+        - "zig build test --test-filter embedding echoue"
+        - "Requetes /v1/embeddings echouent"
+        - "Indexation SPIDX bloquee"
+      diagnosis:
+        - command: "zig build test --test-filter bpe_tokenizer"
+        - command: "ls -la /opt/trix/models/tokenizer.json"
+        - command: "curl -f http://localhost:47000/v1/embeddings -d '{\"input\":\"test\"}'"
+      immediate_actions:
+        - order: 1
+          command: "zig build test --test-filter bpe_tokenizer"
+          description: "Tests tokenizer BPE"
+        - order: 2
+          command: "cp D:/DO/WEB/TOOLS/L3-CITIZENS/LLUX/models/tokenizer.json /opt/trix/models/"
+          description: "Copie modele tokenizer"
+        - order: 3
+          command: "trix backend restart llux"
+          description: "Redemarrage TRIX pour recharger tokenizer"
+      escalation:
+        - level: "L1"
+          delay: "10min"
+        - level: "L2"
+          delay: "30min"
+  
+  # Rollback complet
+  rollback:
+    name: "Rollback Complet Triade"
+    description: "Restauration versions precedentes de tous les composants"
+    script: |
+      #!/bin/bash
+      # Rollback complet de la triade
+      
+      echo "=== ROLLBACK TRIADE ==="
+      date
+      
+      # 1. Arret LLUX
+      echo "Arret LLUX..."
+      trix backend stop llux
+      
+      # 2. Restauration binaires
+      echo "Restauration binaires..."
+      cp /opt/trix/bin/llux.backup /opt/trix/bin/llux
+      cp /opt/piano/bin/piano.backup /opt/piano/bin/piano
+      cp /opt/spidx/bin/spidx.backup /opt/spidx/bin/spidx
+      cp /usr/local/bin/trix.backup /usr/local/bin/trix
+      
+      # 3. Restauration tokenizer
+      echo "Restauration tokenizer..."
+      cp /opt/trix/models/tokenizer.json.backup /opt/trix/models/tokenizer.json
+      
+      # 4. Redemarrage
+      echo "Redemarrage LLUX..."
+      trix backend start llux
+      
+      # 5. Verification
+      echo "Verification sante..."
+      sleep 10
+      curl -f http://localhost:47000/health
+      
+      echo "=== ROLLBACK TERMINÉ ==="
+      date
+    triggers:
+      - "Deployment verification failed"
+      - "Critical error rate > 10%"
+      - "Manual operator request via RLM-INCIDENT"
+      - "Health check failure after 3 retries"
+    timeout: "120s"
+    verification:
+      - "curl -f http://localhost:47000/health"
+      - "curl -f POST /v1/chat/completions"
+      - "curl -f POST /v1/embeddings"
+      - "curl -f POST /mcp/llux/llm/chat"
+  
+  # Escalade
+  escalation:
+    contacts:
+      L1:
+        name: "DevOps On-Call"
+        slack: "#infra-alerts"
+        phone: "+33-X-XX-XX-XX-XX"
+        delay: "5min"
+      L2:
+        name: "SRE Team"
+        slack: "#sre-oncall"
+        phone: "+33-X-XX-XX-XX-XX"
+        delay: "15min"
+      L3:
+        name: "Platform Team"
+        slack: "#platform-oncall"
+        delay: "30min"
+      L4:
+        name: "Architecture Team"
+        slack: "#arch-oncall"
+        delay: "1h"
+    auto_escalate: true
+    escalation_triggers:
+      - "scenario not resolved in delay"
+      - "multiple components affected"
+      - "business impact detected"
+  
+  # Post-mortem
+  post_mortem:
+    template:
+      - field: "Date"
+        required: true
+      - field: "Incident ID"
+        required: true
+      - field: "Duration"
+        required: true
+      - field: "Impact"
+        required: true
+        description: "Users affected, features degraded, SLA breach"
+      - field: "Root Cause"
+        required: true
+        description: "5 Whys analysis"
+      - field: "Resolution"
+        required: true
+      - field: "Preventive Actions"
+        required: true
+        description: "Tickets created, owners, deadlines"
+      - field: "Timeline"
+        required: true
+        description: "Key events with timestamps"
+      - field: "Metrics"
+        required: true
+        description: "Error rate, latency, availability during incident"
+    storage: "RLM-INCIDENT/post-mortems/"
+    review_meeting: "within 48h"
+  
+  # Integration RLM-INCIDENT
+  rlm_incident_integration:
+    api_endpoint: "http://localhost:8081/api/v1"
+    create_incident:
+      endpoint: "POST /incidents"
+      payload:
+        title: "Triade: {scenario_name}"
+        severity: "{severity}"
+        components: ["LLUX", "PIANO", "SPIDX", "TRIX", "GATEWAY-MANAGER"]
+        runbook: "incident/fallback.yaml#{scenario_name}"
+    update_incident:
+      endpoint: "PATCH /incidents/{id}"
+    resolve_incident:
+      endpoint: "POST /incidents/{id}/resolve"
+    link_runbook:
+      endpoint: "POST /incidents/{id}/runbook"
+      payload:
+        url: "https://github.com/gerivdb/RLM-INCIDENT/blob/main/playbooks/triade_fallback.md"
+        scenario: "{scenario_name}"

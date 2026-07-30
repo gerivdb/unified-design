@@ -1,0 +1,537 @@
+---
+type: GATEWAY_OPENAPI
+version: "1.0.0"
+status: active
+intent_hash: 0xGATEWAY_OPENAPI_20260730
+description: "OpenAPI 3.0 specification for GATEWAY-MANAGER API"
+---
+
+openapi: "3.0.0"
+info:
+  title: "GATEWAY-MANAGER API"
+  version: "1.0.0"
+  description: |
+    Routeur unifie multi-backend pour l'ecosysteme gerivdb.
+    
+    Fournit routage intelligent, circuit breaker, fallback chains et rate limiting
+    pour tous les backends LLM (LLUX, Ollama, Groq, OpenRouter, etc.).
+  contact:
+    name: "Gateway Team"
+    url: "https://github.com/gerivdb/GATEWAY-MANAGER"
+
+servers:
+  - url: "http://localhost:9000"
+    description: "GATEWAY-MANAGER local"
+
+tags:
+  - name: "Chat"
+    description: "Chat completions via routing intelligent"
+  - name: "Embeddings"
+    description: "Embeddings via backend optimal"
+  - name: "Admin"
+    description: "Administration et monitoring"
+  - name: "Backends"
+    description: "Gestion des backends"
+
+paths:
+  /mcp/llux/llm/chat:
+    post:
+      tags: ["Chat"]
+      summary: "Chat completion via LLUX (backend par defaut)"
+      operationId: "lluxChatCompletion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatCompletionRequest"
+      responses:
+        "200":
+          description: "Reponse du backend route"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatCompletionResponse"
+        "503":
+          description: "Tous les backends indisponibles"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /mcp/llux/llm/chat/health:
+    get:
+      tags: ["Health"]
+      summary: "Health check du backend LLUX via Gateway"
+      operationId: "lluxHealthViaGateway"
+      responses:
+        "200":
+          description: "Backend LLUX sain"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+        "503":
+          description: "Backend LLUX indisponible"
+
+  /mcp/{backend}/chat:
+    post:
+      tags: ["Chat"]
+      summary: "Chat completion via backend specifique"
+      operationId: "backendChatCompletion"
+      parameters:
+        - name: backend
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["llux", "ollama-env2", "groq", "google-ai-studio", "github-models", "openrouter-nemotron-free", "qoder"]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatCompletionRequest"
+      responses:
+        "200":
+          description: "Reponse du backend"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatCompletionResponse"
+        "404":
+          description: "Backend inconnu"
+        "503":
+          description: "Backend indisponible"
+
+  /mcp/{backend}/embeddings:
+    post:
+      tags: ["Embeddings"]
+      summary: "Embeddings via backend specifique"
+      operationId: "backendEmbeddings"
+      parameters:
+        - name: backend
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: ["llux", "ollama-env2", "openrouter-nemotron-free"]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmbeddingRequest"
+      responses:
+        "200":
+          description: "Embeddings generes"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmbeddingResponse"
+
+  /admin/backends:
+    get:
+      tags: ["Admin", "Backends"]
+      summary: "Liste tous les backends et leur sante"
+      operationId: "listBackends"
+      responses:
+        "200":
+          description: "Liste des backends"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  backends:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/BackendStatus"
+                  default_backend:
+                    type: string
+                  type: string
+                  routing_priority:
+                    type: array
+                    items:
+                      type: string
+
+  /admin/backends/{name}:
+    get:
+      tags: ["Admin", "Backends"]
+      summary: "Details d'un backend"
+      operationId: "getBackend"
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Details backend"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BackendDetail"
+        "404":
+          description: "Backend non trouve"
+
+  /admin/backends/{name}/health:
+    get:
+      tags: ["Admin", "Backends"]
+      summary: "Force health check d'un backend"
+      operationId: "forceBackendHealthCheck"
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Resultat health check"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+
+  /admin/backends/{name}/disable:
+    post:
+      tags: ["Admin", "Backends"]
+      summary: "Desactive un backend"
+      operationId: "disableBackend"
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Backend desactive"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  disabled:
+                    type: boolean
+                    value: true
+                  backend:
+                    type: string
+
+  /admin/backends/{name}/enable:
+    post:
+      tags: ["Admin", "Backends"]
+      summary: "Active un backend"
+      operationId: "enableBackend"
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Backend active"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+                    value: true
+                  backend:
+                    type: string
+
+  /admin/reload:
+    post:
+      tags: ["Admin"]
+      summary: "Recharge la configuration"
+      operationId: "reloadConfig"
+      responses:
+        "200":
+          description: "Configuration rechargee"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reloaded:
+                    type: boolean
+                    value: true
+                  timestamp:
+                    type: string
+                    format: date-time
+
+  /admin/circuit-breakers:
+    get:
+      tags: ["Admin"]
+      summary: "État de tous les circuit breakers"
+      operationId: "getCircuitBreakers"
+      responses:
+        "200":
+          description: "États circuit breakers"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  circuits:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CircuitBreakerStatus"
+
+components:
+  schemas:
+    ChatCompletionRequest:
+      type: object
+      required: [messages, model]
+      properties:
+        messages:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [role, content]
+            properties:
+              role:
+                type: string
+                enum: ["system", "user", "assistant"]
+              content:
+                type: string
+        model:
+          type: string
+        temperature:
+          type: number
+          minimum: 0
+          maximum: 2
+          default: 0.7
+        max_tokens:
+          type: integer
+          minimum: 1
+          maximum: 4096
+          default: 2048
+        top_p:
+          type: number
+          minimum: 0
+          maximum: 1
+          default: 0.9
+        stream:
+          type: boolean
+          default: false
+    
+    ChatCompletionResponse:
+      type: object
+      required: [id, object, created, model, choices, usage]
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          enum: ["chat.completion"]
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            required: [index, message, finish_reason]
+            properties:
+              index:
+                type: integer
+              message:
+                type: object
+                required: [role, content]
+                properties:
+                  role:
+                    type: string
+                    enum: ["assistant"]
+                  content:
+                    type: string
+              finish_reason:
+                type: string
+                enum: ["stop", "length", "content_filter"]
+        usage:
+          type: object
+          required: [prompt_tokens, completion_tokens, total_tokens]
+          properties:
+            prompt_tokens:
+              type: integer
+            completion_tokens:
+              type: integer
+            total_tokens:
+              type: integer
+    
+    EmbeddingRequest:
+      type: object
+      required: [input, model]
+      properties:
+        input:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+        model:
+          type: string
+        encoding_format:
+          type: string
+          enum: ["float", "base64"]
+          default: "float"
+    
+    EmbeddingResponse:
+      type: object
+      required: [object, data, model, usage]
+      properties:
+        object:
+          type: string
+          enum: ["list"]
+        data:
+          type: array
+          items:
+            type: object
+            required: [object, embedding, index]
+            properties:
+              object:
+                type: string
+                enum: ["embedding"]
+              embedding:
+                type: array
+                items:
+                  type: number
+              index:
+                type: integer
+        model:
+          type: string
+        usage:
+          type: object
+          required: [prompt_tokens, total_tokens]
+          properties:
+            prompt_tokens:
+              type: integer
+            total_tokens:
+              type: integer
+    
+    HealthResponse:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: ["healthy", "unhealthy"]
+        model:
+          type: string
+        backend:
+          type: string
+        version:
+          type: string
+        uptime_seconds:
+          type: integer
+        error:
+          type: string
+    
+    BackendStatus:
+      type: object
+      required: [name, type, status, models]
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum: ["http", "trix"]
+        url:
+          type: string
+        status:
+          type: string
+          enum: ["healthy", "unhealthy", "disabled", "circuit_open"]
+        models:
+          type: array
+          items:
+            type: string
+        rate_limit:
+          type: integer
+        circuit_breaker:
+          type: object
+          properties:
+            state:
+              type: string
+              enum: ["CLOSED", "OPEN", "HALF_OPEN"]
+            failures:
+              type: integer
+            last_failure:
+              type: string
+              format: date-time
+        fallback_priority:
+          type: integer
+    
+    BackendDetail:
+      allOf:
+        - $ref: "#/components/schemas/BackendStatus"
+        - type: object
+          properties:
+            config:
+              type: object
+              properties:
+                timeout:
+                  type: string
+                retry_policy:
+                  type: string
+                max_retries:
+                  type: integer
+                health_check:
+                  type: object
+    
+    CircuitBreakerStatus:
+      type: object
+      required: [backend, state, failures, successes]
+      properties:
+        backend:
+          type: string
+        state:
+          type: string
+          enum: ["CLOSED", "OPEN", "HALF_OPEN"]
+        failures:
+          type: integer
+        successes:
+          type: integer
+        failure_threshold:
+          type: integer
+        timeout:
+          type: string
+        half_open_requests:
+          type: integer
+        last_state_change:
+          type: string
+          format: date-time
+        health_check:
+          type: object
+          properties:
+            endpoint:
+              type: string
+            interval:
+              type: string
+            last_check:
+              type: string
+              format: date-time
+            result:
+              type: string
+              enum: ["pass", "fail"]
+    
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [message, type, code]
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+            code:
+              type: string
