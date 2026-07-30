@@ -1,6 +1,6 @@
 ---
 name: infra-tool-layer
-description: "Couche infrastructurelle DevTools : fournit des scripts opérationnels à CTULU, ECOS-CLI, BRAIN. N'importe pas PRIMUS (règle de juridiction)."
+description: "Couche infrastructurelle DevTools : fournit des scripts operationnels a CTULU, ECOS-CLI, BRAIN. N'importe pas PRIMUS (regle de juridiction)."
 parameters:
   provider: DevTools
   consumers:
@@ -21,14 +21,14 @@ inherits: [cross-repo-flow, registry-driven-orchestration]
 
 # Infra Tool Layer Atom
 
-Couche infrastructurelle DevTools vers les consommateurs opérationnels.
+Couche infrastructurelle DevTools vers les consommateurs operationnels.
 
-## Rôle
+## Role
 
-Documenter et valider le flux d'outils opérationnels depuis `gerivdb/DevTools` vers :
+Documenter et valider le flux d'outils operationnels depuis `gerivdb/DevTools` vers :
 - **CTULU** : scheduled tasks, scripts utilitaires
-- **ECOS-CLI** : point d'entrée CLI unifié (`ecos.ps1`)
-- **BRAIN** : intégration des managers via scripts
+- **ECOS-CLI** : point d'entree CLI unifie (`ecos.ps1`)
+- **BRAIN** : integration des managers via scripts
 
 ## Structure canonique
 
@@ -50,29 +50,29 @@ cross_repo_flow:
 
 ## Invariants
 
-- DevTools NE DOIT PAS importer PRIMUS (règle de juridiction)
-- DevTools fournit des scripts **opérationnels**, pas de la logique métier
-- CTULU référence DevTools pour les scheduled tasks
-- ECOS-CLI est le point d'entrée unique vers tous les outils DevTools
-- BRAIN consomme DevTools via les managers synchronisés
+- DevTools NE DOIT PAS importer PRIMUS (regle de juridiction)
+- DevTools fournit des scripts **operationnels**, pas de la logique metier
+- CTULU reference DevTools pour les scheduled tasks
+- ECOS-CLI est le point d'entree unique vers tous les outils DevTools
+- BRAIN consomme DevTools via les managers synchronises
 
 ## Validation
 
-Le loop engine MDU DOIT vérifier :
-1. `DevTools` possède l'atome `infra-tool-provider`
-2. Aucun consommateur ne dépend de PRIMUS via DevTools
+Le loop engine MDU DOIT verifier :
+1. `DevTools` possede l'atome `infra-tool-provider`
+2. Aucun consommateur ne depend de PRIMUS via DevTools
 3. Les chemins des scheduled tasks sont valides
 
 ## Exemples
 
-| Outil | Catégorie | Consumer | Usage |
+| Outil | Categorie | Consumer | Usage |
 |-------|-----------|----------|-------|
-| `ecos.ps1` | cli_wrapper | ECOS-CLI | Point d'entrée unifié |
+| `ecos.ps1` | cli_wrapper | ECOS-CLI | Point d'entree unifie |
 | `ecos-sync-audit.ps1` | sync_orchestrator | CTULU | Audit 47 repos |
 | `verify-mcp-access.ps1` | mcp_diagnostics | CTULU | Diagnostic MCP |
 | `Makefile` | build_pipeline | BRAIN | Build multi-langage |
 
-## Références
+## References
 
 - `D:\DO\WEB\TOOLS\L2-PLATFORM\DevTools\README.md`
 - `D:\DO\WEB\TOOLS\L2-PLATFORM\DevTools\bin\ecos.ps1`

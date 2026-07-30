@@ -1,6 +1,6 @@
 ---
 name: pipeline-orchestrator
-description: "Pipeline automatisé : âme → équipe → verses → validation → rapport consolidé."
+description: "Pipeline automatise : ame -> equipe -> verses -> validation -> rapport consolide."
 parameters:
   stages:
     - hermes generate

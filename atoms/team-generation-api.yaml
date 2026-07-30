@@ -1,6 +1,6 @@
 ---
 name: team-generation-api
-description: "Interface de HERMES pour dériver une équipe depuis une âme et un méta-design d'équipe."
+description: "Interface de HERMES pour deriver une equipe depuis une ame et un meta-design d'equipe."
 parameters:
   input:
     - soul: string

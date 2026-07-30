@@ -1,6 +1,6 @@
 ---
 name: ternary-query
-description: "Langage de requête fractal ternaire pour NEXUS. Paradigme Think-Do-Check avec récursion auto-similaire."
+description: "Langage de requete fractal ternaire pour NEXUS. Paradigme Think-Do-Check avec recursion auto-similaire."
 parameters:
   paradigm: Think-Do-Check
   recursion: true
@@ -12,31 +12,31 @@ inherits: [b243-vector]
 
 # Ternary Query Atom
 
-Pattern de langage de requête fractal ternaire.
+Pattern de langage de requete fractal ternaire.
 
-## Rôle
+## Role
 
-Langage de requête pour NEXUS basé sur le paradigme ternaire :
+Langage de requete pour NEXUS base sur le paradigme ternaire :
 - **Paradigme** : Think-Do-Check
-- **Récursion** : auto-similaire, max_depth=10
+- **Recursion** : auto-similaire, max_depth=10
 - **Short-circuit** : NEUTRE (ADR-0013)
-- **Opérateurs** : 12 cognitifs
+- **Operateurs** : 12 cognitifs
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| `paradigm` | string | `Think-Do-Check` | Paradigme de requête |
-| `recursion` | bool | `true` | Récursion auto-similaire |
-| `max_depth` | int | `10` | Profondeur max de récursion |
+| `paradigm` | string | `Think-Do-Check` | Paradigme de requete |
+| `recursion` | bool | `true` | Recursion auto-similaire |
+| `max_depth` | int | `10` | Profondeur max de recursion |
 | `short_circuit` | string | `NEUTRE` | Mode short-circuit |
-| `operators` | int | `12` | Nombre d'opérateurs cognitifs |
+| `operators` | int | `12` | Nombre d'operateurs cognitifs |
 
 ## Invariants
 
-- La récursion DOIT avoir une profondeur max
+- La recursion DOIT avoir une profondeur max
 - Le short-circuit NEUTRE EST obligatoire (ADR-0013)
-- Les opérateurs DOIVENT être couverts par les tests
+- Les operateurs DOIVENT etre couverts par les tests
 
 ## Exemple d'usage
 
@@ -51,7 +51,7 @@ capabilities:
       operators: 12
 ```
 
-## Références
+## References
 
 - TQL (gerivdb/TQL)
 - ADR-0013 (short-circuit NEUTRE)

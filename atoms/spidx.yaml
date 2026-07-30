@@ -11,20 +11,20 @@ inherits: [b243-vector]
 
 Index sparse pour les coefficients non-nuls d'un signal Q243.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| max_coefficients | int | 1000000 | Nombre max de coefficients indexés |
+| max_coefficients | int | 1000000 | Nombre max de coefficients indexes |
 | compression_ratio | int | 10 | Ratio de compression attendu |
 
 ## Invariants
 
-- Seuls les coefficients non-nuls sont stockés
-- L'index est trié par position croissante
-- Complexité O(1) par lookup
+- Seuls les coefficients non-nuls sont stockes
+- L'index est trie par position croissante
+- Complexite O(1) par lookup
 
-## Références
+## References
 
 - PLIX codec
 - Q243 quantification

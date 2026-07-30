@@ -1,6 +1,6 @@
 ---
 name: design-validate-cli
-description: "Spécification de la CLI gerivdb design validate et ses options."
+description: "Specification de la CLI gerivdb design validate et ses options."
 parameters:
   command: gerivdb design validate
   options:

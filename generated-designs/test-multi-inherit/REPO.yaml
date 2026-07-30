@@ -6,7 +6,7 @@ parents:
 - REPO-STANDARDS
 status: active
 stratum: L0-CANON
-description: Design unifié hérité de GOVERNANCE-HUB, REPO-STANDARDS
+description: Design unifie herite de GOVERNANCE-HUB, REPO-STANDARDS
 capabilities:
 - latency-bound
 - power-capped

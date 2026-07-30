@@ -1,6 +1,6 @@
 ---
 name: artefact-id-registry-sot
-description: "Registre SOT des artefacts/citoyens/outils pour hypothèses AUTO-DEV et TQL bridge."
+description: "Registre SOT des artefacts/citoyens/outils pour hypotheses AUTO-DEV et TQL bridge."
 parameters:
   registry_types:
     - artefacts

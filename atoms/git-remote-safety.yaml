@@ -1,6 +1,6 @@
 ---
 name: git-remote-safety
-description: "Protocole de sécurité pour les opérations git remote avec vérification des remotes, branches et historique distant."
+description: "Protocole de securite pour les operations git remote avec verification des remotes, branches et historique distant."
 parameters:
   pre_push_checks: 5
   remote_verification: true
@@ -8,8 +8,8 @@ parameters:
   history_verification: true
   force_push_protection: true
 constraints:
-  - "Toujours vérifier le remote avant push"
-  - "Toujours vérifier la branche avant push"
+  - "Toujours verifier le remote avant push"
+  - "Toujours verifier la branche avant push"
   - "Jamais de force push sans autorisation explicite"
 inherits: [git-safety, version-control]
 ---
@@ -17,47 +17,47 @@ inherits: [git-safety, version-control]
 # Atom : git-remote-safety
 
 ## Contexte
-Basé sur la session `ses_004` (INTENT-2F35C94A811EC8C7). Incident de force push vers le mauvais repo avec écrasement de CTULU. Ce protocole prévient ce type d'erreur.
+Base sur la session `ses_004` (INTENT-2F35C94A811EC8C7). Incident de force push vers le mauvais repo avec ecrasement de CTULU. Ce protocole previent ce type d'erreur.
 
 ## Protocol obligatoire avant chaque push
 
-### Étape 1 — Vérifier le remote
+### Étape 1 - Verifier le remote
 ```bash
 git remote -v
 ```
-→ Vérifier que le remote correspond au repo attendu
-→ Si mismatch → `git remote set-url origin <url_correcte>`
+-> Verifier que le remote correspond au repo attendu
+-> Si mismatch -> `git remote set-url origin <url_correcte>`
 
-### Étape 2 — Vérifier la branche
+### Étape 2 - Verifier la branche
 ```bash
 git branch
 ```
-→ Si HEAD détaché → `git checkout -B main HEAD`
+-> Si HEAD detache -> `git checkout -B main HEAD`
 
-### Étape 3 — Vérifier l'historique distant
+### Étape 3 - Verifier l'historique distant
 ```bash
 git log origin/main --oneline -5
 ```
-→ Vérifier que le distant n'a pas été écrasé
+-> Verifier que le distant n'a pas ete ecrase
 
-### Étape 4 — Push SANS force
+### Étape 4 - Push SANS force
 ```bash
 git push origin main
 ```
-→ Ne JAMAIS utiliser `--force` sans vérification
+-> Ne JAMAIS utiliser `--force` sans verification
 
-### Étape 5 — En cas de force push
+### Étape 5 - En cas de force push
 ```bash
-# UNIQUEMENT si les étapes 1-3 sont OK ET intentionnel
+# UNIQUEMENT si les etapes 1-3 sont OK ET intentionnel
 git push --force origin <commit_sha>:main
 ```
 
 ## Anti-patterns bloquants
-- `git push --force` sans vérifier `git remote -v`
-- `git push` sans vérifier `git branch`
+- `git push --force` sans verifier `git remote -v`
+- `git push` sans verifier `git branch`
 - Changer de repo sans utiliser `workdir` ou des chemins absolus
 
 ## Incidents connus
-- **Incident 2026-06-22** : Force push accidentel vers mauvais repo (TRIX→CTULU)
+- **Incident 2026-06-22** : Force push accidentel vers mauvais repo (TRIX->CTULU)
   - Remote incorrect : `origin = git@github.com:gerivdb/TRIX.git` au lieu de `CTULU.git`
-  - Résolution : Restauration via WAL et récupération des commits perdus
+  - Resolution : Restauration via WAL et recuperation des commits perdus

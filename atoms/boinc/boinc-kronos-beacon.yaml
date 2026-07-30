@@ -10,8 +10,8 @@ atom:
   status: active
   version: "1.0.0"
   description: |
-    Qualifications des signaux émis par le swarm BOINC via KRONOS.
-    Applique le gate phi-CPS, détecte les anomalies, qualifie pour irrigation wavefront.
+    Qualifications des signaux emis par le swarm BOINC via KRONOS.
+    Applique le gate phi-CPS, detecte les anomalies, qualifie pour irrigation wavefront.
   intent_hash: "0xATOM_BOINC_KRONOS_BEACON_20260726"
   layer: L2_COMPOSITION
   governance: BOUNC-ADR-0022
@@ -20,11 +20,11 @@ parameters:
   - name: phi_cps
     type: number
     required: true
-    description: "Score phi-CPS du signal à qualifier"
+    description: "Score phi-CPS du signal a qualifier"
   - name: intent_hash
     type: string
     required: true
-    description: "IntentHash du design source pour traçabilité"
+    description: "IntentHash du design source pour tracabilite"
   - name: source_node
     type: string
     required: true
@@ -38,10 +38,10 @@ parameters:
 returns:
   - name: qualified
     type: boolean
-    description: "True si signal qualifié pour propagation P1"
+    description: "True si signal qualifie pour propagation P1"
   - name: phi_score
     type: number
-    description: "Score phi-CPS final après qualification KRONOS"
+    description: "Score phi-CPS final apres qualification KRONOS"
 
 dependencies:
   - ATOM-KRONOS-ENGINE
@@ -51,7 +51,7 @@ dependencies:
 validation:
   - rule: "qualified == true"
     severity: warning
-    message: "Signal non qualifié par KRONOS - propagation bloquée"
+    message: "Signal non qualifie par KRONOS - propagation bloquee"
 
 references:
   - "design.yaml: ATOM-BOINC-KRONOS-BEACON"

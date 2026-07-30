@@ -1,0 +1,301 @@
+---
+type: TRIADE_COMPONENTS
+version: "1.0.0"
+status: active
+intent_hash: 0xTRIADE_COMPONENTS_20260730
+description: "Composants de la Triade Cognitive L4 : PIANO + SPIDX + LLUX"
+---
+
+triade:
+  name: "Triade Cognitive L4"
+  version: "1.0.0"
+  description: "Orchestration integree PIANO + SPIDX + LLUX pour inference LLM locale"
+  stratum: L4_TOOLS
+  repos:
+    - "L4-TOOLS/PIANO"
+    - "L4-TOOLS/SPIDX"
+    - "L3-CITIZENS/LLUX"
+    - "L4-TOOLS/TRIX"
+  
+  composants:
+    PIANO:
+      role: "Orchestrateur"
+      repo: "L4-TOOLS/PIANO"
+      language: Zig
+      fonctions:
+        - name: "Planification"
+          description: "Planification des taches d'inference"
+        - name: "Scheduling"
+          description: "Ordonnancement ressources (GPU/CPU, memoire)"
+        - name: "Allocation ressources"
+          description: "Gestion allocation dynamique ressources"
+        - name: "Binding LLUX"
+          description: "Client Zig pour LLUX HTTP API"
+          binding: "llux_binding.zig"
+        - name: "Integration SPIDX"
+          description: "Appels SPARQL vers SPIDX"
+      binding_llux:
+        file: "src/llux_binding.zig"
+        functions:
+          - chat: POST /v1/chat/completions
+          - embed: POST /v1/embeddings
+          - health: GET /health
+        circuit_breaker:
+          enabled: true
+          failures: 3
+          timeout: 60s
+        retry:
+          max_attempts: 3
+          delay: 1000ms
+      health_check: "zig build test --test-filter llux"
+      build: "zig build -Dcpu=westmere -Drelease-fast"
+      deploy: "/opt/piano/bin/piano"
+      service: "systemd piano"
+  
+    SPIDX:
+      role: "Indexation Semantique"
+      repo: "L4-TOOLS/SPIDX"
+      language: Zig
+      fonctions:
+        - name: "SPARQL"
+          description: "Moteur de requetes SPARQL"
+        - name: "Knowledge Graph"
+          description: "Graphe de connaissances"
+        - name: "Gamma Index"
+          description: "Index ternaire haute performance"
+        - name: "Embeddings via LLUX"
+          description: "Appels HTTP /v1/embeddings vers LLUX"
+      embedding:
+        source: "LLUX"
+        endpoint: "/v1/embeddings"
+        model: "nomic-embed-v1.5"
+        dimension: 768
+        cache:
+          enabled: true
+          ttl: 3600s
+          max_size: 1000
+      query_engine: "SPARQL + Gamma Index"
+      build: "zig build -Dcpu=westmere -Drelease-fast"
+      deploy: "/opt/spidx/bin/spidx"
+      service: "systemd spidx"
+      tests:
+        - "zig build test --test-filter embedding"
+        - "zig build test --test-filter sparql"
+  
+    LLUX:
+      role: "Inference LLM"
+      repo: "L3-CITIZENS/LLUX"
+      language: Zig
+      fonctions:
+        - name: "HTTP Server OpenAI-compatible"
+          description: "API REST compatible OpenAI"
+          endpoints:
+            - GET /health
+            - POST /v1/chat/completions
+            - POST /v1/embeddings
+        - name: "BPE Tokenizer"
+          description: "Tokenizer BPE compatible llama.cpp"
+          formats: ["GGUF vocab", "tokenizer.json"]
+        - name: "BitNet 1.58b Inference"
+          description: "Inference poids ternaires {-1, 0, 1}"
+          features: ["KV Cache", "LayerNorm", "Top-k/Top-p sampling"]
+        - name: "KV Cache"
+          description: "Cache cle-valeur pour acceleration"
+          max_context: 4096
+      model: "bitnet-1.58b"
+      embedding_model: "nomic-embed-v1.5"
+      embedding_dimension: 768
+      cpu: "westmere"
+      instruction_set: "SSE4.2"
+      build: "zig build -Dcpu=westmere -Drelease-fast"
+      deploy: "/opt/trix/bin/llux"
+      managed_by: "TRIX"
+      port_range: "47000-48000"
+      tokenizer: "/opt/trix/models/tokenizer.json"
+      tests:
+        - "zig build test --test-filter bpe_tokenizer"
+        - "zig build test --test-filter bitnet"
+        - "curl -f http://localhost:47000/health"
+  
+    TRIX:
+      role: "Runtime Orchestrateur"
+      repo: "L4-TOOLS/TRIX"
+      language: Zig
+      fonctions:
+        - name: "LLUX Backend"
+          description: "Gestion cycle de vie LLUX comme backend TRIX"
+        - name: "WAL Logging"
+          description: "Write-Ahead Logging atomique"
+        - name: "Health Checks"
+          description: "Surveillance sante backends"
+        - name: "Dynamic Ports"
+          description: "Allocation ports 47000-48000"
+      llux_backend:
+        binary: "/opt/trix/bin/llux"
+        args: ["--http", "--model", "models/bitnet-1.58b.gguf"]
+        resources:
+          memory: "4GB"
+          disk: "8GB"
+          cpu_cores: 4
+        network:
+          loopback_only: true
+          ports: "47000-48000"
+        isolation:
+          type: "hyperv"  # Windows / cgroups v2 sur Linux
+        wal:
+          enabled: true
+          path: "/var/lib/trix/wal/llux.log"
+        health_check:
+          endpoint: "/health"
+          max_attempts: 30
+          retry_delay: "2s"
+      commands:
+        start: "trix backend start llux"
+        stop: "trix backend stop llux"
+        status: "trix backend status llux"
+        cleanup: "trix backend cleanup llux"
+      tests:
+        - "trix test"
+        - "zig build test"
+  
+  # Flux de donnees internes
+  data_flows:
+    - name: "KiloCode -> LLUX Chat"
+      path: "KiloCode -> GATEWAY-MANAGER -> TRIX -> LLUX"
+      protocol: HTTP
+      details:
+        - "KiloCode POST /mcp/llux/llm/chat"
+        - "GATEWAY-MANAGER route vers backend llux (TRIX)"
+        - "TRIX forward vers LLUX:47000"
+        - "LLUX retourne reponse OpenAI-compatible"
+    
+    - name: "PIANO -> LLUX Chat"
+      path: "PIANO -> LLUX"
+      protocol: HTTP
+      binding: "llux_binding.zig"
+      details:
+        - "PIANO appelle llux_binding.chat()"
+        - "POST /v1/chat/completions direct"
+    
+    - name: "PIANO -> SPIDX Query"
+      path: "PIANO -> SPIDX"
+      protocol: SPARQL
+      details:
+        - "PIANO execute requete SPARQL"
+        - "SPIDX repond avec resultats KG"
+    
+    - name: "SPIDX -> LLUX Embeddings"
+      path: "SPIDX -> LLUX"
+      protocol: HTTP
+      details:
+        - "SPIDX appelle POST /v1/embeddings"
+        - "Modele: nomic-embed-v1.5"
+        - "Cache embeddings (TTL 1h)"
+    
+    - name: "TRIX Health Monitoring"
+      path: "TRIX -> LLUX"
+      protocol: HTTP
+      interval: "30s"
+      endpoint: "/health"
+  
+  # Dependances
+  dependencies:
+    - from: "TRIX"
+      to: "LLUX"
+      type: "runtime"
+      required: true
+    - from: "PIANO"
+      to: "LLUX"
+      type: "binding"
+      required: true
+    - from: "PIANO"
+      to: "SPIDX"
+      type: "query"
+      required: true
+    - from: "SPIDX"
+      to: "LLUX"
+      type: "embeddings"
+      required: true
+    - from: "GATEWAY-MANAGER"
+      to: "TRIX"
+      type: "routing"
+      required: true
+    - from: "GATEWAY-MANAGER"
+      to: "LLUX"
+      type: "fallback"
+      required: false
+  
+  # Metriques partagees
+  shared_metrics:
+    - name: "llux_latency_ms"
+      source: "LLUX"
+      consumers: ["TRIX", "PIANO", "GATEWAY-MANAGER", "RLM-METRICS"]
+    - name: "llux_tokens_per_sec"
+      source: "LLUX"
+      consumers: ["RLM-METRICS"]
+    - name: "spidx_embedding_dim"
+      source: "SPIDX"
+      consumers: ["RLM-METRICS"]
+    - name: "trix_container_status"
+      source: "TRIX"
+      consumers: ["RLM-METRICS", "RLM-INCIDENT"]
+  
+  # Configuration unifiee
+  unified_config:
+    westmere: true
+    release_fast: true
+    port_range: "47000-48000"
+    tokenizer_path: "/opt/trix/models/tokenizer.json"
+    model_path: "models/bitnet-1.58b.gguf"
+    wal_path: "/var/lib/trix/wal"
+    log_path: "/var/log/trix"
+  
+  # Tests d'integration
+  integration_tests:
+    - name: "Triade E2E Chat"
+      command: |
+        curl -f -X POST http://localhost:47000/v1/chat/completions \
+          -H "Content-Type: application/json" \
+          -d '{"messages":[{"role":"user","content":"Hello triade"}],"model":"bitnet-1.58b"}'
+      expected_contains: "choices"
+    
+    - name: "Triade E2E Embeddings"
+      command: |
+        curl -f -X POST http://localhost:47000/v1/embeddings \
+          -H "Content-Type: application/json" \
+          -d '{"input":"test","model":"nomic-embed-v1.5"}'
+      expected_contains: "embedding"
+    
+    - name: "PIANO Binding Test"
+      command: "cd L4-TOOLS/PIANO && zig build test --test-filter llux"
+    
+    - name: "SPIDX Embedding Test"
+      command: "cd L4-TOOLS/SPIDX && zig build test --test-filter embedding"
+    
+    - name: "BPE Tokenizer Test"
+      command: "cd L3-CITIZENS/LLUX && zig build test --test-filter bpe_tokenizer"
+    
+    - name: "GATEWAY Route Test"
+      command: |
+        curl -f -X POST http://localhost:9000/mcp/llux/llm/chat \
+          -H "Content-Type: application/json" \
+          -d '{"messages":[{"role":"user","content":"test"}]}'
+      expected_contains: "choices"
+  
+  # Deploiement
+  deployment:
+    strategy: "blue-green"
+    order:
+      1: "LLUX"
+      2: "TRIX"
+      3: "PIANO"
+      4: "SPIDX"
+    verify_after_each: true
+    rollback_on_failure: true
+  
+  # Fallback
+  fallback:
+    llux_unhealthy: "GATEWAY-MANAGER -> ollama-env2"
+    trix_failed: "TRIX cleanup + restart"
+    piano_failed: "rebuild + restart"
+    spidx_failed: "rebuild embeddings cache + restart"

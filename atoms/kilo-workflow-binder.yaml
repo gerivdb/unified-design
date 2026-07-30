@@ -1,6 +1,6 @@
 ---
 name: kilo-workflow-binder
-description: "Sélecteur de mode Kilo + Gas Station + activation des chemins d'exécution."
+description: "Selecteur de mode Kilo + Gas Station + activation des chemins d'execution."
 parameters:
   modes:
     - architect

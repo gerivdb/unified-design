@@ -1,0 +1,199 @@
+---
+type: GATEWAY_BACKENDS
+version: "1.0.0"
+status: active
+intent_hash: 0xGATEWAY_BACKENDS_20260730
+description: "Configuration complete des backends GATEWAY-MANAGER"
+inherits: [trix-gateway-router, absolute-rules-enforcement]
+---
+
+backends:
+  openrouter-nemotron-free:
+    type: http
+    url: "https://openrouter.ai/api/v1"
+    rate_limit: 32
+    models:
+      - "nemotron-4-340b-free"
+      - "llama-3-70b-free"
+      - "mistral-7b-free"
+    fallback:
+      - google-ai-studio
+      - groq
+    auth:
+      type: bearer
+      env_var: OPENROUTER_API_KEY
+    timeout: 120s
+    retry:
+      max_attempts: 3
+      backoff: exponential
+  
+  groq:
+    type: http
+    url: "https://api.groq.com/openai/v1"
+    rate_limit: 30
+    models:
+      - "llama-3.1-70b-versatile"
+      - "mixtral-8x7b-32768"
+      - "gemma-7b-it"
+    fallback:
+      - openrouter-nemotron-free
+      - google-ai-studio
+    auth:
+      type: bearer
+      env_var: GROQ_API_KEY
+    timeout: 60s
+    retry:
+      max_attempts: 3
+      backoff: exponential
+  
+  google-ai-studio:
+    type: http
+    url: "https://generativelanguage.googleapis.com/v1beta"
+    rate_limit: 60
+    models:
+      - "gemini-1.5-pro"
+      - "gemini-1.5-flash"
+      - "gemini-1.0-pro"
+    fallback:
+      - groq
+      - openrouter-nemotron-free
+    auth:
+      type: bearer
+      env_var: GOOGLE_AI_API_KEY
+    timeout: 120s
+    retry:
+      max_attempts: 3
+      backoff: exponential
+  
+  github-models:
+    type: http
+    url: "https://models.inference.ai.azure.com"
+    rate_limit: 50
+    models:
+      - "gpt-4o"
+      - "gpt-4o-mini"
+      - "codestral-latest"
+    fallback:
+      - groq
+      - google-ai-studio
+    auth:
+      type: bearer
+      env_var: GITHUB_TOKEN
+    timeout: 120s
+    retry:
+      max_attempts: 3
+      backoff: exponential
+  
+  qoder:
+    type: http
+    url: "http://localhost:13377"
+    rate_limit: 0
+    cdp_mode: true
+    token_cost: 0
+    models:
+      - "qoder-default"
+    fallback:
+      - ollama-env2
+    auth:
+      type: none
+    timeout: 180s
+    retry:
+      max_attempts: 2
+      backoff: linear
+  
+  ollama-env2:
+    type: http
+    url: "http://localhost:11434"
+    rate_limit: 0
+    models:
+      - "llama3.1:8b"
+      - "mistral:7b"
+      - "codellama:13b"
+      - "nomic-embed-text"
+    fallback:
+      - openrouter-nemotron-free
+    auth:
+      type: none
+    timeout: 300s
+    retry:
+      max_attempts: 3
+      backoff: exponential
+  
+  llux:
+    type: trix
+    trix_backend: "llux"
+    port_range: [47000, 48000]
+    rate_limit: 0
+    timeout: 300s
+    health_check: "/health"
+    circuit_breaker:
+      failures: 3
+      timeout: 60s
+      half_open_requests: 5
+      health_check_interval: 30s
+    models:
+      - "bitnet-1.58b"
+      - "nomic-embed-v1.5"
+    embedding:
+      enabled: true
+      endpoint: "/v1/embeddings"
+      model: "nomic-embed-v1.5"
+      dimension: 768
+    fallback:
+      - ollama-env2
+      - openrouter-nemotron-free
+    managed_by: "TRIX"
+    deployment: "RLM-DEPLOY"
+    tokenizer: "/opt/trix/models/tokenizer.json"
+
+# Ordre de priorite pour le routage (premier match gagne)
+routing_priority:
+  1: "llux"           # Local first (BDCP, zero cost, zero token)
+  2: "qoder"          # CDP mode, zero token cost
+  3: "ollama-env2"    # Local, zero token cost
+  4: "groq"           # Fast, generous free tier
+  5: "google-ai-studio" # Good quality, free tier
+  6: "github-models"  # Good for code
+  7: "openrouter-nemotron-free"  # Last resort
+
+# Configuration globale
+global_config:
+  default_backend: "llux"
+  fallback_chain:
+    - "llux"
+    - "ollama-env2"
+    - "qoder"
+    - "groq"
+    - "google-ai-studio"
+    - "github-models"
+    - "openrouter-nemotron-free"
+  health_check_interval: 30s
+  circuit_breaker_defaults:
+    failures: 3
+    timeout: 60s
+    half_open_requests: 5
+  rate_limit_pooling: true
+  auth_unified: true
+  retry_policy: exponential_backoff
+  max_retries: 3
+  request_timeout: 300s
+  streaming: true
+  load_balancing: "round_robin"  # par backend
+
+# Endpoints d'administration
+admin_endpoints:
+  - path: "/admin/backends"
+    method: GET
+    description: "Liste tous les backends et leur sante"
+  - path: "/admin/reload"
+    method: POST
+    description: "Recharge la configuration"
+  - path: "/admin/backends/{name}/disable"
+    method: POST
+    description: "Desactive un backend"
+  - path: "/admin/backends/{name}/enable"
+    method: POST
+    description: "Active un backend"
+  - path: "/admin/backends/{name}/health"
+    method: GET
+    description: "Force health check d'un backend"

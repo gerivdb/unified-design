@@ -8,18 +8,18 @@ inherits: []
 
 # Power Capped Atom
 
-Capacité de design imposant une limite de consommation de puissance.
+Capacite de design imposant une limite de consommation de puissance.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| `max_power_w` | int | `150` | Puissance maximale autorisée (W) |
+| `max_power_w` | int | `150` | Puissance maximale autorisee (W) |
 
 ## Invariants
 
-- Toute inférence ou opération matérielle doit respecter `max_power_w`.
-- En cas de dépassement, le design doit inclure un mécanisme de régulation (ex:Dynamic Voltage Scaling, throttling).
+- Toute inference ou operation materielle doit respecter `max_power_w`.
+- En cas de depassement, le design doit inclure un mecanisme de regulation (ex:Dynamic Voltage Scaling, throttling).
 
 ## Exemple d'usage
 
@@ -30,7 +30,7 @@ capabilities:
       max_power_w: 12
 ```
 
-## Références
+## References
 
 - ADR-015-unified-design-v2
 - Pilier CD (Connard Design)

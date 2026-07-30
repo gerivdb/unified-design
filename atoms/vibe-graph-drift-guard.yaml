@@ -1,6 +1,6 @@
 ---
 name: vibe-graph-drift-guard
-description: "Guard de dérives sur graphe vibe : détecte divergences sémantiques et signale."
+description: "Guard de derives sur graphe vibe : detecte divergences semantiques et signale."
 parameters:
   graph_type: vibe
   drift_detection: semantic

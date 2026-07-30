@@ -1,6 +1,6 @@
 ---
 name: kilo-mayor-context-pump
-description: "Pompe contextuelle pour sessions Kilo : injecte le contexte minimal nécessaire avant démarrage."
+description: "Pompe contextuelle pour sessions Kilo : injecte le contexte minimal necessaire avant demarrage."
 parameters:
   output: context.yaml
   max_size_kb: 5

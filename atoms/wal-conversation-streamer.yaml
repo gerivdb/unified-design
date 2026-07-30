@@ -1,6 +1,6 @@
 ---
 name: wal-conversation-streamer
-description: "Streaming temps réel des conversations Kilo vers WAL + WAZAA-BUS."
+description: "Streaming temps reel des conversations Kilo vers WAL + WAZAA-BUS."
 parameters:
   stream_targets:
     - WAL

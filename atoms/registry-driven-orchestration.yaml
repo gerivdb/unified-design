@@ -1,6 +1,6 @@
 ---
 name: registry-driven-orchestration
-description: "Orchestration par registre : tableau de hashtables définit les cibles, boucle unique applique l'opération à chaque cible."
+description: "Orchestration par registre : tableau de hashtables definit les cibles, boucle unique applique l'operation a chaque cible."
 parameters:
   registry_structure:
     - name: string
@@ -19,14 +19,14 @@ inherits: [srp]
 
 # Registry-Driven Orchestration Atom
 
-Pattern d'orchestration d'opérations sur N cibles via un registre central.
+Pattern d'orchestration d'operations sur N cibles via un registre central.
 
-## Rôle
+## Role
 
-Éviter la duplication de code pour les opérations répétées sur plusieurs dépôts :
-- Définir les cibles dans un tableau de hashtables
-- Boucler sur le registre pour appliquer l'opération
-- Gérer les erreurs par cible sans arrêter tout le pipeline
+Éviter la duplication de code pour les operations repetees sur plusieurs depots :
+- Definir les cibles dans un tableau de hashtables
+- Boucler sur le registre pour appliquer l'operation
+- Gerer les erreurs par cible sans arreter tout le pipeline
 
 ## Structure canonique
 
@@ -50,21 +50,21 @@ foreach ($repo in $Repos) {
 
 ## Invariants
 
-- Chaque entrée du registre DOIT avoir : `n` (name), `p` (path), `b` (branch), `s` (stratum)
-- Le registre DOIT être triable par strate ou priorité
-- Les erreurs DOIVENT être isolées par cible
+- Chaque entree du registre DOIT avoir : `n` (name), `p` (path), `b` (branch), `s` (stratum)
+- Le registre DOIT etre triable par strate ou priorite
+- Les erreurs DOIVENT etre isolees par cible
 - Le script DOIT supporter un mode `-Quiet` pour filtering
 
 ## Exemples
 
-| Script | Opérations | Nb repos |
+| Script | Operations | Nb repos |
 |--------|-----------|----------|
 | `ecos-sync-audit.ps1` | pull/push/status | 47 |
 | `ecos-health.ps1` | health-check | 47 |
 | `ecos-registry.ps1` | registry listing | 47 |
 | `ecos-classify.ps1` | classification | 47 |
 
-## Références
+## References
 
 - `C:\DevTools\scripts\ecos-sync-audit.ps1`
 - `C:\DevTools\bin\ecos.ps1`

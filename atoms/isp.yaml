@@ -1,37 +1,37 @@
 ---
 name: isp
-description: "Interface Segregation Principle — les clients ne doivent pas être forcés à dépendre d'interfaces qu'ils n'utilisent pas."
+description: "Interface Segregation Principle - les clients ne doivent pas etre forces a dependre d'interfaces qu'ils n'utilisent pas."
 parameters:
   client_specific_interfaces: true
   fat_interface_detection: true
   interface_split_threshold: 2
 constraints:
-  - "Interfaces fines et spécifiques aux clients"
+  - "Interfaces fines et specifiques aux clients"
   - "Pas d'interfaces 'gourmandes'"
-  - "Séparation des responsabilités"
+  - "Separation des responsabilites"
 inherits: [design-principle]
 ---
 
 # Atom : ISP (Interface Segregation Principle)
 
 ## Contexte
-Principe SOLID : créez des interfaces spécifiques aux clients plutôt qu'attendus par tous.
+Principe SOLID : creez des interfaces specifiques aux clients plutot qu'attendus par tous.
 
 ## Application dans MDU
-- **Interfaces CLI** : Chaque outil a son interface spécifique
-- **API citizens** : Chaque citizen expose seulement les méthodes nécessaires
-- **Atomes** : Chaque atome a une interface cohérente avec son rôle
+- **Interfaces CLI** : Chaque outil a son interface specifique
+- **API citizens** : Chaque citizen expose seulement les methodes necessaires
+- **Atomes** : Chaque atome a une interface coherente avec son role
 
-## Détection des interfaces "gourmandes"
+## Detection des interfaces "gourmandes"
 ```bash
-# Détecter les interfaces fat
+# Detecter les interfaces fat
 ctulu detect-fat-interface --module src/wazaa_bus_citizens/
 ```
 
 ## Principes
-1. **Interface client spécifique** : Créez des interfaces pour chaque type de client
-2. **Pas de force-dependency** : Les clients ne dépendent que des méthodes qu'ils utilisent
-3. **Séparation des responsabilités** : Chaque interface a un domaine fonctionnel
+1. **Interface client specifique** : Creez des interfaces pour chaque type de client
+2. **Pas de force-dependency** : Les clients ne dependent que des methodes qu'ils utilisent
+3. **Separation des responsabilites** : Chaque interface a un domaine fonctionnel
 
 ## Exemple
 ```yaml

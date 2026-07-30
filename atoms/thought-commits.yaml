@@ -1,6 +1,6 @@
 ---
 name: thought-commits
-description: "Thought-commits KEEL : sérialisation DAG causal en commits Git avec traçabilité."
+description: "Thought-commits KEEL : serialisation DAG causal en commits Git avec tracabilite."
 parameters:
   serialization: DAG_to_commit
   traceability: full

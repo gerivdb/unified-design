@@ -1,0 +1,308 @@
+---
+type: TRIADE_DATA_FLOW
+version: "1.0.0"
+status: active
+intent_hash: 0xTRIADE_DATA_FLOW_20260730
+description: "Flux de donnees dans la Triade Cognitive L4"
+---
+
+data_flow:
+  # Flux principal : KiloCode -> GATEWAY -> TRIX -> LLUX
+  primary_chat_flow:
+    - step: 1
+      source: "KiloCode"
+      target: "GATEWAY-MANAGER"
+      protocol: HTTP
+      method: POST
+      endpoint: "/mcp/llux/llm/chat"
+      headers:
+        - "Content-Type: application/json"
+      payload:
+        messages:
+          - role: "user"
+            content: "Hello"
+      description: "Requete utilisateur via Gateway unifie"
+    
+    - step: 2
+      source: "GATEWAY-MANAGER"
+      target: "TRIX"
+      protocol: HTTP
+      method: POST
+      backend: "llux"
+      description: "Routage vers backend LLUX via TRIX"
+      circuit_breaker:
+        failures: 3
+        timeout: 60s
+        half_open: 5
+    
+    - step: 3
+      source: "TRIX"
+      target: "LLUX"
+      protocol: HTTP
+      method: POST
+      port_range: "47000-48000"
+      endpoint: "/v1/chat/completions"
+      description: "Execution inference BitNet 1.58b"
+      health_check: "GET /health (30s interval)"
+    
+    - step: 4
+      source: "LLUX"
+      target: "TRIX"
+      protocol: HTTP
+      response:
+        choices:
+          - message:
+              role: "assistant"
+              content: "Hello! How can I help?"
+        usage:
+          total_tokens: 42
+      description: "Reponse OpenAI-compatible"
+    
+    - step: 5
+      source: "TRIX"
+      target: "GATEWAY-MANAGER"
+      protocol: HTTP
+      response: "Passthrough LLUX response"
+      description: "Retour via Gateway"
+    
+    - step: 6
+      source: "GATEWAY-MANAGER"
+      target: "KiloCode"
+      protocol: HTTP
+      response: "Reponse formatee"
+      description: "Retour au client"
+
+  # Flux embeddings : SPIDX -> LLUX
+  embedding_flow:
+    - step: 1
+      source: "SPIDX"
+      target: "LLUX"
+      protocol: HTTP
+      method: POST
+      endpoint: "/v1/embeddings"
+      payload:
+        input: "texte a indexer"
+        model: "nomic-embed-v1.5"
+      description: "Demande d'embedding pour indexation"
+    
+    - step: 2
+      source: "LLUX"
+      target: "SPIDX"
+      protocol: HTTP
+      response:
+        data:
+          - embedding:
+              - 0.1
+              - 0.2
+              - "..."
+              - 0.768
+      description: "Vecteur 768 dimensions"
+    
+    - step: 3
+      source: "SPIDX"
+      target: "KG-SPIDX"
+      protocol: internal
+      operation: "index_document"
+      description: "Indexation dans Knowledge Graph"
+    
+    - step: 4
+      source: "SPIDX"
+      target: "Gamma Index"
+      protocol: internal
+      operation: "gamma_insert"
+      description: "Insertion dans index Gamma"
+
+  # Flux SPARQL : PIANO <-> SPIDX
+  sparql_flow:
+    - step: 1
+      source: "PIANO"
+      target: "SPIDX"
+      protocol: SPARQL
+      operation: "SELECT / CONSTRUCT / ASK"
+      description: "Requete semantique depuis orchestrateur"
+    
+    - step: 2
+      source: "SPIDX"
+      target: "KG-SPIDX"
+      protocol: internal
+      operation: "sparql_query"
+      description: "Execution sur Knowledge Graph"
+    
+    - step: 3
+      source: "SPIDX"
+      target: "PIANO"
+      protocol: SPARQL
+      response: "ResultSet / Graph"
+      description: "Resultats de la requete"
+
+  # Flux orchestration : PIANO -> LLUX + SPIDX
+  orchestration_flow:
+    - step: 1
+      source: "PIANO"
+      target: "LLUX"
+      protocol: HTTP
+      binding: "llux_binding.zig"
+      operation: "chat_completion"
+      description: "Inference LLM via binding"
+      circuit_breaker: true
+      retry: 3
+    
+    - step: 2
+      source: "PIANO"
+      target: "SPIDX"
+      protocol: SPARQL
+      operation: "semantic_query"
+      description: "Enrichissement contexte via KG"
+    
+    - step: 3
+      source: "PIANO"
+      target: "TRIX"
+      protocol: CLI
+      operation: "backend_management"
+      description: "Gestion cycle de vie LLUX"
+
+  # Flux health checks
+  health_flows:
+    - name: "LLUX Health"
+      path: "GATEWAY-MANAGER -> TRIX -> LLUX -> /health"
+      interval: 30s
+      expected: '{"status":"healthy"}'
+      on_failure: "circuit_breaker_open -> fallback"
+    
+    - name: "PIANO Health"
+      path: "PIANO -> zig build test --test-filter llux"
+      interval: 60s
+      on_failure: "alert + restart"
+    
+    - name: "SPIDX Health"
+      path: "SPIDX -> zig build test --test-filter embedding"
+      interval: 60s
+      on_failure: "alert + restart"
+    
+    - name: "TRIX Backend Status"
+      path: "TRIX -> backend status llux"
+      interval: 15s
+      on_failure: "cleanup + restart"
+
+  # Flux deploiement
+  deployment_flow:
+    - step: 1
+      source: "RLM-DEPLOY"
+      target: "TRIX"
+      operation: "deploy_binary"
+      files:
+        - "/opt/trix/bin/llux"
+        - "/usr/local/bin/trix"
+        - "/opt/piano/bin/piano"
+        - "/opt/spidx/bin/spidx"
+      backup: true
+      strategy: "blue-green"
+    
+    - step: 2
+      source: "RLM-DEPLOY"
+      target: "LLUX"
+      operation: "deploy_tokenizer"
+      file: "/opt/trix/models/tokenizer.json"
+    
+    - step: 3
+      source: "RLM-DEPLOY"
+      target: "TRIX"
+      operation: "start_backend"
+      command: "trix backend start llux"
+    
+    - step: 4
+      source: "RLM-DEPLOY"
+      target: "ALL"
+      operation: "verify_health"
+      checks:
+        - "curl -f http://localhost:47000/health"
+        - "curl -f POST /v1/chat/completions"
+        - "curl -f POST /v1/embeddings"
+        - "curl -f POST /mcp/llux/llm/chat"
+      on_failure: "rollback_all"
+
+  # Flux metriques
+  metrics_flow:
+    - source: "LLUX"
+      target: "RLM-METRICS"
+      metrics:
+        - llux_latency_ms
+        - llux_tokens_per_sec
+        - llux_memory_mb
+        - llux_kv_cache_hit_rate
+        - llux_request_rate
+        - llux_error_rate
+      interval: "10s"
+      protocol: "prometheus / HTTP scrape"
+    
+    - source: "SPIDX"
+      target: "RLM-METRICS"
+      metrics:
+        - spidx_embedding_dim
+        - spidx_query_latency_ms
+        - spidx_index_size
+      interval: "30s"
+    
+    - source: "TRIX"
+      target: "RLM-METRICS"
+      metrics:
+        - trix_container_status
+        - trix_wal_size
+        - trix_port_allocations
+      interval: "30s"
+
+  # Flux incident / fallback
+  incident_flows:
+    - name: "LLUX Unhealthy"
+      trigger: "health_check != healthy"
+      flow:
+        - "trix backend status llux"
+        - "tail -f /var/log/trix/llux-*.log"
+        - "trix backend stop llux"
+        - "trix backend start llux"
+        - "curl http://localhost:47000/health"
+      fallback: "kubectl set env deployment/gateway-manager DEFAULT_BACKEND=ollama-env2"
+    
+    - name: "TRIX Container Failed"
+      trigger: "trix backend status llux == failed"
+      flow:
+        - "cat /var/lib/trix/wal/llux.log"
+        - "trix backend cleanup llux"
+        - "trix backend start llux"
+    
+    - name: "GATEWAY-MANAGER Router Down"
+      trigger: "/mcp/llux/llm/chat timeout / 503"
+      flow:
+        - "systemctl restart gateway-manager"
+        - "curl -X POST http://localhost:9000/admin/reload"
+        - "curl http://localhost:9000/admin/backends"
+      fallback: "Direct LLUX: curl -X POST http://localhost:47000/v1/chat/completions"
+    
+    - name: "PIANO Orchestration Failed"
+      trigger: "PIANO test failure"
+      flow:
+        - "cd L4-TOOLS/PIANO && zig build test --test-filter llux"
+        - "zig build -Dcpu=westmere -Drelease-fast"
+        - "systemctl restart piano"
+    
+    - name: "SPIDX Embeddings Failed"
+      trigger: "embedding test failure"
+      flow:
+        - "zig build test --test-filter bpe_tokenizer"
+        - "cp models/tokenizer.json /opt/trix/models/"
+        - "trix backend restart llux"
+
+  # Rollback complet
+  rollback_flow:
+    command: |
+      trix backend stop llux
+      cp /opt/trix/bin/llux.backup /opt/trix/bin/llux
+      cp /opt/piano/bin/piano.backup /opt/piano/bin/piano
+      cp /opt/spidx/bin/spidx.backup /opt/spidx/bin/spidx
+      trix backend start llux
+      curl http://localhost:47000/health
+    triggers:
+      - "Deployment verification failed"
+      - "Critical error rate > 10%"
+      - "Manual operator request"
+    timeout: 120s

@@ -1,0 +1,204 @@
+---
+type: CIRCUIT_BREAKER_CONFIG
+version: "1.0.0"
+status: active
+intent_hash: 0xCIRCUIT_BREAKER_20260730
+description: "Configuration Circuit Breaker pour GATEWAY-MANAGER (etend trix-gateway-router.yaml)"
+---
+
+circuit_breaker:
+  # Configuration par defaut (herite de trix-gateway-router.yaml)
+  defaults:
+    failure_threshold: 3
+    timeout: 60s
+    half_open_requests: 5
+    health_check_interval: 30s
+    health_check_timeout: 5s
+    success_threshold: 2  # succes requis en half-open pour fermer
+  
+  # Configuration specifique par backend
+  per_backend:
+    llux:
+      failure_threshold: 3
+      timeout: 60s
+      half_open_requests: 5
+      health_check:
+        endpoint: "/health"
+        interval: 30s
+        timeout: 5s
+        expected_status: 200
+        expected_body: '{"status":"healthy"}'
+      on_open:
+        - "log: circuit_breaker_open for llux"
+        - "alert: #infra-alerts"
+        - "fallback: activate ollama-env2"
+      on_half_open:
+        - "log: circuit_breaker_half_open for llux"
+        - "test: send probe request to /health"
+      on_close:
+        - "log: circuit_breaker_closed for llux"
+        - "alert: resolved"
+    
+    ollama-env2:
+      failure_threshold: 5
+      timeout: 30s
+      half_open_requests: 3
+      health_check:
+        endpoint: "/api/tags"
+        interval: 60s
+        timeout: 10s
+        expected_status: 200
+      on_open:
+        - "log: circuit_breaker_open for ollama-env2"
+        - "fallback: activate groq"
+    
+    groq:
+      failure_threshold: 3
+      timeout: 60s
+      half_open_requests: 3
+      health_check:
+        endpoint: "/models"
+        interval: 60s
+        timeout: 10s
+        expected_status: 200
+      on_open:
+        - "log: circuit_breaker_open for groq"
+        - "fallback: activate google-ai-studio"
+    
+    google-ai-studio:
+      failure_threshold: 3
+      timeout: 60s
+      half_open_requests: 3
+      health_check:
+        endpoint: "/models"
+        interval: 60s
+        timeout: 10s
+        expected_status: 200
+      on_open:
+        - "log: circuit_breaker_open for google-ai-studio"
+        - "fallback: activate github-models"
+    
+    github-models:
+      failure_threshold: 3
+      timeout: 60s
+      half_open_requests: 3
+      health_check:
+        endpoint: "/models"
+        interval: 60s
+        timeout: 10s
+        expected_status: 200
+      on_open:
+        - "log: circuit_breaker_open for github-models"
+        - "fallback: activate openrouter-nemotron-free"
+    
+    openrouter-nemotron-free:
+      failure_threshold: 5
+      timeout: 120s
+      half_open_requests: 2
+      health_check:
+        endpoint: "/models"
+        interval: 120s
+        timeout: 15s
+        expected_status: 200
+      on_open:
+        - "log: circuit_breaker_open for openrouter-nemotron-free"
+        - "alert: ALL BACKENDS DOWN - critical"
+        - "fallback: return 503 to client"
+    
+    qoder:
+      failure_threshold: 3
+      timeout: 30s
+      half_open_requests: 3
+      health_check:
+        endpoint: "/health"
+        interval: 30s
+        timeout: 5s
+        expected_status: 200
+      on_open:
+        - "log: circuit_breaker_open for qoder"
+        - "fallback: activate ollama-env2"
+
+  # États du circuit breaker
+  states:
+    CLOSED:
+      description: "Normal operation - requests pass through"
+      transitions:
+        - condition: "failure_threshold reached"
+          to: "OPEN"
+          action: "increment failure_count, start timeout timer"
+    
+    OPEN:
+      description: "Failing - requests blocked, fallback activated"
+      transitions:
+        - condition: "timeout elapsed"
+          to: "HALF_OPEN"
+          action: "allow probe requests"
+        - condition: "manual reset"
+          to: "CLOSED"
+          action: "reset failure_count"
+    
+    HALF_OPEN:
+      description: "Testing recovery - limited requests allowed"
+      transitions:
+        - condition: "success_threshold reached"
+          to: "CLOSED"
+          action: "reset failure_count, log recovery"
+        - condition: "any failure"
+          to: "OPEN"
+          action: "restart timeout timer, log failure"
+
+  # Metriques collectees
+  metrics:
+    - name: "circuit_breaker_state"
+      type: gauge
+      labels: ["backend", "state"]
+      description: "Current state (0=CLOSED, 1=OPEN, 2=HALF_OPEN)"
+    
+    - name: "circuit_breaker_failures_total"
+      type: counter
+      labels: ["backend"]
+      description: "Total failures since last close"
+    
+    - name: "circuit_breaker_successes_total"
+      type: counter
+      labels: ["backend"]
+      description: "Total successes in half-open"
+    
+    - name: "circuit_breaker_transitions_total"
+      type: counter
+      labels: ["backend", "from_state", "to_state"]
+      description: "State transitions"
+    
+    - name: "circuit_breaker_fallback_activations_total"
+      type: counter
+      labels: ["backend", "fallback_backend"]
+      description: "Fallback activations"
+
+  # Actions automatiques
+  auto_actions:
+    - trigger: "circuit_breaker_open"
+      backend: "llux"
+      actions:
+        - "trix backend stop llux"
+        - "trix backend start llux"
+        - "wait 10s"
+        - "health_check /health"
+      max_attempts: 2
+      cooldown: 60s
+    
+    - trigger: "circuit_breaker_open"
+      backend: "ollama-env2"
+      actions:
+        - "systemctl restart ollama"
+        - "wait 15s"
+        - "health_check /api/tags"
+      max_attempts: 1
+      cooldown: 60s
+
+  # Integration avec trix-gateway-router.yaml
+  inherits_from: "trix-gateway-router.yaml"
+  extends:
+    - rate_limit_pooling: true
+    - auth_unified: true
+    - retry_policy: exponential_backoff
+    - max_retries: 3

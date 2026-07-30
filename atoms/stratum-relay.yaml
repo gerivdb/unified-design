@@ -1,6 +1,6 @@
 ---
 name: stratum-relay
-description: "Règles locales de strate, lifecycle, dépendances et auto-conformité par repo."
+description: "Regles locales de strate, lifecycle, dependances et auto-conformite par repo."
 parameters:
   relay_version: 5
   lifecycle: ACTIVE

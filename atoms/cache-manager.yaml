@@ -1,6 +1,6 @@
 ---
 name: cache-manager
-description: "Gestionnaire de cache multi-niveaux : LRU, TTL, namespaces, stats, invalidation prédictive."
+description: "Gestionnaire de cache multi-niveaux : LRU, TTL, namespaces, stats, invalidation predictive."
 parameters:
   modes:
     - get
@@ -20,16 +20,16 @@ inherits: [kiss, dip]
 
 # Cache Manager Atom
 
-Pattern de cache multi-niveaux avec éviction intelligente.
+Pattern de cache multi-niveaux avec eviction intelligente.
 
-## Rôle
+## Role
 
-Accélérer les accrés répétés dans l'écosystème :
-- **LRU** :Least Recently Used pour mémoire bornée
-- **TTL** : Time-To-Live pour données volatiles
+Accelerer les accres repetes dans l'ecosysteme :
+- **LRU** :Least Recently Used pour memoire bornee
+- **TTL** : Time-To-Live pour donnees volatiles
 - **Namespaces** : isolation par contexte (repo, couche, citizen)
 - **Stats** : hit_rate, miss_rate, evictions
-- **Predictive** : préchargement basé sur patterns d'accès
+- **Predictive** : prechargement base sur patterns d'acces
 
 ## Structure canonique
 
@@ -55,10 +55,10 @@ class CacheManager:
 
 ## Invariants
 
-- Les keys DOIVENT être namespacées (`repo:file:path`)
-- Le TTL DOIT être supporté par entrée
-- Les stats DOIVENT être exposées via métriques
-- L'éviction DOIT être déterministe (LRU ou TTL, pas aléatoire)
+- Les keys DOIVENT etre namespacees (`repo:file:path`)
+- Le TTL DOIT etre supporte par entree
+- Les stats DOIVENT etre exposees via metriques
+- L'eviction DOIT etre deterministe (LRU ou TTL, pas aleatoire)
 
 ## Scripts existants
 
@@ -69,7 +69,7 @@ class CacheManager:
 | `env4-predictive-cache.ps1` | PowerShell | `C:\DevTools\bin\` |
 | `env4-cache-l0.ps1` | PowerShell | `C:\DevTools\bin\` |
 
-## Références
+## References
 
 - `C:\DevTools\cache-optimization-manager.py`
 - `C:\DevTools\bin\env4-predictive-cache.ps1`

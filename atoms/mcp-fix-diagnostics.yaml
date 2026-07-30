@@ -1,6 +1,6 @@
 ---
 name: mcp-fix-diagnostics
-description: "Diagnostic et réparation automatique des connexions MCP : vérification, redémarrage, logging, watchdog."
+description: "Diagnostic et reparation automatique des connexions MCP : verification, redemarrage, logging, watchdog."
 parameters:
   modes:
     - verify
@@ -19,13 +19,13 @@ inherits: [proactive-friction-sensor, registry-consistency-sentinel]
 
 # MCP Fix Diagnostics Atom
 
-Pattern de diagnostic et réparation automatique des serveurs MCP.
+Pattern de diagnostic et reparation automatique des serveurs MCP.
 
-## Rôle
+## Role
 
-Maintenir la connectivité MCP opérationnelle :
-- Vérifier la disponibilité de chaque serveur MCP
-- Redémarrer les serveurs en échec
+Maintenir la connectivite MCP operationnelle :
+- Verifier la disponibilite de chaque serveur MCP
+- Redemarrer les serveurs en echec
 - Logger les interventions pour audit
 - Watchdog automatique avec seuil de panne
 
@@ -46,9 +46,9 @@ foreach ($server in $servers) {
 
 ## Invariants
 
-- Toute intervention DOIT être loggée avec timestamp et action
-- Le redémarrage DOIT être limité à N tentatives avant escalade
-- Le mode `-Fix` DOIT être explicite (pas de auto-fix silencieux)
+- Toute intervention DOIT etre loggee avec timestamp et action
+- Le redemarrage DOIT etre limite a N tentatives avant escalade
+- Le mode `-Fix` DOIT etre explicite (pas de auto-fix silencieux)
 - Le status DOIT inclure : uptime, last_error, restart_count
 
 ## Scripts existants
@@ -60,7 +60,7 @@ foreach ($server in $servers) {
 | `Deploy-MCPFix.ps1` | deploy | `C:\DevTools\` |
 | `Monitor-MCPHealth.ps1` | monitor | `C:\DevTools\` |
 
-## Références
+## References
 
 - `C:\DevTools\SCRIPTS\verify-mcp-access.ps1`
 - `C:\DevTools\Fix-MCPConnection.ps1`

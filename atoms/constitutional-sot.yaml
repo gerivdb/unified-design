@@ -1,28 +1,28 @@
 ---
 name: constitutional-sot
-description: "Source de vérité constitutionnelle définissant des règles immuables, une hiérarchie de documents et un mécanisme de boot."
+description: "Source de verite constitutionnelle definissant des regles immuables, une hierarchie de documents et un mecanisme de boot."
 inherits: []
 ---
 
 # Constitutional SOT Atom
 
-Pattern d'une source de vérité constitutionnelle (ex: GOVERNANCE-HUB).
+Pattern d'une source de verite constitutionnelle (ex: GOVERNANCE-HUB).
 
-## Rôle
+## Role
 
-Définit les règles immuables de l'écosystème, maintient une hiérarchie de documents et expose un mécanisme de boot canonique.
+Definit les regles immuables de l'ecosysteme, maintient une hierarchie de documents et expose un mecanisme de boot canonique.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| `boot_gates` | list | `[]` | Séquence ordonnée des gates de boot (ex: GATE-0 → GATE-1b.9) |
+| `boot_gates` | list | `[]` | Sequence ordonnee des gates de boot (ex: GATE-0 -> GATE-1b.9) |
 | `required_files` | list | `[]` | Fichiers constitutionnels obligatoires (ex: AGENT_RAM.yaml, known_repositories.yaml) |
 
 ## Invariants
 
-- Aucune action sur L3+ ne peut être entreprise sans L0 chargé.
-- Les données non validées sont taggées `[DERIVE]` ou `[HYPOTHESE_NON_CONFIRMEE]`.
+- Aucune action sur L3+ ne peut etre entreprise sans L0 charge.
+- Les donnees non validees sont taggees `[DERIVE]` ou `[HYPOTHESE_NON_CONFIRMEE]`.
 - Le boot sequence est obligatoire avant toute session multi-repo.
 
 ## Exemple d'usage
@@ -32,7 +32,7 @@ inherits:
   - constitutional-sot
 ```
 
-## Références
+## References
 
 - GOVERNANCE-HUB (L0-CANON)
 - ADR-015-unified-design-v2

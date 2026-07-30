@@ -1,6 +1,6 @@
 ---
 name: dependency-graph-cache
-description: "Cache pour le graphe de dépendances entre designs, atomes et personae."
+description: "Cache pour le graphe de dependances entre designs, atomes et personae."
 parameters:
   cache_ttl: 3600
   invalidation: on_change

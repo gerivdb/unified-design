@@ -1,27 +1,27 @@
 ---
 name: closed-loop-goal
-description: "Une loop possède un goal fermé (CLOSED) avec stamps de complétion"
+description: "Une loop possede un goal ferme (CLOSED) avec stamps de completion"
 inherits: []
 ---
 
 # Closed Loop Goal Atom
 
-Capacité de design pour les loops à goal fermé.
+Capacite de design pour les loops a goal ferme.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
 | `goal` | string | `null` | Goal textuel de la loop |
 | `require_completion_stamps` | bool | `true` | Exiger `completedAt` avant fermeture |
 
 ## Invariants
 
-- `goal == null` ⇒ loop ouverte (OPEN).
-- `goal != null` ⇒ loop fermée (CLOSED), exécution pilotée par le goal.
-- Suppression du goal ⇒ suppression automatique des stamps de complétion.
+- `goal == null` => loop ouverte (OPEN).
+- `goal != null` => loop fermee (CLOSED), execution pilotee par le goal.
+- Suppression du goal => suppression automatique des stamps de completion.
 
-## Références
+## References
 
 - ADR-016-loop-engine
 - loopany-platform: loop lifecycle

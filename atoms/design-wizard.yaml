@@ -1,6 +1,6 @@
 ---
 name: design-wizard
-description: "Assistant de création de design : guide l'utilisateur à travers choix d'âme, héritage d'atomes, paramètres."
+description: "Assistant de creation de design : guide l'utilisateur a travers choix d'ame, heritage d'atomes, parametres."
 parameters:
   steps:
     - choose_soul

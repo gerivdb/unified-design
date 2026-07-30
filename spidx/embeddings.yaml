@@ -1,0 +1,205 @@
+---
+type: SPIDX_EMBEDDINGS
+version: "1.0.0"
+status: active
+intent_hash: 0xSPIDX_EMBEDDINGS_20260730
+description: "Configuration embeddings SPIDX via LLUX - Indexation semantique + Knowledge Graph"
+inherits: [cognitive-bus, cognitive-sot, absolute-rules-enforcement]
+---
+
+embeddings:
+  description: "Configuration de generation et indexation d'embeddings pour SPIDX"
+  source: "LLUX"
+  
+  llux:
+    enabled: true
+    endpoint: "/v1/embeddings"
+    base_url: "http://localhost:47000"
+    model: "nomic-embed-v1.5"
+    dimension: 768
+    max_batch_size: 32
+    timeout: 60s
+    retry:
+      max_attempts: 3
+      delay: 1000ms
+    circuit_breaker:
+      enabled: true
+      failures: 3
+      timeout: 60s
+  
+  # Cache embeddings
+  cache:
+    enabled: true
+    backend: "memory"  # ou redis
+    ttl: 3600s
+    max_size: 1000
+    eviction: "lru"
+    key_prefix: "spidx:emb:"
+    warming:
+      enabled: false
+      schedule: "0 3 * * *"  # quotidien a 3h
+  
+  # Formats supportes
+  formats:
+    input:
+      - string
+      - array[string]
+    output:
+      - float
+      - base64
+    encoding: "float"
+  
+  # Pipeline d'indexation
+  indexing_pipeline:
+    steps:
+      - name: "preprocess"
+        description: "Nettoyage et normalisation texte"
+        operations:
+          - "trim_whitespace"
+          - "normalize_unicode"
+          - "truncate_max_tokens: 8192"
+      - name: "embed"
+        description: "Generation vecteur via LLUX"
+        batch_size: 32
+        parallel: true
+        max_workers: 4
+      - name: "validate"
+        description: "Validation dimension et qualite"
+        checks:
+          - "dimension == 768"
+          - "no_nan_values"
+          - "norm > 0"
+      - name: "store"
+        description: "Stockage dans index"
+        targets:
+          - "kg-spidx"      # Knowledge Graph
+          - "gamma_index"   # Index Gamma ternaire
+          - "vector_store"  # Stockage vecteur brut
+  
+  # Knowledge Graph SPIDX
+  kg_spidx:
+    enabled: true
+    repo: "L4-TOOLS/KG-SPIDX"
+    language: Zig
+    sparql_endpoint: "http://localhost:48001/sparql"
+    graph_name: "spidx_kg"
+    namespaces:
+      - "spidx: <http://spidx.org/ontology#>"
+      - "rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
+      - "rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
+      - "owl: <http://www.w3.org/2002/07/owl#>"
+    indexing:
+      entity_embedding: true
+      relation_embedding: false
+      literal_embedding: true
+    query:
+      timeout: 30s
+      max_results: 1000
+      explain: false
+  
+  # Gamma Index (index ternaire haute performance)
+  gamma_index:
+    enabled: true
+    repo: "L4-TOOLS/SPIDX-gamma"
+    language: Zig
+    base: 243  # 3^5
+    dimensions: 768
+    quantization: "ternary"  # -1, 0, 1
+    hnsw:
+      enabled: true
+      M: 16
+      ef_construction: 200
+      ef_search: 100
+    distance: "cosine"
+    batch_insert: true
+    batch_size: 100
+  
+  # Vector Store (stockage brut)
+  vector_store:
+    enabled: true
+    path: "/var/lib/spidx/vectors"
+    format: "fvecs"  # float32 vectors
+    metadata_path: "/var/lib/spidx/metadata.jsonl"
+    sharding:
+      enabled: true
+      shards: 4
+      strategy: "hash"
+  
+  # Requetes SPARQL
+  sparql:
+    enabled: true
+    engine: "via SPIDX + KG-SPIDX"
+    query_types:
+      - "SELECT"
+      - "CONSTRUCT"
+      - "ASK"
+      - "DESCRIBE"
+    optimization:
+      - "join_reordering"
+      - "filter_pushdown"
+      - "index_usage"
+    cache:
+      enabled: true
+      ttl: 300s
+      max_entries: 100
+  
+  # Integration Triade
+  triade_integration:
+    piano:
+      calls: ["sparql_query", "gamma_search"]
+      protocol: "SPARQL over HTTP"
+      circuit_breaker: true
+    llux:
+      calls: ["embeddings"]
+      protocol: "HTTP"
+      fallback: "ollama-env2"
+  
+  # Build & Deploy
+  build:
+    command: "zig build -Dcpu=westmere -Drelease-fast"
+    output: "zig-out/bin/spidx"
+    tests:
+      - "zig build test --test-filter embedding"
+      - "zig build test --test-filter sparql"
+      - "zig build test --test-filter gamma_index"
+  
+  deployment:
+    binary: "/opt/spidx/bin/spidx"
+    config: "/etc/spidx/embeddings.yaml"
+    service: "systemd spidx"
+    health_check: "zig build test --test-filter embedding"
+  
+  # Metriques
+  metrics:
+    - name: "spidx_embedding_requests_total"
+      type: counter
+      labels: ["status"]
+    - name: "spidx_embedding_latency_ms"
+      type: histogram
+      buckets: [10, 50, 100, 200, 500, 1000]
+    - name: "spidx_embedding_dimension"
+      type: gauge
+      value: 768
+    - name: "spidx_cache_hit_rate"
+      type: gauge
+      unit: "ratio"
+    - name: "spidx_kg_entities"
+      type: gauge
+    - name: "spidx_kg_relations"
+      type: gauge
+    - name: "spidx_gamma_index_size"
+      type: gauge
+    - name: "spidx_query_latency_ms"
+      type: histogram
+  
+  # Alertes
+  alerts:
+    - name: "spidx_embedding_failure_rate"
+      condition: "rate(spidx_embedding_requests_total{status='error'}[5m]) > 0.1"
+      severity: "critical"
+    - name: "spidx_high_latency"
+      condition: "histogram_quantile(0.95, spidx_embedding_latency_ms) > 2000"
+      severity: "warning"
+    - name: "spidx_cache_low_hit_rate"
+      condition: "spidx_cache_hit_rate < 0.5"
+      severity: "warning"

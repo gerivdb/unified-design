@@ -1,0 +1,58 @@
+---
+name: pr-review-resolver
+description: "Design document for the pr-review-resolver universal skill"
+intent_hash: 0xPR_REVIEW_RESOLVE_UNIVERSAL_20260730
+version: "1.0.0"
+date: "2026-07-30"
+status: active
+layer: L4-TOOLS
+section: P1_STRATEGIC
+---
+
+# pr-review-resolver - Design Document
+
+## Overview
+The `pr-review-resolver` skill is a universal cross-repo skill that orchestrates PR review, CI validation, conflict resolution, and cleanup across all repositories in the gerivdb ecosystem.
+
+## Architecture
+
+### Pipeline Flow
+```
+User Command: "review resoud PR"
+  -> Pattern Router (pattern-router.md)
+  -> pr-review-resolver skill
+  -> Sub-skills:
+     1. diffscope-review (inline comments)
+     2. pr-lifecycle-gate (CI checks + merge)
+     3. merge-conflict-resolver (if blocked)
+     4. session-closeout (D5 cleanup)
+```
+
+### Guards Applied
+1. `agent-budget-check` - RAM/CPU verification before delegation
+2. `adr-governance-gate` - Blocks cross-repo merges without ADR
+3. `checkout-canonicality` - Validates clone path (CTULU/ECOYSTEM)
+
+### Scope
+- **Provider**: SKILLS (L4-TOOLS)
+- **Consumers**: Kilo Agent, CTULU
+- **Execution**: All repos in `D:\DO\WEB`
+
+## Integration Points
+
+| Component | File | Role |
+|-----------|------|------|
+| Pattern Router | `GOVERNANCE-HUB/pattern-router/pattern-router.md` | Routes keywords to skill |
+| Skill Definition | `.kilo/skills/pr-review-resolver.md` | Skill metadata + guards |
+| Command | `.kilo/command/review-resoud-pr.md` | Invocation syntax |
+| Registry | `SKILLS/skill-registry-provider` | Skill registration |
+
+## Validation
+- `tools/registry-gen.py` - Generates skill_registry.yaml
+- `tools/validate-skills.sh` - Validates skill structure
+- `skill-guard` - Pre-propagation validation
+
+## References
+- `unified-design/atoms/skill-orchestration.yaml`
+- `unified-design/atoms/primitive-flow.yaml`
+- `D:\DO\WEB\TOOLS\L4-TOOLS\SKILLS\README.md`

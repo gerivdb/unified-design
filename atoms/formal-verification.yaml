@@ -1,6 +1,6 @@
 ---
 name: formal-verification
-description: "Vérification formelle avec Z3 pour valider les invariants critiques. Preuves automatiques sur les contraintes logiques de l'écosystème."
+description: "Verification formelle avec Z3 pour valider les invariants critiques. Preuves automatiques sur les contraintes logiques de l'ecosysteme."
 parameters:
   solver: Z3
   invariants:
@@ -13,30 +13,30 @@ inherits: [absolute-rules-enforcement]
 
 # Formal Verification Atom
 
-Pattern de vérification formelle avec Z3.
+Pattern de verification formelle avec Z3.
 
-## Rôle
+## Role
 
-Valide les invariants critiques de l'écosystème via des preuves formelles :
+Valide les invariants critiques de l'ecosysteme via des preuves formelles :
 - **Solver** : Z3 (SMT solver)
 - **Invariants** : strata_consistency, bdcp, etc.
-- **Timeout** : 30s par vérification
-- **Preuves** : génération automatique
+- **Timeout** : 30s par verification
+- **Preuves** : generation automatique
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| `solver` | string | `Z3` | Solver de vérification |
-| `invariants` | list | `[]` | Invariants à vérifier |
-| `verification_timeout_ms` | int | `30000` | Timeout par vérification |
-| `proof_generation` | bool | `true` | Génération de preuves |
+| `solver` | string | `Z3` | Solver de verification |
+| `invariants` | list | `[]` | Invariants a verifier |
+| `verification_timeout_ms` | int | `30000` | Timeout par verification |
+| `proof_generation` | bool | `true` | Generation de preuves |
 
 ## Invariants
 
-- Les invariants critiques DOIVENT être vérifiés avant tout merge
-- Le timeout DOIT être respecté pour éviter les blocages
-- Les preuves DOIVENT être conservées pour audit
+- Les invariants critiques DOIVENT etre verifies avant tout merge
+- Le timeout DOIT etre respecte pour eviter les blocages
+- Les preuves DOIVENT etre conservees pour audit
 
 ## Exemple d'usage
 
@@ -50,7 +50,7 @@ capabilities:
       proof_generation: true
 ```
 
-## Références
+## References
 
 - TINA (scripts/formal_verification_z3.py)
-- NEXUS (agrégation cross-repo)
+- NEXUS (agregation cross-repo)

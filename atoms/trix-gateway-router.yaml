@@ -1,6 +1,6 @@
 ---
 name: trix-gateway-router
-description: "Routeur centralisé pour GitHub API avec rate-limit pooling, auth unifiée, retry."
+description: "Routeur centralise pour GitHub API avec rate-limit pooling, auth unifiee, retry."
 parameters:
   rate_limit_pooling: true
   auth_unified: true

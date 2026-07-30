@@ -1,6 +1,6 @@
 ---
 name: registry-consistency-sentinel
-description: "Sentinelle de cohérence des registres cross-repos : détecte incohérences et alertes."
+description: "Sentinelle de coherence des registres cross-repos : detecte incoherences et alertes."
 parameters:
   registries:
     - known_repositories.yaml

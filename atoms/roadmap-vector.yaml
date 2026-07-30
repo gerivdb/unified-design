@@ -1,6 +1,6 @@
 ---
 name: roadmap-vector
-description: "Vecteur de direction stratégique d'un dépôt. Définit l'horizon temporel, la direction, la vélocité observée et la masse."
+description: "Vecteur de direction strategique d'un depot. Definit l'horizon temporel, la direction, la velocite observee et la masse."
 parameters:
   required_fields:
     - type
@@ -24,32 +24,32 @@ inherits: [closed-loop-goal]
 
 # Roadmap Vector Atom
 
-Pattern de vecteur de direction stratégique par dépôt.
+Pattern de vecteur de direction strategique par depot.
 
-## Rôle
+## Role
 
-Chaque dépôt possède un fichier `ROADMAPS/vector.yaml` qui définit sa trajectoire stratégique :
-- horizon : période couverte (ex: 90d)
-- direction : liste des objectifs stratégiques
-- velocity_observed : vélocité observée (0.0 = pas encore mesurée)
-- mass : masse stratégique (0.0-1.0)
-- last_amended : date de dernière modification
+Chaque depot possede un fichier `ROADMAPS/vector.yaml` qui definit sa trajectoire strategique :
+- horizon : periode couverte (ex: 90d)
+- direction : liste des objectifs strategiques
+- velocity_observed : velocite observee (0.0 = pas encore mesuree)
+- mass : masse strategique (0.0-1.0)
+- last_amended : date de derniere modification
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
 | `horizon` | string | "90d" | Horizon temporel du vecteur |
-| `direction` | list | `[]` | Objectifs stratégiques |
-| `velocity_observed` | float | 0.0 | Vélocité observée |
-| `mass` | float | 0.5 | Masse stratégique |
-| `last_amended` | datetime | - | Date de dernière modification |
+| `direction` | list | `[]` | Objectifs strategiques |
+| `velocity_observed` | float | 0.0 | Velocite observee |
+| `mass` | float | 0.5 | Masse strategique |
+| `last_amended` | datetime | - | Date de derniere modification |
 
 ## Invariants
 
-- Tout dépôt actif DOIT avoir un vector.yaml dans ROADMAPS/
-- Le champ `intent_hash` DOIT être unique par version
-- La vélocité DOIT être recalculée après chaque sprint
+- Tout depot actif DOIT avoir un vector.yaml dans ROADMAPS/
+- Le champ `intent_hash` DOIT etre unique par version
+- La velocite DOIT etre recalculee apres chaque sprint
 
 ## Exemple d'usage
 
@@ -70,7 +70,7 @@ vector:
   _inferred: true
 ```
 
-## Références
+## References
 
 - CANDIDATOR/ROADMAPS/vector.yaml
 - GERIBOOKING/ROADMAPS/vector.yaml

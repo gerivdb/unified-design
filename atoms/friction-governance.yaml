@@ -1,6 +1,6 @@
 ---
 name: friction-governance
-description: "Pattern de gouvernance générique par détection de friction et auto-correction post-implémentation."
+description: "Pattern de gouvernance generique par detection de friction et auto-correction post-implementation."
 parameters:
   detector: friction_detector
   corrector: post_implement_check

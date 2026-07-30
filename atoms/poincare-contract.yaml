@@ -1,6 +1,6 @@
 ---
 name: poincare-contract
-description: "Contrat Poincaré : validation β₀=1, β₁=0 sur DAGs, invariants post-transport."
+description: "Contrat Poincare : validation beta0=1, beta1=0 sur DAGs, invariants post-transport."
 parameters:
   beta0: 1
   beta1: 0

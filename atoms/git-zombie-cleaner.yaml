@@ -1,6 +1,6 @@
 ---
 name: git-zombie-cleaner
-description: "Nettoyage des processus git zombies : détection par âge (> 8 min), kill gracieux, disposal, logging."
+description: "Nettoyage des processus git zombies : detection par age (> 8 min), kill gracieux, disposal, logging."
 parameters:
   process_name: git
   age_threshold_minutes: 8
@@ -14,17 +14,17 @@ inherits: [multi-instance-guard]
 
 Pattern de nettoyage des processus git orphelins sur Windows.
 
-## Rôle
+## Role
 
-Éliminer les processus `git.exe` qui survivent à leur parent suite à :
+Éliminer les processus `git.exe` qui survivent a leur parent suite a :
 - Un crash du script PowerShell
-- Un timeout non géré
-- Un `git` blocké sur un prompt ou un lock
+- Un timeout non gere
+- Un `git` blocke sur un prompt ou un lock
 
 ## Structure canonique
 
 ```powershell
-# GUARD — Clean git zombies from previous runs (> 8 min alive)
+# GUARD - Clean git zombies from previous runs (> 8 min alive)
 Get-Process -Name "git" -ErrorAction SilentlyContinue |
     Where-Object { $_.StartTime -and (Get-Date).Subtract($_.StartTime).TotalMinutes -gt 8 } |
     ForEach-Object {
@@ -37,19 +37,19 @@ Get-Process -Name "git" -ErrorAction SilentlyContinue |
 
 ## Invariants
 
-- La détection DOIT utiliser `StartTime` pour calculer l'âge
-- Le threshold DOIT être configurable (défaut: 8 min)
-- Le kill DOIT être gracieux (`Kill()` puis `WaitForExit`)
-- Le `Dispose()` DOIT être appelé même en cas d'erreur
+- La detection DOIT utiliser `StartTime` pour calculer l'age
+- Le threshold DOIT etre configurable (defaut: 8 min)
+- Le kill DOIT etre gracieux (`Kill()` puis `WaitForExit`)
+- Le `Dispose()` DOIT etre appele meme en cas d'erreur
 
-## Métriques
+## Metriques
 
-| Métrique | Valeur | Source |
+| Metrique | Valeur | Source |
 |----------|--------|--------|
-| Seuil âge | 8 minutes | Incident 2026-06-29 |
-| Zombies observés | 93 processus | `Get-Process git` |
+| Seuil age | 8 minutes | Incident 2026-06-29 |
+| Zombies observes | 93 processus | `Get-Process git` |
 | Wait after kill | 2000 ms | Disposal garantie |
 
-## Références
+## References
 
 - `C:\DevTools\scripts\ecos-sync-audit.ps1` (FIX 2026-06-29)

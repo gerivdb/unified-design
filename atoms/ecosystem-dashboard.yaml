@@ -1,6 +1,6 @@
 ---
 name: ecosystem-dashboard
-description: "Tableau de bord de visualisation en temps réel des designs, relations et état de validation."
+description: "Tableau de bord de visualisation en temps reel des designs, relations et etat de validation."
 parameters:
   refresh_interval: 60
   data_sources:

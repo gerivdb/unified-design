@@ -1,6 +1,6 @@
 ---
 name: cognitive-sot
-description: "Cognitive Source of Truth — hub cognitif avec cadastre, manifest, templates et agents locaux."
+description: "Cognitive Source of Truth - hub cognitif avec cadastre, manifest, templates et agents locaux."
 parameters:
   role: cognitive_sot
   rules: urban_ontology_verse/CADASTRE/cadastre_schema.yaml
@@ -8,7 +8,7 @@ parameters:
   agents: [Cadastre manager, manifest propagator, template lifecycle, coherence checker]
   auto_conformity:
     - cadastre_full.yaml valide avant commit
-    - relay_wave_manifest.yaml comptes cohérents
+    - relay_wave_manifest.yaml comptes coherents
     - Pas de contenu narratif BATVERSE
 inherits: [stratum-relay, citizen-registry]
 ---

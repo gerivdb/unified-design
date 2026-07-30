@@ -10,8 +10,8 @@ atom:
   status: active
   version: "1.0.0"
   description: |
-    Émission de beacon vers FLUX pour digestion cognitive post-exécution.
-    Permet le tracking phi-CPS, la détection d'anomalies, et l'irrigation wavefront.
+    Émission de beacon vers FLUX pour digestion cognitive post-execution.
+    Permet le tracking phi-CPS, la detection d'anomalies, et l'irrigation wavefront.
   intent_hash: "0xATOM_BOINC_FLUX_BEACON_20260726"
   layer: L3_EMERGENCE
   governance: BOUNC-ADR-0022
@@ -21,11 +21,11 @@ parameters:
     type: string
     required: true
     enum: ["job_start", "job_complete", "job_failed", "phi_anomaly", "swarm_join", "swarm_leave"]
-    description: "Type d'événement beacon"
+    description: "Type d'evenement beacon"
   - name: node_id
     type: string
     required: true
-    description: "Identifiant du noeud BOINC émetteur"
+    description: "Identifiant du noeud BOINC emetteur"
   - name: phi_cps
     type: number
     required: false
@@ -33,7 +33,7 @@ parameters:
   - name: payload
     type: object
     required: false
-    description: "Données additionnelles contextuelles"
+    description: "Donnees additionnelles contextuelles"
 
 returns:
   - name: beacon_id
@@ -41,7 +41,7 @@ returns:
     description: "Identifiant unique du beacon FLUX"
   - name: routed
     type: boolean
-    description: "True si beacon correctement routé vers FLUX"
+    description: "True si beacon correctement route vers FLUX"
 
 dependencies:
   - ATOM-FLUX-RECEIVER

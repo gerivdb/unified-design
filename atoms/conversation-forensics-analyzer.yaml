@@ -1,6 +1,6 @@
 ---
 name: conversation-forensics-analyzer
-description: "Analyse forensique des conversations pour détecter frictions, bugs, ruptures de chaîne."
+description: "Analyse forensique des conversations pour detecter frictions, bugs, ruptures de chaine."
 parameters:
   scan_targets:
     - tool_calls

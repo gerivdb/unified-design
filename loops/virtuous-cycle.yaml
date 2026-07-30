@@ -3,16 +3,16 @@ name: virtuous-cycle
 type: loop
 cycle_length: 3
 virtuous: true
-description: "Boucle de rétroaction positive sur la performance"
+description: "Boucle de retroaction positive sur la performance"
 nodes:
   - id: observation
     type: pillar
     name: Sonar-Driven Design
-    role: "Collecte de métriques"
+    role: "Collecte de metriques"
   - id: adaptation
     type: capability
     name: latency-bound
-    role: "Ajustement des paramètres"
+    role: "Ajustement des parametres"
   - id: optimisation
     type: pillar
     name: Connard Design
@@ -20,28 +20,28 @@ nodes:
 edges:
   - from: observation
     to: adaptation
-    label: "metrics → params"
+    label: "metrics -> params"
   - from: adaptation
     to: optimisation
-    label: "params → validation"
+    label: "params -> validation"
   - from: optimisation
     to: observation
-    label: "improved → metrics"
+    label: "improved -> metrics"
 ---
 
 # Virtuous Cycle Loop
 
-Pattern de boucle de rétroaction positive sur la performance.
+Pattern de boucle de retroaction positive sur la performance.
 
 ## Description
 
-Cette boucle documente comment l'observation (SDD) alimente l'adaptation (capabilities), qui à son tour déclenche l'optimisation (CD), refermant la boucle sur l'observation avec des métriques améliorées.
+Cette boucle documente comment l'observation (SDD) alimente l'adaptation (capabilities), qui a son tour declenche l'optimisation (CD), refermant la boucle sur l'observation avec des metriques ameliorees.
 
-## Propriétés
+## Proprietes
 
-- `virtuous: true` — boucle autorisée par le détecteur.
-- `cycle_length: 3` — 3 nœuds dans le cycle.
-- Aucun conflit sémantique détecté.
+- `virtuous: true` - boucle autorisee par le detecteur.
+- `cycle_length: 3` - 3 noeuds dans le cycle.
+- Aucun conflit semantique detecte.
 
 ## Utilisation
 
@@ -56,7 +56,7 @@ loops:
       optimisation: CD
 ```
 
-## Références
+## References
 
 - ADR-015-unified-design-v2
 - Pilier SDD, Pilier CD

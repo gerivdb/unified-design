@@ -1,6 +1,6 @@
 ---
 name: cron-autonomous-nervous-system
-description: "CRON comme système nerveux autonome : périodiques, event-driven, HITL-gated."
+description: "CRON comme systeme nerveux autonome : periodiques, event-driven, HITL-gated."
 parameters:
   categories:
     - periodic

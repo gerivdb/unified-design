@@ -6,21 +6,21 @@ inherits: []
 
 # Artifact Synced Loop Atom
 
-Capacité de design pour les loops à artifacts synchronisés.
+Capacite de design pour les loops a artifacts synchronises.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
 | `artifact_kind` | string | `null` | Kind d'artifact (`file`/`html`) |
 | `sync_scope` | string | `run` | `run` ou `loop` |
 
 ## Invariants
 
-- Les artifacts sont taggés par `loopId` + `runId`.
-- Un snapshot de run capture le manifest + blobs pour diff ultérieur.
+- Les artifacts sont tagges par `loopId` + `runId`.
+- Un snapshot de run capture le manifest + blobs pour diff ulterieur.
 
-## Références
+## References
 
 - ADR-016-loop-engine
 - loopany-platform: artifactFiles + runDiff

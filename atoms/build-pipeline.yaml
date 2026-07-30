@@ -28,13 +28,13 @@ inherits: [kiss, srp]
 
 Pattern d'orchestration de build multi-langage via Makefile.
 
-## Rôle
+## Role
 
-Centraliser les commandes de build, test, bench et CI pour un écosystème hétérogène :
-- Détection conditionnelle des composants (`if [ -d "FLUENCE" ]`)
+Centraliser les commandes de build, test, bench et CI pour un ecosysteme heterogene :
+- Detection conditionnelle des composants (`if [ -d "FLUENCE" ]`)
 - Optimisations hardware-aware (Z600, Westmere)
-- Pipeline CI unifiée (`make ci`)
-- Status visuel de l'écosystème
+- Pipeline CI unifiee (`make ci`)
+- Status visuel de l'ecosysteme
 
 ## Structure canonique
 
@@ -50,24 +50,24 @@ build: ## Build tous les composants
 		cd FLUENCE && cargo build --release -p fluence-core && cd ..; \
 	fi
 
-test: ## Exécute tous les tests
+test: ## Execute tous les tests
 	@if [ -d "FLUENCE" ]; then \
 		cd FLUENCE && cargo test --release -p fluence-core && cd ..; \
 	fi
 
-ci: deps build test ## Pipeline complète CI
+ci: deps build test ## Pipeline complete CI
 	bash scripts/validate_all.sh
 
 status: ## Affiche le statut
-	@echo "FLUENCE Core: $$([ -d 'FLUENCE' ] && echo '✓' || echo '✗') Found"
+	@echo "FLUENCE Core: $$([ -d 'FLUENCE' ] && echo '[OK]' || echo '[KO]') Found"
 ```
 
 ## Invariants
 
 - Chaque target DOIT avoir un commentaire `##` pour l'aide automatique
-- Les builds DOIVENT être conditionnels (présence du répertoire)
-- Le pipeline CI DOIT inclure : deps → build → test → validate
-- Le hardware target DOIT être détectable et configurable
+- Les builds DOIVENT etre conditionnels (presence du repertoire)
+- Le pipeline CI DOIT inclure : deps -> build -> test -> validate
+- Le hardware target DOIT etre detectable et configurable
 
 ## Exemples
 
@@ -76,10 +76,10 @@ status: ## Affiche le statut
 | `make build` | Build release | Rust/Node/Python |
 | `make test` | Tests avec coverage | Rust/pytest |
 | `make bench` | Benchmarks | Rust cargo bench |
-| `make ci` | Pipeline complète | Bash |
+| `make ci` | Pipeline complete | Bash |
 | `make status` | Health-check | Bash |
 
-## Références
+## References
 
 - `C:\DevTools\Makefile`
 - `C:\DevTools\scripts\validate_all.sh`

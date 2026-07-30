@@ -1,0 +1,493 @@
+---
+type: LLUX_OPENAPI
+version: "1.0.0"
+status: active
+intent_hash: 0xLLUX_OPENAPI_20260730
+description: "OpenAPI 3.0 specification for LLUX HTTP API - OpenAI-compatible"
+---
+
+openapi: "3.0.0"
+info:
+  title: "LLUX HTTP API"
+  version: "1.0.0"
+  description: |
+    API HTTP OpenAI-compatible pour le moteur BitNet 1.58b (LLUX).
+    
+    Fournit inference LLM, embeddings et health checks via endpoints standards.
+  contact:
+    name: "LLUX Team"
+    url: "https://github.com/gerivdb/LLUX"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+
+servers:
+  - url: "http://localhost:47000"
+    description: "LLUX local via TRIX (ports dynamiques 47000-48000)"
+  - url: "http://localhost:9000/mcp/llux/llm"
+    description: "Via GATEWAY-MANAGER (recommande production)"
+
+tags:
+  - name: "Health"
+    description: "Verification de sante du service"
+  - name: "Chat"
+    description: "Chat completions OpenAI-compatible"
+  - name: "Embeddings"
+    description: "Generation d'embeddings vectoriels"
+  - name: "Models"
+    description: "Liste des modeles disponibles"
+
+paths:
+  /health:
+    get:
+      tags: ["Health"]
+      summary: "Health check du service LLUX"
+      operationId: "healthCheck"
+      responses:
+        "200":
+          description: "Service operationnel"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+              examples:
+                healthy:
+                  summary: "Service sain"
+                  value:
+                    status: "healthy"
+                    model: "bitnet-1.58b"
+                    backend: "trix"
+                    version: "1.0.0"
+                    uptime_seconds: 3600
+                unhealthy:
+                  summary: "Service degrade"
+                  value:
+                    status: "unhealthy"
+                    model: "bitnet-1.58b"
+                    backend: "trix"
+                    error: "KV cache OOM"
+        "503":
+          description: "Service indisponible"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+
+  /v1/chat/completions:
+    post:
+      tags: ["Chat"]
+      summary: "Chat completion (OpenAI-compatible)"
+      operationId: "chatCompletion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatCompletionRequest"
+            examples:
+              simple:
+                summary: "Requete simple"
+                value:
+                  messages:
+                    - role: "user"
+                      content: "Bonjour !"
+                  model: "bitnet-1.58b"
+                  temperature: 0.7
+                  max_tokens: 512
+              system_prompt:
+                summary: "Avec system prompt"
+                value:
+                  messages:
+                    - role: "system"
+                      content: "Tu es un assistant utile."
+                    - role: "user"
+                      content: "Explique la logique ternaire."
+                  model: "bitnet-1.58b"
+                  temperature: 0.5
+                  max_tokens: 1024
+      responses:
+        "200":
+          description: "Reponse reussie"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatCompletionResponse"
+              examples:
+                success:
+                  summary: "Reponse standard"
+                  value:
+                    id: "chatcmpl-abc123"
+                    object: "chat.completion"
+                    created: 1700000000
+                    model: "bitnet-1.58b"
+                    choices:
+                      - index: 0
+                        message:
+                          role: "assistant"
+                          content: "Bonjour ! Comment puis-je vous aider ?"
+                        finish_reason: "stop"
+                    usage:
+                      prompt_tokens: 15
+                      completion_tokens: 12
+                      total_tokens: 27
+        "400":
+          description: "Requete invalide"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "Modele non trouve"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: "Erreur interne"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: "Service indisponible (circuit breaker ouvert)"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/embeddings:
+    post:
+      tags: ["Embeddings"]
+      summary: "Generation d'embeddings vectoriels"
+      operationId: "createEmbedding"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmbeddingRequest"
+            examples:
+              single:
+                summary: "Texte unique"
+                value:
+                  input: "Texte a embedder"
+                  model: "nomic-embed-v1.5"
+              batch:
+                summary: "Lot de textes"
+                value:
+                  input:
+                    - "Premier texte"
+                    - "Deuxieme texte"
+                    - "Troisieme texte"
+                  model: "nomic-embed-v1.5"
+      responses:
+        "200":
+          description: "Embeddings generes"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmbeddingResponse"
+              examples:
+                success:
+                  summary: "Reponse embeddings"
+                  value:
+                    object: "list"
+                    data:
+                      - object: "embedding"
+                        embedding:
+                          - 0.123
+                          - -0.456
+                          - 0.789
+                        index: 0
+                    model: "nomic-embed-v1.5"
+                    usage:
+                      prompt_tokens: 5
+                      total_tokens: 5
+        "400":
+          description: "Requete invalide"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: "Modele non trouve"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /v1/models:
+    get:
+      tags: ["Models"]
+      summary: "Liste des modeles disponibles"
+      operationId: "listModels"
+      responses:
+        "200":
+          description: "Liste des modeles"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  object:
+                    type: string
+                    enum: ["list"]
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ModelInfo"
+              examples:
+                models:
+                  summary: "Modeles disponibles"
+                  value:
+                    object: "list"
+                    data:
+                      - id: "bitnet-1.58b"
+                        object: "model"
+                        created: 1700000000
+                        owned_by: "llux"
+                        permission: []
+                        root: "bitnet-1.58b"
+                        parent: null
+                      - id: "nomic-embed-v1.5"
+                        object: "model"
+                        created: 1700000000
+                        owned_by: "llux"
+                        permission: []
+                        root: "nomic-embed-v1.5"
+                        parent: null
+
+components:
+  schemas:
+    HealthResponse:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: ["healthy", "unhealthy"]
+          description: "État global du service"
+        model:
+          type: string
+          description: "Modele charge"
+        backend:
+          type: string
+          description: "Backend d'execution (trix, direct)"
+        version:
+          type: string
+          description: "Version LLUX"
+        uptime_seconds:
+          type: integer
+          description: "Temps de fonctionnement en secondes"
+        error:
+          type: string
+          description: "Message d'erreur si unhealthy"
+    
+    ChatCompletionRequest:
+      type: object
+      required: [messages, model]
+      properties:
+        messages:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            required: [role, content]
+            properties:
+              role:
+                type: string
+                enum: ["system", "user", "assistant"]
+                description: "Role du message"
+              content:
+                type: string
+                description: "Contenu du message"
+        model:
+          type: string
+          enum: ["bitnet-1.58b"]
+          default: "bitnet-1.58b"
+          description: "Modele a utiliser"
+        temperature:
+          type: number
+          minimum: 0
+          maximum: 2
+          default: 0.7
+          description: "Temperature d'echantillonnage"
+        max_tokens:
+          type: integer
+          minimum: 1
+          maximum: 4096
+          default: 2048
+          description: "Nombre max de tokens de completion"
+        top_p:
+          type: number
+          minimum: 0
+          maximum: 1
+          default: 0.9
+          description: "Nucleus sampling"
+        top_k:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 40
+          description: "Top-k sampling"
+        stream:
+          type: boolean
+          default: false
+          description: "Streaming SSE (non supporte actuellement)"
+    
+    ChatCompletionResponse:
+      type: object
+      required: [id, object, created, model, choices, usage]
+      properties:
+        id:
+          type: string
+          description: "ID unique de la completion"
+        object:
+          type: string
+          enum: ["chat.completion"]
+        created:
+          type: integer
+          description: "Timestamp Unix de creation"
+        model:
+          type: string
+          description: "Modele utilise"
+        choices:
+          type: array
+          items:
+            type: object
+            required: [index, message, finish_reason]
+            properties:
+              index:
+                type: integer
+              message:
+                type: object
+                required: [role, content]
+                properties:
+                  role:
+                    type: string
+                    enum: ["assistant"]
+                  content:
+                    type: string
+              finish_reason:
+                type: string
+                enum: ["stop", "length", "content_filter"]
+        usage:
+          type: object
+          required: [prompt_tokens, completion_tokens, total_tokens]
+          properties:
+            prompt_tokens:
+              type: integer
+            completion_tokens:
+              type: integer
+            total_tokens:
+              type: integer
+    
+    EmbeddingRequest:
+      type: object
+      required: [input, model]
+      properties:
+        input:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                type: string
+          description: "Texte(s) a embedder"
+        model:
+          type: string
+          enum: ["nomic-embed-v1.5"]
+          default: "nomic-embed-v1.5"
+        encoding_format:
+          type: string
+          enum: ["float", "base64"]
+          default: "float"
+        dimensions:
+          type: integer
+          description: "Dimensions de sortie (optionnel, defaut 768)"
+          maximum: 768
+    
+    EmbeddingResponse:
+      type: object
+      required: [object, data, model, usage]
+      properties:
+        object:
+          type: string
+          enum: ["list"]
+        data:
+          type: array
+          items:
+            type: object
+            required: [object, embedding, index]
+            properties:
+              object:
+                type: string
+                enum: ["embedding"]
+              embedding:
+                type: array
+                items:
+                  type: number
+              minItems: 768
+              maxItems: 768
+              description: "Vecteur d'embedding 768 dimensions"
+              index:
+                type: integer
+        model:
+          type: string
+        usage:
+          type: object
+          required: [prompt_tokens, total_tokens]
+          properties:
+            prompt_tokens:
+              type: integer
+            total_tokens:
+              type: integer
+    
+    ModelInfo:
+      type: object
+      required: [id, object, created, owned_by]
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          enum: ["model"]
+        created:
+          type: integer
+        owned_by:
+          type: string
+        permission:
+          type: array
+        root:
+          type: string
+        parent:
+          type: string
+          nullable: true
+    
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [message, type, code]
+          properties:
+            message:
+              type: string
+            type:
+              type: string
+              enum: ["invalid_request", "model_not_found", "internal_error", "service_unavailable", "rate_limit"]
+            code:
+              type: string
+            param:
+              type: string
+              nullable: true
+
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: "Bearer token (optionnel pour local)"
+
+security:
+  - ApiKeyAuth: []

@@ -1,6 +1,6 @@
 ---
 name: design-documentation-generator
-description: "Documentation auto-générée à partir des designs MDU : META-DESIGN.md, rapports, indexes."
+description: "Documentation auto-generee a partir des designs MDU : META-DESIGN.md, rapports, indexes."
 parameters:
   sources:
     - design.yaml

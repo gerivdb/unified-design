@@ -1,0 +1,269 @@
+---
+type: DEPENDENCY_MATRIX
+version: "1.0.0"
+status: active
+intent_hash: 0xDEPENDENCY_MATRIX_20260730
+description: "Matrice de dependances complete entre composants de l'ecosysteme gerivdb"
+---
+
+# Matrice de dependances - Composants principaux
+
+## LLUX (L3_EMERGENCE)
+depends_on:
+  - TRIX: runtime_isolation
+  - GATEWAY-MANAGER: routing_unifie
+provides_to:
+  - GATEWAY-MANAGER: backend_principal
+  - PIANO: binding_llux
+  - SPIDX: embeddings
+  - KIX: pipeline_execution
+  - TIMX: feature_store
+  - VERSES: query_resolution
+  - ARGUS: gap_analysis
+  - KiloCode: user_interface
+
+## TRIX (L4_TOOLS)
+depends_on:
+  - LLUX: backend_gere
+provides_to:
+  - GATEWAY-MANAGER: container_routing
+  - PIANO: lifecycle_management
+  - RLM-DEPLOY: deployment_automation
+
+## GATEWAY-MANAGER (L1_CAUSALITY)
+depends_on:
+  - TRIX: llux_backend
+  - LLUX: local_backend
+  - ollama-env2: fallback_local
+  - openrouter-nemotron-free: fallback_cloud
+  - groq: fallback_cloud
+  - google-ai-studio: fallback_cloud
+  - github-models: fallback_cloud
+  - qoder: fallback_cdp
+provides_to:
+  - KiloCode: unified_routing
+  - all_clients: mcp_endpoints
+
+## PIANO (L4_TOOLS / L2_COMPOSITION)
+depends_on:
+  - LLUX: llm_inference
+  - SPIDX: semantic_indexing
+  - TRIX: runtime_management
+provides_to:
+  - GATEWAY-MANAGER: advanced_orchestration
+  - RLM: release_orchestration
+
+## SPIDX (L4_TOOLS / L1_INFRA)
+depends_on:
+  - LLUX: embeddings_generation
+  - KG-SPIDX: knowledge_graph
+provides_to:
+  - PIANO: sparql_queries
+  - VERSES: resolution
+  - ARGUS: analysis
+  - RLM-METRICS: metrics
+
+## RLM (L2_COMPOSITION - 8 modules)
+depends_on:
+  - KIX: orchestration
+  - TRIX: deployment
+  - PIANO: binding
+  - SPIDX: metrics
+  - TIMX: feature_store
+provides_to:
+  - all_repos: release_lifecycle
+  - KIX: pipeline_execution
+
+## KIX (L2_COMPOSITION)
+depends_on:
+  - RLM: modules_rlm
+  - TIMX: feature_store
+  - PIANO: orchestration
+provides_to:
+  - KiloCode: runner_orchestration
+  - KIX_CLI: cli_execution
+
+## TIMX (L2_COMPOSITION)
+depends_on:
+  - LLUX: embeddings
+  - TLM: ternary_logic
+provides_to:
+  - KIX: feature_storage
+  - RLM: feature_serving
+
+## VERSES (L2_COMPOSITION)
+depends_on:
+  - LLUX: inference
+  - SPIDX: indexing
+provides_to:
+  - KIX: query_resolution
+  - RLM: semantic_search
+
+## ARGUS (L3_EMERGENCE)
+depends_on:
+  - LLUX: analysis
+provides_to:
+  - RLM: gap_detection
+
+## FLUENCE (L1_INFRA / L3_EMERGENCE)
+depends_on: []
+provides_to:
+  - KIX: agent_orchestration
+
+## KiloCode (L0_CANONICAL)
+depends_on:
+  - GATEWAY-MANAGER: llm_routing
+  - KIX: orchestration
+provides_to: []
+
+---
+
+# Matrice par strate
+
+## L0_CANONICAL -> L1_CAUSALITY
+- KiloCode -> GATEWAY-MANAGER
+- GOVERNANCE-HUB -> FLUENCE, KIVA, TOPOS, TQL
+- ONTOLOGY -> SPIDX, KG-SPIDX
+- BRAIN -> FLUENCE, ECOS-CLI
+- unified-design -> conventions partagees
+
+## L1_CAUSALITY -> L2_COMPOSITION
+- GATEWAY-MANAGER -> RLM, KIX, PIANO
+- FLUENCE -> KIX
+- SPIDX -> VERSES, RLM-METRICS
+- KIVA -> KIX
+- TQL -> VERSES
+- ECOS-CLI -> RLM, KIX
+
+## L2_COMPOSITION -> L3_EMERGENCE
+- RLM -> LLUX, ARGUS
+- KIX -> LLUX, ROOTX, TLM
+- TIMX -> LLUX, TLM
+- VERSES -> LLUX, SPIDX
+- PIANO -> LLUX, SPIDX
+
+## L3_EMERGENCE -> L4_TOOLS
+- LLUX -> TRIX, PIANO, SPIDX
+- ROOTX -> TLM-LANG
+- TLM -> TLM-LANG, FLUENCE
+- ARGUS -> RLM-SECURE
+- HOLMES -> CTULU
+- MIMIR -> VDB
+- CRONOS -> cron-centralized-registry
+- SABRE -> RLM-SECURE
+- FLUX -> PIANO
+- CoPaw -> RLM-INCIDENT
+- MirrorFish -> SPIDX-gamma
+- OpenClaw -> KG-SPIDX
+- BATVERSE -> CTULU
+- RACINES -> ROOTX
+
+## L4_TOOLS -> L5_ARCHIVE
+- TRIX -> archive benchmarks
+- PIANO -> archive versions
+- SPIDX -> archive indexes
+- CTULU -> archive pipelines
+
+---
+
+# Dependances transversales (cross-strata)
+
+## BDCP Mode (L0->L4)
+- KiloCode BDCP -> GATEWAY-MANAGER clapet
+- GATEWAY-MANAGER BDCP -> tous backends
+- RLM BDCP -> deploiement securise
+- TRIX BDCP -> isolation conteneurs
+
+## Clone Prevention (L0->L4)
+- hitl-gate.yaml -> tous repos
+- known_repositories.yaml -> SOT
+- ECOS-CLI registry -> validation
+
+## Circuit Breaker Pattern (L1->L4)
+- trix-gateway-router.yaml -> GATEWAY-MANAGER
+- circuit_breaker.yaml -> tous backends
+- llux_binding.yaml -> PIANO
+- SPIDX embeddings -> SPIDX
+
+## WAL Atomicity (L4)
+- trix-wal-atomic-writer.yaml -> TRIX
+- RLM-DEPLOY -> rollback atomique
+- KIX -> WAL conversation
+
+## Loop Detection (L0->L4)
+- loop_engine/ -> tous designs
+- Poincare contract -> beta0=1, beta1=0
+- deadlock-pattern.yaml -> detection
+
+## Connard Design (L0->L4)
+- design-principle.yaml -> inheritance
+- latency-bound.yaml -> 45ms P99
+- power-capped.yaml -> 12W max
+- inheritance depth <= 3
+
+---
+
+# Graph des dependances critiques (cycles interdits)
+
+## Cycle detecte et resolu
+- PIANO <-> LLUX (binding bidirectionnel)
+  Resolution: PIANO necessite LLUX au runtime, LLUX ne connait pas PIANO
+  
+- SPIDX <-> LLUX (embeddings)
+  Resolution: SPIDX appelle LLUX, LLUX ne connait pas SPIDX
+
+- GATEWAY-MANAGER <-> TRIX (routing)
+  Resolution: GATEWAY route vers TRIX, TRIX expose health, pas de cycle
+
+## Aretes critiques (latence <= 45ms)
+1. KiloCode -> GATEWAY-MANAGER -> TRIX -> LLUX
+2. PIANO -> LLUX (binding direct)
+3. SPIDX -> LLUX (embeddings)
+4. RLM-DEPLOY -> TRIX -> LLUX (health checks)
+
+## Aretes de fallback (tolerance panne)
+1. GATEWAY-MANAGER -> ollama-env2 (si LLUX down)
+2. GATEWAY-MANAGER -> openrouter-nemotron-free (si local down)
+3. PIANO -> retry + circuit breaker -> fallback GATEWAY
+4. SPIDX -> cache embeddings -> retry LLUX
+
+---
+
+# Validation KIVA-CI
+
+## Steps obligatoires
+1. validate_meta_design.py -> meta-design.yaml [OK]
+2. validate_atom_registry.py -> atoms_registry.yaml [OK]
+3. extract_atom_deps.py -> atom_deps.json (DAG) [OK]
+4. connard_validator.py -> design rules [OK]
+5. check_loops.py -> Poincare beta0=1, beta1=0 [OK]
+
+## Gates de merge
+- TOUS steps = exit 0 requis
+- pre-commit hook -> kiva ci run --dry-run
+- GitHub Actions INTERDIT (ADR-024)
+
+---
+
+# Metriques de sante
+
+## Composants surveilles
+| Composant | Metrique critique | Seuil alerte |
+|-----------|------------------|--------------|
+| LLUX | latency_p99_ms | > 1000ms |
+| LLUX | memory_mb | > 8192 |
+| LLUX | error_rate | > 10% |
+| TRIX | container_status | != running |
+| GATEWAY | circuit_breaker | OPEN |
+| PIANO | orchestration_failed | > 0 |
+| SPIDX | embedding_latency_ms | > 2000 |
+| RLM | pipeline_duration | > 600s |
+| KIX | orchestrator_health | != healthy |
+
+## SLA globaux
+- Disponibilite LLUX: 99.9%
+- Latence P99 chat: < 1000ms
+- Latence P99 embeddings: < 500ms
+- Deploiement RLM: < 10min
+- Rollback: < 2min
+- Incident L1 response: < 5min

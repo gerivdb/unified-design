@@ -1,0 +1,267 @@
+---
+type: RUNNER_TAXONOMY
+version: "1.0.0"
+status: active
+intent_hash: 0xRUNNER_TAXONOMY_20260730
+description: "Taxonomie canonique des runners de l'ecosysteme gerivdb (160+ runners)"
+---
+
+runner_types:
+  LLM:
+    description: "Large Language Model - Inference linguistique"
+    category: inference
+    examples:
+      - LLUX
+      - LLAMA.CPP
+      - vscode-lm-proxy
+      - BatMCP
+    capabilities:
+      - chat_completion
+      - embedding
+      - tokenization
+    stratum: L3_EMERGENCE
+  
+  RLM:
+    description: "Release Lifecycle Manager - CI/CD Release"
+    category: orchestration
+    modules:
+      - RLM-CONFIG
+      - RLM-DEPLOY
+      - RLM-GRAPH
+      - RLM-INCIDENT
+      - RLM-MDU
+      - RLM-METRICS
+      - RLM-RELEASE
+      - RLM-SECURE
+    capabilities:
+      - pipeline_execution
+      - deployment
+      - release_tagging
+      - metrics_collection
+      - incident_management
+    stratum: L2_COMPOSITION
+  
+  TLM:
+    description: "Ternary Logic Machine - Logique ternaire"
+    category: logic
+    examples:
+      - TLM-LANG
+      - FLUENCE
+    capabilities:
+      - ternary_inference
+      - base243_operations
+    stratum: L3_EMERGENCE
+  
+  TIMX:
+    description: "Time-series Feature Store"
+    category: data
+    examples:
+      - TIMX-FEATURE-STORE
+    capabilities:
+      - feature_storage
+      - time_series_query
+    stratum: L2_COMPOSITION
+  
+  ROOTX:
+    description: "Racines Symboliques"
+    category: symbolic
+    examples:
+      - RACINES
+    capabilities:
+      - symbolic_reasoning
+    stratum: L3_EMERGENCE
+  
+  KIX:
+    description: "Kernel Execution - Orchestration des runners"
+    category: orchestration
+    examples:
+      - KIX
+    capabilities:
+      - runner_orchestration
+      - pipeline_scheduling
+    stratum: L2_COMPOSITION
+  
+  TRIX:
+    description: "Runtime Isole + WAL"
+    category: runtime
+    examples:
+      - TRIX
+    capabilities:
+      - container_isolation
+      - wal_logging
+      - health_monitoring
+      - dynamic_ports
+    stratum: L4_TOOLS
+  
+  PIANO:
+    description: "Orchestrateur Triade"
+    category: orchestration
+    examples:
+      - PIANO
+    capabilities:
+      - triade_orchestration
+      - llux_binding
+      - spidx_integration
+    stratum: L4_TOOLS
+  
+  SPIDX:
+    description: "Indexation Semantique + SPARQL + KG"
+    category: indexing
+    examples:
+      - SPIDX
+      - KG-SPIDX
+      - SPIDX-gamma
+    capabilities:
+      - sparql_query
+      - knowledge_graph
+      - gamma_index
+      - embedding_via_llux
+    stratum: L4_TOOLS
+  
+  GATEWAY:
+    description: "Routeur unifie multi-backend"
+    category: routing
+    examples:
+      - GATEWAY-MANAGER
+    capabilities:
+      - rate_limit_pooling
+      - unified_auth
+      - circuit_breaker
+      - backend_routing
+      - fallback_chains
+    stratum: L1_CAUSALITY
+  
+  CTULU:
+    description: "Orchestrateur de pipelines"
+    category: orchestration
+    examples:
+      - CTULU
+    capabilities:
+      - pipeline_routing
+      - resolver
+    stratum: L4_TOOLS
+  
+  ECOS_CLI:
+    description: "CLI multi-repo"
+    category: cli
+    examples:
+      - ECOS-CLI
+    capabilities:
+      - cross_repo_ops
+      - registry_management
+    stratum: L4_TOOLS
+  
+  FLUENCE_CLI:
+    description: "CLI FLUENCE"
+    category: cli
+    examples:
+      - FLUENCE-CLI
+    capabilities:
+      - citizen_management
+    stratum: L4_TOOLS
+  
+  RLM_243:
+    description: "RLM base 243"
+    category: orchestration
+    examples:
+      - RLM-243
+    capabilities:
+      - ternary_release
+    stratum: L4_TOOLS
+
+# Mapping strate -> runners
+stratum_runners:
+  L0_CANONICAL:
+    - KiloCode
+  L1_CAUSALITY:
+    - GATEWAY-MANAGER
+    - SPIDX
+    - KG-SPIDX
+    - FLUENCE
+    - KIVA
+    - TOPOS
+    - TQL
+    - ECOS-CLI
+  L2_COMPOSITION:
+    - RLM-CONFIG
+    - RLM-DEPLOY
+    - RLM-GRAPH
+    - RLM-INCIDENT
+    - RLM-MDU
+    - RLM-METRICS
+    - RLM-RELEASE
+    - RLM-SECURE
+    - TIMX
+    - KIX
+    - VERSES
+  L3_EMERGENCE:
+    - LLUX
+    - ROOTX
+    - TLM
+    - ARGUS
+    - HOLMES
+    - MIMIR
+    - CRONOS
+    - SABRE
+    - BATVERSE
+    - FLUX
+    - CoPaw
+    - MirrorFish
+    - OpenClaw
+  L4_TOOLS:
+    - TRIX
+    - PIANO
+    - SPIDX
+    - SPIDX-gamma
+    - TLM-LANG
+    - FLUENCE-CLI
+    - CTULU
+    - RLM-243
+    - ECOS-CLI
+    - KIVA-CLI
+    - HOLMES
+    - HERMES
+    - LYCOS
+    - Mnemo-SRC
+    - OPENSRC
+    - OUTPUT-WORKSPACE
+    - REPO-STANDARDS
+    - SERVICES
+    - SKILLS
+    - TEST-REPO
+    - VDB
+    - WAZAA
+  L5_ARCHIVE:
+    - "Projets geles, historique, documentation"
+
+# Capacites par type
+capabilities_by_type:
+  LLM:
+    - http_server
+    - chat_completions
+    - embeddings
+    - tokenization
+  RLM:
+    - pipeline
+    - deploy
+    - release
+    - metrics
+    - incident
+  TLM:
+    - ternary_ops
+    - base243
+  TRIX:
+    - isolation
+    - wal
+    - health
+  PIANO:
+    - orchestration
+    - binding
+  SPIDX:
+    - sparql
+    - kg
+    - embeddings
+  GATEWAY:
+    - routing
+    - fallback
+    - circuit_breaker

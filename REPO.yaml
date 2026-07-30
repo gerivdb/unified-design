@@ -6,8 +6,8 @@ intent_hash: 0xUNIFIED_DESIGN_20260715
 rss_depth: 4
 type: core
 description: |
-  Meta-Design (MDU) — L'atlas global des invariants architecturaux de l'écosystème gerivdb.
-  Constitution technique définissant les 4 piliers : Sonar-Driven Design, Triadic Compound Eye,
+  Meta-Design (MDU) - L'atlas global des invariants architecturaux de l'ecosysteme gerivdb.
+  Constitution technique definissant les 4 piliers : Sonar-Driven Design, Triadic Compound Eye,
   MorphoHDL Anamorphic Growth, et Connard Design.
 owner: gerivdb
 status: active
@@ -24,11 +24,11 @@ enforcement_mode:
   vyoa: full
   brgs: full
 
-# Livrables associés
+# Livrables associes
 adrs:
   - ADR-013
 
-# Références croisées
+# References croisees
 crosslinks:
   - GOVERNANCE-HUB
   - REPO-STANDARDS

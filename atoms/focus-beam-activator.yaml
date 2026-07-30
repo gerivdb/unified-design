@@ -1,6 +1,6 @@
 ---
 name: focus-beam-activator
-description: "Mode focus-beam sur gap critique : verrouillage swarm exclusif sur un problème prioritaire."
+description: "Mode focus-beam sur gap critique : verrouillage swarm exclusif sur un probleme prioritaire."
 parameters:
   activation_mode: exclusive_swarm
   target: critical_gap

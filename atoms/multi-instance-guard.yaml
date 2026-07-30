@@ -1,6 +1,6 @@
 ---
 name: multi-instance-guard
-description: "Garde anti-concurrence Windows : mutex nommé, détection d'instance existante, expulsion HITL si conflit."
+description: "Garde anti-concurrence Windows : mutex nomme, detection d'instance existante, expulsion HITL si conflit."
 parameters:
   mutex_type: named
   mutex_scope: Global
@@ -12,31 +12,31 @@ inherits: [hitl-gate]
 
 # Multi-Instance Guard Atom
 
-Pattern de garde contre les exécutions concurrentes sur Windows.
+Pattern de garde contre les executions concurrentes sur Windows.
 
-## Rôle
+## Role
 
-Prévenir les corruption de données et les race conditions lorsque :
-- Un script long risque d'être lancé plusieurs fois
-- Un processus zombie peut bloquer un mutex abandonné
-- Plusieurs agents KiloCode opèrent sur le même dépôt
+Prevenir les corruption de donnees et les race conditions lorsque :
+- Un script long risque d'etre lance plusieurs fois
+- Un processus zombie peut bloquer un mutex abandonne
+- Plusieurs agents KiloCode operent sur le meme depot
 
 ## Structure canonique
 
 ```powershell
-# GUARD — Anti-multi-instance (Windows named mutex)
+# GUARD - Anti-multi-instance (Windows named mutex)
 $mutexName = "Global\EcoSyncAudit_Mutex"
 $mutex = New-Object System.Threading.Mutex($false, $mutexName)
 $ownsMutex = $false
 try {
     $ownsMutex = $mutex.WaitOne(0)
 } catch {
-    # Abandoned mutex from crashed prior run — retry once
+    # Abandoned mutex from crashed prior run - retry once
     Start-Sleep -Milliseconds 500
     try { $ownsMutex = $mutex.WaitOne(0) } catch { $ownsMutex = $true }
 }
 if (-not $ownsMutex) {
-    Write-Output "[SCRIPT] Une instance est déjà en cours. Abandon."
+    Write-Output "[SCRIPT] Une instance est deja en cours. Abandon."
     exit 2
 }
 
@@ -49,20 +49,20 @@ trap {
 
 ## Invariants
 
-- Le mutex DOIT être nommé `Global\` pour être visible inter-sessions
-- Le timeout DOIT être 0 (non-bloquant) par défaut
-- Un mutex abandonné DOIT être récupéré après 500ms de sleep
-- Le cleanup DOIT être dans un `trap` ou `finally`
+- Le mutex DOIT etre nomme `Global\` pour etre visible inter-sessions
+- Le timeout DOIT etre 0 (non-bloquant) par defaut
+- Un mutex abandonne DOIT etre recupere apres 500ms de sleep
+- Le cleanup DOIT etre dans un `trap` ou `finally`
 
 ## Cas d'usage
 
-| Script | Mutex | Timeout | Action si occupé |
+| Script | Mutex | Timeout | Action si occupe |
 |--------|-------|---------|------------------|
 | `ecos-sync-audit.ps1` | `Global\EcoSyncAudit_Mutex` | 0 | exit 2 |
 | `ecos-sync-watchdog.ps1` | `Global\EcoSyncWatchdog_Mutex` | 0 | exit 2 |
 | `hitl-preflight.ps1` | `Global\HitlPreflight_Mutex` | 0 | wait + retry |
 
-## Références
+## References
 
 - `C:\DevTools\scripts\ecos-sync-audit.ps1`
 - `C:\DevTools\scripts\ecos-sync-watchdog.ps1`

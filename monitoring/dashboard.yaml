@@ -1,0 +1,295 @@
+---
+type: MONITORING_DASHBOARD
+version: "1.0.0"
+status: active
+intent_hash: 0xMONITORING_DASHBOARD_20260730
+description: "Dashboard de performance Triade Cognitive - LLUX + PIANO + SPIDX"
+inherits: [ecosystem-health-dashboard, phi-cps-regression-guard, absolute-rules-enforcement]
+---
+
+dashboard:
+  name: "triade_performance"
+  version: "1.0.0"
+  title: "Triade Cognitive - Performance Dashboard"
+  description: "Metriques de performance pour LLUX + PIANO + SPIDX + TRIX"
+  refresh: "10s"
+  time_range: "1h"
+  
+  panels:
+    # Row 1: LLUX Core Metrics
+    - id: "llux_latency"
+      title: "Latence LLUX (P99)"
+      type: "gauge"
+      metric: "llux_latency_ms"
+      unit: "ms"
+      thresholds:
+        green: 100
+        yellow: 500
+        red: 1000
+      refresh: "10s"
+      stats: ["current", "p50", "p95", "p99"]
+    
+    - id: "llux_tokens_per_sec"
+      title: "Debit d'inference"
+      type: "graph"
+      metric: "llux_tokens_per_sec"
+      unit: "tokens/s"
+      refresh: "10s"
+      stats: ["current", "avg", "max"]
+      lines:
+        - label: "current"
+          color: "#4CAF50"
+        - label: "avg_5m"
+          color: "#2196F3"
+    
+    - id: "llux_memory"
+      title: "Memoire LLUX"
+      type: "gauge"
+      metric: "llux_memory_mb"
+      unit: "MB"
+      thresholds:
+        green: 2048
+        yellow: 4096
+        red: 8192
+      refresh: "30s"
+      stats: ["current", "max"]
+    
+    - id: "llux_kv_cache_hit_rate"
+      title: "Taux de hit KV Cache"
+      type: "graph"
+      metric: "llux_kv_cache_hit_rate"
+      unit: "%"
+      refresh: "30s"
+      stats: ["current", "avg"]
+      threshold:
+        green: 80
+        yellow: 50
+        red: 30
+    
+    # Row 2: Health & Requests
+    - id: "llux_health_status"
+      title: "Statut de sante LLUX"
+      type: "status"
+      metric: "llux_health_status"
+      refresh: "5s"
+      states:
+        - value: "healthy"
+          color: "#4CAF50"
+          label: "[OK] Sain"
+        - value: "unhealthy"
+          color: "#F44336"
+          label: "[KO] Defaillant"
+        - value: "starting"
+          color: "#FF9800"
+          label: "🔄 Demarrage"
+    
+    - id: "llux_request_rate"
+      title: "Taux de requetes"
+      type: "graph"
+      metric: "llux_request_rate"
+      unit: "req/s"
+      refresh: "10s"
+      stats: ["current", "avg", "max"]
+      lines:
+        - label: "chat"
+          color: "#4CAF50"
+        - label: "embeddings"
+          color: "#2196F3"
+        - label: "health"
+          color: "#FF9800"
+    
+    - id: "llux_error_rate"
+      title: "Taux d'erreur"
+      type: "graph"
+      metric: "llux_error_rate"
+      unit: "%"
+      refresh: "30s"
+      thresholds:
+        green: 1
+        yellow: 5
+        red: 10
+      stats: ["current", "max"]
+      alert_line: 5
+    
+    # Row 3: SPIDX Metrics
+    - id: "spidx_embedding_dim"
+      title: "Dimension d'embedding"
+      type: "stat"
+      metric: "spidx_embedding_dim"
+      unit: "dim"
+      value: 768
+      refresh: "60s"
+      color: "#9C27B0"
+    
+    - id: "spidx_query_latency"
+      title: "Latence requetes SPIDX"
+      type: "graph"
+      metric: "spidx_query_latency_ms"
+      unit: "ms"
+      refresh: "30s"
+      thresholds:
+        green: 100
+        yellow: 500
+        red: 1000
+      stats: ["current", "p50", "p95"]
+    
+    - id: "spidx_cache_hit_rate"
+      title: "Taux de hit cache embeddings"
+      type: "gauge"
+      metric: "spidx_cache_hit_rate"
+      unit: "%"
+      refresh: "60s"
+      thresholds:
+        green: 80
+        yellow: 50
+        red: 30
+    
+    - id: "spidx_kg_size"
+      title: "Taille Knowledge Graph"
+      type: "stat"
+      metric: "spidx_kg_entities"
+      unit: "entities"
+      refresh: "60s"
+      sub_metrics:
+        - name: "spidx_kg_relations"
+          label: "Relations"
+        - name: "spidx_gamma_index_size"
+          label: "Gamma Index"
+    
+    # Row 4: TRIX & PIANO
+    - id: "trix_container_status"
+      title: "Statut conteneurs TRIX"
+      type: "status"
+      metric: "trix_container_status"
+      refresh: "15s"
+      states:
+        - value: "running"
+          color: "#4CAF50"
+        - value: "stopped"
+          color: "#9E9E9E"
+        - value: "failed"
+          color: "#F44336"
+        - value: "starting"
+          color: "#FF9800"
+    
+    - id: "trix_port_allocations"
+      title: "Allocations ports TRIX"
+      type: "stat"
+      metric: "trix_port_allocations"
+      unit: "ports"
+      refresh: "30s"
+      threshold:
+        green: 5
+        yellow: 10
+        red: 20
+    
+    - id: "trix_wal_size"
+      title: "Taille WAL TRIX"
+      type: "graph"
+      metric: "trix_wal_size_mb"
+      unit: "MB"
+      refresh: "60s"
+      stats: ["current", "max"]
+    
+    - id: "piano_orchestrations"
+      title: "Orchestrations PIANO"
+      type: "graph"
+      metric: "piano_orchestrations_total"
+      unit: "ops"
+      refresh: "60s"
+      lines:
+        - label: "success"
+          color: "#4CAF50"
+        - label: "failed"
+          color: "#F44336"
+        - label: "retried"
+          color: "#FF9800"
+  
+  # Alertes
+  alerts:
+    - id: "latency_alert"
+      name: "Latence LLUX critique"
+      condition: "llux_latency_ms > 1000"
+      severity: "critical"
+      message: "Latence LLUX > 1s - Degradation performance"
+      runbook: "incident/fallback.yaml#llux_unhealthy"
+      notifications:
+        - "slack:#infra-alerts"
+        - "pagerduty:oncall"
+    
+    - id: "memory_alert"
+      name: "Memoire LLUX elevee"
+      condition: "llux_memory_mb > 8192"
+      severity: "warning"
+      message: "Memoire LLUX > 8GB - Risque OOM"
+      runbook: "incident/fallback.yaml#llux_unhealthy"
+      notifications:
+        - "slack:#infra-alerts"
+    
+    - id: "health_alert"
+      name: "LLUX unhealthy"
+      condition: "llux_health_status != 'healthy'"
+      severity: "critical"
+      message: "LLUX n'est pas sain - Fallback active"
+      runbook: "incident/fallback.yaml#llux_unhealthy"
+      notifications:
+        - "slack:#infra-alerts"
+        - "pagerduty:oncall"
+    
+    - id: "error_rate_alert"
+      name: "Taux d'erreur eleve"
+      condition: "llux_error_rate > 10"
+      severity: "critical"
+      message: "Taux d'erreur > 10% - Service degrade"
+      runbook: "incident/fallback.yaml#llux_unhealthy"
+      notifications:
+        - "slack:#infra-alerts"
+        - "pagerduty:oncall"
+    
+    - id: "spidx_latency_alert"
+      name: "Latence SPIDX elevee"
+      condition: "spidx_query_latency_ms > 1000"
+      severity: "warning"
+      message: "Requetes SPIDX lentes"
+      notifications:
+        - "slack:#infra-alerts"
+    
+    - id: "trix_container_failed"
+      name: "Conteneur TRIX echoue"
+      condition: "trix_container_status == 'failed'"
+      severity: "critical"
+      message: "Conteneur TRIX en echec - Nettoyage requis"
+      runbook: "incident/fallback.yaml#trix_container_failed"
+      notifications:
+        - "slack:#infra-alerts"
+        - "pagerduty:oncall"
+  
+  # Export
+  export:
+    enabled: true
+    formats: ["json", "csv", "png"]
+    schedule: "0 */6 * * *"  # toutes les 6h
+    retention: "30d"
+  
+  # Variables templating
+  templating:
+    - name: "environment"
+      type: "query"
+      query: "label_values(llux_health_status, environment)"
+      default: "production"
+    - name: "backend"
+      type: "query"
+      query: "label_values(trix_container_status, backend)"
+      default: "llux"
+  
+  # Links
+  links:
+    - name: "Grafana"
+      url: "http://grafana.ecosystem.com/d/triade"
+      type: "dashboards"
+    - name: "Runbooks"
+      url: "https://github.com/gerivdb/RLM-INCIDENT/tree/main/playbooks"
+      type: "docs"
+    - name: "RLM-METRICS"
+      url: "https://github.com/gerivdb/RLM-METRICS"
+      type: "repo"

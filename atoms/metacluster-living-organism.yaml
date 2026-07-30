@@ -1,6 +1,6 @@
 ---
 name: metacluster-living-organism
-description: "Méta-cluster comme organisme vivant : causalité, holographie, polymorphisme, MoE."
+description: "Meta-cluster comme organisme vivant : causalite, holographie, polymorphisme, MoE."
 parameters:
   properties:
     - causality

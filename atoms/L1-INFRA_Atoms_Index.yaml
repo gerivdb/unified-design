@@ -1,8 +1,10 @@
 # L1-INFRA_Atoms_Index.yaml
 # Index des atomes extraits de L1-INFRA, L2-COMPOSITION, L3-EMERGENCE et L4-DevTools
 # Date: 2026-07-16
-# Source: known_repositories.yaml + scan L1-INFRA + scan L2-COMPOSITION + scan L3-EMERGENCE + scan L4-DevTools + flux inter-dépôts
+# Source: known_repositories.yaml + scan L1-INFRA + scan L2-COMPOSITION + scan L3-EMERGENCE + scan L4-DevTools + flux inter-depots
 # IntentHash: 0xATOM_SCAN_L2_L3_L4_CROSSREPO_20260716
+
+name: L1-INFRA_Atoms_Index
 
 ---
 metadata:
@@ -12,7 +14,7 @@ metadata:
   sot: "gerivdb/GOVERNANCE-HUB"
   total_atoms_scanned: 96
 
-# ── Atomes par dépôt ───────────────────────────────────────────────────────────────────────
+# -- Atomes par depot -----------------------------------------------------------------------
 
 repos_atoms:
   # L1-INFRA (already scanned)
@@ -155,7 +157,7 @@ repos_atoms:
     - bin/deduct-*.ps1
     - bin/onto-*.ps1
 
-# ── Atomes majeurs identifiés ───────────────────────────────────────────────────────────
+# -- Atomes majeurs identifies -----------------------------------------------------------
 
 major_atoms:
   # L1-INFRA atoms (existing)
@@ -180,7 +182,7 @@ major_atoms:
   - id: TOPOS_TOPOLOGY
     file: TOPOS/topology.yaml
     type: Graph
-    description: "Topologie des dépôts et leurs dépendances"
+    description: "Topologie des depots et leurs dependances"
     lines: 388
     
   - id: GATEWAY_CONFIG
@@ -198,7 +200,7 @@ major_atoms:
   - id: BOOT_SEQUENCE
     file: LLM-REPO/BOOT/boot_sequence.yaml
     type: Procedure
-    description: "Séquence canonique de boot LLM (5 étapes)"
+    description: "Sequence canonique de boot LLM (5 etapes)"
     lines: 43
     
   - id: GATE_RSS_V1
@@ -211,13 +213,13 @@ major_atoms:
   - id: MORPHISM_MAP_SCHEMA
     file: ECOS-CLI/ECOYSTEM/governance/morphism_maps/morphism_map.schema.yaml
     type: Schema
-    description: "Schéma de morphism map (MM-XXX format)"
+    description: "Schema de morphism map (MM-XXX format)"
     lines: 54
     
   - id: ONTOLOGY_MASTER
     file: ONTOLOGY/ONTOLOGY.yaml
     type: Ontology
-    description: "Définitions ontologiques maîtres de l'écosystème"
+    description: "Definitions ontologiques maitres de l'ecosysteme"
     lines: 753
     intent_hash: "0xONT_MASTER_DEFINITIONS_ECOSYSTEM_20260331"
     entities: 35+
@@ -297,7 +299,7 @@ major_atoms:
     lines: 9
     intent_hash: "0xSTRIX_ECOS_ROOT_20260715"
 
-# ── Coverage par strate ────────────────────────────────────────────────────────────────
+# -- Coverage par strate ----------------------------------------------------------------
 
 coverage:
   L0_CONSTITUTIONAL:
@@ -345,7 +347,7 @@ coverage:
     repos_scanned: [PITCH-1, DATA-MINER]
     atoms_found: [ROADMAP_VECTOR, ROADMAP_BLOCKERS, ROADMAP_DEPENDENCIES, ROADMAP_HISTORY, ROADMAP_MILESTONES, STRATUM_RELAY]
 
-# ── Doublons potentiels avec GOVERNANCE-HUB ────────────────────────────────────────
+# -- Doublons potentiels avec GOVERNANCE-HUB ----------------------------------------
 
 potential_duplicates:
   - atom: "constitutional-sot"
@@ -397,29 +399,29 @@ statistics:
     - Flow
     - CrossRepo
 
-# ── Next Steps ────────────────────────────────────────────────────────────────────────
+# -- Next Steps ------------------------------------------------------------------------
 
 next_steps:
-  - "Créer les atom definitions MDU pour les nouveaux patterns L2/L3"
-  - "Vérifier les doublons avec GOVERNANCE-HUB atoms"
-  - "Générer le rapport de couverture final"
-  - "Intégrer les atomes L2/L3 dans connard-design/standards/connard-rules.yaml"
-  - "Créer les design.yaml pour PRIMUS, SKILLS, PHOTON référençant les flux inter-dépôts"
-  - "Implémenter la détection de cycles dans le loop engine MDU"
-  - "Créer l'ADR-029 documentant l'extension cross-repo flows"
+  - "Creer les atom definitions MDU pour les nouveaux patterns L2/L3"
+  - "Verifier les doublons avec GOVERNANCE-HUB atoms"
+  - "Generer le rapport de couverture final"
+  - "Integrer les atomes L2/L3 dans connard-design/standards/connard-rules.yaml"
+  - "Creer les design.yaml pour PRIMUS, SKILLS, PHOTON referencant les flux inter-depots"
+  - "Implementer la detection de cycles dans le loop engine MDU"
+  - "Creer l'ADR-029 documentant l'extension cross-repo flows"
 
-# ── Cross-Repo Flows ────────────────────────────────────────────────────────────────────
+# -- Cross-Repo Flows --------------------------------------------------------------------
 #
-# DAG des flux inter-dépôts (validation requise par le loop engine):
-# PRIMUS ──(primitive-flow)──> CTULU, SKILLS, NEXUS
-# CITIZENS ──(registry-sync)──> CTULU, TINA, BRAIN, Kilo Agent
-# PHOTON ──(photon-pipeline)──> TRIX, NEXUS, CTULU
-# SKILLS ──(skill-orchestration)──> CTULU, PRIMUS
-# DevTools ──(infra-tool-layer)──> CTULU, ECOS-CLI, BRAIN
+# DAG des flux inter-depots (validation requise par le loop engine):
+# PRIMUS --(primitive-flow)--> CTULU, SKILLS, NEXUS
+# CITIZENS --(registry-sync)--> CTULU, TINA, BRAIN, Kilo Agent
+# PHOTON --(photon-pipeline)--> TRIX, NEXUS, CTULU
+# SKILLS --(skill-orchestration)--> CTULU, PRIMUS
+# DevTools --(infra-tool-layer)--> CTULU, ECOS-CLI, BRAIN
 #
 # Cycles interdits:
-# PRIMUS → CTULU → PRIMUS
-# CITIZENS → CTULU → CITIZENS
-# PHOTON → NEXUS → PHOTON
+# PRIMUS -> CTULU -> PRIMUS
+# CITIZENS -> CTULU -> CITIZENS
+# PHOTON -> NEXUS -> PHOTON
 
 

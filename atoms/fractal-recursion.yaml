@@ -1,6 +1,6 @@
 ---
 name: fractal-recursion
-description: "Récursion fractale auto-similaire pour les requêtes TQL. Pattern auto-similaire avec short-circuit NEUTRE pour éviter l'explosion combinatoire."
+description: "Recursion fractale auto-similaire pour les requetes TQL. Pattern auto-similaire avec short-circuit NEUTRE pour eviter l'explosion combinatoire."
 parameters:
   pattern: self-similar
   operators: 12
@@ -12,31 +12,31 @@ inherits: [b243-vector]
 
 # Fractal Recursion Atom
 
-Pattern de récursion fractale auto-similaire.
+Pattern de recursion fractale auto-similaire.
 
-## Rôle
+## Role
 
-Implémente la récursion fractale pour les requêtes TQL :
+Implemente la recursion fractale pour les requetes TQL :
 - **Pattern** : auto-similaire
-- **Opérateurs** : 12 cognitifs
-- **Short-circuit** : NEUTRE (évite l'explosion combinatoire)
-- **Complexité** : O(DELTA)
+- **Operateurs** : 12 cognitifs
+- **Short-circuit** : NEUTRE (evite l'explosion combinatoire)
+- **Complexite** : O(DELTA)
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| `pattern` | string | `self-similar` | Pattern de récursion |
-| `operators` | int | `12` | Opérateurs cognitifs |
+| `pattern` | string | `self-similar` | Pattern de recursion |
+| `operators` | int | `12` | Operateurs cognitifs |
 | `short_circuit` | string | `NEUTRE` | Mode short-circuit |
 | `max_depth` | int | `10` | Profondeur max |
-| `complexity` | string | `O(DELTA)` | Complexité théorique |
+| `complexity` | string | `O(DELTA)` | Complexite theorique |
 
 ## Invariants
 
 - Le short-circuit NEUTRE EST obligatoire (ADR-0013)
-- La profondeur max DOIT être respectée
-- La complexité DOIT rester O(DELTA)
+- La profondeur max DOIT etre respectee
+- La complexite DOIT rester O(DELTA)
 
 ## Exemple d'usage
 
@@ -51,7 +51,7 @@ capabilities:
       complexity: O(DELTA)
 ```
 
-## Références
+## References
 
 - TQL (gerivdb/TQL)
 - ADR-0013 (short-circuit NEUTRE)

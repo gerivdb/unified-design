@@ -1,46 +1,46 @@
 ---
 name: law-of-demeter
-description: "Law of Demeter — ne parlez qu'aux amis directs, évitez la navigation profonde dans les objets."
+description: "Law of Demeter - ne parlez qu'aux amis directs, evitez la navigation profonde dans les objets."
 parameters:
   max_method_calls: 1
   chain_length_max: 3
   forbidden_chains:
     - "objet.prochain.amis.inconnu"
-    - "tableau.collection.élément.propriété"
+    - "tableau.collection.element.propriete"
 constraints:
-  - "Chaque méthode n'appelle que ses propres méthodes"
-  - "Chaque méthode n'accède qu'aux propriétés directes"
-  - "Chaîne de navigation limitée à 3 niveaux"
+  - "Chaque methode n'appelle que ses propres methodes"
+  - "Chaque methode n'accede qu'aux proprietes directes"
+  - "Chaine de navigation limitee a 3 niveaux"
 inherits: [design-principle]
 ---
 
 # Atom : Law of Demeter (LoD)
 
 ## Contexte
-Principe de conception : "ne parlez qu'aux amis directs". Un objet ne doit pas connaître la structure interne d'autres objets.
+Principe de conception : "ne parlez qu'aux amis directs". Un objet ne doit pas connaitre la structure interne d'autres objets.
 
 ## Application dans MDU
-- **Citizens** : Chaque citizen expose ses méthodes directes
-- **Atomes** : Les atomes communiquent via des interfaces bien définies
-- **Pipelines** : Les étapes communiquent via des données, pas par navigation
+- **Citizens** : Chaque citizen expose ses methodes directes
+- **Atomes** : Les atomes communiquent via des interfaces bien definies
+- **Pipelines** : Les etapes communiquent via des donnees, pas par navigation
 
-## Règles
-1. **Méthode** : Une méthode peut appeler :
-   - Ses propres méthodes
-   - Méthodes de ses paramètres
-   - Méthodes des attributs immédiats
-   - Méthodes des objets créés localement
+## Regles
+1. **Methode** : Une methode peut appeler :
+   - Ses propres methodes
+   - Methodes de ses parametres
+   - Methodes des attributs immediats
+   - Methodes des objets crees localement
 
-2. **Navigation** : Chaîne limitée à 3 niveaux max
+2. **Navigation** : Chaine limitee a 3 niveaux max
 
 ## Anti-patterns
-- `user.getOrder().getItems().get(0).getName()` ❌
-- `config.getDatabase().getConnection().getStats()` ❌
+- `user.getOrder().getItems().get(0).getName()` [KO]
+- `config.getDatabase().getConnection().getStats()` [KO]
 
 ## Bonnes pratiques
-- **Facade** : Créer des méthodes délégantes
+- **Facade** : Creer des methodes delegantes
 - **Builder** : Utiliser des builders pour la construction
-- **Service** : Inverser la dépendance
+- **Service** : Inverser la dependance
 
 ## Exemple
 ```python

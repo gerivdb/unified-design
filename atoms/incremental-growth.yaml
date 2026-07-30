@@ -1,6 +1,6 @@
 ---
 name: incremental-growth
-description: "Attracteur d'incrémentalité : les designs s'enrichissent par héritage sans se détruire."
+description: "Attracteur d'incrementalite : les designs s'enrichissent par heritage sans se detruire."
 parameters:
   merge_strategy: additive
   conflict_resolution: ADR-backed

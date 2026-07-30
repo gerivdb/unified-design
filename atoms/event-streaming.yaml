@@ -1,6 +1,6 @@
 ---
 name: event-streaming
-description: "Serveur WebSocket-based pour le streaming temps réel d'événements avec pub/sub, filtrage et backpressure."
+description: "Serveur WebSocket-based pour le streaming temps reel d'evenements avec pub/sub, filtrage et backpressure."
 parameters:
   protocol: WebSocket
   heartbeat_interval_seconds: 30
@@ -8,7 +8,7 @@ parameters:
   message_queue_size: 10000
   compression_enabled: true
 constraints:
-  - "Débit ≥ 1000 événements/seconde"
+  - "Debit >= 1000 evenements/seconde"
   - "Latence < 50 ms"
   - "99.9% uptime"
   - "Gestion backpressure automatique"
@@ -18,39 +18,39 @@ inherits: [real-time-system, websocket-server]
 # Atom : event-streaming
 
 ## Contexte
-Basé sur EPIC-1222 REAL-TIME EVENT STREAMING SERVER. Serveur WebSocket pour le streaming temps réel des événements WAZAA.
+Base sur EPIC-1222 REAL-TIME EVENT STREAMING SERVER. Serveur WebSocket pour le streaming temps reel des evenements WAZAA.
 
-## Fonctionnalités
-- **Pub/Sub** : Publication et abonnement aux événements
-- **Filtrage** : Filtrage sélectif des événements par type
-- **Backpressure** : Gestion du débordement avec file d'attente
+## Fonctionnalites
+- **Pub/Sub** : Publication et abonnement aux evenements
+- **Filtrage** : Filtrage selectif des evenements par type
+- **Backpressure** : Gestion du debordement avec file d'attente
 - **Compression** : Compression des messages volumineux
-- **Heartbeat** : Détection des connexions mortes
+- **Heartbeat** : Detection des connexions mortes
 
 ## Architecture
 ```
-┌─────────────────────────────────────────────┐
-│         EVENT STREAMING SERVER              │
-├─────────────────────────────────────────────┤
-│  ┌─────────────┐  ┌─────────────┐  ┌───────┐ │
-│  │  Pub/Sub    │  │   Filter    │  │ Queue │ │
-│  │   Engine    │  │   Engine    │  │ Engine│ │
-│  └─────────────┘  └─────────────┘  └───────┘ │
-│           │                         │        │
-│           ▼                         ▼        │
-│  ┌─────────────────────────────────────────┐ │
-│  │           WebSocket Server              │ │
-│  │  - Connection management                │ │
-│  │  - Message routing                      │ │
-│  │  - Compression                          │ │
-│  └─────────────────────────────────────────┘ │
-└─────────────────────────────────────────────┘
++---------------------------------------------+
+|         EVENT STREAMING SERVER              |
++---------------------------------------------+
+|  +-------------+  +-------------+  +-------+ |
+|  |  Pub/Sub    |  |   Filter    |  | Queue | |
+|  |   Engine    |  |   Engine    |  | Engine| |
+|  +-------------+  +-------------+  +-------+ |
+|           |                         |        |
+|           v                         v        |
+|  +-----------------------------------------+ |
+|  |           WebSocket Server              | |
+|  |  - Connection management                | |
+|  |  - Message routing                      | |
+|  |  - Compression                          | |
+|  +-----------------------------------------+ |
++---------------------------------------------+
 ```
 
-## Événements supportés
-- `event.stream.started` - Le streaming a démarré
-- `event.stream.stopped` - Le streaming s'est arrêté
-- `event.published` - Un événement a été publié
-- `event.subscribed` - Un client s'est abonné
-- `event.filtered` - Un événement a été filtré
-- `event.backpressure.triggered` - Le backpressure est déclenché
+## Évenements supportes
+- `event.stream.started` - Le streaming a demarre
+- `event.stream.stopped` - Le streaming s'est arrete
+- `event.published` - Un evenement a ete publie
+- `event.subscribed` - Un client s'est abonne
+- `event.filtered` - Un evenement a ete filtre
+- `event.backpressure.triggered` - Le backpressure est declenche

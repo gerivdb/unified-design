@@ -1,6 +1,6 @@
 ---
 name: soul-selection-strategy
-description: "Stratégie de sélection dynamique d'âme en fonction du contexte de problème."
+description: "Strategie de selection dynamique d'ame en fonction du contexte de probleme."
 parameters:
   souls:
     - canonical

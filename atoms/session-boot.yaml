@@ -1,6 +1,6 @@
 ---
 name: session-boot
-description: "Script de boot session : génère context.yaml < 5 Ko pour boot session LLM."
+description: "Script de boot session : genere context.yaml < 5 Ko pour boot session LLM."
 parameters:
   output: context.yaml
   max_size_kb: 5

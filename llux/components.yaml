@@ -1,0 +1,205 @@
+---
+type: LLUX_COMPONENTS
+version: "1.0.0"
+status: active
+intent_hash: 0xLLUX_COMPONENTS_20260730
+description: "Composants du moteur BitNet 1.58b Zig natif - LLUX"
+inherits: [design-principle, latency-bound, power-capped]
+---
+
+llux:
+  version: "1.0.0"
+  description: "Moteur BitNet 1.58b Zig natif - HTTP OpenAI-compatible"
+  stratum: L3_EMERGENCE
+  repo: "L3-CITIZENS/LLUX"
+  
+  composants:
+    http_server:
+      description: "Serveur HTTP OpenAI-compatible"
+      language: Zig
+      endpoints:
+        - method: GET
+          path: /health
+          description: "Health check - retourne status healthy/unhealthy"
+          response:
+            status: string
+            model: string
+            backend: string
+        - method: POST
+          path: /v1/chat/completions
+          description: "Chat completion OpenAI-compatible"
+          request:
+            messages:
+              type: array
+              items:
+                role: string
+                content: string
+            model: string
+            temperature: number
+            max_tokens: integer
+          response:
+            choices:
+              type: array
+              items:
+                message:
+                  role: string
+                  content: string
+            usage:
+              total_tokens: integer
+        - method: POST
+          path: /v1/embeddings
+          description: "Embeddings nomic-embed-v1.5"
+          request:
+            input: string
+            model: string
+          response:
+            data:
+              type: array
+              items:
+                embedding:
+                  type: array
+                  items:
+                    type: number
+      port_range: "47000-48000"
+      protocol: HTTP/1.1
+      concurrent_requests: 32
+  
+    bpe_tokenizer:
+      description: "Tokenizer BPE compatible llama.cpp"
+      language: Zig
+      formats:
+        - name: GGUF vocab
+          type: binary
+          description: "Format binaire natif GGUF"
+        - name: tokenizer.json
+          type: json
+          description: "Format HuggingFace standard"
+      operations:
+        - encode
+        - decode
+        - token_to_id
+        - id_to_token
+      vocab_size: 32000
+      special_tokens:
+        - "<|endoftext|>"
+        - "<|user|>"
+        - "<|assistant|>"
+        - "<|system|>"
+      compatibility: "llama.cpp / HuggingFace tokenizers"
+  
+    bitnet_engine:
+      description: "Inference BitNet 1.58b (poids in {-1, 0, 1})"
+      language: Zig
+      features:
+        - name: KV Cache
+          description: "Cache cle-valeur pour acceleration generation"
+          max_context: 4096
+        - name: LayerNorm
+          description: "Normalisation de couche"
+        - name: Top-k sampling
+          description: "Échantillonnage top-k"
+          default_k: 40
+        - name: Top-p sampling
+          description: "Échantillonnage nucleus"
+          default_p: 0.9
+        - name: Temperature
+          description: "Temperature d'echantillonnage"
+          default: 0.7
+      operations:
+        - linear_ternary
+        - attention
+        - layernorm
+        - activation
+      optimization: "Additions d'entiers uniquement (pas de multiplications flottantes)"
+      target_ram: "2-6 Go selon modele (3B-13B)"
+  
+    embedding_kernel:
+      description: "Embeddings nomic-embed-v1.5"
+      language: Zig
+      model: "nomic-embed-v1.5"
+      dimension: 768
+      max_seq_len: 8192
+      pooling: "mean"
+      normalization: true
+      usage:
+        - SPIDX indexing
+        - Semantic search
+        - RAG pipelines
+  
+  compatibilite:
+    cpu: "westmere"
+    instruction_set: "SSE4.2"
+    no_fp16: true
+    no_avx2: true
+    ram_limit_gb: 24
+    compilation_flags:
+      - "-Dcpu=westmere"
+      - "-Drelease-fast"
+    benchmarks:
+      - model: "3B"
+        ram_gb: 1.5
+        tok_s: "15-20"
+      - model: "7B"
+        ram_gb: 3
+        tok_s: "8-12"
+      - model: "13B"
+        ram_gb: "5-6"
+        tok_s: "3-5"
+  
+  dependencies:
+    - component: TRIX
+      role: runtime_isolated
+      type: orchestrateur_conteneurs
+      reason: "Gestion cycle de vie, WAL, health checks"
+    - component: GATEWAY-MANAGER
+      role: routage_llm
+      type: routeur_unifie
+      reason: "Routage unifie multi-backend, circuit breaker, fallback"
+    - component: PIANO
+      role: orchestration_triade
+      type: binding_client
+      reason: "Client Zig pour orchestration triade"
+    - component: SPIDX
+      role: embeddings
+      type: indexation_semantique
+      reason: "Fournisseur d'embeddings pour indexation"
+  
+  health_checks:
+    - endpoint: /health
+      interval: 30s
+      timeout: 5s
+      expected: '{"status":"healthy"}'
+    - endpoint: /v1/chat/completions
+      interval: 60s
+      test_payload: '{"messages":[{"role":"user","content":"test"}],"model":"bitnet-1.58b"}'
+      expected_contains: "choices"
+    - endpoint: /v1/embeddings
+      interval: 60s
+      test_payload: '{"input":"test","model":"nomic-embed-v1.5"}'
+      expected_contains: "embedding"
+  
+  metrics:
+    - name: llux_latency_ms
+      type: gauge
+      unit: ms
+      description: "Latence requete HTTP"
+    - name: llux_tokens_per_sec
+      type: gauge
+      unit: tok/s
+      description: "Debit d'inference"
+    - name: llux_memory_mb
+      type: gauge
+      unit: MB
+      description: "Memoire RSS"
+    - name: llux_kv_cache_hit_rate
+      type: gauge
+      unit: "%"
+      description: "Taux de hit KV Cache"
+    - name: llux_request_rate
+      type: counter
+      unit: req/s
+      description: "Taux de requetes"
+    - name: llux_error_rate
+      type: gauge
+      unit: "%"
+      description: "Taux d'erreur"

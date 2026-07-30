@@ -1,0 +1,235 @@
+---
+type: RLM_PIPELINE
+version: "1.0.0"
+status: active
+intent_hash: 0xRLM_PIPELINE_TRIADE_20260730
+description: "Pipeline de release RLM pour la Triade Cognitive (LLUX + PIANO + SPIDX + TRIX)"
+inherits: [ci-pipeline, build-pipeline, cache-manager, absolute-rules-enforcement]
+---
+
+pipeline:
+  name: "triade"
+  version: "1.0.0"
+  description: "Release pipeline pour la triade cognitive L4 (LLUX + PIANO + SPIDX + TRIX)"
+  
+  environments:
+    - dev
+    - staging
+    - production
+  
+  stages:
+    build:
+      name: "🔨 Compilation Westmere"
+      timeout: 600s
+      parallel: true
+      steps:
+        - component: "llux"
+          repo: "L3-CITIZENS/LLUX"
+          command: "zig build -Dcpu=westmere -Drelease-fast"
+          artifacts:
+            - "zig-out/bin/llux"
+          cache_key: "llux-{{ .Commit }}"
+          depends_on: []
+        
+        - component: "piano"
+          repo: "L4-TOOLS/PIANO"
+          command: "zig build -Dcpu=westmere -Drelease-fast"
+          artifacts:
+            - "zig-out/bin/piano"
+          cache_key: "piano-{{ .Commit }}"
+          depends_on: []
+        
+        - component: "spidx"
+          repo: "L4-TOOLS/SPIDX"
+          command: "zig build -Dcpu=westmere -Drelease-fast"
+          artifacts:
+            - "zig-out/bin/spidx"
+          cache_key: "spidx-{{ .Commit }}"
+          depends_on: []
+        
+        - component: "trix"
+          repo: "L4-TOOLS/TRIX"
+          command: "zig build -Dcpu=westmere -Drelease-fast"
+          artifacts:
+            - "zig-out/bin/trix"
+          cache_key: "trix-{{ .Commit }}"
+          depends_on: []
+    
+    test:
+      name: "🧪 Tests d'integration"
+      timeout: 300s
+      parallel: true
+      steps:
+        - name: "LLUX health check"
+          command: "trix backend start llux && curl -f http://localhost:47000/health"
+          retries: 3
+          repo: "L4-TOOLS/TRIX"
+          depends_on: ["build:llux", "build:trix"]
+        
+        - name: "PIANO binding test"
+          command: "zig build test --test-filter llux"
+          repo: "L4-TOOLS/PIANO"
+          depends_on: ["build:piano", "build:llux"]
+        
+        - name: "SPIDX embedding test"
+          command: "zig build test --test-filter embedding"
+          repo: "L4-TOOLS/SPIDX"
+          depends_on: ["build:spidx", "build:llux"]
+        
+        - name: "BPE tokenizer test"
+          command: "zig build test --test-filter bpe_tokenizer"
+          repo: "L3-CITIZENS/LLUX"
+          depends_on: ["build:llux"]
+        
+        - name: "E2E triade test"
+          command: |
+            curl -f -X POST http://localhost:47000/v1/chat/completions \
+              -H "Content-Type: application/json" \
+              -d '{"messages":[{"role":"user","content":"Hello triade"}],"model":"bitnet-1.58b"}'
+          depends_on: ["test:LLUX health check", "test:PIANO binding test", "test:SPIDX embedding test"]
+    
+    deploy:
+      name: "🚀 Deploiement triade"
+      timeout: 300s
+      strategy: "blue-green"
+      rollback_on_failure: true
+      steps:
+        - name: "Backup current binaries"
+          command: |
+            cp /opt/trix/bin/llux /opt/trix/bin/llux.backup.$(date +%s)
+            cp /usr/local/bin/trix /usr/local/bin/trix.backup.$(date +%s)
+            cp /opt/piano/bin/piano /opt/piano/bin/piano.backup.$(date +%s)
+            cp /opt/spidx/bin/spidx /opt/spidx/bin/spidx.backup.$(date +%s)
+          run_on: "all"
+        
+        - name: "Deploy LLUX"
+          command: "cp zig-out/bin/llux /opt/trix/bin/llux"
+          repo: "L3-CITIZENS/LLUX"
+          run_on: "target"
+        
+        - name: "Deploy TRIX"
+          command: "cp zig-out/bin/trix /usr/local/bin/trix"
+          repo: "L4-TOOLS/TRIX"
+          run_on: "target"
+        
+        - name: "Deploy PIANO"
+          command: "cp zig-out/bin/piano /opt/piano/bin/piano"
+          repo: "L4-TOOLS/PIANO"
+          run_on: "target"
+        
+        - name: "Deploy SPIDX"
+          command: "cp zig-out/bin/spidx /opt/spidx/bin/spidx"
+          repo: "L4-TOOLS/SPIDX"
+          run_on: "target"
+        
+        - name: "Deploy Tokenizer"
+          command: "cp models/tokenizer.json /opt/trix/models/tokenizer.json"
+          repo: "L3-CITIZENS/LLUX"
+          run_on: "target"
+        
+        - name: "Start LLUX via TRIX"
+          command: "trix backend start llux"
+          run_on: "target"
+          health_check:
+            max_attempts: 30
+            interval: 2s
+            endpoint: "http://localhost:47000/health"
+        
+        - name: "Verify GATEWAY-MANAGER"
+          command: "curl -f http://localhost:9000/mcp/llux/llm/chat/health"
+          run_on: "target"
+    
+    verify:
+      name: "[OK] Verification post-deploiement"
+      timeout: 120s
+      steps:
+        - name: "Health endpoint"
+          command: "curl -f http://localhost:47000/health"
+          expected: '{"status":"healthy"}'
+          run_on: "target"
+        
+        - name: "Chat endpoint"
+          command: |
+            curl -f -X POST http://localhost:47000/v1/chat/completions \
+              -H "Content-Type: application/json" \
+              -d '{"messages":[{"role":"user","content":"test"}],"model":"bitnet-1.58b"}'
+          expected_contains: "choices"
+          run_on: "target"
+        
+        - name: "Embedding endpoint"
+          command: |
+            curl -f -X POST http://localhost:47000/v1/embeddings \
+              -H "Content-Type: application/json" \
+              -d '{"input":"test","model":"nomic-embed-v1.5"}'
+          expected_contains: "embedding"
+          run_on: "target"
+        
+        - name: "GATEWAY route"
+          command: |
+            curl -f -X POST http://localhost:9000/mcp/llux/llm/chat \
+              -H "Content-Type: application/json" \
+              -d '{"messages":[{"role":"user","content":"test"}]}'
+          expected_contains: "choices"
+          run_on: "target"
+    
+    metrics:
+      name: "📊 Collecte metriques"
+      steps:
+        - name: "Latence LLUX"
+          metric: "llux_latency_ms"
+          command: "curl -w '%{time_total}' -o /dev/null -s http://localhost:47000/health"
+          run_on: "target"
+        
+        - name: "Tokens/sec"
+          metric: "llux_tokens_per_sec"
+          command: "curl -s -X POST http://localhost:47000/v1/chat/completions -d '{\"messages\":[{\"role\":\"user\",\"content\":\"Hello\"}]}' | jq '.usage.total_tokens'"
+          run_on: "target"
+        
+        - name: "RAM usage"
+          metric: "llux_memory_mb"
+          command: "ps -o vsz= -p $(pgrep llux) | awk '{print $1/1024}'"
+          run_on: "target"
+  
+  error_handling:
+    on_failure: "rollback"
+    retry_count: 2
+    retry_delay: 10s
+    notify:
+      - slack: "#infra-alerts"
+      - email: "devops@ecosystem.com"
+  
+  on_success:
+    notify:
+      - slack: "#releases"
+      - email: "team@ecosystem.com"
+  
+  metrics:
+    enabled: true
+    collectors:
+      - build_time
+      - test_coverage
+      - deployment_duration
+      - rollback_count
+      - health_check_latency
+  
+  # Integration KIVA-CI
+  kiva_ci:
+    steps:
+      - "validate_meta_design"
+      - "validate_atom_registry"
+      - "extract_atom_deps"
+      - "connard_validator"
+      - "loop_engine_check"
+    gate: "ALL steps must pass"
+  
+  # Variables
+  variables:
+    TRIX_BIN: "/usr/local/bin/trix"
+    LLUX_BIN: "/opt/trix/bin/llux"
+    PIANO_BIN: "/opt/piano/bin/piano"
+    SPIDX_BIN: "/opt/spidx/bin/spidx"
+    TOKENIZER_MODEL: "/opt/trix/models/tokenizer.json"
+    LLUX_MODEL: "/opt/trix/models/bitnet-1.58b.gguf"
+    PORT_RANGE: "47000-48000"
+    WAL_PATH: "/var/lib/trix/wal"
+    LOG_PATH: "/var/log/trix"

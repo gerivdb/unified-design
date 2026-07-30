@@ -7,7 +7,7 @@ parents:
   - citizen-routing
 status: active
 stratum: L3_CITIZENS
-description: Connecteur TINA ↔ PLIX pour orchestration cognitivo-technique
+description: Connecteur TINA <-> PLIX pour orchestration cognitivo-technique
 capabilities:
   - plix-codec
   - sandbox-isolation

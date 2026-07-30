@@ -1,0 +1,245 @@
+---
+type: RLM_MODULES
+version: "1.0.0"
+status: active
+intent_hash: 0xRLM_MODULES_20260730
+description: "Modules RLM (Release Lifecycle Manager) - 8 modules pour la triade"
+---
+
+rlm_modules:
+  RLM-CONFIG:
+    description: "Configuration centralisee et pipelines"
+    stratum: L2_COMPOSITION
+    repo: "D:/DO/WEB/TOOLS/L2-PLATFORM/RLM-CONFIG"
+    responsibilities:
+      - "Pipeline definitions (YAML)"
+      - "Environment configs (dev/staging/prod)"
+      - "Feature flags"
+      - "Release criteria"
+    artifacts:
+      - "pipeline/triade.yaml"
+    apis:
+      - "GET /config/{env}"
+      - "POST /config/{env}"
+    dependencies: []
+    health: "GET /health"
+  
+  RLM-DEPLOY:
+    description: "Scripts de deploiement automatise"
+    stratum: L2_COMPOSITION
+    repo: "D:/DO/WEB/TOOLS/L2-PLATFORM/RLM-DEPLOY"
+    responsibilities:
+      - "Blue-green deployment"
+      - "Binary deployment"
+      - "Health verification"
+      - "Rollback automation"
+    artifacts:
+      - "scripts/deploy_triade.sh"
+    apis:
+      - "POST /deploy"
+      - "POST /rollback"
+      - "GET /deploy/status"
+    dependencies:
+      - "TRIX"
+      - "RLM-CONFIG"
+    health: "GET /health"
+  
+  RLM-RELEASE:
+    description: "Gestion des tags et versions de release"
+    stratum: L2_COMPOSITION
+    repo: "D:/DO/WEB/TOOLS/L2-PLATFORM/RLM-RELEASE"
+    responsibilities:
+      - "Semantic versioning"
+      - "Release tagging"
+      - "Changelog generation"
+      - "Release notes"
+    artifacts:
+      - "tags/triade_v1.0.0.json"
+    apis:
+      - "POST /release/tag"
+      - "GET /release/{version}"
+      - "GET /release/latest"
+    dependencies:
+      - "RLM-CONFIG"
+    health: "GET /health"
+  
+  RLM-METRICS:
+    description: "Collecte et exposition des metriques"
+    stratum: L2_COMPOSITION
+    repo: "D:/DO/WEB/TOOLS/L2-PLATFORM/RLM-METRICS"
+    responsibilities:
+      - "Metrics collection (Prometheus)"
+      - "Dashboard provisioning"
+      - "Alert rules"
+      - "Export (JSON/CSV/PNG)"
+    artifacts:
+      - "dashboards/triade_dashboard.json"
+    apis:
+      - "GET /metrics"
+      - "GET /metrics/{name}"
+      - "POST /metrics/collect"
+    dependencies:
+      - "LLUX"
+      - "SPIDX"
+      - "TRIX"
+      - "PIANO"
+    health: "GET /health"
+    scrape_interval: "10s"
+  
+  RLM-INCIDENT:
+    description: "Playbooks d'incident et fallback"
+    stratum: L2_COMPOSITION
+    repo: "D:/DO/WEB/TOOLS/L2-PLATFORM/RLM-INCIDENT"
+    responsibilities:
+      - "Incident runbooks"
+      - "Fallback procedures"
+      - "Escalation policies"
+      - "Post-mortem templates"
+    artifacts:
+      - "playbooks/triade_fallback.md"
+    apis:
+      - "POST /incident/trigger"
+      - "GET /incident/{id}"
+      - "POST /incident/{id}/resolve"
+    dependencies:
+      - "RLM-DEPLOY"
+      - "RLM-METRICS"
+    health: "GET /health"
+  
+  RLM-GRAPH:
+    description: "Graphe de dependances et topology"
+    stratum: L2_COMPOSITION
+    repo: "D:/DO/WEB/TOOLS/L2-PLATFORM/RLM-GRAPH"
+    responsibilities:
+      - "Dependency graph"
+      - "Topology visualization"
+      - "Impact analysis"
+      - "Circular detection"
+    artifacts: []
+    apis:
+      - "GET /graph"
+      - "GET /graph/{component}"
+      - "POST /graph/analyze"
+    dependencies:
+      - "RLM-CONFIG"
+    health: "GET /health"
+  
+  RLM-MDU:
+    description: "Migration MDU et validation designs"
+    stratum: L2_COMPOSITION
+    repo: "D:/DO/WEB/TOOLS/L2-PLATFORM/RLM-MDU"
+    responsibilities:
+      - "Design validation"
+      - "MDU migration"
+      - "Atom registry sync"
+      - "Loop detection"
+    artifacts: []
+    apis:
+      - "POST /mdu/validate"
+      - "POST /mdu/migrate"
+      - "GET /mdu/status"
+    dependencies:
+      - "unified-design"
+    health: "GET /health"
+  
+  RLM-SECURE:
+    description: "Securite, secrets, compliance"
+    stratum: L2_COMPOSITION
+    repo: "D:/DO/WEB/TOOLS/L2-PLATFORM/RLM-SECURE"
+    responsibilities:
+      - "Secrets management"
+      - "Certificate rotation"
+      - "Compliance checks"
+      - "Audit logging"
+    artifacts: []
+    apis:
+      - "GET /secrets/{name}"
+      - "POST /secrets/rotate"
+      - "GET /compliance/report"
+    dependencies: []
+    health: "GET /health"
+
+# Pipeline de release unifie
+unified_release_pipeline:
+  name: "triade"
+  version: "1.0.0"
+  stages:
+    - "RLM-CONFIG: validate_pipeline"
+    - "RLM-MDU: validate_designs"
+    - "RLM-GRAPH: check_dependencies"
+    - "RLM-SECURE: check_secrets"
+    - "RLM-CONFIG: build"
+    - "RLM-DEPLOY: deploy"
+    - "RLM-METRICS: collect_baseline"
+    - "RLM-RELEASE: tag_version"
+    - "RLM-INCIDENT: register_playbooks"
+    - "RLM-METRICS: verify_sla"
+  
+  gates:
+    - name: "Design validation"
+      module: "RLM-MDU"
+      required: true
+    - name: "Dependency check"
+      module: "RLM-GRAPH"
+      required: true
+    - name: "Security scan"
+      module: "RLM-SECURE"
+      required: true
+    - name: "Health verification"
+      module: "RLM-DEPLOY"
+      required: true
+    - name: "SLA verification"
+      module: "RLM-METRICS"
+      required: true
+  
+  rollback:
+    trigger: "any_gate_failure OR health_check_failure"
+    modules:
+      - "RLM-DEPLOY: rollback"
+      - "RLM-RELEASE: delete_tag"
+      - "RLM-INCIDENT: create_incident"
+      - "RLM-METRICS: alert"
+
+# Integration KIX
+kix_integration:
+  orchestrates: ["RLM-CONFIG", "RLM-DEPLOY", "RLM-RELEASE", "RLM-METRICS", "RLM-INCIDENT", "RLM-GRAPH", "RLM-MDU", "RLM-SECURE"]
+  schedules:
+    - name: "daily_release"
+      cron: "0 2 * * *"
+      pipeline: "triade"
+    - name: "health_check"
+      cron: "*/15 * * * *"
+      modules: ["RLM-METRICS", "RLM-DEPLOY"]
+    - name: "security_audit"
+      cron: "0 3 * * 1"
+      module: "RLM-SECURE"
+
+# Monitoring RLM
+rlm_monitoring:
+  metrics:
+    - name: "rlm_pipeline_duration_seconds"
+      type: histogram
+      labels: ["stage", "status"]
+    - name: "rlm_deployment_total"
+      type: counter
+      labels: ["module", "status"]
+    - name: "rlm_rollback_total"
+      type: counter
+      labels: ["module", "reason"]
+    - name: "rlm_gate_duration_seconds"
+      type: histogram
+      labels: ["gate", "status"]
+    - name: "rlm_incident_total"
+      type: counter
+      labels: ["severity", "status"]
+  
+  alerts:
+    - name: "rlm_pipeline_failed"
+      condition: "rlm_deployment_total{status='failed'} > 0"
+      severity: "critical"
+    - name: "rlm_rollback_frequency"
+      condition: "rate(rlm_rollback_total[1h]) > 2"
+      severity: "warning"
+    - name: "rlm_gate_timeout"
+      condition: "rlm_gate_duration_seconds > 600"
+      severity: "warning"

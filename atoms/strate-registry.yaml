@@ -1,10 +1,10 @@
 ---
 name: strate-registry
-description: "Classification L0-L5 des dépôts avec règles de gouvernance"
+description: "Classification L0-L5 des depots avec regles de gouvernance"
 parameters:
   strates:
     L0_CANON:
-      description: "Repos sources de vérité (SOT). Non négociable."
+      description: "Repos sources de verite (SOT). Non negociable."
       max_repos: 10
     L1_CAUSALITY:
       description: "Infrastructure runtime, agents, scheduler, WAL."
@@ -16,40 +16,40 @@ parameters:
       description: "Repos de composition et orchestration."
       max_repos: 20
     L2_PLATFORM:
-      description: "Plateformes et cadres d'exécution."
+      description: "Plateformes et cadres d'execution."
       max_repos: 15
     L3_EMERGENCE:
-      description: "Repos citoyens et d'émergence."
+      description: "Repos citoyens et d'emergence."
       max_repos: 30
     L4_TOOLS:
-      description: "Outils de développement."
+      description: "Outils de developpement."
       max_repos: 50
     L5_ARCHIVE:
       description: "Repos archives. Read-only."
       max_repos: 100
   global_rules:
-    - "TOPOS/topology.yaml est la SOT des dépendances inter-repos"
-    - "Chaque repo avec ECOS_ROOT.json doit être dans topology.yaml"
-    - "Les divergences doivent être résolues"
+    - "TOPOS/topology.yaml est la SOT des dependances inter-repos"
+    - "Chaque repo avec ECOS_ROOT.json doit etre dans topology.yaml"
+    - "Les divergences doivent etre resolues"
 inherits: []
 ---
 
 # Strate Registry Atom
 
-Capacité de design définissant la classification hiérarchique des dépôts.
+Capacite de design definissant la classification hierarchique des depots.
 
-## Paramètres
+## Parametres
 
-| Paramètre | Type | Défaut | Description |
+| Parametre | Type | Defaut | Description |
 |-----------|------|--------|-------------|
-| `strates` | dict | {} | Classification L0-L5 avec règles |
-| `global_rules` | list | [] | Règles de gouvernance transverses |
+| `strates` | dict | {} | Classification L0-L5 avec regles |
+| `global_rules` | list | [] | Regles de gouvernance transverses |
 
 ## Invariants
 
-- Chaque dépôt doit appartenir à exactement une strate
-- Les règles de gouvernance sont strictes par strate
-- Les modifications de strate nécessitent un ADR
+- Chaque depot doit appartenir a exactement une strate
+- Les regles de gouvernance sont strictes par strate
+- Les modifications de strate necessitent un ADR
 
 ## Exemple d'usage
 
@@ -66,7 +66,7 @@ capabilities:
         - "TOPOS/topology.yaml est la SOT"
 ```
 
-## Références
+## References
 
 - TOPOS STRATE_REGISTRY.yaml
 - Meta-Design MDU v2

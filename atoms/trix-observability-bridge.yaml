@@ -1,6 +1,6 @@
 ---
 name: trix-observability-bridge
-description: "Bridge d'observabilité runtime pour méta-outils avec spans et décorateur @observe_tool."
+description: "Bridge d'observabilite runtime pour meta-outils avec spans et decorateur @observe_tool."
 parameters:
   instrumentation: "@observe_tool"
   span_emission: true

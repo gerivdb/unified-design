@@ -1,6 +1,6 @@
 ---
 name: session-continuity-bridge
-description: "Bridge de continuité inter-sessions via WAL + stashes + manifests."
+description: "Bridge de continuite inter-sessions via WAL + stashes + manifests."
 parameters:
   continuity_mechanisms:
     - WAL append-only
