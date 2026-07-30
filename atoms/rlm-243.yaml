@@ -1,0 +1,33 @@
+---
+name: rlm-243
+description: "RLM-243 - noyau recurrent ternaire 243 neurones, Base 243"
+parameters:
+  neurons: 243
+  base: 3
+  recurrence: true
+inherits: [b243-vector]
+---
+
+# RLM-243 Atom
+
+Noyau récurrent ternaire à 243 neurones (3^5 états).
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| neurons | int | 243 | Nombre de neurones |
+| base | int | 3 | Base ternaire |
+| recurrence | bool | true | Boucle récurrente |
+
+## Invariants
+
+- État du système encodé dans vecteur b243
+- Chaque neuron est un trit
+- Récurrence via fractal loop
+
+## Références
+
+- b243-vector
+- OUROBOUROS pattern
+- PLIX runners

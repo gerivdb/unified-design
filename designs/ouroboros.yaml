@@ -1,0 +1,21 @@
+---
+name: ouroboros
+version: "1.0.0"
+description: "OUROBOUROS - pattern recursif interne pour auto-reparation et adaptation"
+status: active
+owner: Bellard
+inherits:
+  - fractal-recursion
+capabilities:
+  - name: fractal-loop
+    parameters:
+      max_depth: 6
+      self_repair: true
+components:
+  - loop: fractal_loop
+  - healer: healer_runner
+  - adapter: metamorphic_adapter
+constraints:
+  - pas de point central
+  - resilience: auto-organisation
+intent_hash: 0xOUROBOROS_DESIGN_20260730

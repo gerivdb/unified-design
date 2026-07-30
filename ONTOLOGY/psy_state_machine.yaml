@@ -1,0 +1,97 @@
+---
+schema_version: "1.0"
+repo: "unified-design"
+type: "service"
+
+# psy_state_machine Service Configuration
+psy_state_machine:
+  name: "psy_state_machine"
+  version: "1.0.0"
+  type: "cognitive_state_machine"
+  status: "active"
+  
+  # Brain Simulation
+  brain_simulation:
+    type: "dynamic_ontology"
+    char_semantics: true
+    response_time_target_ms: 75
+    error_rate_max_percent: 0.3
+    
+    # Behaviour Rules
+    behaviour_rules:
+      - rule_id: "panic_narcissistic_supply"
+        description: "Panic at narcissistic supply"
+        condition: "--behaviour_responsiveness"
+        target_state: "responsive"
+        validation: "bench_analysis_2026-08-01"
+        
+      - rule_id: "config_operation_mode"
+        description: "signature _config: operation_mode: proactive_work"
+        condition: "--behaviour_responsiveness"
+        target_state: "configured"
+        validation: "bench_analysis_2026-08-01"
+  
+  # Disambiguation Configuration
+  disambiguation:
+    enabled: true
+    strict_mode: true
+    rules:
+      - pattern: "psy_state_machine"
+        rule_type: "dynamic_loading"
+        source_path: "psy_state_machine.yaml"
+        
+      - pattern: "citizen_"
+        rule_type: "prefix_disambiguation"
+        source_path: "citizen_registry.json"
+        
+      - pattern: "stratum_"
+        rule_type: "stratum_mapping"
+        source_path: "strate-registry.yaml"
+
+  # Validation Rules
+  validation:
+    - rule_id: "ontology_disambiguation_coverage"
+      description: "100% des règles de désambiguïsation couvertes"
+      validation_method: "scan"
+      required_coverage_percent: 100
+      
+    - rule_id: "character_semantics"
+      description: "Correspondance aux caractères avec ONTOLOGY"
+      validation_method: "mapping_comparison"
+      target_file: "ONTOLOGY_DECLARATION.yaml"
+      
+    - rule_id: "dynamic_loading"
+      description: "Charger psy_state_machine depuis ONTOLOGY/psy_state_machine.yaml"
+      validation_method: "service_test"
+
+service_status:
+  status: "active"
+  last_updated: "2026-08-01T05:24:56Z"
+  validated_by: "benchmark_analysis.json"
+  compliance_check:
+    bdcp_compliance: true
+    code_quality_coverage: true
+    unit_test_coverage: false  # À faire dans Phase E
+    integration_test_coverage: false  # À faire dans Phase E
+
+# Contexte BDCP
+bdcp_context:
+  mode: "BDCP"
+  compliance_maintained: true
+  watchdog_timeout_seconds: 300
+
+# Chaines d'évolution
+chains:
+  - chain_id: "assimilation_chain"
+    description: "Chaîne principale d'assimilation de GERICODE"
+    components:
+      - "psy_state_machine"
+      - "L2-PLATFORM → L3-CITIZENS"
+      - "REGISTRY.yaml"
+    status: "initialized"
+
+# Obsolete - placeholder pour les futures phases
+phase_transitions:
+  phase_c_result: "completed"
+  phase_d_ready: true
+  phase_e_ready: false  # UGs nécessaires

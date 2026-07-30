@@ -1,0 +1,32 @@
+---
+name: ouroboros
+description: "OUROBOUROS - pattern recursif interne pour auto-reparation et adaptation"
+parameters:
+  max_depth: 6
+  self_repair: true
+inherits:
+  - fractal-recursion
+---
+
+# OUROBOUROS Atom
+
+Pattern récursif présent dans BRAIN, PLIX, PIANO, runners.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| max_depth | int | 6 | Profondeur fractal max |
+| self_repair | bool | true | Auto-réparation active |
+
+## Invariants
+
+- Pas de point central
+- Auto-organisation
+- Fractal loop interne à chaque runner
+
+## Références
+
+- fractal-recursion
+- CTULU orchestration
+- HEALER runner

@@ -1,0 +1,39 @@
+---
+name: maxwell-triad
+description: "Triade semantique Maxwell - Entropie/Gradient/Symetrie pour audio+video"
+parameters:
+  signal_types: [video, audio]
+  metric: shannon
+  diff_order: 1
+  invariant: energy
+inherits:
+  - plix-codec
+  - plix-audio
+---
+
+# Maxwell Triad Atom
+
+Triade semantique commune audio+video : Entropie, Gradient, Symetrie.
+
+## Parametres
+
+| Parametre | Type | Defaut | Description |
+|-----------|------|--------|-------------|
+| signal_types | list | [video, audio] | Signaux supportes |
+| metric | string | shannon | Metrique entropie |
+| diff_order | int | 1 | Ordre derivation |
+| invariant | string | energy | Invariant conserve |
+
+## Invariants
+
+- Entropie -> SPIDX
+- Gradient -> PIANO-DIFF
+- Symetrie -> Fractal kernel
+- Conservation energie : E(t) = E(0)
+
+## References
+
+- SPIDX
+- PIANO-DIFF
+- Fractal kernel
+- maxwell_pipeline.c

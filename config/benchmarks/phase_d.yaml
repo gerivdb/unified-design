@@ -1,0 +1,62 @@
+---
+# phase_d.yaml — Configuration Phase D : GERICODE KILOCODE ASSIMILATION
+# DOI: 10.6084/m9.figshare.25578396
+# Version: 1.0.0 (2026-08-01)
+
+phase:
+  identifier: "phase_d"
+  name: "GERICODE KILOCODE ASSIMILATION"
+  version: "1.0.0"
+  date: "2026-08-01"
+  status: planned
+  parent_phase: "phase_c"
+
+migration:
+      rename_operations:
+        - from: "L2-PLATFORM"
+          to: "L3-CITIZENS"
+          type: directory_rename
+          scope: "cross_repo"
+          validation: "git ls-tree --recursive HEAD --name-only"
+          dry_run: false
+      
+  files_to_update:
+    - pattern: "**/*L2-PLATFORM*"
+      action: "rename_to_L3-CITIZENS"
+      backup: true
+
+ontology_mapping:
+  fill_schema:
+    source: "gerivdb/ONTOLOGY/psy_state_machine.yaml"
+    target: "config/REGISTRY.yaml"
+    type: "ontology_fill_mapping"
+    version: "2.1"
+    validation: "ontology_audit.py"
+
+service_deployment:
+  psy_state_machine:
+    type: "yaml_service"
+    location: "ONTOLOGY/psy_state_machine.yaml"
+    schema_version: "1.0"
+    required: true
+    description: "Service d'état cognitif dynamique pour gestion des citoyens"
+
+validation:
+  pre_migration:
+    - "git status --porcelain"
+    - "git remote -v"
+    - "python scripts/validate_atom_registry.py"
+  post_migration:
+    - "find . -name '*L2-PLATFORM*' -type f"
+    - "ontology_consistency_check.py"
+    - "bdcp_status_check.py"
+
+rollback:
+  enabled: true
+  strategy: "git reflog"
+  max_history: 72h
+
+reporting:
+  output_dir: "reports/phase_d"
+  formats: ["json", "markdown"]
+  include_diffs: true

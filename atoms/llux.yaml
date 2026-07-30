@@ -1,0 +1,33 @@
+---
+name: llux
+description: "LLUX - moteur systeme miroir pour inference BitNet 1.58b via TRIX"
+parameters:
+  model: bitnet-1.58b
+  backend: trix
+  ports: [47000, 48000]
+inherits: []
+---
+
+# LLUX Atom
+
+Moteur système miroir pour inférence LLM quantifié BitNet 1.58b.
+
+## Paramètres
+
+| Paramètre | Type | Défaut | Description |
+|-----------|------|--------|-------------|
+| model | string | bitnet-1.58b | Modèle quantifié |
+| backend | string | trix | Backend d'exécution |
+| ports | list | [47000, 48000] | Plage ports dynamiques |
+
+## Invariants
+
+- API OpenAI-compatible
+- Backend TRIX obligatoire
+- Ports dynamiques 47000-48000
+
+## Références
+
+- TRIX backend
+- PIANO binding
+- SPIDX embeddings
