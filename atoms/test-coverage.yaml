@@ -1,0 +1,54 @@
+---
+name: test-coverage
+description: "Exigence de couverture de tests pour ATOM-049 et détection de cycles blocks dans les relations structurelles."
+level: N2
+inherits: [structural-relations, fixpoint-validator]
+family: quality-assurance
+structural_relations:
+  - kind: requires
+    target: structural-relations
+  - kind: requires
+    target: fixpoint-validator
+syntax: detect_blocks_cycles(graph: Graph) -> Result<List[Cycle], Error>
+implementation: piano/inference.py (_detect_blocks_cycles)
+references:
+  - ATOM-045
+  - ATOM-049
+---
+
+# ATOM-049 - Test Coverage & Cycle Detection
+
+## Contexte
+
+ATOM-045 a introduit les relations structurelles, dont le kind `blocks` impose une acyclicité stricte.
+Le validateur actuel ne détecte que les doublons exacts, pas les cycles transitifs.
+
+## Objectif
+
+1. Ajouter une détection de cycles `blocks` par DFS dans `piano/inference.py`.
+2. Définir un seuil de couverture de tests pour `piano` et `plix`.
+3. Référencer ATOM-045 (structural-relations) dans la sortie de validation.
+
+## Règles
+
+- `_detect_blocks_cycles(graph)` retourne la liste des cycles ou `[]` si acyclique.
+- `validate_structural` intègre la détection et retourne `False` si un cycle est trouvé.
+- Seuil de couverture : 80 % sur `piano/` et `plix/`.
+- La CLI `plix validate --structural` affiche les cycles détectés sans lever d'exception.
+
+## Validation
+
+```yaml
+structural_relations:
+  - kind: blocks
+    target: alpha
+  - kind: blocks
+    target: beta
+```
+
+Si `alpha -> beta -> alpha`, la validation échoue et liste le cycle.
+
+## Références
+
+- ATOM-045 (structural-relations)
+- ADR-2026-07-30-004 (structural-relations)
