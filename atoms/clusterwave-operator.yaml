@@ -1,0 +1,16 @@
+---
+name: clusterwave-operator
+description: "Opérateur PSL (cw) injectant un état ternaire à une fréquence donnée (delta/theta/alpha/beta) pour piloter le débruitage ou la prédiction de convergence."
+level: N2
+inherits: [frequency-engineering]
+family: pulse-control
+structural_relations:
+  - kind: opposes
+    target: fixpoint-validator
+  - kind: requires
+    target: time-machine
+syntax: cw(f: Frequency, s: Trit, phase_offset: Option<f32>)
+implementation: piano/time_machine.py
+references:
+  - ATOM-047
+  - ADR-016-loop-engine

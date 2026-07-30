@@ -330,6 +330,10 @@ couche_gouvernance:
 
 # Atomes de gouvernance (extraits de GOVERNANCE-HUB)
 governance_atoms:
+  - pre-action-validation
+  - structural-relations
+  - clusterwave-operator
+  - fixpoint-validator
   - constitutional-sot
   - stratified-repository-registry
   - ternary-governance
@@ -380,6 +384,8 @@ git_policy:
 
 # References
 references:
+  - ADR-2026-07-30-004
+  - ADR-2026-07-30-004
   - ADR-012-meta-design-validation-protocol
   - ADR-015-unified-design-v2
   - ADR-016-loop-engine
@@ -390,3 +396,5 @@ references:
   - ADR-20260715-002-DESIGN-VALIDATE-CLI
   - INT-CONNARD-001
   - EPIC-CONNARD-001
+
+

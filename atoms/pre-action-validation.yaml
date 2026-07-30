@@ -1,0 +1,42 @@
+---
+name: pre-action-validation
+description: "Protocole de validation pre-action : verifier les prealables (acces fichiers, remote, workspace) avant toute action."
+parameters:
+  checks:
+    - mcp_access
+    - bash_absolute_path
+    - remote_url
+    - workspace_state
+  timeout_ms: 100
+  sonde_active: true
+inherits: [formal-verification, absolute-rules-enforcement]
+---
+
+# ATOM-048 -- Pre-Action Validation Protocol
+
+## Contexte
+L'IA annonce parfois des actions qu'elle ne peut pas executer faute de prealables valides. Ce protocole impose une sonde active avant toute declaration d'action.
+
+## Regles
+
+1. Ne jamais declarer une action sans avoir verifie sa capacite a l'executer.
+2. Toujours sonder l'acces via MCP ou os.access() avant toute action.
+3. Toujours utiliser des chemins absolus en bash (bash-cwd-persistence).
+4. Toujours verifier le remote avant tout push (git-remote-safety).
+5. Toujours verifier l'etat du workspace avant toute modification.
+
+## Verification
+
+La fonction can_execute(action, context) retourne True si et seulement si :
+- Le chemin cible est dans allowedDirectories MCP (si lecture/ecriture fichier)
+- Le chemin cible est accessible en bash (si execution commande)
+- Le remote est configure (si push)
+- La branche existe (si checkout/merge)
+
+## References
+
+- ADR-2026-07-30-004
+- ADR-061 (structural-relations)
+- bash-cwd-persistence.md
+- git-remote-safety.md
+
