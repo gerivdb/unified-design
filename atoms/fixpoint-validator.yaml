@@ -1,0 +1,16 @@
+---
+name: fixpoint-validator
+description: "Validateur asynchrone de point fixe opposé à Clusterwave, exécuté sur une horloge indépendante pour éviter le biais de prédiction."
+level: N2
+inherits: [frequency-engineering]
+family: pulse-control
+structural_relations:
+  - kind: opposes
+    target: clusterwave-operator
+  - kind: stabilizes
+    target: chain-engineering
+syntax: fixpoint(guard: Fn, timeout: Duration) -> Result<bool, Error>
+implementation: piano/time_machine.py (FixpointGuard)
+references:
+  - ATOM-047
+  - ADR-019-phase3-incremental

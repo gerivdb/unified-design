@@ -1,0 +1,80 @@
+---
+name: structural-relations
+description: "Contrat des 6 kinds de relations structurelles optionnelles entre nodes MDU : opposes, complements, inherits, requires, blocks, stabilizes. Acronymes ATOM-045."
+parameters:
+  kinds:
+    - opposes
+    - complements
+    - inherits
+    - requires
+    - blocks
+    - stabilizes
+  symmetry:
+    opposes: symmetric
+    complements: symmetric
+    inherits: asymmetric
+    requires: asymmetric
+    blocks: asymmetric
+    stabilizes: asymmetric
+  acyclicity:
+    blocks: strict
+    requires: strict
+    inherits: strict
+    stabilizes: allowed
+    opposes: allowed
+    complements: allowed
+  validation: yaml_frontmatter_only
+inherits: [formal-verification, dependency-graph-cache]
+---
+
+# ATOM-045 -- Structural Relations MDU
+
+Le MDU dispose d'une hiérarchie verticale (`inherits`) mais pas de relations horizontales explicites entre noeuds de même niveau. Les concepts `loop-engineering`, `chain-engineering`, `circuit-breaker-pattern` et `conflict-resolver-pattern` forment des paires binaires qui stabilisent l'architecture sans être formalisées.
+
+## Décision
+
+Introduire 6 kinds de relations structurelles optionnelles dans les métadonnées YAML des designs et atomes :
+
+| Kind | Sémantique | Symétrie | Acyclicité |
+|------|-----------|----------|----|
+| `opposes` | Opposition conceptuelle | Oui | Oui |
+| `complements` | Complémentarité fonctionnelle | Oui | Oui |
+| `inherits` | Héritage MDU | Non | Oui |
+| `requires` | Dépendance sémantique | Non | Oui |
+| `blocks` | Blocage structurel | Non | Oui |
+| `stabilizes` | Stabilisation asymétrique | Non | Non |
+
+## Règles
+
+- `opposes` et `complements` sont symétriques par défaut.
+- `stabilizes` est asymétrique : le validateur rejette la symétrie déclarée.
+- Aucun cycle n'est toléré dans `blocks`.
+- Le champ est optionnel ; absence = pas de relation horizontale déclarée.
+
+## Utilisation
+
+```yaml
+structural_relations:
+  - kind: opposes
+    target: pattern-x
+  - kind: complements
+    target: pattern-y
+```
+
+## Validation
+
+Le validateur `plix validate --structural` vérifie :
+1. Les kinds déclarés sont dans la liste autorisée.
+2. La symétrie de `opposes`/`complements` est respectée.
+3. Aucun cycle `blocks` n'existe dans le graphe.
+4. `stabilizes` n'est pas déclaré symétrique.
+
+## Références
+
+- ADR-2026-07-30-004 (structural-relations)
+- ADR-016-loop-engine
+- ADR-019-phase3-incremental
+- ADR-2026-07-30-001 (ADMG/DAG-3 hierarchy)
+- ADR-2026-07-30-002 (fractal-engineering-strata)
+- ADR-2026-07-30-003 (merge-fork-balance)
+
