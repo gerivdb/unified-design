@@ -953,3 +953,8 @@ ATOM-042-REPOSITORY-CENSUS.md:
   description: 'description: "Validateur asynchrone de point fixe opposé à Clusterwave."'
   depends_on:
     - frequency-engineering
+
+- path: atoms/pre-action-validation.yaml
+  hash: 1cf95a9a9720
+  description: 'description: "Protocole de validation pre-action (ATOM-048)."'
+  depends_on: []
