@@ -1,0 +1,19 @@
+---
+name: fractal-engineering-strata
+description: "Fractal engineering auto-similaire sur les strates L0-L4"
+version: 1.0.0
+status: active
+inherits:
+  - fractal-recursion
+  - ouroboros
+  - incremental-growth
+parameters:
+  pattern: self-similar
+  max_depth: 6
+  short_circuit: NEUTRE
+  strata: [L0, L1, L2, L3, L4]
+performance:
+  latency_p99: 45ms
+  power_max: 12W
+intent_hash: 0xFRACTAL_ENGINEERING_STRATA_20260730
+---
