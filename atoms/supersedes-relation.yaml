@@ -1,0 +1,59 @@
+---
+name: ATOM-061-supersedes-relation
+level: N+1
+inherits: [ATOM-045-structural-relations]
+structural_relations:
+  - kind: supersedes
+    target: relation-conflict-resolution
+  - kind: supersedes
+    target: orchestration-relations
+---
+
+# ATOM-061: supersedes Relation Kind
+
+Étend la triade structurelle (ATOM-045) avec un nouveau kind de relation `supersedes` pour modéliser le remplacement ou l'obsolescence d'un élément par un autre.
+
+## Sémantique
+
+| Propriété | Valeur |
+|-----------|--------|
+| **Kind** | `supersedes` |
+| **Symétrie** | Asymétrique (A supersedes B != B supersedes A) |
+| **Transitivité** | Oui (A supersedes B && B supersedes C => A supersedes C) |
+| **Signification** | A remplace/obsolette B ; B n'est plus recommandé mais peut exister pour compatibilité |
+
+## Exemples d'usage
+
+```yaml
+# Dans un atom/design
+structural_relations:
+  - kind: supersedes
+    target: old-design-pattern
+  - kind: supersedes
+    target: legacy-validation-method
+```
+
+## Différences avec les kinds existants
+
+| Kind | Sémantique | Supersedes |
+|------|------------|------------|
+| `blocks` | A empêche B de fonctionner | Non - bloque l'exécution |
+| `requires` | A a besoin de B | Non - dépendance |
+| `supersedes` | A remplace B (obsolescence) | **Oui** - migration/replacement |
+
+## Détection de conflits (ATOM-051)
+
+Le détecteur de conflits existant gère `supersedes` via `VALID_KINDS` :
+- `self_referential` : A supersedes A -> conflit
+- `multiple_relations_same_target` : A supersedes B + A requires B -> avertissement
+- `opposing_and_complementing` : N/A (supersedes != opposes/complements)
+
+## Impact CI
+
+Aucun changement au pipeline KIVA-CLI requis. La validation `plix validate --conflicts` inclut automatiquement `supersedes` via l'import `VALID_KINDS`.
+
+## Références
+
+- ATOM-045 : structural-relations (base)
+- ATOM-051 : relation-conflict-resolution (détection)
+- ATOM-060 : orchestration-relations (contexte)

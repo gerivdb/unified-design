@@ -1,6 +1,14 @@
 name: unified-design
 description: Pipeline de validation souverain pour unified-design (KIVA-CLI local)
 
+# Parallel groups: steps in the same inner list run concurrently
+# Steps not in any group run sequentially in dependency order
+parallel_groups:
+  - - "Validate meta-design schema"
+    - "Validate atoms YAML"
+    - "Validate designs YAML"
+    - "Validate ATOM-051 atom"
+
 steps:
   - name: Validate meta-design schema
     command: python scripts/validate_meta_design.py --schema schemas/meta-design.schema.json meta-design.yaml
