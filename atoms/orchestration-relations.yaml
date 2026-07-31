@@ -1,0 +1,22 @@
+---
+name: orchestration-relations
+description: "Extension de la triade par les relations d'activation et de delegation : orchestrates, delegates, forwards_to. Acronyme ATOM-060."
+level: N1
+inherits: [structural-relations, chain-engineering]
+family: governance
+parameters:
+  kinds:
+    - orchestrates
+    - delegates
+    - forwards_to
+  symmetry:
+    orchestrates: asymmetric
+    delegates: asymmetric
+    forwards_to: asymmetric
+  acyclicity:
+    orchestrates: strict
+    delegates: strict
+    forwards_to: strict
+  validation: yaml_frontmatter_only
+inherits: [structural-relations]
+---
