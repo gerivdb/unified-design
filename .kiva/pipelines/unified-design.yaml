@@ -13,3 +13,7 @@ steps:
 
   - name: Validate ATOM-051 atom
     command: python scripts/validate_yaml.py "atoms/relation-conflict-resolution.yaml"
+
+  - name: CFMI Scan
+    command: plix governance --scan --designs-path .
+    timeout: 30s
