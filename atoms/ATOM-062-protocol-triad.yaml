@@ -1,0 +1,68 @@
+# ATOM-062: Protocol Triad THINK/DO/CHECK (N0 Meta-Governance)
+# Formalisation de la triade protocolaire : Plan (THINK) - Verify (CHECK) - Execute (DO) - Verify (CHECK)
+version: "2.0.0"
+name: "ATOM-062-protocol-triad"
+inherits:
+  - "ATOM-048-pre-action-validation"
+  - "ATOM-050-primitivism-structuralism-anamorphism"
+capabilities:
+  - name: "think-phase"
+    description: "Phase de planification : analyse, decomposition, selection template, generation plan.json"
+    parameters:
+      max_tokens_per_step: 150
+      single_tool_per_step: true
+      no_nesting: true
+      absolute_paths: true
+      verify_included: true
+      tools: ["atomic-task-planner"]
+  - name: "check-pre"
+    description: "Validation pre-execution : verification prerequis, hash, chemins, dependances"
+    parameters:
+      validate_plan: true
+      validate_hash: true
+      validate_paths: true
+      validate_dependencies: true
+      validate_verify_field: true
+      tools: ["task-graph-validator"]
+      mode: "--check-pre"
+  - name: "do-phase"
+    description: "Phase d-execution atomique : 1 step = 1 tool call, etat persistant, reprise"
+    parameters:
+      atomic_execution: true
+      state_persistence: ".slm/state.json"
+      resume_capable: true
+      tool_mapping:
+        read: "Path.read_text"
+        write: "Path.write_text"
+        edit: "string_replace"
+        bash: "subprocess.run"
+      tools: ["slm-micro-executor"]
+  - name: "check-post"
+    description: "Validation post-execution : verification resultat, commit ATOM, livraison"
+    parameters:
+      verify_output: true
+      verify_commit_format: true
+      verify_atom_number: true
+      verify_intent_hash: true
+      verify_refs: true
+      tools: ["micro-commit-orchestrator", "task-graph-validator"]
+      mode: "--check-post"
+  - name: "triad-invariant"
+    description: "Invariant protocolaire : CHECK avant DO, CHECK apres DO, jamais DO sans CHECK"
+    parameters:
+      enforce_pre_check: true
+      enforce_post_check: true
+      error_on_violation: true
+      wal_logging: true
+  - name: "latency-bound"
+    parameters:
+      max_latency_ms: 100
+  - name: "power-capped"
+    parameters:
+      max_power_w: 5
+design_version: "1.0"
+intent_hash: 0xATOM_062_PROTOCOL_TRIAD_20260801
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90
