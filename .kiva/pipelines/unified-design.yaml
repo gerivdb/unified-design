@@ -15,5 +15,5 @@ steps:
     command: python scripts/validate_yaml.py "atoms/relation-conflict-resolution.yaml"
 
   - name: CFMI Scan
-    command: set PYTHONPATH=D:/DO/WEB/TOOLS/L1-INFRA/FLUENCE && python -c "from plix.governance import scan_gates; from pathlib import Path; print(scan_gates(Path('.')))"
+    command: $env:PYTHONPATH='D:/DO/WEB/TOOLS/L1-INFRA/FLUENCE'; python -c "from plix.governance import scan_gates; from pathlib import Path; print(scan_gates(Path('.')))"
     timeout: 30s
