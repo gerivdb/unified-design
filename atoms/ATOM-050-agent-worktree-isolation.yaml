@@ -1,0 +1,25 @@
+# ATOM-050: Agent Worktree Isolation (G2)
+# Chaque nœud du graphe reçoit son propre worktree Git avec dry-run avant merge
+version: "2.0.0"
+name: "ATOM-050-agent-worktree-isolation"
+inherits: ["ATOM-003-gated-boot-sequence", "ATOM-004-constitutional-sot"]
+capabilities:
+  - name: "worktree-isolation"
+    description: "Isolation physique agents via git worktree avec dry-run pré-merge"
+    parameters:
+      dry_run_enabled: true
+      abort_on_conflict: true
+      max_parallel_worktrees: 8
+      cleanup_on_complete: true
+  - name: "latency-bound"
+    parameters:
+      max_latency_ms: 50
+  - name: "power-capped"
+    parameters:
+      max_power_w: 10
+design_version: "1.0"
+intent_hash: 0xATOM_050_AGENT_WORKTREE_ISO_20260731
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90

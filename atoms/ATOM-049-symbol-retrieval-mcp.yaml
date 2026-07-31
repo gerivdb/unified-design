@@ -1,0 +1,25 @@
+# ATOM-049: Symbol Retrieval via MCP (L3 - Serena)
+# Remplace Read/Edit par récupération au niveau symbole via Model Context Protocol
+version: "2.0.0"
+name: "ATOM-049-symbol-retrieval-mcp"
+inherits: ["ATOM-001-sonar-driven-design", "ATOM-002-attention-mechanism"]
+capabilities:
+  - name: "symbol-retrieval"
+    description: "Récupération de fonctions/classes via MCP au lieu de lecture fichier complet"
+    parameters:
+      protocol: "MCP"
+      transport: "stdio"
+      max_symbols_per_call: 50
+      context_savings_tokens: 16000
+  - name: "latency-bound"
+    parameters:
+      max_latency_ms: 10
+  - name: "power-capped"
+    parameters:
+      max_power_w: 5
+design_version: "1.0"
+intent_hash: 0xATOM_049_SYMBOL_RETRIEVAL_MCP_20260731
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90

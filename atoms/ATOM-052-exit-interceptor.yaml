@@ -1,0 +1,27 @@
+# ATOM-052: Exit Interceptor / Stop Hook (L5)
+# Blocage sortie agent + validation par second modèle (OpenAI Codex) avant exit
+version: "2.0.0"
+name: "ATOM-052-exit-interceptor"
+inherits: ["ATOM-008-hitl-gate", "ATOM-009-ext-code-reviewer", "ATOM-010-constitutional-filter"]
+capabilities:
+  - name: "exit-interceptor"
+    description: "Stop hook bloquant exit agent + validation cross-model avant libération"
+    parameters:
+      block_on_exit: true
+      validator_model: "openai-codex"
+      validation_artifact: "review.md"
+      require_signed_review: true
+      timeout_seconds: 300
+      self_review_prevention: true
+  - name: "latency-bound"
+    parameters:
+      max_latency_ms: 5000
+  - name: "power-capped"
+    parameters:
+      max_power_w: 15
+design_version: "1.0"
+intent_hash: 0xATOM_052_EXIT_INTERCEPTOR_20260731
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90

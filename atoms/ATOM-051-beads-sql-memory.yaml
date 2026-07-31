@@ -1,0 +1,29 @@
+# ATOM-051: Beads SQL Versioned Memory (L1)
+# Remplace TODO.md par graphe réel SQL versionné + compression 70% insights
+version: "2.0.0"
+name: "ATOM-051-beads-sql-memory"
+inherits: ["ATOM-005-memory-curator", "ATOM-006-wal-compaction", "ATOM-007-sovereign-vector-memory"]
+capabilities:
+  - name: "beads-sql-memory"
+    description: "Mémoire SQL versionnée (SQLite+WAL) - graphe insights + compression 70%"
+    parameters:
+      storage_backend: "sqlite+wal"
+      compression_ratio: 0.70
+      survival_modes:
+        - "context_reset"
+        - "account_rotation"
+      query_interface: "sql"
+      schema_version: 1
+      index_strategy: "btree+fulltext"
+  - name: "latency-bound"
+    parameters:
+      max_latency_ms: 20
+  - name: "power-capped"
+    parameters:
+      max_power_w: 8
+design_version: "1.0"
+intent_hash: 0xATOM_051_BEADS_SQL_MEMORY_20260731
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90
