@@ -1,0 +1,32 @@
+# ATOM-063: Execution Protocol (N0 Meta-Governance)
+# Imposes OPERATOR -> ORDER -> IA -> EXECUTION cycle without summary
+version: "2.0.0"
+name: "ATOM-063-execution-protocol"
+inherits:
+  - "ATOM-062-protocol-triad"
+capabilities:
+  - name: "exec-mode"
+    description: "Immediate execution without summary reporting"
+    parameters:
+      suppress_summary: true
+      suppress_json: true
+      verbose_only: true
+      latency_bound_ms: 1000
+  - name: "operator-authority"
+    description: "Operator decides, IA executes without reporting"
+    parameters:
+      no_unsolicited_report: true
+      report_only_on_verbose: true
+      ack_only: true
+  - name: "exec-flag"
+    description: "CLI flag --exec to bypass summaries"
+    parameters:
+      flag_name: "--exec"
+      alias: "-x"
+      effect: "suppress all output except errors and explicit print"
+design_version: "1.0"
+intent_hash: 0xATOM_063_EXECUTION_PROTOCOL_20260801
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90
