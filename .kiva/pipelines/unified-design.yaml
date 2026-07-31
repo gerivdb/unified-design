@@ -15,5 +15,5 @@ steps:
     command: python scripts/validate_yaml.py "atoms/relation-conflict-resolution.yaml"
 
   - name: CFMI Scan
-    command: plix governance --scan --designs-path .
-    timeout: 30s
+    command: python scripts/cfmi_scan.py .
+    timeout: 30
