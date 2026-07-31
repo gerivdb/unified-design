@@ -1,0 +1,27 @@
+# ATOM-054: Trace Replay Proof (L6 - Workshop)
+# Capture exécution réelle + replay exact contre code modifié + vérification SQL
+version: "2.0.0"
+name: "ATOM-054-trace-replay-proof"
+inherits: ["ATOM-014-wal-reconciler", "ATOM-015-phi-opt-recovery", "ATOM-016-deterministic-replay"]
+capabilities:
+  - name: "trace-replay-proof"
+    description: "Preuve par re-exécution trace - capture + replay + assertions SQL"
+    parameters:
+      capture_mode: "full_trace"
+      replay_target: "local_daemon"
+      verification_method: "sql_assertions"
+      trace_storage: "sqlite+wal"
+      comparison_strategy: "exact_trace_match"
+      pass_criteria: "all_assertions_pass"
+  - name: "latency-bound"
+    parameters:
+      max_latency_ms: 10000
+  - name: "power-capped"
+    parameters:
+      max_power_w: 25
+design_version: "1.0"
+intent_hash: 0xATOM_054_TRACE_REPLAY_PROOF_20260731
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90

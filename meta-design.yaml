@@ -1,10 +1,10 @@
-# Meta-Design Schema (MDU) v2
+# Meta-Design Schema (MDU) v2.1
 # Schema de validation YAML pour l'architecture gerivdb
-# Version 2.0 : ajout des capacites, detection de boucles et industrialisation
+# Version 2.1 : ajout des 6 atoms "Graph of Loops" (L1-L6)
 
 $schema: "https://json-schema.org/draft/2020-12/schema"
-version: "2.0.0"
-intent_hash: 0xMDU_SCHEMA_20260715_V2
+version: "2.1.0"
+intent_hash: 0xMDU_SCHEMA_20260731_V2_1_GRAPH_OF_LOOPS
 status: active
 
 $schema: "schemas/meta-design.schema.json"
@@ -12,7 +12,7 @@ $schema: "schemas/meta-design.schema.json"
 # Heritage multiple de designs abstraits
 inherits: []
 
-# Capacites heritees (mixins)
+# Capacites heritees (mixins) - EXTENDUES avec 6 nouvelles capacites Graph of Loops
 capabilities:
   - name: latency-bound
     description: "Le design impose une limite de latence"
@@ -28,13 +28,85 @@ capabilities:
       scaling_factor: "1/sqrt(d)"
       temperature: 1.0
       num_heads: 8
+  
+  # --- Nouvelles capacites Graph of Loops (L1-L6) ---
+  - name: symbol-retrieval
+    description: "Recuperation symboles via MCP au lieu lecture fichiers complets (L3 Serena)"
+    parameters:
+      protocol: "MCP"
+      transport: "stdio"
+      max_symbols_per_call: 50
+      context_savings_tokens: 16000
+  - name: worktree-isolation
+    description: "Isolation physique agents via git worktree avec dry-run pre-merge (G2)"
+    parameters:
+      dry_run_enabled: true
+      abort_on_conflict: true
+      max_parallel_worktrees: 8
+      cleanup_on_complete: true
+  - name: beads-sql-memory
+    description: "Memoire SQL versionnee (SQLite+WAL) - graphe insights + compression 70% (L1 Beads)"
+    parameters:
+      storage_backend: "sqlite+wal"
+      compression_ratio: 0.70
+      survival_modes:
+        - "context_reset"
+        - "account_rotation"
+      query_interface: "sql"
+      schema_version: 1
+      index_strategy: "btree+fulltext"
+  - name: exit-interceptor
+    description: "Stop hook bloquant exit agent + validation cross-model avant liberation (L5)"
+    parameters:
+      block_on_exit: true
+      validator_model: "openai-codex"
+      validation_artifact: "review.md"
+      require_signed_review: true
+      timeout_seconds: 300
+      self_review_prevention: true
+  - name: tdd-airain-law
+    description: "No Test No Code - suppression code prod sans test echoue prealable (L4 Superpowers)"
+    parameters:
+      enforce_test_first: true
+      delete_on_violation: true
+      violation_action: "delete_and_restart"
+      test_must_fail_first: true
+      coverage_threshold: 0.85
+  - name: trace-replay-proof
+    description: "Preuve par re-execution trace - capture + replay + assertions SQL (L6 Workshop)"
+    parameters:
+      capture_mode: "full_trace"
+      replay_target: "local_daemon"
+      verification_method: "sql_assertions"
+      trace_storage: "sqlite+wal"
+      comparison_strategy: "exact_trace_match"
+      pass_criteria: "all_assertions_pass"
 
-# Regles de validation du graphe de dependances
+# Regles de validation du graphe de dependances - EXTENDUES
 design_rules:
   - name: "no-circular-inheritance"
     check: "graph_is_acyclic"
   - name: "capability-conflict"
     check: "no_conflicting_capabilities"
+  # Nouvelles regles Graph of Loops
+  - name: "symbol-retrieval-mandatory"
+    check: "mcp_symbol_access_required"
+    description: "Toute lecture code doit passer par MCP symbol-retrieval, pas Read/Edit direct"
+  - name: "worktree-isolation-enforced"
+    check: "agent_worktree_isolation"
+    description: "Chaque agent parallele doit avoir son worktree isole avec dry-run"
+  - name: "beads-sql-memory-persistence"
+    check: "sql_memory_survival"
+    description: "Insights doivent survivre reset contexte + rotation compte (compression 70%)"
+  - name: "exit-interceptor-mandatory"
+    check: "cross_model_validation_on_exit"
+    description: "Exit agent bloque tant qu'un second modele n'a pas signe review.md"
+  - name: "tdd-airain-law-enforced"
+    check: "test_first_or_delete"
+    description: "Code prod sans test echoue prealable -> suppression immediate"
+  - name: "trace-replay-verification"
+    check: "replay_assertions_pass"
+    description: "Replay trace exacte contre code modifie + assertions SQL valident corrections"
 
 # Schema etendu pour les fichiers design.yaml generes
 design_schema:
@@ -328,7 +400,7 @@ couche_gouvernance:
     - "atomic-bridge-api"
     - "atomic-server-fork"
 
-# Atomes de gouvernance (extraits de GOVERNANCE-HUB)
+# Atomes de gouvernance (extraits de GOVERNANCE-HUB) - EXTENDUS
 governance_atoms:
   - meta-design-triad
   - pre-action-validation
@@ -341,6 +413,13 @@ governance_atoms:
   - gated-boot-sequence
   - absolute-rules-enforcement
   - adr-prd-epics-intents
+  # Nouveaux atoms Graph of Loops
+  - symbol-retrieval-mcp
+  - agent-worktree-isolation
+  - beads-sql-memory
+  - exit-interceptor
+  - tdd-airain-law
+  - trace-replay-proof
 
 # Agents associes par pilier
 agents_par_pilier:
@@ -365,7 +444,7 @@ agents_par_pilier:
 # Validation
 validation:
   schema: "meta-design.yaml"
-  adr: "ADR-012, ADR-015, ADR-016, ADR-017"
+  adr: "ADR-012, ADR-015, ADR-016, ADR-017, ADR-2026-07-31-001, ADR-2026-07-31-002, ADR-2026-07-31-003, ADR-2026-07-31-004, ADR-2026-07-31-005, ADR-2026-07-31-006"
   cli: "gerivdb meta validate"
   hooks:
     pre_commit: true
@@ -386,6 +465,11 @@ git_policy:
 # References
 references:
   - ATOM-050
+  - ATOM-051
+  - ATOM-052
+  - ATOM-053
+  - ATOM-054
+  - ATOM-055
   - ADR-2026-07-30-004
   - ADR-2026-07-30-004
   - ADR-012-meta-design-validation-protocol
@@ -398,6 +482,10 @@ references:
   - ADR-20260715-002-DESIGN-VALIDATE-CLI
   - INT-CONNARD-001
   - EPIC-CONNARD-001
-
-
-
+  # Nouveaux ADRs Graph of Loops
+  - ADR-2026-07-31-001-SYMBOL-RETRIEVAL-MCP
+  - ADR-2026-07-31-002-AGENT-WORKTREE-ISOLATION
+  - ADR-2026-07-31-003-BEADS-SQL-MEMORY
+  - ADR-2026-07-31-004-EXIT-INTERCEPTOR
+  - ADR-2026-07-31-005-TDD-AIRAIN-LAW
+  - ADR-2026-07-31-006-TRACE-REPLAY-PROOF

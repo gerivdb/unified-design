@@ -1,0 +1,26 @@
+# ATOM-053: TDD Airain Law / No Test No Code (L4 - Superpowers)
+# Interdiction code prod sans test échoué préalable - "Delete means delete"
+version: "2.0.0"
+name: "ATOM-053-tdd-airain-law"
+inherits: ["ATOM-011-test-handler-first", "ATOM-012-test-windows-tcp", "ATOM-013-atomic-commit"]
+capabilities:
+  - name: "tdd-airain-law"
+    description: "No Test No Code - suppression code prod sans test échoué préalable"
+    parameters:
+      enforce_test_first: true
+      delete_on_violation: true
+      violation_action: "delete_and_restart"
+      test_must_fail_first: true
+      coverage_threshold: 0.85
+  - name: "latency-bound"
+    parameters:
+      max_latency_ms: 100
+  - name: "power-capped"
+    parameters:
+      max_power_w: 12
+design_version: "1.0"
+intent_hash: 0xATOM_053_TDD_AIRAIN_LAW_20260731
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90
