@@ -9,6 +9,7 @@ parameters:
     - requires
     - blocks
     - stabilizes
+    - supersedes
   symmetry:
     opposes: symmetric
     complements: symmetric
@@ -16,6 +17,7 @@ parameters:
     requires: asymmetric
     blocks: asymmetric
     stabilizes: asymmetric
+    supersedes: asymmetric
   acyclicity:
     blocks: strict
     requires: strict
@@ -23,6 +25,7 @@ parameters:
     stabilizes: allowed
     opposes: allowed
     complements: allowed
+    supersedes: strict
   validation: yaml_frontmatter_only
 inherits: [formal-verification, dependency-graph-cache]
 ---
@@ -33,7 +36,7 @@ Le MDU dispose d'une hiérarchie verticale (`inherits`) mais pas de relations ho
 
 ## Décision
 
-Introduire 6 kinds de relations structurelles optionnelles dans les métadonnées YAML des designs et atomes :
+Introduire 7 kinds de relations structurelles optionnelles dans les métadonnées YAML des designs et atomes :
 
 | Kind | Sémantique | Symétrie | Acyclicité |
 |------|-----------|----------|----|
@@ -43,12 +46,13 @@ Introduire 6 kinds de relations structurelles optionnelles dans les métadonnée
 | `requires` | Dépendance sémantique | Non | Oui |
 | `blocks` | Blocage structurel | Non | Oui |
 | `stabilizes` | Stabilisation asymétrique | Non | Non |
+| `supersedes` | Remplacement/dépréciation | Non | Oui |
 
 ## Règles
 
 - `opposes` et `complements` sont symétriques par défaut.
-- `stabilizes` est asymétrique : le validateur rejette la symétrie déclarée.
-- Aucun cycle n'est toléré dans `blocks`.
+- `stabilizes` et `supersedes` sont asymétriques : le validateur rejette la symétrie déclarée.
+- Aucun cycle n'est toléré dans `blocks` ni `supersedes`.
 - Le champ est optionnel ; absence = pas de relation horizontale déclarée.
 
 ## Utilisation
@@ -59,6 +63,8 @@ structural_relations:
     target: pattern-x
   - kind: complements
     target: pattern-y
+  - kind: supersedes
+    target: design-old
 ```
 
 ## Validation
@@ -66,8 +72,8 @@ structural_relations:
 Le validateur `plix validate --structural` vérifie :
 1. Les kinds déclarés sont dans la liste autorisée.
 2. La symétrie de `opposes`/`complements` est respectée.
-3. Aucun cycle `blocks` n'existe dans le graphe.
-4. `stabilizes` n'est pas déclaré symétrique.
+3. L'asymétrie de `stabilizes`/`supersedes` est respectée.
+4. Aucun cycle `blocks`/`supersedes` n'existe dans le graphe.
 
 ## Références
 
