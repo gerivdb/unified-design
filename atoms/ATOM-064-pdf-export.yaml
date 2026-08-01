@@ -1,0 +1,24 @@
+# ATOM-064: PDF Export for plix graph (DIR-010)
+# Adds --format pdf using GraphViz dot -Tpdf
+version: "2.0.0"
+name: "ATOM-064-pdf-export"
+inherits:
+  - "ATOM-063-execution-protocol"
+capabilities:
+  - name: "pdf-export"
+    description: "Generate PDF output via GraphViz dot -Tpdf"
+    parameters:
+      backend: "graphviz"
+      command: "dot -Tpdf"
+      output_flag: "--output"
+      depends_on: ["dot", "svg"]
+  - name: "exec-compatible"
+    description: "Works with --exec flag for silent execution"
+    parameters:
+      exec_supported: true
+design_version: "1.0"
+intent_hash: 0xATOM_064_PDF_EXPORT_20260801
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90
