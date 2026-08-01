@@ -1,0 +1,139 @@
+---
+type: ATOM
+status: proposed
+date: "2026-08-01"
+intent_hash: 0xATOM_066_GIT_ENGINEERING_PROTOCOL_20260801
+---
+
+# ATOM-066 : Git Engineering Protocol
+
+## Objectif
+Standardiser l'usage de Git comme infrastructure d'execution reactive (pas seulement versioning).
+Transformer le graphe de commits en registre de causalite pur.
+
+---
+
+## Principes fondamentaux
+
+### 1. Worktree par agent (Isolation G2)
+- Chaque agent/instance d'execution opere dans son propre `git worktree`
+- Invariant : zero collision d'etat entre executions paralleles
+- `git worktree add ../<agent-id> <branch>` avant tout `DO`
+
+### 2. Auto-stash systematique (Symetrie THINK<->DO)
+- AVANT toute transition de contexte (THINK -> DO, DO -> CHECK) :
+  ```bash
+  git stash push -m "auto-stash: <phase-transition> <timestamp>"
+  ```
+- APRES validation : `git stash pop` ou `git stash drop` selon outcome
+- Garantit symetrie parfaite entre intention et rollback
+
+### 3. Checkpoint post-THINK (Tracabilite binaire)
+- Apres phase THINK : `plix git-checkpoint --all`
+- Sauvegarde etat binaire KORX dans `.mdu/checkpoint.json`
+- Cree tag alpha automatique : `alpha/YYYY-MM-DD-XXX`
+
+### 4. Detection de drift continue (Seuil 5%)
+- `git_status_logic.py --all --only-issues` avant chaque `DO`
+- Alertes si drift > 5% (branches diverged, commits non merges)
+- Actions auto : SYNC / PR_NEEDED / ESCALATE / CLEAN / PRUNE
+
+### 5. Synchronisation cross-repo (232 repos)
+- Lecture `REPO_MAPPING` depuis `.kilocode/context.json`
+- `plix git-checkpoint --all` synchronise tous les repos enregistres
+- Log evenements dans `SWARM.yaml` (event: post_merge_sync)
+
+### 6. Fencing multi-branches (Protection donnees metier)
+- Verrou sur `atomic_business_objects.yaml` et fichiers critiques
+- `git update-index --assume-unchanged` pour donnees immuables
+- Evite derive entropique lors executions paralleles
+
+---
+
+## Workflow standardise
+
+```
+[ TASK ] 
+    |
+    v
+[ git worktree add ] --> [ THINK : auto-stash + plan ]
+    | (Isolation G2)            |
+    v                           v
+[ AUTO-STASH ] <--------------- [ CHECKPOINT : plix git-checkpoint ]
+ (Symmetry)                    (Tracabilite)
+    |                           |
+    v                           v
+[ DO : execution ] --> [ CHECK : git_status_logic --all ]
+    |                           |
+    v                           v
+[ COMMIT ATOM ] <------------ [ VALIDATE : drift < 5% ]
+ (Proof L6)                    (Seuil)
+```
+
+---
+
+## Commandes standardisees
+
+| Commande | Description |
+|----------|-------------|
+| `plix git-checkpoint --all` | Sync tous repos + checkpoint .mdu |
+| `plix git-checkpoint --repo <name>` | Sync repo specifique |
+| `git_status_logic.py --all --only-issues` | Scan divergences cross-repo |
+| `git stash push -m "auto-stash: <phase>"` | Protection etat avant transition |
+| `git worktree add ../<agent-id> <branch>` | Isolation execution |
+
+---
+
+## Metriques de gouvernance
+
+| Metrique | Seuil | Action si depasse |
+|----------|-------|-------------------|
+| Drift cross-repo | > 5% | ESCALATE + stop DO |
+| Branches diverged | > 0 | ESCALATE |
+| Branches merged non PRUNE | > 5 | CLEAN/PRUNE auto |
+| Branches merged non PUSH | > 5 | PUSH auto |
+| Drift phi-CPS | > 12% | FREEZE + recovery |
+
+---
+
+## Integration BatMCP
+
+```python
+# BatMCP tool: git_status_logic()
+# Input: { "repo": "ECOS-CLI", "scope": "cross-repo" }
+# Output: { 
+#   "divergences": [...], 
+#   "pr_needed": [...], 
+#   "clean": [...], 
+#   "prune": [...], 
+#   "escalate": [...] 
+# }
+```
+
+---
+
+## ATOM dependants
+
+- ATOM-045 a ATOM-051 (Git methodology)
+- ATOM-BRANCH-DELETE-SAFE
+- ATOM-CHERRY-PICK-STATE
+- ATOM-CONFLICT-RESOLVE
+- ATOM-LOCK-GUARD
+- ATOM-WORKTREE-GUARD
+
+---
+
+## Validation
+
+- `plix git-checkpoint --all` : exit 0 = tous synced
+- `git_status_logic.py --all --only-issues` : exit 0 = no issues
+- Drift phi-CPS < 12% (budget margin 0.85%)
+
+---
+
+## Reference ADR
+- **ADR** : ADR-2026-08-01-066-GIT-ENGINEERING-PROTOCOL
+- **IntentHash** : 0xATOM_066_GIT_ENGINEERING_PROTOCOL_20260801
+- **Depot** : unified-design (L0-CANON)
+- **Statut ADR** : proposed
+- **Maj requise si** : statut ADR -> deprecated ou superseded
