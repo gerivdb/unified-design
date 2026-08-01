@@ -153,6 +153,13 @@ industrialization:
   validator:
     command: "connard-validator --strict"
 
+# Designs enregistres
+designs:
+  - name: moc-governance
+    path: designs/moc-governance.yaml
+    version: '1.0.0'
+    intent_hash: 0xMOC_GOVERNANCE_DESIGN_20260801
+
 # Architecture des quatre piliers
 piliers:
   - nom: "Sonar-Driven Design"
