@@ -1,26 +1,26 @@
-# META-DESIGN.md — Meta-Design Atlas v2.1.0
+# META-DESIGN.md - Meta-Design Atlas v2.1.0
 
 > **Version** : 2.1.0 | **Date** : 2026-07-15 | **Statut** : ACTIF
 
 ---
 
-## Table des matières
+## Table des matieres
 
 1. [Vue d'ensemble](#vue-densemble)
 2. [Architecture des piliers](#architecture-des-piliers)
 3. [Validation](#validation)
-4. [Atoms catalogués](#atoms-catalogués)
-5. [Références](#références)
+4. [Atoms catalogues](#atoms-catalogues)
+5. [References](#references)
 
 ---
 
 ## Vue d'ensemble
 
-Le **Meta-Design (MDU)** est l'atlas des invariants architecturaux de l'écosystème gerivdb. Il définit :
+Le **Meta-Design (MDU)** est l'atlas des invariants architecturaux de l'ecosysteme gerivdb. Il definit :
 
 - Les **piliers** de conception (SDD, TCE, MAG, CD)
-- Les **règles transversales** de validation
-- Les **atoms** réutilisables (patterns fondamentaux)
+- Les **regles transversales** de validation
+- Les **atoms** reutilisables (patterns fondamentaux)
 - Le **protocole de validation** via le CLI `gerivdb design validate`
 
 ---
@@ -29,47 +29,47 @@ Le **Meta-Design (MDU)** est l'atlas des invariants architecturaux de l'écosyst
 
 ### Sonar-Driven Design (SDD)
 
-**Rôle** : Observabilité
+**Role** : Observabilite
 
 | Invariant | Description | Limite |
 |-----------|-------------|--------|
 | Ping/Echo | Message minimal avec ID unique + timestamp | - |
-| Sonar Map | Structure partagée d'état temps réel | - |
+| Sonar Map | Structure partagee d'etat temps reel | - |
 | PRF | Pulse Repetition Frequency | - |
-| Latence P99 | Temps de réponse 99e centile | ≤ 45ms |
-| Puissance | Consommation énergétique | ≤ 12W |
+| Latence P99 | Temps de reponse 99e centile | <= 45ms |
+| Puissance | Consommation energetique | <= 12W |
 
 ### Triadic Compound Eye (TCE)
 
-**Rôle** : Orchestration Agents
+**Role** : Orchestration Agents
 
 | Invariant | Description |
 |-----------|-------------|
-| Triade C-E-Obs | Communication → Exécution → Observation |
-| Swarm Intelligence | Agents autonomes évolutifs |
+| Triade C-E-Obs | Communication -> Execution -> Observation |
+| Swarm Intelligence | Agents autonomes evolutifs |
 | HITL Gate | Validation humaine pour modifications critiques |
 
 ### MorphoHDL Anamorphic Growth (MAG)
 
-**Rôle** : Optimisation Matérielle
+**Role** : Optimisation Materielle
 
 | Invariant | Description |
 |-----------|-------------|
-| Croissance Expérimentale | Circuits adaptatifs |
-| Base 243 | Structure ternaire native 3⁵ |
-| RVBA | Canaux de couleur sémantique |
-| O(1) Index | Accès constant via index ternaire |
+| Croissance Experimentale | Circuits adaptatifs |
+| Base 243 | Structure ternaire native 35 |
+| RVBA | Canaux de couleur semantique |
+| O(1) Index | Acces constant via index ternaire |
 
 ### Connard Design (CD)
 
-**Rôle** : Contrôle Qualité
+**Role** : Controle Qualite
 
 | Invariant | Description | Limite |
 |-----------|-------------|--------|
-| Héritage | Profondeur d'abstraction | ≤ 3 niveaux |
-| Latence P99 | Temps de réponse | ≤ 45ms |
-| Puissance | Consommation | ≤ 12W |
-| Roast Automatique | Feedback négatif constructif | - |
+| Heritage | Profondeur d'abstraction | <= 3 niveaux |
+| Latence P99 | Temps de reponse | <= 45ms |
+| Puissance | Consommation | <= 12W |
+| Roast Automatique | Feedback negatif constructif | - |
 
 ---
 
@@ -77,7 +77,7 @@ Le **Meta-Design (MDU)** est l'atlas des invariants architecturaux de l'écosyst
 
 ### CLI Design Validate
 
-Le CLI `gerivdb design validate` fournit une interface unifiée pour valider les fichiers `design.yaml` et leurs atomes associés.
+Le CLI `gerivdb design validate` fournit une interface unifiee pour valider les fichiers `design.yaml` et leurs atomes associes.
 
 #### Usage
 
@@ -85,10 +85,10 @@ Le CLI `gerivdb design validate` fournit une interface unifiée pour valider les
 # Validation rapide (pass sur warnings)
 gerivdb design validate
 
-# Validation stricte (échoue sur warnings)
+# Validation stricte (echoue sur warnings)
 gerivdb design validate --strict
 
-# Validation d'un chemin spécifique
+# Validation d'un chemin specifique
 gerivdb design validate /path/to/repo
 
 # Sortie JSON pour CI/CD
@@ -98,7 +98,7 @@ gerivdb design validate --output json
 gerivdb design validate --strict --output json
 ```
 
-#### Checks exécutés
+#### Checks executes
 
 | Check | Source | Seuil critique |
 |-------|--------|----------------|
@@ -111,11 +111,11 @@ gerivdb design validate --strict --output json
 #### Sortie texte
 
 ```
-✓ inheritance_depth: 2 (OK)
-✓ latency_p99: 32ms (OK)
-✓ power_w: 8W (OK)
-✓ git_policy: OK on branch 'main'
-✓ semantic_loops: No cycles detected
+OK inheritance_depth: 2 (OK)
+OK latency_p99: 32ms (OK)
+OK power_w: 8W (OK)
+OK git_policy: OK on branch 'main'
+OK semantic_loops: No cycles detected
 
 [PASS] Design validation passed
 ```
@@ -136,7 +136,7 @@ gerivdb design validate --strict --output json
 }
 ```
 
-### Intégration CI/CD
+### Integration CI/CD
 
 #### GitHub Actions
 
@@ -161,18 +161,24 @@ gerivdb design validate --strict --output json
 
 ---
 
-## Atoms catalogués
+## Atoms catalogues
 
 ### L0-CANON
 
 | Atom | Type | Description |
 |------|------|-------------|
-| constitutional-sot | Registry | Source de vérité constitutionnelle |
-| stratified-repository-registry | Registry | Registre des dépôts par strate |
-| ternary-governance | Rule | Règles de gouvernance ternaire |
-| gated-boot-sequence | Procedure | Séquence de boot avec gates |
-| absolute-rules-enforcement | Rule | Enforcement des règles absolues |
+| constitutional-sot | Registry | Source de verite constitutionnelle |
+| stratified-repository-registry | Registry | Registre des depots par strate |
+| ternary-governance | Rule | Regles de gouvernance ternaire |
+| gated-boot-sequence | Procedure | Sequence de boot avec gates |
+| absolute-rules-enforcement | Rule | Enforcement des regles absolues |
 | adr-prd-epics-intents | Registry | Registre ADR/PRD/EPIC/INTENT |
+
+### Designs enregistres
+
+| Design | Version | Description |
+|---|---|---|
+| moc-governance | 1.0.0 | MOC governance design for artifact hierarchy and session control |
 
 ### L1-INFRA (nouveaux)
 
@@ -181,21 +187,21 @@ gerivdb design validate --strict --output json
 | TOPOS_CITIZENS | Registry | Citoyens (agents) pour validation TOPOS |
 | TOPOS_STRATE_REGISTRY | Registry | Registre des strates L0-L5 |
 | TOPOS_SWARM | Config | Configuration coordination swarming |
-| TOPOS_TOPOLOGY | Graph | Topologie des dépôts |
+| TOPOS_TOPOLOGY | Graph | Topologie des depots |
 | GATEWAY_CONFIG | Config | Configuration principale du gateway |
 | BDCP_CONFIG | Config | Configuration BDCP - Behind CDP |
-| BOOT_SEQUENCE | Procedure | Séquence canonique de boot LLM |
+| BOOT_SEQUENCE | Procedure | Sequence canonique de boot LLM |
 | GATE_RSS_V1 | Config | Gate RSS v1 pour validation HITL |
-| MORPHISM_MAP_SCHEMA | Schema | Schéma de morphism map |
+| MORPHISM_MAP_SCHEMA | Schema | Schema de morphism map |
 
 ---
 
-## Références
+## References
 
 - **ADR-013** : Meta-Design Validation Protocol
 - **ADR-016** : Unified Design Loop Detection Engine
 - **ADR-CONNARD-001** : Connard Design Protocol
-- **meta-design.yaml** : Schéma de validation YAML
+- **meta-design.yaml** : Schema de validation YAML
 
 ---
 
@@ -209,19 +215,19 @@ gerivdb design validate --strict --output json
 
 ---
 
-## Référence ADR
+## Reference ADR
 
 - **ADR** : ADR-2026-07-15-001-MDU-L1-INFRA-EXTENSION
 - **IntentHash** : 0xMDU_L1_INFRA_EXT_20260715
-- **Dépôt** : gerivdb/unified-design
+- **Depot** : gerivdb/unified-design
 - **Statut ADR** : proposed
-- **Màj requise si** : statut ADR → deprecated ou superseded
-## Cas pratique — Test boucle MDU (2026-07-15)
+- **Màj requise si** : statut ADR -> deprecated ou superseded
+## Cas pratique - Test boucle MDU (2026-07-15)
 
-Problème: Concevoir le connecteur TINA-PLIX-CONNECTOR en mode équipe horizontale.
+Probleme: Concevoir le connecteur TINA-PLIX-CONNECTOR en mode equipe horizontale.
 
-Résultat:
-- Équipe générée: personae/teams/generated-tina-plix-connector.yaml
+Resultat:
+- Équipe generee: personae/teams/generated-tina-plix-connector.yaml
 - Verses: VERSES/generated/tina-plix-connector/
 - Validation: PASS
-- Gain: instanciation dynamique vs équipe pré-câblée statique
+- Gain: instanciation dynamique vs equipe pre-câblee statique

@@ -1,0 +1,30 @@
+---
+name: moc-governance
+version: "1.0.0"
+description: "MOC - Master of Ceremonies governance design for artifact hierarchy and session control"
+status: active
+owner: gerivdb
+inherits:
+  - fractal-recursion
+  - ouroboros
+capabilities:
+  - name: artifact_registry
+    parameters:
+      types: [MOC, INTENT, PRD, ADR, EPIC, IMPENSE]
+      registry_file: MOC-000-governance.md
+  - name: session_gate
+    parameters:
+      max_concurrent_sessions: 3
+      budget_check: true
+      friction_sensor: true
+components:
+  - registry: governance_registry
+  - gate: session_boot_gate
+  - auditor: rss_lint_auditor
+constraints:
+  - atomic_commits: true
+  - max_files_per_commit: 3
+  - encoding: ascii_only
+  - no_clone_without_strate: true
+  - bdcp_mode: permanent
+intent_hash: 0xMOC_GOVERNANCE_DESIGN_20260801
