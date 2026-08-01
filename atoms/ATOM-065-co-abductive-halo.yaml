@@ -1,0 +1,35 @@
+# ATOM-065: Interface Co-abductive HALO (L3 - Emergence)
+# Observation -> DIVERGE -> LEAP -> CONVERGE
+version: "1.0.0"
+name: "ATOM-065-co-abductive-halo"
+inherits:
+  - "ouroboros"
+  - "fractal-recursion"
+capabilities:
+  - name: "co-abductive-leap"
+    description: "Bascule divergente/convergente via bouton Insight"
+    parameters:
+      cycle: "Observation -> DIVERGE -> LEAP -> CONVERGE"
+      leap_state_required: true
+      quorum_validation: true
+      max_divergent_paths: 3
+      signature: "@TERNARY_SIGNATURE"
+  - name: "insight-capture"
+    description: "Capture du Insight par l'operateur"
+    parameters:
+      operator: "gerivdb"
+      output: "Leap State JSON"
+      trace: ".piano-diff"
+      ouroboros_passive: true
+  - name: "convergence-synthesis"
+    description: "Synthese LEGO en mode CONVERGE"
+    parameters:
+      builder: "builder.yaml"
+      runtime: "business_reader.zig"
+      quorum: "L5"
+design_version: "1.0"
+intent_hash: 0xATOM_065_COABDUCTIVE_HALO_20260801
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90

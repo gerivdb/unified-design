@@ -935,6 +935,12 @@ atoms:
   hash: new-atom-merge-parent-select
   description: ATOM-MERGE-PARENT-SELECT: Proper parent selection for merge commit cherry-picks
   depends_on: []
+- path: atoms/ATOM-065-co-abductive-halo.yaml
+  hash: new-atom-co-abductive-halo
+  description: ATOM-065: Interface Co-abductive HALO (L3 - Emergence) Observation -> DIVERGE -> LEAP -> CONVERGE
+  depends_on:
+    - ouroboros
+    - fractal-recursion
 ATOM-042-REPOSITORY-CENSUS.md:
   path: atoms\ATOM-042-REPOSITORY-CENSUS.md
   depends_on: []

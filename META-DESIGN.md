@@ -180,6 +180,12 @@ OK semantic_loops: No cycles detected
 |---|---|---|
 | moc-governance | 1.0.0 | MOC governance design for artifact hierarchy and session control |
 
+### Atoms L0-L3 (extraits)
+
+| Atom | Type | Description |
+|---|---|---|
+| ATOM-065-co-abductive-halo | Atom | Interface Co-abductive HALO (L3 - Emergence) Observation -> DIVERGE -> LEAP -> CONVERGE |
+
 ### L1-INFRA (nouveaux)
 
 | Atom | Type | Description |
