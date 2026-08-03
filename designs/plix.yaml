@@ -19,7 +19,7 @@ capabilities:
       signals: [video, audio]
 components:
   - encoders: [video, audio, image]
-  - runners: [math, triade, maxwell, pdd]
+  - runners: [math, triade, maxwell, spidx]
   - pipelines: [maxwell, validation]
 constraints:
   - GPU: Quadro 2000 Fermi (sm_20) -> cpu_only fallback obligatoire
