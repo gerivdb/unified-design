@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gerivdb/unified-design/schemas/artifact-quality.schema.json",
+  "title": "Artifact Quality Rules",
+  "description": "Règles de rédaction dérivées de PRD-MOC-N243-ARTIFACT-WRITING-STANDARDS. Utilisé par MOX/ARGUS pour valider la clarté des artefacts de gouvernance.",
+  "type": "object",
+  "required": ["frontmatter", "sections", "probes"],
+  "properties": {
+    "frontmatter": {
+      "type": "object",
+      "required": ["valid", "schema"],
+      "properties": {
+        "valid": {
+          "type": "boolean",
+          "description": "Le frontmatter YAML est valide selon intent_frontmatter.json."
+        },
+        "schema": {
+          "type": "string",
+          "description": "Schéma JSON utilisé pour la validation."
+        }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "required": ["present", "max_lines", "max_sentence_words"],
+      "properties": {
+        "present": {
+          "type": "object",
+          "description": "Présence des sections obligatoires.",
+          "required": ["objectif", "contexte", "perimetre", "architecture", "regles", "roles", "processus", "probes", "criteres", "rollback", "references"],
+          "properties": {
+            "objectif": { "type": "boolean" },
+            "contexte": { "type": "boolean" },
+            "perimetre": { "type": "boolean" },
+            "architecture": { "type": "boolean" },
+            "regles": { "type": "boolean" },
+            "roles": { "type": "boolean" },
+            "processus": { "type": "boolean" },
+            "probes": { "type": "boolean" },
+            "criteres": { "type": "boolean" },
+            "rollback": { "type": "boolean" },
+            "references": { "type": "boolean" }
+          }
+        },
+        "max_lines": {
+          "type": "integer",
+          "description": "Longueur maximale autorisée pour une section hors tableaux.",
+          "minimum": 1,
+          "maximum": 15
+        },
+        "max_sentence_words": {
+          "type": "integer",
+          "description": "Longueur maximale d'une phrase en mots.",
+          "minimum": 1,
+          "maximum": 20
+        }
+      }
+    },
+    "lists": {
+      "type": "object",
+      "required": ["max_bullet_items", "max_numbered_steps"],
+      "properties": {
+        "max_bullet_items": {
+          "type": "integer",
+          "description": "Nombre maximal d'items dans une liste à puces.",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "max_numbered_steps": {
+          "type": "integer",
+          "description": "Nombre maximal d'étapes dans une liste numérotée.",
+          "minimum": 1,
+          "maximum": 10
+        }
+      }
+    },
+    "tables": {
+      "type": "object",
+      "required": ["required_per_data_section"],
+      "properties": {
+        "required_per_data_section": {
+          "type": "boolean",
+          "description": "Indique si au moins un tableau ASCII est requis par section de données ou processus."
+        }
+      }
+    },
+    "references": {
+      "type": "object",
+      "required": ["min_per_reference_section", "require_path_or_intent_hash"],
+      "properties": {
+        "min_per_reference_section": {
+          "type": "integer",
+          "description": "Nombre minimal de références explicites par section références.",
+          "minimum": 1
+        },
+        "require_path_or_intent_hash": {
+          "type": "boolean",
+          "description": "Toute référence doit contenir un chemin absolu ou un IntentHash."
+        }
+      }
+    },
+    "probes": {
+      "type": "object",
+      "required": ["P-101", "P-102", "P-103", "P-104", "P-105", "P-106", "P-107", "P-108", "P-109"],
+      "properties": {
+        "P-101": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "condition": { "type": "string" },
+            "threshold": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "P-102": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "condition": { "type": "string" },
+            "threshold": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "P-103": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "condition": { "type": "string" },
+            "threshold": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "P-104": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "condition": { "type": "string" },
+            "required": { "type": "boolean" }
+          }
+        },
+        "P-105": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "condition": { "type": "string" },
+            "min_per_section": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "P-106": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "condition": { "type": "string" },
+            "required": { "type": "boolean" }
+          }
+        },
+        "P-107": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "condition": { "type": "string" },
+            "required": { "type": "boolean" }
+          }
+        },
+        "P-108": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "condition": { "type": "string" },
+            "threshold": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "P-109": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "condition": { "type": "string" },
+            "threshold": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    }
+  }
+}
