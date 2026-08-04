@@ -1,0 +1,18 @@
+---
+name: artifact-quality-guard
+description: "Validation automatique de la qualite des artefacts de gouvernance : probes P-101..P-109, anti-patterns, conformite RSS-v2.3 et unified-design."
+version: "1.0.0"
+depends_on:
+  - artifact-writing-standards
+  - continuous-design-validation
+capabilities:
+  - name: artifact-quality-check
+    parameters:
+      probes: ["P-101", "P-102", "P-103", "P-104", "P-105", "P-106", "P-107", "P-108", "P-109"]
+      validator: mox
+      argus_cross_check: true
+      wal_logging: true
+      auto_reject_on_failure: ["P-106", "P-107"]
+stratum: L0-CANON
+status: active
+---
