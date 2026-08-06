@@ -1,6 +1,5 @@
----
 name: artifact-writing-standards
-description: "Normes de rédaction pour les artefacts de gouvernance PRD/ADR/EPIC/INTENT/SPEC/REPORT/RPT/GUI/RUN : structure mesurable, anti-patterns, probes P-101..P-109."
+description: "Normes de rédaction pour les artefacts de gouvernance PRD/ADR/EPIC/INTENT/SPEC/REPORT/RPT/GUI/RUN."
 version: "1.0.0"
 depends_on:
   - kiss
@@ -25,4 +24,5 @@ capabilities:
       wal_logging: true
 stratum: L0-CANON
 status: active
----
+ontology_ref: "ONTOLOGY.yaml > entities.terms > artifact-writing-standards"
+intent_hash: 0xARTIFACT_WRITING_STANDARDS_20260806
