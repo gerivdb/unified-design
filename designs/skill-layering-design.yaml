@@ -1,0 +1,109 @@
+---
+type: DESIGN
+version: "1.0.0"
+status: proposed
+date: "2026-08-07"
+intent_hash: 0xDESIGN_SKILL_LAYERING_20260807
+layer: L4
+citizen: DEV-EXPERIENCE
+source_repo: gerivdb/GeriCode
+source_path: .kilo/designs/skill-layering-design.yaml
+---
+
+# Design: Skill Layering
+
+## Objectif
+Définir l'architecture à deux couches des skills : développement local `.kilo/skills/` et registre central `SKILLS/`.
+
+## Principe
+Tout skill est développé localement dans `.kilo/skills/<repo>/`, puis enregistré dans le registre central `SKILLS/REGISTRY.yaml`.
+
+## Architecture
+
+```
+GeriCode/
+├── .kilo/
+│   └── skills/
+│       ├── repo-citizen-manager/    ← LOCAL : développement natif
+│       ├── registry-sync/           ← LOCAL : développement natif
+│       └── skill-auto-enroller/     ← LOCAL : développement natif
+│
+└── act-protocol/
+    └── citizens.yaml                ← CENTRAL : citoyenneté
+
+SKILLS/ (repo dédié L4)
+├── REGISTRY.yaml                    ← CENTRAL : source de vérité
+├── registry.json                    ← CENTRAL : vue dérivée
+└── TAXONOMY.md                      ← CENTRAL : classification
+```
+
+## Règles
+
+### 1. Développement local
+- Tout nouveau skill est créé dans `.kilo/skills/<repo>/<skill-name>/`
+- Structure complète : `SKILL.md`, `acceptance/contract.yaml`, `tests/`, `domain/`, `application/`, `infrastructure/`, `contracts/`
+- `source: native` dans le frontmatter
+- `source_repo: gerivdb/<repo>` dans le frontmatter
+
+### 2. Enregistrement central
+- Le skill doit être enregistré dans `SKILLS/REGISTRY.yaml`
+- Entrée avec champs obligatoires : `name`, `description`, `type`, `triggers`, `domain`, `version`, `author`, `license`, `status`, `source_repo`, `path`, `source`
+- `path` relatif depuis le repo source : `..\L2-PLATFORM\GeriCode\.kilo\skills\<skill>\SKILL.md`
+- `source: native` pour les skills développés dans l'écosystème
+
+### 3. Découverte
+- `registry-sync` synchronise `REGISTRY.yaml` → `registry.json`
+- `skills-validator` valide tous les skills contre `TAXONOMY.md`
+- `citizenship-auditor` vérifie que tous les skills locaux sont dans `REGISTRY.yaml` (P-806)
+
+### 4. Portée
+Cette architecture s'applique à **tous les repos citoyens** de L0 à L4 (L5 exclus) :
+- L0-CANON : GOVERNANCE-HUB, ONTOLOGY, BLO, FERMI-EVER
+- L1_CAUSALITY : NEXUS, KIVA, ECOS-CLI, TQL
+- L2-PLATFORM : GeriCode, VERSES, TOPOS
+- L3_EMERGENCE : BRAIN, FLUENCE, CANDIDATOR, etc.
+- L4_TOOLS : SKILLS, DevTools, email-sender-1, etc.
+
+### 5. Exceptions
+- `C:\DevTools\` : hub central, pas de `.kilo/skills/`
+- Skills externes assimilés : `source: external`, `source_repo` pointe vers le repo externe
+
+## Matrice de responsabilité
+
+| Repo type | `.kilo/skills/` | `SKILLS/REGISTRY.yaml` |
+|-----------|------------------|------------------------|
+| L0-CANON | ✅ Développement | ✅ Enregistrement |
+| L1_CAUSALITY | ✅ Développement | ✅ Enregistrement |
+| L2-PLATFORM | ✅ Développement | ✅ Enregistrement |
+| L3_EMERGENCE | ✅ Développement | ✅ Enregistrement |
+| L4_TOOLS | ✅ Développement | ✅ Enregistrement |
+| L5_ARCHIVE | ❌ Exclu | ❌ Exclu |
+| SKILLS (central) | ❌ N/A (est le central) | ✅ Source de vérité |
+
+## Workflow
+
+```mermaid
+graph TD
+    A[Dev crée skill dans .kilo/skills/<repo>/] --> B{skill-auto-enroller}
+    B -->|enroll| C[REGISTRY.yaml]
+    B -->|enroll| D[citizens.yaml]
+    B -->|enroll| E[VERSES/verses/]
+    B -->|enroll| F[BRIDGES.yaml]
+    
+    G[Modification manuelle REGISTRY.yaml] --> H{registry-sync}
+    H -->|sync| I[registry.json]
+    H -->|sync| D
+    
+    J[CI/CD] --> K{citizenship-auditor}
+    J --> L{bridge-auditor}
+    J --> M{skills-validator}
+    K -->|P-801..P-805| N[Pass/Fail]
+    L -->|P-905..P-906| N
+    M -->|P-903..P-904| N
+```
+
+## Référence ADR
+- ADR : ADR-2026-08-07-001-YAML-SAFE-INJECTOR
+- IntentHash : 0xADR_YAML_SAFE_INJECTOR_20260807
+- Dépôt : gerivdb/GOVERNANCE-HUB
+- Statut ADR : proposed
