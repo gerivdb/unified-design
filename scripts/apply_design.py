@@ -27,8 +27,17 @@ KNOWN_REPOS_PATH = REPO_ROOT.parent.parent / "GOVERNANCE-HUB" / "known_repositor
 
 
 def load_yaml(path: Path) -> dict[str, Any]:
-    with open(path, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+    text = path.read_text(encoding="utf-8")
+    try:
+        data = yaml.safe_load(text)
+        if isinstance(data, dict):
+            return data
+    except yaml.YAMLError:
+        pass
+    for doc in yaml.safe_load_all(text):
+        if isinstance(doc, dict):
+            return doc
+    return {}
 
 
 def load_known_repos() -> dict[str, Any]:
