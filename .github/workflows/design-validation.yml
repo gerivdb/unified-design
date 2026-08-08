@@ -1,0 +1,123 @@
+name: Design Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "designs/**"
+      - "schemas/**"
+      - "engine/**"
+      - "atoms/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "designs/**"
+      - "schemas/**"
+      - "engine/**"
+      - "atoms/**"
+
+jobs:
+  validate-designs:
+    name: Validate Designs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml jsonschema
+
+      - name: Validate design schemas
+        run: |
+          python -c "
+          import json, yaml, jsonschema, pathlib, sys
+          root = pathlib.Path('.')
+          schema_path = root / 'schemas' / 'design.schema.json'
+          schema = json.loads(schema_path.read_text())
+          errors = []
+          for design_file in sorted((root / 'designs').glob('*.yaml')):
+              try:
+                  data = yaml.safe_load(design_file.read_text()) or {}
+                  if not isinstance(data, dict):
+                      errors.append(f'{design_file}: not a mapping')
+                      continue
+                  jsonschema.validate(instance=data, schema=schema)
+                  print(f'[OK] {design_file}')
+              except jsonschema.ValidationError as e:
+                  errors.append(f'{design_file}: {e.message}')
+              except Exception as e:
+                  errors.append(f'{design_file}: {e}')
+          if errors:
+              print('---')
+              print('VALIDATION FAILED')
+              for err in errors:
+                  print(err)
+              sys.exit(1)
+          print('All designs passed schema validation.')
+          "
+
+      - name: Validate design contracts
+        run: |
+          python -c "
+          import re, yaml, pathlib, sys
+          root = pathlib.Path('.')
+          errors = []
+          for design_file in sorted((root / 'designs').glob('*.yaml')):
+              data = yaml.safe_load(design_file.read_text()) or {}
+              name = data.get('name', '')
+              if not re.fullmatch(r'[a-z0-9-]+', name):
+                  errors.append(f'{design_file}: non-universal name \"{name}\"')
+              depends = data.get('depends_on', [])
+              if isinstance(depends, list):
+                  for dep in depends:
+                      if not re.fullmatch(r'ATOM-[0-9]+-[a-z0-9-]+', dep):
+                          errors.append(f'{design_file}: invalid depends_on \"{dep}\"')
+                          atom_path = root / 'atoms' / f'{dep}.md'
+                          if not atom_path.exists():
+                              errors.append(f'{design_file}: depends_on atom missing: {dep}')
+              bridges = data.get('bridges', [])
+              if isinstance(bridges, list):
+                  for bridge in bridges:
+                      if not isinstance(bridge, dict):
+                          errors.append(f'{design_file}: invalid bridge entry')
+                          continue
+                      role = bridge.get('role', '')
+                      if role and role not in ('consumer', 'provider', 'bidirectional'):
+                          errors.append(f'{design_file}: invalid bridge role \"{role}\"')
+          if errors:
+              print('---')
+              print('CONTRACT VALIDATION FAILED')
+              for err in errors:
+                  print(err)
+              sys.exit(1)
+          print('All designs passed contract validation.')
+          "
+
+      - name: Validate atoms registry references
+        run: |
+          python -c "
+          import re, yaml, pathlib, sys
+          root = pathlib.Path('.')
+          atoms_dir = root / 'atoms'
+          errors = []
+          for design_file in sorted((root / 'designs').glob('*.yaml')):
+              data = yaml.safe_load(design_file.read_text()) or {}
+              for atom_id in data.get('depends_on', []):
+                  atom_path = atoms_dir / f'{atom_id}.md'
+                  if not atom_path.exists():
+                      errors.append(f'{design_file}: atom {atom_id} missing')
+          if errors:
+              print('---')
+              print('ATOM REFERENCE VALIDATION FAILED')
+              for err in errors:
+                  print(err)
+              sys.exit(1)
+          print('All atom references are valid.')
+          "
