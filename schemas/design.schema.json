@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://gerivdb.github.io/unified-design/schemas/design.schema.json",
+  "title": "Unified Design Schema",
+  "description": "Schema for validating design YAML files in unified-design/designs/. Enforces universal naming, depends_on contracts, and bridges declarations.",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "status",
+    "layer",
+    "intent_hash"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Universal design name (no repo-specific naming)."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the design."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "proposed", "deprecated"],
+      "description": "Lifecycle status of the design."
+    },
+    "layer": {
+      "type": "string",
+      "description": "Universal layer scope (e.g. L0, L1-L4, L2-PLATFORM)."
+    },
+    "intent_hash": {
+      "type": "string",
+      "pattern": "^0x[a-zA-Z0-9_]+$",
+      "description": "Unique intent hash for governance traceability."
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the design."
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^ATOM-[0-9]+-[a-z0-9-]+$"
+      },
+      "description": "List of atom IDs this design depends on."
+    },
+    "bridges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["target", "role", "protocol"],
+        "properties": {
+          "target": {
+            "type": "string",
+            "description": "Target repo or system name (universal, not repo-specific)."
+          },
+          "role": {
+            "type": "string",
+            "enum": ["consumer", "provider", "bidirectional"],
+            "description": "Role of the target in relation to this design."
+          },
+          "protocol": {
+            "type": "string",
+            "description": "Integration protocol (e.g. python-import, rest-api, mcp)."
+          }
+        }
+      },
+      "description": "Bridges to consuming/providing systems."
+    },
+    "inherits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of parent design names this design inherits from."
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "parameters"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "description": "Capabilities provided by this design."
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Arbitrary parameters for design instantiation."
+    },
+    "performance": {
+      "type": "object",
+      "properties": {
+        "latency_p99": {
+          "type": "number"
+        },
+        "power_max": {
+          "type": "number"
+        }
+      },
+      "description": "Performance constraints."
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Logical components of the design."
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Hard constraints enforced by the design."
+    }
+  },
+  "additionalProperties": false
+}
