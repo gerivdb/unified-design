@@ -1,12 +1,23 @@
 ---
 name: fractal-engineering-strata
-description: "Fractal engineering auto-similaire sur les strates L0-L5"
-version: 1.0.0
+version: "1.0.0"
 status: active
+layer: L0-L5
+intent_hash: 0xFRACTAL_ENGINEERING_STRATA_20260730
 inherits:
   - fractal-recursion
   - ouroboros
   - incremental-growth
+depends_on:
+  - ATOM-001-ffi-abi-boundary
+  - ATOM-003-namespace-collision-prevention
+bridges:
+  - target: N243
+    role: consumer
+    protocol: python-import
+  - target: TRIX
+    role: consumer
+    protocol: zig-import
 parameters:
   pattern: self-similar
   max_depth: 6
@@ -15,5 +26,60 @@ parameters:
 performance:
   latency_p99: 45ms
   power_max: 12W
-intent_hash: 0xFRACTAL_ENGINEERING_STRATA_20260730
 ---
+
+# Design: fractal-engineering-strata
+
+> Fractal engineering auto-similaire sur les strates L0-L5
+
+## Universal Principles
+
+1. **Self-similarity** -- chaque strate réplique la même structure fractal
+2. **Short-circuit NEUTRE** -- pas de court-circuit entre strates
+3. **Max depth 6** -- limitation de profondeur pour éviter la récursion infinie
+4. **Strata registry** -- chaque strate est enregistrée dans un registre canonique
+
+## Architecture
+
+```
+L0-CANON (GOVERNANCE)
++-- L1-INFRA (CAUSALITE)
+    +-- L2-PLATFORM (KERNEL)
+        +-- L3-CITIZENS (COGNITION)
+            +-- L4-TOOLS (SERVICES)
+                +-- L5-ARCHIVE (PERSISTANCE)
+```
+
+## Contracts
+
+### Strata contract
+
+- Input: strate identifier + configuration
+- Output: registered stratum with validated boundaries
+- Side effect: updates `atoms/strate-registry.yaml`
+
+### Fractal recursion contract
+
+- Each stratum must implement the same interface:
+  - `register()`
+  - `validate()`
+  - `propagate()`
+
+## Implementation Notes
+
+- Use `stratum-relay.yaml` atom for cross-strata communication
+- Use `stratified-abstraction.yaml` atom for abstraction boundaries
+- Maximum recursion depth: 6 levels
+
+## Rollout
+
+1. Define stratum in `atoms/strate-registry.yaml`
+2. Implement `register/validate/propagate` interface
+3. Validate with `engine/validator.py`
+4. Test with `scripts/validate_strata.py`
+
+## References
+
+- `ATOM-001-ffi-abi-boundary` (unified-design)
+- `ATOM-003-namespace-collision-prevention` (unified-design)
+- `PRD-MOC-ACTPROTOCOL-UNIFIED-DESIGN-STRUCTURE-2026-08-06`

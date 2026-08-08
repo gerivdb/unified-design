@@ -1,18 +1,24 @@
+---
+name: incremental-scan-cache
+version: "1.0.0"
+status: proposed
+layer: L1-L4
+intent_hash: 0xINCREMENTAL_SCAN_CACHE_20260806
+depends_on:
+  - ATOM-004-cache-invalidation-hygiene
+  - ATOM-058-think-do-check-cross-repo-protocol
+bridges:
+  - target: N243
+    role: consumer
+    protocol: python-import
+  - target: MOX
+    role: consumer
+    protocol: python-import
+---
+
 # Design: incremental-scan-cache
 
 > Universal design for scan/cache/incremental pipelines across the ecosystem.
-
-## Metadata
-
-| Field | Value |
-|-------|-------|
-| **Design ID** | D-025 |
-| **Name** | incremental-scan-cache |
-| **Version** | 1.0.0 |
-| **Status** | proposed |
-| **Layer** | L1-L4 (universal) |
-| **IntentHash** | 0xINCREMENTAL_SCAN_CACHE_20260806 |
-| **Applies to** | N243, MOX, TOPOS, ARGUS, CTULU, any scanner |
 
 ## Problem
 
