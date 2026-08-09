@@ -1,0 +1,14 @@
+# Detector Template
+
+```yaml
+name: <detector_name>
+type: <kix_endpoint | trix_preflight | powershell_script | github_api | mcp_tool>
+implementation:
+  - repo: <repo>
+    path: <relative_path>
+    language: <python | zig | powershell | typescript>
+    entry_point: <file:function_or_route>
+output:
+  format: <json | yaml | markdown>
+  schema: <path_to_schema.yaml>
+```

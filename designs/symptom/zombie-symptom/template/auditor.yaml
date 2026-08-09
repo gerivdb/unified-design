@@ -1,0 +1,19 @@
+# Auditor Template
+
+```yaml
+name: <auditor_name>
+wal:
+  enabled: true
+  prefix: <WAL_PREFIX>
+  fields:
+    - timestamp
+    - pid
+    - name
+    - repo
+    - worktree
+    - action
+    - result
+nexus:
+  index: <gerivdb/NEXUS/concepts/...>
+  conformity: CONFORME_NEXUS
+```

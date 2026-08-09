@@ -1,0 +1,24 @@
+# Symptom Template
+
+```yaml
+name: <symptom_name>
+category: <system_health | cross_repo | runtime | governance>
+intent_hash: 0x<SLUG_MAJUSCULES>
+repos_target:
+  - <repo/L>
+  - <repo/L>
+triggers:
+  - <condition_1>
+  - <condition_2>
+indicators:
+  - name: <indicator_name>
+    type: <process | file | handle | metric>
+    detector: <kix_endpoint | trix_preflight | powershell_script | github_api>
+    threshold: <value>
+    severity: <info | warn | error | critical>
+impact:
+  - <blocking_worktree_removal>
+  - <falsifying_metrics>
+  - <cross_repo_conflict>
+  - <resource_leak>
+```
