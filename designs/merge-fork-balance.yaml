@@ -1,22 +1,21 @@
----
 name: merge-fork-balance
-description: "Équilibre entre merges et forks pour éviter l'entropie et la sur-ingénierie"
+description: Équilibre entre merges et forks pour éviter l'entropie et la sur-ingénierie
 version: 1.0.0
 status: active
 inherits:
-  - design-principle
-  - incremental-growth
-  - fractal-recursion
+- design-principle
+- incremental-growth
+- fractal-recursion
 parameters:
   max_forks_before_merge: 3
   max_fork_merge_ratio: 1.5
   max_fractal_depth: 6
   review_required_after: 3
   short_circuit: NEUTRE
-  consolidation_mode: "merge-before-fork"
-family: "governance"
+  consolidation_mode: merge-before-fork
+family: governance
 performance:
-  latency_p99: 45ms
-  power_max: 12W
-intent_hash: 0xMERGE_FORK_BALANCE_20260730
----
+  latency_p99: 45.0
+  power_max: 12.0
+intent_hash: 0xmerge_fork_balance_20260730
+layer: L2

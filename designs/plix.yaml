@@ -1,27 +1,45 @@
----
 name: plix
-version: "1.0.0"
-description: "Pipeline PLIX - encodeur temps reel, runners, orchestration Maxwell"
+version: 1.0.0
+description: Pipeline PLIX - encodeur temps reel, runners, orchestration Maxwell
 status: active
 owner: Fabric Bellard
 inherits:
-  - b243-vector
-  - plix-codec
+- b243-vector
+- plix-codec
 capabilities:
-  - name: plix-codec
-    parameters:
-      codecs: [mirror_lens, clusterwave, piano_runtime, verses_resolver]
-      registry: schema_registry
-      sync_pipeline: required
-  - name: maxwell-triad
-    parameters:
-      triad: [entropy, gradient, symmetry]
-      signals: [video, audio]
+- name: plix-codec
+  parameters:
+    codecs:
+    - mirror_lens
+    - clusterwave
+    - piano_runtime
+    - verses_resolver
+    registry: schema_registry
+    sync_pipeline: required
+- name: maxwell-triad
+  parameters:
+    triad:
+    - entropy
+    - gradient
+    - symmetry
+    signals:
+    - video
+    - audio
 components:
-  - encoders: [video, audio, image]
-  - runners: [math, triade, maxwell, spidx]
-  - pipelines: [maxwell, validation]
+- encoders:
+  - video
+  - audio
+  - image
+- runners:
+  - math
+  - triade
+  - maxwell
+  - spidx
+- pipelines:
+  - maxwell
+  - validation
 constraints:
-  - GPU: Quadro 2000 Fermi (sm_20) -> cpu_only fallback obligatoire
-  - CPU: fallback obligatoire
-intent_hash: 0xPLIX_DESIGN_20260730
+- GPU: Quadro 2000 Fermi (sm_20) -> cpu_only fallback obligatoire
+- CPU: fallback obligatoire
+intent_hash: 0xplix_design_20260730
+layer: L2

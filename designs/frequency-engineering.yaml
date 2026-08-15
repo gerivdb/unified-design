@@ -1,20 +1,33 @@
----
 name: frequency-engineering
-description: "Sous-domaine du chain-engineering dédié à l'ingénierie des pulses fréquentiels pour la convergence prédictive (Clusterwave, sonar-driven design, fixpoint validation)."
+description: Sous-domaine du chain-engineering dédié à l'ingénierie des pulses fréquentiels
+  pour la convergence prédictive (Clusterwave, sonar-driven design, fixpoint validation).
 level: N1
-inherits: [chain-engineering]
+inherits:
+- chain-engineering
 family: pulse-control
 structural_relations:
-  - kind: stabilizes
-    target: chain-engineering
+- kind: stabilizes
+  target: chain-engineering
 parameters:
   frequency_bands:
-    delta: [0, 4]
-    theta: [4, 8]
-    alpha: [8, 12]
-    beta: [12, 30]
+    delta:
+    - 0
+    - 4
+    theta:
+    - 4
+    - 8
+    alpha:
+    - 8
+    - 12
+    beta:
+    - 12
+    - 30
   default_band: delta
 references:
-  - ATOM-047
-  - ADR-2026-07-30-004
-  - docs/clusterwave.md
+- ATOM-047
+- ADR-2026-07-30-004
+- docs/clusterwave.md
+layer: L0
+version: 1.0.0
+status: draft
+intent_hash: 0xfrequency-engineering_20260815

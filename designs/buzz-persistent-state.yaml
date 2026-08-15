@@ -1,69 +1,61 @@
-# unified-design/designs/buzz-persistent-state.yaml
-version: "1.0"
-intent_hash: "0xBPS_20260801"
-status: "active"
+version: 1.0.0
+intent_hash: 0xbps_20260801
+status: active
+description: 'Buzz@block comme infrastructure de persistance pour l''état système.
 
-description: |
-  Buzz@block comme infrastructure de persistance pour l'état système.
   Tout événement est signé, loggué, et devient une ancre de vérité.
 
-architecture: |
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │                    BUZZ@BLOCK (Upstream)                           │
-  │  ┌─────────────────────────────────────────────────────────────┐   │
-  │  │  buzZ-relay  │  buzz-acp  │  buzz-workflow  │  buzz-audit  │   │
-  │  │  (Nostr)     │  (ACP)     │  (YAML)         │  (hash-chain)│   │
-  │  └─────────────────────────────────────────────────────────────┘   │
-  └─────────────────────────────────────────────────────────────────────┘
-                                    │
-         ┌──────────────────────────┼──────────────────────────┐
-         ▼                          ▼                          ▼
-  ┌─────────────────┐    ┌─────────────────────┐    ┌─────────────────────┐
-  │   BUZZ-X (L4)   │    │    N243 (L4)        │    │   WAZAA Bridge      │
-  │  Overlay Nostr  │    │  Meta-orchestrateur │    │  (pont Python)      │
-  │  sur Buzz@block │    │  ternaire Rust      │    │  → consomme BUZZ-X  │
-  └─────────────────┘    └─────────────────────┘    └─────────────────────┘
-
+  '
+architecture: "┌─────────────────────────────────────────────────────────────────────┐\n\
+  │                    BUZZ@BLOCK (Upstream)                           │\n│  ┌─────────────────────────────────────────────────────────────┐\
+  \   │\n│  │  buzZ-relay  │  buzz-acp  │  buzz-workflow  │  buzz-audit  │   │\n│\
+  \  │  (Nostr)     │  (ACP)     │  (YAML)         │  (hash-chain)│   │\n│  └─────────────────────────────────────────────────────────────┘\
+  \   │\n└─────────────────────────────────────────────────────────────────────┘\n\
+  \                                  │\n       ┌──────────────────────────┼──────────────────────────┐\n\
+  \       ▼                          ▼                          ▼\n┌─────────────────┐\
+  \    ┌─────────────────────┐    ┌─────────────────────┐\n│   BUZZ-X (L4)   │   \
+  \ │    N243 (L4)        │    │   WAZAA Bridge      │\n│  Overlay Nostr  │    │ \
+  \ Meta-orchestrateur │    │  (pont Python)      │\n│  sur Buzz@block │    │  ternaire\
+  \ Rust      │    │  → consomme BUZZ-X  │\n└─────────────────┘    └─────────────────────┘\
+  \    └─────────────────────┘\n"
 storage_layers:
-  - layer: "events"
-    component: "buzz-relay"
-    format: "Nostr événement signé"
-    persistence: "Postgres + Redis"
-
-  - layer: "workflows"
-    component: "buzz-workflow"
-    format: "YAML"
-    persistence: "Postgres"
-
-  - layer: "audit"
-    component: "buzz-audit"
-    format: "hash-chain log"
-    persistence: "Postgres + WAL"
-
-  - layer: "ternary_wal"
-    component: "N243 / wal.rs"
-    format: "Ternary WAL (Convergence/Divergence/Oscillation)"
-    persistence: "local file + buzz-audit"
-
+- layer: events
+  component: buzz-relay
+  format: Nostr événement signé
+  persistence: Postgres + Redis
+- layer: workflows
+  component: buzz-workflow
+  format: YAML
+  persistence: Postgres
+- layer: audit
+  component: buzz-audit
+  format: hash-chain log
+  persistence: Postgres + WAL
+- layer: ternary_wal
+  component: N243 / wal.rs
+  format: Ternary WAL (Convergence/Divergence/Oscillation)
+  persistence: local file + buzz-audit
 rules:
-  - id: "BPS-001"
-    name: "Single Source of Truth"
-    description: "Le relais Buzz est l'unique source de vérité pour les événements"
-    enforcement: "design"
-
-  - id: "BPS-002"
-    name: "Événement Signé"
-    description: "Tout événement est signé par une clé Schnorr (humain ou agent)"
-    enforcement: "auto"
-
-  - id: "BPS-003"
-    name: "Persistance immédiate"
-    description: "Toute information capturée est persistée dans le relais avant traitement"
-    enforcement: "auto"
-    pattern: "First-Right Capture"
-
-  - id: "BPS-004"
-    name: "WAL ternaire"
-    description: "Les transitions d'état sont loggées dans un WAL ternaire"
-    enforcement: "auto"
-    states: ["Convergence", "Divergence", "Oscillation"]
+- id: BPS-001
+  name: Single Source of Truth
+  description: Le relais Buzz est l'unique source de vérité pour les événements
+  enforcement: design
+- id: BPS-002
+  name: Événement Signé
+  description: Tout événement est signé par une clé Schnorr (humain ou agent)
+  enforcement: auto
+- id: BPS-003
+  name: Persistance immédiate
+  description: Toute information capturée est persistée dans le relais avant traitement
+  enforcement: auto
+  pattern: First-Right Capture
+- id: BPS-004
+  name: WAL ternaire
+  description: Les transitions d'état sont loggées dans un WAL ternaire
+  enforcement: auto
+  states:
+  - Convergence
+  - Divergence
+  - Oscillation
+name: buzz-persistent-state
+layer: L1

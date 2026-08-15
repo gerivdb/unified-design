@@ -1,105 +1,15 @@
----
 name: incremental-scan-cache
-version: "1.0.0"
+version: 1.0.0
 status: proposed
 layer: L1-L4
-intent_hash: 0xINCREMENTAL_SCAN_CACHE_20260806
+intent_hash: 0xincremental_scan_cache_20260806
 depends_on:
-  - ATOM-004-cache-invalidation-hygiene
-  - ATOM-058-think-do-check-cross-repo-protocol
+- ATOM-004-cache-invalidation-hygiene
+- ATOM-058-think-do-check-cross-repo-protocol
 bridges:
-  - target: N243
-    role: consumer
-    protocol: python-import
-  - target: MOX
-    role: consumer
-    protocol: python-import
----
-
-# Design: incremental-scan-cache
-
-> Universal design for scan/cache/incremental pipelines across the ecosystem.
-
-## Problem
-
-Any pipeline that scans >= 50 filesystem targets (repos, modules, docs)
-hits the same bottleneck: full scan cost grows linearly with target count,
-and repeated scans waste CPU/IO on unchanged targets.
-
-## Universal Principles
-
-1. **Cache first, scan second** -- before scanning a target, check if it is
-   already cached and unchanged.
-2. **Change detection by mtime + size** -- use `stat().st_mtime` and
-   `stat().st_size` as a cheap fingerprint. Fall back to full scan on
-   mismatch or missing cache.
-3. **Batch + parallelize** -- scan targets in parallel using a bounded
-   thread pool. Keep worker count <= hardware concurrency.
-4. **Cache invalidation hygiene** -- cache entries are invalidated when
-   mtime drifts > threshold or when the scanner code changes.
-5. **Observability** -- every run logs `cached/total/skipped` counts and
-   per-phase timing.
-
-## Architecture
-
-```
-[SOT Loader]
-      |
-      v
-[Target Deduplicator] -- removes duplicates before scanning
-      |
-      v
-[Cache Layer] -- key = (target_id + mtime + size)
-      |
-      +-- cache hit --> [Reconstruct Node from cache]
-      |
-      +-- cache miss --> [Parallel Scanner] --> [Update Cache]
-      |
-      v
-[Graph Builder / Analyzer / etc.]
-```
-
-## Contracts
-
-### Cache entry schema
-
-```yaml
-cache_key: sha256(target_id|path)[:16]
-mtime: float
-size: int
-data: <serialized result>
-```
-
-### Scanner contract
-
-- Input: list of target descriptors (id, path, optional metadata).
-- Output: list of results, one per target.
-- Side effect: updates cache for cache-miss targets.
-- Must be idempotent: running twice with unchanged inputs produces the
-  same output.
-
-### Invalidation rules
-
-- Invalidate cache entry when `abs(current_mtime - cached_mtime) > 1.0`.
-- Invalidate all entries when scanner code hash changes.
-- Invalidate specific entry when caller passes `force=True`.
-
-## Implementation Notes
-
-- Use `ThreadPoolExecutor` for I/O-bound scans (filesystem, network).
-- Use `ProcessPoolExecutor` for CPU-bound transforms (parsing, indexing).
-- Keep cache file size < 10 MB. Compact by removing entries for deleted
-  targets.
-- Store cache under `data/.cache/` in the consuming repo.
-
-## Rollout
-
-1. Add `ScanCache` class to the consuming skill/repo.
-2. Wrap existing scan loop with cache lookup.
-3. Add `--force` / `--json` flags to CLI.
-4. Add probes: `cache_hit_rate > 50%`, `scan_time < 2s` for 100 targets.
-
-## References
-
-- `ATOM-004-cache-invalidation-hygiene` (unified-design)
-- `PRD-MOC-N243-SOVEREIGN-CROSS-REPO-GRAPH-2026-08-04` section RAI
+- target: N243
+  role: consumer
+  protocol: python-import
+- target: MOX
+  role: consumer
+  protocol: python-import

@@ -1,38 +1,46 @@
-# unified-design/designs/pattern-first-right-capture.yaml
-version: "1.0"
-intent_hash: "0xFRC_20260801"
-status: "active"
+version: 1.0.0
+intent_hash: 0xfrc_20260801
+status: active
+description: 'Pattern cognitif : capture immédiate, persistance dans l''état de travail,
 
-description: |
-  Pattern cognitif : capture immédiate, persistance dans l'état de travail,
   application cohérente sans redemander.
 
+  '
 rules:
-  - id: "FRC-001"
-    name: "Atomisation"
-    description: |
-      Toute information reçue doit être décomposée en un ATOM ou un Event Buzz.
-      Pas de stockage intermédiaire volatile.
-    enforcement: "auto"
+- id: FRC-001
+  name: Atomisation
+  description: 'Toute information reçue doit être décomposée en un ATOM ou un Event
+    Buzz.
 
-  - id: "FRC-002"
-    name: "Injection Immédiate"
-    description: |
-      L'information doit être injectée dans les fichiers de configuration
-      ou les artefacts actifs (designs, config, todo) dans la même seconde.
-    enforcement: "auto"
+    Pas de stockage intermédiaire volatile.
 
-  - id: "FRC-003"
-    name: "Autorité du Log"
-    description: |
-      Le log d'audit devient l'unique source de vérité.
-      Si l'info est dans le log, l'agent a l'interdiction de poser la question.
-    enforcement: "auto"
-    exception: "Vérification d'intégrité du log"
+    '
+  enforcement: auto
+- id: FRC-002
+  name: Injection Immédiate
+  description: 'L''information doit être injectée dans les fichiers de configuration
 
-  - id: "FRC-004"
-    name: "Zéro Demande de Re-confirmation"
-    description: |
-      L'agent ne demande jamais "tu peux répéter ?", "as-tu déjà fait X ?",
-      "confirme-moi que..." pour une information déjà capturée.
-    enforcement: "auto"
+    ou les artefacts actifs (designs, config, todo) dans la même seconde.
+
+    '
+  enforcement: auto
+- id: FRC-003
+  name: Autorité du Log
+  description: 'Le log d''audit devient l''unique source de vérité.
+
+    Si l''info est dans le log, l''agent a l''interdiction de poser la question.
+
+    '
+  enforcement: auto
+  exception: Vérification d'intégrité du log
+- id: FRC-004
+  name: Zéro Demande de Re-confirmation
+  description: 'L''agent ne demande jamais "tu peux répéter ?", "as-tu déjà fait X
+    ?",
+
+    "confirme-moi que..." pour une information déjà capturée.
+
+    '
+  enforcement: auto
+name: pattern-first-right-capture
+layer: L0

@@ -1,62 +1,62 @@
----
 name: m5-production-ontologique
-description: "Mathème M5 de production ontologique - cycle de vie complet d'un concept ONTOLOGY, de sa naissance (detectBirth) à son intégration (integrate) et sa gestion de cycle de vie (lifecycle)."
-version: "1.0.0"
+description: Mathème M5 de production ontologique - cycle de vie complet d'un concept
+  ONTOLOGY, de sa naissance (detectBirth) à son intégration (integrate) et sa gestion
+  de cycle de vie (lifecycle).
+version: 1.0.0
 status: active
 stratum: L0_CANON
-citizen: "ECOSYSTEM-BRAIN"
-layer: "L0"
-created: "2026-08-07"
+citizen: ECOSYSTEM-BRAIN
+layer: L0
+created: '2026-08-07'
 source_repo: gerivdb/GeriCode
 source_path: unified-design/designs/m5-production-ontologique.yaml
 matheme:
   id: M5
-  label: "Production Ontologique"
+  label: Production Ontologique
   weight: 6
   quorum: 15
-  compatibility: "W(M5, Mi) < 0.5 pour tout i in {1,2,3,4}"
+  compatibility: W(M5, Mi) < 0.5 pour tout i in {1,2,3,4}
 cycle:
-  - phase: detectBirth
-    matheme: M2
-    action: "Détecter l'émergence d'un concept dans le chat/réflexion"
-    output: "Embryo concept"
-  - phase: develop
-    matheme: M3
-    action: "Développer le concept : raffiner la définition, ajouter relations"
-    output: "Developing concept"
-  - phase: stabilize
-    matheme: M1+M4
-    action: "Surveiller la dérive, mesurer la stabilité"
-    output: "Stable concept"
-  - phase: integrate
-    matheme: M3.5
-    action: "Intégrer dans ONTOLOGY comme concept formel"
-    output: "Integrated concept"
-  - phase: lifecycle
-    matheme: M4
-    action: "Gérer la maturation, l'obsolescence, l'archivage"
-    output: "Lifecycle managed"
+- phase: detectBirth
+  matheme: M2
+  action: Détecter l'émergence d'un concept dans le chat/réflexion
+  output: Embryo concept
+- phase: develop
+  matheme: M3
+  action: 'Développer le concept : raffiner la définition, ajouter relations'
+  output: Developing concept
+- phase: stabilize
+  matheme: M1+M4
+  action: Surveiller la dérive, mesurer la stabilité
+  output: Stable concept
+- phase: integrate
+  matheme: M3.5
+  action: Intégrer dans ONTOLOGY comme concept formel
+  output: Integrated concept
+- phase: lifecycle
+  matheme: M4
+  action: Gérer la maturation, l'obsolescence, l'archivage
+  output: Lifecycle managed
 states:
-  - state: DAY
-    description: "Concept en maturation active"
-  - state: NIGHT
-    description: "Concept abandonné - rollback sémantique"
-  - state: TWILIGHT
-    description: "Concept en superposition non effondrée (résonance pure)"
+- state: DAY
+  description: Concept en maturation active
+- state: NIGHT
+  description: Concept abandonné - rollback sémantique
+- state: TWILIGHT
+  description: Concept en superposition non effondrée (résonance pure)
 integration:
-  boot_sequence: "BOOT-0.5 (M5 probe)"
-  skill: "m5-production-monitor"
+  boot_sequence: BOOT-0.5 (M5 probe)
+  skill: m5-production-monitor
   concepts:
-    - "conversational_anaphor"
-    - "register_shift"
-    - "context_scope_ambiguity"
-    - "lexical_scope_ambiguity"
-    - "asymmetric_confidence"
-    - "context_drift"
-    - "conversation_semantic_stability"
-    - "quiproquo_lifecycle"
+  - conversational_anaphor
+  - register_shift
+  - context_scope_ambiguity
+  - lexical_scope_ambiguity
+  - asymmetric_confidence
+  - context_drift
+  - conversation_semantic_stability
+  - quiproquo_lifecycle
 references:
-  - "PRD-MOC-M5-PRODUCTION-ONTOLOGIQUE-2026-08-07.md"
-  - "unified-design/atoms/GOVERNANCE/artifact-writing-standards.yaml"
-intent_hash: 0xDESIGN_M5_PRODUCTION_ONTOLOGIQUE_20260807
----
+- PRD-MOC-M5-PRODUCTION-ONTOLOGIQUE-2026-08-07.md
+- unified-design/atoms/GOVERNANCE/artifact-writing-standards.yaml
+intent_hash: 0xdesign_m5_production_ontologique_20260807

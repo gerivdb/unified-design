@@ -1,29 +1,34 @@
----
 name: maxwell-triad
-version: "1.0.0"
-description: "Triade semantique Maxwell - Entropie/Gradient/Symetrie pour audio+video"
+version: 1.0.0
+description: Triade semantique Maxwell - Entropie/Gradient/Symetrie pour audio+video
 status: active
 owner: Maxwell
 inherits:
-  - plix
-  - plix-audio
+- plix
+- plix-audio
 capabilities:
-  - name: entropy-mapping
-    parameters:
-      signal_types: [video, audio]
-      metric: shannon
-  - name: gradient-flux
-    parameters:
-      diff_order: 1
-      encoding: piano-diff
-  - name: symmetry-keeping
-    parameters:
-      invariant: energy
-      conservation: true
+- name: entropy-mapping
+  parameters:
+    signal_types:
+    - video
+    - audio
+    metric: shannon
+- name: gradient-flux
+  parameters:
+    diff_order: 1
+    encoding: piano-diff
+- name: symmetry-keeping
+  parameters:
+    invariant: energy
+    conservation: true
 components:
-  - runners: [entropy_mapper, gradient_flux, symmetry_keeper]
-  - pipeline: maxwell_pipeline
+- runners:
+  - entropy_mapper
+  - gradient_flux
+  - symmetry_keeper
+- pipeline: maxwell_pipeline
 constraints:
-  - snr_db: 40
-  - latency_ms: 100
-intent_hash: 0xMAXWELL_TRIAD_DESIGN_20260730
+- snr_db: 40
+- latency_ms: 100
+intent_hash: 0xmaxwell_triad_design_20260730
+layer: L3-L4

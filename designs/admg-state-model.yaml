@@ -1,71 +1,68 @@
-# unified-design/designs/admg-state-model.yaml
-version: "1.0"
-intent_hash: "0xADMG_20260801"
-status: "active"
+version: 1.0.0
+intent_hash: 0xadmg_20260801
+status: active
+description: 'ADMG (Array Dependence Matrix Graph) comme modèle de dépendances
 
-description: |
-  ADMG (Array Dependence Matrix Graph) comme modèle de dépendances
   pour les systèmes multi-agents avec variables latentes.
 
-admg_illustration: |
-  +----------+       +------------+       +-----------+
-  |   A      | ----> |    B       | <---- |    C      |
-  | (obs)    |       | (latent)   |       | (obs)     |
-  +----------+       +------------+       +-----------+
-      |                    ^                    |
-      |                    |                    |
-      v                    |                    v
-  +----------+       +------------+       +-----------+
-  |   D      | ----> |    E       | <---- |    F      |
-  | (obs)    |       | (latent)   |       | (obs)     |
-  +----------+       +------------+       +-----------+
-       |                   ^                   |
-       +---------+---------+---------+---------+
-                 |                 |
-                 v                 v
-           +------------+    +------------+
-           |     G      |    |     H      |
-           |  (outcome) |    |  (proxy)   |
-           +------------+    +------------+
-
+  '
+admg_illustration: "+----------+       +------------+       +-----------+\n|   A \
+  \     | ----> |    B       | <---- |    C      |\n| (obs)    |       | (latent)\
+  \   |       | (obs)     |\n+----------+       +------------+       +-----------+\n\
+  \    |                    ^                    |\n    |                    |   \
+  \                 |\n    v                    |                    v\n+----------+\
+  \       +------------+       +-----------+\n|   D      | ----> |    E       | <----\
+  \ |    F      |\n| (obs)    |       | (latent)   |       | (obs)     |\n+----------+\
+  \       +------------+       +-----------+\n     |                   ^         \
+  \          |\n     +---------+---------+---------+---------+\n               | \
+  \                |\n               v                 v\n         +------------+\
+  \    +------------+\n         |     G      |    |     H      |\n         |  (outcome)\
+  \ |    |  (proxy)   |\n         +------------+    +------------+\n"
 mapping:
-  - node_type: "observed"
-    examples: ["événement signé", "réaction agent", "résultat CI"]
-    storage: "Buzz@block / WAL"
-    persistent: true
-
-  - node_type: "latent"
-    examples: ["inférence neuronale", "intention non formulée", "contexte tacite"]
-    storage: "N243 / TLM-CORE"
-    persistent: false
-
-  - node_type: "outcome"
-    examples: ["merge decision", "release", "décision ternaire"]
-    storage: "RLM-243 / N243 workflow"
-    persistent: true
-
-  - node_type: "proxy"
-    examples: ["hash-chain log", "WAL ternaire", "metrics"]
-    storage: "buzz-audit / wal.rs"
-    persistent: true
-
+- node_type: observed
+  examples:
+  - événement signé
+  - réaction agent
+  - résultat CI
+  storage: Buzz@block / WAL
+  persistent: true
+- node_type: latent
+  examples:
+  - inférence neuronale
+  - intention non formulée
+  - contexte tacite
+  storage: N243 / TLM-CORE
+  persistent: false
+- node_type: outcome
+  examples:
+  - merge decision
+  - release
+  - décision ternaire
+  storage: RLM-243 / N243 workflow
+  persistent: true
+- node_type: proxy
+  examples:
+  - hash-chain log
+  - WAL ternaire
+  - metrics
+  storage: buzz-audit / wal.rs
+  persistent: true
 rules:
-  - id: "ADMG-001"
-    name: "Arêtes Dirigées"
-    description: "Les relations causales directes sont représentées par ->"
-    enforcement: "design"
-
-  - id: "ADMG-002"
-    name: "Confounding"
-    description: "Les dépendances non causales entre latents sont représentées par ↔"
-    enforcement: "design"
-
-  - id: "ADMG-003"
-    name: "DAG-3"
-    description: "Pas de cycles dirigés — le graphe est acyclique"
-    enforcement: "design"
-
-  - id: "ADMG-004"
-    name: "Observé → Persistant"
-    description: "Toute variable observée est persistée dans Buzz@block ou WAL"
-    enforcement: "auto"
+- id: ADMG-001
+  name: Arêtes Dirigées
+  description: Les relations causales directes sont représentées par ->
+  enforcement: design
+- id: ADMG-002
+  name: Confounding
+  description: Les dépendances non causales entre latents sont représentées par ↔
+  enforcement: design
+- id: ADMG-003
+  name: DAG-3
+  description: Pas de cycles dirigés — le graphe est acyclique
+  enforcement: design
+- id: ADMG-004
+  name: Observé → Persistant
+  description: Toute variable observée est persistée dans Buzz@block ou WAL
+  enforcement: auto
+name: admg-state-model
+layer: L0

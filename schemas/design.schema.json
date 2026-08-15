@@ -38,7 +38,7 @@
     },
     "intent_hash": {
       "type": "string",
-      "pattern": "^0x[a-zA-Z0-9_]+$",
+      "pattern": "^0x[a-zA-Z0-9_-]+$",
       "description": "Unique intent hash for governance traceability."
     },
     "description": {
@@ -96,8 +96,7 @@
       "items": {
         "type": "object",
         "required": [
-          "name",
-          "parameters"
+          "name"
         ],
         "properties": {
           "name": {
@@ -134,17 +133,142 @@
     "components": {
       "type": "array",
       "items": {
-        "type": "string"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          }
+        ]
       },
       "description": "Logical components of the design."
     },
     "constraints": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object"
+              }
+            ]
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": true
+        }
+      ],
+      "description": "Hard constraints enforced by the design."
+    },
+    "citizen": {
+      "type": "string"
+    },
+    "source_repo": {
+      "type": "string"
+    },
+    "source_path": {
+      "type": "string"
+    },
+    "stratum": {
+      "type": "string"
+    },
+    "created": {
+      "type": "string"
+    },
+    "cycle": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      ]
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "concepts": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "references": {
       "type": "array",
       "items": {
         "type": "string"
-      },
-      "description": "Hard constraints enforced by the design."
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    },
+    "integration": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "matheme": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "date": {
+      "type": "string"
+    },
+    "section": {
+      "type": "string"
+    },
+    "bdcp_mode": {
+      "type": [
+        "string",
+        "object"
+      ]
+    },
+    "statuses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   },
-  "additionalProperties": false
+  "additionalProperties": true
 }
