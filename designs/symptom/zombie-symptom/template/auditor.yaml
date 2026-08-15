@@ -1,6 +1,3 @@
-# Auditor Template
-
-```yaml
 name: <auditor_name>
 wal:
   enabled: true
@@ -16,4 +13,3 @@ wal:
 nexus:
   index: <gerivdb/NEXUS/concepts/...>
   conformity: CONFORME_NEXUS
-```
