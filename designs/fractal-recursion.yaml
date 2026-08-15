@@ -1,20 +1,19 @@
----
 name: fractal-recursion
-version: "1.0.0"
-description: "Récursion auto-similaire pour les designs fractals"
+version: 1.0.0
+description: Récursion auto-similaire pour les designs fractals
 status: active
 owner: Bellard
 inherits: []
 capabilities:
-  - name: fractal-recursion
-    parameters:
-      pattern: self-similar
-      max_depth: 10
-      short_circuit: NEUTRE
-      complexity: O(DELTA)
+- name: fractal-recursion
+  parameters:
+    pattern: self-similar
+    max_depth: 10
+    short_circuit: NEUTRE
+    complexity: O(DELTA)
 constraints:
-  - "Le short-circuit NEUTRE EST obligatoire (ADR-0013)"
-  - "La profondeur max DOIT etre respectee"
-  - "La complexite DOIT rester O(DELTA)"
-intent_hash: 0xFRACTAL_RECURSION_20260730
----
+- Le short-circuit NEUTRE EST obligatoire (ADR-0013)
+- La profondeur max DOIT etre respectee
+- La complexite DOIT rester O(DELTA)
+intent_hash: 0xfractal_recursion_20260730
+layer: L0-L4

@@ -1,74 +1,99 @@
----
 name: clone-governance
-description: "Principe d'unicité des dépôts - un seul chemin canonique par repo, interdiction de doublons inter-couches"
+description: Principe d'unicité des dépôts - un seul chemin canonique par repo, interdiction
+  de doublons inter-couches
 version: 1.0.0
 status: active
 inherits:
-  - fractal-engineering-strata
-  - design-principle
+- fractal-engineering-strata
+- design-principle
 parameters:
   pattern: canonical-singleton
   max_depth: 6
   short_circuit: NEUTRE
-  strata: [L0, L1, L2, L3, L4]
+  strata:
+  - L0
+  - L1
+  - L2
+  - L3
+  - L4
   canonical_sot: known_repositories.yaml
   canonical_sot_repo: gerivdb/GOVERNANCE-HUB
   canonical_sot_path: D:\\\\DO\\\\WEB\\\\TOOLS\\\\L0-CANON\\\\GOVERNANCE-HUB\\\\known_repositories.yaml
 rules:
-  - name: unique_canonical_path
-    description: Chaque depot a un chemin canonique unique defini par known_repositories.yaml
-    check: |
-      Pour tout depot R, il existe exactement un chemin
-      local_path dans known_repositories.yaml.
-      Toute instance de R en dehors de ce chemin est illégitime.
-  - name: no_duplicate_across_layers
-    description: Un depot ne peut pas etre duplique entre strates L0-L5
-    check: |
-      Si R existe dans L1-INFRA (canonique), il ne doit pas exister
-      dans L4-TOOLS ou toute autre strate sans validation explicite.
-      Les doublons sont detectes par scan_strates.py.
-  - name: known_repositories_truth
-    description: known_repositories.yaml est la source de verite absolue
-    check: |
-      Toutes les instances de R doivent etre referencées dans
-      known_repositories.yaml avec son chemin canonique.
-      Pas de local_path = pas d'autorisation de clone.
-  - name: do_not_create_lock
-    description: "Le champ do_not_create: true bloque toute creation de clone"
-    check: |
-      Si R a do_not_create: true dans known_repositories.yaml,
-      aucun agent ne peut créer une copie. Le chemin canonical_path
-      est immuable.
-  - name: stratum_hierarchy
-    description: Les strates L0-L5 definiient l'emplacement canonique
-    check: |
-      L0-CANON     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L0-CANON\\\\
-      L1-INFRA     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L1-INFRA\\\\
-      L2-PLATFORM  -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L2-PLATFORM\\\\
-      L3-CITIZENS  -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L3-CITIZENS\\\\
-      L4-TOOLS     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L4-TOOLS\\\\
-      L5-ARCHIVE   -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L5-ARCHIVE\\\\
-      Un depot ne peut pas exister dans deux strates simultanément.
+- name: unique_canonical_path
+  description: Chaque depot a un chemin canonique unique defini par known_repositories.yaml
+  check: 'Pour tout depot R, il existe exactement un chemin
+
+    local_path dans known_repositories.yaml.
+
+    Toute instance de R en dehors de ce chemin est illégitime.
+
+    '
+- name: no_duplicate_across_layers
+  description: Un depot ne peut pas etre duplique entre strates L0-L5
+  check: 'Si R existe dans L1-INFRA (canonique), il ne doit pas exister
+
+    dans L4-TOOLS ou toute autre strate sans validation explicite.
+
+    Les doublons sont detectes par scan_strates.py.
+
+    '
+- name: known_repositories_truth
+  description: known_repositories.yaml est la source de verite absolue
+  check: 'Toutes les instances de R doivent etre referencées dans
+
+    known_repositories.yaml avec son chemin canonique.
+
+    Pas de local_path = pas d''autorisation de clone.
+
+    '
+- name: do_not_create_lock
+  description: 'Le champ do_not_create: true bloque toute creation de clone'
+  check: 'Si R a do_not_create: true dans known_repositories.yaml,
+
+    aucun agent ne peut créer une copie. Le chemin canonical_path
+
+    est immuable.
+
+    '
+- name: stratum_hierarchy
+  description: Les strates L0-L5 definiient l'emplacement canonique
+  check: 'L0-CANON     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L0-CANON\\\\
+
+    L1-INFRA     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L1-INFRA\\\\
+
+    L2-PLATFORM  -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L2-PLATFORM\\\\
+
+    L3-CITIZENS  -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L3-CITIZENS\\\\
+
+    L4-TOOLS     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L4-TOOLS\\\\
+
+    L5-ARCHIVE   -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L5-ARCHIVE\\\\
+
+    Un depot ne peut pas exister dans deux strates simultanément.
+
+    '
 enforcement:
-  - pre_commit_hook: check_no_duplicates
-  - ci_check: scan_for_duplicates
-  - remediation: suppress_duplicate_keep_canonical
-  - scan_tool: scan_strates.py
-  - known_repos_tool: update_known_repos.py
+- pre_commit_hook: check_no_duplicates
+- ci_check: scan_for_duplicates
+- remediation: suppress_duplicate_keep_canonical
+- scan_tool: scan_strates.py
+- known_repos_tool: update_known_repos.py
 violations_documented:
-  - repo: ECOS-CLI
-    canonical: D:\\\\DO\\\\WEB\\\\TOOLS\\\\L1-INFRA\\\\ECOS-CLI
-    illegitimate: D:\\\\DO\\\\WEB\\\\TOOLS\\\\L4-TOOLS\\\\ECOS-CLI
-    resolution: SUPPRIME (2026-07-31)
-    adr: ADR-032-clone-governance
-  - repo: KIVA-CLI
-    canonical: D:\\\\DO\\\\WEB\\\\TOOLS\\\\L1-INFRA\\\\KIVA-CLI
-    illegitimate: D:\\\\DO\\\\WEB\\\\TOOLS\\\\L4-TOOLS\\\\KIVA-CLI
-    status: DETECTE
-    resolution: A traiter
-    layer: L2_COMPOSITION
-    do_not_create: true
+- repo: ECOS-CLI
+  canonical: D:\\\\DO\\\\WEB\\\\TOOLS\\\\L1-INFRA\\\\ECOS-CLI
+  illegitimate: D:\\\\DO\\\\WEB\\\\TOOLS\\\\L4-TOOLS\\\\ECOS-CLI
+  resolution: SUPPRIME (2026-07-31)
+  adr: ADR-032-clone-governance
+- repo: KIVA-CLI
+  canonical: D:\\\\DO\\\\WEB\\\\TOOLS\\\\L1-INFRA\\\\KIVA-CLI
+  illegitimate: D:\\\\DO\\\\WEB\\\\TOOLS\\\\L4-TOOLS\\\\KIVA-CLI
+  status: DETECTE
+  resolution: A traiter
+  layer: L2_COMPOSITION
+  do_not_create: true
 performance:
-  latency_p99: 10ms
-  power_max: 1W
-intent_hash: 0xCLONE_GOVERNANCE_20260731
+  latency_p99: 10.0
+  power_max: 1.0
+intent_hash: 0xclone_governance_20260731
+layer: L0-L5

@@ -1,47 +1,48 @@
----
 name: prd-moc-progress-sync
-version: "1.0.0"
-description: "PRD-MOC Progress Sync Automation - Definit le mecanisme par lequel un PRD MOC contenant un plan d'implementation maintient automatiquement sa section d'etat et sa section 'Reste a faire'."
+version: 1.0.0
+description: PRD-MOC Progress Sync Automation - Definit le mecanisme par lequel un
+  PRD MOC contenant un plan d'implementation maintient automatiquement sa section
+  d'etat et sa section 'Reste a faire'.
 status: active
 owner: gerivdb
-responsible_agent: "ECOSYSTEM-BRAIN"
+responsible_agent: ECOSYSTEM-BRAIN
 inherits:
-  - moc-governance
-  - ecosystem-discovery-boot
+- moc-governance
+- ecosystem-discovery-boot
 capabilities:
-  - name: progress_tracking
-    description: "Suivi structure de l'avancement d'un plan d'implementation"
-  - name: probe_status_sync
-    description: "Synchronisation du statut avec l'execution reelle des probes"
-  - name: prd_moc_self_description
-    description: "PRD MOC auto-descriptif : declare son propre mecanisme de suivi"
+- name: progress_tracking
+  description: Suivi structure de l'avancement d'un plan d'implementation
+- name: probe_status_sync
+  description: Synchronisation du statut avec l'execution reelle des probes
+- name: prd_moc_self_description
+  description: 'PRD MOC auto-descriptif : declare son propre mecanisme de suivi'
 components:
-  - skill: progress-sync
-  - boot_step: BOOT-5B
-  - registry: SKILLS/REGISTRY.yaml
-  - ontology: ONTOLOGY/ONTOLOGY.yaml
+- skill: progress-sync
+- boot_step: BOOT-5B
+- registry: SKILLS/REGISTRY.yaml
+- ontology: ONTOLOGY/ONTOLOGY.yaml
 constraints:
   atomic_update: true
   read_only_prd_moc_content: true
   write_only_progress_sections: true
   mandatory_progress_tracking_block: true
   statuses:
-    - "[OK] FAIT"
-    - "[WIP] EN COURS"
-    - "[WIP] A FAIRE"
-    - "[KO] BLOQUE"
-  forbidden: "Ne jamais creer un PRD MOC parallele hors-norme"
+  - '[OK] FAIT'
+  - '[WIP] EN COURS'
+  - '[WIP] A FAIRE'
+  - '[KO] BLOQUE'
+  forbidden: Ne jamais creer un PRD MOC parallele hors-norme
 update_triggers:
-  - "Tout commit touchant un livrable liste"
-  - "Toute execution de probe P-7xx / P-8xx"
-  - "Toute demande de verification utilisateur"
+- Tout commit touchant un livrable liste
+- Toute execution de probe P-7xx / P-8xx
+- Toute demande de verification utilisateur
 ontology_terms:
-  - prd-moc-progress-sync
-  - progress-tracking
-  - probe-status-sync
-  - prd-moc-self-description
-  - harness-engineering
-  - repo-citizen
-  - verse_mapping
-intent_hash: 0xDESIGN_PRD_MOC_PROGRESS_SYNC_20260807
----
+- prd-moc-progress-sync
+- progress-tracking
+- probe-status-sync
+- prd-moc-self-description
+- harness-engineering
+- repo-citizen
+- verse_mapping
+intent_hash: 0xdesign_prd_moc_progress_sync_20260807
+layer: L0-L4

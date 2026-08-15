@@ -1,20 +1,21 @@
-# unified-design/designs/force-path-access.yaml
-# Force l'IA à accéder directement aux chemins L*
-version: "1.0"
-intent_hash: "0xFORCEPATH_20260801"
-
+version: 1.0.0
+intent_hash: 0xforcepath_20260801
 rules:
-  - id: "FPA-001"
-    name: "Accès direct aux chemins autorisés"
-    description: >
-      Pour tout chemin sous D:\DO\WEB\, C:\DevTools, C:\Users\GG\AppData,
-      C:\Users\GG\AppData\Roaming\Code\User\globalStorage ou C:\Users\GG\.kilocode,
-      l'IA doit tenter l'accès direct.
-    enforcement: "auto"
+- id: FPA-001
+  name: Accès direct aux chemins autorisés
+  description: 'Pour tout chemin sous D:\DO\WEB\, C:\DevTools, C:\Users\GG\AppData,
+    C:\Users\GG\AppData\Roaming\Code\User\globalStorage ou C:\Users\GG\.kilocode,
+    l''IA doit tenter l''accès direct.
 
-  - id: "FPA-002"
-    name: "Rapport d'échec réel"
-    description: >
-      Si un chemin est inaccessible, l'IA doit rapporter l'erreur système réelle.
-      Ne pas remplacer par "hors périmètre".
-    enforcement: "auto"
+    '
+  enforcement: auto
+- id: FPA-002
+  name: Rapport d'échec réel
+  description: 'Si un chemin est inaccessible, l''IA doit rapporter l''erreur système
+    réelle. Ne pas remplacer par "hors périmètre".
+
+    '
+  enforcement: auto
+name: force-path-access
+layer: L0
+status: draft

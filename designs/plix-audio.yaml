@@ -1,27 +1,38 @@
----
 name: plix-audio
-version: "1.0.0"
-description: "PLIX-AUDIO - extension audio de PLIX pour flux temporel 1D"
+version: 1.0.0
+description: PLIX-AUDIO - extension audio de PLIX pour flux temporel 1D
 status: active
 owner: Bellard
 inherits:
-  - plix
-  - b243-vector
+- plix
+- b243-vector
 capabilities:
-  - name: audio-encode
-    parameters:
-      sample_rate: [44100, 48000]
-      channels: [1, 2]
-      bits_per_sample: [16, 24]
-  - name: spectrum-analysis
-    parameters:
-      fft_size: 1024
-      hop_size: 512
+- name: audio-encode
+  parameters:
+    sample_rate:
+    - 44100
+    - 48000
+    channels:
+    - 1
+    - 2
+    bits_per_sample:
+    - 16
+    - 24
+- name: spectrum-analysis
+  parameters:
+    fft_size: 1024
+    hop_size: 512
 components:
-  - encoder: plix_audio_encode
-  - decoder: plix_audio_decode
-  - runners: [spectrum_analyzer, envelope_tracker, phase_detector, harmonic_encoder, audio_validator]
+- encoder: plix_audio_encode
+- decoder: plix_audio_decode
+- runners:
+  - spectrum_analyzer
+  - envelope_tracker
+  - phase_detector
+  - harmonic_encoder
+  - audio_validator
 constraints:
-  - cpu_only: true
-  - compression_target: 0.1% de PCM
-intent_hash: 0xPLIX_AUDIO_DESIGN_20260730
+- cpu_only: true
+- compression_target: 0.1% de PCM
+intent_hash: 0xplix_audio_design_20260730
+layer: L3-L4
