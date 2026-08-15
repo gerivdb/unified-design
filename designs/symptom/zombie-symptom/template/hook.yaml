@@ -1,0 +1,12 @@
+# Hook Template
+
+```yaml
+name: <hook_name>
+type: <pre | post | on_error | on_timeout>
+events:
+  - <session_start | session_end | worktree_create | worktree_remove | ci_start | ci_end>
+actions:
+  - <detect | classify | purge | log | notify>
+scope:
+  - <local | cross_repo | ecosystem>
+```

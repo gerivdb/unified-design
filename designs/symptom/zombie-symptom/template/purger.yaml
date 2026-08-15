@@ -1,0 +1,21 @@
+# Purger Template
+
+```yaml
+name: <purger_name>
+type: <orchestrated | sequential | parallel>
+safety:
+  - check_before_kill: <true|false>
+  - confirmation_required: <true|false>
+  - rollback_on_failure: <true|false>
+steps:
+  - order: 1
+    target: <process_type | repo | worktree>
+    action: <taskkill | git_worktree_remove | close_handle>
+    force: <true|false>
+    priority: <1-10>
+  - order: 2
+    ...
+logging:
+  wal: <true|false>
+  nexus_index: <path>
+```

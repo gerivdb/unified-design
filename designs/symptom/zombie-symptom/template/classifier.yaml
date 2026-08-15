@@ -1,0 +1,15 @@
+# Classifier Template
+
+```yaml
+name: <classifier_name>
+dimensions:
+  - name: <dimension_name>
+    type: <severity | priority | repo_scope | process_type>
+    values:
+      - <value_1>
+      - <value_2>
+rules:
+  - if: <condition>
+    then: <classification>
+    priority: <1-10>
+```
