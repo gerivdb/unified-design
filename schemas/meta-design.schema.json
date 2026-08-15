@@ -37,7 +37,8 @@
       "enum": [
         "active",
         "deprecated",
-        "draft"
+        "draft",
+        "proposed"
       ]
     },
     "inherits": {

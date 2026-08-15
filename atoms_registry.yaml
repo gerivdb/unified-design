@@ -23,7 +23,6 @@ atoms:
     - spidx
     - mox-meta-coherence
     - korx
-  depends_on: []
 - path: atoms/adr-prd-epics-intents.yaml
   hash: 9e770e28bc64
   description: 'description: "Gestion des ADR, PRD, EPICS, INTENTS comme artefacts
@@ -1010,8 +1009,7 @@ atoms:
   depends_on:
     - ouroboros
     - fractal-recursion
-ATOM-042-REPOSITORY-CENSUS.md:
-  path: atoms\ATOM-042-REPOSITORY-CENSUS.md
+- path: atoms/ATOM-042-REPOSITORY-CENSUS.md
   depends_on: []
 
 - path: atoms/structural-relations.yaml
@@ -1054,3 +1052,9 @@ ATOM-042-REPOSITORY-CENSUS.md:
     - artifact-writing-standards
     - dag3-conversation-forensics
 
+- path: atoms/merge-completeness-check.yaml
+  hash: MERGE_COMPLETENESS_CHECK_HASH
+  description: 'description: "Verifie la completude des dossiers attendus lors des fusions cross-repo. Compare recursivement les dossiers attendus avec la realite du working tree."'
+  depends_on:
+    - git-remote-safety
+    - pre-action-validation

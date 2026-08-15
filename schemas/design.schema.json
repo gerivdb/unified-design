@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://gerivdb.github.io/unified-design/schemas/design.schema.json",
   "title": "Unified Design Schema",
   "description": "Schema for validating design YAML files in unified-design/designs/. Enforces universal naming, depends_on contracts, and bridges declarations.",
@@ -24,7 +24,12 @@
     },
     "status": {
       "type": "string",
-      "enum": ["active", "proposed", "deprecated"],
+      "enum": [
+        "active",
+        "deprecated",
+        "draft",
+        "proposed"
+      ],
       "description": "Lifecycle status of the design."
     },
     "layer": {
@@ -52,7 +57,11 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["target", "role", "protocol"],
+        "required": [
+          "target",
+          "role",
+          "protocol"
+        ],
         "properties": {
           "target": {
             "type": "string",
@@ -60,7 +69,11 @@
           },
           "role": {
             "type": "string",
-            "enum": ["consumer", "provider", "bidirectional"],
+            "enum": [
+              "consumer",
+              "provider",
+              "bidirectional"
+            ],
             "description": "Role of the target in relation to this design."
           },
           "protocol": {
@@ -82,7 +95,10 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["name", "parameters"],
+        "required": [
+          "name",
+          "parameters"
+        ],
         "properties": {
           "name": {
             "type": "string"
