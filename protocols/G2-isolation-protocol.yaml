@@ -1,0 +1,103 @@
+# G2 Isolation Protocol — Fencing Multi-Branches
+# IntentHash: 0xG2_ISOLATION_PROTOCOL_20260803
+# Source: Odoo multi-tenant isolation patterns
+# Target: gerivdb Git branch fencing
+
+version: "1.0"
+description: "Protocole d'isolation logique stricte pour agents sur branches Git concurrentes"
+
+## Principe fondamental
+
+> Inspiré par la gestion multi-tenant d'Odoo (`company_id`, `branch_id`), ce protocole
+> permet à des agents travaillant sur des branches Git différentes de partager la même
+> base de données métier sans collision, en appliquant un "fencing" logique strict.
+
+## Architecture
+
+### Composants
+
+1. **Branch Fence** — Isolation par branche Git
+   - Chaque branche obtient un `fence_id` unique
+   - Les ressources métier sont taguées avec le `fence_id` courant
+   - Accès croisés interdits sans élévation de privilège
+
+2. **Resource Lock** — Verrouillage consultatif PostgreSQL
+   - Utilise `pg_advisory_lock` pour les ressources partagées
+   - Timeout automatique après 300s (configurable)
+   - Fallback file-based locking si PostgreSQL indisponible
+
+3. **Conflict Detector** — Détection de conflits
+   - Scans les modifications concurrentes
+   - Alerte en cas de collision sur même ressource
+   - Escalade vers resolution manuelle si conflit non résoluble
+
+## Règles d'isolation
+
+### Règle 1 : Fence par branche
+
+```yaml
+branch: main
+fence_id: "fence-main-001"
+read_access: ["main", "develop"]
+write_access: ["main"]
+
+branch: feature/xyz
+fence_id: "fence-feature-xyz-001"
+read_access: ["main", "develop", "feature/xyz"]
+write_access: ["feature/xyz"]
+```
+
+### Règle 2 : Verrouillage explicite
+
+```yaml
+operations:
+  - name: "piano_diff_generation"
+    lock_type: "exclusive"
+    lock_id: "piano_diff:{partition_id}"
+    timeout_ms: 5000
+    retry_count: 3
+    fallback: "file_lock"
+
+  - name: "knowledge_graph_read"
+    lock_type: "shared"
+    lock_id: "kg:{node_id}"
+    timeout_ms: 1000
+    retry_count: 1
+    fallback: "none"
+```
+
+### Règle 3 : Détection de conflits
+
+```yaml
+conflict_detection:
+  enabled: true
+  scan_interval_seconds: 60
+  alert_threshold: "high"
+  auto_resolve: false
+  escalation: "human"
+```
+
+## Intégration Odoo
+
+| Concept Odoo | Mapping gerivdb | Implémentation |
+|--------------|-----------------|----------------|
+| `company_id` / `branch_id` | `fence_id` par branche Git | G2 Branch Fence |
+| `pg_advisory_lock` | Verrouillage consultatif partitions | `business_reader.zig` |
+| `ir.model.access` | Règles d'accès par fence | G2 Access Control |
+| Multi-tenant isolation | Isolation agents concurrents | G2 Conflict Detector |
+
+## Métriques de succès
+
+| Métrique | Cible | Validation |
+|----------|-------|------------|
+| Isolation | 100% | Test multi-branch sur même base |
+| Conflits détectés | 100% | Scan automatique toutes les 60s |
+| Lock timeout | < 5s | Timeout configurable |
+| Fallback | 100% | File-based locking si PG indisponible |
+
+## Références
+
+- PRD-001: N423 Odoo Integration v1.5
+- ATOM-065: Verrouillage llm_role
+- `atomic_business_objects.yaml`: TTL rules
+- `business_reader.zig`: Advisory locking implementation

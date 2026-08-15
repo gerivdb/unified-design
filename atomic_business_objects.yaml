@@ -1,0 +1,64 @@
+# Atomic Business Objects — TTL Rules
+# IntentHash: 0xATOMIC_BUSINESS_OBJECTS_20260803
+
+version: "1.0"
+description: "Règles de péremption des objets métier éphémères inspirées d'Odoo transient models"
+
+transient_objects:
+  - id: "temp_invoice_calculation"
+    description: "Calculs temporaires de facturation"
+    ttl_seconds: 3600
+    cleanup_policy: "delete"
+    max_age_seconds: 7200
+    dependencies: []
+
+  - id: "lead_enrichment_cache"
+    description: "Cache d'enrichissement des leads"
+    ttl_seconds: 1800
+    cleanup_policy: "archive"
+    max_age_seconds: 3600
+    dependencies: ["crm.lead"]
+
+  - id: "contract_review_draft"
+    description: "Brouillons de révision de contrat"
+    ttl_seconds: 86400
+    cleanup_policy: "archive"
+    max_age_seconds: 172800
+    dependencies: ["contract"]
+
+  - id: "ticket_merge_candidate"
+    description: "Candidates de fusion de tickets"
+    ttl_seconds: 7200
+    cleanup_policy: "delete"
+    max_age_seconds: 14400
+    dependencies: ["helpdesk.ticket"]
+
+  - id: "piano_diff_fragment"
+    description: "Fragments de connaissance .piano-diff"
+    ttl_seconds: 604800
+    cleanup_policy: "archive"
+    max_age_seconds: 1209600
+    dependencies: ["knowledge.node"]
+
+cleanup_rules:
+  - name: "hourly_cleanup"
+    cron: "0 * * * *"
+    target: "temp_invoice_calculation"
+    action: "delete"
+
+  - name: "daily_archive"
+    cron: "0 0 * * *"
+    target: "lead_enrichment_cache"
+    action: "archive"
+
+  - name: "weekly_cleanup"
+    cron: "0 0 * * 0"
+    target: "piano_diff_fragment"
+    action: "archive"
+
+governance:
+  max_transient_objects: 1000
+  warning_threshold: 800
+  critical_threshold: 950
+  auto_cleanup_enabled: true
+  audit_log: true

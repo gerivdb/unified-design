@@ -1,0 +1,79 @@
+---
+name: conversation-semantic-layer
+description: "Couche conversationnelle M5 - 8 concepts sémantiques liés aux ambiguïtés, dérives et quiproquos conversationnels, leurs relations, déclencheurs et métriques de stabilité."
+version: "1.0.0"
+status: active
+stratum: L0_CANON
+citizen: "ECOSYSTEM-BRAIN"
+layer: "L0"
+created: "2026-08-07"
+source_repo: gerivdb/GeriCode
+source_path: unified-design/designs/conversation-semantic-layer.yaml
+matheme:
+  id: M5
+  label: "Production Ontologique"
+  weight: 6
+  quorum: 15
+concepts:
+  - id: conversational_anaphor
+    phase: detectBirth
+    description: "Référence orpheline non vérifiée dans le chat"
+    maturity_threshold: 0.2
+  - id: register_shift
+    phase: develop
+    description: "Changement de registre implicite"
+    maturity_threshold: 0.5
+  - id: context_scope_ambiguity
+    phase: develop
+    description: "Périmetre flou non borné"
+    maturity_threshold: 0.5
+  - id: lexical_scope_ambiguity
+    phase: detectBirth
+    description: "Champ lexical large non borné"
+    maturity_threshold: 0.2
+  - id: asymmetric_confidence
+    phase: stabilize
+    description: "Écart de confiance entre system et user"
+    maturity_threshold: 0.8
+  - id: context_drift
+    phase: stabilize
+    description: "Accumulation d'écarts sémantiques"
+    maturity_threshold: 0.8
+  - id: conversation_semantic_stability
+    phase: stabilize
+    description: "Propriété de stabilité sémantique conversationnelle"
+    maturity_threshold: 0.8
+  - id: quiproquo_lifecycle
+    phase: integrate
+    description: "Cycle de vie complet du quiproquo"
+    maturity_threshold: 0.8
+relationships:
+  - from: conversational_anaphor
+    to: lexical_scope_ambiguity
+    type: "trigger"
+  - from: context_scope_ambiguity
+    to: context_drift
+    type: "causes"
+  - from: register_shift
+    to: asymmetric_confidence
+    type: "causes"
+  - from: context_drift
+    to: conversation_semantic_stability
+    type: "inverse"
+  - from: quiproquo_lifecycle
+    to: conversation_semantic_stability
+    type: "resolves"
+integration:
+  boot_sequence: "BOOT-0.5 (M5 probe)"
+  skill: "m5-production-monitor"
+  maturity_score: "0.0 -> 1.0"
+  states:
+    - DAY
+    - NIGHT
+    - TWILIGHT
+references:
+  - "PRD-MOC-M5-PRODUCTION-ONTOLOGIQUE-2026-08-07.md"
+  - "PRD-MOC-CONVERSATION-SEMANTIC-LAYER-2026-08-07.md"
+  - "unified-design/atoms/GOVERNANCE/artifact-writing-standards.yaml"
+intent_hash: 0xDESIGN_CONVERSATION_SEMANTIC_LAYER_20260807
+---

@@ -1,12 +1,22 @@
 ---
 name: moc-governance
 version: "1.0.0"
-description: "MOC - Master of Ceremonies governance design for artifact hierarchy and session control"
 status: active
-owner: gerivdb
+layer: L0-L4
+intent_hash: 0xMOC_GOVERNANCE_DESIGN_20260801
 inherits:
   - fractal-recursion
   - ouroboros
+depends_on:
+  - ATOM-045-git-arbiter-health-probe
+  - ATOM-046-wic-branch-prefix-validation
+bridges:
+  - target: GOVERNANCE-HUB
+    role: consumer
+    protocol: markdown-link
+  - target: MOX
+    role: consumer
+    protocol: python-import
 capabilities:
   - name: artifact_registry
     parameters:
@@ -27,4 +37,60 @@ constraints:
   - encoding: ascii_only
   - no_clone_without_strate: true
   - bdcp_mode: permanent
-intent_hash: 0xMOC_GOVERNANCE_DESIGN_20260801
+---
+
+# Design: moc-governance
+
+> MOC - Master of Ceremonies governance design for artifact hierarchy and session control
+
+## Universal Principles
+
+1. **Artifact hierarchy** -- PRD > MOC > INTENT > ADR > EPIC
+2. **Session gate** -- budget check + friction sensor before any agentic session
+3. **Atomic commits** -- max 3 files per commit, max 30 min between commits
+4. **BDCP mode permanent** -- anonymat réseau + protection quota tokens
+
+## Architecture
+
+```
+[Artifact Registry] -> [Session Gate] -> [Agent Manager]
+       |                    |                 |
+       v                    v                 v
+[GOVERNANCE-HUB]    [Budget Check]    [6 parallel sessions max]
+       |                    |                 |
+       v                    v                 v
+[MOX Validation]    [Friction Sensor]  [Worktree isolation]
+```
+
+## Contracts
+
+### Artifact contract
+
+- Input: artifact type + metadata
+- Output: validated artifact with frontmatter
+- Side effect: registered in `MOC-000-governance.md`
+
+### Session contract
+
+- Input: task description + budget constraints
+- Output: session plan with atomic steps
+- Side effect: logged in WAL
+
+## Implementation Notes
+
+- Use `agent-budget-check` rule for RAM/CPU validation
+- Use `session-boot-sequence` for BOOT-0 to BOOT-7 gates
+- Use `pr-lifecycle-gate` for PR cleanup at session end
+- Use `git-atomic-commit` for commit discipline
+
+## Rollout
+
+1. Register artifact types in `MOC-000-governance.md`
+2. Implement session gate in Agent Manager
+3. Validate with MOX before accepting new artifact types
+4. Test with `scripts/session_boot_gate.py`
+
+## References
+
+- `PRD-MOC-ACTPROTOCOL-UNIFIED-DESIGN-STRUCTURE-2026-08-06`
+- `ADR-2026-05-14-004-KILO-CODE-HOTL-OPERATIONAL-STD`

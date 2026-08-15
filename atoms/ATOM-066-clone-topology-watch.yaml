@@ -1,0 +1,85 @@
+# ATOM-066: Clone Topology Watch (G4)
+# Surveillance topologique continue des clones et repertoires plats
+version: "2.0.0"
+name: "ATOM-066-clone-topology-watch"
+inherits: ["ATOM-050-agent-worktree-isolation", "ATOM-049-symbol-retrieval-mcp"]
+capabilities:
+  - name: "topology-watch"
+    description: "Surveillance continue de la topologie disque vs SOT"
+    parameters:
+      scan_paths:
+        - "D:\DO\WEB\TOOLS\L0-CANON"
+        - "D:\DO\WEB\TOOLS\L1-INFRA"
+        - "D:\DO\WEB\TOOLS\L2-PLATFORM"
+        - "D:\DO\WEB\TOOLS\L3-CITIZENS"
+        - "D:\DO\WEB\TOOLS\L4-TOOLS"
+        - "D:\DO\WEB\TOOLS\L5-ARCHIVE"
+        - "C:\DevTools"
+      sot_sources:
+        - "known_repositories.yaml"
+        - "ECOS_ROOT.json"
+        - "TOPOS/topology.yaml"
+        - "STRATE_REGISTRY.yaml"
+        - "ONTOLOGY.yaml"
+      detection_rules: ["R-TOP-001", "R-TOP-002", "R-TOP-003", "R-TOP-004", "R-TOP-005", "R-TOP-006"]
+  - name: "ontology-classification"
+    description: "Classification des entites selon ONTOLOGY"
+    parameters:
+      entity_types: ["git_worktree", "kilo_worktree", "plain_directory", "clone_legitimate", "clone_illegitimate"]
+      classifications: ["stratum_compliant", "stratum_violation"]
+  - name: "quarantine-reversible"
+    description: "Quarantaine reversible des clones illegitimes"
+    parameters:
+      quarantine_path: "D:\DO\WEB\TOOLS\L5-ARCHIVE\quarantine"
+      reversible: true
+      restore_enabled: true
+  - name: "poop-cycle"
+    description: "Cycle POOP @day/@twilight/@night"
+    parameters:
+      day: "scan"
+      twilight: "verify"
+      night: "quarantine"
+  - name: "rsi-effects"
+    description: "Effets reversibles (RSI)"
+    parameters:
+      effects: ["scan", "quarantine", "block", "alert"]
+      all_reversible: true
+design_version: "1.0"
+intent_hash: 0xATOM_066_CLONE_TOPOLOGY_WATCH_20260815
+status: active
+deprecated_capabilities: []
+priority_resolution: "order"
+deprecation_period_days: 90
+
+# References ontologiques
+ontology:
+  - concept: "clone_legitimate"
+    source: "ONTOLOGY.yaml"
+    definition: "Clone conforme a known_repositories.yaml et STRATE_REGISTRY.yaml"
+  - concept: "clone_illegitimate"
+    source: "ONTOLOGY.yaml"
+    definition: "Clone non repertorie ou hors strate L*"
+  - concept: "plain_directory"
+    source: "ONTOLOGY.yaml"
+    definition: "Repertoire sans .git contenant des fichiers de governance"
+  - concept: "topology_watch"
+    source: "ONTOLOGY.yaml"
+    definition: "Service de surveillance topologique"
+  - concept: "worktree_hygiene_auditor"
+    source: "ONTOLOGY/concepts/worktree-hygiene-auditor.md"
+    definition: "Classification des entites du filesystem"
+
+# Implementation
+implementation:
+  primary_repo: "gerivdb/REPO-STANDARDS"
+  scripts:
+    - "scripts/clone-topology-watch.py"
+    - "scripts/rss_bulk_scan.py"
+    - ".githooks/pre-commit-topology-watch.py"
+  topo_tools:
+    - "D:\DO\WEB\TOOLS\L1-INFRA\TOPOS\tools\topos_clone_validator.py"
+    - "D:\DO\WEB\TOOLS\L1-INFRA\TOPOS\scripts\strate-watcher.py"
+  tests:
+    - "tests/test_clone_topology_watch.py"
+  docs:
+    - "docs/clone-topology-watch.md"

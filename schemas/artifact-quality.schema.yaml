@@ -1,0 +1,179 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Artifact Quality Schema",
+  "description": "Schéma de validation de la qualité des artefacts de gouvernance PRD/ADR/EPIC/INTENT/SPEC/REPORT/RPT/GUI/RUN.",
+  "type": "object",
+  "required": ["frontmatter", "structure"],
+  "properties": {
+    "frontmatter": {
+      "type": "object",
+      "required": ["type", "version", "status", "date", "intent_hash", "citizen", "layer", "author", "source_repo", "source_path"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["PRD", "ADR", "EPIC", "INTENT", "SPEC", "REPORT", "RPT", "GUI", "RUN", "PRD_MOC", "INDEX"]
+        },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "proposed", "accepted", "active", "canonical", "deprecated", "archived"]
+        },
+        "date": { "type": "string", "format": "date" },
+        "intent_hash": { "type": "string", "pattern": "^0x[A-Z0-9_]{8,}$" },
+        "citizen": { "type": "string" },
+        "layer": { "type": "string" },
+        "author": { "type": "string" },
+        "source_repo": { "type": "string", "pattern": "^gerivdb/[A-Z0-9_-]+$" },
+        "source_path": { "type": "string" }
+      }
+    },
+    "structure": {
+      "type": "object",
+      "required": ["objectif", "contexte", "perimetre", "architecture", "regles", "roles", "processus", "probes", "criteres", "rollback", "references"],
+      "properties": {
+        "objectif": {
+          "type": "object",
+          "required": ["summary", "items"],
+          "properties": {
+            "summary": { "type": "string", "maxLength": 200 },
+            "items": { "type": "array", "items": { "type": "string" }, "maxItems": 5 }
+          }
+        },
+        "contexte": {
+          "type": "object",
+          "required": ["problem", "current_state"],
+          "properties": {
+            "problem": { "type": "string" },
+            "current_state": { "type": "string" }
+          }
+        },
+        "perimetre": {
+          "type": "object",
+          "required": ["in", "out"],
+          "properties": {
+            "in": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+            "out": { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+          }
+        },
+        "architecture": {
+          "type": "object",
+          "required": ["diagram"],
+          "properties": {
+            "diagram": { "type": "string", "description": "ASCII diagram" }
+          }
+        },
+        "regles": {
+          "type": "object",
+          "required": ["rules"],
+          "properties": {
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "cause", "effect"],
+                "properties": {
+                  "id": { "type": "string", "pattern": "^R-\\d+$" },
+                  "cause": { "type": "string" },
+                  "effect": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "roles": {
+          "type": "object",
+          "required": ["actors"],
+          "properties": {
+            "actors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "responsibility"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "responsibility": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "processus": {
+          "type": "object",
+          "required": ["steps"],
+          "properties": {
+            "steps": {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 2,
+              "maxItems": 10
+            }
+          }
+        },
+        "probes": {
+          "type": "object",
+          "required": ["probes"],
+          "properties": {
+            "probes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "condition", "expected"],
+                "properties": {
+                  "id": { "type": "string", "pattern": "^P-\\d+$" },
+                  "condition": { "type": "string" },
+                  "expected": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "criteres": {
+          "type": "object",
+          "required": ["criteria"],
+          "properties": {
+            "criteria": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "description", "method"],
+                "properties": {
+                  "id": { "type": "string", "pattern": "^C-\\d+$" },
+                  "description": { "type": "string" },
+                  "method": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "rollback": {
+          "type": "object",
+          "required": ["steps"],
+          "properties": {
+            "steps": {
+              "type": "array",
+              "items": { "type": "string" },
+              "minItems": 1
+            }
+          }
+        },
+        "references": {
+          "type": "object",
+          "required": ["links"],
+          "properties": {
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["path", "description"],
+                "properties": {
+                  "path": { "type": "string" },
+                  "description": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

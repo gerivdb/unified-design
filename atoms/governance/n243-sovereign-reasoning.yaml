@@ -1,0 +1,39 @@
+name: n243-sovereign-reasoning
+description: "N243 est le moteur souverain de graphe cross-repo. Interface de requête et de synthèse locale sans limite de sources."
+version: "1.0.0"
+depends_on:
+  - ctulu-orch
+  - tql
+  - llux
+  - plix
+  - piano
+  - spidx
+  - mox-meta-coherence
+  - korx
+capabilities:
+  - name: cross-repo-ingestion
+    parameters:
+      source_types: ["markdown", "yaml", "json", "sqlite"]
+      max_sources: "unlimited"
+      scan_trigger: ["commit", "nightly", "manual"]
+  - name: graph-query
+    parameters:
+      engine: ctulu-orch
+      query_language: tql
+      operators: 12
+      temporal_support: true
+      max_response_time_ms: 2000
+  - name: usage-mining
+    parameters:
+      log_retention_days: 30
+      probe_derivation: true
+      pattern_detection: true
+  - name: synthesis
+    parameters:
+      output_formats: ["markdown", "ascii", "json"]
+      source_tracing: true
+      contradiction_detection: true
+stratum: L4
+status: active
+ontology_ref: "ONTOLOGY.yaml > entities.terms > N243"
+intent_hash: 0xN243_SOVEREIGN_REASONING_20260806

@@ -1,0 +1,44 @@
+---
+name: mox-validation
+description: "Validation MOX des documents de gouvernance. Définit les probes P-106/P-107 et leur application sur les INTENTs/PRDs/ADRs/EPICs."
+inherits: []
+version: "1.0.0"
+date: "2026-08-09"
+status: proposed
+intent_hash: 0xMOX_VALIDATION_ATOM_20260809
+author: gerivdb
+source_repo: gerivdb/unified-design
+source_path: atoms/mox-validation.yaml
+---
+
+# Atom — MOX Validation
+
+## Objectif
+
+Garantir que tout artefact de gouvernance passe les probes MOX avant d'être promu.
+
+## Probes
+
+| Probe | Nom | Cible | Critère |
+|-------|-----|-------|---------|
+| **P-106** | Frontmatter Validator | PRD, ADR, EPIC, INTENT, REPORT, RPT, GUI, RUN | Frontmatter YAML valide et complet |
+| **P-107** | Sections Obligatoires Validator | PRD, ADR, EPIC, INTENT, REPORT, RPT, GUI, RUN | Sections obligatoires présentes |
+
+## Application
+
+- **INTENT** : P-106 + P-107 sont obligatoires avant conversion PRD MOC
+- **PRD MOC** : P-106 + P-107 sont obligatoires avant merge
+- **ADR** : P-106 + P-107 sont obligatoires avant acceptation
+- **EPIC** : P-106 + P-107 sont obligatoires avant activation
+
+## Implémentation
+
+- **Validateur** : `MOX/src/engines/probes.py`
+- **CLI** : `mox validate-intent <path>` et `mox generate-prd-from-intent <path>`
+- **Linter** : `REPO-STANDARDS/scripts/rss_lint.py --check-intent-continuity`
+
+## Références
+
+- **Probes** : GOVERNANCE-HUB/probes/P-106-frontmatter-validator.md, P-107-sections-validator.md
+- **Pipeline** : unified-design/atoms/thought-commit-pipeline.yaml
+- **Templates** : REPO-STANDARDS/templates/INTENT-magistral.md, INTENT-subalterne.md, PRD-MOC-from-INTENT.template.md

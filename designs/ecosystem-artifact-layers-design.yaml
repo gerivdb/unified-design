@@ -1,0 +1,152 @@
+---
+type: DESIGN
+version: "1.0.0"
+status: proposed
+date: "2026-08-07"
+intent_hash: 0xDESIGN_ECOSYSTEM_ARTIFACT_LAYERS_20260807
+layer: L0
+citizen: unified-design
+source_repo: gerivdb/unified-design
+source_path: designs/ecosystem-artifact-layers-design.yaml
+---
+
+# Design: Ecosystem Artifact Layers
+
+## Objectif
+Définir les emplacements canoniques et les règles de découverte cross-repo pour les artefacts de l'écosystème : skills, designs, gouvernance.
+
+## Principe
+Chaque artefact vit dans son repo canonique. Les workspaces comme GeriCode ne font que consommer ces artefacts via des chemins stables.
+
+## Architecture globale
+
+```
+D:\DO\WEB\TOOLS\
+├── L0-CANON\
+│   └── unified-design\          ← Designs canoniques
+│       ├── designs\             ← Tous les designs écosystème
+│       ├── atoms\               ← Atoms de gouvernance
+│       └── README.md
+│
+├── L1-INFRA\
+│   ├── GOVERNANCE-HUB\          ← Registres et règles de gouvernance
+│   │   ├── known_repositories.yaml
+│   │   └── act-protocol\        ← Citizens, bridges, PRD/MOC
+│   │
+│   ├── TOPOS\                   ← Cartographie et bridges
+│   │   └── BRIDGES.yaml
+│   │
+│   └── ONTOLOGY\                ← Glossaire et concepts
+│       └── glossary.yaml
+│
+├── L4-TOOLS\
+│   └── SKILLS\                  ← Registry global des skills
+│       ├── REGISTRY.yaml        ← Source de vérité unique
+│       ├── registry.json        ← Vue dérivée
+│       ├── TAXONOMY.md          ← Classification
+│       ├── native\              ← Skills natifs écosystème
+│       │   ├── foundational\    ← Skills transverses (git, registry, etc.)
+│       │   ├── engines\         ← Moteurs (causal-chain, dag-rag, etc.)
+│       │   └── domain\          ← Skills métier (booking, finance, etc.)
+│       └── ext\                 ← Skills externes assimilés
+│
+└── L2-PLATFORM\
+    └── GeriCode\                ← Workspace de développement
+        ├── .kilo\               ← Config KiloCode (règles, worktrees, config)
+        ├── act-protocol\        ← Brouillon de travail (pas SOT)
+        └── [code source]        ← Implémentations
+```
+
+## Règles
+
+### 1. Emplacements canoniques
+
+| Artefact | Emplacement canonical | Règle |
+|----------|----------------------|-------|
+| **Designs** | `unified-design/designs/<name>.yaml` | Un design = un fichier dans unified-design |
+| **Skills** | `SKILLS/native/<domain>/<skill>/SKILL.md` | Tous les skills natifs dans SKILLS |
+| **Registry skills** | `SKILLS/REGISTRY.yaml` | Source de vérité unique |
+| **Citizens** | `GOVERNANCE-HUB/act-protocol/citizens.yaml` | SOT dans GOVERNANCE-HUB |
+| **Bridges** | `TOPOS/BRIDGES.yaml` | SOT dans TOPOS |
+| **Config KiloCode** | `<repo>/.kilo/` | Config locale uniquement |
+| **Work in progress** | `<workspace>/act-protocol/` | Pas SOT, peut être supprimé |
+
+### 2. Découverte cross-repo
+
+Tout repo workspace DOIT pouvoir atteindre les artefacts canoniques via :
+
+```python
+from pathlib import Path
+
+# Skills
+SKILLS_REGISTRY = Path("D:/DO/WEB/TOOLS/L4-TOOLS/SKILLS/REGISTRY.yaml")
+SKILLS_DIR = Path("D:/DO/WEB/TOOLS/L4-TOOLS/SKILLS/native")
+
+# Designs
+UNIFIED_DESIGNS = Path("D:/DO/WEB/TOOLS/L0-CANON/unified-design/designs")
+
+# Gouvernance
+KNOWN_REPOS = Path("D:/DO/WEB/TOOLS/L0-CANON/GOVERNANCE-HUB/known_repositories.yaml")
+CITIZENS = Path("D:/DO/WEB/TOOLS/L0-CANON/GOVERNANCE-HUB/act-protocol/citizens.yaml")
+BRIDGES = Path("D:/DO/WEB/TOOLS/L1-INFRA/TOPOS/BRIDGES.yaml")
+ONTOLOGY = Path("D:/DO/WEB/TOOLS/L0-CANON/ONTOLOGY/glossary.yaml")
+```
+
+### 3. Règles par strate
+
+| Strates | Rôle | Artefacts autorisés |
+|---------|------|---------------------|
+| **L0-CANON** | Source de vérité | Designs, atoms, governance, ontology |
+| **L1-INFRA** | Infrastructure | Bridges, registry, config |
+| **L2-PLATFORM** | Plateforme | Workspaces de développement (GeriCode, VERSES, etc.) |
+| **L3-EMERGENCE** | Citoyens | Code métier, pas de skills/designs canoniques |
+| **L4-TOOLS** | Outils | SKILLS registry, outils transverses |
+| **L5-ARCHIVE** | Archive | Read-only, pas de modification |
+
+### 4. Workflow de développement
+
+```
+1. Dev crée un skill dans GeriCode (workspace)
+   └── .kilo/skills/temp-<skill>/
+
+2. skill-auto-enroller déploie vers SKILLS/
+   └── D:\DO\WEB\TOOLS\L4-TOOLS\SKILLS\native\gericode\<skill>\SKILL.md
+
+3. registry-sync enregistre dans REGISTRY.yaml
+   └── SKILLS/REGISTRY.yaml
+
+4. citizenship-auditor vérifie la cohérence
+   └── P-806, P-807
+
+5. bridge-auditor vérifie les bridges
+   └── P-905, P-906
+
+6. Nettoyage GeriCode
+   └── Supprimer .kilo/skills/<skill>/
+```
+
+### 5. Exceptions
+
+| Exception | Règle |
+|-----------|-------|
+| `C:\DevTools\` | Hub central, pas de `.kilo/skills/` |
+| Workspace temporaire | `act-protocol/` dans le workspace = brouillon, pas SOT |
+| Skills externes | `source: external` dans REGISTRY.yaml |
+| L5-ARCHIVE | Exclu de toute modification |
+
+## Références
+
+- `clone-governance.yaml` : unicité des chemins canoniques
+- `fractal-engineering-strata.yaml` : structure L0-L5
+- `moc-governance.yaml` : gouvernance des artefacts
+- `capability-awareness.yaml` : accès cross-repo
+
+## Matrice de responsabilité
+
+| Artefact | Créé dans | Stocké dans | Consommé depuis |
+|----------|-----------|-------------|-----------------|
+| Skill | Workspace | SKILLS/native/<domain>/<skill>/ | Tous repos |
+| Design | Workspace | unified-design/designs/ | Tous repos |
+| Citizen | Workspace | GOVERNANCE-HUB/act-protocol/citizens.yaml | Tous repos |
+| Bridge | Workspace | TOPOS/BRIDGES.yaml | Tous repos |
+| Config KiloCode | Local | <repo>/.kilo/ | Local uniquement |

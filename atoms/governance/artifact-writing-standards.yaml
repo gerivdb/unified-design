@@ -1,0 +1,28 @@
+name: artifact-writing-standards
+description: "Normes de rédaction pour les artefacts de gouvernance PRD/ADR/EPIC/INTENT/SPEC/REPORT/RPT/GUI/RUN."
+version: "1.0.0"
+depends_on:
+  - kiss
+  - srp
+  - dip
+  - yagni
+  - law-of-demeter
+  - principle-of-least-astonishment
+  - stratified-abstraction
+  - convention-over-configuration
+capabilities:
+  - name: artifact-clarity
+    parameters:
+      max_sentence_length: 20
+      max_section_lines: 15
+      max_bullet_items: 8
+      mandatory_sections: ["objectif", "contexte", "perimetre", "architecture", "regles", "roles", "processus", "probes", "criteres", "rollback", "references"]
+  - name: artifact-validation
+    parameters:
+      probes: ["P-101", "P-102", "P-103", "P-104", "P-105", "P-106", "P-107", "P-108", "P-109"]
+      validator: mox
+      wal_logging: true
+stratum: L0-CANON
+status: active
+ontology_ref: "ONTOLOGY.yaml > entities.terms > artifact-writing-standards"
+intent_hash: 0xARTIFACT_WRITING_STANDARDS_20260806

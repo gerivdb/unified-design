@@ -1,0 +1,91 @@
+---
+name: thought-commit-pipeline
+description: "Pipeline de continuité Chat → INTENT → PRD MOC → Implémentation → Production Ready. Garantit la traçabilité et les gates MOX à chaque stage."
+inherits: []
+version: "1.0.0"
+date: "2026-08-09"
+status: proposed
+intent_hash: 0xTHOUGHT_COMMIT_PIPELINE_20260809
+author: gerivdb
+source_repo: gerivdb/unified-design
+source_path: atoms/thought-commit-pipeline.yaml
+mox_gates:
+  - P-106
+  - P-107
+---
+
+# Atom — Thought-Commit Pipeline
+
+## Objectif
+
+Garantir la continuité sans rupture depuis l'expression du besoin jusqu'à la production.
+
+## Stages
+
+| Stage | Artefact | Gate | Validation |
+|-------|----------|------|------------|
+| **Chat** | Expression du besoin | Aucune | Collecte |
+| **INTENT** | `INTENT-*.md` | P-106, P-107 | Frontmatter + sections AUDIT/DESIGN/PROPOSITION/VALIDATION |
+| **PRD MOC** | `PRD-MOC-*.md` | MOX validate | Structure + tests + dépendances + risques |
+| **Implémentation** | Commits | Tests + benchmarks | pytest + benchmarks ENV2 |
+| **Production Ready** | Livrable | M5 quorum | 9/10 effets core passent + benchmarks <100ms |
+
+## Gates MOX
+
+| Gate | Nom | Critère |
+|------|-----|---------|
+| **P-106** | Frontmatter valide | Schéma JSON conforme |
+| **P-107** | Sections obligatoires | AUDIT, DESIGN, PROPOSITION, VALIDATION présentes |
+
+## Thought Chain Template
+
+```yaml
+thought_chain:
+  - source: "Chat / Expression utilisateur"
+    artifact: "<INTENT.md>"
+    intent_hash: "<intent_hash>"
+  - source: "INTENT"
+    artifact: "PRD-MOC-<slug>.md"
+    mox_validation: "P-106 + P-107"
+  - source: "PRD MOC"
+    artifact: "Implementation commits"
+    commit_hashes: []
+  - source: "Implementation"
+    artifact: "Production ready"
+    benchmark_results: "JSON"
+```
+
+## MOX Continuity Template
+
+```yaml
+mox_continuity:
+  intent_hash_source: "<intent_hash>"
+  target_prd_moc: "PRD-MOC-<slug>.md"
+  probes_gates:
+    - "P-106: frontmatter valide"
+    - "P-107: sections obligatoires présentes"
+  conversion_plan:
+    - "Contexte/Mission → section Contexte + Périmètre"
+    - "Phases/Livrables → section Plan d'implémentation"
+    - "Quorum/M5 → section Métriques + Validation"
+  dependencies:
+    - "<ADR ou PRD dépendant>"
+  risks:
+    - "<risque 1>"
+    - "<risque 2>"
+```
+
+## Critères d'arrêt
+
+- **Bloquant** : P-106 ou P-107 échouent → ne pas créer le PRD MOC
+- **Bloquant** : Quorum M5 non atteint → ne pas déclarer production ready
+- **Avertissement** : KORX decision pending → documenter le risque
+- **Avertissement** : Benchmarks ENV2 manquants → mesurer avant optimisation
+
+## Références
+
+- **Template INTENT magistral** : REPO-STANDARDS/templates/INTENT-magistral.md
+- **Template INTENT subalterne** : REPO-STANDARDS/templates/INTENT-subalterne.md
+- **Template PRD MOC depuis INTENT** : REPO-STANDARDS/templates/PRD-MOC-from-INTENT.template.md
+- **MOX probes P-106/P-107** : MOX/src/engines/probes.py
+- **Linter** : REPO-STANDARDS/scripts/rss_lint.py --check-intent-continuity

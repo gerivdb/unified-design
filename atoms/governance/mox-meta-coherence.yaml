@@ -1,0 +1,28 @@
+name: mox-meta-coherence
+description: "MOX est le mode opératoire PLIX + KIX + NEXUS chargé de la cohérence des documents markdown de l'écosystème."
+version: "1.0.0"
+depends_on:
+  - plix
+  - kix
+  - nexus
+  - artifact-writing-standards
+capabilities:
+  - name: document-coherence
+    parameters:
+      scope: ["ADR", "PRD", "INTENT", "EPIC", "IMPENSE", "REPORT", "ROADMAP", "SPEC"]
+      validation_layers: ["frontmatter", "crossrefs", "bridges", "rss_v23"]
+      wal_logging: true
+  - name: cross-repo-contradiction-detection
+    parameters:
+      max_detection_time_ms: 1000
+      auto_fix: false
+      escalate_to: mox
+  - name: artifact-quality-gate
+    parameters:
+      probes: ["P-101", "P-102", "P-103", "P-104", "P-105", "P-106", "P-107", "P-108", "P-109"]
+      mandatory_probes: ["P-106", "P-107"]
+      reject_on_fail: true
+stratum: L2b
+status: active
+ontology_ref: "ONTOLOGY.yaml > entities.terms > mox"
+intent_hash: 0xMOX_META_COHERENCE_20260806

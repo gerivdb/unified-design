@@ -3,6 +3,26 @@ atoms:
   hash: 1657766cf932
   description: 'description: "Regles absolues (interdictions/obligations) avec tags
     automatiques pour hypotheses non confirmees."'
+- path: atoms/GOVERNANCE/mox-meta-coherence.yaml
+  hash: 089FBC53D8DC
+  description: 'description: "MOX est le mode operatoire PLIX + KIX + NEXUS charge de la coherence des documents markdown de l'ecosysteme."'
+  depends_on:
+    - plix
+    - kix
+    - nexus
+    - artifact-writing-standards
+- path: atoms/GOVERNANCE/n243-sovereign-reasoning.yaml
+  hash: 2EF20FF52435
+  description: 'description: "N243 est le moteur souverain de graphe cross-repo. Interface de requete et de synthese locale sans limite de sources."'
+  depends_on:
+    - ctulu-orch
+    - tql
+    - llux
+    - plix
+    - piano
+    - spidx
+    - mox-meta-coherence
+    - korx
   depends_on: []
 - path: atoms/adr-prd-epics-intents.yaml
   hash: 9e770e28bc64
@@ -24,6 +44,19 @@ atoms:
   description: 'description: "Une loop synchronise des artifacts par run (fichiers,
     blobs)"'
   depends_on: []
+- path: atoms/GOVERNANCE/artifact-writing-standards.yaml
+  hash:\ 6B3EB67AB7DC
+  description: 'description: "Normes de rédaction pour les artefacts de gouvernance
+    PRD/ADR/EPIC/INTENT/SPEC/REPORT/RPT/GUI/RUN."'
+  depends_on:
+    - kiss
+    - srp
+    - dip
+    - yagni
+    - law-of-demeter
+    - principle-of-least-astonishment
+    - stratified-abstraction
+    - convention-over-configuration
 - path: atoms/ATOM-042-REPOSITORY-CENSUS.md
   hash: a1ec4776846a
   description: 'ATOM-042 : Repository Census & Discovery'
@@ -59,6 +92,13 @@ atoms:
   description: 'description: "Generation par lots de verses : 10 personae  9 sections
     en une execution."'
   depends_on: []
+- path: atoms/talex-narrative-engine.yaml
+  hash: D6B033AC14E25B69F373DFA096DABD2AAA9D32973608426EE482B2822DFA79DC
+   description: 'description: "Moteur narratif X-FORGE - convertit graphes de reecriture (SPIDX, DAG-3) en recits coherents et genere des scenarios narratifs. Point de convergence des flux narratifs de l\'ecosysteme."'
+  depends_on:
+    - batch-verse-generation
+    - ATOM-052
+    - ATOM-053
 - path: atoms/build-pipeline.yaml
   hash: 706daea6fc59
   description: 'description: "Pipeline de build multi-langage via Makefile : orchestration
@@ -401,6 +441,14 @@ atoms:
   description: 'description: "Meta-cluster comme organisme vivant : causalite, holographie,
     polymorphisme, MoE."'
   depends_on: []
+- path: atoms/GOVERNANCE/mox-meta-coherence.yaml
+  hash: 089FBC53D8DC
+  description: 'description: "MOX est le mode operatoire PLIX + KIX + NEXUS charge de la coherence des documents markdown de l'ecosysteme."'
+  depends_on:
+    - plix
+    - kix
+    - nexus
+    - artifact-writing-standards
 - path: atoms/morphism-maps-governance.yaml
   hash: 80cbda4ad64a
   description: 'description: "Cartes de transport causal entre repos : schema YAML
@@ -416,6 +464,18 @@ atoms:
   description: 'description: "Audit cross-repo avec gardes anti-zombie, mutex Windows,
     timeout git, et strategie auto-pull/push."'
   depends_on: []
+- path: atoms/GOVERNANCE/n243-sovereign-reasoning.yaml
+  hash: 2EF20FF52435
+  description: 'description: "N243 est le moteur souverain de graphe cross-repo. Interface de requete et de synthese locale sans limite de sources."'
+  depends_on:
+    - ctulu-orch
+    - tql
+    - llux
+    - plix
+    - piano
+    - spidx
+    - mox-meta-coherence
+    - korx
 - path: atoms/ontology-audit.yaml
   hash: 05adffac1bdc
   description: 'description: "Audit ontologique pour verifier la coherence des connaissances
@@ -935,6 +995,15 @@ atoms:
   hash: new-atom-merge-parent-select
   description: ATOM-MERGE-PARENT-SELECT: Proper parent selection for merge commit cherry-picks
   depends_on: []
+- path: atoms/ATOM-052-artifact-lifecycle-zones.md
+  hash: 7582635F01784113329F5EAEB28409A01BC33BF4E4D24204D3D48A081750A9B6
+  description: 'ATOM-052 : Artifact Lifecycle Zones - Organisation CRM des artefacts de gouvernance par statut'
+  depends_on: []
+- path: atoms/ATOM-053-workspace-draft-convention.md
+  hash: 11D545A64663958F2F8D54E296838504685A513F7BCD2CA8231AC6219B86B9E7
+  description: 'ATOM-053 : Workspace Zones & Repo Config - drafts/, limbo/, .TRASH/, .gitignore, .rssignore'
+  depends_on:
+    - ATOM-052
 - path: atoms/ATOM-065-co-abductive-halo.yaml
   hash: new-atom-co-abductive-halo
   description: ATOM-065: Interface Co-abductive HALO (L3 - Emergence) Observation -> DIVERGE -> LEAP -> CONVERGE
@@ -969,3 +1038,19 @@ ATOM-042-REPOSITORY-CENSUS.md:
   hash: 1cf95a9a9720
   description: 'description: "Metadesign triad: primitivism, structuralism, anamorphism (ATOM-050)."'
   depends_on: []
+- path: designs/aep-fractal-repo-structure.yaml
+  hash:\ 6B3EB67AB7DC
+  description: 'description: "Structure AEP fractal / poupées russes pour les répertoires PRD/MOC : projet racine, pré-compositions imbriquées, composants autonomes."'
+  depends_on:
+    - fractal-recursion
+    - moc-governance
+    - artifact-writing-standards
+- path: designs/unified-design-alignment-dag3.yaml
+  hash:\ 6B3EB67AB7DC
+  description: 'description: "Alignement causal/fractal de unified-design sur la structure DAG-3 : parser/engine/runtime/proactivity/integration, ADMG interne, bridges, strates L0-L4."'
+  depends_on:
+    - fractal-recursion
+    - moc-governance
+    - artifact-writing-standards
+    - dag3-conversation-forensics
+
