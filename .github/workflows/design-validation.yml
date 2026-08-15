@@ -40,18 +40,26 @@ jobs:
           import json, yaml, jsonschema, pathlib, sys
           root = pathlib.Path('.')
           schema_path = root / 'schemas' / 'design.schema.json'
-          schema = json.loads(schema_path.read_text())
+          schema = json.loads(schema_path.read_text(encoding='utf-8'))
           errors = []
           for design_file in sorted((root / 'designs').glob('*.yaml')):
               try:
-                  data = yaml.safe_load(design_file.read_text()) or {}
-                  if not isinstance(data, dict):
-                      errors.append(f'{design_file}: not a mapping')
-                      continue
-                  jsonschema.validate(instance=data, schema=schema)
-                  print(f'[OK] {design_file}')
+                  content = design_file.read_text(encoding='utf-8')
+                  docs = list(yaml.safe_load_all(content))
+                  validated = False
+                  for doc in docs:
+                      if not isinstance(doc, dict):
+                          continue
+                      jsonschema.validate(instance=doc, schema=schema)
+                      validated = True
+                  if validated:
+                      print(f'[OK] {design_file}')
+                  else:
+                      errors.append(f'{design_file}: no mapping document found')
               except jsonschema.ValidationError as e:
                   errors.append(f'{design_file}: {e.message}')
+              except yaml.YAMLError as e:
+                  errors.append(f'{design_file}: YAML parse error: {e}')
               except Exception as e:
                   errors.append(f'{design_file}: {e}')
           if errors:
@@ -68,29 +76,43 @@ jobs:
           python -c "
           import re, yaml, pathlib, sys
           root = pathlib.Path('.')
+          atoms_dir = root / 'atoms'
           errors = []
           for design_file in sorted((root / 'designs').glob('*.yaml')):
-              data = yaml.safe_load(design_file.read_text()) or {}
-              name = data.get('name', '')
-              if not re.fullmatch(r'[a-z0-9-]+', name):
-                  errors.append(f'{design_file}: non-universal name \"{name}\"')
-              depends = data.get('depends_on', [])
-              if isinstance(depends, list):
-                  for dep in depends:
-                      if not re.fullmatch(r'ATOM-[0-9]+-[a-z0-9-]+', dep):
-                          errors.append(f'{design_file}: invalid depends_on \"{dep}\"')
-                          atom_path = root / 'atoms' / f'{dep}.md'
-                          if not atom_path.exists():
-                              errors.append(f'{design_file}: depends_on atom missing: {dep}')
-              bridges = data.get('bridges', [])
-              if isinstance(bridges, list):
-                  for bridge in bridges:
-                      if not isinstance(bridge, dict):
-                          errors.append(f'{design_file}: invalid bridge entry')
-                          continue
-                      role = bridge.get('role', '')
-                      if role and role not in ('consumer', 'provider', 'bidirectional'):
-                          errors.append(f'{design_file}: invalid bridge role \"{role}\"')
+              try:
+                  content = design_file.read_text(encoding='utf-8')
+                  docs = list(yaml.safe_load_all(content))
+                  data = None
+                  for doc in docs:
+                      if isinstance(doc, dict):
+                          data = doc
+                          break
+                  if data is None:
+                      errors.append(f'{design_file}: no mapping document found')
+                      continue
+                  name = data.get('name', '')
+                  if name and not re.fullmatch(r'[a-z0-9-]+', name):
+                      errors.append(f'{design_file}: non-universal name \"{name}\"')
+                  depends = data.get('depends_on', [])
+                  if isinstance(depends, list):
+                      for dep in depends:
+                          if not re.fullmatch(r'ATOM-[0-9]+-[a-z0-9-]+', dep):
+                              errors.append(f'{design_file}: invalid depends_on \"{dep}\"')
+                              if not list(atoms_dir.rglob(f'{dep}.md')) and not list(atoms_dir.rglob(f'{dep}.yaml')):
+                                  errors.append(f'{design_file}: depends_on atom missing: {dep}')
+                  bridges = data.get('bridges', [])
+                  if isinstance(bridges, list):
+                      for bridge in bridges:
+                          if not isinstance(bridge, dict):
+                              errors.append(f'{design_file}: invalid bridge entry')
+                              continue
+                          role = bridge.get('role', '')
+                          if role and role not in ('consumer', 'provider', 'bidirectional'):
+                              errors.append(f'{design_file}: invalid bridge role \"{role}\"')
+              except yaml.YAMLError as e:
+                  errors.append(f'{design_file}: YAML parse error: {e}')
+              except Exception as e:
+                  errors.append(f'{design_file}: {e}')
           if errors:
               print('---')
               print('CONTRACT VALIDATION FAILED')
@@ -108,11 +130,24 @@ jobs:
           atoms_dir = root / 'atoms'
           errors = []
           for design_file in sorted((root / 'designs').glob('*.yaml')):
-              data = yaml.safe_load(design_file.read_text()) or {}
-              for atom_id in data.get('depends_on', []):
-                  atom_path = atoms_dir / f'{atom_id}.md'
-                  if not atom_path.exists():
-                      errors.append(f'{design_file}: atom {atom_id} missing')
+              try:
+                  content = design_file.read_text(encoding='utf-8')
+                  docs = list(yaml.safe_load_all(content))
+                  data = None
+                  for doc in docs:
+                      if isinstance(doc, dict):
+                          data = doc
+                          break
+                  if data is None:
+                      errors.append(f'{design_file}: no mapping document found')
+                      continue
+                  for atom_id in data.get('depends_on', []):
+                      if not list(atoms_dir.rglob(f'{atom_id}.md')) and not list(atoms_dir.rglob(f'{atom_id}.yaml')):
+                          errors.append(f'{design_file}: atom {atom_id} missing')
+              except yaml.YAMLError as e:
+                  errors.append(f'{design_file}: YAML parse error: {e}')
+              except Exception as e:
+                  errors.append(f'{design_file}: {e}')
           if errors:
               print('---')
               print('ATOM REFERENCE VALIDATION FAILED')
