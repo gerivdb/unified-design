@@ -35,7 +35,7 @@ Ce dépôt contient les **conventions de développement standardisées** pour l'
                                             │
                                             ▼
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                            ATOM REGISTRY — 138 ENTRIES                               │
+│                            ATOM REGISTRY — 197 ENTRIES                               │
 │  atoms_registry.yaml ◄────── 2. REGISTRE CANONIQUE (path, sha1-hash, depends_on[])  │
 │       ▲                                                                              │
 │       │ validates                                                                    │
@@ -50,7 +50,7 @@ Ce dépôt contient les **conventions de développement standardisées** pour l'
                     ┌───────────────────────┼───────────────────────┐
                     ▼                       ▼                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                              ATOMS LAYER — 138 ATOMS (.yaml + .md)                    │
+│                              ATOMS LAYER — 197 ATOMS (.yaml + .md)                    │
 │  atoms/                                                                               │
 │  ├─ CORE PRINCIPLES (10)          ├─ GOVERNANCE (12)          ├─ INFRASTRUCTURE (8)  │
 │  │  kiss.yaml                      │  absolute-rules-           │  build-pipeline.yaml │
@@ -199,9 +199,9 @@ Ce dépôt contient les **conventions de développement standardisées** pour l'
 │  meta-design.yaml (executable schema)            │  meta-design.yaml (IDENTIQUE)     │
 │  clusters: GOUVERNANCE, OUTILS, CITOYENS, INFRA  │  Atoms map to clusters via       │
 │  strates: L0-L5 (physical)                       │  layer/role in design.yaml        │
-│  designs: DESIGN-KIVA-001...005 (catalogued)     │  design instances in             │
+│  designs: 53 canonical designs (designs/) + 6 generated instances     │  design instances in             │
 │  atoms: 15 L1-INFRA atoms catalogued             │  generated-designs/               │
-│  pipelines: validation, sync, ADR lifecycle      │  138 atoms registered (superset)  │
+│  pipelines: validation, sync, ADR lifecycle      │  197 atoms registered (superset)  │
 │  budgets: inheritance≤3, latency≤45ms, power≤12W │  capabilities in design.yaml      │
 │  BDCP mode inviolable                            │  ADR-024 enforces KIVA-CI        │
 │  clone prevention (5-step probe)                 │  hitl-gate.yaml atom              │
@@ -219,7 +219,7 @@ ALIGNMENT CHECKS ✓
 └─ Loop detection → loop_engine/ (validates β₀=1, β₁=0 Poincaré contract)
 
 ÉCARTS MINEURS (non bloquants)
-├─ unified-design a 138 atoms vs ~20 catalogués dans REPO-STD (superset normal)
+├─ unified-design a 197 atoms vs ~20 catalogués dans REPO-STD (superset normal)
 ├─ methodology atoms (38) sont micro-implémentations absentes du macro
 ├─ generated-designs/ sont des instances de test (absentes du macro)
 └─ loop_engine/ runtime n'est pas explicite dans REPO-STD (implémentation)

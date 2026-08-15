@@ -28,7 +28,12 @@ class DesignValidator:
             if atoms_dir.exists():
                 for path in atoms_dir.rglob("*"):
                     if path.is_file() and path.suffix in (".md", ".yaml", ".yml"):
-                        self._atom_cache.add(path.stem)
+                        stem = path.stem
+                        # Normalize: extract ATOM-NNN prefix if present
+                        match = re.match(r'(ATOM-\d+)', stem)
+                        if match:
+                            stem = match.group(1)
+                        self._atom_cache.add(stem)
         return self._atom_cache
 
     def validate(self, design: dict[str, Any]) -> list[str]:
