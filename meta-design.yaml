@@ -5,7 +5,6 @@
 # Schema de validation YAML pour l'architecture gerivdb
 # Version 2.1 : ajout des 6 atoms "Graph of Loops" (L1-L6)
 
-$schema: "https://json-schema.org/draft/2020-12/schema"
 version: "2.1.0"
 intent_hash: 0xMDU_SCHEMA_20260731_V2_1_GRAPH_OF_LOOPS
 status: active
