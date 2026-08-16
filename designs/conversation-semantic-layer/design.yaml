@@ -1,0 +1,5 @@
+name: conversation-semantic-layer
+version: 1.0.0
+status: active
+profile: STANDARD
+consumers: []
