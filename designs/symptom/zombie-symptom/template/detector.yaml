@@ -1,6 +1,3 @@
-# Detector Template
-
-```yaml
 name: <detector_name>
 type: <kix_endpoint | trix_preflight | powershell_script | github_api | mcp_tool>
 implementation:
@@ -11,4 +8,3 @@ implementation:
 output:
   format: <json | yaml | markdown>
   schema: <path_to_schema.yaml>
-```

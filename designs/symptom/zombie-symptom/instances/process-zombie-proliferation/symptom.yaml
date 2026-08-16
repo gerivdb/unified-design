@@ -1,24 +1,23 @@
-# Process Zombie Proliferation — Symptom Instance
+name: process-zombie-proliferation
+parent_pattern: zombie-symptom
+intent_hash: 0xPROCESS_ZOMBIE_PROLIFERATION_20260809
+repos_target:
+  - GeriCode/L2
+  - KIX/L2
+  - TRIX/L4
+  - KIVA-CLI/L1
+status: proposed
 
-**Parent Pattern** : `zombie-symptom`  
-**IntentHash** : `0xPROCESS_ZOMBIE_PROLIFERATION_20260809`  
-**Repos Target** : GeriCode/L2, KIX/L2, TRIX/L4, KIVA-CLI/L1  
-**Status** : proposed
+symptom: |
+  After KiloCode sessions / worktrees / KIVA-CLI runs, system processes proliferate:
+  - git.exe : orphan worktrees, interrupted git gc, git hooks
+  - node.exe : KiloCode/VS Code extension scanning .kilo/worktrees
+  - python.exe : KIX/TRIX/diagnostics scripts
+  - zig.exe : TRIX compilation
+  - cargo.exe : Rust builds
+  - bun.exe : JS scripts
+  - pwsh.exe : PowerShell scripts waiting
 
-## Symptom
-
-After KiloCode sessions / worktrees / KIVA-CLI runs, system processes proliferate:
-- `git.exe` : orphan worktrees, interrupted `git gc`, git hooks
-- `node.exe` : KiloCode/VS Code extension scanning `.kilo/worktrees`
-- `python.exe` : KIX/TRIX/diagnostics scripts
-- `zig.exe` : TRIX compilation
-- `cargo.exe` : Rust builds
-- `bun.exe` : JS scripts
-- `pwsh.exe` : PowerShell scripts waiting
-
-## Indicators
-
-```yaml
 indicators:
   - name: git_zombie_count
     type: process
@@ -35,23 +34,29 @@ indicators:
     detector: powershell_script
     threshold: 0
     severity: critical
-```
 
-## Impact
+impact:
+  - Blocking .kilo/worktrees/* removal
+  - RAM/CPU leak
+  - Cross-repo conflicts undetected
+  - phi-CPS metrics falsified
 
-- Blocking `.kilo/worktrees/*` removal
-- RAM/CPU leak
-- Cross-repo conflicts undetected
-- φ-CPS metrics falsified
-
-## Implementation Mapping
-
-| Component | Path | Role |
-|-----------|------|------|
-| KIX | `src/zombie_monitor.py` | `/health/zombies`, `/health/zombies/purge` |
-| GeriCode | `scripts/verify-agent-manager-env.ps1` | `check_process_zombies()` |
-| GeriCode | `.kilo/skills/process-hygiene/SKILL.md` | skill |
-| TRIX | `tools/trix_preflight.zig` | extended preflight |
-| KIVA-CLI | `docs/KIVACLI-GIT-ZOMBIE-HOOKS.md` | hooks documentation |
-| Governance | `ONTOLOGY/ONTOLOGY.yaml` | `process_zombie_proliferation` concept |
-
+implementation_mapping:
+  - component: KIX
+    path: src/zombie_monitor.py
+    role: /health/zombies, /health/zombies/purge
+  - component: GeriCode
+    path: scripts/verify-agent-manager-env.ps1
+    role: check_process_zombies()
+  - component: GeriCode
+    path: .kilo/skills/process-hygiene/SKILL.md
+    role: skill
+  - component: TRIX
+    path: tools/trix_preflight.zig
+    role: extended preflight
+  - component: KIVA-CLI
+    path: docs/KIVACLI-GIT-ZOMBIE-HOOKS.md
+    role: hooks documentation
+  - component: Governance
+    path: ONTOLOGY/ONTOLOGY.yaml
+    role: process_zombie_proliferation concept
