@@ -93,17 +93,17 @@ Ce ADR introduit un **breaking change** sur le schéma `meta-design.yaml` :
 
 ## Alternatives Considered
 
-1. Garder les tableaux codés en dur + validation stricte — rejeté : ne résout pas les merge conflicts.
-2. Génération uniquement de `META-DESIGN.md`, garder `meta-design.yaml` manuel — rejeté : divergence persistante.
-3. Registre centralisé `atoms_registry.yaml` — rejeté : même problème de fichier unique.
-4. Auto-découverte par manifests + génération automatique (choisi) — conforme OCP, élimine les edits manuels.
+1. Garder les tableaux codés en dur + validation stricte -- rejeté : ne résout pas les merge conflicts.
+2. Génération uniquement de `META-DESIGN.md`, garder `meta-design.yaml` manuel -- rejeté : divergence persistante.
+3. Registre centralisé `atoms_registry.yaml` -- rejeté : même problème de fichier unique.
+4. Auto-découverte par manifests + génération automatique (choisi) -- conforme OCP, élimine les edits manuels.
 
 ## Consequences
 
 - **Positif** : Ajout d'un atome = création d'un dossier + manifest, pas d'édition de fichier central.
 - **Positif** : `meta-design.yaml` et `META-DESIGN.md` ne divergent jamais (générés depuis la même source).
 - **Positif** : Merge conflicts sur `meta-design.yaml` éliminés (fichier généré, non édité).
-- **Négatif** : Breaking change du schéma `meta-design.yaml` — migration requise.
+- **Négatif** : Breaking change du schéma `meta-design.yaml` -- migration requise.
 - **Négatif** : Courbe d'apprentissage pour les contributeurs (concept de manifest + génération).
 - **Négatif** : Dépendance à `tools/meta-design-gen.py` pour toute modification du MDU.
 
@@ -120,4 +120,5 @@ Ce ADR introduit un **breaking change** sur le schéma `meta-design.yaml` :
 - **Dépôt** : gerivdb/unified-design
 - **Statut ADR** : proposed
 - **Màj requise si** : statut ADR passe à deprecated ou superseded
+
 
