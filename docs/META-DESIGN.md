@@ -224,7 +224,7 @@ git push origin main
 
 ### L2-PLATFORM (18 atomes)
 
-| Nom | Description | Parents |
+| Name | Description | Parents |
 |-----|-------------|---------|
 | `plix-codec` | Codec PLIX v2 | ternary-query, b243-vector |
 | `gpu-decoder` | Décodage GPU NVDEC | — |
@@ -235,7 +235,7 @@ git push origin main
 
 ### L3-CITIZENS (18 atomes)
 
-| Nom | Description | Parents |
+| Name | Description | Parents |
 |-----|-------------|---------|
 | `hitl-expulsion-governance` | Gouvernance expulsion HITL | — |
 | `friction-governance` | Gouvernance par friction | — |
@@ -244,7 +244,7 @@ git push origin main
 
 ### L4-TOOLS (18 atomes)
 
-| Nom | Description | Parents |
+| Name | Description | Parents |
 |-----|-------------|---------|
 | `stratum-relay` | Relais de strate | — |
 | `pattern-citizen` | Pattern citoyen | — |
