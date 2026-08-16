@@ -1,6 +1,3 @@
-# Symptom Template
-
-```yaml
 name: <symptom_name>
 category: <system_health | cross_repo | runtime | governance>
 intent_hash: 0x<SLUG_MAJUSCULES>
@@ -21,4 +18,3 @@ impact:
   - <falsifying_metrics>
   - <cross_repo_conflict>
   - <resource_leak>
-```
