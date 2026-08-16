@@ -221,6 +221,33 @@ OK semantic_loops: No cycles detected
 
 ---
 
+---
+
+## Références croisées
+
+| Repo | Relation | Document |
+|------|----------|----------|
+| GOVERNANCE-HUB | SOT governance, known_repositories.yaml, BRIDGES.yaml, ATOM-REGISTRY | `L0-CANON/GOVERNANCE-HUB/` |
+| REPO-STANDARDS | RSS-v2.3, templates, CROSSLINKS/bridges.yaml | `L4-TOOLS/REPO-STANDARDS/` |
+| ONTOLOGY | Couche sémantique, bridges/, concepts | `L0-CANON/ONTOLOGY/` |
+| MOX | Context forge, PRD-MOC validation, ATOM-052/053 compliance | `L2-PLATFORM/MOX/` |
+| LLUX | Proof-of-concept ATOM-052/053, artifact lifecycle | `L3-CITIZENS/LLUX/` |
+| NEXUS | Mega-SOT, registre des registres, N4 governance | `L1-INFRA/NEXUS/` |
+| PLIX | Codec, path-registry, inference engine | `L2-PLATFORM/PLIX/` |
+
+### Bridges implémentés
+
+- **unified-design -> GOVERNANCE-HUB** : ADR-013, ATOM governance
+- **unified-design -> REPO-STANDARDS** : META-DESIGN.md macro <-> micro cohérence
+- **REPO-STANDARDS -> unified-design** : CROSSLINKS/bridges.yaml, N1 logical layer
+- **REPO-STANDARDS -> MOX** : PRD-MOC template, ATOM-052/053 validation
+- **REPO-STANDARDS -> LLUX** : Artifact lifecycle proof-of-concept
+- **ONTOLOGY -> GOVERNANCE-HUB** : bridges/governance_hub_bridge.md (à créer)
+- **ONTOLOGY -> REPO-STANDARDS** : bridges/repo_standards_bridge.md (à créer)
+- **ONTOLOGY -> unified-design** : bridges/unified_design_bridge.md (à créer)
+- **ONTOLOGY -> MOX** : bridges/mox_bridge.md (à créer)
+- **ONTOLOGY -> LLUX** : bridges/llux_bridge.md (à créer)
+
 ## Reference ADR
 
 - **ADR** : ADR-2026-07-15-001-MDU-L1-INFRA-EXTENSION

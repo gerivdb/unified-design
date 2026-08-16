@@ -1,8 +1,8 @@
-# Atomic Business Objects — TTL Rules
+# Atomic Business Objects  TTL Rules
 # IntentHash: 0xATOMIC_BUSINESS_OBJECTS_20260803
 
 version: "1.0"
-description: "Règles de péremption des objets métier éphémères inspirées d'Odoo transient models"
+description: "Rgles de premption des objets mtier phmres inspires d'Odoo transient models"
 
 transient_objects:
   - id: "temp_invoice_calculation"
@@ -20,7 +20,7 @@ transient_objects:
     dependencies: ["crm.lead"]
 
   - id: "contract_review_draft"
-    description: "Brouillons de révision de contrat"
+    description: "Brouillons de rvision de contrat"
     ttl_seconds: 86400
     cleanup_policy: "archive"
     max_age_seconds: 172800

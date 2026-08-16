@@ -32,6 +32,12 @@ adrs:
 crosslinks:
   - GOVERNANCE-HUB
   - REPO-STANDARDS
+  - ONTOLOGY
+  - MOX
+  - LLUX
+  - NEXUS
+  - TOPOS
+  - PLIX
   - connard-design
   - sonar-driven-design
   - triadic-compound-eye
