@@ -1,0 +1,5 @@
+name: agent-manager-json-schema
+version: 1.0.0
+status: active
+profile: STANDARD
+consumers: []
