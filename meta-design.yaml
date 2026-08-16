@@ -187,86 +187,86 @@ designs:
 
 # Architecture des quatre piliers
 piliers:
-  - nom: "Sonar-Driven Design"
+  - name: "Sonar-Driven Design"
     abbr: "SDD"
     role: "Observabilite"
-    couleur: "#4CAF50"
+    color: "#4CAF50"
     invariants:
-      - nom: "Ping/Echo"
+      - name: "Ping/Echo"
         description: "Message minimal avec ID unique + timestamp"
-      - nom: "Sonar Map"
+      - name: "Sonar Map"
         description: "Structure partagee d'etat temps reel"
-      - nom: "PRF"
+      - name: "PRF"
         description: "Pulse Repetition Frequency"
-      - nom: "Latence P99"
+      - name: "Latence P99"
         valeur: 45
         unite: "ms"
-      - nom: "Puissance"
+      - name: "Puissance"
         valeur: 12
         unite: "W"
 
-  - nom: "Triadic Compound Eye"
+  - name: "Triadic Compound Eye"
     abbr: "TCE"
     role: "Orchestration Agents"
-    couleur: "#2196F3"
+    color: "#2196F3"
     invariants:
-      - nom: "Triade C-E-Obs"
+      - name: "Triade C-E-Obs"
         description: "Communication -> Execution -> Observation"
-      - nom: "Swarm Intelligence"
+      - name: "Swarm Intelligence"
         description: "Agents autonomes evolutifs"
-      - nom: "HITL Gate"
+      - name: "HITL Gate"
         description: "Validation humaine pour modifications critiques"
 
-  - nom: "MorphoHDL Anamorphic Growth"
+  - name: "MorphoHDL Anamorphic Growth"
     abbr: "MAG"
     role: "Optimisation Materielle"
-    couleur: "#9C27B0"
+    color: "#9C27B0"
     invariants:
-      - nom: "Croissance Experimentale"
+      - name: "Croissance Experimentale"
         description: "Circuits adaptatifs"
-      - nom: "Base 243"
+      - name: "Base 243"
         description: "Structure ternaire native 3^5"
-      - nom: "RVBA"
+      - name: "RVBA"
         description: "Canaux de couleur semantique"
-      - nom: "O(1) Index"
+      - name: "O(1) Index"
         description: "Acces constant via index ternaire"
 
-  - nom: "Connard Design"
+  - name: "Connard Design"
     abbr: "CD"
     role: "Controle Qualite"
-    couleur: "#F44336"
+    color: "#F44336"
     invariants:
-      - nom: "Heritage"
+      - name: "Heritage"
         max: 3
         description: "Profondeur d'abstraction"
-      - nom: "Latence P99"
+      - name: "Latence P99"
         valeur: 45
         unite: "ms"
-      - nom: "Puissance"
+      - name: "Puissance"
         valeur: 12
         unite: "W"
-      - nom: "Roast Automatique"
+      - name: "Roast Automatique"
         description: "Feedback negatif constructif"
 
 # Regles transversales
 regles_transversales:
-  - nom: "Composition"
+  - name: "Composition"
     description: "Profondeur dependance <= 3 niveaux"
     action: "Wall of Shame"
   
-  - nom: "Latence"
+  - name: "Latence"
     description: "P99 <= 45ms pour operations critiques"
     action: "Roast automatique"
   
-  - nom: "Puissance"
+  - name: "Puissance"
     description: "<= 12W par inference"
     action: "Optimisation PIANO"
   
-  - nom: "Observation"
+  - name: "Observation"
     description: "Tout systeme critique doit etre observable"
     action: "Ajout de probes Sonar"
   
-  - nom: "Validation"
+  - name: "Validation"
     description: "Toute modification passe par Connard"
     commandes:
       - "gerivdb connard validate <path>"
