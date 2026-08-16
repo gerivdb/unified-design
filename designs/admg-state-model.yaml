@@ -54,14 +54,14 @@ rules:
   enforcement: design
 - id: ADMG-002
   name: Confounding
-  description: Les dépendances non causales entre latents sont représentées par ↔
+  description: Les dépendances non causales entre latents sont représentées par <->
   enforcement: design
 - id: ADMG-003
   name: DAG-3
-  description: Pas de cycles dirigés — le graphe est acyclique
+  description: Pas de cycles dirigés - le graphe est acyclique
   enforcement: design
 - id: ADMG-004
-  name: Observé → Persistant
+  name: Observé -> Persistant
   description: Toute variable observée est persistée dans Buzz@block ou WAL
   enforcement: auto
 name: admg-state-model
