@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Trace Replay Proof Output",
+  "type": "object",
+  "properties": {
+    "verified": {
+      "type": "boolean"
+    },
+    "assertion_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "divergences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["verified"]
+}

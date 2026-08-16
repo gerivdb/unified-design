@@ -1,0 +1,5 @@
+name: admg-dag3-hierarchy
+version: 1.0.0
+status: active
+profile: STANDARD
+consumers: []

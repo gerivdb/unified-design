@@ -1,3 +1,6 @@
+# AUTO-GENERATED FILE - DO NOT EDIT DIRECTLY
+# Source: manifests + tools/meta-design-gen.py
+# Regenerate: python tools/meta-design-gen.py
 # Meta-Design Schema (MDU) v2.1
 # Schema de validation YAML pour l'architecture gerivdb
 # Version 2.1 : ajout des 6 atoms "Graph of Loops" (L1-L6)
@@ -13,40 +16,49 @@ inherits: []
 
 # Capacites heritees (mixins) - EXTENDUES avec 6 nouvelles capacites Graph of Loops
 capabilities:
-  - name: latency-bound
+  - port_id: latency-bound
     description: "Le design impose une limite de latence"
+    consumers: []
+    profile: STANDARD
     parameters:
       max_latency_ms: 10
-  - name: power-capped
+  - port_id: power-capped
     description: "Le design impose une limite de puissance"
+    consumers: []
+    profile: STANDARD
     parameters:
       max_power_w: 150
-  - name: attention-mechanism
+  - port_id: attention-mechanism
     description: "Mecanisme d'attention universelle inspire d'UAE"
+    consumers: []
+    profile: STANDARD
     parameters:
       scaling_factor: "1/sqrt(d)"
       temperature: 1.0
       num_heads: 8
   
   # --- Nouvelles capacites Graph of Loops (L1-L6) ---
-  - name: symbol-retrieval
+  - port_id: symbol-retrieval
     description: "Recuperation symboles via MCP au lieu lecture fichiers complets (L3 Serena)"
+    consumers: []
+    profile: STANDARD
     parameters:
-      protocol: "MCP"
-      transport: "stdio"
       max_symbols_per_call: 50
       context_savings_tokens: 16000
-  - name: worktree-isolation
+  - port_id: worktree-isolation
     description: "Isolation physique agents via git worktree avec dry-run pre-merge (G2)"
+    consumers: []
+    profile: STANDARD
     parameters:
       dry_run_enabled: true
       abort_on_conflict: true
       max_parallel_worktrees: 8
       cleanup_on_complete: true
-  - name: beads-sql-memory
+  - port_id: beads-sql-memory
     description: "Memoire SQL versionnee (SQLite+WAL) - graphe insights + compression 70% (L1 Beads)"
+    consumers: []
+    profile: STANDARD
     parameters:
-      storage_backend: "sqlite+wal"
       compression_ratio: 0.70
       survival_modes:
         - "context_reset"
@@ -54,25 +66,30 @@ capabilities:
       query_interface: "sql"
       schema_version: 1
       index_strategy: "btree+fulltext"
-  - name: exit-interceptor
+  - port_id: exit-interceptor
     description: "Stop hook bloquant exit agent + validation cross-model avant liberation (L5)"
+    consumers: []
+    profile: STANDARD
     parameters:
       block_on_exit: true
-      validator_model: "openai-codex"
       validation_artifact: "review.md"
       require_signed_review: true
       timeout_seconds: 300
       self_review_prevention: true
-  - name: tdd-airain-law
+  - port_id: tdd-airain-law
     description: "No Test No Code - suppression code prod sans test echoue prealable (L4 Superpowers)"
+    consumers: []
+    profile: STANDARD
     parameters:
       enforce_test_first: true
       delete_on_violation: true
       violation_action: "delete_and_restart"
       test_must_fail_first: true
       coverage_threshold: 0.85
-  - name: trace-replay-proof
+  - port_id: trace-replay-proof
     description: "Preuve par re-execution trace - capture + replay + assertions SQL (L6 Workshop)"
+    consumers: []
+    profile: STANDARD
     parameters:
       capture_mode: "full_trace"
       replay_target: "local_daemon"
@@ -106,6 +123,13 @@ design_rules:
   - name: "trace-replay-verification"
     check: "replay_assertions_pass"
     description: "Replay trace exacte contre code modifie + assertions SQL valident corrections"
+
+# Complexite maximale autorisee par atome/design
+complexity_gates:
+  cognitive_complexity: 15
+  max_capabilities_per_design: 8
+  max_rules_per_atom: 10
+  max_nesting_depth: 3
 
 # Schema etendu pour les fichiers design.yaml generes
 design_schema:
@@ -158,6 +182,8 @@ designs:
     path: designs/moc-governance.yaml
     version: '1.0.0'
     intent_hash: 0xMOC_GOVERNANCE_DESIGN_20260801
+    consumers: []
+    profile: STANDARD
 
 # Architecture des quatre piliers
 piliers:

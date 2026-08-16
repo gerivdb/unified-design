@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Exit Interceptor Input",
+  "type": "object",
+  "properties": {
+    "agent_session": {
+      "type": "string"
+    },
+    "exit_reason": {
+      "type": "string"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["agent_session", "exit_reason"]
+}

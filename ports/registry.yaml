@@ -1,0 +1,25 @@
+ports:
+  - port_id: symbol-retrieval
+    contract:
+      input_schema: schemas/ports/symbol_retrieval_input.json
+      output_schema: schemas/ports/symbol_retrieval_output.json
+  - port_id: beads-sql-memory
+    contract:
+      input_schema: schemas/ports/beads_sql_memory_input.json
+      output_schema: schemas/ports/beads_sql_memory_output.json
+  - port_id: worktree-isolation
+    contract:
+      input_schema: schemas/ports/worktree_isolation_input.json
+      output_schema: schemas/ports/worktree_isolation_output.json
+  - port_id: exit-interceptor
+    contract:
+      input_schema: schemas/ports/exit_interceptor_input.json
+      output_schema: schemas/ports/exit_interceptor_output.json
+  - port_id: tdd-airain-law
+    contract:
+      input_schema: schemas/ports/tdd_airain_law_input.json
+      output_schema: schemas/ports/tdd_airain_law_output.json
+  - port_id: trace-replay-proof
+    contract:
+      input_schema: schemas/ports/trace_replay_proof_input.json
+      output_schema: schemas/ports/trace_replay_proof_output.json

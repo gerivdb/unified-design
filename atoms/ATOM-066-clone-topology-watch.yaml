@@ -1,3 +1,10 @@
+---
+type: ATOM
+version: "2.0.0"
+status: active
+intent_hash: 0xATOM_066_CLONE_TOPOLOGY_WATCH_20260815
+---
+
 # ATOM-066: Clone Topology Watch (G4)
 # Surveillance topologique continue des clones et repertoires plats
 version: "2.0.0"

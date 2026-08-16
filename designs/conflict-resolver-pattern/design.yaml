@@ -1,0 +1,5 @@
+name: conflict-resolver-pattern
+version: 1.0.0
+status: active
+profile: STANDARD
+consumers: []
