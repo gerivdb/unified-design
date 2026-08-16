@@ -218,14 +218,14 @@
       "items": {
         "type": "object",
         "required": [
-          "nom",
+          "name",
           "abbr",
           "role",
-          "couleur",
+          "color",
           "invariants"
         ],
         "properties": {
-          "nom": {
+          "name": {
             "type": "string"
           },
           "abbr": {
@@ -235,7 +235,7 @@
           "role": {
             "type": "string"
           },
-          "couleur": {
+          "color": {
             "type": "string",
             "pattern": "^#[0-9A-Fa-f]{6}$"
           },
@@ -244,10 +244,10 @@
             "items": {
               "type": "object",
               "required": [
-                "nom"
+                "name"
               ],
               "properties": {
-                "nom": {
+                "name": {
                   "type": "string"
                 },
                 "description": {
@@ -280,11 +280,11 @@
       "items": {
         "type": "object",
         "required": [
-          "nom",
+          "name",
           "description"
         ],
         "properties": {
-          "nom": {
+          "name": {
             "type": "string"
           },
           "description": {
