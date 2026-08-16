@@ -107,6 +107,10 @@ gerivdb design validate --strict --output json
 | power_w | connard-validator | > 12W |
 | git_policy | connard-validator | violation politique |
 | semantic_loops | loop_engine | deadlock_pattern |
+| cognitive_complexity | connard-validator | > 15 |
+| max_capabilities_per_design | connard-validator | > 8 |
+| max_rules_per_atom | connard-validator | > 10 |
+| max_nesting_depth | connard-validator | > 3 |
 
 #### Sortie texte
 
@@ -165,14 +169,14 @@ OK semantic_loops: No cycles detected
 
 ### L0-CANON
 
-| Atom | Type | Description |
-|------|------|-------------|
-| constitutional-sot | Registry | Source de verite constitutionnelle |
-| stratified-repository-registry | Registry | Registre des depots par strate |
-| ternary-governance | Rule | Regles de gouvernance ternaire |
-| gated-boot-sequence | Procedure | Sequence de boot avec gates |
-| absolute-rules-enforcement | Rule | Enforcement des regles absolues |
-| adr-prd-epics-intents | Registry | Registre ADR/PRD/EPIC/INTENT |
+| Atom | Type | Description | Consommateurs |
+|------|------|-------------|---------------|
+| constitutional-sot | Registry | Source de verite constitutionnelle | - |
+| stratified-repository-registry | Registry | Registre des depots par strate | - |
+| ternary-governance | Rule | Regles de gouvernance ternaire | - |
+| gated-boot-sequence | Procedure | Sequence de boot avec gates | - |
+| absolute-rules-enforcement | Rule | Enforcement des regles absolues | - |
+| adr-prd-epics-intents | Registry | Registre ADR/PRD/EPIC/INTENT | - |
 
 ### Designs enregistres
 
@@ -188,17 +192,17 @@ OK semantic_loops: No cycles detected
 
 ### L1-INFRA (nouveaux)
 
-| Atom | Type | Description |
-|------|------|-------------|
-| TOPOS_CITIZENS | Registry | Citoyens (agents) pour validation TOPOS |
-| TOPOS_STRATE_REGISTRY | Registry | Registre des strates L0-L5 |
-| TOPOS_SWARM | Config | Configuration coordination swarming |
-| TOPOS_TOPOLOGY | Graph | Topologie des depots |
-| GATEWAY_CONFIG | Config | Configuration principale du gateway |
-| BDCP_CONFIG | Config | Configuration BDCP - Behind CDP |
-| BOOT_SEQUENCE | Procedure | Sequence canonique de boot LLM |
-| GATE_RSS_V1 | Config | Gate RSS v1 pour validation HITL |
-| MORPHISM_MAP_SCHEMA | Schema | Schema de morphism map |
+| Atom | Type | Description | Consommateurs |
+|------|------|-------------|---------------|
+| TOPOS_CITIZENS | Registry | Citoyens (agents) pour validation TOPOS | - |
+| TOPOS_STRATE_REGISTRY | Registry | Registre des strates L0-L5 | - |
+| TOPOS_SWARM | Config | Configuration coordination swarming | - |
+| TOPOS_TOPOLOGY | Graph | Topologie des depots | - |
+| GATEWAY_CONFIG | Config | Configuration principale du gateway | - |
+| BDCP_CONFIG | Config | Configuration BDCP - Behind CDP | - |
+| BOOT_SEQUENCE | Procedure | Sequence canonique de boot LLM | - |
+| GATE_RSS_V1 | Config | Gate RSS v1 pour validation HITL | - |
+| MORPHISM_MAP_SCHEMA | Schema | Schema de morphism map | - |
 
 ---
 
