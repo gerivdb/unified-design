@@ -1,3 +1,6 @@
+# AUTO-GENERATED FILE - DO NOT EDIT DIRECTLY
+# Source: manifests + tools/meta-design-gen.py
+# Regenerate: python tools/meta-design-gen.py
 # Meta-Design Schema (MDU) v2.1
 # Schema de validation YAML pour l'architecture gerivdb
 # Version 2.1 : ajout des 6 atoms "Graph of Loops" (L1-L6)
