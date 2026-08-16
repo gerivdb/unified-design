@@ -14,6 +14,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from engine.validator import DesignValidator
 from typing import Any
 
 import yaml
@@ -53,42 +54,9 @@ def load_known_repos() -> dict[str, Any]:
 
 
 def validate_design(design: dict[str, Any]) -> list[str]:
-    """Minimal validation matching engine/validator.py."""
-    errors: list[str] = []
-    import re
-
-    if "name" not in design:
-        errors.append("missing name")
-    if "version" not in design:
-        errors.append("missing version")
-    if "status" not in design:
-        errors.append("missing status")
-    if "layer" not in design:
-        errors.append("missing layer")
-    if "intent_hash" not in design:
-        errors.append("missing intent_hash")
-
-    name = design.get("name", "")
-    if name and not re.fullmatch(r"[a-z0-9-]+", name):
-        errors.append(f"non-universal design name: '{name}'")
-
-    depends_on = design.get("depends_on", [])
-    if isinstance(depends_on, list):
-        for dep in depends_on:
-            if not re.fullmatch(r"ATOM-[0-9]+-[a-z0-9-]+", dep):
-                errors.append(f"invalid depends_on id: '{dep}'")
-
-    bridges = design.get("bridges", [])
-    if isinstance(bridges, list):
-        for bridge in bridges:
-            if not isinstance(bridge, dict):
-                errors.append(f"invalid bridge entry: {bridge}")
-                continue
-            role = bridge.get("role", "")
-            if role and role not in ("consumer", "provider", "bidirectional"):
-                errors.append(f"invalid bridge role: '{role}'")
-
-    return errors
+    """Delegate validation to the canonical engine validator."""
+    validator = DesignValidator(REPO_ROOT)
+    return validator.validate(design)
 
 
 def generate_contract(design: dict[str, Any], bridge: dict[str, Any]) -> dict[str, Any]:
@@ -163,3 +131,6 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+
