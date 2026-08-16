@@ -87,10 +87,10 @@ capabilities:
 
 ## Alternatives Considered
 
-1. Garder les implémentations concrètes dans `capabilities` (choix actuel) — rejeté : couplage fort, violation DIP.
-2. Dupliquer les capabilities par strate — rejeté : duplication, drift.
-3. Supprimer les capabilities du MDU — rejeté : perte de traçabilité des invariants.
-4. Ports & Adapters avec contrats formels (choisi) — conforme DIP, substitution d'implémentation sans modification du MDU.
+1. Garder les implémentations concrètes dans `capabilities` (choix actuel) -- rejeté : couplage fort, violation DIP.
+2. Dupliquer les capabilities par strate -- rejeté : duplication, drift.
+3. Supprimer les capabilities du MDU -- rejeté : perte de traçabilité des invariants.
+4. Ports & Adapters avec contrats formels (choisi) -- conforme DIP, substitution d'implémentation sans modification du MDU.
 
 ## Consequences
 
@@ -102,7 +102,7 @@ capabilities:
 
 ## Validation
 
-- **Preuve** : Analyse statique de `meta-design.yaml` v2.1.0 — 6 implémentations concrètes identifiées.
+- **Preuve** : Analyse statique de `meta-design.yaml` v2.1.0 -- 6 implémentations concrètes identifiées.
 - **Conformité** : Respecte ADR-2026-06-28-001 (architecture logique N+1/N+2/N+3/N+4).
 - **RSS-v2.3** : Conforme.
 
@@ -113,4 +113,5 @@ capabilities:
 - **Dépôt** : gerivdb/unified-design
 - **Statut ADR** : proposed
 - **Màj requise si** : statut ADR passe à deprecated ou superseded
+
 

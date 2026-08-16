@@ -7,15 +7,15 @@ repo: gerivdb/unified-design
 intent_hash: 0xREPORT_MOC_GAPS_IMPL_SESSION_20260816
 ---
 
-# REPORT — Session d'implémentation MOC Gaps (unified-design)
+# REPORT -- Session d'implémentation MOC Gaps (unified-design)
 
 ## Contexte
 
 Cette session couvre l'implémentation complète des 4 lacunes du Meta-Design Atlas (MDU v2.1.0) telles que définies dans `PRD-MOC-MDU-GAPS-2026-08-16.md` :
 
-- **P1** — MOC-1 YAGNI Gate + MOC-4 KISS Gate
-- **P2** — MOC-3 DIP / Ports & Adapters
-- **P3** — MOC-2 OCP / Auto-découverte par manifests
+- **P1** -- MOC-1 YAGNI Gate + MOC-4 KISS Gate
+- **P2** -- MOC-3 DIP / Ports & Adapters
+- **P3** -- MOC-2 OCP / Auto-découverte par manifests
 
 ADR de backing : **ADR-040** + **ADR-041**.
 
@@ -33,11 +33,11 @@ ADR de backing : **ADR-040** + **ADR-041**.
 
 ### Fichiers livrés
 
-- `meta-design.yaml` — header AUTO-GENERATED, `consumers`/`profile` sur capabilities/designs, `port_id`, `complexity_gates`
-- `META-DESIGN.md` — section Validation enrichie, catalogue Atomes avec colonne Consommateurs
-- `ports/registry.yaml` + `schemas/ports/*.json` — 6 ports abstraits avec contrats input/output
-- `atoms/*.atom.yaml` + `designs/*/design.yaml` — manifests pour auto-découverte
-- `schemas/meta-design.schema.json` — étendu pour `designs`, `complexity_gates`, `consumers`, `profile`, `port_id`
+- `meta-design.yaml` -- header AUTO-GENERATED, `consumers`/`profile` sur capabilities/designs, `port_id`, `complexity_gates`
+- `META-DESIGN.md` -- section Validation enrichie, catalogue Atomes avec colonne Consommateurs
+- `ports/registry.yaml` + `schemas/ports/*.json` -- 6 ports abstraits avec contrats input/output
+- `atoms/*.atom.yaml` + `designs/*/design.yaml` -- manifests pour auto-découverte
+- `schemas/meta-design.schema.json` -- étendu pour `designs`, `complexity_gates`, `consumers`, `profile`, `port_id`
 - `ADR/ADR-040-moc3-dip-ports-adapters.md` + `ADR/041-moc2-ocp-auto-discovery.md`
 
 ---
@@ -47,7 +47,7 @@ ADR de backing : **ADR-040** + **ADR-041**.
 | Heure (CEST) | Événement | Outil / Action |
 |--------------|-----------|----------------|
 | ~19:34 | Création worktree Agent Manager `wt-1786908880523-1` | `agent_manager` (mode `worktree`) |
-| 19:34 → 20:28 | Implémentation P1-P3 par session Agent Manager | Agent Manager session `ses_ff3ee3d46ffepB10jM8vyOVRjd` |
+| 19:34 -> 20:28 | Implémentation P1-P3 par session Agent Manager | Agent Manager session `ses_ff3ee3d46ffepB10jM8vyOVRjd` |
 | ~20:28 | Découverte PR #60 ouverte | `agent_manager list` |
 | ~20:29 | Échec GitHub Actions : *account locked due to a billing issue* | `gh pr checks 60` |
 | ~20:30 | Bascule vers CI locale KIVA-CLI | `kiva ci run unified-design` |
@@ -205,4 +205,6 @@ Cependant, **9 lacunes workflow** ont forcé des interventions manuelles, princi
 - la disponibilité de la CI GitHub
 
 Ces points sont documentés dans le PRD et les ADRs pour être adressés dans les versions futures.
+
+
 

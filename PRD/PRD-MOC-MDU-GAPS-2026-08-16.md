@@ -6,7 +6,7 @@ status: draft
 intent_hash: 0xPRD_MOC_MDU_GAPS_20260816
 ---
 
-# PRD MOC — Meta-Design Gaps Minimum Obligatory Contract
+# PRD MOC -- Meta-Design Gaps Minimum Obligatory Contract
 
 ## Contexte
 
@@ -17,9 +17,9 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 
 ---
 
-## Amélioration de l'analyse — 4 lacunes confirmées et quantifiées
+## Amélioration de l'analyse -- 4 lacunes confirmées et quantifiées
 
-### 1. YAGNI (Principe 4) — Inflation Méta-Ontologique
+### 1. YAGNI (Principe 4) -- Inflation Méta-Ontologique
 
 **Constat MDU :**
 - `meta-design.yaml` ajoute 6 nouvelles capacités "Graph of Loops" (L1-L6) sans traçage de consommation dans `META-DESIGN.md` ni dans `atoms_registry.yaml`.
@@ -32,7 +32,7 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 
 ---
 
-### 2. OCP (Principe 6) — Registres Centraux Statiques
+### 2. OCP (Principe 6) -- Registres Centraux Statiques
 
 **Constat MDU :**
 - `meta-design.yaml` stocke `designs:` en tableau codé en dur (1 seul design enregistré).
@@ -46,7 +46,7 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 
 ---
 
-### 3. DIP (Principe 7) — Couplage fort Inter-Strates
+### 3. DIP (Principe 7) -- Couplage fort Inter-Strates
 
 **Constat MDU :**
 - `capabilities` référence des implémentations concrètes : `protocol: "MCP"`, `storage_backend: "sqlite+wal"`, `validator_model: "openai-codex"`.
@@ -59,7 +59,7 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 
 ---
 
-### 4. KISS (Principe 3) — Absence de Métrique de Complexité Cognitive
+### 4. KISS (Principe 3) -- Absence de Métrique de Complexité Cognitive
 
 **Constat MDU :**
 - `connard-validator` vérifie : `inheritance_depth <= 3`, `latency_p99 <= 45ms`, `power_w <= 12W`.
@@ -75,7 +75,7 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 
 ## Minimum Obligatory Contract (MOC)
 
-### Règle MOC-1 — YAGNI Gate (Atomes et Capacités)
+### Règle MOC-1 -- YAGNI Gate (Atomes et Capacités)
 
 **Obligation :** Tout atome, capacité ou design ajouté dans `meta-design.yaml` ou `META-DESIGN.md` doit avoir **au moins un consommateur identifié** dans l'écosystème avant d'être promu en `status: active`.
 
@@ -83,19 +83,19 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 - Ajouter un champ obligatoire `consumers: []` (liste de repo/design IDs) dans chaque entrée d'atome/capacité/design.
 - Ajouter un champ `profile: CRITICAL | STANDARD | EXPERIMENTAL` pour qualifier la criticité de l'artefact.
   - `profile: CRITICAL` : l'absence de consommateur déclenche une **alerte HITL**, pas une dépréciation automatique.
-  - `profile: STANDARD` : règle par défaut — dépréciation automatique après 30 jours sans consommateur.
+  - `profile: STANDARD` : règle par défaut -- dépréciation automatique après 30 jours sans consommateur.
   - `profile: EXPERIMENTAL` : dépréciation automatique après **7 jours** sans consommateur.
 - Si `consumers` est vide pendant la durée configurée par `profile`, l'artefact passe en `status: deprecated` (soft-delete).
 - `designs:` dans `meta-design.yaml` doit pointer vers un `designs/*.yaml` existant et consommé.
 
 **Impact MDU :**
-- `meta-design.yaml` → ajout champ `consumers` sous chaque capability et design.
-- `META-DESIGN.md` → section "Atoms catalogues" complétée par une colonne `Consommateurs`.
-- `atoms_registry.yaml` → ajout champ `consumers` et `last_verified`.
+- `meta-design.yaml` -> ajout champ `consumers` sous chaque capability et design.
+- `META-DESIGN.md` -> section "Atoms catalogues" complétée par une colonne `Consommateurs`.
+- `atoms_registry.yaml` -> ajout champ `consumers` et `last_verified`.
 
 ---
 
-### Règle MOC-2 — OCP / Auto-Découverte des Atomes
+### Règle MOC-2 -- OCP / Auto-Découverte des Atomes
 
 **Obligation :** L'ajout d'un atome ou d'un design ne doit **pas nécessiter d'édition manuelle** de `meta-design.yaml` ou `META-DESIGN.md`.
 
@@ -112,13 +112,13 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 - Ajouter un check CI `verify-meta-design-sync` qui échoue si `meta-design.yaml` commité diffère du résultat produit par `python tools/meta-design-gen.py`.
 
 **Impact MDU :**
-- Suppression du tableau `designs:` codé en dur → remplacé par un scan du répertoire `designs/`.
-- Suppression du tableau `piliers:` codé en dur → chargé depuis `piliers/*.yaml`.
+- Suppression du tableau `designs:` codé en dur -> remplacé par un scan du répertoire `designs/`.
+- Suppression du tableau `piliers:` codé en dur -> chargé depuis `piliers/*.yaml`.
 - Ajout d'un script de génération dans `tools/` (hors scope MDU canonique, mais documenté dans ADR dédié).
 
 ---
 
-### Règle MOC-3 — DIP / Ports & Adapters Inter-Strates
+### Règle MOC-3 -- DIP / Ports & Adapters Inter-Strates
 
 **Obligation :** Les strates supérieures (L1-L4) ne doivent pas importer de structures concrètes définies dans `meta-design.yaml` ou `META-DESIGN.md`. Elles dépendent uniquement d'abstractions (ports) définies dans L0-CANON.
 
@@ -135,13 +135,13 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 - Les implémentations concrètes (ex: `MCP`, `sqlite+wal`) sont décrites dans des `adapters/*.yaml` par strate, pas dans le MDU canonique.
 
 **Impact MDU :**
-- `meta-design.yaml` → `capabilities` devient une liste de `port_id` + paramètres abstraits.
+- `meta-design.yaml` -> `capabilities` devient une liste de `port_id` + paramètres abstraits.
 - Ajout d'un registre `ports/registry.yaml` dans L0-CANON.
 - `design_rules` référence des `port_id` au lieu de noms d'implémentation.
 
 ---
 
-### Règle MOC-4 — KISS Gate (Complexité Cognitive)
+### Règle MOC-4 -- KISS Gate (Complexité Cognitive)
 
 **Obligation :** Tout design ou atome validé par `gerivdb design validate` doit respecter des seuils de complexité cognitive.
 
@@ -155,13 +155,13 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 - **Règle d'interprétation** : les seuils sont sémantiques, pas de limitation artificielle du nombre de lignes. Un design de 210 lignes avec 3 capabilities et 5 règles reste valide si ses métriques de complexité sont conformes.
 
 **Impact MDU :**
-- `meta-design.yaml` → ajout section `complexity_gates`.
-- `META-DESIGN.md` → section "Validation" complétée par les nouveaux checks.
-- `connard-validator` → implémentation des 4 nouveaux checks (hors scope MDU, à adresser dans PRD/PRD dédié).
+- `meta-design.yaml` -> ajout section `complexity_gates`.
+- `META-DESIGN.md` -> section "Validation" complétée par les nouveaux checks.
+- `connard-validator` -> implémentation des 4 nouveaux checks (hors scope MDU, à adresser dans PRD/PRD dédié).
 
 ---
 
-## Plan d'implémentation (MOC — ordre d'exécution)
+## Plan d'implémentation (MOC -- ordre d'exécution)
 
 | Priorité | Règle | Fichiers MDU modifiés | Effort | Risque |
 |----------|-------|----------------------|--------|--------|
@@ -196,12 +196,12 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 
 ## Documentation de référence
 
-- `META-DESIGN.md` — Atlas MDU v2.1.0
-- `meta-design.yaml` — Schema de validation YAML
-- `PRD-UNIFIED-DESIGN-GOVERNANCE-GAPS-2026-08-16.md` — PRD existant sur les gaps de gouvernance
-- ADR-013 — Meta-Design Validation Protocol
-- ADR-016 — Unified Design Loop Detection Engine
-- ADR-CONNARD-001 — Connard Design Protocol
+- `META-DESIGN.md` -- Atlas MDU v2.1.0
+- `meta-design.yaml` -- Schema de validation YAML
+- `PRD-UNIFIED-DESIGN-GOVERNANCE-GAPS-2026-08-16.md` -- PRD existant sur les gaps de gouvernance
+- ADR-013 -- Meta-Design Validation Protocol
+- ADR-016 -- Unified Design Loop Detection Engine
+- ADR-CONNARD-001 -- Connard Design Protocol
 
 ---
 
@@ -211,4 +211,6 @@ Ce PRD définit le **Minimum Obligatory Contract (MOC)** à intégrer dans le MD
 - **IntentHash** : 0xMDU_L1_INFRA_EXT_20260715
 - **Dépôt** : gerivdb/unified-design
 - **Statut ADR** : proposed
+
+
 
