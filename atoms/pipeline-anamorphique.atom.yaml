@@ -1,0 +1,7 @@
+atom_id: pipeline-anamorphique
+version: 1.0.0
+type: atom
+description: ''
+profile: STANDARD
+consumers: []
+last_verified: '2026-08-16'
