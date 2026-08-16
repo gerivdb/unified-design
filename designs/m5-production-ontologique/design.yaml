@@ -1,0 +1,5 @@
+name: m5-production-ontologique
+version: 1.0.0
+status: active
+profile: STANDARD
+consumers: []
