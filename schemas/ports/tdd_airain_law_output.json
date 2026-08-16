@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TDD Airaín Law Output",
+  "type": "object",
+  "properties": {
+    "passed": {
+      "type": "boolean"
+    },
+    "action": {
+      "type": "string"
+    },
+    "details": {
+      "type": "string"
+    }
+  },
+  "required": ["passed", "action"]
+}
