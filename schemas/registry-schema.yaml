@@ -1,0 +1,34 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://gerivdb.github.io/unified-design/schemas/registry.schema.json
+title: Atoms Registry Schema
+description: JSON Schema for validating atoms_registry.yaml. Enforces unique paths,
+  valid hashes, and consistent descriptions.
+type: object
+required:
+- atoms
+properties:
+  atoms:
+    type: array
+    items:
+      type: object
+      required:
+      - path
+      - hash
+      - description
+      properties:
+        path:
+          type: string
+          description: Relative path to the atom YAML or MD file.
+        hash:
+          type: string
+          pattern: ^[a-fA-F0-9]{6,64}$
+          description: Content hash for the atom file.
+        description:
+          type: string
+          description: Short description of the atom.
+        depends_on:
+          type: array
+          items:
+            type: string
+          description: List of atom dependencies.
+additionalProperties: false
