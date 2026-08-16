@@ -51,21 +51,14 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": [
-          "name",
-          "description",
-          "parameters"
-        ],
+        "required": ["port_id", "description", "parameters"],
         "properties": {
-          "name": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "parameters": {
-            "type": "object"
-          }
+          "port_id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "consumers": { "type": "array", "items": { "type": "string" } },
+          "profile": { "type": "string", "enum": ["CRITICAL", "STANDARD", "EXPERIMENTAL"] },
+          "parameters": { "type": "object" }
         }
       }
     },
@@ -469,6 +462,29 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "designs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "path", "version", "intent_hash"],
+        "properties": {
+          "name": { "type": "string" },
+          "path": { "type": "string" },
+          "version": { "type": "string" },
+          "intent_hash": { "type": "string", "pattern": "^0x[a-zA-Z0-9_]+$" }
+        }
+      }
+    },
+    "complexity_gates": {
+      "type": "object",
+      "required": ["cognitive_complexity", "max_capabilities_per_design", "max_rules_per_atom", "max_nesting_depth"],
+      "properties": {
+        "cognitive_complexity": { "type": "integer" },
+        "max_capabilities_per_design": { "type": "integer" },
+        "max_rules_per_atom": { "type": "integer" },
+        "max_nesting_depth": { "type": "integer" }
       }
     }
   },
