@@ -1,0 +1,35 @@
+name: talex-narrative-engine
+version: "14.8"
+intent_hash: "0xTALEX_NARRATIVE_ENGINE_20260801"
+status: active
+profile: CRITICAL
+description: >
+  Moteur narratif X-FORGE qui convertit graphes de réécriture (SPIDX, DAG-3)
+  en récits cohérents et génère des scénarios narratifs. Point de convergence
+  des flux narratifs de l'écosystème gerivdb.
+
+depends_on:
+  - batch-verse-generation
+  - ATOM-052
+  - ATOM-053
+  - spidx
+  - dag3
+
+consumers:
+  - TALEX
+  - GeriCode
+  - FLUENCE
+
+capabilities:
+  - port_id: narrative-generation
+    description: Génération de récits à partir de graphes sémantiques
+    profile: CRITICAL
+  - port_id: spidx-rewriting
+    description: Réécriture causale via SPIDX (S/K/R, Default-FAIL)
+    profile: CRITICAL
+  - port_id: dag3-compilation
+    description: Compilation DAG-3 vers instructions TALEX
+    profile: STANDARD
+  - port_id: verse-batch-generation
+    description: Génération par lots de verses (10 personae x 9 sections)
+    profile: STANDARD
