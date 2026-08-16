@@ -6,18 +6,18 @@ description: 'Buzz@block comme infrastructure de persistance pour l''état syst�
   Tout événement est signé, loggué, et devient une ancre de vérité.
 
   '
-architecture: "┌─────────────────────────────────────────────────────────────────────┐\n\
-  │                    BUZZ@BLOCK (Upstream)                           │\n│  ┌─────────────────────────────────────────────────────────────┐\
-  \   │\n│  │  buzZ-relay  │  buzz-acp  │  buzz-workflow  │  buzz-audit  │   │\n│\
-  \  │  (Nostr)     │  (ACP)     │  (YAML)         │  (hash-chain)│   │\n│  └─────────────────────────────────────────────────────────────┘\
-  \   │\n└─────────────────────────────────────────────────────────────────────┘\n\
-  \                                  │\n       ┌──────────────────────────┼──────────────────────────┐\n\
-  \       ▼                          ▼                          ▼\n┌─────────────────┐\
-  \    ┌─────────────────────┐    ┌─────────────────────┐\n│   BUZZ-X (L4)   │   \
-  \ │    N243 (L4)        │    │   WAZAA Bridge      │\n│  Overlay Nostr  │    │ \
-  \ Meta-orchestrateur │    │  (pont Python)      │\n│  sur Buzz@block │    │  ternaire\
-  \ Rust      │    │  → consomme BUZZ-X  │\n└─────────────────┘    └─────────────────────┘\
-  \    └─────────────────────┘\n"
+architecture: "+---------------------------------------------------------------------+\n\
+  |                    BUZZ@BLOCK (Upstream)                           |\n|  +-------------------------------------------------------------+\
+  \   |\n|  |  buzZ-relay  |  buzz-acp  |  buzz-workflow  |  buzz-audit  |   |\n|\
+  \  |  (Nostr)     |  (ACP)     |  (YAML)         |  (hash-chain)|   |\n|  +-------------------------------------------------------------+\
+  \   |\n+---------------------------------------------------------------------+\n\
+  \                                  |\n       +--------------------------+--------------------------+\n\
+  \       v                          v                          v\n+-----------------+\
+  \    +---------------------+    +---------------------+\n|   BUZZ-X (L4)   |   \
+  \ |    N243 (L4)        |    |   WAZAA Bridge      |\n|  Overlay Nostr  |    | \
+  \ Meta-orchestrateur |    |  (pont Python)      |\n|  sur Buzz@block |    |  ternaire\
+  \ Rust      |    |  -> consomme BUZZ-X  |\n+-----------------+    +---------------------+\
+  \    +---------------------+\n"
 storage_layers:
 - layer: events
   component: buzz-relay
