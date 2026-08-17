@@ -345,7 +345,6 @@ references:
   - ATOM-054
   - ATOM-055
   - ADR-2026-07-30-004
-  - ADR-2026-07-30-004
   - ADR-012-meta-design-validation-protocol
   - ADR-015-unified-design-v2
   - ADR-016-loop-engine
