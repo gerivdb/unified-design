@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://gerivdb.github.io/unified-design/schemas/meta-design.schema.json",
   "title": "Meta-Design Schema (MDU) v2",
   "type": "object",
@@ -496,5 +496,5 @@
       }
     }
   },
-  "additionalProperties": false
+  "additionalProperties": true
 }
