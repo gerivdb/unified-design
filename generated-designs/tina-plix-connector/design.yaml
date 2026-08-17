@@ -4,9 +4,7 @@ description: "Connecteur TINA-PLIX - interface cognitivo-technique pour l'orches
 version: "1.0.0"
 parent: unified-design
 inherits:
-  - plix-codec
-  - sandbox-isolation
-  - citizen-routing
+  - plix
 capabilities:
   - name: plix-codec
     parameters:
