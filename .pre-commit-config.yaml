@@ -14,3 +14,10 @@ repos:
         pass_filenames: false
         always_run: true
         verbose: true
+      - id: kiva-pipeline-unified-design
+        name: KIVA-CLI Pipeline Validator (unified-design)
+        entry: cmd /c kiva pipeline run unified-design
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
