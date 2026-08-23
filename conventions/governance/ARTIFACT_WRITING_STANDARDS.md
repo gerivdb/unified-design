@@ -135,3 +135,19 @@ Ce document complete `REPO-STANDARDS/docs/RSS-v2.md` :
 - `REPO-STANDARDS/schemas/intent_frontmatter.json`
 - `ONTOLOGY/ONTOLOGY.yaml`
 
+## Frontmatter minimal (U-M4 -- 2026-08-23)
+
+Tout artefact de gouvernance porte un frontmatter conforme (Axiome 9) :
+
+```yaml
+---
+type: <PRD|PRD-MOC|ADR|EPIC|INTENT|SPEC>
+category: <general|act-protocol|env2|...>
+status: <proposed|active|deprecated|archived|completed|draft|approved>
+date: YYYY-MM-DD
+intent_hash: 0x...   # recommande, optionnel a la creation
+---
+```
+
+Le chemin de l'artefact est deduit du frontmatter. Tout ecart est signale par le script
+de validation du depot hote (check-prd-structure.ps1 ou equivalent ARGUS).

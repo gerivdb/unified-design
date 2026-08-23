@@ -268,3 +268,32 @@ Resultat:
 - Verses: VERSES/generated/tina-plix-connector/
 - Validation: PASS
 - Gain: instanciation dynamique vs equipe pre-câblee statique
+
+---
+
+## Application : Structure des artefacts (U-M1 -- 2026-08-23)
+
+Le design fractal s'applique concretement a la structure des artefacts de gouvernance.
+Norme operationnelle: REPO-STANDARDS/standards/artifacts/artifact-structure-standard.md (L4).
+
+| Principe fractal | Application artefacts |
+|------------------|----------------------|
+| Auto-similarite | Meme patron pour PRD/, PRD-MOC/, ADR/, EPICS/, INTENTS/, SPEC/ |
+| Profondeur bornee | Max 3 niveaux |
+| Declaratif | Le frontmatter porte l'information de placement (type, category) |
+| Auto-indexation | Index regeneres de facon idempotente (update-artifact-index.ps1) |
+| Clustering | Detection seuil >= 3 en mode suggestion ; split jamais automatique |
+| HITL | L'automatisation propose, l'humain valide |
+
+### Axiome 10 -- Repository Single Responsibility (RSR) (U-M2)
+
+Un depot declare UN role unique dans la SOT (known_repositories.yaml).
+Tout artefact heberge doit correspondre au role de son depot hote.
+Extension services (INTENT infra): un service = une responsabilite unique
+declaree dans services.yaml (binaire, port, endpoints explicites).
+
+DRY inter-repos: un artefact = une seule localisation canonique.
+YAGNI inter-repos: pas de stockage preventif.
+
+Lecon ADR-028: un principe sans gate mecanique n'est pas suivi d'effet.
+RSR est verifie par check-prd-structure.ps1 (croisement artefacts x roles).
