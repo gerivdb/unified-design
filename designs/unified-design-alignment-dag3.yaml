@@ -21,7 +21,7 @@ bridges:
 
 dag3_layer_mapping:
   parser:
-    repo_dirs: [generator/, generator? schemas/]
+    repo_dirs: [generator/, schemas/]
     role: ingestion des designs.yaml / atoms / templates -> IR interne
     artifacts: [meta-design.yaml, schemas/]
   engine:
