@@ -46,6 +46,9 @@ Rôles MDU :
 - Gardien (validation)
 - HOTL (Human-in-the-Loop)
 
+> Note AXE-0 (PRD-MOC-GEN-009) : "HOTL" ici = gate de validation humaine =
+> niveau **A0 (HITL)** de `ONTOLOGY/concepts/autonomy-ladder.md`.
+
 ## 6. Mémoire
 
 État hors-contexte :

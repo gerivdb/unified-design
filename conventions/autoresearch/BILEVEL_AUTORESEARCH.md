@@ -29,6 +29,9 @@ ses propres mécanismes de recherche. Gain cible : 5x en efficience.
 - En équipe : HOTL (Human-in-the-Loop) obligatoire
 - Mode automatique : seulement pour code non critique
 
+> Note AXE-0 (PRD-MOC-GEN-009) : l'approval humaine obligatoire ici = niveau
+> **A0 (HITL)** de `ONTOLOGY/concepts/autonomy-ladder.md` (validation par action).
+
 ### 4. Log
 - Toute modification est journalisée
 - Format : timestamp, action, résultat, rollback_id

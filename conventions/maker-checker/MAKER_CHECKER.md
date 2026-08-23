@@ -12,6 +12,9 @@ intent_hash: 0xATOM_026_MAKER_CHECKER
 L'agent qui écrit (Analyst) ne valide jamais son propre travail.
 Un second agent (Critic) ou un humain (HOTL) doit valider.
 
+> Note AXE-0 (PRD-MOC-GEN-009) : le terme "HOTL" ici désigne une validation
+> obligatoire par action = niveau **A0 (HITL)** de `ONTOLOGY/concepts/autonomy-ladder.md`.
+
 ## Implémentation MDU
 
 - L'Avocat du Diable (rôle tournant) est le Critic natif du MDU.
