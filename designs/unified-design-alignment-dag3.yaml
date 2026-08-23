@@ -1,0 +1,64 @@
+name: unified-design-alignment-dag3
+description: "Alignement causal/fractal de unified-design sur la structure DAG-3 : parser/engine/runtime/proactivity/integration, ADMG interne, bridges, strates L0-L4. Le repo meta-design se conforme lui-meme a l'architecture qu'il prescrit."
+version: 1.0.0
+status: active
+layer: L0-L4
+intent_hash: 0xDESIGN_UNIFIED_DESIGN_ALIGNMENT_DAG3_20260824
+inherits:
+- fractal-recursion
+- moc-governance
+- artifact-writing-standards
+depends_on:
+- admg-dag3-hierarchy
+- admg-state-model
+bridges:
+- target: TRIX
+  role: dag3_runtime_reference
+  protocol: zig-import
+- target: CTULU
+  role: orchestration_consumer
+  protocol: markdown-link
+
+dag3_layer_mapping:
+  parser:
+    repo_dirs: [generator/, generator? schemas/]
+    role: ingestion des designs.yaml / atoms / templates -> IR interne
+    artifacts: [meta-design.yaml, schemas/]
+  engine:
+    repo_dirs: [engine/, loop_engine/]
+    role: evaluation des invariants, detection de boucles, fixpoints (ouroboros, clusterwave)
+    artifacts: [atoms/clusterwave-operator.yaml, atoms/fixpoint-validator.yaml, designs/ouroboros.yaml]
+  runtime:
+    repo_dirs: [runners/, pipelines/, triade/]
+    role: execution des loops de design (scan -> analyse -> validation)
+    artifacts: [scan_loop.py, scan_strates.py]
+  proactivity:
+    repo_dirs: [monitoring/, reports/, incident/]
+    role: anticipation - coverage scanner, friction, gaps avant crise
+    artifacts: [designs/design-coverage-scanner.yaml, designs/unforeseen-lifecycle.yaml]
+  integration:
+    repo_dirs: [CROSSLINKS/, ports/, workflows/, validation/]
+    role: contracts vers repos externes et gates de sortie
+    artifacts: [designs/moc-governance.yaml, .githooks/]
+
+internal_admg:
+  hierarchy_ref: designs/admg-dag3-hierarchy.yaml
+  state_model_ref: designs/admg-state-model.yaml
+  rule: tout flux interne du repo (idea -> design -> atom -> enforcement) se decrit comme noeud/arete ADMG traçable
+
+strates_coverage:
+  L0: axiomes et principes (META-DESIGN.md, multi-repo-fundamental)
+  L1: gouvernance operationnelle (meta-coherence, unforeseen-lifecycle)
+  L2: composition des patterns (moc-governance, thought-commit-pipeline)
+  L3: emergence consommatrice (citizens.yaml, generated-designs/)
+  L4: outillage concret (scripts python, hooks, scanners)
+
+alignment_rules:
+- un dossier du repo sans mapping DAG-3 declare est un candidat DESIGN_VOID interne
+- chaque nouveau design doit declarer sa couche DAG-3 dominante (parser|engine|runtime|proactivity|integration) dans son frontmatter layer_note
+- le repo ne prescrit que ce qu'il pratique : toute regle META-DESIGN doit avoir sa contrepartie executable ici
+
+enforcement:
+- scan_loop.py + scan_strates.py (runtime existants)
+- pre-commit hooks (.githooks/)
+- design_coverage_scanner (proactivity, heberge ARGUS)

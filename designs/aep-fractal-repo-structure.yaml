@@ -1,0 +1,57 @@
+name: aep-fractal-repo-structure
+description: "Structure AEP fractal / poupees russes pour les repertoires PRD/MOC : projet racine, pre-compositions imbriquees, composants autonomes. Chaque niveau est auto-similaire, auto-indexe et autonome."
+version: 1.0.0
+status: active
+layer: L0-L4
+intent_hash: 0xDESIGN_AEP_FRACTAL_REPO_STRUCTURE_20260824
+inherits:
+- fractal-recursion
+- moc-governance
+- artifact-writing-standards
+depends_on:
+- ATOM-053-workspace-draft-convention
+bridges:
+- target: REPO-STANDARDS
+  role: placement_standard
+  protocol: markdown-link
+  path: standards/artifacts/artifact-structure-standard.md
+- target: GOVERNANCE-HUB
+  role: reference_implementation
+  protocol: markdown-link
+  path: PRD-MOC/
+
+parameters:
+  pattern: self-similar-nesting
+  metaphor: poupees-russes
+  max_depth: 3
+  clustering_threshold: 3
+
+levels:
+  level0_racine_projet:
+    description: dossier racine du domaine (ex PRD-MOC/, PRD/)
+    contents: index obligatoire (PRD-000-index.md / README.md)
+  level1_precomposition_imbriquee:
+    description: sous-dossier par axe de classification (general, domaine, protocole, env, repo)
+    rule: cree seulement si >= 3 artefacts (axiome 6 artifact-standard)
+  level2_composant_autonome:
+    description: l'artefact feuille - frontmatter complet, resolvable seul, consommable sans contexte parent
+
+self_similarity_invariants:
+- chaque niveau porte son index regenere de facon idempotente (update-artifact-index.ps1)
+- le frontmatter porte toute l'information de placement (type + category) - declaratif, pas positionnel
+- un composant deplace reste valide si son axe dominant ne change pas ; sinon maj cross-references (axiome 8)
+- profondeur max 3 (racine = niveau 0) - conforme axiome 3 artifact-structure-standard
+
+anti_patterns:
+- sous-dossiers fonctionnels decoratifs (fractal/, architecture/, components/) interdits dans PRD/ ou PRD-MOC/
+- artefact sans axe dominant unique
+- index manuel non regenerate
+
+validated_case:
+  repo: GOVERNANCE-HUB
+  tree: "PRD-MOC/general/PRD-MOC-GEN-010..., PRD-MOC/act-protocol/..."
+  date: "2026-08-23"
+
+enforcement:
+- structure_check: check-prd-structure.ps1
+- placement_standard: REPO-STANDARDS artifact-structure-standard.md (ADR-2026-08-22)
