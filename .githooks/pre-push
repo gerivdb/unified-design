@@ -28,18 +28,34 @@ while read -r local_ref local_sha remote_ref remote_sha; do
 done
 
 if [ "$IS_DELETE_PUSH" = "false" ] && { [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; }; then
+    # --- Option 3 (U-C1/COHERENCE_TRANSVERSE + ARBITRATION-ALFRED-BDCP 2026-08-23) ---
+    # Push main autorise SI tous les commits pousses sont deja publies
+    # sur au moins une branche feat/* remote (publication-branche prealable).
+    ALL_PUBLISHED=true
+    HAS_NEW=false
+    for C in $(git rev-list --no-merges origin/$BRANCH..$BRANCH 2>/dev/null); do
+        HAS_NEW=true
+        if ! git branch -r --contains "$C" 2>/dev/null | grep -qE 'origin/(feat|fix|hotfix)/'; then
+            ALL_PUBLISHED=false
+            break
+        fi
+    done
+    if [ "$HAS_NEW" = "true" ] && [ "$ALL_PUBLISHED" = "true" ]; then
+        echo "[ALFRED] Option 3: commits deja publies sur branche feat/* -- push main autorise."
+        exit 0
+    fi
     echo ""
     echo "============================================================"
     echo "[ALFRED BLOCK] Push DIRECT sur '$BRANCH' interdit."
     echo "============================================================"
     echo ""
-    echo "Workflow requis (Plan Lens Module 2 - branch-lifecycle.md) :"
-    echo "  1. Créer une branche : git checkout -b feat/<desc>"
-    echo "  2. Committer : git commit -m 'feat(<scope>): <desc>'"
-    echo "  3. Pousser la branche : git push origin feat/<desc>"
-    echo "  4. Créer une PR : gh pr create"
+    echo "Workflow requis (Option 3 -- publication-branche prealable) :"
+    echo "  1. git checkout -b feat/<desc>"
+    echo "  2. git push origin feat/<desc>   (publication + revue possible)"
+    echo "  3. git checkout main && git merge --no-ff feat/<desc>"
+    echo "  4. git push origin main          (desormais autorise)"
     echo ""
-    echo "Contournement intentionnel : git push --no-verify"
+    echo "Contournement intentionnel : git push --no-verify (INTERDIT par BDCP/design)"
     echo "============================================================"
     exit 1
 fi
