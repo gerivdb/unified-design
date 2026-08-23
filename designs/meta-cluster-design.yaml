@@ -1,0 +1,102 @@
+name: meta-cluster-design
+description: Definit ce qui lie N depots independants en UN ecosysteme coherent - le meta-cluster gerivdb. Cohesion par SOT unique, topologie strates, contrats bridges, ontologie partagee et traceabilite intent_hash.
+version: 1.0.0
+status: active
+layer: L0-L1
+intent_hash: 0xDESIGN_META_CLUSTER_20260823
+inherits:
+- multi-repo-fundamental
+- meta-coherence
+- ouroboros
+depends_on:
+- unforeseen-lifecycle
+- design-coverage-scanner
+bridges:
+- target: GOVERNANCE-HUB
+  role: sot_and_normative
+  protocol: markdown-link
+- target: NEXUS
+  role: ecosystem_registry
+  protocol: json-read
+- target: REPO-STANDARDS
+  role: crosslinks
+  protocol: markdown-link
+- target: ECOS-CLI
+  role: operations_tool
+  protocol: python-import
+- target: ONTOLOGY
+  role: shared_ontology
+  protocol: markdown-link
+- target: ARGUS
+  role: cluster_watchman
+  protocol: python-import
+
+definition_formal: >
+  metacluster = { repos } x { SOT unique } x { topologie strates L0-L5 + couches N+1..N+4 }
+  x { contrats bridges } x { ontologie partagee } x { traceabilite intent_hash }.
+
+coupling_taxonomy:
+- type: hard_code
+  mechanism: import direct declare
+  examples: [PLIX-LLUX python-import, TRIX zig-import]
+  verifier: build/integration tier
+- type: soft_artifact
+  mechanism: lien croise declare
+  examples: [bridges markdown-link moc-governance]
+  verifier: MOX P-106/P-107
+- type: data
+  mechanism: registres partages
+  examples: [ECOS_ROOT.json, index.jsonl BALISE]
+  verifier: drift ARGUS
+- type: governance
+  mechanism: gates communs
+  examples: [hooks encodage/BDCP, adr-governance-gate]
+  verifier: pre-commit/pre-push
+
+consistency_models:
+  sot_registries:
+    mode: strict
+    rule: ecriture unique, propagation maitrisee
+    rupture_detector: nexus_reciprocity_check
+  mirrors:
+    mode: eventual
+    rule: convergence garantie, latence tolerate
+    rupture_detector: ARGUS DRIFT
+  child_artifacts:
+    mode: strict_traceability
+    rule: hash racine invariant sur toute la chaine MOC -> subalternes
+    rupture_detector: design-coverage-scanner
+  runtime:
+    mode: best_effort_local
+    rule: leases WAL index locaux par repo
+    rupture_detector: TTL + purge BALISE
+
+operations_semantics:
+  commit:
+    repo_scope: atomique <= 3 fichiers
+    cluster_scope: declenche progress-sync si livrable MOC
+  merge:
+    repo_scope: pr-lifecycle-gate
+    cluster_scope: post-merge-sync + drift check
+  scan:
+    repo_scope: balise scan <repo>
+    cluster_scope: ARGUS scanners globaux
+  incident:
+    repo_scope: post-mortem repo
+    cluster_scope: unforeseen-lifecycle (R compte cross-repo)
+
+failure_isolation: >
+  Un repo hors ligne n'egorge pas le cluster (mode BDCP/offline,
+  network-resilient-sync avec file d'attente). La perte d'un repo citoyen
+  degrade ; la perte de la SOT bloque - d'ou P0_CONSTITUTIONAL.
+
+ontology_registration:
+  term: metacluster
+  registered_in: ONTOLOGY/ONTOLOGY.yaml (concepts.metacluster)
+  used_in_rules: [pr-lifecycle-gate.md, pattern-router.md]
+
+enforcement:
+- bridge_check: ARGUS bridge_check.py existant
+- shadow_ghost_scanners: filesystem_scan SHADOW / registry GHOST
+- drift_reciprocity: nexus_reciprocity_check.py
+intent_hash_note: adosse PF2 - verificateurs cites, proprietaire GOVERNANCE-HUB N+4

@@ -1,0 +1,50 @@
+name: multi-repo-fundamental
+description: Axiomatise le fait fondateur de l'ecosysteme - il n'existe aucun mono-repo. Toute capacite vit dans exactement un depot ; toute cooperation est un contrat explicite.
+version: 1.0.0
+status: active
+layer: L0
+intent_hash: 0xDESIGN_MULTI_REPO_FUNDAMENTAL_20260823
+inherits:
+- fractal-engineering-strata
+- clone-governance
+depends_on: []
+bridges:
+- target: meta-cluster-design
+  role: cohesion_layer
+  protocol: yaml-inherit
+- target: thought-commit-pipeline
+  role: cascade_consumer
+  protocol: yaml-inherit
+- target: REPO-STANDARDS
+  role: artifact_structure_standard
+  protocol: markdown-link
+
+axioms:
+- id: MR1
+  rule: Pas de monorepo. Le depot est l'unite atomique de propriete et d'atomicite git.
+- id: MR2
+  rule: Une capacite = un repo (RSR applique aux repos eux-memes). Deux repos ne portent jamais la meme capacite.
+- id: MR3
+  rule: Tout acces cross-repo passe par un contrat explicite declare dans BRIDGES.yaml (protocole nomme). Jamais de chemin relatif implicite ni d'etat partage silencieux.
+- id: MR4
+  rule: Un commit git ne traverse jamais la frontiere d'un repo. L'atomicite est per-repo ; la coordination inter-repos se fait par artefacts de gouvernance (MOC -> subalternes).
+- id: MR5
+  rule: La recherche cross-repo exige un index (BALISE) ; l'operation cross-repo exige un outil (ECOS-CLI) ; la surveillance exige un agent (ARGUS). Rien de natif dans git multi-repo.
+- id: MR6
+  rule: Tout repo declare sa strate (L0-L5) et ses couches logiques (N+1..N+4) dans la SOT. Un repo sans declaration SOT est un GHOST (pathologie ARGUS).
+
+operational_consequences:
+  tests: unitaires par repo + tier integration cross-repo explicite
+  release: par repo, avec ordre de cascade quand dependances declarees dans bridges
+  onboarding: lire SOT + BRIDGES avant tout code
+
+enforcement:
+- sot_check: GATE-1 known_repositories avant toute creation/clone
+- ghost_detection: ARGUS filesystem_scan + registry_diff
+- bridge_declaration: BRIDGES.yaml obligatoire pour tout couplage MR3
+
+violations_documented:
+- case: PIANO local_path SOT pointait REPO-STANDARDS/PIANO au lieu du clone reel
+  correction: "2026-08-23, GEN-010, local_path -> D:/DO/WEB/TOOLS/L4-TOOLS/PIANO"
+
+intent_hash_note: adosse PF2 - verificateurs cites, proprietaire GOVERNANCE-HUB N+4
