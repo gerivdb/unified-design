@@ -1,0 +1,41 @@
+name: recovery-tooling
+description: Outils de recuperation SQLite KiloCode en securite - copie de travail obligatoire, validation d'integrite avant reecriture, troncature controllee, vacuum, dry-run par defaut.
+version: 1.0.0
+status: active
+layer: L0
+intent_hash: 0xDESIGN_RECOVERY_TOOLING_20260823
+inherits:
+- moc-governance
+- clone-governance
+depends_on:
+- ATOM-052-exit-interceptor
+bridges:
+- target: GOVERNANCE-HUB
+  role: implementation
+  protocol: python-import
+  path: scripts/kilo_recovery_safe.py
+- target: PRD-KILOCA-SQLITE-RECOVERY
+  role: operational_context
+
+capabilities:
+- name: safe_recovery
+  parameters:
+    working_copy_only: true
+    replace_original_requires: "--replace-original explicite"
+- name: integrity_check
+  description: validation SQLite (PRAGMA integrity_check) avant toute reecriture
+- name: truncate_oversized
+  description: troncature controlee des payloads surdimensionnes, rapporte les lignes touchees
+- name: vacuum
+  description: optimisation apres purge, deltas de taille journalises
+- name: dry_run
+  description: mode test sans ecriture, par defaut
+
+principles:
+- preserver la donnee source
+- copie de travail jamais l'original sans opt-in explicite
+- valider avant remplacement
+- rapport structure des lignes touchees et deltas
+
+companion_tools:
+- scripts/kilo_snapshot_manifest.py : manifeste reproducible read-only (sha256, tables core)

@@ -1,0 +1,48 @@
+name: kg35-migration
+description: Migration de documents inter-repos avec transfert d'ownership - identification de l'orphelin, validation destination, git mv preserve historique, mise a jour SOT et cross-references, commits atomiques dans les deux repos, gate HITL.
+version: 1.0.0
+status: active
+layer: L4
+intent_hash: 0xDESIGN_KG35_MIGRATION_20260823
+inherits:
+- clone-governance
+- moc-governance
+depends_on:
+- ATOM-053-workspace-draft-convention
+- thought-commit-pipeline
+bridges:
+- target: KG-L
+  role: validated_case_destination
+  path: PRD/PRD-KG35-V9-DOC-MIGRATION-2026-08-23.md
+- target: PIANO
+  role: validated_case_source
+- target: GOVERNANCE-HUB
+  role: sot_authority
+
+capabilities:
+- name: ownership_transfer
+  description: deplacer un document du repo A vers le repo B dont il releve semantiquement
+- name: sot_update
+  description: maj known_repositories.yaml si chemin canonique change (cas vecu PIANO local_path)
+- name: cross_ref_update
+  description: maj des references INTENT/PRD pointant vers l'ancien emplacement
+- name: git_history_preserve
+  description: historique preserve via git mv, jamais copie+delete silencieux
+- name: hitl_gate
+  description: approbation humaine requise avant toute migration definitive
+
+workflow:
+  - "1. identifier le document orphelin (contenu appartient au repo B) - ARGUS orphan scanner"
+  - "2. valider la capacite du repo destination"
+  - "3. transferer vers destination (git mv)"
+  - "4. maj SOT si chemin canonique change"
+  - "5. maj references croisees INTENT/PRD"
+  - "6. retirer de la source"
+  - "7. commits atomiques dans les deux repos"
+
+validated_case:
+  date: "2026-08-23"
+  doc: KG35-V9-PERFECT.md
+  from: PIANO
+  to: KG-L
+  companion: PRD-MOC-GEN-010 cascade
