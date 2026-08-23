@@ -205,6 +205,17 @@ if [ "$BRANCH" = "HEAD" ]; then
 fi
 
 ###############################################################################
+# ÉTAPE 6 : HOTL RESOLVER (design AUTONOMY_INTEGRITY_MATRIX)
+# Non bloquant. Resolver canonique : GOVERNANCE-HUB/scripts/hotl_resolve.ps1
+###############################################################################
+
+HOTL_SCRIPT="D:/DO/WEB/TOOLS/L0-CANON/GOVERNANCE-HUB/scripts/hotl_resolve.ps1"
+if [ -f "$HOTL_SCRIPT" ]; then
+    HOTL_OUT="$(pwsh -NoProfile -File "$HOTL_SCRIPT" -RepoPath "$REPO_ROOT" 2>/dev/null || true)"
+    echo "[HOTL] niveau resolu (non bloquant) : ${HOTL_OUT:-failsafe A2}"
+fi
+
+###############################################################################
 # SORTIE
 #################################################################################
 
