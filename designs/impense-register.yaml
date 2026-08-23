@@ -1,0 +1,53 @@
+name: impense-register
+description: Boucle prospective de remise en question du MDU lui-meme (serendipite provoquee par cadence et lentilles) + registre trie des impenses R=1. Receptacle physique IMPENSES/ (REPO-STANDARDS).
+version: 1.0.0
+status: active
+layer: L1-L4
+intent_hash: 0xDESIGN_IMPENSE_REGISTER_20260823
+inherits:
+- ouroboros
+- incremental-growth
+depends_on:
+- unforeseen-lifecycle
+bridges:
+- target: REPO-STANDARDS
+  role: physical_register
+  protocol: yaml-read
+  path: IMPENSES/IMPENSES-REGISTRY.yaml
+- target: GOVERNANCE-HUB
+  role: gaps_registry_normative
+  protocol: markdown-link
+- target: causal-gap-analyst
+  role: prospective_engine
+
+two_loops:
+  retroactive:
+    trigger: chaque incident/anomalie
+    question: quel design couvrait ce cas ? aucun -> trou enregistre
+    automation: HOTL
+  prospective:
+    cadence: trimestrielle + evenementielle
+    nature: HITL-assiste (la pensee se provoque, ne se programme pas)
+
+three_lenses:
+  analogical: importer patterns externes -> "avons-nous l'equivalent ?" (skill anamorphoser)
+  entropic: suivre H_designs ; alertes monoculture/dispersion (math KG35-V9-PERFECT)
+  adversarial: red-team periodique ; chaque attaque sans defense = impense
+
+triage_pipeline: impense -> design a creer ? terme ontologique ? entree SOT ? risque accepte explicitement ?
+
+initial_entries_r1:
+  source_session: "2026-08-23 BALISE"
+  count: 3
+  entries_ref: REPO-STANDARDS/IMPENSES/IMPENSES-REGISTRY.yaml
+  - PS_NATIVE_STDERR_EAP_STOP
+  - PS_DATETIME_KIND_LOCAL_VS_UTC
+  - PS_SETCONTENT_EMPTY_COLLECTION_NOOP
+
+self_audit_guard:
+  principle: qui surveille les surveillants (ouroboros, PF7)
+  rule: le registre lui-meme audite trimestriellement ; criteres d'obsolescence declares
+
+enforcement:
+- pf1: R>=2 conversion obligatoire ; R>=5 faute de gouvernance bloquante
+- feed: unforeseen-lifecycle depose automatiquement les R=1
