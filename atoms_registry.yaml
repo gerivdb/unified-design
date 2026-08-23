@@ -954,3 +954,82 @@ atoms:
   - moc-governance
   - artifact-writing-standards
   - dag3-conversation-forensics
+- path: designs/multi-repo-fundamental.yaml
+  hash: pending-hash-on-commit
+  description: 'Axiomes MR1-MR6 du multi-repo fondamental : pas de monorepo, capacite=repo, contrats explicites BRIDGES, atomicite per-repo, declaration SOT obligatoire.'
+  depends_on:
+  - fractal-engineering-strata
+  - clone-governance
+- path: designs/meta-cluster-design.yaml
+  hash: pending-hash-on-commit
+  description: 'Cohesion du meta-cluster : definition formelle, taxonomie couplage dur/souple/donnees/gouvernance, modeles coherence strict/eventuel/best-effort, semantique operations, isolation defaillance.'
+  depends_on:
+  - multi-repo-fundamental
+  - meta-coherence
+  - ouroboros
+- path: designs/meta-coherence.yaml
+  hash: pending-hash-on-commit
+  description: 'Coherence structurelle cross-repo P0 ; ARGUS agent operationnel ; pathologies GAP/GHOST/DRIFT/COLLISION/ORPHAN/SHADOW/VOID ; anti-collision documentee vs mox-meta-coherence.'
+  depends_on:
+  - fractal-engineering-strata
+  - ouroboros
+- path: designs/limbo-transit.yaml
+  hash: pending-hash-on-commit
+  description: 'Zone transit .LIMBO par strate/repo + temp + quarantine ; routage ARGUS auto ; escalade HOTL apres N validations identiques (PF4/PF6).'
+  depends_on:
+  - clone-governance
+  - ATOM-053-workspace-draft-convention
+- path: designs/argus-orphan-scanner.yaml
+  hash: pending-hash-on-commit
+  description: 'Scanner orphelins cross-repo : untracked x SOT, pathologies ORPHAN_FILE/WRONG_REPO/TEMP_ARTIFACT/SOT_MISMATCH, routage .LIMBO, rapports JSON.'
+  depends_on:
+  - meta-coherence
+  - limbo-transit
+- path: designs/balise-identity-freshness.yaml
+  hash: pending-hash-on-commit
+  description: 'Runtime BALISE : index idempotent, resolve positif obligatoire, leases TTL purge UTC, preserve EAP-safe, freshness check, scan delegation ARGUS.'
+  depends_on:
+  - fractal-engineering-strata
+  - moc-governance
+- path: designs/unforeseen-lifecycle.yaml
+  hash: pending-hash-on-commit
+  description: 'Pipeline imprevus signal->institution : taxonomie 6 types, grille echelle x moment, recurrence R (1/2+/5+), metriques TE/TF/VE/H, registre ERR generalise, symptom-template, postmortems obliges.'
+  depends_on:
+  - ouroboros
+  - circuit-breaker-pattern
+  - ATOM-053-workspace-draft-convention
+- path: designs/design-coverage-scanner.yaml
+  hash: pending-hash-on-commit
+  description: 'Pathologies DESIGN_* (GAP/GHOST/DRIFT/COLLISION/ORPHAN/VOID) : ghost via atoms_registry, matrice couverture, croisement incidents x designs, entropie H_designs. Implementation ARGUS design_coverage_scanner.py.'
+  depends_on:
+  - meta-coherence
+  - unforeseen-lifecycle
+- path: designs/impense-register.yaml
+  hash: pending-hash-on-commit
+  description: 'Boucle prospective MDU : lentilles analogique/entropique/adversariale, triage IMPENSES/, auto-audit ouroboros. Receptacle REPO-STANDARDS/IMPENSES/IMPENSES-REGISTRY.yaml.'
+  depends_on:
+  - unforeseen-lifecycle
+- path: designs/thought-commit-pipeline.yaml
+  hash: pending-hash-on-commit
+  description: 'Continuite vibe->INTENT->PRD-MOC->subalternes->ADR/EPIC->issues ; gates G0-G3 ; huit cas de cascade dont transverses N-repo ; traceabilite hash descendante, statuts ascendantes.'
+  depends_on:
+  - moc-governance
+  - prd-moc-progress-sync
+  - unforeseen-lifecycle
+- path: designs/recovery-tooling.yaml
+  hash: pending-hash-on-commit
+  description: 'Recovery SQLite securisee : copie de travail, integrity_check, troncature controlee, vacuum, dry-run par defaut ; compagnon kilo_snapshot_manifest.py.'
+  depends_on:
+  - moc-governance
+- path: designs/gguf-probe-retention.yaml
+  hash: pending-hash-on-commit
+  description: 'Probes GGUF metadata sans tenseurs, manifestes reproducibles, e2e kbin aller-retour, retention gitignore >100MB (cas vecu modele 1.1GB).'
+  depends_on:
+  - fractal-engineering-strata
+  - ATOM-053-workspace-draft-convention
+- path: designs/kg35-migration.yaml
+  hash: pending-hash-on-commit
+  description: 'Migration documents inter-repos : ownership transfer, SOT update, cross-ref update, git mv historique preserve, HITL gate. Cas valide KG35-V9 PIANO->KG-L.'
+  depends_on:
+  - clone-governance
+  - thought-commit-pipeline
