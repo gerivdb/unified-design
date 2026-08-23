@@ -1,0 +1,63 @@
+name: limbo-transit
+description: Zone de transit normalisee pour fichiers orphelins detectes par ARGUS. Structure .LIMBO par strate/repo + temp + quarantine. Routage automatique, validation HITL avec escalade HOTL apres repetitions validees.
+version: 1.0.0
+status: active
+layer: L0
+intent_hash: 0xDESIGN_LIMBO_TRANSIT_20260823
+inherits:
+- clone-governance
+- moc-governance
+depends_on:
+- ATOM-053-workspace-draft-convention
+bridges:
+- target: ARGUS
+  role: detector_and_router
+  protocol: python-import
+- target: BALISE
+  role: scan_delegation
+  protocol: powershell-invoke
+- target: ONTOLOGY
+  role: concept_limbo_transit
+  protocol: markdown-link
+
+zones:
+  root: "D:/DO/WEB/TOOLS/.LIMBO"
+  strata_dirs: ["L0-CANON", "L1-INFRA", "L2-PLATFORM", "L3-CITIZENS", "L4-TOOLS"]
+  temp: temp/
+  quarantine: quarantine/
+
+capabilities:
+- name: transit_zone
+  parameters:
+    pattern: ".LIMBO/<strate>/<repo>/"
+- name: temp_staging
+  parameters:
+    patterns: [debug_*, optimize_*, clean_*, fix_*, rewrite_*, generate_*, tmp_*, temp_*]
+    cleanup: hebdomadaire
+- name: quarantine
+  parameters:
+    rule: fichiers non identifies -> audit humain obligatoire
+- name: auto_route
+  description: ARGUS orphan_file_scanner route les findings vers .LIMBO
+- name: hotl_escalation
+  description: >
+    Apres N validations identiques du meme pattern, le deplacement devient
+    automatique (PF4/PF6 - reduction continue HITL vers HOTL).
+
+workflow:
+  - "ARGUS scan detecte orphelin"
+  - "classification ontologie + unified-design"
+  - "routage .LIMBO/<strate>/<repo>/"
+  - "validation HITL (escalade HOTL si pattern repete)"
+  - "git mv vers destination finale + commit atomique"
+
+constraints:
+  no_commit_orphan_outside_limbo: true
+  hitl_required_for_quarantine: true
+  atomic_move_only: true
+
+enforcement:
+- pre_commit_hook: check_no_orphans_outside_limbo
+- scanner: ARGUS/scanners/orphan_file_scanner.py
+- balise_command: "balise scan --dry-run"
+- cron: ARGUS/crons/balise_limbo_cron.py

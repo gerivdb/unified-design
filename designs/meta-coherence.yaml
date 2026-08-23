@@ -1,0 +1,61 @@
+name: meta-coherence
+description: Principe P0 de coherence multi-echelle et cross-repo de l'ecosysteme. ARGUS est l'agent operationnel : il detecte les ecarts (GAP, GHOST, DRIFT, COLLISION, ORPHAN, SHADOW, VOID) entre tous les depots gerivdb et propose ou applique des corrections.
+version: 1.0.0
+status: active
+layer: L1
+intent_hash: 0xDESIGN_META_COHERENCE_20260823
+inherits:
+- fractal-engineering-strata
+- ouroboros
+depends_on:
+- ATOM-001-ffi-abi-boundary
+bridges:
+- target: ARGUS
+  role: operational_agent
+  protocol: python-import
+- target: ONTOLOGY
+  role: concept_meta_coherence
+  protocol: markdown-link
+
+collision_resolution_note: >
+  Distinguer explicitement de l'atom mox-meta-coherence : MOX couvre la
+  coherence des DOCUMENTS markdown (ADR, PRD, INTENT...) via probes P-1xx.
+  meta-coherence ici couvre la coherence STRUCTURELLE cross-repo (registres,
+  chemins, bridges, topologie). Les deux sont complementaires, non concurrents.
+
+capabilities:
+- name: multi_scale_scan
+  parameters:
+    layers: [L0, L1, L2, L3, L4, L5]
+- name: drift_detection
+  parameters:
+    scope: SOT vs miroirs vs implementations
+    detector: nexus_reciprocity_check.py
+- name: gap_detection
+  parameters:
+    scope: entites manquantes, bridges manquants
+- name: collision_detection
+  parameters:
+    scope: identifiants ambigus multi-repos
+- name: quarantine_management
+  parameters:
+    zone: .LIMBO/quarantine/
+    hitl_required: true
+
+pathologies:
+- {code: GAP, severity: CRITICAL, definition: present SOT absent disque/miroir}
+- {code: GHOST, severity: CRITICAL, definition: present disque absent SOT}
+- {code: DRIFT, severity: WARNING, definition: valeur divergente SOT/implementation}
+- {code: COLLISION, severity: WARNING, definition: meme identifiant deux entites}
+- {code: ORPHAN, severity: WARNING, definition: reference sans parent trace}
+- {code: SHADOW, severity: WARNING, definition: contrat implicite consomme}
+- {code: VOID, severity: INFO, definition: repo enregistre zero fichier integration}
+
+principles:
+- P0_CONSTITUTIONAL pour la coherence cross-repo
+- ARGUS agent operationnel ; ONTOLOGY definit les concepts ; GOVERNANCE-HUB definit les regles
+
+enforcement:
+- scanners: ARGUS/scanners/* (6+ specialised)
+- wal: ARGUS/wal SyncEvent immuable
+- cron: MC7 freshness + limbo + metrics
