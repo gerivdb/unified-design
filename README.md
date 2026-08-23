@@ -40,6 +40,6 @@ unified-design/
 ## Références
 
 - `REPO-STANDARDS/META-DESIGN.md` : source initiale MDU
-- `ADR-012-META-DESIGN` : décision architecturelle
+- `META-DESIGN.md` (racine et docs/) : décision architecturelle MDU
 - `INTENT-016` : magistral MDU
 - `PRD-MOC-FLEX-ENV2-TOPOLOGY-HARMONY.md` : DESIGN-FLEX-001

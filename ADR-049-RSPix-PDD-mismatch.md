@@ -40,9 +40,9 @@ Refer to:
 - Prevents confusion in future audits or code reviews
 
 ## Related ADRs
-- ADR-025-SPARQL-PLANNING
-- ADR-031-KG-SPIDX-integration
-- ADR-049-RPKix-PDD-mismatch
+- ~~ADR-025-SPARQL-PLANNING~~ (retiree 2026-08-23 : jamais creee, numero ADR-025 occupe par mem-core-consolidation)
+- ~~ADR-031-KG-SPIDX-integration~~ (retiree 2026-08-23 : jamais creee, numero ADR-031 occupe par rlm-tlm-integration)
+- ADR-049-RSPix-PDD-mismatch
 
 ## Impact
 - Technical cleanup: resolves documented gap

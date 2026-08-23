@@ -28,7 +28,7 @@ Tout agent ou workflow MDU doit respecter la pile :
 
 ```
 Prompt : "Analyser le repo LLM-REPO"
-Context : design.context chargé, INTENT-XXX lu
+Context : design.context chargé, `INTENT-XXX` lu
 Harness : script analyze_repo.py exécuté
 Loop : résultat sauvegardé dans .mdu/checkpoint.json, prochain run dans 24h
 ```

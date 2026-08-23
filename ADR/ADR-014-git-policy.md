@@ -58,7 +58,7 @@ Il faut donc :
 
 ## Référence ADR
 
-- **ADR** : ADR-014-git-policy-meta-design
+- **ADR** : ADR-014-git-policy
 - **IntentHash** : 0xGIT_POLICY_META_DESIGN_20260715
 - **Dépôt** : gerivdb/unified-design
 - **Statut ADR** : accepted
