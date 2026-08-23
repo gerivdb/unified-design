@@ -71,6 +71,39 @@ Le **Meta-Design (MDU)** est l'atlas des invariants architecturaux de l'ecosyste
 | Puissance | Consommation | <= 12W |
 | Roast Automatique | Feedback negatif constructif | - |
 
+### .LIMBO Transit Pattern (L0-CANON)
+
+**Role** : Transit automatique des fichiers orphelins cross-repo
+
+| Invariant | Description |
+|-----------|-------------|
+| Detection | ARGUS scan identifie les orphelins (GAP/GHOST/ORPHAN) |
+| Classification | Ontologie + unified-design determinent la strate/repo cible |
+| Transit | Deplacement vers `.LIMBO/<strate>/<repo>/` |
+| Validation | HITL confirmation avant deplacement final |
+| Integration | `git mv` vers le repo cible + commit atomique |
+
+**Structure .LIMBO** :
+```
+D:\DO\WEB\TOOLS\.LIMBO\
+├── L0-CANON\GOVERNANCE-HUB\    ← Fichiers gouvernance
+├── L1-INFRA\ARGUS\             ← Fichiers ARGUS
+├── L2-PLATFORM\PLIX\           ← Fichiers PLIX
+├── L4-TOOLS\PIANO\             ← Fichiers PIANO
+├── temp\                       ← Artefacts temporaires (debug, optimize, etc.)
+└── quarantine\                 ← Fichiers suspects a auditer
+```
+
+**Workflow ARGUS** :
+1. `orphan_file_scanner.py` scanne tous les repos sous `D:\DO\WEB\TOOLS`
+2. Detecte : ORPHAN_FILE, WRONG_REPO, TEMP_ARTIFACT, SOT_MISMATCH
+3. Route vers `.LIMBO/<strate>/<repo>/` selon la pathologie
+4. Cron `balise_limbo_cron.py` execute le transit automatique (dry-run par defaut)
+5. BALISE `scan` delegue au scanner ARGUS
+
+**Principe RSR etendu** : Un artefact = une seule localisation canonique.
+Si un fichier est orphelin, il transite par `.LIMBO` avant d'etre re-affecte.
+
 ---
 
 ## Validation
@@ -203,6 +236,7 @@ OK semantic_loops: No cycles detected
 | BOOT_SEQUENCE | Procedure | Sequence canonique de boot LLM | - |
 | GATE_RSS_V1 | Config | Gate RSS v1 pour validation HITL | - |
 | MORPHISM_MAP_SCHEMA | Schema | Schema de morphism map | - |
+| LIMBO_TRANSIT | Pattern | Zone de transit normalisee pour fichiers orphelins (ARGUS -> .LIMBO) | L0 |
 
 ---
 
@@ -211,6 +245,7 @@ OK semantic_loops: No cycles detected
 - **ADR-013** : Meta-Design Validation Protocol
 - **ADR-016** : Unified Design Loop Detection Engine
 - **ADR-CONNARD-001** : Connard Design Protocol
+- **ADR-20260823** : Orphan File Classification and .LIMBO (PRD-MOC-GEN-010)
 - **meta-design.yaml** : Schema de validation YAML
 
 ---
@@ -238,6 +273,7 @@ OK semantic_loops: No cycles detected
 | LLUX | Proof-of-concept ATOM-052/053, artifact lifecycle | `L3-CITIZENS/LLUX/` |
 | NEXUS | Mega-SOT, registre des registres, N4 governance | `L1-INFRA/NEXUS/` |
 | PLIX | Codec, path-registry, inference engine | `L2-PLATFORM/PLIX/` |
+| ARGUS | Meta-coherence, orphan detection, .LIMBO transit, scanners | `L1-INFRA/ARGUS/` |
 
 ### Bridges implémentés
 
