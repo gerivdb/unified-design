@@ -1,0 +1,57 @@
+name: argus-orphan-scanner
+description: Scanner ARGUS de detection des fichiers orphelins cross-repo. Enumere les untracked, croise avec la SOT known_repositories.yaml, classifie (ORPHAN_FILE, WRONG_REPO, TEMP_ARTIFACT, SOT_MISMATCH) et route vers .LIMBO.
+version: 1.0.0
+status: active
+layer: L1
+intent_hash: 0xDESIGN_ARGUS_ORPHAN_SCANNER_20260823
+inherits:
+- meta-coherence
+- clone-governance
+depends_on:
+- ATOM-053-workspace-draft-convention
+bridges:
+- target: ARGUS
+  role: implementation
+  protocol: python-import
+  path: scanners/orphan_file_scanner.py
+- target: limbo-transit
+  role: routing_destination
+  protocol: filesystem-move
+
+capabilities:
+- name: scan_git_repos
+  parameters:
+    base: "D:/DO/WEB/TOOLS"
+    method: gitpython untracked_files
+    excludes: [".git/", ".LIMBO/"]
+- name: cross_reference_sot
+  parameters:
+    sot: GOVERNANCE-HUB/known_repositories.yaml
+    formats: [list, flat_dict, sectioned_dict]
+- name: classify_orphan
+  pathologies:
+  - {code: ORPHAN_FILE, severity: WARNING, definition: fichier appartient au repo X mais situe dans repo Y}
+  - {code: WRONG_REPO, severity: WARNING, definition: fichier dans un repo mais non conforme SOT}
+  - {code: TEMP_ARTIFACT, severity: INFO, definition: pattern debug_/optimize_/clean_/fix_/rewrite_}
+  - {code: SOT_MISMATCH, severity: CRITICAL, definition: local_path SOT inexistant ou divergent}
+- name: route_to_limbo
+  parameters:
+    temp_artifact: ".LIMBO/temp/<repo>/"
+    orphan: ".LIMBO/L4-TOOLS/<repo>/"
+    quarantine: ".LIMBO/quarantine/"
+    dry_run_default: true
+- name: generate_report
+  parameters:
+    output: reports/ORPHAN_SCAN_<ts>.json
+    fields: [pathology, severity, repo, file, absolute_path, reason, suggested_destination]
+
+cli:
+  usage: "python -m scanners.orphan_file_scanner [--dry-run] [--json] [--base BASE]"
+  exit_codes: {ok: 0, critical_findings: 1}
+
+consumers:
+- BALISE scan subcommand (delegation)
+- ARGUS balise_limbo_cron.py (routing automation)
+
+enforcement:
+- cron: balise_limbo_cron (--apply apres validation HITL uniquement)

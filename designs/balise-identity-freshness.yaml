@@ -1,0 +1,56 @@
+name: balise-identity-freshness
+description: Runtime BALISE - Balise d'Adressage et de Localisation d'Identifiants Souverains. Un objet = une adresse resolvable. Sous-commandes index, resolve, lease, preserve, scan, check --fresh.
+version: 1.0.0
+status: active
+layer: L0
+intent_hash: 0xDESIGN_BALISE_IDENTITY_FRESHNESS_20260823
+inherits:
+- fractal-engineering-strata
+- moc-governance
+depends_on:
+- ATOM-052-exit-interceptor
+bridges:
+- target: GOVERNANCE-HUB
+  role: implementation_runtime
+  protocol: powershell-invoke
+  path: scripts/balise.ps1
+
+capabilities:
+- name: identity_resolve
+  description: resolution hash exact, slug prefix unique ; absent = exit 1 (pas de reference sans resolve positif)
+- name: lease_management
+  parameters:
+    commands: [take, release, list]
+    default_ttl_min: 240
+    purge_rule: expires purges au list ; comparaison UTC normalisee (.ToUniversalTime())
+    empty_file_write: "Set-Content -Value @() explicite (pipe collection vide = no-op PS)"
+- name: preserve_workflow
+  parameters:
+    branch_pattern: chore/wip-<repo>-<date>
+    steps: [checkout -b, add -A, commit, push, rev-parse, journal jsonl, checkout main]
+    powershell_note: EAP local Continue autour des appels git (stderr natif != erreur sous Stop)
+- name: freshness_check
+  parameters:
+    command: check --fresh
+    statuses: [CONVERGED, STALE, MISSING, UNKNOWN]
+    report: converged/diverged/stale/missing counts
+- name: scan_orphans
+  parameters:
+    delegation: ARGUS/scanners/orphan_file_scanner.py
+    usage: "balise scan [--dry-run] [--json] [--base PATH]"
+
+parameters:
+  index_file: RUNTIME/index.jsonl
+  leases_file: RUNTIME/leases.jsonl
+  freshness_file: RUNTIME/freshness.yaml
+  preserve_journal: RUNTIME/preserve_journal.jsonl
+  build: atomique tmp + rename, idempotent
+
+constraints:
+  no_reference_without_positive_resolve: true
+  index_idempotent: true
+  atomic_writes: true
+
+consumers:
+- ARGUS crons (freshness MC7, limbo)
+- hooks pre-commit (resolve checks)
