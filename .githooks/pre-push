@@ -33,6 +33,11 @@ if [ "$IS_DELETE_PUSH" = "false" ] && { [ "$BRANCH" = "main" ] || [ "$BRANCH" = 
     # sur au moins une branche feat/* remote (publication-branche prealable).
     ALL_PUBLISHED=true
     HAS_NEW=false
+    # Cas limite: aucun nouveau commit (push no-op) -> rien a verifier, autoriser
+    if [ -z "$(git rev-list --no-merges origin/$BRANCH..$BRANCH 2>/dev/null)" ]; then
+        echo "[ALFRED] aucun nouveau commit sur $BRANCH -- rien a verifier."
+        exit 0
+    fi
     for C in $(git rev-list --no-merges origin/$BRANCH..$BRANCH 2>/dev/null); do
         HAS_NEW=true
         if ! git branch -r --contains "$C" 2>/dev/null | grep -qE 'origin/(feat|fix|hotfix)/'; then
