@@ -1,5 +1,5 @@
 name: meta-coherence
-description: Principe P0 de coherence multi-echelle et cross-repo de l'ecosysteme. ARGUS est l'agent operationnel : il detecte les ecarts (GAP, GHOST, DRIFT, COLLISION, ORPHAN, SHADOW, VOID) entre tous les depots gerivdb et propose ou applique des corrections.
+description: "Principe P0 de coherence multi-echelle et cross-repo de l'ecosysteme. ARGUS est l'agent operationnel - il detecte les ecarts (GAP, GHOST, DRIFT, COLLISION, ORPHAN, SHADOW, VOID) entre tous les depots gerivdb et propose ou applique des corrections."
 version: 1.0.0
 status: active
 layer: L1
