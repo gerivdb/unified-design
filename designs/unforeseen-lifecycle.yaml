@@ -1,0 +1,75 @@
+name: unforeseen-lifecycle
+description: Pipeline complet signal -> institution pour tous les imprevus du developpement (frictions, erreurs, ERR, bugs, incidents, impenses). Taxonomie a six types, grille echelle x moment, regle de recurrence R, metriques TE/TF/VE/H_designs.
+version: 1.0.0
+status: active
+layer: L1
+intent_hash: 0xDESIGN_UNFORESEEN_LIFECYCLE_20260823
+inherits:
+- ouroboros
+- circuit-breaker-pattern
+depends_on:
+- ATOM-053-workspace-draft-convention
+bridges:
+- target: ARGUS
+  role: wal_capture_and_crons
+  protocol: python-import
+- target: AGENT_RAM
+  role: err_registry_generalized
+  protocol: yaml-read
+- target: REPO-STANDARDS
+  role: impenses_register
+  protocol: yaml-read
+- target: zombie-symptom
+  role: symptom_template_pattern
+  protocol: yaml-inherit
+
+taxonomy:
+- {type: friction, nature: resiste sans casser, signal: "score > 0.7 BOOT-0", receptacle: friction-sensor}
+- {type: incident, nature: echec ponctuel avec cout reel, signal: perte/degat documente, receptacle: post-mortem oblige}
+- {type: erreur, nature: echec d'execution isole, signal: exception ou exit != 0, receptacle: WAL capture}
+- {type: err, nature: erreur recurrente classifiee, signal: recurrence R >= 2, receptacle: registre ERR generalise}
+- {type: bug, nature: defaut livre symptome observe, signal: comportement != spec, receptacle: PRD recovery/symptom}
+- {type: impense, nature: absence de conception, signal: question sans reponse, receptacle: IMPENSES/}
+
+scale_moment_grid:
+  moments: [boot, execution, pre_commit, pre_push, post_merge, post_incident]
+  scales: [micro, meso, macro, meta]
+  rule: chaque gate capte sa classe ; cases vides = trous de capture prioritaires
+  priority_gaps: [meta column, post_incident row]
+
+lifecycle_pipeline:
+  - capture_structuree: WAL ARGUS, jamais perdu, type x echelle x moment x code
+  - classification: taxonomie + grille
+  - recurrence_tracking:
+      R_egal_1: impense acceptable -> IMPENSES/
+      R_superieur_2: ERR candidat -> conversion obligatoire (regle KiloCode | atom | design | registre)
+      R_superieur_5: sans institution = FAUTE DE GOUVERNANCE -> blocage PF1
+  - efficacy_check: institution existe ET suivie ; sinon DESIGN_GHOST/DRIFT -> design-coverage-scanner
+
+metrics:
+  te: {formula: imprevus_institutionnalises / imprevus_captures, cible: 0.60, alerte: 0.30}
+  tf: {formula: frictions_eliminees / frictions_detectees}
+  ve: {formula: institutions_suivies / institutions_existantes, critique: "VE < 1.0 sur P0 = DESIGN_DRIFT"}
+  h_designs: {formula: "somme p_i * |log2(p_i)| / log2(N_domains)", bas: monoculture, haut: dispersion}
+
+capabilities:
+- name: capture_structured
+- name: recurrence_tracking
+- name: mandatory_conversion
+- name: governance_fault_gate
+- name: efficacy_check
+- name: metrics_reporting
+  implementation: ARGUS/crons/metrics_report_cron.py
+- name: symptom_template_instantiation
+  pattern_source: designs/symptom/zombie-symptom/template/
+  roles: [detector, classifier, auditor, hook, purger]
+- name: postmortem_trigger
+  skill: talex-postmortem
+  rule: obligatoire pour incidents au-dessus seuil de cout
+- name: err_registry_generalized
+  extends: AGENT_RAM llm_known_errors (agents) -> tous acteurs humains/outils/pipelines
+
+enforcement:
+- cron_metrics: mc7_metrics_reports.jsonl
+- cross_rule: COHERENCE_TRANSVERSE CT3 etendue aux designs
+intent_hash_note: adosse PF2 - verificateur metrics_report + coverage-scanner, proprietaire INTENT ARGUS MC7

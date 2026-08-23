@@ -1,0 +1,51 @@
+name: design-coverage-scanner
+description: Scan mecanique continu des pathologies de l'espace de designs lui-meme (DESIGN_GAP, GHOST, DRIFT, COLLISION, ORPHAN, VOID) et croisement incidents x designs. Aurait detete le fantome ATOM-053 avant incident.
+version: 1.0.0
+status: active
+layer: L1
+intent_hash: 0xDESIGN_COVERAGE_SCANNER_20260823
+inherits:
+- meta-coherence
+- incremental-scan-cache
+depends_on:
+- unforeseen-lifecycle
+bridges:
+- target: ARGUS
+  role: implementation
+  protocol: python-import
+  path: scanners/design_coverage_scanner.py
+- target: GOVERNANCE-HUB
+  role: sot_cross_reference
+  protocol: yaml-read
+  path: known_repositories.yaml
+
+pathologies:
+- {code: DESIGN_GAP, severity: WARNING, definition: domaine de problemes sans design}
+- {code: DESIGN_GHOST, severity: CRITICAL, definition: design reference fichier absent - cas ATOM-053}
+- {code: DESIGN_DRIFT, severity: WARNING, definition: design desynchronise de l'implementation}
+- {code: DESIGN_COLLISION, severity: WARNING, definition: recouvrement/conflict entre deux designs}
+- {code: DESIGN_ORPHAN, severity: INFO, definition: design sans consumers ni bridges sortants}
+- {code: DESIGN_VOID, severity: WARNING, definition: domaine declare zero design}
+
+capabilities:
+- name: ghost_detection
+  method: croisement atoms_registry.yaml (path+hash) <-> fichiers reels
+- name: coverage_matrix
+  method: matrice domaines-problemes x designs ; cellules vides = candidats GAP
+  domains_source: sections PRD-MOC-GEN-011 + taxonomies designs
+- name: incident_crossref
+  method: lit dernier rapport WAL/unforeseen ; incident sans design couvrant -> GAP
+- name: collision_check
+  method: recouvrements semantiques (name/description/capabilities)
+- name: orphan_scan
+  method: designs sans consumers ni bridges
+- name: h_metrics
+  formula: "H = somme p_i * |log2(p_i)| / log2(N_domains)"
+
+cli:
+  usage: "python -m scanners.design_coverage_scanner [--dry-run] [--json] [--designs-root PATH]"
+  exit_codes: {ok: 0, critical_findings: 1}
+
+consumers:
+- P4 integration check GEN-011
+- unforeseen-lifecycle efficacy_check
