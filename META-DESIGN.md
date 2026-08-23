@@ -237,6 +237,15 @@ OK semantic_loops: No cycles detected
 | GATE_RSS_V1 | Config | Gate RSS v1 pour validation HITL | - |
 | MORPHISM_MAP_SCHEMA | Schema | Schema de morphism map | - |
 | LIMBO_TRANSIT | Pattern | Zone de transit normalisee pour fichiers orphelins (ARGUS -> .LIMBO) | L0 |
+| MULTI_REPO_FUNDAMENTAL | Axiome | MR1-MR6 : pas de monorepo, capacite=repo, contrats explicites, atomicite per-repo | L0 |
+| META_CLUSTER | Design | Cohesion N repos : SOT unique, bridges, coherence graduee, operations cluster | L0-L1 |
+| UNFORESEEN_LIFECYCLE | Pattern | Imprevus signal->institution : taxonomie, recurrence R, metriques TE/TF/VE/H | L1 |
+| DESIGN_COVERAGE_SCANNER | Outil | Pathologies DESIGN_* + matrice couverture + croisement incidents x designs | L1 |
+| IMPENSE_REGISTER | Pattern | Boucle prospective MDU (3 lentilles) + registre R=1 trie | L1-L4 |
+| THOUGHT_COMMIT_PIPELINE | Design | Continuite vibe->INTENT->MOC->subalternes->ADR/EPIC ; gates G0-G3 ; 8 cas cascade | L0 |
+| RECOVERY_TOOLING | Pattern | Recovery SQLite securisee (copie travail, integrite, vacuum) | L0 |
+| GGUF_PROBE_RETENTION | Pattern | Binaires lourds hors git, probes metadata, e2e kbin | L4 |
+| KG35_MIGRATION | Pattern | Migration documents inter-repos avec HITL gate et SOT update | L4 |
 
 ---
 
