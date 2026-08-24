@@ -1,0 +1,24 @@
+name: script-file-over-inline
+description: >-
+  Sous PowerShell, les scripts python -c / here-strings imbriques
+  cassent sur les guillemets, accents et backticks (echecs repetes
+  session KG35). Regle : ecrire le script SUR DISQUE puis l'executer.
+  S'applique aussi aux patchs multi-lignes de code genere.
+version: 1.0.0
+status: active
+inherits:
+  - incremental-growth
+parameters:
+  inline_max_complexity: trivial_single_line
+  complex_script: write_to_disk_then_run
+constraints:
+- Tout script > 3 lignes ou contenant quotes/acces passe par un fichier
+- Les fichiers one-shot sont supprimes apres usage
+performance:
+  latency_p99: 45.0
+intent_hash: 0xscript_file_over_inline_20260825
+layer: L0
+origin: >-
+  Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient
+  d'un incident reel rencontre et corrige pendant la migration KG-L ->
+  KG 35 V10 (voir CJ-008bis et PRD-MOC/repos/memory-bus.md).

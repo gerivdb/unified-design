@@ -1,0 +1,28 @@
+name: persistent-learning-loop
+description: >-
+  Un apprentissage annonce doit survivre au redemarrage AVANT d'etre
+  celebre. Trois etages : RAM (instantane) -> appris persistant
+  (learned_path, separe du canonique) -> canonique L0 (apres validation
+  TeamBrain). Ascension possible, contamination impossible.
+version: 1.0.0
+status: active
+inherits:
+  - seven-turns-reflection
+  - buzz-persistent-state
+parameters:
+  stage_ram: immediate
+  stage_learned: jsonl_or_json
+  stage_canonical: ontology_yaml_via_adr
+  separation: learned_never_pollutes_canonical
+constraints:
+- Interdit de celebrer un apprentissage volatile
+- L'appris est journalise et recharge au boot
+- Seule la validation TeamBrain promeut appris -> canonique
+performance:
+  latency_p99: 45.0
+intent_hash: 0xpersistent_learning_loop_20260825
+layer: L0
+origin: >-
+  Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient
+  d'un incident reel rencontre et corrige pendant la migration KG-L ->
+  KG 35 V10 (voir CJ-008bis et PRD-MOC/repos/memory-bus.md).

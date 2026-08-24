@@ -1,0 +1,26 @@
+name: deterministic-budget-control
+description: >-
+  Controle de rythme par BUDGET deterministe (plafond floor(TM_max x
+  propositions)) plutot que throttling probabiliste (qui oscille sans
+  converger). Garantit TM <= TM_MAX strictement ; un plancher non atteint
+  est SIGNALE (signal SLOW), jamais falsifie.
+version: 1.0.0
+status: active
+inherits:
+  - dynamic-systems
+  - cybernetic-control
+parameters:
+  ceiling_guaranteed: true
+  floor_signaled_not_faked: true
+  budget_formula: floor(tm_max * proposed)
+constraints:
+- Interdit de masquer un rythme trop lent par des acceptations forcees
+- Signal SLOW explicite dans le rapport de cycle (GF-2 bas)
+performance:
+  latency_p99: 45.0
+intent_hash: 0xdeterministic_budget_control_20260825
+layer: L0
+origin: >-
+  Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient
+  d'un incident reel rencontre et corrige pendant la migration KG-L ->
+  KG 35 V10 (voir CJ-008bis et PRD-MOC/repos/memory-bus.md).

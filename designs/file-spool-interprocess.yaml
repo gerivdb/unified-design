@@ -1,0 +1,28 @@
+name: file-spool-interprocess
+description: >-
+  Les bus in-process ne traversent pas les processus. Canal robuste
+  sans infrastructure : spool JSONL append-only + offset persistant
+  crash-safe + traitement idempotent. Prouve ONTOLOGY->KG-L et
+  remplace avantageusement une queue reseau pour ENV2.
+version: 1.0.0
+status: active
+inherits:
+  - buzz-persistent-state
+  - loop-engineering
+parameters:
+  format: jsonl_append_only
+  offset: persisted_after_apply
+  idempotent: true
+  corruption_policy: skip_and_count
+constraints:
+- L'offset n'avance qu'APRES application reussie
+- Rejouer un spool consomme = zero effet de bord
+- Le marqueur anti-doublon empeche la republication source
+performance:
+  latency_p99: 45.0
+intent_hash: 0xfile_spool_interprocess_20260825
+layer: L0
+origin: >-
+  Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient
+  d'un incident reel rencontre et corrige pendant la migration KG-L ->
+  KG 35 V10 (voir CJ-008bis et PRD-MOC/repos/memory-bus.md).

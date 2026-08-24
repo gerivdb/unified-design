@@ -1,0 +1,26 @@
+name: teach-learn-asymmetry
+description: >-
+  Pattern enseignant/apprenant : la source canonique (ex. ONTOLOGY)
+  publie ses resolutions ; les moteurs (ex. KG-L) ecoutent, etendent
+  leur lexique a chaud et persistent. Asymetrie assumee : peu
+  d'emetteurs legitimes, beaucoup d'apprenants.
+version: 1.0.0
+status: active
+inherits:
+  - seven-turns-reflection
+  - teach-learn-asymmetry-placeholder
+parameters:
+  teacher_legitimacy: canonical_source_only
+  learner_side_effects: extend_lexicon_persisted
+  unblock_on_learn: gf14_live
+constraints:
+- Un apprentissage externe debloque immediatement les gardes concernes
+- L'enseignant marque ses publications (anti-doublon)
+performance:
+  latency_p99: 45.0
+intent_hash: 0xteach_learn_asymmetry_20260825
+layer: L0
+origin: >-
+  Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient
+  d'un incident reel rencontre et corrige pendant la migration KG-L ->
+  KG 35 V10 (voir CJ-008bis et PRD-MOC/repos/memory-bus.md).

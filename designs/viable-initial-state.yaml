@@ -1,0 +1,28 @@
+name: viable-initial-state
+description: >-
+  Tout etat naissant (graphe initial, base vide, premier cycle)
+  doit naitre SOUS les seuils critiques du systeme. Preuve : une base
+  50/50 a H=1.0 a sterilise 10 000 mutations (0 acceptees). La
+  diversification brute converge vers l'etat critique ; la consolidation
+  d'abord (kind majoritaire), la diversification ensuite.
+version: 1.0.0
+status: active
+inherits:
+  - percolation-phase-transitions
+  - dynamic-systems
+parameters:
+  initial_h_below_critical: true
+  consolidate_before_diversify: true
+  gf12_standard_fallback: on_reject
+constraints:
+- Toute creation d'etat initial verifie les seuils AVANT premiere mutation
+- Un fallback conservateur (substitution standard) remplace le rejet sec
+- La sterilite detectee en simulation = defect de condition initiale
+performance:
+  latency_p99: 45.0
+intent_hash: 0xviable_initial_state_20260825
+layer: L0
+origin: >-
+  Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient
+  d'un incident reel rencontre et corrige pendant la migration KG-L ->
+  KG 35 V10 (voir CJ-008bis et PRD-MOC/repos/memory-bus.md).

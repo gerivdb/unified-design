@@ -1,0 +1,28 @@
+name: cross-package-dual-import
+description: >-
+  Pattern d'import quand deux repos exposent un module de meme nom
+  (ex. ONTOLOGY/bus vs WAZAA/src/bus) ou quand un module sibulin
+  doit etre atteint depuis un package charge hors namespace.
+  Regle : imports RELATIFS par defaut ; si cross-package,
+  try/except ImportError avec repli top-level ; purge defensive
+  de sys.modules avant tout bootstrap de path tiers.
+version: 1.0.0
+status: active
+inherits:
+  - incremental-growth
+parameters:
+  default_style: relative
+  fallback: top_level
+  purge_sys_modules: true
+constraints:
+- INTERDIT d'injecter sys.path d'un repo voisin sans purger sys.modules
+- Tout import cross-package porte le try/except dual
+- Toute collision detectee est journalisee (fail de chainage tracable)
+performance:
+  latency_p99: 45.0
+intent_hash: 0xcross_package_dual_import_20260825
+layer: L0
+origin: >-
+  Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient
+  d'un incident reel rencontre et corrige pendant la migration KG-L ->
+  KG 35 V10 (voir CJ-008bis et PRD-MOC/repos/memory-bus.md).

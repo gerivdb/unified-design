@@ -1,0 +1,27 @@
+name: graceful-degradation-fallback
+description: >-
+  Tout emetteur/recepteur optionnel possede un canal de repli local,
+  silencieux et persistant. Un service absent ne perd jamais une
+  trace : WAZAA absent -> JSONL local ; TLM-LANG absent -> detecteur
+  lexical local ; Node absent -> inspection statique.
+version: 1.0.0
+status: active
+inherits:
+  - capability-awareness
+  - loop-engineering
+parameters:
+  fallback_mode: local_persistent
+  alert_on_fallback: false
+  replay_on_recovery: true
+constraints:
+- Le fallback ne doit jamais casser l'appelant
+- Le fallback persiste AUSSI bien que le canal principal
+- Le verdict expose available + last_error (pas de stub muet)
+performance:
+  latency_p99: 45.0
+intent_hash: 0xgraceful_degradation_fallback_20260825
+layer: L0
+origin: >-
+  Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient
+  d'un incident reel rencontre et corrige pendant la migration KG-L ->
+  KG 35 V10 (voir CJ-008bis et PRD-MOC/repos/memory-bus.md).
