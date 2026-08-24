@@ -1,0 +1,59 @@
+name: ide-window-lifecycle
+description: >-
+  GEN-014 STENTOR - La fenetre litterale suit la fenetre gouvernee. Ouverture
+  deterministe (ide_open produit explicite + pin folder), inventaire d'onglets
+  opt-in double source (extension | os-probe), fermeture confirmee par gate
+  moc-close -RequireOperational + fan-out close-tabs multi-sessions + sondes OS,
+  registre vivant .swarm/windows/<session-id>.json publie sur canaux ide.window.*.
+version: 1.0.0
+status: active
+layer: L0
+intent_hash: 0xINTENT_STENTOR_WINDOW_LIFECYCLE_20260824
+inherits:
+- wazaa-social-bus
+- balise-identity-freshness
+depends_on:
+- ATOM-052-exit-interceptor
+bridges:
+- target: GOVERNANCE-HUB
+  role: implementation_runtime
+  protocol: powershell-invoke
+  path: scripts/balise.ps1
+- target: WAZAA
+  role: transport_bus_et_registre
+  protocol: file-inbox
+  path: src/bus/session_inbox.py
+- target: GeriCode
+  role: contrat_extension
+  protocol: doc-spec
+  path: docs/stentor-extension-contract.md
+
+capabilities:
+- name: deterministic_open
+  description: ide_open(path, workspace) via registre produits ; code nu et MRU interdits (ST1) ; preuve par titre OS (os-probe)
+- name: dual_source_inventory
+  description: source etiquetee extension sinon os-probe ; aucune affirmation d'etat sans source (ST2)
+- name: confirmed_close_gate
+  description: moc-close -RequireOperational = suite <24h + scheduler <26h + freshness CONVERGED + zero subalterne ouvert (ST3, non contournable -Force)
+- name: stentor_fanout
+  description: post-close, consignes ide.window.close aux sessions dont le snapshot contient le MOC, sonde residuelle OS, digest prdmoc.closed.digest vers _swarm
+- name: window_registry
+  description: .swarm/windows/<session-id>.json runtime-only (gitignore), publication snapshot sur bus si opt_in
+
+parameters:
+  editor_products: GOVERNANCE-HUB/RUNTIME/editor_products.yaml
+  window_registry: WAZAA/.swarm/windows/
+  balise_suite_proof: GOVERNANCE-HUB/RUNTIME/balise_suite.jsonl (<24h)
+  scheduler_proof: GOVERNANCE-HUB/RUNTIME/scheduler_runs.jsonl (<26h)
+
+constraints:
+  no_bare_code_or_mru: true
+  zero_sendkeys_zero_screenshot: true
+  tabs_opt_in_only: true
+  realms_isolated_on_ide_topics: true
+  reqop_not_bypassable: true
+
+consumers:
+- sessions KiloCode/GeriCode (ouverture et cloture de PRD-MOC)
+- gate balise moc-close (fan-out §5)
+- MC7 (fraicheur registre windows <= 1 cycle)

@@ -285,10 +285,12 @@ OK semantic_loops: No cycles detected
 | PLIX | Codec, path-registry, inference engine | `L2-PLATFORM/PLIX/` |
 | ARGUS | Meta-coherence, orphan detection, .LIMBO transit, scanners | `L1-INFRA/ARGUS/` |
 | WAZAA | Bus multi-transport + reseau social entites (realms, presence, inbox) | `L4-TOOLS/WAZAA/` |
+| GOVERNANCE-HUB | GEN-014 STENTOR : gate moc-close -RequireOperational, ide_open, registre fenetres (design `ide-window-lifecycle`) | `L0-CANON/GOVERNANCE-HUB/scripts/balise.ps1` |
 
 ### Bridges implémentés
 
 - **unified-design -> GOVERNANCE-HUB** : ADR-013, ATOM governance
+- **unified-design -> GOVERNANCE-HUB (STENTOR)** : designs/ide-window-lifecycle.yaml -> balise.ps1 (moc-close/ide-open/fanout), RUNTIME/editor_products.yaml
 - **unified-design -> REPO-STANDARDS** : META-DESIGN.md macro <-> micro cohérence
 - **REPO-STANDARDS -> unified-design** : CROSSLINKS/bridges.yaml, N1 logical layer
 - **REPO-STANDARDS -> MOX** : PRD-MOC template, ATOM-052/053 validation

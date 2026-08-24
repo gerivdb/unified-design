@@ -1038,3 +1038,9 @@ atoms:
   description: 'WAZAA bus + reseau social des entites : trois transports (in-process / fichier cross-process realms kilo|act / daemon optionnel), presence HELLO-BYE, identite holographique, session context bridge. Couche duale L3 citoyen + fonction N4. SHADOW 3 chemins documente pour audit.'
   depends_on:
   - multi-repo-fundamental
+- path: designs/ide-window-lifecycle.yaml
+  hash: pending-hash-on-commit
+  description: 'GEN-014 STENTOR : fenetre litterale suit la fenetre gouvernee. ide_open deterministe (registre produits, pin folder, preuve titre OS), inventaire opt-in double source extension|os-probe, gate moc-close -RequireOperational (suite<24h, scheduler<26h, freshness CONVERGED, non contournable), fan-out close-tabs + sondes residuelles + digest essaim, registre .swarm/windows runtime-only.'
+  depends_on:
+  - wazaa-social-bus
+  - balise-identity-freshness
