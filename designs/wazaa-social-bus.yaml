@@ -72,7 +72,17 @@ consistency_models:
 violations_documented:
 - type: SHADOW_PATHS
   detail: "trois arborescences wazaa detectees : L4-TOOLS/WAZAA (canonique SOT), L1-INFRA/ECOS-CLI/WAZAA, L1-INFRA/FLUENCE/wazaa"
-  action: audit HITL requis (clone-governance / scan_strates) - non resolu ici
+  audit_2026_08_24:
+    L4_TOOLS_WAZAA:
+      verdict: CANONIQUE
+      action: "entree SOT active ajoutee (MR6 corrige) ; succession BUZZ-X documentee"
+    ECOS_CLI_WAZAA:
+      verdict: OVERLAY_MIGRE
+      action: "implementation Phase-1 PRD-WAZAA-1266 adoptee vers canonical overlays/ecos-cli/ ; copies hotes supprimees ; import verifie OK ; gap-1266 annote migration"
+    FLUENCE_wazaa:
+      verdict: INTEGRATION_LEGITIME
+      action: "aucune - paquet metier FLUENCE (co_abductive_halo, insight_button, l5_trust_gate) importe par 5 fichiers hôtes ; zero overlap avec le bus canonique"
+    journal: "[CLONE_AUDIT] canonique=L4-TOOLS/WAZAA diffs=MIGRE|LEGITIME actions=migration+retrait+SOT-fix"
 
 related_but_distinct:
   mox-meta-coherence: coherence DOCUMENTS (MOX) - WAZAA transporte, MOX valide
