@@ -1,0 +1,18 @@
+# CATALOG_SCHEMA.yaml - Contrat commun des index miroirs (PRD-MOC-GEN-014 DESIGN-B)
+# Regénéré par les scanners ; édition manuelle = HAND_EDIT_DETECTED.
+version: "1.0"
+entry:
+  required: [type, id, source_repo, source_path, status, updated]
+  optional: [intent_hash]
+  types: [design, adr, skill, citizen, primitive]
+  status_vocabulary: "hérité du canal source (actif/archivé/proposé/draft/...)"
+rules:
+  - id unique par canal ; type+id unique globalement
+  - source_repo + source_path doivent résoudre vers un fichier existant au scan
+  - index régénéré uniquement par catalog_sync_scanner (jamais édité à la main)
+channels:
+  designs:    {source: "unified-design/designs/**",            owner: unified-design}
+  adrs:       {source: "GOVERNANCE-HUB/ADR/*.md",              owner: GOVERNANCE-HUB}
+  skills:     {source: "SKILL.md découverts sous racines déclarées", owner: hôtes multiples}
+  citizens:   {source: "citizen_registration.json + citizens.yaml",  owner: BDCP-CORE (post-ARB-2)}
+  primitives: {source: "ONTOLOGY/primitives/**",               owner: ONTOLOGY}
