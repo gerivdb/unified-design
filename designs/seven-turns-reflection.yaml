@@ -1,0 +1,35 @@
+name: seven-turns-reflection
+description: >-
+  Méta-design super-amont : "tourne ta langue 7 fois dans ta bouche avant de
+  parler". Formalise la réflexion préalable comme PHASE OBLIGATOIRE de tout
+  acte de design, nommage ou introduction de concept. Né de l'épisode
+  CJ-008/bus-yaml : deux concepts distincts ont partagé le même mot parce que
+  personne n'avait consulté ONTOLOGY avant de nommer. Chaque "tour" est une
+  question bloquante posée AVANT l'acte, pas après.
+version: 1.0.0
+status: active
+inherits:
+- incremental-growth
+- capability-awareness
+parameters:
+  turns: 7
+  enforcement: blocking
+  gate_implementation: gerivdb/KG-L@kilocode/semantics/naming_gate.py
+  consult_targets:
+    - ONTOLOGY.yaml#concepts
+    - known_repositories.yaml
+    - canaux WAZAA déclarés (MEMORY_CHANNELS + wazaa-channels.yaml par repo)
+    - modules/fichiers existants du repo porteur
+constraints:
+- 'Tour 1 EXISTENCE : le nom existe-t-il déjà (ontologie, registres, disque) ? Consultation OBLIGATOIRE avant création.'
+- 'Tour 2 COLLISION : est-il à distance lexicale dangereuse dun terme vivant (ex. bus.yaml vs BusCore) ?'
+- 'Tour 3 REGISTRE : dans quel registre sémantique vit-il (technique/ethique/systemique) — déclaré, pas sous-entendu.'
+- 'Tour 4 AMBIGUITÉ FUTURE : pourra-t-il être confondu demain avec un concept voisin non encore né ?'
+- 'Tour 5 ALTERNATIVES : quelles options considérées, pourquoi rejetées — consigné, pas oublié.'
+- 'Tour 6 RÉVERSIBILITÉ : si je me trompe, combien coûte le retour arrière ?'
+- 'Tour 7 SILENCE : ai-je vraiment besoin de nommer MAINTENANT ? Ne pas nommer est une réponse valide.'
+performance:
+  latency_p99: 500.0
+  power_max: 1.0
+intent_hash: 0xseven_turns_reflection_20260824
+layer: L0
