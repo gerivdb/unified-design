@@ -109,3 +109,13 @@ Créer dans `unified-design` les 13 designs listés au MOC §11 (7 fonctionnels 
 - PRD-MOC-GEN-011 v2.2 (parent, toutes sections 11.x détaillées)
 - artifact-structure-standard.md (REPO-STANDARDS, placement/numérotation)
 - designs/moc-governance.yaml, prd-moc-progress-sync.yaml (patterns hérités)
+
+---
+
+## Phases & preuves d'exécution (clôture 2026-08-24)
+
+> Ajouté par l'audit de clôture GEN-011 : les livrables étaient produits mais non prouvés (réserve SUBALTERN_UNPROVEN du cascade_integrity_scanner).
+
+- [x] **Phase A/B — 13 designs + ATOM-053 + registre + META** : vérification machine Test-Path → 13/13 designs OK, ATOM-053 présent, atoms_registry.yaml et META-DESIGN.md présents.
+- [x] **Scan de couverture ARGUS** : design_coverage_scanner.py → **designs=76, H=0.9218, 0 DESIGN_GHOST / 0 DESIGN_GAP / 0 COLLISION** (57 DESIGN_ORPHAN INFO = chantier bridges résiduel tracé). Rapport JSON : ARGUS/reports/DESIGN_COVERAGE_20260824T003023Z.json.
+- [x] **Intégrité cascade** : cascade_integrity_scanner.py --moc GEN-011 → ce fichier passe de SUBALTERN_UNPROVEN à prouvé (présente section).
