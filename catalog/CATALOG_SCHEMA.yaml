@@ -16,3 +16,14 @@ channels:
   skills:     {source: "SKILL.md découverts sous racines déclarées", owner: hôtes multiples}
   citizens:   {source: "citizen_registration.json + citizens.yaml",  owner: BDCP-CORE (post-ARB-2)}
   primitives: {source: "ONTOLOGY/primitives/**",               owner: ONTOLOGY}
+
+# --- Enveloppe v1 (PRD-MOC-GEN-015 DESIGN-A) : contrat des événements tc.* ---
+envelope:
+  version: "1.0"
+  required: [chain_id, stage, art_type, art_id, source_repo, source_path, status, ts, grade]
+  stages: [vibe, intent, moc, prd, adr, epic, issue, impense]
+  grades: [D0, D1, D2, D3, D4]
+  rules:
+    - "champs additionnels namespacés par type ; SCHEMA_VIOLATION sinon"
+    - "un événement = une TRANSITION d'état (pas de heartbeat)"
+    - "aucun contenu libre de conversation dans l'enveloppe (métadonnées uniquement)"
