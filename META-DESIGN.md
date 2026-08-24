@@ -246,6 +246,7 @@ OK semantic_loops: No cycles detected
 | RECOVERY_TOOLING | Pattern | Recovery SQLite securisee (copie travail, integrite, vacuum) | L0 |
 | GGUF_PROBE_RETENTION | Pattern | Binaires lourds hors git, probes metadata, e2e kbin | L4 |
 | KG35_MIGRATION | Pattern | Migration documents inter-repos avec HITL gate et SOT update | L4 |
+| WAZAA_SOCIAL_BUS | Design | Bus 3 transports + reseau social des entites (realms kilo/act, presence, inbox) | L3-fct N4 |
 
 ---
 
@@ -283,6 +284,7 @@ OK semantic_loops: No cycles detected
 | NEXUS | Mega-SOT, registre des registres, N4 governance | `L1-INFRA/NEXUS/` |
 | PLIX | Codec, path-registry, inference engine | `L2-PLATFORM/PLIX/` |
 | ARGUS | Meta-coherence, orphan detection, .LIMBO transit, scanners | `L1-INFRA/ARGUS/` |
+| WAZAA | Bus multi-transport + reseau social entites (realms, presence, inbox) | `L4-TOOLS/WAZAA/` |
 
 ### Bridges implémentés
 

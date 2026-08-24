@@ -1033,3 +1033,8 @@ atoms:
   depends_on:
   - clone-governance
   - thought-commit-pipeline
+- path: designs/wazaa-social-bus.yaml
+  hash: pending-hash-on-commit
+  description: 'WAZAA bus + reseau social des entites : trois transports (in-process / fichier cross-process realms kilo|act / daemon optionnel), presence HELLO-BYE, identite holographique, session context bridge. Couche duale L3 citoyen + fonction N4. SHADOW 3 chemins documente pour audit.'
+  depends_on:
+  - multi-repo-fundamental

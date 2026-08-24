@@ -1,0 +1,86 @@
+name: wazaa-social-bus
+description: "WAZAA est le bus ET le reseau social de toutes les entites de l'ecosysteme (sessions KiloCode, agents GeriCode/ACT, citizens, bots). Bus : trois transports complementaires. Social : identites realm-namespaced, presence HELLO/BYE, inbox adressage, graph citoyens."
+version: 1.0.0
+status: active
+layer: L3_EMERGENCE-fonction-N4
+intent_hash: 0xDESIGN_WAZAA_SOCIAL_BUS_20260824
+inherits:
+- multi-repo-fundamental
+depends_on: []
+bridges:
+- target: GOVERNANCE-HUB
+  role: lease_consumer_swarm_protocol
+  protocol: python-import
+  path: scripts/balise.ps1
+- target: ARGUS
+  role: surveillance_mc7
+  protocol: yaml-read
+  path: rules/balise_freshness.yaml
+- target: GeriCode
+  role: realm_act_origin
+  protocol: markdown-link
+- target: PRD-MOC-GEN-013
+  role: swarm_lease_consumer
+  protocol: yaml-inherit
+
+layer_resolution_note: >
+  Nature duale declaree : citoyen L3_EMERGENCE (.swarm/node.yaml) portant une
+  fonction de coordination N4 (SOT : meta-orchestrateur cross-repo).
+  La couche N4 decrit CE QUE fait WAZAA (coordonner), L3 decrit CE QU'IL EST
+  (citoyen). Pas de collision : deux axes distincts.
+
+bus_transports:
+  in_process:
+    implementation: src/bus/wazaabus.py (WazaaBusCore, asyncio queues, topics+patterms)
+    scope: un seul processus
+  file_cross_process:
+    implementation: src/bus/session_inbox.py + scripts/wazaa_inbox.py
+    scope: entre sessions/processus ; .swarm/inbox/<dest>/MSG-*.json atomique
+    realms: {kilo: KiloCode, act: "GeriCode/ACT"}   # grammaire <realm>-<actor>-<hex6>
+    convention_messages: docs/protocols/swarm-messages.yaml (HELLO/BYE/REQUEST/GRANT)
+  daemon_optional:
+    implementation: scripts/busrunner.py (NSSM, health port, EMIT bridge, AnamorphicPipeline)
+    status: optionnel, non requis pour le MVP cross-process
+
+social_network:
+  identity: .swarm/node.yaml (carte holographique du noeud)
+  members:
+    - sessions KiloCode (realm kilo)
+    - agents GeriCode/ACT (realm act, separation progressive)
+    - citizens/ (ex LLUX) et bots/ - entites longues durees
+  presence: swarm.hello au boot / swarm.bye au closeout (PRD-MOC-GEN-013)
+  state_transfer: src/citizens/session_bridge_citizen.py -> data/session_store.yaml (TTL 7j)
+  predecesseur: Buzz (designs/buzz-persistent-state.yaml)
+
+capabilities:
+- name: publish_subscribe
+  parameters: {topics: "wildcards supportes", backend: InProcessBackend}
+- name: cross_process_inbox
+  parameters: {atomicite: tmp+rename, ack_cycle: "UNREAD->READ->ack(suppression)"}
+- name: realm_namespacing
+  parameters: {validation_transport: true, filtre_list: "--realm"}
+- name: session_context_bridge
+  parameters: {store: data/session_store.yaml, ttl_days: 7}
+- name: swarm_coordination
+  consumer: PRD-MOC-GEN-013 (baux BALISE announces via bus)
+
+consistency_models:
+  in_process: strict (memoire partagee)
+  file_inbox: eventual garanti (fichiers atomiques, jamais perdus)
+  daemon_bridge: best-effort (optionnel)
+
+violations_documented:
+- type: SHADOW_PATHS
+  detail: "trois arborescences wazaa detectees : L4-TOOLS/WAZAA (canonique SOT), L1-INFRA/ECOS-CLI/WAZAA, L1-INFRA/FLUENCE/wazaa"
+  action: audit HITL requis (clone-governance / scan_strates) - non resolu ici
+
+related_but_distinct:
+  mox-meta-coherence: coherence DOCUMENTS (MOX) - WAZAA transporte, MOX valide
+  clone-governance: unicite des depots - le SHADOW ci-dessus releve de lui
+
+enforcement:
+- self_test: python src/bus/session_inbox.py (round-trip send/list/read/ack + realms)
+- ghost_guard: design reference par atoms_registry (entree ajoutee 2026-08-24)
+- consumers_tests: test_swarm_hello_roundtrip (suite BALISE GOVERNANCE-HUB 15/15)
+
+intent_hash_note: adosse PF2 - verificateurs cites, proprietaire citizen WAZAA L3 / norme N4 GOVERNANCE-HUB
