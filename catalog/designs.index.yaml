@@ -561,3 +561,9 @@ entries:
     source_path: "designs/clone-dedup-rescue.yaml"
     status: "active"
     updated: "2026-08-25"
+  - type: design
+    id: "contract-centrality"
+    source_repo: "unified-design"
+    source_path: "designs/contract-centrality.yaml"
+    status: "active"
+    updated: "2026-08-25"

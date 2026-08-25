@@ -1,0 +1,124 @@
+name: contract-centrality
+description: "Principe structurel de centralite des contrats : tout contrat implicite eparpille (canaux WAZAA, chemins locaux, remotes, formats payload, edge-kinds...) doit monter une echelle de centralite incrementale C0-C5. Les canaux WAZAA ne sont qu'une consequence ; le besoin structurel est la centralite declaree des contrats de frontiere entre entites paralleles."
+version: 1.0.0
+status: active
+layer: L0
+date: "2026-08-25"
+intent_hash: 0xDESIGN_CONTRACT_CENTRALITY_20260825
+source_repo: unified-design
+source_path: "designs\\contract-centrality.yaml"
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+  - artifact-ownership-routing
+bridges:
+  - target: KG-L
+    role: discernement_outil
+    protocol: python-script
+    implementation: "KG-L/scripts/contract_centrality_eval.py"
+  - target: WAZAA
+    role: premiere_application
+    protocol: registry-file
+
+problem: |
+  Les entites paralleles de l'ecosysteme (repos, sessions, citoyens) coopèrent
+  via des CONTRATS DE FRONTIERE : topics de bus, chemins canoniques, URLs
+  remotes, formats de payload, kinds d'aretes, noms d'evenements. Ces contrats
+  naissent implicites (dans le code, dans une tete), se documentent localement,
+  divergent, et produisent les pathologies meta-coherence : fantomes, collisions,
+  drifts, orphelins d'ecoute. Le cas WAZAA channels n'est qu'une instance :
+  le besoin est structurel.
+
+discernement_structurel:
+  vertical_vs_horizontal: >
+    La PARALLELISATION est horizontale : branches independantes qui avancent
+    sans couplage. L'ORCHESTRATION coordonne l'horizontal au moment T.
+    La STRUCTURATION est verticale : elle decide QUI PORTE QUOI a QUEL NIVEAU
+    (strate) et comment les niveaux s'emboitent. Le design fractal
+    (fractal-engineering-strata) releve de cette structuration verticale :
+    auto-similarite du pattern a travers les strates.
+  role_des_contrats: >
+    Un contrat de frontiere est un POINT DE COUPLAGE VERTICAL entre strates.
+    Sans centralite, chaque branche parallele reinvente son contrat -> divergence
+    exponentielle. Avec centralite fractale, LE MEME PATTERN de registre se
+    decline par famille de contrat : un seul mecanisme (SOT -> validation ->
+    projection -> gate) applique auto-similairement a chaque type de frontiere.
+  kg_l_role: >
+    KG-L est l'instrument de DISCERNEMENT : il mesure le niveau de centralite
+    reel de chaque famille (contract_centrality_eval.py), alimente le watchdog
+    metacoherence, et rend visible l'ecart entre centralite souhaitee et reelle.
+
+centralite_scale:
+  C0_IMPLICITE:
+    definition: "Contrat vivant uniquement dans le code ou la tete d'un agent."
+    risk: CRITICAL
+    example: "topics WAZAA crees dynamiquement, convention en commentaire."
+  C1_DOCUMENTE:
+    definition: "Ecrit quelque part, mais local, sans valeur canonique ni lecteur."
+    risk: HIGH
+    example: "wazaa-channels.yaml isole d'un seul repo."
+  C2_REGISTRE:
+    definition: "SOT centrale declarative unique, propriete clairement assignee."
+    risk: MEDIUM
+    example: "known_repositories.yaml ; ONTOLOGY.yaml ; futur channels.index.yaml."
+  C3_VALIDATE:
+    definition: "Le registre est CONSOMME par le code (validation soft ou duree a l'usage)."
+    risk: LOW
+    example: "edge_kind_registry.py KG-L ; clone-guard lisant la SOT."
+  C4_PROJETE:
+    definition: "Vue graphe derivee du registre + faits observes ; surveillance watchdog continue."
+    risk: INFO
+    example: "ecosystem_kg_view.py ; channel_kg_view.py (a venir)."
+  C5_CONTRACTUEL:
+    definition: "Violation bloquante (gate pre-commit/pre-publish). Le contrat est loi."
+    risk: NONE
+    example: "GF-15 sur designs ; hitl-clone-gate sur SOT."
+
+contract_families:
+  - family: wazaa-topics
+    frontier: "bus semantique inter-repos"
+    current_level_estimate: C1
+    target_level: C4
+    sot_owner: WAZAA/channels/channels.index.yaml
+  - family: repo-local-paths
+    frontier: "disque <-> identite GitHub"
+    current_level_estimate: C3
+    target_level: C5
+    sot_owner: GOVERNANCE-HUB/known_repositories.yaml
+  - family: git-remotes-url
+    frontier: "clone local <-> remote"
+    current_level_estimate: C1
+    target_level: C3
+    sot_owner: GOVERNANCE-HUB/known_repositories.yaml (full_name/url)
+  - family: payload-format-semantic-events
+    frontier: "emetteur <-> consommateur d'evenements"
+    current_level_estimate: C1
+    target_level: C3
+    sot_owner: WAZAA/schemas (a creer)
+  - family: kg-edge-kinds
+    frontier: "graphe causal KG-L"
+    current_level_estimate: C3
+    target_level: C5
+    sot_owner: KG-L/src/runtime/edge_kind_registry.py
+  - family: designs-catalog
+    frontier: "designs L0 <-> implementations"
+    current_level_estimate: C4
+    target_level: C5
+    sot_owner: unified-design/catalog/designs.index.yaml + GF-15
+  - family: ontology-terms
+    frontier: "langage commun ecosysteme"
+    current_level_estimate: C2
+    target_level: C4
+    sot_owner: ONTOLOGY/ONTOLOGY.yaml
+
+incremental_protocol:
+  step_1_discerner: "contract_centrality_eval.py mesure le niveau reel de chaque famille."
+  step_2_prioriser: "Monter d'abord les familles dont le risque courant est CRITICAL/HIGH."
+  step_3_un_pattern: "Appliquer le meme pattern fractal : SOT -> validation soft -> projection KG -> gate."
+  step_4_surveiller: "coherence_watchdog surveille chaque nouveau registre des sa creation."
+
+consumers:
+  - KG-L scripts/contract_centrality_eval.py
+  - coherence_watchdog.py (nouveaux registres)
+  - WAZAA channels governance (premiere application)
+  - GOVERNANCE-HUB meta-coherence enforcement
