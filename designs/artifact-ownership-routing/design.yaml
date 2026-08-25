@@ -1,5 +1,5 @@
 name: artifact-ownership-routing
-description: Logique de routage déductive : tout artifact est attribué au repo dédié qui en est le gestionnaire canonique. Si aucun repo dédié n'existe, créer l'artifact dans le repo porteur du périmètre métier concerné.
+description: Logique de routage déductive : tout artifact est attribué au repo dédié qui en est le gestionnaire canonique. Inclut un mapping sémantique complet par concept structurel (topologie, standards, gouvernance, gateway, bootstrap, runtime, memory, semantic-layer, bus, naming, citizen, registry).
 version: 1.0.0
 status: active
 profile: STANDARD

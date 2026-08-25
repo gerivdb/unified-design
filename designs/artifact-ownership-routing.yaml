@@ -226,6 +226,175 @@ artifact_types:
       événements formatés pour WAZAA, mais WAZAA en est le gestionnaire
       canonique.
 
+semantic_concept_mappings:
+  - concept: topology
+    owner_repo: TOPOS
+    owner_path: src/, registry/
+    layer: L1b
+    rationale: >
+      TOPOS est le registre canonique des lieux d'exécution (ENV0-5+).
+      Toute donnée de topologie, territoire, souveraineté, stack et
+      capacités y est centralisée.
+    forbidden_local_paths:
+      - "topology.yaml"
+      - "topology/"
+      - "topos/"
+    ambiguous_synonyms:
+      - topology
+      - registry-of-places
+      - execution-environments
+      - ENV registry
+
+  - concept: standards
+    owner_repo: REPO-STANDARDS
+    owner_path: standards/, conventions/, templates/
+    layer: L4_TOOLS
+    rationale: >
+      REPO-STANDARDS est le repo dédié aux standards, conventions,
+      templates et outils méta de l'écosystème. Toute norme partagée
+      y est définie une fois et référencée depuis les autres repos.
+    forbidden_local_paths:
+      - "standards/"
+      - "conventions/"
+      - "templates/"
+
+  - concept: governance
+    owner_repo: GOVERNANCE-HUB
+    owner_path: .kilocode/rules/, ADR/, REGISTERS/
+    layer: L0_CONSTITUTIONAL
+    rationale: >
+      GOVERNANCE-HUB est la SOT exécutable de la gouvernance.
+      Les règles KiloCode, les ADRs, les registres de gouvernance
+      et les procédures y sont centralisés.
+    ambiguous_synonyms:
+      - governance
+      - rules
+      - policy
+      - convention
+
+  - concept: gateway
+    owner_repo: GATEWAY-MANAGER
+    owner_path: src/, daemon/, config/
+    layer: L1_CAUSALITY
+    rationale: >
+      GATEWAY-MANAGER est hybride : proxy/reverse-proxy, BDCP, Clapet.
+      Il gère à la fois la couche réseau et la bascule BDCP/FREE.
+      Toute configuration de gateway, clapet ou proxy y réside.
+    notes: hybride-reseau-gouvernance
+
+  - concept: bootstrap
+    owner_repo: ECOS-CLI
+    owner_path: bin/, scripts/, bootstrap/
+    layer: L1_CAUSALITY
+    rationale: >
+      ECOS-CLI est l'orchestrateur local CLI, workflows EECS et
+      bootstrap de l'écosystème. Toute séquence de démarrage,
+      health-check et sync y est définie.
+    ambiguous_synonyms:
+      - bootstrap
+      - startup
+      - initialization
+      - boot-sequence
+
+  - concept: runtime
+    owner_repo: KIVA
+    owner_path: src/, agents/, scheduler/, WAL/
+    layer: L1_CAUSALITY
+    rationale: >
+      KIVA est l'infrastructure runtime, agents, scheduler, WAL.
+      Tout ce qui concerne l'exécution, la planification et le WAL
+      y est dédié.
+    ambiguous_synonyms:
+      - runtime
+      - scheduler
+      - agent
+      - WAL
+
+  - concept: memory
+    owner_repo: HERMES
+    owner_path: MEMORY.md, USER.md, Facts DB
+    layer: L0_CONSTITUTIONAL
+    rationale: >
+      HERMES est la SOT mémoire hierarchique. MEMORY.md, USER.md,
+      Skills et Facts DB y sont centralisés. TEAMLORE complète par
+      une couche lore-as-code versionnée.
+    ambiguous_synonyms:
+      - memory
+      - MEMORY.md
+      - facts
+      - Skills
+
+  - concept: semantic-layer
+    owner_repo: ONTOLOGY
+    owner_path: ontologies/, vocabularies/
+    layer: L1_CAUSALITY
+    rationale: >
+      ONTOLOGY est la SOT sémantique, dictionnaire canonique,
+      ontologies. Toute définition de terme ontologique y est
+      centralisée.
+    ambiguous_synonyms:
+      - ontology
+      - semantic
+      - dictionary
+      - vocabulary
+
+  - concept: bus
+    owner_repo: WAZAA
+    owner_path: src/, scripts/, protocols/
+    layer: L4_TOOLS
+    rationale: >
+      WAZAA est le bus et réseau social des entités. Toute
+      implémentation du protocole WAZAA, canaux, realms et
+      transports y réside. EMIT produit des événements formatés
+      pour WAZAA, mais WAZAA en est le gestionnaire canonique.
+    forbidden_local_paths:
+      - "bus/"
+      - "bus.yaml"
+    ambiguous_synonyms:
+      - bus
+      - event-bus
+      - message-bus
+      - wazaa
+
+  - concept: naming
+    owner_repo: REPO-STANDARDS
+    owner_path: standards/naming/, conventions/
+    layer: L4_TOOLS
+    rationale: >
+      REPO-STANDARDS définit les conventions de nommage, les
+      patterns de branche, les préfixes et la taxonomie.
+      Toute règle de nommage partagée y est centralisée.
+    ambiguous_synonyms:
+      - naming
+      - branch-naming
+      - taxonomy
+      - conventions
+
+  - concept: citizen
+    owner_repo: CITIZENS
+    owner_path: citizens.yaml
+    layer: L3_EMERGENCE
+    rationale: >
+      CITIZENS est le registre officiel des citizens L3 du
+      meta-cluster gerivdb.
+    ambiguous_synonyms:
+      - citizen
+      - agent
+      - persona
+
+  - concept: registry
+    owner_repo: NEXUS
+    owner_path: REGISTERS/
+    layer: L1_CAUSALITY
+    rationale: >
+      NEXUS est le Mega-SOT — registre des registres, gouvernance N4.
+      Tous les registres transverses y sont consolidés.
+    ambiguous_synonyms:
+      - registry
+      - register
+      - SOT
+      - index
+
 routing_algorithm:
   - step: 1
     action: identifier-le-type
