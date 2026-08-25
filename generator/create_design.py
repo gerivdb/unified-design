@@ -181,6 +181,65 @@ Thumbs.db
     return out_file
 
 
+def generate_kg_l_stub(design_name: str) -> Path | None:
+    """Gnre un stub d'enforcement automatique dans KG-L pour le design cr."""
+    try:
+        kg_l_root = Path(r"D:\DO\WEB\TOOLS\L4-TOOLS\KG-L")
+        enforcement_dir = kg_l_root / "kilocode" / "guards" / "design_enforcement"
+        enforcement_dir.mkdir(parents=True, exist_ok=True)
+        
+        stub_path = enforcement_dir / f"{design_name}.py"
+        if stub_path.exists():
+            return stub_path
+        
+        class_name = "".join(w.capitalize() for w in design_name.split("-"))
+        content = f'''"""Stub d'enforcement automatique pour le design '{design_name}'.
+
+Ce fichier est gnr automatiquement par create_design.py.
+Il DOIT tre remplac par une implmentation relle du design.
+
+Design source: unified-design/designs/{design_name}.yaml
+"""
+
+from __future__ import annotations
+
+from typing import Any, Dict
+
+from kilocode.guards.base import GuardContext, GuardResult
+
+
+class {class_name}Enforcer:
+    """Enforcer pour le design {design_name}."""
+
+    def __init__(self) -> None:
+        self.design_id = "{design_name}"
+        self.implemented = False  # Passer  True quand implment
+
+    def check(self, ctx: GuardContext) -> GuardResult:
+        """Vrifie que le design est respect."""
+        return GuardResult(
+            guard_id="GF-15-{design_name}",
+            passed=False,
+            severity="warning",
+            message=f"Design {design_name} : stub d'enforcement non remplac par une implmentation rale",
+            action="Implmenter le design dans kilocode/guards/design_enforcement/{design_name}.py",
+        )
+
+    def enforce(self, **kwargs: Any) -> Dict[str, Any]:
+        """Applique le design."""
+        return {{
+            "design_id": self.design_id,
+            "status": "stub",
+            "message": "Enforcement stub —  implmenter",
+        }}
+'''
+        stub_path.write_text(content, encoding="utf-8")
+        return stub_path
+    except Exception as e:
+        print(f"[WARN] Impossible de gnrer le stub KG-L: {e}")
+        return None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Gnre un nouveau design unifi")
     parser.add_argument("design_name", help="Nom du design  crer")
@@ -271,6 +330,11 @@ def main() -> int:
     print(f"     - {repo_file}")
     print(f"     - {ci_file}")
     print(f"     - {gitignore_file}")
+    
+    # Gnrer le stub d'enforcement KG-L automatiquement
+    kg_l_stub = generate_kg_l_stub(args.design_name)
+    if kg_l_stub:
+        print(f"   KG-L enforcement stub: {kg_l_stub}")
     
     return 0
 
