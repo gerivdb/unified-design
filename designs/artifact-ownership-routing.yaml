@@ -106,7 +106,7 @@ artifact_types:
       - kiva-pr-workflow
     forbidden_local_paths:
       - "*/skills/"
-      - "*.SKILL.md" hors SKILLS/skills/
+      - "*.SKILL.md hors SKILLS/skills/"
     rationale: >
       SKILLS est le gestionnaire dédié des skills KiloCode/ECOS. Son rôle
       explicite dans known_repositories.yaml est "Skills". L'index
@@ -123,7 +123,7 @@ artifact_types:
       - BDCP-CORE:citizen_registration.json
       - unified-design:citizens.yaml
     forbidden_local_paths:
-      - "citizens.yaml" hors CITIZENS/
+      - "citizens.yaml hors CITIZENS/"
     rationale: >
       CITIZENS est le registre officiel des citizens L3 du meta-cluster.
       Voir role "Registre des citizens L3 du meta-cluster gerivdb".
