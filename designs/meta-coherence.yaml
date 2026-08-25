@@ -50,6 +50,7 @@ pathologies:
 - {code: ORPHAN, severity: WARNING, definition: reference sans parent trace}
 - {code: SHADOW, severity: WARNING, definition: contrat implicite consomme}
 - {code: VOID, severity: INFO, definition: repo enregistre zero fichier integration}
+- {code: PHANTOM_PATH, severity: CRITICAL, definition: chemin cite par un document normatif inexistant au disque — detecte par KG-L/scripts/phantom_path_scanner.py (resolution SOT multi-strategies)}
 
 principles:
 - P0_CONSTITUTIONAL pour la coherence cross-repo
