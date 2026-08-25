@@ -1,0 +1,78 @@
+name: clone-dedup-rescue
+description: "Pipeline de deduplication des clones git locaux avec sauvetage par diff avant quarantaine, puis suppression. Garantie de non-perte : format-patch de tous les commits uniques + transfert des fichiers reels vers le canonique AVANT toute mise en quarantaine ; suppression finale jamais automatique."
+version: 1.0.0
+status: active
+layer: L0
+date: "2026-08-25"
+intent_hash: 0xDESIGN_CLONE_DEDUP_RESCUE_20260825
+source_repo: unified-design
+source_path: "designs\\clone-dedup-rescue.yaml"
+inherits:
+  - meta-coherence
+  - artifact-ownership-routing
+bridges:
+  - target: KG-L
+    role: operational_pipeline
+    protocol: python-script
+    implementation: "KG-L/scripts/clone_rescue_pipeline.py"
+    companion_tools:
+      - KG-L/scripts/clone_audit.py
+      - KG-L/scripts/meta_coherence_eval.py
+
+problem: |
+  Les sessions multi-agents creent des clones illegitimes ou des doublons
+  divergents (noms differents pour le meme remote, remotes mal nommes,
+  worktrees orphelins, checkouts casses). Le premier reflexe — supprimer —
+  a deja fait perdre du travail : un clone « propre » peut porter des commits
+  uniques non fusionnes, et « clean » ne signifie pas « fusionne ».
+
+principles:
+  - id: P_DIFF_FIRST
+    rule: "Tout doublon est DIFFE contre le canonique avant toute action."
+  - id: P_COMMITS_NOT_NAMES
+    rule: "L'unicite se prouve par ascendance (fetch local + log --not), jamais par nom de dossier ni statut clean."
+  - id: P_ALL_REMOTES
+    rule: "Lire TOUS les remotes (pas seulement origin) et ne jamais dedupliquer par nom entre strates."
+  - id: P_HIDDEN_FILES
+    rule: "Inventaires avec fichiers caches inclus (-Force / rglob complet)."
+  - id: P_TRANSFER_BEFORE_QUARANTINE
+    rule: "Fichiers uniques transferes (sans ecrasement) et commits sauvegardes en format-patch AVANT quarantaine."
+  - id: P_QUARANTINE_NOT_DELETE
+    rule: "Quarantaine reversible .LIMBO/quarantine/ + MANIFEST.md horodate. Suppression = decision HITL separee."
+
+pathologies_detected:
+  - {code: DUPLICATE_CLUSTER, definition: "plusieurs dossiers locaux partagent le meme remote"}
+  - {code: MISLABELED_CLONE, definition: "nom de dossier != remote reel (ex: HERMES pointant gerivdb/L2-PLATFORM)"}
+  - {code: GHOST_REPO, definition: "dossier git absent de la SOT known_repositories.yaml"}
+  - {code: BROKEN_CHECKOUT, definition: "fichiers 'M' au status mais absents du disque"}
+  - {code: NESTED_SCAFFOLD, definition: "arbres untracked vides imitant la structure strates"}
+
+pipeline_phases:
+  - phase: scan
+    output: "inventaire JSON + clusters multi-clones"
+  - phase: diff
+    steps: [ancestralite_fetch_local, tracked_mod_vs_canonical, untracked_reels]
+    verdicts: [PURGEABLE, SAUVETAGE_REQUIS]
+  - phase: transfer
+    rule: "copy-if-absent uniquement, journal des copies"
+  - phase: rescue
+    steps: [format-patch permanent, git am --3way sur branche rescue/*]
+    on_conflict: "patch preserve, am --abort, flag HITL"
+  - phase: quarantine
+    destination: ".LIMBO/quarantine/<batch>-<date>/ + MANIFEST.md"
+  - phase: report
+    output: "synthese de non-perte ([CLONE_LOSS_AUDIT] perte=AUCUNE)"
+
+proven_results:
+  date: "2026-08-25"
+  repos_scanned: 124
+  clusters_traites: 5
+  commits_sauves: 12
+  patches_permanents: 15
+  atom_recupere: "ATOM-065 RLM-243 -> unified-design/atoms"
+  perte_confirmee: AUCUNE
+
+consumers:
+  - KG-L scripts/meta_coherence_eval.py
+  - ECOS-CLI clone-guard
+  - GOVERNANCE-HUB governance rules (clone-causal-prevention)
