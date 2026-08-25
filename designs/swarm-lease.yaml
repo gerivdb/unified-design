@@ -1,0 +1,48 @@
+name: swarm-lease
+version: 1.0.0
+status: active
+layer: L0-L4
+intent_hash: 0xDESIGN_SWARM_LEASE_20260825
+inherits:
+- multi-repo-fundamental
+- moc-governance
+depends_on:
+- ATOM-243-kilo-act-contract
+- ATOM-258-friction-sensor
+bridges:
+- target: GOVERNANCE-HUB/SOT
+  role: registry_source
+  protocol: yaml-read
+- target: WAZAA/bus
+  role: message_bus
+  protocol: python-call
+axioms:
+- id: SL1
+  rule: L'unite d'exclusion est {repo x perimetre(-Paths)}, pas le workspace.
+- id: SL2
+  rule: Lecture toujours libre ; ecriture bailee (lock par bail).
+- id: SL3
+  rule: Premier bail horodate gagne ; perdant re-planifie ou negocie (swarm.grant).
+- id: SL4
+  rule: Bail expire (TTL) = territoire re-libre automatiquement (leases.jsonl).
+- id: SL5
+  rule: "Scope reserve (SOT GOVERNANCE-HUB) : un seul bail actif a la fois."
+operational_consequences:
+  preflight: balise lease list (JSON) avant toute mutation
+  identity: SID = <realm>-<actor>-<hex6> (realm ∈ {kilo, act})
+  announcement: HELLO _swarm avec baux actifs
+  closeout: release bail + bye + preserve dirty + retour main propre
+enforcement:
+- preflight_singleton: health check 127.0.0.1:<port>/health avec fingerprint build
+- fingerprint: /health expose build (YYYYMMDDTHHMMSSZ UTC)
+- session_id: grammaire <realm>-<workspace>-<hex6> obligatoire
+- lease_expiration: TTL dans RUNTIME/leases.jsonl (DateTime UTC normalize)
+constraints:
+- baux_actifs_max: 6 (agent-budget-check.md, RAM > 16 Go -> 6 sessions)
+- mode_bdcp: permanent (interdit POST /clapet/open sans ordre explicite)
+- read_free: lecture hors-bail autorisee sans restriction
+violations_documented:
+- case: mutation repo sans bail alors qu'autre session active dans essaim
+  correction: "swarm-lease.md SL3/SL5, balise lease take/release obligatoire"
+- case: session fermee sans closeout/release
+  correction: "swarm-lease.md SL4, TTL rattrape mais faute loggee"
