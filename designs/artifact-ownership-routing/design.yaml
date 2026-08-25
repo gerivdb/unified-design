@@ -1,0 +1,10 @@
+name: artifact-ownership-routing
+description: Logique de routage déductive : tout artifact est attribué au repo dédié qui en est le gestionnaire canonique. Si aucun repo dédié n'existe, créer l'artifact dans le repo porteur du périmètre métier concerné.
+version: 1.0.0
+status: active
+profile: STANDARD
+consumers:
+  - CTULU artifact routing
+  - KG-L semantic linker
+  - ECOS-CLI registry sync
+  - pattern-router artifact-type detection

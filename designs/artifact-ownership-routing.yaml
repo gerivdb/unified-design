@@ -1,0 +1,329 @@
+type: DESIGN
+version: 1.0.0
+status: proposed
+date: '2026-08-25'
+intent_hash: 0xDESIGN_ARTIFACT_OWNERSHIP_ROUTING_20260825
+layer: L0
+citizen: unified-design
+source_repo: gerivdb/unified-design
+source_path: designs/artifact-ownership-routing.yaml
+name: artifact-ownership-routing
+
+description: >
+  Logique de routage déductive : tout artifact de l'écosystème est attribué
+  au repo dédié qui en est le gestionnaire canonique. Si aucun repo dédié
+  n'existe, créer l'artifact dans le repo porteur du périmètre métier
+  concerné. Cette design rend explicite la règle sous-jacente qui fait du
+  repo SKILLS le gestionnaire des skills, de GOVERNANCE-HUB celui des ADR,
+  de unified-design celui des designs, etc.
+
+problem:
+  - code: ARTIFACT_DISPERSION
+    severity: CRITICAL
+    definition: >
+      Un même type d'artifact est dispersé dans plusieurs repos sans autorité
+      canonique identifiée. Exemple historique : les designs créés localement
+      dans KG-L/designs/ alors que unified-design en est le propriétaire L0.
+  - code: OWNERSHIP_AMBIGUITY
+    severity: WARNING
+    definition: >
+      Absence de règle formelle pour décider quel repo doit recevoir un nouvel
+      artifact. Les agents créent alors des doublons dans des repos non dédiés.
+
+principles:
+  - id: P1
+    name: single-canonical-owner
+    statement: >
+      Pour chaque type d'artifact (design, ADR, skill, citizen, registry, etc.),
+      il existe exactement un repo dédié qui en est le gestionnaire canonique.
+  - id: P2
+    name: routing-by-type
+    statement: >
+      Le type d'artifact détermine le repo cible. Le nom du fichier, le
+      contenu ou le contexte local ne sont pas des critères de routage.
+  - id: P3
+    name: catalog-as-truth
+    statement: >
+      Le catalogue unified-design/catalog/*.index.yaml est la source de vérité
+      du routage. Toute divergence entre le catalogue et la réalité est une
+      pathologie DESIGN_DRIFT.
+  - id: P4
+    name: do-not-create-locally
+    statement: >
+      Si un repo dédié existe pour un type d'artifact, il est interdit de
+      créer cet artifact dans un autre repo, sauf délégation explicite.
+  - id: P5
+    name: layer-compliance
+    statement: >
+      Le repo cible doit résider dans la strate L* conforme au type d'artifact
+      (L0 pour designs/ADRs canoniques, L1 pour governance, etc.).
+
+artifact_types:
+  - type: design
+    owner_repo: unified-design
+    owner_path: designs/
+    layer: L0
+    index: catalog/designs.index.yaml
+    examples:
+      - DAG-3-Design
+      - admg-dag3-hierarchy
+      - circuit-breaker-pattern
+      - wazaa-social-bus
+    forbidden_local_paths:
+      - "*/designs/"
+      - "*/design/"
+      - "meta-design/"
+    rationale: >
+      unified-design est le Meta-Design Atlas (MDU). Tous les méta-patterns,
+      architectures cibles et invariants architecturaux y sont centralisés.
+      Voir ADR-013 et ADR-015-unified-design-v2.
+
+  - type: adr
+    owner_repo: GOVERNANCE-HUB
+    owner_path: ADR/
+    layer: L0_CONSTITUTIONAL
+    index: catalog/adrs.index.yaml
+    examples:
+      - ADR-001-bdcp-principles-formels
+      - ADR-013-meta-design-validation-protocol
+      - ADR-069-unified-design-schema-validation-governance
+    forbidden_local_paths:
+      - "*/ADR/"
+      - "*/adr/"
+    rationale: >
+      GOVERNANCE-HUB est la SOT exécutable des décisions architecturales.
+      Toutes les ADRs y sont créées, votées et tracées. Voir role SOT execution.
+
+  - type: skill
+    owner_repo: SKILLS
+    owner_path: skills/
+    layer: L4_TOOLS
+    index: catalog/skills.index.yaml
+    examples:
+      - trix-build-compile
+      - governance-doc-writer
+      - frontmatter-guardian
+      - kiva-pr-workflow
+    forbidden_local_paths:
+      - "*/skills/"
+      - "*.SKILL.md" hors SKILLS/skills/
+    rationale: >
+      SKILLS est le gestionnaire dédié des skills KiloCode/ECOS. Son rôle
+      explicite dans known_repositories.yaml est "Skills". L'index
+      skills.index.yaml confirme que toutes les skills connues y sont
+      référencées, qu'elles soient stockées dans SKILLS, user-kilo ou
+      user-kilocode.
+
+  - type: citizen
+    owner_repo: CITIZENS
+    owner_path: citizens.yaml
+    layer: L3_EMERGENCE
+    index: catalog/citizens.index.yaml
+    examples:
+      - BDCP-CORE:citizen_registration.json
+      - unified-design:citizens.yaml
+    forbidden_local_paths:
+      - "citizens.yaml" hors CITIZENS/
+    rationale: >
+      CITIZENS est le registre officiel des citizens L3 du meta-cluster.
+      Voir role "Registre des citizens L3 du meta-cluster gerivdb".
+
+  - type: ontology
+    owner_repo: ONTOLOGY
+    owner_path: ontologies/
+    layer: L1_CAUSALITY
+    examples:
+      - psy_state_machine.yaml
+      - citizen_registry.json
+    forbidden_local_paths:
+      - "*/ontology/"
+      - "*/ontologies/"
+    rationale: >
+      ONTOLOGY est la SOT sémantique, dictionnaire canonique, ontologies.
+      Toute définition de terme ontologique y est centralisée.
+
+  - type: registry
+    owner_repo: NEXUS
+    owner_path: REGISTERS/
+    layer: L1_CAUSALITY
+    examples:
+      - SECONDARY_SOTS.md
+      - STRATUM_RELAYS.md
+    rationale: >
+      NEXUS est le Mega-SOT — registre des registres, gouvernance N4.
+      Tous les registres transverses y sont consolidés.
+
+  - type: governance-rule
+    owner_repo: GOVERNANCE-HUB
+    owner_path: .kilocode/rules/
+    layer: L0_CONSTITUTIONAL
+    examples:
+      - adr-governance-gate.md
+      - bdcp-kiva-workflow.md
+      - hitl-clone-gate.md
+    forbidden_local_paths:
+      - "*/.kilocode/rules/"
+    rationale: >
+      Les règles KiloCode sont des contraintes de gouvernance exécutables.
+      Elles résident dans GOVERNANCE-HUB, la SOT des règles.
+
+  - type: event-bus
+    owner_repo: WAZAA
+    owner_path: src/ ou scripts/
+    layer: L4_TOOLS
+    rationale: >
+      WAZAA est le bus et réseau social des entités. Toute implémentation
+      du protocole WAZAA y réside. EMIT peut produire des événements
+      formatés pour WAZAA, mais WAZAA en est le gestionnaire canonique.
+
+  - type: memory-layer
+    owner_repo: HERMES
+    owner_path: MEMORY.md, USER.md, Facts DB
+    layer: L0_CONSTITUTIONAL
+    rationale: >
+      HERMES est la SOT mémoire hierarchique. MEMORY.md, USER.md, Skills
+      et Facts DB y sont centralisés. TEAMLORE complète par une couche
+      lore-as-code versionnée.
+
+  - type: runtime-infrastructure
+    owner_repo: KIVA
+    owner_path: src/, agents/, scheduler/, WAL/
+    layer: L1_CAUSALITY
+    rationale: >
+      KIVA est l'infrastructure runtime, agents, scheduler, WAL. Tout ce
+      qui concerne l'exécution, la planification et le WAL y est dédié.
+
+  - type: validation-runner
+    owner_repo: KIX
+    owner_path: runners/, services/
+    layer: L2_PLATFORM
+    rationale: >
+      KIX est l'orchestrateur central du cycle de vie des runners RLM.
+      Il valide et orchestre tous les runners de validation.
+
+  - type: event-bus
+    owner_repo: WAZAA
+    owner_path: src/, scripts/
+    layer: L4_TOOLS
+    rationale: >
+      WAZAA est le bus et réseau social des entités. EMIT produit des
+      événements formatés pour WAZAA, mais WAZAA en est le gestionnaire
+      canonique.
+
+routing_algorithm:
+  - step: 1
+    action: identifier-le-type
+    description: >
+      Déterminer le type d'artifact à créer/modifier :
+      design, adr, skill, citizen, ontology, registry, etc.
+  - step: 2
+    action: consulter-le-catalogue
+    description: >
+      Lire unified-design/catalog/*.index.yaml pour trouver le repo
+      propriétaire du type identifié.
+  - step: 3
+    action: verifier-la-sot
+    description: >
+      Vérifier dans GOVERNANCE-HUB/known_repositories.yaml que le repo
+      propriétaire existe, est ACTIVE, et possède un local_path valide.
+  - step: 4
+    action: appliquer-le-rouage
+    description: >
+      Si le repo propriétaire existe :
+      - Créer/modifier l'artifact dans le repo propriétaire
+      - Respecter le owner_path défini dans cette design
+      - Mettre à jour l'index canonique si nécessaire
+      Si le repo propriétaire n'existe pas :
+      - STOP — demander HITL pour création de repo dédié
+  - step: 5
+    action: interdiction-des-locaux
+    description: >
+      Si forbidden_local_paths est défini, vérifier qu'aucun artifact
+      du même type n'existe dans un chemin interdit. Si oui, migrer
+      vers le repo propriétaire.
+
+exceptions:
+  - condition: delegated-storage
+    description: >
+      Un repo peut stocker un artifact d'un autre type si le repo propriétaire
+      y délègue explicitement. Exemple : user-kilo stocke des skills, mais
+      SKILLS reste le gestionnaire canonique référencé dans skills.index.yaml.
+    allowed_repos:
+      - user-kilo
+      - user-kilocode
+    constraint: l'artifact doit être référencé dans l'index canonique du repo propriétaire.
+
+  - condition: archive-stratum
+    description: >
+      Les repos L5-ARCHIVE peuvent contenir des artifacts de tout type,
+      mais ils ne sont jamais le gestionnaire canonique actif.
+    allowed_layers:
+      - L5-ARCHIVE
+
+  - condition: cross-repo-reference
+    description: >
+      Un repo peut référencer un artifact d'un autre type sans le posséder.
+      Exemple : KG-L référence des designs dans unified-design via bridges.
+    constraint: la référence doit être un lien, pas une copie.
+
+pathologies:
+  - code: ARTIFACT_DISPERSION
+    severity: CRITICAL
+    detection: >
+      Scan de l'écosystème : compter les occurrences d'un type d'artifact
+      hors du repo propriétaire. Si > 1 et pas d'exception, c'est une
+      dispersion.
+    remediation: migrer vers le repo propriétaire + mettre à jour les liens
+  - code: OWNERSHIP_AMBIGUITY
+    severity: WARNING
+    detection: >
+      Un artifact est créé dans un repo qui n'est pas le propriétaire et
+      n'a pas de délégation explicite.
+    remediation: déplacer vers le repo propriétaire + ajouter une référence
+  - code: DESIGN_DRIFT
+    severity: WARNING
+    detection: >
+      L'index canonique (catalog/*.index.yaml) ne correspond pas à la
+      réalité des fichiers présents dans le repo propriétaire.
+    remediation: régénérer l'index via catalog_sync_scanner
+  - code: FORBIDDEN_LOCAL_CREATION
+    severity: CRITICAL
+    detection: >
+      Un artifact est créé dans un chemin interdit par forbidden_local_paths.
+    remediation: supprimer la création locale + créer dans le repo propriétaire
+
+governance:
+  enforcement: full
+  hook: pre-commit
+  checks:
+    - forbidden-local-creation
+    - ownership-ambiguity
+    - catalog-sync
+  adr_refs:
+    - ADR-013-meta-design-validation-protocol
+    - ADR-015-unified-design-v2
+    - ADR-069-unified-design-schema-validation-governance
+
+bridges:
+  - target: GOVERNANCE-HUB
+    role: sot_cross_reference
+    protocol: yaml-read
+    path: known_repositories.yaml
+  - target: ARGUS
+    role: implementation
+    protocol: python-import
+    path: scanners/artifact_ownership_scanner.py
+  - target: SKILLS
+    role: implementation
+    protocol: python-import
+    path: skill_registry.py
+  - target: CTULU
+    role: propagation
+    protocol: python-import
+    path: artifact_propagator.py
+
+consumers:
+  - CTULU artifact routing
+  - KG-L semantic linker
+  - ECOS-CLI registry sync
+  - pattern-router artifact-type detection
