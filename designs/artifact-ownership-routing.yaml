@@ -201,6 +201,22 @@ artifact_types:
       KIX est l'orchestrateur central du cycle de vie des runners RLM.
       Il valide et orchestre tous les runners de validation.
 
+  - type: primitive
+    owner_repo: PRIMUS
+    owner_path: primitives/
+    layer: L4_TOOLS
+    examples:
+      - base-243 primitives
+      - triadic operators
+      - RVBA kernels
+    forbidden_local_paths:
+      - "*/primitives/"
+      - "primitive-*"
+    rationale: >
+      PRIMUS est le repo dédié aux primitives de base de l'écosystème.
+      Toute définition de primitive réutilisable (Base 243, opérateurs
+      ternaires, kernels RVBA) y est centralisée.
+
   - type: event-bus
     owner_repo: WAZAA
     owner_path: src/, scripts/
