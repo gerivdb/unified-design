@@ -1,0 +1,57 @@
+
+name: delivery-engine
+version: 1.0.0
+description: >
+  Abstraction mutualisée pour workflows de build/test/package/audit des repos L6-WORK.
+  Hôte : CTULU (L4-TOOLS). Invoqué par KIVA-CLI / ECOS-CLI.
+  Trace : KG-L edges L6_depends_on / delivery_engine_governs / invokes.
+status: active
+owner: gerivdb
+intent_hash: 0xDELIVERY_ENGINE_MUTUALISE_L6_20260826
+layer: L0
+inherits:
+  - incremental-growth
+  - script-file-over-inline
+  - graceful-degradation-fallback
+parameters:
+  max_workflow_phases: 4
+  default_workflow: [build, test, package, audit]
+  invocation_mode: declarative
+  runtime_dependency: false
+  l6_boundary_policy: ADR-2026-08-25-001
+constraints:
+  - 'Un repo L6 ne contient aucun outil de build/test/package ; il invoque delivery-engine'
+  - 'Le livrable final fonctionne hors écosystème (pas de dépendance runtime vers meta-cluster)'
+  - 'KIVA-CLI / ECOS-CLI sont points d\'entrée optionnels ; pas de modification du core'
+  - 'DAG-3 modélise le workflow ; CTULU implémente l\'exécution'
+  - 'KG-L enregistre ≥ 3 liens sémantiques L6 -> engine'
+  - 'unified-design valide le pattern MDU avant implémentation'
+performance:
+  latency_p99: 30.0
+  success_rate_target: 0.98
+mitigates:
+  - concept: l6-duplication-debt
+    evidence: 'LP premier repo L6 sans duplication de scripts de delivery'
+  - concept: delivery-engine-runtime-leak
+  - concept: dag-complexity-overhead
+origin: >
+  PRD-MOC-GEN-024 (2026-08-26) + INTENT-008. LP (Lukas Prestations) cas déclencheur :
+  premier repo L6-WORK nécessitant un workflow de delivery mutualisé.
+cross_references:
+  - repo: gerivdb/CTULU
+    relation: hosts
+  - repo: gerivdb/DAG-3
+    relation: models
+  - repo: gerivdb/KIVA-CLI
+    relation: invokes
+  - repo: gerivdb/ECOS-CLI
+    relation: invokes
+  - repo: gerivdb/KG-L
+    relation: traces
+  - repo: gerivdb/unified-design
+    relation: documents
+  - repo: gerivdb/REPO-STANDARDS
+    relation: governs
+  - adr: ADR-2026-08-25-001-L6-BOUNDARY-POLICY
+  - prd_moc: PRD-MOC-GEN-024-delivery-engine-mutualise-l6-2026-08-26
+  - intent: INTENT-008-delivery-engine-mutualise
