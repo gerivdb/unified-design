@@ -1,0 +1,55 @@
+
+name: atomic-fragmentation
+version: 1.0.0
+description: >
+  Décomposition atomique obligatoire pour tout LLM/SLM à capacité limitée.
+  Une tâche = une action = un outil = un résultat vérifiable.
+  Évite les dépassements de contexte, timeouts upstream, crashs silencieux.
+status: active
+owner: gerivdb
+intent_hash: 0xATOMIC_FRAGMENTATION_20260826
+layer: L0
+inherits:
+  - incremental-growth
+  - script-file-over-inline
+  - graceful-degradation-fallback
+parameters:
+  max_tokens_per_action: 4000
+  max_files_per_session: 3
+  max_minutes_per_commit: 30
+  atomic_unit: single_file_single_tool
+  native_tools_priority: [read, write, edit, glob, grep]
+  bash_max_lines: 3
+  task_agent_max_context_lines: 100
+  delegation_criterion: atomic_subproblem_only
+constraints:
+  - 'Une opération = un fichier ciblé, un outil natif (read/write/edit/glob/grep)'
+  - 'Jamais de scan récursif multi-repo en une commande'
+  - 'Jamais de regex Unicode complexes (utiliser emoji_cleaner.py)'
+  - 'Task agents uniquement pour sous-problèmes atomiques (1 fichier, 1 question)'
+  - 'Agent Manager : mode local par défaut, max 3 sessions simultanées (RAM 24 Go)'
+  - 'Commit atomique : max 3 fichiers, max 30 min entre commits'
+  - 'Pattern Router obligatoire avant toute action (table de routage A-E)'
+  - 'Preuve d\\'exécution horodatée pour tout [x] (clause GEN-012 DESIGN-E)'
+performance:
+  latency_p99: 45.0
+  success_rate_target: 0.99
+mitigates:
+  - concept: nemotron-upstream-idle-timeout
+    evidence: '3/3 PRD-MOC générés avec succès via fragmentation atomique (2026-08-26)'
+  - concept: token-blowout
+  - concept: compute-bound-inference
+  - concept: slm-context-overflow
+origin: >
+  Session 2026-08-26 LP PRD creation — 3 échecs Nemotron 504 upstream idle timeout
+  sur documents >10k tokens. Résolu par fragmentation atomique (Pattern A-E,
+  règle slm-fragmented-approach) : un PRD-MOC par appel write, séquentiel.
+  Preuve : PRD-MOC-LP-CORE, FACTURE-ELECTRONIQUE, PACKAGING créés avec succès.
+cross_references:
+  - rule: slm-fragmented-approach
+  - rule: slm-hardware-environment
+  - rule: git-atomic-commit
+  - rule: pattern-router
+  - concept: nemotron-upstream-idle-timeout
+  - concept: proof-of-life-gate
+

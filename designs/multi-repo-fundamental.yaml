@@ -42,6 +42,7 @@ enforcement:
 - sot_check: GATE-1 known_repositories avant toute creation/clone
 - ghost_detection: ARGUS filesystem_scan + registry_diff
 - bridge_declaration: BRIDGES.yaml obligatoire pour tout couplage MR3
+- swarm_lease: baux territoriaux (SID-hex) obligatoires avant mutation cross-repo (swarm.hello / swarm.grant / swarm.bye)
 
 violations_documented:
 - case: PIANO local_path SOT pointait REPO-STANDARDS/PIANO au lieu du clone reel

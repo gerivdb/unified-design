@@ -43,3 +43,4 @@ roles:
 ## Anti-pattern évité
 
 - **Nodding Loop** : l'agent s'approuve lui-même → interdit
+> **Requalification AXE-0 (GEN-009 P0, 2026-08-25)** : la contrainte de validation decrite ci-dessus correspond au niveau **A0 (HITL)** de l'echelle autonomy-ladder (ONTOLOGY/concepts/autonomy-ladder.md). Requalification additive — aucun texte modifie.

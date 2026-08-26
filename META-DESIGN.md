@@ -346,3 +346,7 @@ YAGNI inter-repos: pas de stockage preventif.
 
 Lecon ADR-028: un principe sans gate mecanique n'est pas suivi d'effet.
 RSR est verifie par check-prd-structure.ps1 (croisement artefacts x roles).
+
+- inter-repo-migration
+- limbo-governance
+- recovery-tooling-governance

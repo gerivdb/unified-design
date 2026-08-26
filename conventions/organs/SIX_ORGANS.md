@@ -73,3 +73,4 @@ Rôles MDU :
 - Les organes communiquent via des canaux standardisés
 - La mémoire est persistante et versionnée
 - Les sub-agents peuvent être remplacés sans rupture
+> **Requalification AXE-0 (GEN-009 P0, 2026-08-25)** : la contrainte de validation decrite ci-dessus correspond au niveau **A0 (HITL)** de l'echelle autonomy-ladder (ONTOLOGY/concepts/autonomy-ladder.md). Requalification additive — aucun texte modifie.

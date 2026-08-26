@@ -1,0 +1,51 @@
+name: approval-readiness
+version: 1.0.0
+status: active
+layer: L0-L4
+intent_hash: 0xDESIGN_APPROVAL_READINESS_20260825
+inherits:
+- moc-governance
+- swarm-lease
+depends_on:
+- ATOM-243-kilo-act-contract
+- ATOM-258-friction-sensor
+bridges:
+- target: GOVERNANCE-HUB/INTENTS
+  role: status_source
+  protocol: markdown-read
+- target: GOVERNANCE-HUB/ADR
+  role: backing_source
+  protocol: markdown-link
+axioms:
+- id: AR1
+  rule: Tout statut [x] d'un PRD-MOC exige une preuve d'execution horodatee (Proof-of-Life, GEN-012 6.5).
+- id: AR2
+  rule: Un PRD-MOC passe draft -> approved uniquement apres gate ontologique (strict) et gate readiness (A0-A3).
+- id: AR3
+  rule: Un [x] sans preuve est traite comme [ ] en revue (clause Proof-of-Life reflexive).
+- id: AR4
+  rule: Le pre-commit applique le mode LENIENT sur staged PRD-MOC/PRD/INTENT (Check 7) et STRICT au passage approved.
+operational_consequences:
+  grade_decision:
+    A0: auto_approved (politique permanente P1-P3, registry_sync_checker --triage)
+    A1: one_word_approval (HITL minimal, confirmation ecrite explicite)
+    A2: warning_disjoint_scopes (collision A1-A2, scopes disjoints toleres avec journal)
+    A3: journal_only (audit trail, pas de blocage)
+  readiness_check:
+    - script: scripts/approval_readiness.py
+    - mode: --grade A0|A1|A2|A3
+    - input: PRD-MOC + INTENT + ADR backing + preflight singleton + index consistency
+    - output: grade + preuves horodatees (commande + sortie collee)
+enforcement:
+- pre_commit_check: .githooks/pre-commit applique Check 7 (ontologie LENIENT) et Check 8/9 (structure/index)
+- strict_gate: passage approved exige --strict (exit 1 si terme ABSENT dans ONTOLOGY)
+- readiness_script: approval_readiness.py valide G2 readiness avant promotion proposed -> approved
+constraints:
+- pre_commit_hook: obligatoire sur GOVERNANCE-HUB, PIANO, MOX, GeriCode
+- proof_of_life: chaque [x] doit avoir annexe avec commande + sortie + horodatage
+- ontological_shift_left: verification avant draft->approved (python scripts/ontology_term_gate.py --strict)
+violations_documented:
+- case: statut [x] sans preuve
+  correction: "GEN-012 6.5 Proof-of-Life reflexive, traiter comme [ ]"
+- case: terme absente ONTOLOGY au passage approved
+  correction: "ADR-095 / scripts/ontology_term_gate.py --strict, exit 1"

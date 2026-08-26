@@ -75,3 +75,4 @@ def optimize_search(query: str) -> list[str]:
 - Signature numérique du code injecté
 - Test en isolation avant intégration
 - Revue par l'Avocat du Diable
+> **Requalification AXE-0 (GEN-009 P0, 2026-08-25)** : la contrainte de validation decrite ci-dessus correspond au niveau **A0 (HITL)** de l'echelle autonomy-ladder (ONTOLOGY/concepts/autonomy-ladder.md). Requalification additive — aucun texte modifie.

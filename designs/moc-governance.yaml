@@ -31,11 +31,22 @@ capabilities:
   parameters:
     max_concurrent_sessions: 3
     budget_check: true
+    budget_contract: timeout >= 3*p99_documented (probe-budget-contract.md)
     friction_sensor: true
+    approval_pipeline: A0(auto)/A1(one-word)/A2(warn+scope)/A3(journal) (approval_readiness.py)
+- name: approval_readiness
+  parameters:
+    grades:
+    - A0: auto_approved (policy P1-P3)
+    - A1: one_word_approval (HITL minimal)
+    - A2: warning_disjoint_scopes (collision A1-A2)
+    - A3: journal_only (audit trail)
+  script: scripts/approval_readiness.py
 components:
 - registry: governance_registry
 - gate: session_boot_gate
 - auditor: rss_lint_auditor
+- approval_readiness: A0-A3 grade pipeline
 constraints:
 - atomic_commits: true
 - max_files_per_commit: 3
