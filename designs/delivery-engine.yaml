@@ -22,8 +22,8 @@ parameters:
 constraints:
   - 'Un repo L6 ne contient aucun outil de build/test/package ; il invoque delivery-engine'
   - 'Le livrable final fonctionne hors écosystème (pas de dépendance runtime vers meta-cluster)'
-  - 'KIVA-CLI / ECOS-CLI sont points d\'entrée optionnels ; pas de modification du core'
-  - 'DAG-3 modélise le workflow ; CTULU implémente l\'exécution'
+  - 'KIVA-CLI / ECOS-CLI sont points d''entrée optionnels ; pas de modification du core'
+  - 'DAG-3 modélise le workflow ; CTULU implémente l''exécution'
   - 'KG-L enregistre ≥ 3 liens sémantiques L6 -> engine'
   - 'unified-design valide le pattern MDU avant implémentation'
 performance:

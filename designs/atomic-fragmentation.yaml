@@ -30,7 +30,7 @@ constraints:
   - 'Agent Manager : mode local par défaut, max 3 sessions simultanées (RAM 24 Go)'
   - 'Commit atomique : max 3 fichiers, max 30 min entre commits'
   - 'Pattern Router obligatoire avant toute action (table de routage A-E)'
-  - 'Preuve d\\'exécution horodatée pour tout [x] (clause GEN-012 DESIGN-E)'
+  - 'Preuve d''exécution horodatée pour tout [x] (clause GEN-012 DESIGN-E)'
 performance:
   latency_p99: 45.0
   success_rate_target: 0.99

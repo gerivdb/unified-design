@@ -22,7 +22,7 @@ parameters:
   singleton_preflight: true
 constraints:
   - 'Chaque nœud est une étape atomique invocable par CTULU delivery-engine'
-  - 'Aucun nœud ne dépend d\'un repo L6 spécifique (neutralité)'
+  - 'Aucun nœud ne dépend d''un repo L6 spécifique (neutralité)'
   - 'DAG-3 reste dans la strate L2-PLATFORM (pas de dépendance vers L3/L5)'
   - 'Adapter CTULU existe pour invoquer le workflow depuis DAG-3'
 performance:
