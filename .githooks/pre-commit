@@ -60,6 +60,27 @@ fi
 
 echo "[PRE-COMMIT] Checks passed."
 
+# --- Check 5: MDU Conformity (O6) ---
+# Vérifie que les nouveaux designs/atoms/citizens ont leurs entrées MDU
+REPO_ROOT=$(git rev-parse --show-toplevel)
+MDU_SCANNER="${REPO_ROOT}/scripts/design_coverage_scanner.py"
+
+if [ -f "${MDU_SCANNER}" ]; then
+    # Vérifier seulement si des fichiers MDU ont été modifiés
+    MDU_CHANGED=$(echo "${STAGED_FILES}" | grep -E "^(designs/|atoms/|citizens\.yaml$)" || true)
+    if [ -n "${MDU_CHANGED}" ]; then
+        echo "[PRE-COMMIT] Changements MDU détectés — validation design coverage..."
+        python "${MDU_SCANNER}" --strict --source discovery 2>/dev/null || {
+            echo ""
+            echo "[PRE-COMMIT BLOCK] MDU design coverage check failed."
+            echo "Run: python scripts/design_coverage_scanner.py --strict --source discovery"
+            echo "To bypass: git commit --no-verify (NOT RECOMMENDED)"
+            exit 1
+        }
+        echo "[PRE-COMMIT] MDU design coverage OK."
+    fi
+fi
+
 # --- Check 4: Encoding (CP1252 / Unicode) via pre-commit-encoding-check ---
 REPO_ROOT=$(git rev-parse --show-toplevel)
 ENCODING_HOOK="${REPO_ROOT}/.githooks/pre-commit-encoding-check"

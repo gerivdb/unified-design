@@ -61,3 +61,22 @@ if echo "${CHANGED}" | grep -qE "(requirements|package\.json|build\.zig|pyprojec
     echo "${CHANGED}" | grep -E "(requirements|package\.json|build\.zig|pyproject\.toml)"
     echo "Rebuild recommandé."
 fi
+
+# -- O3: Catalog Auto-Sync ------------------------------------------------------
+# Si designs/, atoms/, ou citizens.yaml ont changé → régénérer les catalogues
+if echo "${CHANGED}" | grep -qE "^(designs/|atoms/|citizens\.yaml$)"; then
+    echo ""
+    echo "[POST-MERGE] Changements détectés dans designs/atoms/citizens — catalog auto-sync..."
+    if [ -f "$REPO_ROOT/scripts/catalog_sync_scanner.py" ]; then
+        python "$REPO_ROOT/scripts/catalog_sync_scanner.py" --all || true
+        # Commit les changements de catalog si nécessaire
+        CATALOG_CHANGES=$(git -C "$REPO_ROOT" status --porcelain catalog/ 2>/dev/null | wc -l | tr -d ' ')
+        if [ "${CATALOG_CHANGES}" -gt 0 ]; then
+            echo "[POST-MERGE] Catalogue mis à jour — commit auto..."
+            git -C "$REPO_ROOT" add catalog/
+            git -C "$REPO_ROOT" commit -m "chore(catalog): auto-sync after design/atom/citizen changes" || true
+        fi
+    else
+        echo "[POST-MERGE WARN] catalog_sync_scanner.py absent — sync manuelle requise"
+    fi
+fi

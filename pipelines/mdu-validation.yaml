@@ -90,11 +90,31 @@ steps:
     on_fail: ABORT
     timeout_sec: 30
 
-  # -- 2. Loop Detection ------------------------------------------------------
+  # -- 2. Design Coverage Scan (O1) ---------------------------------------------
+  - id: design-coverage
+    name: "MDU - Design Coverage Scan (discovery)"
+    agent: Alfred
+    depends_on: [validate-yaml]
+    run: |
+      $PYTHON $MDU_ROOT/scripts/design_coverage_scanner.py --strict --source discovery
+    on_fail: ABORT
+    timeout_sec: 30
+
+  # -- 3. Compliance Report JSON (O1) -------------------------------------------
+  - id: compliance-report
+    name: "MDU - Compliance Report JSON"
+    agent: Alfred
+    depends_on: [design-coverage]
+    run: |
+      $PYTHON $MDU_ROOT/scripts/design_coverage_scanner.py --source discovery --report-json $REPORTS_DIR/mdu-compliance-$(date +%s).json
+    on_fail: WARN
+    timeout_sec: 30
+
+  # -- 4. Loop Detection --------------------------------------------------------
   - id: loop-detection
     name: "MDU - Detection de boucles"
     agent: Alfred
-    depends_on: [validate-yaml]
+    depends_on: [compliance-report]
     run: |
       $PYTHON $MDU_ROOT/loop_engine/check_loops.py \
         --path $MDU_ROOT \
