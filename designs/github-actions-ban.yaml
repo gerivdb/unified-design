@@ -1,0 +1,5 @@
+name: github-actions-ban
+version: "1.0.0"
+status: active
+profile: STANDARD
+description: Interdiction d'utiliser GitHub Actions ou tout autre service CI externe ; le CI doit être exécuté localement via KIVA/ECOS-CLI.
