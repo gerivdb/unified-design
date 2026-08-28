@@ -1,0 +1,12 @@
+name: compliance-scanner
+type: scanner
+version: "1.0.0"
+description: |
+  Detecte les manques de conformite MDU/RSS/ARGUS dans chaque repo.
+depends_on:
+  - unified-design
+  - argus
+  - repo-standards
+consumers:
+  - unified-design
+  - governance-hub

@@ -1665,3 +1665,33 @@ entries:
     source_path: "ADR/ADR-v3-003-phi-cps-threshold-policy.md"
     status: "unknown"
     updated: "2026-08-15"
+  - type: adr
+    id: "ADR-0001-ngram-feature-hashing"
+    source_repo: "RADX"
+    source_path: "ADR/ADR-0001-ngram-feature-hashing.md"
+    status: "accepted"
+    updated: "2026-08-28"
+  - type: adr
+    id: "ADR-0002-lvq-supervised-training"
+    source_repo: "RADX"
+    source_path: "ADR/ADR-0002-lvq-supervised-training.md"
+    status: "accepted"
+    updated: "2026-08-28"
+  - type: adr
+    id: "ADR-0003-ridge-regression-weights"
+    source_repo: "RADX"
+    source_path: "ADR/ADR-0003-ridge-regression-weights.md"
+    status: "accepted"
+    updated: "2026-08-28"
+  - type: adr
+    id: "ADR-0004-cosine-similarity-kernel"
+    source_repo: "RADX"
+    source_path: "ADR/ADR-0004-cosine-similarity-kernel.md"
+    status: "accepted"
+    updated: "2026-08-28"
+  - type: adr
+    id: "ADR-0005-wazaa-acp-integration"
+    source_repo: "RADX"
+    source_path: "ADR/ADR-0005-wazaa-acp-integration.md"
+    status: "accepted"
+    updated: "2026-08-28"

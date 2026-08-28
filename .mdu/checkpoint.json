@@ -1,35 +1,11 @@
 {
-  "timestamp": "2026-07-30T23:08:12+02:00",
-  "status": "frequency-engineering-completed",
-  "unified_design": {
-    "pr_29": "merged",
-    "pr_30": "merged",
-    "sha": "d14a888"
-  },
-  "fluence": {
-    "pr_189": "merged",
-    "pr_190": "merged",
-    "sha": "d4d568a13"
-  },
-  "governance_hub": {
-    "pr_156": "merged"
-  },
-  "artifacts": [
-    "ATOM-045-structural-relations",
-    "ATOM-047-frequency-engineering",
-    "ATOM-048-pre-action-validation",
-    "unified-design/meta-design.yaml",
-    "unified-design/atoms_registry.yaml",
-    "FLUENCE/piano/{time_machine.py,inference.py,__init__.py}",
-    "FLUENCE/plix/{cli.py,__init__.py}",
-    "FLUENCE/tests/test_piano.py",
-    "FLUENCE/docs/clusterwave.md"
-  ],
-  "validations": {
-    "meta_design_schema": "OK",
-    "inheritance_cycles": "OK",
-    "pytest": "10 passed",
-    "cli_wave": "OK",
-    "cli_validate": "OK"
-  }
+  "repo": "gerivdb/RADX",
+  "version": "1.0.0",
+  "mdu_version": "2.1.0",
+  "status": "compliant",
+  "designs": ["radx"],
+  "atoms": ["radx"],
+  "adrs": ["ADR-0001", "ADR-0002", "ADR-0003", "ADR-0004", "ADR-0005"],
+  "last_validated": "2026-08-28",
+  "validator": "gerivdb design validate"
 }

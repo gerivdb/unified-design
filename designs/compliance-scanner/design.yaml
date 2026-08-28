@@ -1,0 +1,22 @@
+name: compliance-scanner
+version: "1.0.0"
+status: proposed
+description: |
+  Scanner de conformite MDU/RSS/ARGUS pour tous les repos.
+  Detecte les manques : designs, atoms, citizens, ADRs, checkpoints.
+layer: L0
+capabilities:
+  - repo-audit
+    parameters:
+      checks:
+        - design_registered
+        - atom_registered
+        - citizen_registered
+        - adr_indexed
+        - mdu_checkpoint
+        - rss_compliant
+        - argus_clean
+dependencies:
+  - unified-design
+  - argus
+  - repo-standards

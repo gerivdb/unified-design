@@ -584,3 +584,27 @@ entries:
     source_path: "designs/wazaa-social-bus.yaml"
     status: "active"
     updated: "2026-08-27"
+  - type: design
+    id: "radx"
+    source_repo: "unified-design"
+    source_path: "designs/radx/design.yaml"
+    status: "active"
+    updated: "2026-08-28"
+  - type: design
+    id: "radx"
+    source_repo: "unified-design"
+    source_path: "designs/radx/radx.md"
+    status: "active"
+    updated: "2026-08-28"
+  - type: design
+    id: "compliance-scanner"
+    source_repo: "unified-design"
+    source_path: "designs/compliance-scanner/design.yaml"
+    status: "active"
+    updated: "2026-08-28"
+  - type: design
+    id: "compliance-scanner"
+    source_repo: "unified-design"
+    source_path: "designs/compliance-scanner/compliance-scanner.md"
+    status: "active"
+    updated: "2026-08-28"

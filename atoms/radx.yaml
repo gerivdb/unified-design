@@ -1,0 +1,14 @@
+name: radx
+type: runner
+version: "1.0.0"
+description: |
+  Runner L3 fast-path WAZAA. RBF 300 neurones, < 3 ms.
+depends_on:
+  - wazaa-social-bus
+  - llux
+  - plix
+  - larql-243
+  - ontology-l0
+consumers:
+  - wazaa-bus
+  - llux-fallback

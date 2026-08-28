@@ -1,0 +1,30 @@
+name: radx
+version: "1.0.0"
+status: active
+description: |
+  RADX (Radial Activation Distributed eXtreme) est le runner L3 fast-path
+  du bus WAZAA. Moteur RBF parallélisé 300 neurones, < 3 ms sur Dual Xeon E5620.
+parent: wazaa-social-bus
+layer: L3
+capabilities:
+  - latency-bound
+    parameters:
+      max_latency_ms: 3
+      p99_latency_ms: 2.9
+  - fast-path-rbf
+    parameters:
+      neurons: 300
+      dimensions: 512
+      kernel: cosine-similarity
+      threshold: 0.48
+  - wazaa-acp
+    parameters:
+      protocol: ACP
+      fallback: llux
+      timeout_ms: 5
+dependencies:
+  - wazaa-social-bus
+  - llux
+  - plix
+  - larql-243
+  - ontology-l0
