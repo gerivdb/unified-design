@@ -1,0 +1,17 @@
+---
+name: consciousness
+description: "État subjectif premier, non dérivé de la connaissance. Présence active antérieure à toute forme de connaissance. Distincte de awareness (connaissance présentielle) et de big_picture (reconfiguration topologique). Antérieure à la connaissance, pas une forme de connaissance. depends_on=[awareness] pour respecter la contrainte DAG sans circularité."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_CONSCIOUSNESS_20260828"
+inherits:
+  - awareness
+  - big-picture
+depends_on:
+  - awareness
+bridges:
+  - target: repo:BRAIN
+    role: provider
+    protocol: wazaa-channel
+    channel: L4-TOOLS/BRAIN/consciousness/state

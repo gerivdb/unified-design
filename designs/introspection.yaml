@@ -1,0 +1,16 @@
+---
+name: introspection
+description: "Exploration interne d'un système. Analyse des structures cognitives internes, des patterns de pensée, des biais. Modalité interne de l'exploration, complémentaire de l'extra-spection. depends_on=[exploration] pour respecter la contrainte DAG sans circularité."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_INTROSPECTION_20260828"
+inherits:
+  - exploration
+depends_on:
+  - exploration
+bridges:
+  - target: repo:KG-L
+    role: consumer
+    protocol: wazaa-channel
+    channel: L4-TOOLS/KG-L/introspection/patterns

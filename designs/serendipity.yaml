@@ -1,0 +1,19 @@
+---
+name: serendipity
+description: "Découverte heureuse et inattendue qui surgit lors d'une exploration. Liée à l'entropie du système : plus l'exploration est ouverte et diversifiée, plus la serendipity a de chances d'émerger. L'intelligence et la big_picture ne sont pas opposées à la serendipity : elles créent les conditions de son apparition. inherits=[] (racine phénoménologique ; intelligence dépend de serendipity via depends_on)."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_SERENDIPITY_20260828"
+inherits: []
+depends_on:
+  - entropy-search
+bridges:
+  - target: repo:KG-L
+    role: consumer
+    protocol: wazaa-channel
+    channel: L4-TOOLS/KG-L/serendipity/detected
+  - target: repo:WAZAA
+    role: provider
+    protocol: wazaa-channel
+    channel: L4-TOOLS/*/serendipity/*

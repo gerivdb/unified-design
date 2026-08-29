@@ -1,0 +1,22 @@
+---
+name: extra-spection
+description: "Exploration externe d'un système. Analyse des structures externes, des repos, des bus, des canaux WAZAA. Modalité externe de l'exploration, complémentaire de l'introspection. Terme forgé pour distinguer clairement de introspection. Prérequis pour meta-coherence : on ne peut pas avoir la vue d'ensemble sans explorer l'extérieur."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_EXTRA_SPECTION_20260828"
+inherits:
+  - exploration
+depends_on:
+  - meta-coherence
+  - topos
+bridges:
+  - target: repo:ARGUS
+    role: provider
+    protocol: python-import
+  - target: repo:CTULU
+    role: provider
+    protocol: tool-invocation
+    tools:
+      - anamorphoser
+      - functor-anything

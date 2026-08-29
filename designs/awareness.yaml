@@ -1,0 +1,19 @@
+---
+name: awareness
+description: "Connaissance de ce qui est présent. Mode de connaissance limité à l'observation immédiate. Savoir local et présentiel, pas une reconfiguration topologique. Plus étendue que consciousness (état subjectif), moins transformative que big_picture (acte transitif). inherits=[] (racine ; consciousness hérite de awareness, pas l'inverse)."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_AWARENESS_20260828"
+inherits: []
+depends_on:
+  - meta-coherence
+  - exploration
+bridges:
+  - target: repo:KG-L
+    role: consumer
+    protocol: wazaa-channel
+    channel: L4-TOOLS/KG-L/awareness/alerts
+  - target: repo:ONTOLOGY
+    role: provider
+    protocol: ontology-link

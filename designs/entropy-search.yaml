@@ -1,0 +1,16 @@
+---
+name: entropy-search
+description: "Méthode de recherche intelligente qui maintient un niveau d'entropie suffisant dans l'espace d'exploration pour permettre la serendipity. Pas une exploration aléatoire, mais une exploration structurée qui préserve la diversité des chemins. Appliquée à l'écosystème, cela signifie maintenir H dans [0.38, 0.90] et TM dans [0.15, 0.25]. inherits=[] (racine méthodologique). depends_on=[meta-coherence, viable-initial-state] uniquement (exploration → serendipity → entropy-search, pas de retour)."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_ENTROPY_SEARCH_20260828"
+inherits: []
+depends_on:
+  - meta-coherence
+  - viable-initial-state
+bridges:
+  - target: repo:KG-L
+    role: consumer
+    protocol: wazaa-channel
+    channel: L4-TOOLS/KG-L/entropy_search/loop

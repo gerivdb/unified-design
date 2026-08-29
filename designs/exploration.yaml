@@ -1,0 +1,21 @@
+---
+name: exploration
+description: "Mouvement actif vers l'inconnu. Comprend l'introspection (exploration interne) et l'extra-spection (exploration externe). Processus par lequel la big_picture se construit : on ne peut pas avoir la big_picture sans explorer, mais l'exploration sans big_picture est aveugle. inherits=[] (racine sémantique). depends_on=[serendipity] uniquement (entropy-search dépend de exploration, pas l'inverse)."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_EXPLORATION_20260828"
+inherits: []
+depends_on:
+  - serendipity
+bridges:
+  - target: repo:CTULU
+    role: provider
+    protocol: tool-invocation
+    tools:
+      - anamorphoser
+      - holograph-anything
+  - target: repo:IRIS
+    role: provider
+    protocol: wazaa-channel
+    channel: L4-TOOLS/IRIS/signals/*

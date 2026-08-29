@@ -1,0 +1,20 @@
+---
+name: topos
+description: "Structure topologique d'un système dans laquelle s'inscrivent les acteurs. Réaliser son topos, c'est prendre conscience de la forme d'engagement qui nous habite sans qu'on le sache. La big_picture est l'acte transitif qui réalise ce topos. Le topos n'est pas seulement spatial : il est sémantique, relationnel, temporel. depends_on=[exploration] uniquement (big-picture hérite de topos, pas l'inverse)."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_TOPOS_20260828"
+inherits:
+  - meta-coherence
+depends_on:
+  - exploration
+bridges:
+  - target: repo:TOPOS
+    role: provider
+    protocol: json-export
+    path: exports/topology.json
+  - target: repo:KG-L
+    role: consumer
+    protocol: wazaa-channel
+    channel: L4-TOOLS/TOPOS/topos/updated

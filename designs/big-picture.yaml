@@ -1,0 +1,21 @@
+---
+name: big-picture
+description: "Acte transitif de compréhension globale d'un système. Réaliser que l'on s'inscrivait dans un topos sans le savoir. Reconfiguration de la topologie de compréhension elle-même. Distincte de breakthrough (saut qualitatif local), consciousness (état subjectif premier) et awareness (connaissance présentielle). inherits=[meta-coherence] uniquement (topos dépend de big-picture via depends_on, pas d'héritage croisé)."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_BIG_PICTURE_20260828"
+inherits:
+  - meta-coherence
+depends_on:
+  - exploration
+  - intelligence
+bridges:
+  - target: repo:KG-L
+    role: consumer
+    protocol: wazaa-channel
+    channel: L4-TOOLS/KG-L/big_picture/aggregate
+  - target: repo:WAZAA
+    role: provider
+    protocol: wazaa-channel
+    channel: L4-TOOLS/BIG-PICTURE/signals/*

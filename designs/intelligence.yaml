@@ -1,0 +1,19 @@
+---
+name: intelligence
+description: "Capacité à résoudre des problèmes, à apprendre et à adapter son comportement. Liée à la big_picture : la compréhension globale du topos libère des possibilités d'action invisibles. L'intelligence sans big_picture est locale ; la big_picture sans intelligence est vide. inherits=[] (racine ; big-picture dépend de intelligence via depends_on, pas l'inverse)."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_INTELLIGENCE_20260828"
+inherits: []
+depends_on:
+  - serendipity
+  - entropy-search
+bridges:
+  - target: repo:CTULU
+    role: provider
+    protocol: tool-invocation
+  - target: repo:BRAIN
+    role: provider
+    protocol: wazaa-channel
+    channel: L4-TOOLS/BRAIN/intelligence/cognitive_state
