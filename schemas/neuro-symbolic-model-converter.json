@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Neuro-Symbolic Model Converter",
+  "type": "object",
+  "required": ["input", "output", "compression"],
+  "properties": {
+    "input": {
+      "type": "object",
+      "required": ["gguf_path", "layer_name", "k_clusters"],
+      "properties": {
+        "gguf_path": {
+          "type": "string",
+          "format": "uri",
+          "description": "Chemin vers le fichier GGUF"
+        },
+        "layer_name": {
+          "type": "string",
+          "description": "Nom de la couche à extraire"
+        },
+        "k_clusters": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 256,
+          "description": "Nombre de clusters K-means"
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["binary_matrix", "rbf_centers", "rbf_sigmas", "vindex_table"],
+      "properties": {
+        "binary_matrix": {
+          "type": "string",
+          "format": "byte-array",
+          "description": "Matrice binaire (poids ternaires)"
+        },
+        "rbf_centers": {
+          "type": "array",
+          "items": {"type": "array", "items": {"type": "number"}},
+          "description": "Centres RBF μ_k"
+        },
+        "rbf_sigmas": {
+          "type": "array",
+          "items": {"type": "number"},
+          "description": "Sigmas RBF σ_k"
+        },
+        "vindex_table": {
+          "type": "string",
+          "format": "byte-array",
+          "description": "Table vindex (concept → poids)"
+        }
+      }
+    },
+    "compression": {
+      "type": "object",
+      "required": ["compression_ratio", "bit_exact"],
+      "properties": {
+        "compression_ratio": {
+          "type": "number",
+          "minimum": 10000,
+          "description": "Ratio de compression (ex: 10000 pour 1:10 000)"
+        },
+        "bit_exact": {
+          "type": "boolean",
+          "const": true,
+          "description": "Égalité bit-exact vérifiée par oracle Python"
+        }
+      }
+    }
+  }
+}

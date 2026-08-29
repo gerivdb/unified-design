@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Procedural Shader Projection",
+  "type": "object",
+  "required": ["compact_state", "projection"],
+  "properties": {
+    "compact_state": {
+      "type": "object",
+      "required": ["spins_count", "rbf_centers_count", "state_size_bytes"],
+      "properties": {
+        "spins_count": {
+          "type": "integer",
+          "maximum": 728,
+          "description": "Nombre de spins ternaires"
+        },
+        "rbf_centers_count": {
+          "type": "integer",
+          "description": "Nombre de centres RBF"
+        },
+        "state_size_bytes": {
+          "type": "integer",
+          "maximum": 4096,
+          "description": "Taille de l'état compact en octets"
+        }
+      }
+    },
+    "projection": {
+      "type": "object",
+      "required": ["shaders", "output"],
+      "properties": {
+        "shaders": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["html_structure", "css_styling", "db_query_generation", "custom"]
+          },
+          "maxItems": 4,
+          "description": "Liste des shaders appliqués"
+        },
+        "output": {
+          "type": "object",
+          "required": ["html", "css", "db_query"],
+          "properties": {
+            "html": {"type": "string"},
+            "css": {"type": "string"},
+            "db_query": {"type": "string"}
+          }
+        },
+        "projection_time_ms": {
+          "type": "number",
+          "maximum": 1,
+          "description": "Temps de projection maximal"
+        }
+      }
+    }
+  }
+}
