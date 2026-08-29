@@ -1,0 +1,22 @@
+name: zero-heap-ring-buffer
+version: "1.0.0"
+status: draft
+description: |
+  Zero-Heap Ring Buffer & Synchronous Pipeline — C99/Zig, 30 Hz,
+  sans allocation dynamique ni locks.
+parent: unified-design-learning-loop
+layer: L4
+capabilities:
+  - ring-buffer
+    parameters:
+      capacity: 256
+      element_size: 64
+      total_memory_bytes: 16384
+  - synchronous-pipeline
+    parameters:
+      frequency_hz: 30
+      cycle_time_ms: 33
+      workers: 16
+dependencies:
+  - runner-contract
+  - rbf-cluster

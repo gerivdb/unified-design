@@ -1,0 +1,28 @@
+name: neuro-symbolic-model-converter
+version: "1.0.0"
+status: draft
+description: |
+  Neuro-Symbolic Model Converter — pipeline GGUF → matrice binaire
+  (K-means, quantization ternaire, lookup tables, vindex).
+parent: unified-design-learning-loop
+layer: L4
+capabilities:
+  - gguf-extraction
+    parameters:
+      input_format: GGUF
+      max_input_size_gb: 10
+  - k-means-clustering
+    parameters:
+      max_clusters: 256
+      algorithm: lloyd
+  - ternary-quantization
+    parameters:
+      values: [-1, 0, +1]
+  - vindex-generation
+    parameters:
+      index_type: vector
+      lookup_table: true
+dependencies:
+  - rbf-cluster
+  - weight-vindex
+  - activation-vector
