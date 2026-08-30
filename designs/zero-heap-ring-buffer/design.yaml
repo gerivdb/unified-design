@@ -7,12 +7,12 @@ description: |
 parent: unified-design-learning-loop
 layer: L4
 capabilities:
-  - ring-buffer
+  - name: ring-buffer
     parameters:
       capacity: 256
       element_size: 64
       total_memory_bytes: 16384
-  - synchronous-pipeline
+  - name: synchronous-pipeline
     parameters:
       frequency_hz: 30
       cycle_time_ms: 33

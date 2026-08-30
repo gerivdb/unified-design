@@ -7,12 +7,12 @@ description: |
 parent: unified-design-learning-loop
 layer: L4
 capabilities:
-  - fast-path-routing
+  - name: fast-path-routing
     parameters:
       max_latency_ms: 3
       threshold: 0.85
       threads: 16
-  - slow-path-fallback
+  - name: slow-path-fallback
     parameters:
       timeout_ms: 50
       model: llm
