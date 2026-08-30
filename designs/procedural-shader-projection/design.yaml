@@ -7,7 +7,7 @@ description: |
 parent: unified-design-learning-loop
 layer: L4
 capabilities:
-  - shader-projection
+  - name: shader-projection
     parameters:
       spins_count: 728
       shaders_max: 4
