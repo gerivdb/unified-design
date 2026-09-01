@@ -1,0 +1,59 @@
+name: timx
+version: 1.0.0
+status: active
+profile: STANDARD
+layer: L2-PLATFORM
+intent_hash: 0xTIMX_FEATURE_STORE_20260828
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  TIMX Feature Store — gestion des signatures temporelles et features
+  vectorielles. Clone local sans remote GitHub configure. Fonctionne
+  comme feature store pour le pipeline LLUX/RLM-243/TALEX.
+consumers:
+  - LLUX
+  - RLM-243
+  - TALEX
+capabilities:
+  - name: temporal-signature-store
+    description: Store and retrieve temporal feature signatures for LLM inference
+    parameters:
+      signature_format: temporal_vector
+      max_dimensions: 243
+      compression: ternary
+  - name: feature-cache
+    description: In-memory cache with TTL for feature vectors
+    parameters:
+      ttl_seconds: 300
+      cache_size_mb: 64
+  - name: rollup-engine
+    description: Aggregate features per time window for training/inference
+    parameters:
+      windows:
+        - 1h
+        - 4h
+        - 1d
+components:
+  - type: feature_store
+    repo: TIMX-FEATURE-STORE
+    path: D:\DO\WEB\TOOLS\L2-PLATFORM\TIMX-FEATURE-STORE
+  - type: cache
+    layer: L2
+bridges:
+  - target: repo:LLUX
+    role: provider
+    protocol: python-import
+  - target: repo:RLM-243
+    role: consumer
+    protocol: http
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
+dependencies:
+  - repo: gerivdb/LLUX
+  - repo: gerivdb/RLM-243
+  - repo: gerivdb/TALEX
+constraints:
+  - cpu_only: true
+  - no_remote_git: true
