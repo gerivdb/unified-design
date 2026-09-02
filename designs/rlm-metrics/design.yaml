@@ -1,0 +1,29 @@
+---
+name: RLM-METRICS
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: operational
+intent_hash: 0xRLM_METRICS_RUNNER_20260821
+description: >
+  RLM-METRICS — Runner de metriques. Collecte et agrege les metriques de tous les services RLM.
+
+dependencies:
+    - rlm-config
+    - rlm-graph
+    - rlm-incident
+
+consumers:
+  - kix
+  - wazaa
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner RLM-METRICS
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

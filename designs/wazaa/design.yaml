@@ -1,0 +1,29 @@
+---
+name: WAZAA Mission Control
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: dashboard
+intent_hash: 0xWAZAA_RUNNER_20260821
+description: >
+  WAZAA Mission Control — Mission Control HTTP/WebSocket (5002). NE PAS confondre avec le bus KG-L 1873.
+
+dependencies:
+  []
+
+consumers:
+  - bootstrap
+  - kix
+  - conversation-cognitive
+  - kg-l-coherence-watchdog
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner WAZAA Mission Control
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

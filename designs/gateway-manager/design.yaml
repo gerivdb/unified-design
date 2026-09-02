@@ -1,0 +1,27 @@
+---
+name: Gateway Manager
+version: "1.0.0"
+status: active
+strate: L1_CAUSALITY
+type: gateway
+intent_hash: 0xGATEWAY_MANAGER_RUNNER_20260820
+description: >
+  Gateway Manager — Passerelle BDCP-CORE du metacluster. Clapet 18000, routage reseau, anonymat.
+
+dependencies:
+  []
+
+consumers:
+  - bootstrap
+  - kix
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner Gateway Manager
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

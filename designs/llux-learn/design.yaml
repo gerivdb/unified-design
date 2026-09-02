@@ -1,0 +1,28 @@
+---
+name: LLUX-LEARN
+version: "1.0.0"
+status: active
+strate: L3-CITIZENS
+type: cognitive
+intent_hash: 0xLLUX_LEARN_RUNNER_20260821
+description: >
+  LLUX-LEARN — Runner d'apprentissage LLUX. Met a jour les modeles de matching a partir des nouveaux incidents resolus.
+
+dependencies:
+    - supermemory
+    - ontology
+
+consumers:
+  - llux-index
+  - llux-replay
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner LLUX-LEARN
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

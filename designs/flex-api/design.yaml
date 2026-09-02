@@ -1,0 +1,26 @@
+---
+name: FLEX API
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: api
+intent_hash: 0xFLEX_API_RUNNER_20260821
+description: >
+  FLEX API — API FLEX (8080), endpoint numa/status. Optionnel au bootstrap.
+
+dependencies:
+  []
+
+consumers:
+  - bootstrap
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner FLEX API
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

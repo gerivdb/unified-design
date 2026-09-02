@@ -1,0 +1,28 @@
+---
+name: SYNCX
+version: "1.0.0"
+status: proposed
+strate: L0-CANON
+type: governance
+intent_hash: 0xSYNCX_SYNC_RUNNER_20260821
+description: >
+  SYNCX — Runner de synchronisation. Coordonne la synchronisation entre depots locaux et distants.
+
+dependencies:
+    - governance-hub
+    - gericode
+    - wazaa
+
+consumers:
+  - kix
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner SYNCX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

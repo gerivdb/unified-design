@@ -1,0 +1,31 @@
+---
+name: RLM-CONFIG
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: operational
+intent_hash: 0xRLM_CONFIG_RUNNER_20260821
+description: >
+  RLM-CONFIG — Service de configuration centralisee pour tous les services RLM.
+
+dependencies:
+  []
+
+consumers:
+  - rlm-deploy
+  - rlm-graph
+  - rlm-secure
+  - rlm-incident
+  - rlm-release
+  - rlm-metrics
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner RLM-CONFIG
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

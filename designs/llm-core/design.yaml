@@ -1,0 +1,31 @@
+---
+name: LLM-CORE
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xLLM_CORE_RUNNER_20260902
+description: >
+  LLM-CORE — Moteur d'inference LLM pour l'ecosysteme. Gere l'inférence locale et distante.
+
+dependencies:
+  []
+
+consumers:
+  - kix
+  - bootstrap
+  - agent-manager
+  - conversation-cognitive
+  - llux-match
+  - llux-learn
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner LLM-CORE
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

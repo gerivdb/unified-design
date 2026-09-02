@@ -1,0 +1,29 @@
+---
+name: TRIX
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: operational
+intent_hash: 0xTRIX_BACKEND_RUNNER_20260902
+description: >
+  TRIX — Interface backend TRIX pour LLUX. Gere la communication avec le daemon trixd.
+
+dependencies:
+  []
+
+consumers:
+  - trixd
+  - kix
+  - llux-match
+  - conversation-cognitive
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner TRIX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

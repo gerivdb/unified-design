@@ -1,0 +1,27 @@
+---
+name: RLM-INCIDENT
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: operational
+intent_hash: 0xRLM_INCIDENT_RUNNER_20260821
+description: >
+  RLM-INCIDENT — Service de gestion des incidents. Cree et suit les incidents systeme.
+
+dependencies:
+    - kix
+
+consumers:
+  - rlm-config
+  - rlm-metrics
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner RLM-INCIDENT
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

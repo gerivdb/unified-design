@@ -1,0 +1,28 @@
+---
+name: REFEREX
+version: "1.0.0"
+status: proposed
+strate: L0-CANON
+type: governance
+intent_hash: 0xREFEREX_CROSSREF_RUNNER_20260821
+description: >
+  REFEREX — Runner de references croisees. Verifie la coherence des references entre documents de gouvernance.
+
+dependencies:
+    - knowledge-graph-memory
+    - ontology
+
+consumers:
+  - kix
+  - conversation-cognitive
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner REFEREX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

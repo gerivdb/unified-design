@@ -1,0 +1,27 @@
+---
+name: TIMX-FEATURE-STORE
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: operational
+intent_hash: 0xTIMX_FEATURE_STORE_RUNNER_20260821
+description: >
+  TIMX-FEATURE-STORE — Feature store temporel pour TALEX. Stocke et sert les features temporelles.
+
+dependencies:
+    - talex
+
+consumers:
+  - talex
+  - timx
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner TIMX-FEATURE-STORE
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

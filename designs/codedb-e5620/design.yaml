@@ -1,0 +1,30 @@
+---
+name: CodeDB-E5620
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: infrastructure
+intent_hash: 0xCODEDB_E5620_20260612
+description: >
+  CodeDB-E5620 — Base de connaissances code pour le processeur Xeon E5620. Stocke patterns, optimisations et contraintes hardware.
+
+dependencies:
+    - ontology
+    - slm-hardware-environment
+
+consumers:
+  - kix
+  - infx
+  - flex
+  - llux
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner CodeDB-E5620
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

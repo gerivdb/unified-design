@@ -1,0 +1,30 @@
+---
+name: INFX
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: citizen
+intent_hash: 0xINFX_DESIGN_20260830
+description: >
+  INFX — Composant CITIZEN de l'ecosysteme gerivdb (strate L4). Interface entre hardware et runners cognitifs.
+
+dependencies:
+    - llux
+    - ecos-cli
+
+consumers:
+  - kix
+  - llux-match
+  - llux-learn
+  - conversation-cognitive
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner INFX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

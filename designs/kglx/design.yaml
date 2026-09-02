@@ -1,0 +1,28 @@
+---
+name: KGLX
+version: "1.0.0"
+status: proposed
+strate: L0-CANON
+type: governance
+intent_hash: 0xKGLX_QUALITY_RUNNER_20260821
+description: >
+  KGLX — Runner de qualite KG-L. Valide la qualite des schemas et des donnees du graphe de connaissances.
+
+dependencies:
+    - knowledge-graph-memory
+    - wazaa
+
+consumers:
+  - conversation-cognitive
+  - kg-l-coherence-watchdog
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner KGLX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

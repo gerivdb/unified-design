@@ -1,0 +1,26 @@
+---
+name: RLM-GRAPH
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: operational
+intent_hash: 0xRLM_GRAPH_RUNNER_20260821
+description: >
+  RLM-GRAPH — Service de graphe de dependances. Construit et maintient le graphe des dependances entre repos.
+
+dependencies:
+    - known_repositories
+
+consumers:
+  - rlm-config
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner RLM-GRAPH
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true
