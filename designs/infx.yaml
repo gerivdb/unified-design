@@ -5,9 +5,10 @@ strate: L4-TOOLS
 type: citizen
 profile: STANDARD
 description: >
-  INFX — Composant CITIZEN de l'écosystème gerivdb (strate L4). Gère l'interface
-  entre le hardware et les runners cognitifs. Référencé dans
-  GOVERNANCE-HUB/known_repositories.yaml (intent_hash: 0xINFX_CREATE_20260830).
+  INFX — Composant CITIZEN de l'écosystème gerivdb (strate L4). Héberge EGMI v0.3,
+  le système de gestion des mutations et interactions (16 threads ENV2, Dual Xeon E5620).
+  Exploite FLEX pour NUMA/affinity/cache/thermal et CodeDB-E5620 pour indexation/checkpoints/MCP.
+  Référencé dans GOVERNANCE-HUB/known_repositories.yaml (intent_hash: 0xINFX_CREATE_20260830).
 inherits:
   - fractal-engineering-strata
 intent_hash: 0xINFX_DESIGN_20260830
@@ -15,16 +16,28 @@ components:
   - type: citizen-agent
     repo: gerivdb/INFX
     path: D:\DO\WEB\TOOLS\L4-TOOLS\INFX
+  - type: egmi-runner
+    binary: egmi_runner.exe
+    hardware: Dual Xeon E5620 (16 threads, 24Go DDR3, SSE4.2)
 dependencies:
   - repo: gerivdb/LLUX
   - repo: gerivdb/ECOS-CLI
+  - repo: gerivdb/FLEX
+  - repo: gerivdb/CodeDB-E5620
 bridges:
   - target: repo:LLUX
     role: consumer
     protocol: cli
-  - target: repo:ECOS-CLI
+  - target: repo:FLEX
     role: consumer
-    protocol: cli
+    protocol: smart-wrapper
+  - target: repo:CodeDB-E5620
+    role: consumer
+    protocol: mcp-server
+  - target: repo:EGMI-v0.3
+    role: provider
+    protocol: in-process
 constraints:
   - cpu_only: true
   - rss_depth: 2
+  - hardware: xeon-e5620-westmere-sse42
