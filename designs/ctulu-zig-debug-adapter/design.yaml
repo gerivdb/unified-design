@@ -1,0 +1,115 @@
+name: ctulu-zig-debug-adapter
+version: 1.0.0
+status: draft
+profile: STANDARD
+consumers: []
+
+# Purpose
+purpose: "Live DWARF/CodeView debugger adapter for Zig 0.15 on Windows. Enables live attach, breakpoints, watch expressions, call stack inspection — eliminating printf-driven debugging."
+
+# Causal Origin
+causal_origin:
+  root_cause: "No live Zig debugger on Windows → printf debugging → slow iteration → missed UB"
+  incident: "LLUX silent hang required 5+ trace-insertion cycles. Live debugger would have caught @Vector UB in minutes."
+  resolution: "DAP-compliant adapter bridging Zig DWARF/CodeView ↔ WinDbg/CDB ↔ VS Code"
+
+# Architecture
+architecture:
+  components:
+    - name: dwarf_codeview_parser
+      language: rust
+      purpose: "Parse Zig 0.15 DWARF (Linux) / CodeView (Windows) debug info from .exe/.pdb"
+      input: "llux.exe + llux.pdb"
+      output: "Internal type/location map (Zig AST → DWARF/CodeView)"
+      
+    - name: windbg_cdb_wrapper
+      language: cpp / rust
+      purpose: "COM wrapper around cdb.exe (WinDbg CLI) for process control"
+      capabilities: ["attach", "detach", "breakpoint", "step", "continue", "read_memory", "write_memory"]
+      
+    - name: zig_ast_mapper
+      language: zig / rust
+      purpose: "Map Zig AST constructs (@Vector, @ptrCast, @alignCast, comptime) to DWARF/CodeView expressions"
+      special_handling:
+        - "@Vector(4, f32)" → watch expression with 4-f32 array
+        - "@ptrCast" → pointer deref with type info
+        - "comptime" → constant folding display
+        - "error unions" → error/value split display
+        
+    - name: dap_server
+      protocol: "Debug Adapter Protocol (DAP) JSON-RPC"
+      transport: "stdio / named pipe / TCP"
+      clients: ["VS Code", "VSCodium", "Zed", "Neovim DAP", "CLI"]
+
+# DAP Capabilities
+dap_capabilities:
+  - "attachRequest (by PID)"
+  - "setBreakpoints (line, condition, hitCondition)"
+  - "setVariable / variables (watch @Vector, slices, error unions)"
+  - "evaluate (Zig expressions with comptime awareness)"
+  - "stackTrace (Zig frames with comptime frames)"
+  - "scopes (local, global, comptime)"
+  - "threads (Zig async tasks + OS threads)"
+  - "disassemble (with Zig source mapping)"
+  - "readMemory / writeMemory (for @ptrCast inspection)"
+
+# Zig-Specific Features
+zig_specific:
+  vector_watch:
+    description: "Expand @Vector(N, T) into N-element array view"
+    example: "@Vector(4, f32) → [4]f32 watch expression"
+    
+  ptr_cast_inspection:
+    description: "Dereference @ptrCast with proper type info"
+    example: "@ptrCast(*const @Vector(4, f32), ptr) → expandable vector view"
+    
+  comptime_visibility:
+    description: "Show comptime-evaluated values in call stack / variables"
+    implementation: "DWARF DW_TAG_constant / DW_TAG_variable with DW_AT_const_value"
+    
+  error_union_display:
+    description: "Split error unions into {error: ..., value: ...} in variables view"
+    implementation: "Custom DAP type renderer for Zig error unions"
+
+# Implementation Roadmap
+roadmap:
+  mvp:
+    - cdb.exe wrapper (attach, break, continue, stackTrace)
+    - Basic variable inspection (scalars, arrays)
+    - VS Code launch.json integration
+    target: 2 weeks
+    
+  v1:
+    - @Vector watch expansion
+    - @ptrCast deref with type
+    - comptime value display
+    - error union split view
+    target: 4 weeks
+    
+  v2:
+    - Full DAP compliance
+    - Zig AST → DWARF mapper
+    - comptime frame stepping
+    target: 8 weeks
+
+# Integration Points
+integration:
+  vs_code:
+    launch_config:
+      type: "ctulu-zig"
+      request: "attach"
+      program: "${workspaceFolder}/zig-out/bin/llux.exe"
+      debugServer: "4711"
+      
+  ctulu_integration:
+    cli: "ctulu debug attach --pid <pid> --module <zig_module_path>"
+    api: "ctulu.debug.attach(pid, zig_module_path)"
+
+# Meta-coherence
+meta_coherence:
+  verifies: "Live debug catches UB (@Vector misalignment) before silent hang"
+  source_of_truth: "Zig 0.15 DWARF/CodeView + PDB"
+  intent_hash: 0xCTULU_ZIG_DEBUG_ADAPTER_20260829
+
+# Intent Hash
+intent_hash: 0xCTULU_ZIG_DEBUG_ADAPTER_20260829
