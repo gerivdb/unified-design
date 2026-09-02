@@ -1,0 +1,31 @@
+---
+name: Friction Analyzer Runner
+version: "1.0.0"
+status: active
+strate: L0-CANON
+type: cognitive
+intent_hash: 0xFRICTION_ANALYZER_RUNNER_20260821
+description: >
+  Friction Analyzer Runner — Runner d'analyse et de correction des frictions de session KiloCode. Collecte, classe et corrige les frictions par 8 categories et 4 niveaux de gravite.
+
+dependencies:
+    - conversation-cognitive
+    - rlm-incident
+    - rootx
+    - prognex
+    - referex
+
+consumers:
+  - ECOS-CLI
+  - KIX
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner Friction Analyzer Runner
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

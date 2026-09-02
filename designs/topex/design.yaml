@@ -1,0 +1,29 @@
+---
+name: TOPEX
+version: "1.0.0"
+status: proposed
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xTOPEX_TOPOLOGY_RUNNER_20260821
+description: >
+  TOPEX — Runner de topologie. Analyse et valide les topologies du systeme gerivdb.
+
+dependencies:
+    - topos
+    - kix
+    - knowledge-graph-memory
+
+consumers:
+  - GITEX
+  - KGLX
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner TOPEX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

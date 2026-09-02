@@ -1,0 +1,28 @@
+---
+name: IDENTX
+version: "1.0.0"
+status: proposed
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xIDENTX_IDENTITY_RUNNER_20260821
+description: >
+  IDENTX — Runner d'identite. Gere l'identification et l'authentification des entites dans le systeme.
+
+dependencies:
+    - knowledge-graph-memory
+    - ontology
+
+consumers:
+  - KG-L
+  - NEXUS
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner IDENTX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

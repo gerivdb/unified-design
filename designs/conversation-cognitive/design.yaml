@@ -1,0 +1,33 @@
+---
+name: Conversation Cognitive Runner
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: cognitive
+intent_hash: 0xCONVERSATION_COGNITIVE_RUNNER_20260821
+description: >
+  Conversation Cognitive Runner — Runner cognitif conversationnel. Extrait, structure et publie les decisions depuis les conversations KiloCode vers KG-L/KG-WAZAA.
+
+dependencies:
+    - kix
+    - tlm-lang
+    - chronox
+    - referex
+    - talex
+    - rootx
+    - wazaa
+
+consumers:
+  - Friction Analyzer
+  - KG-L
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner Conversation Cognitive Runner
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true
