@@ -1,0 +1,73 @@
+name: talex
+version: "14.8"
+design_version: "1.0"
+intent_hash: "0xADMG_GERIVDB_V19.2_20260801"
+inherits:
+  - moc-governance
+status: active
+profile: CRITICAL
+layer: L4
+role: NARRATIVE_ENGINE
+consumers:
+  - GeriCode
+  - TINA
+  - PLIX
+  - KORX
+capabilities:
+  - port_id: narrative-engine
+    description: Moteur narratif X-FORGE transformant intentions en récits causaux
+    profile: CRITICAL
+    parameters:
+      max_latency_ms: 120000
+      output_formats:
+        - script
+        - storyboard
+        - audio
+        - 3d
+        - game
+  - port_id: semantic-graph
+    description: Graphe sémantique unifié (UnifiedSemanticGraph)
+    profile: CRITICAL
+    parameters:
+      edge_kinds: 10
+      node_kinds: 3
+  - port_id: persistence
+    description: Modules de persistance état/checkpoints/logs/proofs
+    profile: CRITICAL
+    parameters:
+      crash_recovery_ms: 10
+  - port_id: realtime-orchestration
+    description: Orchestration 8 couches temps réel avec 4 niveaux de priorité
+    profile: STANDARD
+    parameters:
+      layers: 8
+      priority_levels: 4
+      cpu_idle_target: 0.002
+  - port_id: governance
+    description: Gouvernance distribuée Quorum L5 (4 modes)
+    profile: CRITICAL
+    parameters:
+      availability_target: 0.999
+      quorum_modes:
+        - centralized
+        - distributed
+        - adaptive
+        - fallback
+  - port_id: spidx-rollback
+    description: Rollback SPIDX par étape avec checkpoints
+    profile: STANDARD
+    parameters:
+      failure_rate_target: 0.005
+design_rules:
+  - name: no-circular-inheritance
+    check: graph_is_acyclic
+  - name: capability-conflict
+    check: no_conflicting_capabilities
+  - name: cognitive-complexity
+    check: cognitive_complexity_le_15
+    parameters:
+      max_cognitive_complexity: 15
+  - name: max-capabilities
+    check: max_capabilities_per_design
+    parameters:
+      max_capabilities_per_design: 8

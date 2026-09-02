@@ -1,0 +1,63 @@
+name: kg-test
+description: "Repo satellite de KG-L — runtime de vérification universelle par cartographie KG. Pattern LLUX family : dépendance unidirectionnelle satellite → principal."
+version: "1.0.0"
+status: active
+layer: L4
+intent_hash: "0xDESIGN_KG_TEST_20260828"
+inherits:
+  - meta-coherence
+  - llux-satellite-pattern
+depends_on:
+  - KG-L
+bridges:
+  - target: repo:KG-L
+    role: provider
+    protocol: python-import
+  - target: repo:CTULU
+    role: consumer
+    protocol: tool-invocation
+  - target: repo:WAZAA
+    role: publisher
+    protocol: wazaa-channel
+    channel: L4-TOOLS/KG-TEST/verification/reports
+capabilities:
+  - name: universal_verification
+    parameters:
+      verifiables:
+        - meta_coherence_complete
+        - big_picture_aggregated
+        - breakthrough_detected
+        - consciousness_state_present
+        - awareness_alerts_flow
+        - intelligence_cognitive_state
+        - exploration_active
+        - introspection_patterns_detected
+        - extra_spection_repos_scanned
+        - topos_mapped
+        - serendipity_events_detected
+        - entropy_search_in_band
+  - name: zig_compliance
+    parameters:
+      rules:
+        - zig_015_api_compat
+        - zig_inline_modules
+        - zig_singleton_bind
+        - zig_no_unreachable
+        - zig_memory_safe
+  - name: cross_repo_integrity
+    parameters:
+      checks:
+        - illegitimate_clone
+        - phantom_path
+        - sot_consistency
+principles:
+  - "Dépendance unidirectionnelle : KG-Test → KG-L (jamais l'inverse)"
+  - "Imports KG-L comme bibliothèque: from kg_l import ..."
+  - "Pas d'écriture dans C:\DevTools"
+  - "CTULU via subprocess/adapter"
+  - "BDCP permanent : pas de gh CLI"
+
+enforcement:
+  - design: kg-test
+    implemented_in: KG-TEST/src/kgtest/
+    verified_by: KG-TEST/tests/

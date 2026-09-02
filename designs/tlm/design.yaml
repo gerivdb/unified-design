@@ -1,0 +1,70 @@
+name: tlm
+version: 1.0.0
+status: active
+profile: STANDARD
+layer: L2-PLATFORM
+intent_hash: 0xTLM_LANG_GRAMMAR_20260728
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+  - b243-vector
+description: >
+  TLM-LANG (Topological Logic Model Language) — DSL for expressing
+  topological graphs with ternary semantics (TRL/CTL), invariants,
+  constraints, and state transitions. Consommateur de RLM-243 (port 8793)
+  pour la validation ternaire. Fonctionne comme runner KIX pour le langage TLM.
+consumers:
+  - RLM-243
+  - KIX
+  - TALEX
+capabilities:
+  - name: topological-graph-parser
+    description: Parse .dag3 and .topo file extensions into typed node/edge graphs
+    parameters:
+      file_extensions:
+        - .dag3
+        - .topo
+      node_types:
+        - ternary
+        - trilean
+      edge_constraints: strict
+  - name: invariant-validator
+    description: Express and validate invariants on graph topology
+    parameters:
+      validation_backend: RLM-243
+      validation_port: 8793
+  - name: state-transition-engine
+    description: Describe state transitions between topological configurations
+    parameters:
+      transition_graph: true
+      relaxation_paths: true
+components:
+  - type: parser
+    repo: gerivdb/TLM-LANG
+    path: TLM-LANG/parser/
+  - type: runtime
+    repo: gerivdb/TLM-LANG
+    path: TLM-LANG/runtime/
+  - type: validator
+    repo: gerivdb/TLM-LANG
+    path: TLM-LANG/src/validator.py
+dependencies:
+  - repo: gerivdb/RLM-243
+    port: 8793
+    protocol: http
+  - repo: gerivdb/DAG-3
+    protocol: python-import
+bridges:
+  - target: repo:RLM-243
+    role: consumer
+    protocol: http
+    path: /health
+  - target: repo:DAG-3
+    role: consumer
+    protocol: python-import
+  - target: repo:KIX
+    role: consumer
+    protocol: cli
+constraints:
+  - cpu_only: true
+  - port_8801: free

@@ -42,9 +42,18 @@ canonical_chain:
     decomposition: taches atomiques Patterns A-E (regle SLM)
   - step: EXECUTION
     constraint: commits atomiques <= 3 fichiers
+  - gate: G4
+    name: MDU Compliance Gate
+    description: "Valide conformité MDU (design, atom, citizen, ADR index, checkpoint) avant commit merge"
+    depends_on: [G3]
+    checks:
+      - mdu-design-coverage: "python unified-design/scripts/design_coverage_scanner.py --strict --source discovery"
+      - mdu-compliance-scan: "python citizens/mdu-compliance-scanner/mdu_compliance_scanner.py --repo $(git remote get-url origin | sed 's/.*\///' | sed 's/.git$//') --strict"
+    on_fail: BLOCK_COMMIT
+    timeout_sec: 30
   - feedback_loop:
-      r_sup_2: unforeseen-lifecycle conversion obligatoire
-      r_egal_1: IMPENSES/
+    r_sup_2: unforeseen-lifecycle conversion obligatoire
+    r_egal_1: IMPENSES/
   - step: CLOTURE
     rule: progress-sync remonte statuts ; index regenere ; done conditionnel aux subalternes
 

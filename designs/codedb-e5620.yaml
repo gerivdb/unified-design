@@ -1,0 +1,33 @@
+name: codedb-e5620
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: infrastructure
+profile: STANDARD
+description: >
+  CodeDB-E5620 — Base de connaissances code pour le processeur Xeon E5620.
+  Stocke les patterns, optimisations et contraintes spécifiques au hardware
+  (SSE4.2, pas AVX2, 24 Go DDR3). Référencé dans GOVERNANCE-HUB/known_repositories.yaml.
+inherits:
+  - fractal-engineering-strata
+intent_hash: 0xCODEDB_E5620_20260612
+hardware:
+  cpu: 2x Intel Xeon E5620 (Westmere-EP, 4C/8T @ 2.4 GHz)
+  cores_logical: 16
+  memory_gb: 24
+  features: [sse4.2, no-avx2]
+components:
+  - type: knowledge-base
+    repo: gerivdb/CodeDB-E5620
+    path: D:\DO\WEB\TOOLS\L4-TOOLS\CodeDB-E5620
+dependencies:
+  - repo: gerivdb/ONTOLOGY
+  - repo: gerivdb/SLM-HARDWARE-ENVIRONMENT
+bridges:
+  - target: repo:ONTOLOGY
+    role: consumer
+    protocol: yaml
+constraints:
+  - cpu_only: true
+  - westmere_arch: true
+  - max_sessions: 6

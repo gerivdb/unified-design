@@ -1,0 +1,169 @@
+name: ctulu-auto-cleanup-hook
+version: 1.0.0
+status: draft
+profile: STANDARD
+consumers: []
+
+# Purpose
+purpose: "Automatic zombie process cleanup before build. Eliminates 'AccessDenied' on rebuild caused by llux.exe zombie processes locking the binary."
+
+# Causal Origin
+causal_origin:
+  root_cause: "llux.exe processes not terminated after test/run → lock zig-out/bin/llux.exe → AccessDenied on rebuild"
+  incident: "3 rebuild failures in LLUX session due to PID 96340 llux.exe zombie holding file lock"
+  resolution: "Pre-build hook kills all llux.exe / zig.exe / zig-cache processes before build"
+
+# Implementation
+implementation:
+  language: python
+  entry_point: "ctulu_auto_cleanup.py"
+  integration_points:
+    - zig_validator_extension: "ZigValidator._check_build() calls cleanup first"
+    - build_zig_hook: "build.zig custom step 'clean_zombies' before compile"
+    - pre_commit_hook: ".pre-commit-config.yaml → ctulu-auto-cleanup"
+    - ci_step: "GitHub Actions step before build"
+
+# Target Processes
+target_processes:
+  - name: "llux.exe"
+    reason: "Locks zig-out/bin/llux.exe"
+  - name: "zig.exe"
+    reason: "May hold .zig-cache locks"
+  - name: "zig-cache-cleanup"
+    reason: "Background Zig cache processes"
+  - pattern: "*.exe"
+    cwd_filter: "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LLUX\\*"
+    reason: "Any exe running from LLUX workspace"
+
+# Implementation
+implementation_details:
+  language: python
+  entry_point: "ctulu_auto_cleanup.py"
+  
+  algorithm:
+    1. "Scan processes with psutil.process_iter(['pid', 'name', 'exe', 'cwd'])"
+    2. "Filter: name in target_processes OR exe contains LLUX workspace path"
+    3. "For each match: proc.terminate() → proc.wait(timeout=5)"
+    5. "If timeout: proc.kill() → proc.wait(timeout=2)"
+    6. "Log: killed PIDs, names, reason"
+    7. "Return: killed_count, errors"
+    
+  safety:
+    - "Only targets processes in LLUX workspace (cwd/exe path filter)"
+    - "Graceful terminate first (SIGTERM), then force kill (SIGKILL)"
+    - "Timeout protection (5s terminate + 2s kill)"
+    - "Dry-run mode: --dry-run lists would-kill without killing"
+    - "Verbose mode: --verbose logs each action"
+
+# Integration Points
+integration:
+  zig_validator_py:
+    location: "CTULU/scripts/commands/dev/zig_validator.py"
+    class: ZigValidator
+    method: _check_build()
+    insertion: "First line of _check_build: self._cleanup_zombies()"
+    
+  build_zig:
+    location: "build.zig"
+    step: "b.step('clean-zombies', 'Kill zombie processes before build')"
+    dependency: "exe.step.dependOn(clean_zombies.step)"
+    
+  pre_commit:
+    config: ".pre-commit-config.yaml"
+    hook:
+      id: ctulu-auto-cleanup
+      name: "CTULU Auto Cleanup Zombies"
+      entry: "python CTULU/scripts/ctulu_auto_cleanup.py"
+      language: "system"
+      types: ["zig"]
+      always_run: true
+      
+  ci_cd:
+    github_actions:
+      - name: "CTULU Auto Cleanup"
+        run: "python CTULU/scripts/ctulu_auto_cleanup.py"
+        shell: pwsh
+
+# CLI
+cli:
+  commands:
+    - "ctulu-auto-cleanup [--dry-run] [--verbose] [--force]"
+    - "ctulu-auto-cleanup --list-only"
+    - "ctulu-auto-cleanup --pattern 'llux*' --cwd 'D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LLUX'"
+
+# Configuration
+config:
+  timeout_terminate: 5
+  timeout_kill: 2
+  dry_run_default: false
+  verbose_default: false
+  pattern_file: "CTULU/config/zombie_patterns.yaml"
+
+# zombie_patterns.yaml
+patterns_config:
+  patterns:
+    - "llux.exe"
+    - "zig.exe"
+    - "*.exe" # with cwd filter
+  cwd_filters:
+    - "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LLUX"
+    - "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU"
+    - "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design"
+  exclude:
+    - "pytest.exe" # test runners
+    - "python.exe" # python interpreters
+
+# Integration Points
+integration:
+  zig_validator:
+    location: "CTULU/scripts/commands/dev/zig_validator.py"
+    method: "_check_build"
+    code: |
+      def _check_build(self, module_path):
+          self._cleanup_zombies()  # FIRST LINE
+          # ... existing build check
+    
+  build_zig:
+    step:
+      name: "clean-zombies"
+      command: "python CTULU/scripts/ctulu_auto_cleanup.py"
+    dependency: "exe.step.dependOn(clean_zombies.step)"
+    
+  pre_commit:
+    hook:
+      id: "ctulu-auto-cleanup"
+      name: "CTULU Auto Cleanup Zombies"
+      entry: "python CTULU/scripts/ctulu_auto_cleanup.py"
+      language: "system"
+      types: ["zig"]
+      always_run: true
+      
+  github_actions:
+    step:
+      name: "CTULU Auto Cleanup Zombies"
+      run: "python CTULU/scripts/ctulu_auto_cleanup.py"
+      shell: pwsh
+
+# Tests
+tests:
+  - name: "kill_llux_zombie"
+    setup: "spawn llux.exe, sleep 1s, run cleanup"
+    expect: "process terminated, returns killed_count=1"
+  - name: "no_zombies"
+    setup: "no llux.exe running"
+    expect: "returns killed_count=0, no errors"
+  - name: "dry_run"
+    setup: "llux.exe running, --dry-run"
+    expect: "lists would-kill, process still alive"
+  - name: "cwd_filter"
+    setup: "llux.exe running in different directory"
+    expect: "not killed (cwd filter)"
+
+# Meta-coherence
+meta_coherence:
+  verifies: "Zero AccessDenied on rebuild due to zombie processes"
+  source_of_truth: "psutil process enumeration + cwd/exe filters"
+  intent_hash: 0xCTULU_AUTO_CLEANUP_HOOK_20260829
+
+# Intent Hash
+intent_hash: 0xCTULU_AUTO_CLEANUP_HOOK_20260829

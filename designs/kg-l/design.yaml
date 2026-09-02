@@ -1,0 +1,146 @@
+name: kg-l
+version: "10.0"
+status: active
+profile: CRITICAL
+layer: L4_TOOLS
+intent_hash: 0xKG_L_ENGINE_DESIGN_20260829
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  KG-L (Knowledge Graph — Logical) — moteur d'engine avec arêtes causales
+  formelles (causes, confounds, prevents). Orchestrateur du cycle de 100
+  mutations / 17 étapes (G35 V10). Couche N2 (logique), N3/N4 (cognitive).
+  Gère entropy, ethics, memory, rollback, serendipity, anti-fragilité.
+consumers:
+  - LLUX
+  - RLM-243
+  - TALEX
+  - CANDIDATOR
+capabilities:
+  - name: cycle-engine
+    description: 100-mutation cycle with 17-step orchestration (G35 V10)
+    parameters:
+      mutations: 100
+      steps: 17
+      steps_list:
+        - trigger
+        - check-gf
+        - sense
+        - think
+        - think-plus
+        - serendip
+        - auto
+        - dsl
+        - ethics
+        - check
+        - decide
+        - execute
+        - record
+        - balance
+        - checkpoint
+        - rapport
+        - fin-cycle
+      serendipity_rate: 0.10
+  - name: causal-graph
+    description: Knowledge graph with causal edges (causes, confounds, prevents)
+    parameters:
+      edge_kinds:
+        - causes
+        - confounds
+        - prevents
+        - implies
+        - requires
+  - name: entropy-calculator
+    description: Technical entropy metrics (H, TM, F_grav, nabla_H)
+    parameters:
+      h_max: 100
+      tm_min: 0.7
+      tm_max: 1.5
+  - name: ethics-validator
+    description: Intention validation with formal ethics checking
+    parameters:
+      axes_ethics:
+        - 36
+        - 37
+        - 38
+        - 39
+  - name: anti-fragility
+    description: Episodic memory + anti-fragility for resilience
+    parameters:
+      memory_axes:
+        - 23
+        - 24
+      checkpoint_cascade: true
+  - name: design-enforcement
+    description: Enforces design coverage and meta-coherence via pre-commit
+    parameters:
+      checks:
+        - design_registered
+        - atom_registered
+        - citizen_registered
+        - adr_indexed
+  - name: domain-ontology
+    description: Domain links, intent_hash traceability, causal diff generation
+    parameters:
+      sources:
+        - domain_links.json
+        - kernel_registry.yaml
+        - fixtures.yaml
+  - name: rollback
+    description: Cascade checkpoint rollback (GF-11 compliant)
+    parameters:
+      recovery_ms: 10
+  components:
+  - type: cycle_engine
+    repo: gerivdb/KG-L
+    path: KG-L/kilocode/core/cycle.py
+  - type: causal_graph
+    repo: gerivdb/KG-L
+    path: KG-L/edges/
+  - type: entropy
+    repo: gerivdb/KG-L
+    path: KG-L/kilocode/core/entropy.py
+  - type: ethics
+    repo: gerivdb/KG-L
+    path: KG-L/kilocode/core/ethics.py
+  - type: memory
+    repo: gerivdb/KG-L
+    path: KG-L/kilocode/core/memory.py
+  - type: rollback
+    repo: gerivdb/KG-L
+    path: KG-L/kilocode/core/rollback.py
+  - type: design_enforcer
+    repo: gerivdb/KG-L
+    path: KG-L/kilocode/guards/design_enforcement/
+  - type: axles
+    repo: gerivdb/KG-L
+    path: KG-L/kilocode/axes/
+bridges:
+  - target: repo:LLUX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:RLM-243
+    role: consumer
+    protocol: wazaa-bus
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:CANDIDATOR
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:GoverNANCE-HUB
+    role: consumer
+    protocol: yaml
+dependencies:
+  - repo: gerivdb/LLUX
+  - repo: gerivdb/RLM-243
+  - repo: gerivdb/TALEX
+  - repo: gerivdb/TOPOS
+  - repo: gerivdb/UAE
+  - repo: gerivdb/NEXUS
+  - repo: gerivdb/GOVERNANCE-HUB
+constraints:
+  - cpu_only: true
+  - memory_24gb: true
+  - ram_share_with_agents: true

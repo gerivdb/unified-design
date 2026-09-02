@@ -21,3 +21,9 @@ entries:
     source_path: "citizens.yaml"
     status: "active"
     updated: "2026-07-30"
+  - type: citizen
+    id: "ECOS-CLI:mdu-compliance-scanner"
+    source_repo: "ECOS-CLI"
+    source_path: "citizens/mdu-compliance-scanner"
+    status: "active"
+    updated: "2026-08-28"

@@ -1,0 +1,63 @@
+name: korx
+version: 1.0.0
+status: active
+profile: STANDARD
+layer: L4-TOOLS
+intent_hash: 0xKORX_DESIGN_20260828
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  KORX — State Machine Compiler. DSL de définition de state machines,
+  compilation vers Zig. Consumers: SPIDX, TALEX, N243.
+  Logical layers: N1, N2.
+consumers:
+  - SPIDX
+  - TALEX
+  - N243
+capabilities:
+  - name: state-machine-dsl
+    description: DSL for defining state machines with typed states and transitions
+    parameters:
+      max_states: 100
+      max_transitions: 1000
+      dsl_syntax: declarative
+  - name: zig-compiler
+    description: Compile state machine definitions to Zig code
+    parameters:
+      output_format: Zig
+      inline_only: true
+      cpu_only: true
+  - name: korr-primitive
+    description: KORX state machine (.korx / KORX-L7) persistence and synchronization
+    parameters:
+      format: korr
+      layers: 7
+      sync_protocol: wazaa-bus
+components:
+  - type: dsl-parser
+    repo: gerivdb/KORX
+    path: KORX/
+  - type: zig-compiler
+    repo: gerivdb/KORX
+    path: KORX/src/compiler.zig
+  - type: runtime
+    repo: gerivdb/KORX
+    path: KORX/src/runtime/
+bridges:
+  - target: repo:SPIDX
+    role: consumer
+    protocol: python-import
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:NEXUS
+    role: provider
+    protocol: json-export
+dependencies:
+  - repo: gerivdb/TOPOS
+  - repo: gerivdb/TALEX
+  - repo: gerivdb/SPIDX
+constraints:
+  - cpu_only: true
+  - zig_0_15_compatible: true

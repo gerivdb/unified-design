@@ -1,0 +1,186 @@
+name: kg-edge-kinds
+description: "Registre unifié des EdgeKind pour KG-L et TALEX — Phase D contract-centrality (C4→C5). SOT canonique pour les kinds d'arêtes sémantiques. 15 kinds canoniques (10 Pipeline Ascendant + 5 Causaux) + extensions tracées. GF-16 gate bloquante sur kind inconnu."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: "0xDESIGN_KG_EDGE_KINDS_20260828"
+inherits:
+  - contract-centrality
+depends_on:
+  - contract-centrality
+bridges:
+  - target: repo:KG-L
+    role: implémentation
+    protocol: python-import
+    path: src/runtime/edge_kind_registry.py
+  - target: repo:TALEX
+    role: consommateur
+    protocol: python-import
+  - target: repo:KG-L
+    role: implémentation-zig
+    protocol: zig-module
+    path: src/zig/kg_edge_kinds.zig
+  - target: repo:KG-L
+    role: gate-gf16-zig
+    protocol: zig-module
+    path: src/zig/gf16_edgekind_gate.zig
+  - target: repo:TALEX
+    role: consommateur
+    protocol: zig-module
+    path: src/zig/kg_edge_kinds.zig
+
+capabilities:
+  - name: edge-kind-registry
+    description: "Registre unifié des 15 EdgeKind canoniques + extensions tracées"
+    parameters:
+      core_kinds: 15
+      pipeline_ascendant: 10
+      causal: 5
+      extension_tracing: true
+      intent_hash_required: true
+  - name: gf16-gate
+    description: "Gate bloquante GF-16 : rejette toute mutation avec edge-kind non enregistré"
+    parameters:
+      severity: blocking
+      precommit_gate: true
+      cross_repo_support: true
+      registry_source: src/runtime/edge_kind_registry.py
+  - name: zig-implementation
+    description: "Implémentation Zig 0.14/0.15 du registre et gate GF-16 (Phase D C4→C5)"
+    parameters:
+      target: ENV2 (Zig 0.14/0.15, SSE4.2)
+      module_path: src/zig/kg_edge_kinds.zig
+      gate_path: src/zig/gf16_edgekind_gate.zig
+      build_target: ENV2 (SSE4.2, no AVX2)
+  - name: precommit-gate
+    description: "Gate pré-commit sur kinds stagés dans *.jsonl"
+    parameters:
+      script: scripts/check_staged_edge_kinds.py
+      cross_repo_support: true
+      repo_root_param: --repo-root
+
+pipeline_ascendant_kinds:
+  - name: constrains
+    description: "Skill contraint Design (SK → DS)"
+    phase: pipeline
+  - name: instantiates
+    description: "Design instancie Architecture (DS → AR)"
+    phase: pipeline
+  - name: shapes
+    description: "Paradigm shape Mindset (PA → MS)"
+    phase: pipeline
+  - name: expresses
+    description: "Mindset exprime Being (MS → BE)"
+    phase: pipeline
+  - name: enables
+    description: "Context enable Skills (CX → SK)"
+    phase: pipeline
+  - name: influences
+    description: "Context influence Being (CX → BE)"
+    phase: pipeline
+  - name: grounds
+    description: "Being grounds Mindset (BE → MS)"
+    phase: pipeline
+  - name: interprets
+    description: "Being interpret Context (BE → CX)"
+    phase: pipeline
+  - name: reframes
+    description: "Mindset reframe Paradigm (MS → PA)"
+    phase: pipeline
+  - name: reveals
+    description: "Design reveal Skills (DS → SK)"
+    phase: pipeline
+
+causal_kinds:
+  - name: causes
+    description: "A causes B"
+    phase: causal
+  - name: confounds
+    description: "A confounds B (variable cachée)"
+    phase: causal
+  - name: prevents
+    description: "A previent B"
+    phase: causal
+  - name: correlates
+    description: "A correlate avec B"
+    phase: causal
+  - name: depends
+    description: "A depend de B"
+    phase: causal
+
+founding_extensions:
+  - kind: bridges_to
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: parses
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: packs_into
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: writes
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: loads
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: computes_on
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: produces
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: ships
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: hosts
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: indexed_by
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: target_of
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+  - kind: excluded_from
+    intent_hash: "0xDESIGN_CONTRACT_CENTRALITY_20260825"
+
+phase_d_milestones:
+  - name: C4_PYTHON_SOT
+    description: "SOT Python établi (src/runtime/edge_kind_registry.py + GF-16 Python + precommit gate)"
+    status: done
+  - name: C5_ZIG_IMPLEMENTATION
+    description: "Implémentation Zig 0.14/0.15 du registre + gate GF-16 (kg-edge-kinds C5)"
+    status: pending
+    target_env: ENV2 (Zig 0.14/0.15, SSE4.2, no AVX2)
+  - name: C5_ZIG_BUILD
+    description: "build.zig + build.zig.zon pour compilation ENV2 (SSE4.2, no AVX2)"
+    status: pending
+  - name: C5_ZIG_GF16_GATE
+    description: "Gate GF-16 en Zig (gf16_edgekind_gate.zig) intégré au cycle"
+    status: pending
+  - name: C5_ZIG_TESTS
+    description: "Tests Zig pour kg-edge-kinds (zig test)"
+    status: pending
+
+constraints:
+  - "SOT unique : src/runtime/edge_kind_registry.py (Python) + legacy (15 kinds canoniques)"
+  - "Extensions tracées : intent_hash obligatoire pour register_extension"
+  - "GF-16 bloquante : kind inconnu = mutation rejetée (severity=blocking)"
+  - "Pre-commit gate : scripts/check_staged_edge_kinds.py (cross-repo --repo-root)"
+  - "Zig target: ENV2 (Zig 0.14/0.15, SSE4.2, no AVX2, -Dcpu=westmere)"
+  - "Zig API: 0.14/0.15 compatible (std.ArrayList.init, std.process.getEnvVarOwned)"
+  - "Zig inline modules only: pas de @import relatif depuis sous-dossiers"
+  - "Zig types: u32/i32/*anyopaque pour Win32, pas de types externes"
+
+evidence:
+  - "Registre Python SOT: src/runtime/edge_kind_registry.py"
+  - "Gate Python: kilocode/guards/gf_16_edgekind_gate.py"
+  - "Pre-commit gate: scripts/check_staged_edge_kinds.py"
+  - "Registre legacy: legacy/src/runtime/edge_kind_registry.py (15 kinds canoniques)"
+  - "Extensions fondatrices: 11 kinds (bridges_to, parses, packs_into, writes, loads, computes_on, produces, ships, hosts, indexed_by, target_of, excluded_from)"
+  - "IntentHash extensions: 0xDESIGN_CONTRACT_CENTRALITY_20260825"
+
+references:
+  - "PRD-MOC: PRD-MOC/PRD-MOC-KG35-V10-MIGRATION-MASTER-2026-08-23.md (Phase D)"
+  - "PRD check_staged_edge_kinds: PRD-MOC/repos/check_staged_edge_kinds.md"
+  - "Design contract-centrality: unified-design L0@contract-centrality.yaml"
+  - "INTENT: INTENTS/INTENT-KG35-V10-MIGRATION-20260823.md"
+  - "Legacy registry: legacy/src/runtime/edge_kind_registry.py"
+  - "SOT Python: src/runtime/edge_kind_registry.py"
+  - "GF-16 Python: kilocode/guards/gf_16_edgekind_gate.py"
+  - "Pre-commit gate: scripts/check_staged_edge_kinds.py"
+  - "Phase D contract-centrality: C4→C5_CONTRACTUEL"
+
+---
+
+*Design kg-edge-kinds — L0 — 2026-08-28*

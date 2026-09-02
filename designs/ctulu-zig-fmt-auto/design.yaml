@@ -1,0 +1,118 @@
+name: ctulu-zig-fmt-auto
+version: 1.0.0
+status: draft
+profile: STANDARD
+consumers: []
+
+# Purpose
+purpose: "Zero-friction zig fmt auto-fix loop integrated into zig_validator. Eliminates manual 'zig fmt → re-validate' friction loop."
+
+# Causal Origin
+causal_origin:
+  root_cause: "zig_validator fails on Format ❌ → manual 'zig fmt' → re-validate → friction loop wastes 5-10 min/session"
+  incident: "3 manual zig fmt cycles in LLUX session. Each cycle: validator fails → manual fmt → re-run validator."
+  resolution: "Auto-fix loop built into zig_validator: --auto-fix flag applies fmt and re-validates atomically"
+
+# Integration Point
+integration_point:
+  target: "CTULU/scripts/commands/dev/zig_validator.py"
+  extension: "Add --auto-fix flag to ZigValidator.validate()"
+  behavior: "On Format ❌: run zig fmt → re-check format → return updated result"
+
+# Implementation
+implementation:
+  language: python
+  target_file: "CTULU/scripts/commands/dev/zig_validator.py"
+  
+  changes:
+    - class: ZigValidator
+      method: validate()
+      change: "Add auto_fix parameter, on format failure: run zig fmt → re-validate"
+      
+    - class: ZigValidator
+      method: _check_format()
+      change: "If auto_fix and format fails: subprocess.run([zig, 'fmt'] + files) → return self._check_format(module_path)"
+      
+    - class: ValidationResult
+      change: "Add auto_fixed: bool field"
+      
+    - function: validate_module()
+      change: "Add auto_fix parameter, pass to ZigValidator"
+
+  auto_fix_behavior:
+    on_format_failure:
+      1. "Run: zig fmt <all_zig_files>"
+      2. "Wait for completion (timeout 30s)"
+      3. "Re-run format check (zig fmt --check)"
+      4. "If passes: set auto_fixed=true, continue validation"
+      5. "If still fails: return Format ❌ with auto_fixed=true"
+      
+    safety:
+      - "Only modifies files tracked by git (git ls-files)"
+      - "Preserves git index (no unstaged changes without user consent)"
+      - "Dry-run mode: --auto-fix --dry-run shows what would change"
+      - "Git hook mode: --auto-fix --stage stages changes automatically"
+
+# CLI Interface
+cli:
+  validate_module:
+    - "zig_validator.py <module> [--strict] [--auto-fix] [--auto-fix --dry-run] [--auto-fix --stage]"
+    - "Returns ValidationResult with auto_fixed field"
+    
+  zig_validator_class:
+    - "validator = ZigValidator(auto_fix=True)"
+    - "result = validator.validate(module_path, strict=True)"
+    - "if result.auto_fixed: print('Auto-fixed formatting')"
+
+# Integration with Existing Flow
+integration:
+  zig_validator_py:
+    location: "CTULU/scripts/commands/dev/zig_validator.py"
+    class: ZigValidator
+    method_changes:
+      - __init__: add auto_fix parameter
+      - validate: add auto_fix logic
+      - _check_format: add auto-fix retry logic
+    validate_module: pass auto_fix through
+    
+  ci_integration:
+    github_actions: "zig_validator.py . --strict --auto-fix --stage"
+    pre_commit: "zig_validator.py . --strict --auto-fix"
+    local_dev: "zig_validator.py . --strict --auto-fix --dry-run"
+
+# Configuration
+config:
+  timeout_fmt: 30
+  timeout_recheck: 10
+  dry_run_default: false
+  stage_default: false
+  respect_gitignore: true
+  respect_gitattributes: true
+
+# Tests
+tests:
+  - name: "auto_fix_single_file"
+    setup: "file with zig fmt violations"
+    action: "validator.validate(path, auto_fix=True)"
+    expect: "result.success=True, result.auto_fixed=True, file formatted"
+  - name: "auto_fix_dry_run"
+    setup: "file with violations"
+    action: "validator.validate(path, auto_fix=True, dry_run=True)"
+    expect: "result.success=False, result.auto_fixed=False, file unchanged"
+  - name: "no_violations"
+    setup: "already formatted file"
+    action: "validator.validate(path, auto_fix=True)"
+    expect: "result.success=True, result.auto_fixed=False"
+  - name: "unfixable_violations"
+    setup: "file with syntax error (not fmt issue)"
+    action: "validator.validate(path, auto_fix=True)"
+    expect: "result.success=False, result.auto_fixed=False, error=SyntaxError"
+
+# Meta-coherence
+meta_coherence:
+  verifies: "Zero manual fmt cycles; format gate is auto-healing"
+  source_of_truth: "zig fmt --check"
+  intent_hash: 0xCTULU_ZIG_FMT_AUTO_20260829
+
+# Intent Hash
+intent_hash: 0xCTULU_ZIG_FMT_AUTO_20260829

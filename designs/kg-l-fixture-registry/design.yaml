@@ -1,0 +1,135 @@
+name: kg-l-fixture-registry
+version: 1.0.0
+status: draft
+profile: STANDARD
+consumers: []
+
+# Purpose
+purpose: "Single source of truth for cross-repo fixtures. Fixtures.yaml as canonical registry with checksums, generators, consumers, and pre-push validation."
+
+# Causal Origin
+causal_origin:
+  root_cause: "Fixtures scattered across LLUX/tests/fixtures/, CTULU/.benchmarks/, PIANO/scripts/ — no single source of truth, fragile cross-repo links"
+  incident: "Q4_0 fixture used by LLUX/q243_loader, CTULU/benchmark_q243.py, PIANO/export_q40_fixtures.py — no canonical registry, checksum drift risk"
+  resolution: "Canonical fixtures.yaml in KG-L with checksums, generators, consumers, intent_hash; pre-push hook validates checksums"
+
+# Registry Format
+registry:
+  path: "KG-L/fixtures.yaml"
+  format: yaml
+  schema: "schemas/fixture_registry.schema.json"
+  fields:
+    fixtures:
+      - id: string (unique, kebab-case)
+        path: string (relative to repo root or absolute)
+        summary: string? (path to JSON summary)
+        generator: string (script that produces fixture)
+        intent_hash: string (0xFIXTURE_...)
+        consumers:
+          - repo: string (e.g., LLUX, CTULU, PIANO)
+            component: string (e.g., q243_loader.zig:dequantizeTensor)
+            usage: string (e.g., "Q4_0 dequant oracle")
+        checksum: sha256
+        size_bytes: int
+        created_at: timestamp
+        updated_at: timestamp
+        version: semver?
+        
+# CLI
+cli:
+  commands:
+    - "kg-l fixture list [--repo REPO] [--consumer COMPONENT]"
+    - "kg-l fixture show <id>"
+    - "kg-l fixture add <id> --path <path> --generator <script> --consumer <repo:component> [--summary <path>]"
+    - "kg-l fixture update <id> [--path] [--generator] [--consumer] [--checksum]"
+    - "kg-l fixture verify [--fix] [--repo REPO]"
+    - "kg-l fixture checksum <id> [--recompute]"
+    - "kg-l fixture migrate <id> --from <old_path> --to <new_path>"
+
+# Pre-push Hook
+pre_push_hook:
+  name: "kg-l-fixture-verify"
+  trigger: "pre-push"
+  actions:
+    - "Parse fixtures.yaml"
+    - "For each fixture: verify file exists at path"
+    - "Verify sha256 checksum matches"
+    - "Verify generator script exists"
+    - "Verify all consumer repos/components exist (optional: cross-repo check)"
+    - "On mismatch: --fix rewrites checksum; otherwise block push"
+  integration:
+    pre_commit_config: ".pre-commit-config.yaml → kg-l-fixture-verify"
+    git_hook: ".git/hooks/pre-push"
+
+# Verification Logic
+verification:
+  steps:
+    1. "Parse fixtures.yaml"
+    2. "For each fixture:"
+       - "Resolve path (relative to repo root)"
+       - "Check file exists"
+       - "Compute sha256, compare to registry"
+       - "Verify generator script exists and is executable"
+       - "For each consumer: verify repo exists locally (optional)"
+    3. "Report: OK / MISMATCH (path missing / checksum drift / generator missing)"
+    4. "If --fix: update checksum in fixtures.yaml"
+
+# Fixture Lifecycle
+lifecycle:
+  create:
+    - "kg-l fixture add <id> --path <path> --generator <script> --consumer <repo:component>"
+    - "Auto-compute checksum, write fixtures.yaml"
+    - "Pre-push hook validates on next push"
+  update:
+    - "kg-l fixture update <id> --path <new_path>"
+    - "Auto-recompute checksum"
+  migrate:
+    - "kg-l fixture migrate <id> --from <old> --to <new>"
+    - "Updates path, recomputes checksum, updates consumers if path changed"
+  deprecate:
+    - "kg-l fixture deprecate <id> --reason <reason>"
+    - "Marks status=deprecated, keeps history"
+
+# Cross-Repo Coordination
+cross_repo:
+  generators:
+    - repo: PIANO
+      scripts:
+        - "scripts/export_q40_fixtures.py → q40_block.bin + q40_summary.json"
+        - "scripts/export_q243.py → q243_runnable.q243 + summary"
+    consumers:
+      - repo: LLUX
+        components:
+          - "q243_loader.zig:dequantizeTensor (uses q40_block.bin)"
+          - "q243_loader.zig:loadAuto (uses q243_runnable.q243)"
+      - repo: CTULU
+        components:
+          - "tools/benchmark_q243.py (uses q40_block.bin)"
+  sync_protocol:
+    - "Generator repo updates fixture → updates fixtures.yaml with new checksum/version"
+    - "Consumer repos pull fixtures.yaml → pre-push validates → auto-adapt if --fix"
+
+# Tests
+tests:
+  - name: "verify_checksum_match"
+    setup: "fixture with correct checksum"
+    expect: "pass"
+  - name: "detect_checksum_drift"
+    setup: "fixture modified, checksum stale"
+    expect: "fail with drift report"
+  - name: "verify_generator_exists"
+    setup: "generator script missing"
+    expect: "fail with generator_missing"
+  - name: "auto_fix_checksum"
+    setup: "checksum drift, --fix flag"
+    expect: "checksum updated in registry"
+
+# Meta-coherence
+meta_coherence:
+  verifies: "∀ fixture ∈ fixtures.yaml: checksum matches disk + generator exists + consumers listed"
+  source_of_truth: "KG-L/fixtures.yaml"
+  freshness_gate: "updated_at < 90 days"
+  intent_hash: 0xKG_L_FIXTURE_REGISTRY_20260829
+
+# Intent Hash
+intent_hash: 0xKG_L_FIXTURE_REGISTRY_20260829

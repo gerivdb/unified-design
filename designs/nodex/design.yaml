@@ -1,0 +1,63 @@
+name: nodex
+version: "1.0.0"
+status: active
+profile: CRITICAL
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xNODEX_NATURE_RUNNER_20260821
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  NODEX — Runner de nature des noeuds. Classifie les entities du graphe
+  par type et role. Supervision externe. Consumer de ONTOLOGY et
+  knowledge-graph-memory.
+consumers:
+  - KG-L
+  - ROOTX
+  - CAUSEX
+  - TOPEX
+capabilities:
+  - name: node-type-classification
+    description: Classifie les entités du graphe par type sémantique
+    parameters:
+      entity_id: string
+      graph_context: object
+    outputs:
+      - node_type: string
+      - semantic_type: string
+      - category: string
+      - confidence: number
+  - name: ontology-alignment
+    description: Aligne les entités sur les concepts de l'ontologie ONTOLOGY
+    parameters:
+      ontology_version: string
+    outputs:
+      - ontology_alignment: object
+      - related_entities: array
+  - name: graph-context-analysis
+    description: Analyse le contexte relationnel d'une entité dans le graphe
+    parameters:
+      max_depth: integer
+    outputs:
+      - context_graph: object
+      - edge_analysis: object
+dependencies:
+  - repo: ONTOLOGY
+    protocol: yaml
+  - repo: KG-L
+    protocol: python-import
+bridges:
+  - target: repo:ONTOLOGY
+    role: consumer
+    protocol: yaml-export
+  - target: repo:KG-L
+    role: provider
+    protocol: python-import
+  - target: repo:ROOTX
+    role: consumer
+    protocol: wazaa-channel
+constraints:
+  - cpu_only: true
+  - latency_ms: 50
+  - accuracy_threshold: 0.85

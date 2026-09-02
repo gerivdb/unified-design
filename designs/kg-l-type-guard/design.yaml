@@ -1,0 +1,109 @@
+name: kg-l-type-guard
+version: 1.0.0
+status: draft
+profile: STANDARD
+consumers: []
+
+# Purpose
+purpose: "Verify kernel.domain ⊇ data.domain via domain_links.json before any code compiles. Eliminates domain mismatch at source."
+
+# Causal Origin
+causal_origin:
+  root_cause: "ontological_mismatch: Q4_0_data ⊄ ternary_kernel_domain"
+  incident: "LLUX 7B .q243 silent fail — gemv_ternary (ternary domain) invoked on Q4_0 data (general_f32 domain)"
+  resolution: "gate that verifies kernel.domain ⊇ data.domain before compilation"
+
+# Domain Contracts (from KG-L domain_links.json)
+domain_contracts:
+  kernel_domains:
+    - ternary
+    - general_f32
+    - q4_0
+    - f16
+    - f32
+    - i2_s
+  data_domains:
+    - q4_0
+    - ternary
+    - f16
+    - f32
+    - i2_s
+  subsumption_rules:
+    - kernel: ternary
+      subsumes: [ternary]
+    - kernel: general_f32
+      subsumes: [q4_0, ternary, f16, f32, i2_s]
+    - kernel: q4_0
+      subsumes: [q4_0]
+
+# Implementation Specification
+implementation:
+  language: python
+  entry_point: "kg_l_type_guard.py"
+  integration_points:
+    - pre_commit_hook: ".pre-commit-config.yaml → kg-l-type-guard"
+    - zig_validator_extension: "zig_validator.py --strict --type-guard"
+    - ci_gate: "GitHub Actions / local CI"
+  
+  algorithm:
+    1. parse domain_links.json (freshness < 30 days)
+    2. extract all kernel.domain from domain_links.json
+    3. extract all data.produces from loaders in Zig source
+    4. verify ∀ kernel: kernel.domain ⊇ data.domain
+    5. emit structured error with intent_hash if violation
+
+  zig_source_analysis:
+    kernel_domains_source: "src/kernels/*.zig → domain metadata"
+    loader_produces_source: "src/*loader*.zig → produces metadata"
+    extraction_method: "AST parsing (zig ast) or regex fallback"
+
+# Configuration
+config:
+  domain_links_path: "KG-L/exports/domain_links.json"
+  max_age_days: 30
+  strict_mode: true
+  output_format: "json|text"
+
+# Interfaces
+interfaces:
+  cli:
+    - "kg-l-type-guard check [--strict] [--domain-links PATH]"
+    - "kg-l-type-guard extract-domains --source-dir SRC --output JSON"
+  python_api:
+    - "check_compatibility(domain_links_path, source_dir) → ValidationResult"
+    - "extract_kernel_domains(zig_files) → Dict[kernel, domain]"
+    - "extract_loader_produces(zig_files) → Dict[loader, produces]"
+
+# Error Types
+error_types:
+  - DomainMismatch:
+      fields: [kernel, kernel_domain, data_producer, data_domain, intent_hash]
+      message: "kernel '{kernel}' domain='{kernel_domain}' does not subsume data from '{data_producer}' domain='{data_domain}'"
+  - DomainLinksStale:
+      fields: [age_days, path]
+  - DomainLinksMissing:
+      fields: [expected_path]
+  - SourceParseError:
+      fields: [file, error]
+
+# Tests
+tests:
+  - name: "happy_path_general_f32_subsumes_q4_0"
+    setup: "domain_links with general_f32 kernel, Q4_0 data"
+    expect: "pass"
+  - name: "violation_ternary_kernel_q4_0_data"
+    setup: "domain_links with ternary kernel, Q4_0 data"
+    expect: "DomainMismatch with intent_hash"
+  - name: "stale_domain_links"
+    setup: "domain_links older than 30 days"
+    expect: "DomainLinksStale warning/error"
+
+# Meta-coherence (KG-L)
+meta_coherence:
+  verifies: "∀ kernel ∈ kernels: kernel.domain ⊇ data.domain"
+  source_of_truth: "KG-L/exports/domain_links.json"
+  freshness_gate: "generated_at_utc < 30 days"
+  intent_hash: 0xKG_L_TYPE_GUARD_20260829
+
+# Intent Hash
+intent_hash: 0xKG_L_TYPE_GUARD_20260829

@@ -1,5 +1,215 @@
 name: llux
-version: 1.0.0
+version: 2.0.0
 status: active
 profile: STANDARD
 consumers: []
+
+# Causal Resolution Principles (derived from LLUX 7B .q243 silent fail resolution)
+principles:
+  - name: domain_first
+    statement: "Domain ontology precedes implementation. Kernel.domain must subsume data.domain before any code is written."
+    source: "causal_root: ontological_mismatch(Q4_0_data ⊄ ternary_kernel)"
+    enforcement: "kg-l-type-guard pre-commit hook"
+    
+  - name: ub_as_first_class_risk
+    statement: "Undefined Behavior is not a rare bug — it is the primary architectural risk. @Vector on unaligned data = silent hang."
+    source: "UB trigger: @Vector(4,f32) on unaligned data → silent hang w/o traces"
+    enforcement: "kg-l-type-guard + ctulu-zig-debug-adapter + ctulu-zig-fmt-auto"
+    
+  - name: trace_as_mirror
+    statement: "std.debug.print is not optional debugging — it is a mandatory mirror. Without traces, the compiler optimizes UB into silent hang."
+    source: "With traces: completes. Without traces: hang. Mirror effect prevents UB optimization."
+    enforcement: "ctulu-zig-debug-adapter (live DWARF/CodeView) + mandatory trace gates"
+    
+  - name: kernel_versioning
+    statement: "Kernels are versioned domain contracts. Replacement = domain generalization + fixture migration."
+    source: "gemv_ternary (v1, ternary) → gemv_f32 (v2, general_f32) + fixture migration"
+    enforcement: "kg-l-kernel-versioner + fixtures.yaml cross-repo"
+    
+  - name: format_as_gate
+    statement: "Format is not style — it is a gate. Manual zig fmt is friction; auto-fix loop is mandatory."
+    source: "zig_validator Format ❌ → manual zig fmt → re-validate → friction loop"
+    enforcement: "ctulu-zig-fmt-auto (--auto-fix loop)"
+    
+  - name: zombie_prevention
+    statement: "Zombie processes are not ops problems — they are build correctness risks. AccessDenied on rebuild = correctness failure."
+    source: "llux.exe zombie → AccessDenied on rebuild → silent CI failure"
+    enforcement: "ctulu-auto-cleanup-hook (pre-build)"
+
+  - name: causal_traceability
+    statement: "Every commit must carry its causal lineage: intent_hash → domain_links → causal_diff."
+    source: "git diff shows what; causal_diff shows why. IntentHash: 0xCAUSAL_RESOLUTION_LLUX_Q40_GEMV_20260829"
+    enforcement: "kg-l-causal-diff post-commit + intent_hash in commit msg"
+
+# Domain Ontology (from KG-L domain_links.json)
+domain_ontology:
+  data_domains:
+    - q4_0
+    - ternary
+    - f16
+    - f32
+    - i2_s
+  kernel_domains:
+    - name: ternary
+      subsumes: [ternary]
+      kernels: [gemv_ternary_f32]
+      status: deprecated
+      superseded_by: general_f32
+    - name: general_f32
+      subsumes: [q4_0, ternary, f16, f32, i2_s]
+      kernels: [gemv_f32]
+      status: active
+    - name: q4_0
+      subsumes: [q4_0]
+      kernels: [gemv_f32]
+      status: active
+      
+# Kernel Version Registry
+kernel_registry:
+  - name: gemv_ternary_f32
+    version: "1.0.0"
+    domain: ternary
+    status: deprecated
+    superseded_by: gemv_f32
+    intent_hash: 0xKERNEL_TERNARY_GEMV_20260716
+    fixtures:
+      - tests/fixtures/ternary_gemv.bin
+      
+  - name: gemv_f32
+    version: "2.0.0"
+    domain: general_f32
+    status: active
+    supersedes: [gemv_ternary_f32]
+    intent_hash: 0xKERNEL_GEMV_F32_20260829
+    simd: SSE4.2
+    unroll: 4
+    fixtures:
+      - tests/fixtures/q40_block.bin
+      - tests/fixtures/q243_runnable.q243
+      
+# Fixtures Registry (cross-repo)
+fixtures_registry:
+  - id: q40_block
+    path: LLUX/tests/fixtures/q40_block.bin
+    summary: LLUX/tests/fixtures/q40_summary.json
+    generator: PIANO/scripts/export_q40_fixtures.py
+    intent_hash: 0xFIXTURE_Q40_BLOCK_20260825
+    consumers:
+      - LLUX/src/q243_loader.zig:dequantizeTensor
+      - CTULU/tools/benchmark_q243.py
+    checksum: sha256:placeholder
+    
+  - id: q243_runnable
+    path: LLUX/tests/fixtures/q243_runnable.q243
+    summary: LLUX/tests/fixtures/q243_runnable_summary.json
+    generator: PIANO/scripts/export_q243.py
+    intent_hash: 0xFIXTURE_Q243_RUNNABLE_20260825
+    consumers:
+      - LLUX/src/q243_loader.zig:loadAuto
+      - CTULU/tools/benchmark_q243.py
+
+# Causal Dev Loop (from resolution analysis)
+causal_dev_loop:
+  - step: 1
+    name: intent_to_domain_links
+    tool: "manual + kg-l-domain-links-generator"
+    output: "domain_links.json (data.domain, kernel.domain, intent_hash)"
+    
+  - step: 2
+    name: kg_l_type_guard
+    tool: "kg-l-type-guard pre-commit hook"
+    verification: "kernel.domain ⊇ data.domain"
+    
+  - step: 3
+    name: ctulu_zig_validator
+    tool: "ctulu-zig-validator --strict --auto-fix"
+    checks: ["build", "warnings=0", "format auto-fix"]
+    
+  - step: 4
+    name: ctulu_auto_cleanup
+    tool: "ctulu-auto-cleanup-hook (pre-build)"
+    action: "kill zombies, free locks"
+    
+  - step: 5
+    name: live_debug
+    tool: "ctulu-zig-debug-adapter (live DWARF/CodeView)"
+    features: ["breakpoints", "watch @Vector", "call stack"]
+    
+  - step: 6
+    name: causal_diff
+    tool: "kg-l-causal-diff post-commit"
+    output: "CAUSAL_DIFF.md + intent_hash traceability"
+    
+  - step: 7
+    name: kernel_versioner_fixture_registry
+    tool: "kg-l-kernel-versioner + fixtures.yaml"
+    action: "bump version, update fixtures.yaml, link cross-repo"
+
+# Derived Tools (7 inédits from causal resolution)
+derived_tools:
+  - name: kg-l-type-guard
+    type: pre-commit hook / CI gate
+    purpose: "Verify kernel.domain ⊇ data.domain via domain_links.json"
+    status: to_create
+    repo: CTULU/tools/kg-l-type-guard
+    
+  - name: ctulu-zig-debug-adapter
+    type: DAP (Debug Adapter Protocol) for Zig on Windows
+    purpose: "Live DWARF/CodeView attach, breakpoints, watch @Vector"
+    status: to_create
+    repo: CTULU/tools/ctulu-zig-debug-adapter
+    
+  - name: kg-l-kernel-versioner
+    type: CLI + registry
+    purpose: "Bump kernel versions, update fixtures.yaml, link cross-repo"
+    status: to_create
+    repo: CTULU/tools/kg-l-kernel-versioner
+    
+  - name: ctulu-zig-fmt-auto
+    type: zig_validator extension
+    purpose: "--auto-fix loop for zig fmt (zero-friction CI)"
+    status: to_create
+    repo: CTULU/scripts/commands/dev/zig_validator.py (extend)
+    
+  - name: kg-l-fixture-registry
+    type: YAML registry + pre-push hook
+    purpose: "Single source of truth for cross-repo fixtures (fixtures.yaml)"
+    status: to_create
+    repo: KG-L/fixtures.yaml + pre-push hook
+    
+  - name: ctulu-auto-cleanup-hook
+    type: pre-build hook / zig_validator extension
+    purpose: "Kill zombies, free locks pre-build"
+    status: to_create
+    repo: CTULU/scripts/ctulu-auto-cleanup-hook.py
+    
+  - name: kg-l-causal-diff
+    type: post-commit hook / CLI
+    purpose: "Generate CAUSAL_DIFF.md from git diff + domain_links.json + intent_hash"
+    status: to_create
+    repo: CTULU/tools/kg-l-causal-diff
+
+# Meta-coherence verification (KG-L)
+meta_coherence_checks:
+  - name: domain_links_freshness
+    check: "domain_links.json generated_at_utc < 30 days"
+    source: "KG-L/exports/domain_links.json"
+    
+  - name: fixture_checksums
+    check: "All fixtures.yaml entries have matching sha256 on disk"
+    source: "fixtures.yaml + pre-push hook"
+    
+  - name: kernel_domain_subsumption
+    check: "∀ kernel ∈ kernels: kernel.domain ⊇ data.domain (via domain_links.json)"
+    source: "kg-l-type-guard"
+    
+  - name: fixture_registry_coherence
+    check: "∀ fixture ∈ fixtures.yaml: generator exists + consumers listed + checksum matches"
+    source: "fixtures.yaml + pre-push hook"
+    
+  - name: causal_diff_coverage
+    check: "Every commit on main has CAUSAL_DIFF.md with intent_hash"
+    source: "kg-l-causal-diff post-commit hook"
+
+# Intent Hash
+intent_hash: 0xLLUX_CAUSAL_RESOLUTION_DESIGN_20260829

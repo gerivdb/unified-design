@@ -1,0 +1,107 @@
+name: EGMI-v0.3
+version: 1.0.0
+status: active
+layer: L4-TOOLS
+intent_hash: 0xEGMI_V03_20260831
+inherits:
+- fractal-engineering-strata
+- kg35
+- meta-coherence
+depends_on:
+- FLEX
+- CodeDB-E5620
+- KG-L
+- WAZAA
+- CTULU
+- INFX
+bridges:
+- target: FLEX
+  role: consumer
+  protocol: http-api
+- target: CodeDB-E5620
+  role: producer
+  protocol: mcp
+- target: KG-L
+  role: consumer
+  protocol: mcp
+- target: WAZAA
+  role: publisher
+  protocol: bus
+- target: CTULU
+  role: consumer
+  protocol: tool-integration
+parameters:
+  fractal:
+    pattern: sparse-selective-gating
+    max_depth: 3
+    strata: [L0, L1, L2, L3, L4, L5]
+    auto_params:
+      - eta
+      - kappa
+      - nu
+      - alpha
+      - lambda_stab
+  egmi:
+    num_threads: 16
+    s_dim: 16
+    t0: 1.0
+    tau: 1000000.0
+    dt: 0.01
+    epsilon: 0.01
+    sync_interval: 100
+    checkpoint_interval: 1000
+    alpha_stab: 0.1
+    hysteresis_thresh: 0.5
+    max_norm: 100.0
+    mue_threshold: 0.02
+    divergence_thresh: 1e6
+    temp_min: 1e-9
+    entropy_min: 0.1
+    entropy_max: 0.9
+    tm_max: 0.8
+    f_grav_min: 0.05
+    nabla_h_max: 0.2
+  mue_types:
+    - pupale
+    - ecdysone
+    - martensitique
+    - luciferase
+    - phototropique
+    - sporale
+    - ecdysse
+    - cristalline
+    - amorphe
+    - vesiculaire
+    - fibrillaire
+    - gelatineuse
+    - magnetique
+    - osmotique
+    - electrochromique
+    - piezoelectrique
+    - neotenique
+  holmes_modules:
+    - epistemverse
+    - criminalverse
+    - mythoverse_h
+  kg_l_integration:
+    fractal_engine: true
+    universal_functor: true
+    keel_r9_validation: true
+    guards: [GF-1, GF-2, GF-3, GF-4, GF-5, GF-6, GF-7, GF-8, GF-9, GF-10, GF-11, GF-12, GF-13, GF-14]
+    axes_36_39:
+      axis_36_f_grav: true
+      axis_37_parallelism: true
+      axis_38_trust_gate: true
+      axis_39_wazaa_bus: true
+    cycle_kg35:
+      macro_cycle_iterations: 100
+      steps: 17
+      vibe_artifacts: 6
+  wazaa_channels:
+    - L4-TOOLS/EGMI/mutations/*
+    - L4-TOOLS/EGMI/metrics/*
+    - L4-TOOLS/EGMI/divergence/*
+performance:
+  latency_p99: 50.0
+  power_max: 15.0
+  memory_gb: 2.0

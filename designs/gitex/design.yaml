@@ -1,0 +1,68 @@
+name: gitex
+version: "1.0.0"
+status: proposed
+profile: STANDARD
+strate: L0-CANON
+type: governance
+intent_hash: 0xCAAX_GITEX_TOPOLOGY_20260821
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  GITEX — Runner de topologie Git. Analyse la structure des dépôts,
+  les branches, les commits et produit un graphe de dépendances.
+  Couche 0 (L0-CANON), type governance.
+consumers:
+  - KIX
+  - SYNCX
+  - DEPLOYEX
+  - REFREX
+capabilities:
+  - name: repo-topology-analysis
+    description: Analyse la structure des dépôts et produit un graphe de dépendances
+    parameters:
+      repo_id: string
+      branch: string
+    outputs:
+      - topology_graph: object
+      - branch_health: object
+      - commit_density: number
+  - name: branch-health-check
+    description: Vérifie la santé des branches (orphanes, doublons, divergence)
+    parameters:
+      repo_id: string
+    outputs:
+      - health_status: object
+      - anomalies: array
+      - recommendations: array
+  - name: commit-density-analyzer
+    description: Calcule la densité de commits et détecte les patterns anormaux
+    parameters:
+      time_window: object
+    outputs:
+      - density_report: object
+      - hotspots: array
+dependencies:
+  - repo: gerivdb/TOPOS
+    protocol: yaml
+  - repo: gerivdb/KIX
+    protocol: cli
+  - repo: gerivdb/GOVERNANCE-HUB
+    protocol: yaml
+bridges:
+  - target: repo:TOPOS
+    role: consumer
+    protocol: json
+  - target: repo:KIX
+    role: consumer
+    protocol: cli
+  - target: repo:GOVERNANCE-HUB
+    role: consumer
+    protocol: yaml
+  - target: repo:KNOWN_REPOSITORIES
+    role: consumer
+    protocol: yaml-import
+constraints:
+  - cpu_only: true
+  - batch_mode: true
+  - no_github_actions: true

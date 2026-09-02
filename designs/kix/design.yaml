@@ -1,0 +1,76 @@
+name: kix
+version: 1.0.0
+status: active
+profile: STANDARD
+layer: L2-PLATFORM
+intent_hash: 0xKIX_ORCHESTRATOR_20260828
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  KIX — Orchestrateur central du cycle de vie des runners RLM.
+  Gère l'orchestration des runners cognitifs (RLM-243, LLUX, TLM, TIMX, etc.)
+  et leur cycle de vie (boot, run, verify, shutdown). Logical layers: N1, N3.
+consumers:
+  - RLM-243
+  - LLUX
+  - TLM
+  - TIMX
+  - TALEX
+  - RADX
+capabilities:
+  - name: runner-lifecycle
+    description: Orchestrer le cycle de vie complet des runners RLM cognitifs
+    parameters:
+      phases:
+        - discover
+        - boot
+        - run
+        - verify
+        - shutdown
+      validation_backend: RLM-243
+  - name: tlm-runner
+    description: Execution de scripts TLM-LANG via the TLM runner
+    parameters:
+      port: 8801
+      validation_port: 8793
+  - name: parallel-runner-manager
+    description: Manage multiple runner instances with semaphore-based concurrency
+    parameters:
+      max_concurrency: 6
+      memory_guard: true
+components:
+  - type: orchestrator
+    repo: gerivdb/KIX
+    path: KIX/
+  - type: runner-dispatcher
+    repo: gerivdb/KIX
+    path: KIX/src/
+  - type: validation
+    repo: gerivdb/RLM-243
+    protocol: http
+    port: 8793
+bridges:
+  - target: repo:RLM-243
+    role: consumer
+    protocol: http
+    port: 8793
+  - target: repo:LLUX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:TLM-LANG
+    role: consumer
+    protocol: cli
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-bus
+dependencies:
+  - repo: gerivdb/RLM-243
+  - repo: gerivdb/LLUX
+  - repo: gerivdb/TLM-LANG
+  - repo: gerivdb/TIMX-FEATURE-STORE
+  - repo: gerivdb/TALEX
+  - repo: gerivdb/RADX
+constraints:
+  - cpu_only: true
+  - ram_limit_mb: 24576
