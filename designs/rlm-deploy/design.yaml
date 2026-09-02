@@ -1,0 +1,26 @@
+---
+name: RLM-DEPLOY
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: operational
+intent_hash: 0xRLM_DEPLOY_RUNNER_20260821
+description: >
+  RLM-DEPLOY — Service de deploiement pour les runners RLM.
+
+dependencies:
+    - kix
+
+consumers:
+  - rlm-config
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner RLM-DEPLOY
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

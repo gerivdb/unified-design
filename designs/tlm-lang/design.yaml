@@ -1,0 +1,27 @@
+---
+name: TLM-LANG
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xTLM_LANG_RUNNER_20260821
+description: >
+  TLM-LANG — Runner de langage topological. Valide les topologies TQL et detecte les ambiguites semantiques.
+
+dependencies:
+    - rlm243
+
+consumers:
+  - nodex
+  - topex
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner TLM-LANG
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

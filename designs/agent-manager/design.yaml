@@ -1,0 +1,27 @@
+---
+name: AGENT-MANAGER
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: orchestrator
+intent_hash: 0xAGENT_MANAGER_RUNNER_20260820
+description: >
+  AGENT-MANAGER — Agent Manager GeriCode - Backend d'orchestration des sessions KiloCode.
+
+dependencies:
+    - kix
+
+consumers:
+  - kix
+  - conversation-cognitive
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner AGENT-MANAGER
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

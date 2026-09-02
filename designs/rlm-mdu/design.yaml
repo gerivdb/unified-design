@@ -1,0 +1,26 @@
+---
+name: RLM-MDU
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: operational
+intent_hash: 0xRLM_MDU_RUNNER_20260821
+description: >
+  RLM-MDU — Module MDU (Multi-Dimension Utility). Role a definir.
+
+dependencies:
+    - rlm-config
+
+consumers:
+  - kix
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner RLM-MDU
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

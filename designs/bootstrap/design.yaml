@@ -1,0 +1,31 @@
+---
+name: Bootstrap Runner
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: orchestrator
+intent_hash: 0xBOOTSTRAP_RUNNER_20260820
+description: >
+  Bootstrap Runner — Orchestrateur de l'amorcage systeme. Sequence gateway-manager -> KIX -> Arbiter -> trixd -> wazaa -> flex-api.
+
+dependencies:
+    - gateway-manager
+    - kix
+    - arbiter
+    - trixd
+    - wazaa
+    - flex-api
+
+consumers:
+  - kix
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner Bootstrap Runner
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

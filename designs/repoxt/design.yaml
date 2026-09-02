@@ -1,0 +1,27 @@
+---
+name: REPOX
+version: "1.0.0"
+status: proposed
+strate: L0-CANON
+type: governance
+intent_hash: 0xREPOX_HEALTH_RUNNER_20260821
+description: >
+  REPOX — Runner de sante des repositories. Verifie l'etat de tous les clones locaux et detecte les anomalies.
+
+dependencies:
+    - topos
+    - gericode
+
+consumers:
+  - kix
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner REPOX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

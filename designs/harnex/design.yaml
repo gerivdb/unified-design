@@ -1,0 +1,28 @@
+---
+name: HARNEX
+version: "1.0.0"
+status: proposed
+strate: L0-CANON
+type: governance
+intent_hash: 0xHARNEX_HEALTH_RUNNER_20260821
+description: >
+  HARNEX — Runner de sante du harness. Verifie l'etat des composants d'infrastructure et des connecteurs.
+
+dependencies:
+    - batmcp
+    - governance-hub
+
+consumers:
+  - kix
+  - gateway-manager
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner HARNEX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

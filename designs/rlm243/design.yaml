@@ -1,0 +1,26 @@
+---
+name: RLM-243
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: operational
+intent_hash: 0xRLM243_RESOLUTION_RUNNER_20260821
+description: >
+  RLM-243 — Runner de score de resolution. Evalue les corrections appliquees et produit un vote ternaire.
+
+dependencies:
+  []
+
+consumers:
+  - kix
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner RLM-243
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

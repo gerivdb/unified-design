@@ -1,0 +1,26 @@
+---
+name: RLM-RELEASE
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: operational
+intent_hash: 0xRLM_RELEASE_RUNNER_20260821
+description: >
+  RLM-RELEASE — Service de release. Gere les versions, les tags et les changelogs.
+
+dependencies:
+    - rlm-deploy
+
+consumers:
+  - rlm-config
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner RLM-RELEASE
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

@@ -1,0 +1,31 @@
+---
+name: FLEX
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: infrastructure
+intent_hash: 0xFLEX_DESIGN_20260831
+description: >
+  FLEX — Framework de Lexique et d'Expression. Gere les lexiques, expressions et patterns semantiques.
+
+dependencies:
+    - ontology
+    - kg-l
+    - llux
+
+consumers:
+  - kix
+  - llux-match
+  - infx
+  - codedb-e5620
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner FLEX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

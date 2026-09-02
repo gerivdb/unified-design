@@ -1,0 +1,27 @@
+---
+name: RLM-SECURE
+version: "1.0.0"
+status: active
+strate: L2-PLATFORM
+type: operational
+intent_hash: 0xRLM_SECURE_RUNNER_20260821
+description: >
+  RLM-SECURE — Service de securite. Scan les repos pour detecter les vulnerabilites et les secrets exposes.
+
+dependencies:
+  []
+
+consumers:
+  - kix
+  - rlm-config
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner RLM-SECURE
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

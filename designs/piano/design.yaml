@@ -1,0 +1,28 @@
+---
+name: PIANO
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: operational
+intent_hash: 0xPIANO_BASE243_RUNNER_20260902
+description: >
+  PIANO — Calculateur Base243 (golden vector) pour LLUX. Service de calcul mathematique specialise.
+
+dependencies:
+  []
+
+consumers:
+  - llux-match
+  - llux-index
+  - kix
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner PIANO
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

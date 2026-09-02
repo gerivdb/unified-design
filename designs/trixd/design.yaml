@@ -1,0 +1,26 @@
+---
+name: TRIX Daemon
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: daemon
+intent_hash: 0xTRIXD_RUNNER_20260821
+description: >
+  TRIX Daemon — Daemon conteneurs TRIX (7243). Demarre via KIX ou bootstrap.
+
+dependencies:
+  []
+
+consumers:
+  - kix
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner TRIX Daemon
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

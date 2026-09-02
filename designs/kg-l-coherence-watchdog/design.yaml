@@ -1,0 +1,27 @@
+---
+name: KG-L Coherence Watchdog
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xKG_L_COHERENCE_WATCHDOG_20260827
+description: >
+  KG-L Coherence Watchdog — Watchdog de metacohérence KG-L. Publie les alertes governance.pathology sur le bus WAZAA.
+
+dependencies:
+    - kix
+    - wazaa
+
+consumers:
+  - conversation-cognitive
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner KG-L Coherence Watchdog
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true
