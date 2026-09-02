@@ -1,0 +1,27 @@
+---
+name: CAUSEX
+version: "1.0.0"
+status: proposed
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xCAUSEX_CAUSAL_RUNNER_20260821
+description: >
+  CAUSEX — Runner causal avance. Detecte les relations de cause a effet dans les graphes de dependances.
+
+dependencies:
+    - knowledge-graph-memory
+
+consumers:
+  - ROOTX
+  - KG-L
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner CAUSEX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

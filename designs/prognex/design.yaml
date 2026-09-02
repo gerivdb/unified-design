@@ -1,0 +1,28 @@
+---
+name: PROGNEX
+version: "1.0.0"
+status: proposed
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xPROGNEX_PREDICTION_RUNNER_20260821
+description: >
+  PROGNEX — Runner de prognostic. Predit l'evolution des incidents et des tendances a partir des donnees historiques.
+
+dependencies:
+    - knowledge-graph-memory
+    - supermemory
+
+consumers:
+  - LLUX-MATCH
+  - TALEX
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner PROGNEX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

@@ -1,0 +1,27 @@
+---
+name: TELOX
+version: "1.0.0"
+status: proposed
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xTELOX_FINALITY_RUNNER_20260821
+description: >
+  TELOX — Runner de finitude teleologique. Evalue la coherence des objectifs et des finalites dans les documents de gouvernance.
+
+dependencies:
+    - ontology
+    - knowledge-graph-memory
+
+consumers:
+  - Conversation Cognitive
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner TELOX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

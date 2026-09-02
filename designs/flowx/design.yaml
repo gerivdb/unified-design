@@ -1,0 +1,29 @@
+---
+name: FLOWX
+version: "1.0.0"
+status: proposed
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xFLOWX_DATAFLOW_RUNNER_20260821
+description: >
+  FLOWX — Runner de flux de donnees. Analyse et optimise les flux de donnees entre repositories.
+
+dependencies:
+    - wazaa
+    - kix
+    - topos
+
+consumers:
+  - WAZAA
+  - KIX
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner FLOWX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true

@@ -1,0 +1,27 @@
+---
+name: ROOTX
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: cognitive
+intent_hash: 0xROOTX_CAUSAL_TREE_RUNNER_20260821
+description: >
+  ROOTX — Runner de causalite racine. Construit des arbres de causes multiples et valide la causalite en < 50ms.
+
+dependencies:
+    - knowledge-graph-memory
+
+consumers:
+  - TALEX
+  - CAUSEX
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du runner ROOTX
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - cpu_only: true
