@@ -1,0 +1,116 @@
+---
+name: runner-family-stratification
+version: "1.0.0"
+status: active
+strate: L0-CANON
+type: governance
+intent_hash: 0xRUNNER_FAMILY_STRATIFICATION_20260902
+description: >
+  Stratification des 50 runners du metacluster en 7 sous-familles cohérentes.
+  Audit complet : 21 cognitifs + 29 non-cognitifs. Chaque sous-famille a un
+  rôle fonctionnel unique, un orchestrateur ou point d'entrée clair.
+
+families:
+  # 1. GOVERNANCE LAYER (L0-CANON) — 6 runners
+  - name: gov-l0
+    label: "Governance Layer (L0-CANON)"
+    runner_count: 6
+    runner_ids: [gitex, repoxt, syncx, referex, kglx, harnex]
+    strate: L0-CANON
+    types: [governance]
+    status_pattern: "all proposed"
+    orchestration:
+      entry_point: kix (delegue via ECOS-CLI)
+      pattern: SOT-gate + GF-15 pre-commit
+      purpose: "Validation architecturelle, topology analysis, health checks, cross-ref coherence"
+
+  # 2. CAUSALITY GATEWAY (L1_CAUSALITY) — 1 runner
+  - name: causality-l1
+    label: "Causality Gateway (L1_CAUSALITY)"
+    runner_count: 1
+    runner_ids: [gateway-manager]
+    strate: L1_CAUSALITY
+    types: [gateway]
+    status: active
+    orchestration:
+      entry_point: bootstrap
+      pattern: "bdcp-kiva-workflow (BDCP permanent)"
+      port: 9000
+      purpose: "BDCP clapet network, anonymity proxy, traffic routing"
+
+  # 3. ORCHESTRATION PLATFORM (L2-PLATFORM) — 4 runners
+  - name: orchestration-l2
+    label: "Orchestration Platform (L2-PLATFORM)"
+    runner_count: 4
+    runner_ids: [kix, bootstrap, agent-manager, timx-feature-store]
+    strate: L2-PLATFORM
+    types: [orchestrator, operational]
+    orchestration:
+      entry_point: bootstrap -> kix -> agent-manager
+      pattern: "session-boot-sequence, probe-budget-contract, agent-budget-check"
+      purpose: "Service orchestration, system bootstrap, agent session management"
+
+  # 4. PROCESS ENGINE (L4-TOOLS) — 1 runner
+  - name: process-l4
+    label: "Process Engine (L4-TOOLS)"
+    runner_count: 1
+    runner_ids: [trixd]
+    strate: L4-TOOLS
+    types: [daemon]
+    status: active
+    orchestration:
+      entry_point: kix
+      pattern: "trix-build-compile, trix-linux-dual, pre-push-path-audit"
+      port: 7243
+      purpose: "TRIX container daemon, zig runtime"
+
+  # 5. INFRASTRUCTURE SERVICES (L4-TOOLS) — 5 runners
+  - name: infra-l4
+    label: "Infrastructure Services (L4-TOOLS)"
+    runner_count: 5
+    runner_ids: [wazaa, flex-api, flex, infx, codedb-e5620]
+    strate: L4-TOOLS
+    types: [dashboard, api, infrastructure, citizen]
+    status: all active
+    orchestration:
+      entry_point: wazaa (mission control) -> flex-api
+      pattern: "slm-hardware-environment, win32-singleton-bind, ecos-cli-launcher"
+      purpose: "Dashboard, lexicon, citizen interface, hardware knowledgebase"
+
+  # 6. RLM SERVICE LAYER (archived) — 9 runners
+  - name: rlm-archived
+    label: "RLM Service Layer (archived)"
+    runner_count: 9
+    runner_ids: [rlm243, rlm-metrics, rlm-config, rlm-deploy, rlm-graph, rlm-secure, rlm-incident, rlm-release, rlm-mdu]
+    strate: L2-PLATFORM / L4-TOOLS
+    types: [operational]
+    status: "all archived except rlm-mdu (draft)"
+    archived_at: "2026-08-24"
+    archived_reason: "Superseded by KIX orchestration layer"
+    orchestration:
+      purpose: "Legacy RLM services — non-operational, retained for rollback reference"
+
+  # 7. EXTERNAL DEPENDENCIES — 3 runners
+  - name: external
+    label: "External Dependencies"
+    runner_count: 3
+    runner_ids: [llm-core, piano, trix]
+    strate: external
+    types: [llm, operational]
+    status: all proposed
+    orchestration:
+      purpose: "External dependencies (LLM inference, Base243 calculator, TRIX backend)"
+
+# STRATIFICATION BENEFITS FOR ORCHESTRATION:
+# 1. Each sub-family has a single orchestrator or entry point (KIX, bootstrap, wazaa)
+# 2. Archived runners (RLM layer) are isolated — no accidental activation
+# 3. External dependencies are explicit and isolated — BDCP safety enforced
+# 4. L0 governance is self-contained (SOT gate + design enforcement GF-15)
+# 5. Hardware constraints (codedb-e5620) are explicit in infra family
+# 6. Each family maps to a logical N+1/N+2/N+3/N+4 layer
+
+# CROSS-FAMILY DEPENDENCIES:
+# - gov-l0 -> orchestration-l2 (KIX delegates to governance runners)
+# - orchestration-l2 -> causality-l1 (bootstrap checks gateway first)
+# - process-l4 -> orchestration-l2 (trixd starts via KIX)
+# - infra-l4 -> orchestration-l2 (wazaa/flex-api start via bootstrap)
