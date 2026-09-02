@@ -1,0 +1,108 @@
+name: kg-l-kernel-versioner
+version: 1.0.0
+status: draft
+profile: STANDARD
+consumers: []
+
+# Purpose
+purpose: "Semantic versioning for kernels with domain contracts, fixture migration, and cross-repo traceability. Replaces ad-hoc kernel replacement with governed evolution."
+
+# Causal Origin
+causal_origin:
+  root_cause: "Ad-hoc kernel replacement (gemv_ternary → gemv_f32) without versioning, fixture migration, or cross-repo traceability"
+  incident: "gemv_ternary (v1, ternary) → gemv_f32 (v2, general_f32) done ad-hoc. No version bump, no fixture migration plan, no cross-repo notification."
+  resolution: "Governed kernel lifecycle: version bump → domain change → fixture migration → cross-repo notification → CHANGELOG"
+
+# Domain Model
+domain_model:
+  kernel_entry:
+    fields:
+      - name: string
+      - version: semver
+      - domain: [ternary, general_f32, q4_0, f16, f32, i2_s]
+      - status: [active, deprecated, experimental, superseded]
+      - supersedes: [string] # kernel names
+      - superseded_by: string?
+      - intent_hash: string
+      - fixtures: [fixture_ref]
+      - simd: string?
+      - unroll: int?
+      - description: string
+      - created_at: timestamp
+      - updated_at: timestamp
+      - created_by: string
+      
+  fixture_ref:
+    fields:
+      - id: string
+      - path: string
+      - checksum: sha256
+      - generator: string
+      - intent_hash: string
+
+# Registry
+registry:
+  path: "KG-L/kernels.yaml"
+  format: yaml
+  validation: "schemas/kernel_registry.schema.json"
+  intent_hash_index: true
+
+# CLI
+cli:
+  commands:
+    - "kg-l kernel list [--domain DOMAIN] [--status STATUS]"
+    - "kg-l kernel show <name>"
+    - "kg-l kernel bump <name> --version <semver> [--domain DOMAIN] [--supersedes KERNEL] [--breaking]"
+    - "kg-l kernel deprecate <name> --superseded-by <name>"
+    - "kg-l kernel migrate-fixtures <name> --from <old_fixture> --to <new_fixture>"
+    - "kg-l kernel validate [--strict]"
+    - "kg-l kernel changelog <name> [--since VERSION]"
+
+# Workflow: Kernel Version Bump
+workflow_bump:
+  steps:
+    1. "kg-l kernel bump <name> --version <semver> [--domain NEW_DOMAIN] [--supersedes OLD] [--breaking]"
+    2. "Auto-update kernels.yaml with new version, domain, supersedes"
+    3. "Run kg-l-fixture-registry migrate --kernel <name> --from <old> --to <new>"
+    4. "Auto-generate CHANGELOG.md entry with intent_hash"
+    4. "Auto-update domain_links.json kernel domain if changed"
+    5. "Run kg-l-type-guard to verify new domain subsumption"
+    6. "Run tests with new kernel"
+    7. "Commit with message: 'feat(kernel): <name> vX.Y.Z — intent_hash'"
+
+# Integration Points
+integration:
+  kg_l_type_guard: "Post-bump: verify new kernel.domain ⊇ all data.domains"
+  kg_l_fixture_registry: "Auto-migrate fixtures.yaml references"
+  kg_l_causal_diff: "Auto-generate CAUSAL_DIFF.md for kernel bump commit"
+  kg_l_domain_links: "Update kernel domain in domain_links.json"
+  ctulu_zig_validator: "Run full validation suite post-bump"
+
+# Configuration
+config:
+  registry_path: "KG-L/kernels.yaml"
+  schema_path: "schemas/kernel_registry.schema.json"
+  changelog_path: "CHANGELOG.md"
+  domain_links_path: "KG-L/exports/domain_links.json"
+  fixtures_registry_path: "KG-L/fixtures.yaml"
+
+# Tests
+tests:
+  - name: "bump_minor_non_breaking"
+    setup: "kernel v1.0.0 → v1.1.0, same domain"
+    expect: "version bump, CHANGELOG entry, no domain change"
+  - name: "bump_major_domain_generalization"
+    setup: "kernel v1.0.0 ternary → v2.0.0 general_f32"
+    expect: "version bump, domain change, fixture migration triggered, type-guard passes"
+  - name: "deprecate_with_superseded"
+    setup: "deprecate kernel A, superseded by B"
+    expect: "status=deprecated, superseded_by=B, CHANGELOG entry"
+
+# Meta-coherence
+meta_coherence:
+  verifies: "Kernel version history traces domain evolution; fixtures migrate with kernel"
+  source_of_truth: "KG-L/kernels.yaml + fixtures.yaml"
+  intent_hash: 0xKG_L_KERNEL_VERSIONER_20260829
+
+# Intent Hash
+intent_hash: 0xKG_L_KERNEL_VERSIONER_20260829

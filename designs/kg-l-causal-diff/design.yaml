@@ -1,0 +1,172 @@
+name: kg-l-causal-diff
+version: 1.0.0
+status: draft
+profile: STANDARD
+consumers: []
+
+# Purpose
+purpose: "Generate causal diff reports from git commits. Transforms 'what changed' (git diff) into 'why it changed causally' by linking to domain_links.json, intent_hash, and fixture migrations."
+
+# Causal Origin
+causal_origin:
+  root_cause: "git diff shows WHAT changed; teams need WHY it changed causally. Post-mortems lose causal lineage."
+  incident: "LLUX silent fail resolution required 5 commits. git diff showed 13 files changed; causal analysis took hours to reconstruct."
+  resolution: "Automated causal diff: git diff + domain_links.json + intent_hash + fixture registry → CAUSAL_DIFF.md with intent_hash traceability"
+
+# Input Sources
+inputs:
+  - source: "git diff <from> <to>"
+    format: "unified diff"
+    required: true
+  - source: "KG-L/exports/domain_links.json"
+    format: "json"
+    required: true
+  - source: "KG-L/kernels.yaml"
+    format: "yaml"
+    required: false
+  - source: "KG-L/fixtures.yaml"
+    format: "yaml"
+    required: false
+  - source: "commit message"
+    format: "text"
+    parsing: "extract intent_hash from 'intent_hash: 0x...' or footer 'IntentHash: 0x...'"
+
+# Output
+output:
+  format: "markdown (CAUSAL_DIFF.md)"
+  sections:
+    - "Root Cause Analysis"
+    - "Changes & Causal Links" (table: file | change | causal link)
+    - "Domain Links Impact" (domain_links.json diff)
+    - "Kernel Version Changes" (kernels.yaml diff)
+    - "Fixture Migrations" (fixtures.yaml diff)
+    - "Verification" (determinism, validator, tests)
+    - "Intent Hash Traceability"
+
+# Implementation
+implementation:
+  language: python
+  entry_point: "kg_l_causal_diff.py"
+  
+  algorithm:
+    1. "Parse git diff (from..to or single commit)"
+    2. "Extract changed files, functions, types"
+    3. "Load domain_links.json (check freshness < 30 days)"
+    4. "Load kernels.yaml (if exists)"
+    5. "Load fixtures.yaml (if exists)"
+    7. "Extract intent_hash from commit message"
+    8. "For each changed file:"
+        - "Map to domain concept via domain_links.json (file → concept)"
+        - "Determine causal link: domain_generalization / ub_elimination / fixture_migration / path_fix / trace_gate"
+        - "Check kernel registry for version bumps"
+        - "Check fixture registry for migrations"
+    9. "Extract intent_hash from commit message/footer"
+    9. "Generate CAUSAL_DIFF.md with structured sections"
+    10. "Optionally: append to commit as trailer, or write to file"
+
+# Causal Link Taxonomy
+causal_links:
+  - domain_generalization: "kernel.domain generalized to subsume data.domain (e.g., ternary → general_f32)"
+  - ub_elimination: "Removed UB source (@Vector, @ptrCast, unaligned access)"
+  - fixture_migration: "Fixture updated/migrated to match new kernel/domain"
+  - path_fix: "Absolute path resolution, cwd independence"
+  - trace_gate: "Added/removed debug traces that prevent/surface UB"
+  - zombie_prevention: "Pre-build cleanup hook added"
+  - format_gate: "Auto-fix loop for fmt added"
+  - type_guard: "Domain subsumption gate added"
+  - debug_adapter: "Live debug capability added"
+  - kernel_versioning: "Kernel version bump with domain change"
+
+# Output Template
+output_template: |
+  # CAUSAL DIFF — <commit_range>
+  
+  **IntentHash**: <intent_hash>
+  **Date**: <date>
+  **Author**: <author>
+  
+  ## Root Cause
+  <root_cause_narrative>
+  
+  ## Changes & Causal Links
+  | File | Change | Causal Link | Domain Impact |
+  |------|--------|-------------|---------------|
+  | src/kernels/gemv_f32.c | NEW: SSE4.2 GEMV general f32 | domain_generalization | kernel.domain: ternary → general_f32 |
+  | src/transformer.zig | FFI gemv_f32 + replace matvec_dispatch | domain_generalization | Binds data.domain=Q4_0 → kernel.domain=general_f32 |
+  | src/kernels/simd_matvec.zig | matvec_simd → scalar unroll×4 | ub_elimination | Eliminates @Vector UB source |
+  | src/main.zig | Absolute model path | path_fix | Prevents pitfall:gguf_offsets_relative |
+  
+  ## Domain Links Impact
+  <domain_links.json diff if changed>
+  
+  ## Kernel Version Changes
+  <kernels.yaml diff if changed>
+  
+  ## Fixture Migrations
+  <fixtures.yaml diff if changed>
+  
+  ## Verification
+  - Determinism: <N> runs → identical tokens <tokens>
+  - CTULU validator: Build ✅, Warnings 0, Format ✅
+  - Tests: <pass/fail>
+  
+  ## Intent Hash Traceability
+  **IntentHash**: <intent_hash>
+  **Commits**: <commit_shas>
+
+# Implementation
+implementation:
+  language: python
+  entry_point: "kg_l_causal_diff.py"
+  dependencies: ["gitpython", "pyyaml", "git"]
+  
+  cli:
+    - "kg-l causal-diff <from> <to> [--output FILE] [--commit-msg FILE]"
+    - "kg-l causal-diff HEAD~1 HEAD --output CAUSAL_DIFF.md"
+    - "kg-l causal-diff --commit-msg .git/COMMIT_EDITMSG --output CAUSAL_DIFF.md"
+    - "kg-l causal-diff --stdin-diff --output CAUSAL_DIFF.md"
+
+# Integration Points
+integration:
+  post_commit_hook:
+    config: ".git/hooks/post-commit"
+    script: "kg-l causal-diff HEAD~1 HEAD --output .git/CAUSAL_DIFF.md"
+    
+  post_merge_hook:
+    config: ".git/hooks/post-merge"
+    script: "kg-l causal-diff ORIG_HEAD HEAD --output .git/CAUSAL_DIFF.md"
+    
+  ci_cd:
+    github_actions:
+      - name: "Generate Causal Diff"
+        run: "kg-l causal-diff ${{ github.event.before }} ${{ github.sha }} --output CAUSAL_DIFF.md"
+      - name: "Upload Causal Diff"
+        uses: actions/upload-artifact@v4
+        with:
+          name: causal-diff
+          path: CAUSAL_DIFF.md
+          
+  commit_msg_hook:
+    config: ".git/hooks/commit-msg"
+    script: "kg-l causal-diff --commit-msg $1 --output .git/CAUSAL_DIFF.md"
+
+# Tests
+tests:
+  - name: "single_commit_domain_generalization"
+    setup: "commit with kernel domain generalization"
+    expect: "CAUSAL_DIFF.md with domain_generalization link"
+  - name: "commit_with_ub_elimination"
+    setup: "commit removing @Vector usage"
+    expect: "CAUSAL_DIFF.md with ub_elimination link"
+  - name: "intent_hash_extraction"
+    setup: "commit message with 'IntentHash: 0x...' footer"
+    expect: "intent_hash extracted and included in output"
+
+# Meta-coherence
+meta_coherence:
+  verifies: "Every commit on main has causal traceability to domain_links + intent_hash"
+  source_of_truth: "git history + domain_links.json + kernels.yaml + fixtures.yaml"
+  intent_hash: 0xKG_L_CAUSAL_DIFF_20260829
+
+# Intent Hash
+intent_hash: 0xKG_L_CAUSAL_DIFF_20260829
