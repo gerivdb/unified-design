@@ -1,0 +1,33 @@
+name: flex
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: infrastructure
+profile: STANDARD
+description: >
+  FLEX — Framework de Lexique et d'Expression. Repo maître pour la gestion
+  des lexiques, expressions, et patterns sémantiques. Référencé dans
+  GOVERNANCE-HUB/REGISTRY/runners.yaml.
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+intent_hash: 0xFLEX_DESIGN_20260831
+components:
+  - type: lexicon-manager
+    repo: gerivdb/FLEX
+    path: D:\DO\WEB\TOOLS\L4-TOOLS\FLEX
+  - type: expression-engine
+    protocol: python-import
+dependencies:
+  - repo: gerivdb/ONTOLOGY
+  - repo: gerivdb/KG-L
+bridges:
+  - target: repo:ONTOLOGY
+    role: consumer
+    protocol: yaml
+  - target: repo:KG-L
+    role: provider
+    protocol: python-import
+constraints:
+  - cpu_only: true
+  - no_remote_git: false

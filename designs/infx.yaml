@@ -1,0 +1,30 @@
+name: infx
+version: "1.0.0"
+status: active
+strate: L4-TOOLS
+type: citizen
+profile: STANDARD
+description: >
+  INFX — Composant CITIZEN de l'écosystème gerivdb (strate L4). Gère l'interface
+  entre le hardware et les runners cognitifs. Référencé dans
+  GOVERNANCE-HUB/known_repositories.yaml (intent_hash: 0xINFX_CREATE_20260830).
+inherits:
+  - fractal-engineering-strata
+intent_hash: 0xINFX_DESIGN_20260830
+components:
+  - type: citizen-agent
+    repo: gerivdb/INFX
+    path: D:\DO\WEB\TOOLS\L4-TOOLS\INFX
+dependencies:
+  - repo: gerivdb/LLUX
+  - repo: gerivdb/ECOS-CLI
+bridges:
+  - target: repo:LLUX
+    role: consumer
+    protocol: cli
+  - target: repo:ECOS-CLI
+    role: consumer
+    protocol: cli
+constraints:
+  - cpu_only: true
+  - rss_depth: 2
