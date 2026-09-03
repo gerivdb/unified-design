@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "unified-design Settings Schema",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": true
+}

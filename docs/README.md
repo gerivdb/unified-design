@@ -1,14 +1,11 @@
 # Documentation
 
-## META-DESIGN.md
+Documentation for unified-design (Meta-Design Repository).
 
-L'atlas complet des invariants architecturaux de l'écosystème gerivdb.
+## Structure
 
-Consultez [META-DESIGN.md](./META-DESIGN.md) pour la documentation complète.
-
-## Index
-
-1. [Vision du Méta-Design](../README.md#vision)
-2. [Les Quatre Piliers](../README.md#les-quatre-piliers)
-3. [Validation](../README.md#validation)
-4. [Références](../README.md#références)
+- `adr/` — Architecture Decision Records
+- `guides/` — User guides and how-tos
+- `api/` — API documentation
+- `architecture/` — Architecture diagrams and design docs
+- `reports/` — Historical reports
