@@ -1,0 +1,421 @@
+# E5620 Optimization Design — INFX Anamorphic Engine
+# Source: PRD-MOC-INFX-ANAMORPHIC-2026-09-03
+# IntentHash: 0xDESIGN_INFX_E5620_OPTIMIZATION_20260903
+
+design:
+  id: "infx_e5620_optimization"
+  version: "1.0"
+  status: "proposed"
+  date: "2026-09-03"
+  intent_hash: "0xDESIGN_INFX_E5620_OPTIMIZATION_20260903"
+  parent_prd: "PRD-MOC-INFX-ANAMORPHIC-2026-09-03"
+  related_designs:
+    - "anamorphic_engine.yaml"
+    - "deformations.yaml"
+    - "anamorphic_morphism.yaml"
+    - "codedb-e5620.yaml"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# HARDWARE TARGET — DUAL XEON E5620 (WESTMERE-EP)
+# ──────────────────────────────────────────────────────────────────────────────
+
+hardware_target:
+  cpu_model: "Intel Xeon E5620 (Westmere-EP)"
+  microarchitecture: "Westmere-EP (32nm, 2010)"
+  sockets: 2
+  cores_per_socket: 4
+  total_physical_cores: 8
+  total_logical_threads: 16
+  base_frequency_ghz: 2.4
+  max_turbo_ghz: 2.66
+  cache_l1_per_core_kb: 64
+  cache_l2_per_core_kb: 256
+  cache_l3_shared_mb: 12
+  tdp_watts: 80
+  instruction_sets:
+    - "SSE4.2"
+    - "SSE4.1"
+    - "SSE3"
+    - "SSSE3"
+    - "MMX"
+    - "x86-64"
+  missing_instructions:
+    - "AVX"
+    - "AVX2"
+    - "FMA"
+    - "AVX-512"
+    - "BMI1/BMI2"
+    - "ADX"
+  memory_support:
+    max_capacity_gb: 192
+    channels: 6
+    ddr_type: "DDR3-1066/1333"
+    ecc: true
+  numa_nodes: 2
+  interconnect: "QPI 5.86 GT/s"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# CONTRAINTES D'OPTIMISATION CRITIQUES
+# ──────────────────────────────────────────────────────────────────────────────
+
+optimization_constraints:
+  instruction_set:
+    rule: "SSE4.2 ONLY — NO AVX/AVX2/AVX-512"
+    rationale: "Westmere-EP ne supporte que jusqu'à SSE4.2"
+    enforcement:
+      - "Build system: -Dcpu=westmere (Zig) / -march=westmere (GCC/Clang)"
+      - "CI: Vérification absence d'intrinsics AVX/AVX2 dans code"
+      - "Runtime: Detection CPU au démarrage, fallback si requis"
+  
+  vectorization:
+    rule: "SSE4.2 128-bit ONLY"
+    max_vector_width: 128
+    lanes_float32: 4
+    lanes_int32: 4
+    lanes_int64: 2
+    alignment_requirement: "16-byte aligned pour __m128/__m128i"
+    fallback: "Scalable si SSE4.2 indisponible"
+
+  memory_hierarchy:
+    l1_cache_per_core: "64 KB (32K data + 32K instruction)"
+    l2_cache_per_core: "256 KB"
+    l3_cache_shared: "12 MB (6 MB per socket)"
+    strategy:
+      - "Hot path data < 64 KB → L1 resident"
+      - "Working set < 256 KB → L2 resident"
+      - "Shared read-only data (invariants) → L3 pinned"
+      - "Cache line: 64 bytes → structures alignées 64 bytes"
+
+  core_affinity:
+    numa_awareness: true
+    socket_0_cores: [0, 1, 2, 3]
+    socket_1_cores: [4, 5, 6, 7]
+    worker_assignment:
+      D1_Gauss_Bonnet: [0, 1]  # Socket 0
+      D2_Homotopy: [2, 3]      # Socket 0
+      D3_Invariants: [4, 5]    # Socket 1
+      Synthesis: [6]           # Socket 1
+      I/O_Distribution: [7]    # Socket 1
+    rationale: "Éviter contention L3 cross-socket, localiser données par worker"
+
+  threading:
+    model: "ThreadPoolExecutor(max_workers=8)"
+    rationale: "8 cœurs physiques = 8 workers max sans hyperthreading contention"
+    hyperthreading: "Désactivé pour hot path (affinité 1 thread/core)"
+    synchronization: "Barrier + Futures (pas de locks dans hot path)"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# OPTIMISATIONS PAR COMPOSANT
+# ──────────────────────────────────────────────────────────────────────────────
+
+component_optimizations:
+
+  D1_Gauss_Bonnet:
+    hot_path: "courbure = n_coins * (2π - angle)"
+    optimizations:
+      - "Précalculer 2π = 6.283185307179586 comme constante compile-time"
+      - "Utiliser float64 (double) pour précision — pas de vectorization nécessaire (scalar)"
+      - "Éviter division: multiplication par inverse si angle variable"
+      - "Branchless: pas de conditionnels dans hot path"
+    memory:
+      - "Input: 2 scalaires (int, double) — fits in registers"
+      - "Output: 3 scalaires — retour par valeur (RVO/NRVO)"
+    cycles_estimate: "< 10 cycles/core"
+
+  D2_Homotopy:
+    hot_path: "entropie = 0.1 + 0.8 * t"
+    optimizations:
+      - "Fused Multiply-Add (FMA) via SSE4.2: _mm_add_ps(_mm_mul_ps(t, 0.8), 0.1)"
+      - "Constants 0.1 et 0.8 préchargées en __m128"
+      - "Structure mapping: branchless via LUT ou arithmetic"
+      - "Structure mapping branchless: idx = (t >= 0.7) + (t >= 0.3)"
+    vectorization:
+      - "SSE4.2: 4 lanes float32 → process 4 t values en parallèle si batch"
+      - "Pour single inference: scalar suffisant (< 5 cycles)"
+    memory:
+      - "Constants 0.1, 0.8, seuils 0.3/0.7 en .rodata (L1)"
+    cycles_estimate: "< 5 cycles (scalar) / < 2 cycles/element (vectorized x4)"
+
+  D3_Invariants:
+    hot_path: "stabilite = (convergence > 0.8) ? CONVERGE : CHAOTIQUE"
+    optimizations:
+      - "Branchless comparison: mask = _mm_cmpgt_ps(convergence, 0.8)"
+      - "Invariants constants (χ=2, genre=0, courbure=4π, poincare=2) → .rodata"
+      - "No allocation: sortie par valeur (struct of scalars)"
+      - "Interpretation: LUT indexée par (chi, stabilite, structure)"
+    branchless:
+      - "mask = _mm_cmpgt_ps(convergence_vec, _mm_set1_ps(0.8))"
+      - "stabilite = blend(CONVERGE, CHAOTIQUE, mask)"
+    cycles_estimate: "< 3 cycles (branchless)"
+
+  Morphism_Synthesis:
+    hot_path: "Fusion D1+D2+D3 → Morphisme complet"
+    optimizations:
+      - "Attente Barrier (pas de spinlock actif)"
+      - "Fusion: copie structs (memcpy 64 bytes max) — pas de calcul"
+      - "Interpretation: LUT indexée par (chi, stabilite, structure)"
+      - "Distribution: async fire-and-forget via channels"
+    cycles_estimate: "< 50 cycles (memcpy + LUT)"
+
+  Memory_Layout:
+    hot_structs:
+      - name: "RawDataBundle"
+        size: "< 256 bytes"
+        alignment: "64 bytes (cache line)"
+        fields: ["geometry_topology", "phase_state", "convergence_topology"]
+      - name: "DeformationOutput"
+        size: "< 64 bytes each"
+        alignment: "16 bytes"
+      - name: "AnamorphicMorphismResult"
+        size: "< 256 bytes"
+        alignment: "64 bytes"
+    cold_data:
+      - "Constants (2π, 0.1, 0.8, seuils 0.3/0.7, 4π) → .rodata (L1/L2)"
+      - "LUTs interpretation → .rodata (L2)"
+      - "Logs/metrics → buffer circulaire (L3)"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# BUILD CONFIGURATION — ZIG / PYTHON
+# ──────────────────────────────────────────────────────────────────────────────
+
+build_configuration:
+  zig:
+    target: "x86_64-windows-gnu"
+    cpu: "westmere"
+    optimization: "ReleaseFast"
+    flags:
+      - "-march=westmere"
+      - "-msse4.2"
+      - "-mno-avx"
+      - "-mno-avx2"
+      - "-mno-fma"
+      - "-fno-vectorize"  # Pour hot paths Python, vectorization manuelle
+      - "-fno-slp-vectorize"
+    link:
+      - "-static"  # Éviter dépendances runtime
+    zig_version: "0.13.0+"
+
+  python:
+    interpreter: "Python 3.11+"
+    venv: "Isolé par repo"
+    packages:
+      - "numpy>=1.24 (avec MKL pour SSE4.2 auto-vectorization)"
+      - "scipy (pour tests seulement)"
+    jit:
+      - "numba@njit(parallel=True, fastmath=True, cache=True) sur hot paths"
+      - "target: 'sse42' dans numba config"
+    threading:
+      - "ThreadPoolExecutor(max_workers=8)"
+      - "os.sched_setaffinity pour core pinning (Linux) / SetThreadAffinityMask (Windows)"
+
+  cmake_meson:
+    # Si build mixte C/Zig
+    flags:
+      - "-march=westmere"
+      - "-msse4.2"
+      - "-O3"
+      - "-mno-avx"
+      - "-fno-tree-vectorize"  # Vectorization manuelle seulement
+
+# ──────────────────────────────────────────────────────────────────────────────
+# MÉTRIQUES CIBLES — BENCHMARKS E5620
+# ──────────────────────────────────────────────────────────────────────────────
+
+performance_targets:
+  latency_ms:
+    target: 0.001
+    tolerance: 0.0005
+    measurement: "p99 sur 100k inférences"
+  memory_kb:
+    target: 1.7
+    tolerance: 0.5
+    measurement: "RSS après warmup, hors Python interpreter"
+  compression_ratio:
+    target: 1200000
+    description: "1.2M× (6.2M dims → 5 trits)"
+  cpu_percent:
+    target: 40
+    tolerance: 10
+    measurement: "Moyenne sur 100k inférences, 8 cœurs"
+  throughput_inf_per_sec:
+    target: 1000000
+    tolerance: 200000
+    measurement: "Inférences/seconde sostenues"
+
+  breakdown:
+    D1_Gauss_Bonnet: "~0.0002 ms (20% temps total)"
+    D2_Homotopy: "~0.0002 ms (20% temps total)"
+    D3_Invariants: "~0.0002 ms (20% temps total)"
+    Synthesis: "~0.0002 ms (20% temps total)"
+    Distribution: "~0.0002 ms (20% temps total)"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# VALIDATION BENCHMARKS
+# ──────────────────────────────────────────────────────────────────────────────
+
+benchmark_suite:
+  unit_benchmarks:
+    - name: "D1_latency"
+      iterations: 1000000
+      target_ns: 200
+    - name: "D2_latency"
+      iterations: 1000000
+      target_ns: 200
+    - name: "D3_latency"
+      iterations: 1000000
+      target_ns: 150
+    - name: "Synthesis_latency"
+      iterations: 100000
+      target_ns: 200
+    - name: "Full_pipeline_latency"
+      iterations: 100000
+      target_ns: 1000
+
+  integration_benchmarks:
+    - name: "100k_inferences_throughput"
+      target_inf_per_sec: 1000000
+      duration_sec: 10
+    - name: "memory_stability"
+      duration_sec: 300
+      max_rss_growth_kb: 100
+    - name: "cpu_stability"
+      duration_sec: 60
+      target_cpu_percent: 40
+      tolerance: 10
+
+  regression_tests:
+    - "Latence p99 < 0.001ms sur 100k runs"
+    - "Mémoire RSS < 2KB après 1M inférences"
+    - "CPU% stable ±10% sur 5 min"
+    - "0 GF violations sur 100k itérations"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# PYTHON NUMBA OPTIMIZATION (SIMPLIFIED HOT PATHS)
+# ──────────────────────────────────────────────────────────────────────────────
+
+python_numba_optimizations:
+  enabled: true
+  config:
+    target: "sse42"
+    fastmath: true
+    parallel: true
+    cache: true
+    nopython: true
+  
+  hot_functions:
+    - name: "d1_gauss_bonnet_numba"
+      signature: "(int64, float64) -> (float64, int64)"
+      body: |
+        @njit(parallel=True, fastmath=True, cache=True)
+        def d1_gauss_bonnet_batch(coins_arr, angles_arr):
+            n = len(coins_arr)
+            courbures = np.empty(n, dtype=np.float64)
+            for i in prange(n):
+                courbures[i] = coins_arr[i] * (2.0 * 3.141592653589793 - angles_arr[i])
+            return courbures, np.full(len(coins_arr), 2, dtype=np.int64)
+    
+    - name: "d2_homotopy_numba"
+      signature: "(float64[:]) -> (float64[:], int32[:])"
+      body: |
+        @njit(parallel=True, fastmath=True, cache=True)
+        def d2_homotopy_batch(t_arr):
+            n = len(t_arr)
+            entropies = 0.1 + 0.8 * t_arr
+            structures = np.empty(n, dtype=np.int32)
+            for i in prange(n):
+                ti = t_arr[i]
+                if ti < 0.3:
+                    structures[i] = 0  # cristallin
+                elif ti < 0.7:
+                    structures[i] = 1  # hybride
+                else:
+                    structures[i] = 2  # ionisé
+            return 0.1 + 0.8 * t_arr, structures
+    
+    - name: "d3_invariants_numba"
+      signature: "(float64[:]) -> (int32[:], int32[:])"
+      body: |
+        @njit(parallel=True, fastmath=True, cache=True)
+        def d3_invariants_batch(convergence_arr):
+            n = len(convergence_arr)
+            stabilite = np.empty(n, dtype=np.int32)
+            for i in prange(n):
+                stabilite[i] = 1 if convergence_arr[i] > 0.8 else 0  # 1=CONVERGE, 0=CHAOTIQUE
+            return stabilite, np.full(n, 2, dtype=np.int32), np.zeros(n, dtype=np.int32)
+
+# ──────────────────────────────────────────────────────────────────────────────
+# INTÉGRATION ZIG — PYTHON (SI HYBRIDE)
+# ──────────────────────────────────────────────────────────────────────────────
+
+zig_python_interop:
+  strategy: "Python orchestrateur + Zig hot paths (si performance critique)"
+  communication: "c-types / cffi / Zig C-ABI export"
+  data_exchange:
+    - "Input: structs POD alignés 16 bytes"
+    - "Output: structs POD alignés 16 bytes"
+    - "Zero-copy: memoryview / pointer passing"
+  zig_exports:
+    - "d1_gauss_bonnet_batch"
+    - "d2_homotopy_batch"
+    - "d3_invariants_batch"
+    - "morphism_synthesis"
+  calling_convention: "C (extern \"C\")"
+  abi_stability: "Stable — pas de changements breaking sans version bump"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# CI/CD VALIDATION E5620
+# ──────────────────────────────────────────────────────────────────────────────
+
+ci_validation:
+  hardware_check:
+    - "Vérifier /proc/cpuinfo (Linux) / Get-WmiObject Win32_Processor (Windows)"
+    - "Valider flags: sse4_2 present, avx absent"
+    - "Valider cores: 8 physiques, 16 logiques"
+    - "Valider L3: 12 MB"
+  
+  build_validation:
+    - "zig build -Dcpu=westmere -Doptimize=ReleaseFast"
+    - "Vérifier absence instructions AVX/AVX2 dans binaire (objdump/objdump -d)"
+    - "Valider alignement 16 bytes sur hot structs"
+  
+  runtime_validation:
+    - "Warmup: 10k inférences"
+    - "Mesure: 100k inférences p99 latency"
+    - "RSS memory check: < 2KB growth sur 1M inferences"
+    - "CPU% monitoring: 40% ±10% sur 5 min"
+    - "100k itérations: 0 GF violations"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# FALLBACK & DEGRADATION GRACEFUL
+# ──────────────────────────────────────────────────────────────────────────────
+
+graceful_degradation:
+  cpu_detection:
+    - "Au démarrage: détecter instruction sets disponibles"
+    - "Si AVX2+ détecté: utiliser path optimisé AVX2 (future-proof)"
+    - "Si SSE4.2 only: utiliser path Westmere (current)"
+    - "Si SSE2 only: path de secours scalaire (degraded)"
+  
+  memory_pressure:
+    - "Si RSS > 4KB: trigger GC / arena reset"
+    - "Si OOM risk: réduire batch size, augmenter GC frequency"
+  
+  cpu_throttling:
+    - "Si CPU% > 60% sur 30s: réduire workers de 8→6→4"
+    - "Si CPU% < 20% sur 60s: restaurer workers 8"
+  
+  thermal:
+    - "Si temp > 80°C: réduire frequency / workers"
+    - "Monitoring via /sys/class/thermal ou WMI"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# MÉTADONNÉES
+# ──────────────────────────────────────────────────────────────────────────────
+
+metadata:
+  created: "2026-09-03"
+  author: "gerivdb"
+  source_repo: "gerivdb/unified-design"
+  source_path: "unified-design/designs/infx/e5620_optimization.yaml"
+  parent_prd: "PRD-MOC-INFX-ANAMORPHIC-2026-09-03"
+  intent_hash: "0xDESIGN_INFX_E5620_OPTIMIZATION_20260903"

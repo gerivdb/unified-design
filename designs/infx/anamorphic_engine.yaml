@@ -1,0 +1,371 @@
+# Anamorphic Inference Engine Design
+# Source: PRD-MOC-INFX-ANAMORPHIC-2026-09-03
+# IntentHash: 0xDESIGN_INFX_ANAMORPHIC_ENGINE_20260903
+
+design:
+  id: "infx_anamorphic_engine"
+  version: "1.0"
+  status: "proposed"
+  date: "2026-09-03"
+  intent_hash: "0xDESIGN_INFX_ANAMORPHIC_ENGINE_20260903"
+  parent_prd: "PRD-MOC-INFX-ANAMORPHIC-2026-09-03"
+  related_designs:
+    - "anamorphic_morphism.yaml"
+    - "deformations.yaml"
+    - "e5620_optimization.yaml"
+    - "egmi-architecture.yaml"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# ARCHITECTURE GLOBALE — ENGINE PRINCIPAL
+# ──────────────────────────────────────────────────────────────────────────────
+
+engine:
+  name: "AnamorphicInferenceEngine"
+  version: "v0.4"
+  type: "Anamorphic Inference (Topological Interaction)"
+  paradigm: "Déformation intentionnelle → Révélation invariants (PAS calcul)"
+  core_principle: "L'inférence n'est PAS un calcul, c'est une MORPHOLOGIE"
+  hardware_target: "Dual Xeon E5620 (Westmere-EP, 8C/16T, SSE4.2, 12MB L3)"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# PIPELINE DE DÉFORMATION PARALLÈLE
+# ──────────────────────────────────────────────────────────────────────────────
+
+pipeline:
+  stages:
+    - id: "collect"
+      name: "Collecte Données Brutes"
+      parallel: false
+      inputs: ["PLIX", "PIANO", "TALEX", "SPIDX", "WAZAA"]
+      output: "RawDataBundle"
+      description: "Collecte synchrone des données haute dimension depuis 5 repos source"
+
+    - id: "deform_parallel"
+      name: "Déformation Parallèle (3 Workers)"
+      parallel: true
+      workers: 3
+      core_affinity:
+        worker_1: [0, 1]  # D1
+        worker_2: [2, 3]  # D2
+        worker_3: [4, 5]  # D3
+      description: "Exécution simultanée des 3 déformations anamorphiques"
+      workers_spec:
+        - id: "D1_gauss_bonnet"
+          name: "D1 — Déformation Différentielle (Gauss-Bonnet)"
+          module: "infx.deformations.d1_gauss_bonnet"
+          class: "GaussBonnetDeformation"
+          input_schema: "GeometryTopologyInput"
+          output_schema: "GaussBonnetOutput"
+          complexity: "O(n_coins)"
+        - id: "D2_homotopy"
+          name: "D2 — Déformation Spectrale (Homotopie)"
+          module: "infx.deformations.d2_homotopy"
+          class: "HomotopyDeformation"
+          input_schema: "PhaseStateInput"
+          output_schema: "HomotopyOutput"
+          complexity: "O(1)"
+        - id: "D3_invariants"
+          name: "D3 — Déformation Temporelle (Invariants)"
+          module: "infx.deformations.d3_invariants"
+          class: "InvariantsDeformation"
+          input_schema: "ConvergenceTopologyInput"
+          output_schema: "InvariantsOutput"
+          complexity: "O(1)"
+
+    - id: "synthesis"
+      name: "Synthèse Morphisme"
+      parallel: false
+      description: "Fusion des 3 résultats → Morphisme Anamorphique complet"
+      operation: "Fusion D1+D2+D3 → InvariantComplet + Interprétation"
+      output: "AnamorphicMorphismResult"
+
+    - id: "distribute"
+      name: "Distribution Cibles"
+      parallel: true
+      targets: ["ONTOLOGY", "ADR/GOVERNANCE-HUB", "KG-L", "CTULU", "TRIX/KIX", "MOX"]
+      description: "Distribution asynchrone des résultats vers repos cibles"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# INTERFACES DE DONNÉES (SCHÉMAS)
+# ──────────────────────────────────────────────────────────────────────────────
+
+schemas:
+  GeometryTopologyInput:
+    description: "Input pour D1 - Géométrie/Topologie brute"
+    fields:
+      - name: "coins"
+        type: "int"
+        description: "Nombre de coins/singularités (ex: 8 pour cube)"
+        constraints: ">= 4"
+      - name: "angle"
+        type: "float"
+        description: "Angle aux coins en radians (ex: π/2 pour cube)"
+        constraints: "> 0, < 2π"
+      - name: "vertices"
+        type: "array[float]"
+        description: "Coordonnées sommets (optionnel, pour validation)"
+        optional: true
+
+  GaussBonnetOutput:
+    description: "Output D1 - Courbure et caractéristique d'Euler"
+    fields:
+      - name: "courbure"
+        type: "float"
+        description: "Courbure totale = n_coins * (2π - angle)"
+      - name: "chi"
+        type: "int"
+        description: "Caractéristique d'Euler (2 pour sphère topologique)"
+      - name: "coins"
+        type: "int"
+        description: "Nombre de coins traités"
+      - name: "courbure_par_coin"
+        type: "float"
+        description: "Courbure moyenne par coin"
+
+  PhaseStateInput:
+    description: "Input pour D2 - État de phase / spectre"
+    fields:
+      - name: "t"
+        type: "float"
+        description: "Paramètre d'interpolation [0,1] (0=glace, 1=plasma)"
+        constraints: ">= 0, <= 1"
+      - name: "temperature"
+        type: "float"
+        description: "Température effective (optionnel)"
+        optional: true
+      - name: "pressure"
+        type: "float"
+        description: "Pression effective (optionnel)"
+        optional: true
+
+  HomotopyOutput:
+    description: "Output D2 - Interpolation spectrale"
+    fields:
+      - name: "entropie"
+        type: "float"
+        description: "Entropie effective = 0.1 + 0.8*t"
+        constraints: ">= 0.1, <= 0.9"
+      - name: "structure"
+        type: "enum"
+        values: ["cristallin", "hybride", "ionisé"]
+        description: "Structure dominante selon t"
+      - name: "interpolation_factor"
+        type: "float"
+        description: "Facteur d'interpolation t"
+
+  ConvergenceTopologyInput:
+    description: "Input pour D3 - Convergence & Topologie"
+    fields:
+      - name: "convergence"
+        type: "float"
+        description: "Mesure de convergence [0,1]"
+        constraints: ">= 0, <= 1"
+      - name: "chi"
+        type: "int"
+        description: "Caractéristique d'Euler (depuis D1)"
+        default: 2
+      - name: "genre"
+        type: "int"
+        description: "Genre topologique"
+        default: 0
+      - name: "iterations"
+        type: "int"
+        description: "Nombre d'itérations de convergence"
+        optional: true
+
+  InvariantsOutput:
+    description: "Output D3 - Invariants topologiques + Stabilité"
+    fields:
+      - name: "stabilite"
+        type: "enum"
+        values: ["CONVERGÉ", "CHAOTIQUE"]
+        description: "CONVERGÉ si convergence > 0.8"
+      - name: "euler"
+        type: "int"
+        description: "Caractéristique d'Euler"
+        default: 2
+      - name: "genre"
+        type: "int"
+        description: "Genre topologique"
+        default: 0
+      - name: "courbure_totale"
+        type: "string"
+        description: "Courbure totale (ex: '4π')"
+        default: "4π"
+      - name: "indice_poincare"
+        type: "int"
+        description: "Indice de Poincaré-Hopf"
+        default: 2
+      - name: "interpretation"
+        type: "enum"
+        values: ["SYNESTHÉSIE TOTALE (ignition)", "TOPOLOGIE STABLE (sphère)", "CHAOS (exploration)"]
+
+# ──────────────────────────────────────────────────────────────────────────────
+# RÉSULTAT FINAL — MORPHISME ANAMORPHIQUE COMPLET
+# ──────────────────────────────────────────────────────────────────────────────
+
+final_output:
+  name: "AnamorphicMorphismResult"
+  description: "Résultat complet du morphisme anamorphique"
+  fields:
+    - name: "d1_gauss_bonnet"
+      type: "GaussBonnetOutput"
+    - name: "d2_homotopy"
+      type: "HomotopyOutput"
+    - name: "d3_invariants"
+      type: "InvariantsOutput"
+    - name: "morphism"
+      type: "AnamorphicMorphism"
+      description: "Morphisme complet Source→Cible (ref: anamorphic_morphism.yaml)"
+    - name: "interpretation"
+      type: "enum"
+      values: ["SYNESTHÉSIE TOTALE (ignition)", "TOPOLOGIE STABLE (sphère)", "CHAOS (exploration)"]
+      description: "Classification finale basée sur χ, stabilité, structure"
+    - name: "performance"
+      type: "PerformanceMetrics"
+      fields:
+        - name: "latence_ms"
+          type: "float"
+        - name: "memoire_kb"
+          type: "float"
+        - name: "cpu_percent"
+          type: "float"
+        - name: "compression_ratio"
+          type: "int"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# ALGORITHMES PAR DÉFORMATION
+# ──────────────────────────────────────────────────────────────────────────────
+
+algorithms:
+  D1_Gauss_Bonnet:
+    description: "Théorème de Gauss-Bonnet généralisé pour polyèdres"
+    formula: "courbure_totale = n_coins * (2π - angle_intérieur)"
+    euler_characteristic: "χ = 2 (sphère topologique)"
+    steps:
+      - "Valider n_coins >= 4 et 0 < angle < 2π"
+      - "Calculer courbure = n_coins * (2π - angle)"
+      - "χ = 2 (invariant topologique pour sphère)"
+      - "Retourner {courbure, χ, coins, courbure_par_coin}"
+    complexity: "O(1)"
+    parallelizable: true
+
+  D2_Homotopy:
+    description: "Interpolation spectrale par homotopie glace↔plasma"
+    formula: "entropie = 0.1 + 0.8 * t"
+    structure_mapping:
+      - range: "[0.0, 0.3)"
+        structure: "cristallin"
+      - range: "[0.3, 0.7)"
+        structure: "hybride"
+      - range: "[0.7, 1.0]"
+        structure: "ionisé"
+    steps:
+      - "Valider 0 <= t <= 1"
+      - "Calculer entropie = 0.1 + 0.8*t"
+      - "Déterminer structure selon seuils"
+      - "Retourner {entropie, structure, interpolation_factor}"
+    complexity: "O(1)"
+    parallelizable: true
+
+  D3_Invariants:
+    description: "Prédiction stabilité via invariants topologiques O(1)"
+    formula: "stabilité = CONVERGÉ si convergence > 0.8 sinon CHAOTIQUE"
+    invariants_fixes:
+      euler: 2
+      genre: 0
+      courbure_totale: "4π"
+      indice_poincare: 2
+    steps:
+      - "Valider 0 <= convergence <= 1"
+      - "Déterminer stabilité selon seuil 0.8"
+      - "Assembler invariants (Euler, Genre, Courbure, Poincaré)"
+      - "Déterminer interprétation selon χ, stabilité, structure"
+      - "Retourner {stabilité, euler, genre, courbure_totale, indice_poincare, interprétation}"
+    complexity: "O(1)"
+    parallelizable: true
+
+  Morphism_Synthesis:
+    description: "Fusion des 3 déformations → Morphisme complet"
+    steps:
+      - "Attendre completion des 3 workers parallèles"
+      - "Valider cohérence: χ(D1) == χ(D3)"
+      - "Construire morphisme Source→Cible (ref: anamorphic_morphism.yaml)"
+      - "Déterminer interprétation finale:"
+        - "SI χ==2 ET stabilité==CONVERGÉ → SYNESTHÉSIE TOTALE"
+        - "SI χ==2 → TOPOLOGIE STABLE"
+        - "SI structure==ionisé → PLASMA (chaos)"
+        - "SI structure==cristallin → GLACE (ordre)"
+        - "SINON → CARBONE (intermédiaire)"
+      - "Calculer métriques performance"
+      - "Distribuer vers cibles (async)"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# CONFIGURATION HARDWARE E5620
+# ──────────────────────────────────────────────────────────────────────────────
+
+hardware_config:
+  target: "Dual Xeon E5620 (Westmere-EP)"
+  cores: 8
+  threads: 16
+  instruction_set: "SSE4.2"
+  cache_l3_mb: 12
+  core_affinity:
+    D1_gauss_bonnet: [0, 1]
+    D2_homotopy: [2, 3]
+    D3_invariants: [4, 5]
+    synthesis: [6]
+    io_distribution: [7]
+  constraints:
+    - "NO AVX2 (SSE4.2 only)"
+    - "Stack allocation in hot path"
+    - "16-byte alignment for SSE4.2"
+    - "ThreadPoolExecutor(max_workers=8)"
+    - "Arena allocator for hot path"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# PERFORMANCE TARGETS
+# ──────────────────────────────────────────────────────────────────────────────
+
+performance_targets:
+  latency_ms: 0.001
+  memory_kb: 1.7
+  compression_ratio: 1200000
+  cpu_percent: 40
+  throughput_inf_per_sec: 1000000
+
+# ──────────────────────────────────────────────────────────────────────────────
+# VALIDATION & TESTS
+# ──────────────────────────────────────────────────────────────────────────────
+
+validation:
+  unit_tests:
+    - "D1: Cube (8 coins, π/2) → Courbure=8π, χ=2"
+    - "D1: Tétraèdre (4 coins, 2π/3) → Courbure=4π, χ=2"
+    - "D2: t=0.0 → entropie=0.1, structure=cristallin"
+    - "D2: t=0.5 → entropie=0.5, structure=hybride"
+    - "D2: t=1.0 → entropie=0.9, structure=ionisé"
+    - "D3: convergence=0.95 → STABILITÉ=CONVERGÉ, χ=2"
+    - "D3: convergence=0.3 → STABILITÉ=CHAOTIQUE"
+  integration_tests:
+    - "Morphisme roundtrip: Source→Cible→Source invariants préservés"
+    - "Parallélisation 3 workers: Latence < 0.001ms sur E5620"
+    - "Mémoire: < 2 KB après compression"
+    - "100k itérations: 0 violations, 0 GF violations"
+  benchmarks_e5620:
+    latency_ms: { target: 0.001, tolerance: 0.0005 }
+    memory_kb: { target: 1.7, tolerance: 0.5 }
+    cpu_percent: { target: 40, tolerance: 10 }
+    throughput_inf_per_sec: { target: 1000000, tolerance: 200000 }
+
+# ──────────────────────────────────────────────────────────────────────────────
+# MÉTADONNÉES
+# ──────────────────────────────────────────────────────────────────────────────
+
+metadata:
+  created: "2026-09-03"
+  author: "gerivdb"
+  source_repo: "gerivdb/unified-design"
+  source_path: "unified-design/designs/infx/anamorphic_engine.yaml"
+  parent_prd: "PRD-MOC-INFX-ANAMORPHIC-2026-09-03"
+  intent_hash: "0xDESIGN_INFX_ANAMORPHIC_ENGINE_20260903"

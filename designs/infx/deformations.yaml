@@ -1,0 +1,415 @@
+# Déformations Anamorphiques — Spécifications Détaillées
+# Source: PRD-MOC-INFX-ANAMORPHIC-2026-09-03
+# IntentHash: 0xDESIGN_INFX_DEFORMATIONS_20260903
+
+design:
+  id: "infx_deformations"
+  version: "1.0"
+  status: "proposed"
+  date: "2026-09-03"
+  intent_hash: "0xDESIGN_INFX_DEFORMATIONS_20260903"
+  parent_prd: "PRD-MOC-INFX-ANAMORPHIC-2026-09-03"
+  related_designs:
+    - "anamorphic_engine.yaml"
+    - "anamorphic_morphism.yaml"
+    - "e5620_optimization.yaml"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# VUE D'ENSEMBLE — 3 DÉFORMATIONS ANAMORPHIQUES
+# ──────────────────────────────────────────────────────────────────────────────
+
+deformations_overview:
+  - id: "D1"
+    name: "Déformation Différentielle — Gauss-Bonnet"
+    alias: "Gauss-Bonnet / Coins → Courbure"
+    module: "infx.deformations.d1_gauss_bonnet"
+    class: "GaussBonnetDeformation"
+    worker_id: 0
+    cores: [0, 1]
+    complexity: "O(n_coins)"
+    parallelizable: true
+    description: |
+      Transposition anamorphique de la lacune "différentiel n'existe pas aux coins".
+      Au lieu de calculer un différentiel inexistant, on mesure la COURBURE concentrée aux coins.
+      Théorème de Gauss-Bonnet généralisé : la courbure totale est PRÉSERVÉE et égale à 4π.
+      Application : On n'a PAS besoin de df ; on COMPTE les coins.
+  - id: "D2"
+    name: "Déformation Spectrale — Homotopie Glace↔Plasma"
+    alias: "Homotopie / Spectre continu"
+    module: "infx.deformations.d2_homotopy"
+    class: "HomotopyDeformation"
+    worker_id: 1
+    cores: [2, 3]
+    complexity: "O(1)"
+    parallelizable: true
+    description: |
+      Transposition anamorphique de la lacune "glace et plasma incompatibles".
+      Ce sont les EXTRÉMITÉS d'un spectre continu. Le CARBONE est l'INTERPOLATEUR.
+      Tout état intermédiaire est possible via interpolation homotopique.
+  - id: "D3"
+    name: "Déformation Temporelle — Invariants Topologiques"
+    alias: "Invariants / Prédiction O(1)"
+    module: "infx.deformations.d3_invariants"
+    class: "InvariantsDeformation"
+    worker_id: 2
+    cores: [4, 5]
+    complexity: "O(1)"
+    parallelizable: true
+    description: |
+      Transposition anamorphique de la lacune "O(1) impossible dans le chaos".
+      O(1) est pour les INVARIANTS, pas la trajectoire.
+      La TOPOLOGIE prédit la STABILITÉ → on prédit la CONVERGENCE, pas la position.
+
+# ──────────────────────────────────────────────────────────────────────────────
+# D1 — GAUSS-BONNET / COINS → COURBURE
+# ──────────────────────────────────────────────────────────────────────────────
+
+D1_Gauss_Bonnet:
+  name: "Déformation D1 — Gauss-Bonnet / Comptage Coins"
+  module_path: "infx.deformations.d1_gauss_bonnet"
+  class_name: "GaussBonnetDeformation"
+  mathematical_foundation:
+    theorem: "Théorème de Gauss-Bonnet généralisé pour polyèdres"
+    formula: "Courbure_totale = Σ (2π - angle_intérieur_i) = 4π"
+    discrete_form: "Courbure_totale = n_coins * (2π - angle_intérieur)"
+    euler_characteristic: "χ = 2 (pour sphère topologique)"
+    principle: "La courbure est CONCENTRÉE aux coins (singularités)"
+
+  input_schema:
+    coins:
+      type: "int"
+      description: "Nombre de coins/singularités"
+      constraints: ">= 4"
+      examples: [4, 6, 8, 12, 20]
+    angle:
+      type: "float"
+      unit: "radians"
+      description: "Angle intérieur aux coins"
+      constraints: "> 0, < 2π"
+      typical: "π/2 (cube), 2π/3 (tétraèdre), π/3 (octaèdre)"
+    vertices:
+      type: "array[float]"
+      description: "Coordonnées sommets (optionnel, validation)"
+      optional: true
+
+  output:
+    courbure:
+      type: "float"
+      formula: "n_coins * (2π - angle)"
+      unit: "radians"
+      example: "Cube: 8 * (2π - π/2) = 8π"
+    chi:
+      type: "int"
+      value: 2
+      description: "Caractéristique d'Euler (sphère topologique)"
+    coins:
+      type: "int"
+      description: "Nombre de coins traités"
+    courbure_par_coin:
+      type: "float"
+      formula: "courbure / n_coins"
+
+  algorithm:
+    steps:
+      - "Valider n_coins >= 4"
+      - "Valider 0 < angle < 2π"
+      - "Calculer courbure = n_coins * (2π - angle)"
+      - "χ = 2 (invariant topologique pour sphère)"
+      - "Retourner {courbure, chi=2, coins, courbure_par_coin}"
+    complexity: "O(n_coins) — linéaire en nombre de coins"
+    parallelizable: true
+    worker_cores: [0, 1]
+
+  validation_tests:
+    - name: "Cube"
+      input: {coins: 8, angle: 1.57079632679}  # π/2
+      expected: {courbure: 25.1327412287, chi: 2}  # 8π ≈ 25.13
+    - name: "Tétraèdre"
+      input: {coins: 4, angle: 2.09439510239}  # 2π/3
+      expected: {courbure: 12.5663706144, chi: 2}  # 4π ≈ 12.57
+    - name: "Octaèdre"
+      input: {coins: 6, angle: 1.0471975512}  # π/3
+      expected: {courbure: 25.1327412287, chi: 2}
+    - name: "Dodécaèdre"
+      input: {coins: 20, angle: 1.88495559215}  # 3π/5
+      expected: {courbure: 25.1327412287, chi: 2}
+    - name: "Icosaèdre"
+      input: {coins: 12, angle: 1.88495559215}  # 3π/5
+      expected: {courbure: 25.1327412287, chi: 2}
+
+  invariants:
+    - name: "Courbure totale constante"
+      property: "Pour tout polyèdre convexe homeomorphe à une sphère: Courbure = 4π"
+    - name: "Caractéristique d'Euler"
+      property: "χ = 2 invariant pour toute surface homeomorphe à une sphère"
+    - name: "Courbure par coin"
+      property: "Courbure/coin = (2π - angle) — dépend uniquement de l'angle"
+
+  anamorphic_interpretation:
+    appears_as: "Lacune: différentiel n'existe pas aux coins"
+    reality_is: "Source d'information: la courbure EST CONCENTRÉE aux coins"
+    key_insight: "On n'a PAS besoin de df ; on COMPTE les coins → courbure totale"
+    gauss_bonnet_generalized: "La courbure discrète aux coins Remplace le différentiel continu"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# D2 — HOMOTOPIE / SPECTRE GLACE ↔ PLASMA
+# ──────────────────────────────────────────────────────────────────────────────
+
+D2_Homotopy:
+  name: "Déformation D2 — Homotopie / Interpolation Spectrale"
+  module_path: "infx.deformations.d2_homotopy"
+  class_name: "HomotopyDeformation"
+  mathematical_foundation:
+    principle: "Interpolation topologique (homotopie) entre états extrêmes"
+    spectrum: "Glace (ordre) ↔ Carbone (intermédiaire) ↔ Plasma (chaos)"
+    interpolation_parameter: "t ∈ [0, 1]"
+    carbon_role: "Le CARBONE est l'INTERPOLATEUR universel"
+    continuity: "Tout état intermédiaire est possible par homotopie"
+
+  input_schema:
+    t:
+      type: "float"
+      description: "Paramètre d'interpolation"
+      constraints: "0 <= t <= 1"
+      meaning: "0 = Glace pure (ordre), 1 = Plasma pur (chaos)"
+    temperature:
+      type: "float"
+      optional: true
+      description: "Température effective (contexte physique)"
+    pressure:
+      type: "float"
+      optional: true
+      description: "Pression effective (contexte physique)"
+
+  output:
+    entropie:
+      type: "float"
+      formula: "entropie = 0.1 + 0.8 * t"
+      range: "[0.1, 0.9]"
+      interpretation: "0.1 = ordre parfait (glace), 0.9 = chaos maximal (plasma)"
+    structure:
+      type: "enum"
+      values: ["cristallin", "hybride", "ionisé"]
+      mapping:
+        - range: "[0.0, 0.3)"
+          value: "cristallin"
+          description: "Ordre cristallin, structure rigide"
+        - range: "[0.3, 0.7)"
+          value: "hybride"
+          description: "État carbone, interpolation flexible"
+        - range: "[0.7, 1.0]"
+          value: "ionisé"
+          description: "Plasma, chaos ionisé"
+    interpolation_factor:
+      type: "float"
+      description: "Facteur d'interpolation t (écho de l'input)"
+
+  algorithm:
+    steps:
+      - "Valider 0 <= t <= 1"
+      - "Calculer entropie = 0.1 + 0.8 * t"
+      - "Déterminer structure selon seuils: [0,0.3)=cristallin, [0.3,0.7)=hybride, [0.7,1]=ionisé"
+      - "Retourner {entropie, structure, interpolation_factor}"
+    complexity: "O(1)"
+    parallelizable: true
+    worker_cores: [2, 3]
+
+  structure_mapping:
+    - range: "[0.0, 0.3)"
+      structure: "cristallin"
+      entropie_range: "[0.1, 0.34)"
+      description: "État glace — ordre cristallin, structure rigide"
+    - range: "[0.3, 0.7)"
+      structure: "hybride"
+      entropie_range: "[0.34, 0.66)"
+      description: "État carbone — interpolation flexible, adaptable"
+    - range: "[0.7, 1.0]"
+      structure: "ionisé"
+      entropie_range: "[0.66, 0.9]"
+      description: "État plasma — chaos ionisé, fluide"
+
+  carbon_interpolator:
+    role: "Le CARBONE est l'INTERPOLATEUR universel"
+    explanation: |
+      Entre la glace (ordre rigide, t=0) et le plasma (chaos, t=1),
+      le carbone (hybride, t∈[0.3,0.7]) permet TOUS les états intermédiaires.
+      L'incompatibilité apparente Glace↔Plasma est résolue par l'homotopie:
+      il existe un chemin continu dans l'espace des structures.
+
+  anamorphic_interpretation:
+    appears_as: "Incompatibilité: Glace vs Plasma"
+    reality_is: "Spectre continu: interpolation par le CARBONE"
+    key_insight: "L'incompatibilité est une ILLUSION de perspective — le spectre est CONTINU"
+    homotopy_principle: "Deux états sont homotopes s'ils peuvent se déformer continûment l'un en l'autre"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# D3 — INVARIANTS TOPOLOGIQUES / PRÉDICTION O(1)
+# ──────────────────────────────────────────────────────────────────────────────
+
+D3_Invariants:
+  name: "Déformation D3 — Invariants Topologiques / Prédiction O(1)"
+  module_path: "infx.deformations.d3_invariants"
+  class_name: "InvariantsDeformation"
+  mathematical_foundation:
+    principle: "O(1) est pour les INVARIANTS, pas la trajectoire"
+    prediction_target: "STABILITÉ (CONVERGÉ vs CHAOTIQUE)"
+    topological_invariants:
+      euler_characteristic: "χ = 2 (sphère)"
+      genus: "g = 0 (sphère)"
+      total_curvature: "4π (Gauss-Bonnet)"
+      poincare_index: "2 (Poincaré-Hopf)"
+    prediction_principle: "La TOPOLOGIE prédit la STABILITÉ → CONVERGENCE en O(1)"
+
+  input_schema:
+    convergence:
+      type: "float"
+      range: "[0, 1]"
+      description: "Mesure de convergence du système"
+    chi:
+      type: "int"
+      default: 2
+      description: "Caractéristique d'Euler (depuis D1)"
+    genus:
+      type: "int"
+      default: 0
+      description: "Genre topologique"
+    iterations:
+      type: "int"
+      optional: true
+      description: "Nombre d'itérations de convergence"
+
+  output:
+    stabilite:
+      type: "enum"
+      values: ["CONVERGÉ", "CHAOTIQUE"]
+      rule: "CONVERGÉ si convergence > 0.8, sinon CHAOTIQUE"
+    euler:
+      type: "int"
+      default: 2
+      description: "Caractéristique d'Euler χ"
+    genre:
+      type: "int"
+      default: 0
+      description: "Genre topologique g"
+    courbure_totale:
+      type: "string"
+      default: "4π"
+      description: "Courbure totale (Gauss-Bonnet)"
+    indice_poincare:
+      type: "int"
+      default: 2
+      description: "Indice de Poincaré-Hopf"
+    interpretation:
+      type: "enum"
+      values: ["SYNESTHÉSIE TOTALE (ignition)", "TOPOLOGIE STABLE (sphère)", "CHAOS (exploration)"]
+      mapping:
+        - condition: "χ==2 AND stabilité==CONVERGÉ"
+          value: "SYNESTHÉSIE TOTALE (ignition)"
+        - condition: "χ==2"
+          value: "TOPOLOGIE STABLE (sphère)"
+        - condition: "structure==ionisé"
+          value: "PLASMA (chaos)"
+        - condition: "structure==cristallin"
+          value: "GLACE (ordre)"
+        - default: "CARBONE (intermédiaire)"
+
+  algorithm:
+    steps:
+      - "Valider 0 <= convergence <= 1"
+      - "Déterminer stabilité: CONVERGÉ si convergence > 0.8 sinon CHAOTIQUE"
+      - "Assembler invariants: Euler=2, Genre=0, Courbure=4π, Poincaré=2"
+      - "Déterminer interprétation selon χ, stabilité, structure (depuis D2)"
+      - "Retourner {stabilité, euler, genre, courbure_totale, indice_poincare, interpretation}"
+    complexity: "O(1) — Prédiction en temps constant"
+    parallelizable: true
+    worker_cores: [4, 5]
+
+  invariants_fixes:
+    - name: "Caractéristique d'Euler"
+      value: 2
+      invariant: "Pour toute surface homeomorphe à une sphère"
+    - name: "Genre topologique"
+      value: 0
+      invariant: "Sphère sans trous"
+    - name: "Courbure totale"
+      value: "4π"
+      invariant: "Théorème de Gauss-Bonnet"
+    - name: "Indice de Poincaré-Hopf"
+      value: 2
+      invariant: "Somme des indices des points critiques"
+
+  anamorphic_interpretation:
+    appears_as: "Impossibilité: O(1) dans le chaos"
+    reality_is: "Prédiction possible: les INVARIANTS sont en O(1)"
+    key_insight: "La TOPOLOGIE prédit la STABILITÉ → on prédit la CONVERGENCE, pas la position"
+    o1_principle: "Calculer la trajectoire = O(n), Prédire l'invariant = O(1)"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# TABLEAU DE SYNTHÈSE — 3 DÉFORMATIONS
+# ──────────────────────────────────────────────────────────────────────────────
+
+synthesis_table:
+  headers: ["Déformation", "Lacune Originale", "Réalité Anamorphique", "Inférence", "Application", "Worker"]
+  rows:
+    - ["D1", "Différentiel n'existe pas aux coins", "Courbure CONCENTRÉE aux coins", "Gauss-Bonnet: Compter les coins → Courbure totale", "Compter coins au lieu de calculer df", "Worker 0 (cores 0,1)"]
+    - ["D2", "Glace vs Plasma incompatibles", "SPECTRE CONTINU (Carbone = Interpolateur)", "Homotopie: Tout état intermédiaire possible", "Interpolation t∈[0,1] via Carbone", "Worker 1 (cores 2,3)"]
+    - ["D3", "O(1) impossible dans le chaos", "O(1) pour INVARIANTS (Topologie)", "Topologie prédit Stabilité → Convergence O(1)", "Prédire Convergence, pas position", "Worker 2 (cores 4,5)"]
+
+# ──────────────────────────────────────────────────────────────────────────────
+# INTÉGRATION PARALLÈLE — SYNCHRONISATION
+# ──────────────────────────────────────────────────────────────────────────────
+
+parallel_execution:
+  framework: "ThreadPoolExecutor(max_workers=8)"
+  synchronization: "Barrier + Futures"
+  workers:
+    - worker: 0
+      deformation: "D1_Gauss_Bonnet"
+      cores: [0, 1]
+      input_dependency: "RawDataBundle.geometry_topology"
+      output: "GaussBonnetOutput"
+    - worker: 1
+      deformation: "D2_Homotopy"
+      cores: [2, 3]
+      input_dependency: "RawDataBundle.phase_state"
+      output: "HomotopyOutput"
+    - worker: 2
+      deformation: "D3_Invariants"
+      cores: [4, 5]
+      input_dependency: "RawDataBundle.convergence_topology"
+      output: "InvariantsOutput"
+  synchronization_point: "Barrier.wait() après completion des 3 workers"
+  synthesis_trigger: "Tous les 3 outputs disponibles → Morphism_Synthesis"
+  synthesis_cores: [6]
+  distribution_cores: [7]
+
+# ──────────────────────────────────────────────────────────────────────────────
+# VALIDATION CROISÉE DES DÉFORMATIONS
+# ──────────────────────────────────────────────────────────────────────────────
+
+cross_validation:
+  checks:
+    - name: "Cohérence χ (D1 ↔ D3)"
+      rule: "D1.chi == D3.euler (doit être 2)"
+      failure_action: "ALERT + retry"
+    - name: "Cohérence structure/stabilité (D2 ↔ D3)"
+      rule: "Si D2.structure==ionisé ALORS D3.stabilite==CHAOTIQUE"
+      failure_action: "WARNING"
+    - name: "Cohérence courbure (D1 ↔ D3)"
+      rule: "D1.courbure ≈ D3.courbure_totale (4π)"
+      tolerance: "0.01%"
+    - name: "Cohérence entropie/stabilité (D2 ↔ D3)"
+      rule: "Si D2.entropie > 0.66 ALORS D3.stabilite==CHAOTIQUE"
+      failure_action: "WARNING"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# MÉTADONNÉES
+# ──────────────────────────────────────────────────────────────────────────────
+
+metadata:
+  created: "2026-09-03"
+  author: "gerivdb"
+  source_repo: "gerivdb/unified-design"
+  source_path: "unified-design/designs/infx/deformations.yaml"
+  parent_prd: "PRD-MOC-INFX-ANAMORPHIC-2026-09-03"
+  intent_hash: "0xDESIGN_INFX_DEFORMATIONS_20260903"

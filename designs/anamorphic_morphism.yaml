@@ -1,0 +1,281 @@
+# Anamorphic Morphism Design
+# Source: PRD-MOC-INFX-ANAMORPHIC-2026-09-03
+# IntentHash: 0xDESIGN_ANAMORPHIC_MORPHISM_20260903
+
+design:
+  id: "anamorphic_morphism"
+  version: "1.0"
+  status: "proposed"
+  date: "2026-09-03"
+  intent_hash: "0xDESIGN_ANAMORPHIC_MORPHISM_20260903"
+  parent_prd: "PRD-MOC-INFX-ANAMORPHIC-2026-09-03"
+  related_designs:
+    - "infx/anamorphic_engine.yaml"
+    - "infx/deformations.yaml"
+    - "egmi-architecture.yaml"
+    - "kg-l/anamorphic_indexer.yaml"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# MORPHISME ANAMORPHIQUE : ESPACE SOURCE → ESPACE CIBLE
+# ──────────────────────────────────────────────────────────────────────────────
+
+source_space:
+  name: "Espace Source — Données Brutes / Chaotiques"
+  description: "L'espace des données d'entrée avant déformation anamorphique"
+  topology: "Chaotique (problème des 3 corps), haute dimension, singularités nombreuses"
+  dimension: "Élevée (ex: 1920×1080×3 = 6.2M dimensions pour PLIX)"
+  singularities:
+    type: "Denses, non-isolées"
+    examples: ["Bruit capteur", "Artefacts compression", "Anomalies temporelles"]
+  repositories:
+    - "PLIX: 1920×1080×3 (codecs, formats, compression)"
+    - "PIANO: ∞ échantillons (audio, specs)"
+    - "TALEX: Événements temporels narratifs"
+    - "SPIDX: Graphe N² (causal edges, embeddings)"
+    - "WAZAA: Réseau N (bus social, citizens/skills)"
+
+target_space:
+  name: "Espace Cible — Connaissances / Invariants"
+  description: "L'espace des connaissances après révélation anamorphique"
+  topology: "Stable (invariants topologiques), faible dimension"
+  dimension: "Faible (5 trits = 3^5 = 243 états possibles)"
+  singularities:
+    type: "Ponctuelles, isolées"
+    examples: ["Coins (singularités concentrées)", "Points de Lagrange (L4/L5)"]
+  repositories:
+    - "ONTOLOGY: Concepts canoniques (curvature-source, singularity-as-info, etc.)"
+    - "GOVERNANCE-HUB: ADR, PRD-MOC, INTENT, RUNTIME/"
+    - "KG-L: Invariant causal edges, convergence prediction"
+    - "ADR/GOVERNANCE-HUB: Décisions architecture, SOT"
+
+morphism:
+  name: "Morphisme Anamorphique"
+  function: "Déformer les données pour révéler les invariants topologiques"
+  type: "Anamorphic (déformation intentionnelle → révélation)"
+  properties:
+    - "Conserve la topologie (χ = 2)"
+    - "Concentre la courbure (coins → sources d'info)"
+    - "Réduit la dimension (1.2M× compression : 6.2M → 5 trits)"
+    - "Prédit la stabilité (O(1))"
+    - "Préserve la courbure totale (Gauss-Bonnet: 4π)"
+  stages:
+    - name: "Déformation (Compression)"
+      description: "Projection de l'espace source haute dimension vers espace bas dimension"
+      input: "Données brutes (PLIX, PIANO, TALEX, SPIDX, WAZAA)"
+      output: "Données déformées (5 trits, 8 coins, courbure 4π, entropie 0.5)"
+      operation: "Projection anamorphique + quantification"
+    - name: "Révélation (Extraction Invariants)"
+      description: "Extraction des invariants topologiques depuis données déformées"
+      input: "Données déformées"
+      output: "Invariants (Euler=2, Genre=0, Courbure=4π, Indice Poincaré=2, Stabilité)"
+      operation: "Extraction Gauss-Bonnet + Homotopie + Indice Poincaré-Hopf"
+    - name: "Interprétation (Classification)"
+      description: "Classification finale basée sur invariants"
+      input: "Invariants topologiques"
+      output: "Interprétation (SYNESTHÉSIE TOTALE / TOPOLOGIE STABLE / CHAOS)"
+      operation: "Mapping invariants → classe sémantique"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# TABLEAU DE CORRESPONDANCE ANAMORPHIQUE
+# ──────────────────────────────────────────────────────────────────────────────
+
+anamorphic_mapping:
+  - appears_as: "Une lacune (différentiel n'existe pas aux coins)"
+    reality_is: "Une SOURCE d'information (la courbure est CONCENTRÉE aux coins)"
+    deformation: "D1 - Gauss-Bonnet"
+    inference: "On n'a PAS besoin de df ; on COMPTE les coins → courbure totale"
+  - appears_as: "Une incompatibilité (Glace vs Plasma)"
+    reality_is: "Un SPECTRE continu (interpolation par le carbone)"
+    deformation: "D2 - Homotopie / Spectrale"
+    inference: "Le CARBONE est l'INTERPOLATEUR → tout état intermédiaire possible"
+  - appears_as: "Une impossibilité (O(1) dans le chaos)"
+    reality_is: "Une PRÉDICTION possible (les invariants sont en O(1))"
+    deformation: "D3 - Invariants Topologiques"
+    inference: "La TOPOLOGIE prédit la STABILITÉ → on prédit la CONVERGENCE"
+  - appears_as: "Un traitement de données (calcul)"
+    reality_is: "Une INTERACTION TOPOLOGIQUE (morphisme anamorphique)"
+    deformation: "Morphisme Global"
+    inference: "L'inférence n'est PAS un calcul, c'est une MORPHOLOGIE"
+  - appears_as: "Un résultat (sortie, valeur numérique)"
+    reality_is: "Une RÉVÉLATION (invariant topologique)"
+    deformation: "Morphisme Global"
+    inference: "L'inférence ne produit pas, elle RÉVÈLE"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# FLUX DE DONNÉES (DATA FLOW)
+# ──────────────────────────────────────────────────────────────────────────────
+
+data_flow:
+  - step: 1
+    name: "COLLECTE"
+    sources: ["PLIX", "PIANO", "TALEX", "SPIDX", "WAZAA"]
+    operation: "Collecte données brutes haute dimension"
+    output: "Raw data tensors / graphs / streams"
+  - step: 2
+    name: "DÉFORMATION PARALLÈLE (3 WORKERS)"
+    parallel_workers: 3
+    worker_1:
+      name: "D1 - Gauss-Bonnet"
+      cores: [0, 1]
+      input: "Raw geometry / topology"
+      output: "{courbure: float, χ: int, coins: int}"
+    worker_2:
+      name: "D2 - Homotopie"
+      cores: [2, 3]
+      input: "Raw state / phase data"
+      output: "{entropie: float, structure: enum[cristallin|hybride|ionisé]}"
+    worker_3:
+      name: "D3 - Invariants"
+      cores: [4, 5]
+      input: "Convergence / topology state"
+      output: "{stabilité: enum, euler: int, genre: int, courbure: str}"
+  - step: 3
+    name: "SYNTHÈSE MORPHISME"
+    operation: "Fusion résultats 3 déformations → Morphisme complet"
+    output: "Invariant complet + Interprétation"
+  - step: 4
+    name: "DISTRIBUTION CIBLE"
+    targets: ["ONTOLOGY", "ADR/GOVERNANCE-HUB", "KG-L", "CTULU", "TRIX/KIX", "MOX"]
+
+# ──────────────────────────────────────────────────────────────────────────────
+# PERFORMANCE TARGETS (E5620)
+# ──────────────────────────────────────────────────────────────────────────────
+
+performance_targets:
+  hardware: "Dual Xeon E5620 (Westmere-EP, 8C/16T, SSE4.2, 12MB L3)"
+  targets:
+    latency_ms: 0.001
+    memory_kb: 1.7
+    compression_ratio: 1200000  # 1.2M×
+    cpu_percent: 40
+    throughput_inf_per_sec: 1000000
+  constraints:
+    - "NO AVX2 (SSE4.2 only)"
+    - "Stack allocation in hot path"
+    - "16-byte alignment for SSE4.2"
+    - "ThreadPoolExecutor(max_workers=8)"
+    - "Core affinity: D1→[0,1], D2→[2,3], D3→[4,5]"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# VALIDATION CRITERIA
+# ──────────────────────────────────────────────────────────────────────────────
+
+validation:
+  unit_tests:
+    - "D1: Cube (8 coins, π/2) → Courbure=8π, χ=2"
+    - "D1: Tétraèdre (4 coins, 2π/3) → Courbure=4π, χ=2"
+    - "D2: t=0.0 → entropie=0.1, structure=cristallin"
+    - "D2: t=0.5 → entropie=0.5, structure=hybride"
+    - "D2: t=1.0 → entropie=0.9, structure=ionisé"
+    - "D3: convergence=0.95 → STABILITÉ=CONVERGÉ, χ=2"
+    - "D3: convergence=0.3 → STABILITÉ=CHAOTIQUE"
+  integration_tests:
+    - "Morphisme roundtrip: Source→Cible→Source invariants préservés"
+    - "Parallélisation 3 workers: Latence < 0.001ms sur E5620"
+    - "Mémoire: < 2 KB après compression"
+    - "100k itérations: 0 violations, 0 GF violations"
+  benchmarks_e5620:
+    latency_ms: { target: 0.001, tolerance: 0.0005 }
+    memory_kb: { target: 1.7, tolerance: 0.5 }
+    cpu_percent: { target: 40, tolerance: 10 }
+    throughput_inf_per_sec: { target: 1000000, tolerance: 200000 }
+
+# ──────────────────────────────────────────────────────────────────────────────
+# INTÉGRATION ÉCOSYSTÈME
+# ──────────────────────────────────────────────────────────────────────────────
+
+ecosystem_integration:
+  upstream_inputs:
+    - source: "PLIX"
+      data: "Codecs, formats, compression"
+      via: "CTULU router"
+    - source: "PIANO"
+      data: "Échantillons audio, specs"
+      via: "CTULU router"
+    - source: "TALEX"
+      data: "Événements narratifs, causalité"
+      via: "KG-L / CTULU"
+    - source: "SPIDX"
+      data: "Graphe causal, embeddings"
+      via: "KG-L / SPIDX"
+    - source: "WAZAA"
+      data: "Réseau social, bus pub/sub"
+      via: "WAZAA bus"
+  downstream_outputs:
+    - target: "ONTOLOGY"
+      data: "Concepts nouveaux (curvature-source, singularity-as-info, etc.)"
+      via: "PR commit direct"
+    - target: "ADR/GOVERNANCE-HUB"
+      data: "Décisions architecture"
+      via: "PR commit direct"
+    - target: "KG-L"
+      data: "Invariant causal edges, convergence prediction"
+      via: "Skill kg-l-indexer"
+    - target: "CTULU"
+      data: "Simulation orchestrator, routing"
+      via: "CTULU/tools/simulation_orchestrator.py"
+    - target: "TRIX/KIX"
+      data: "Process lifecycle hooks"
+      via: "Endpoints /process/kill-tree, /process/release-handles"
+    - target: "MOX"
+      data: "Guardrail pipeline, cost-aware"
+      via: "MOX/scripts/"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# REPOS RESPONSABLES
+# ──────────────────────────────────────────────────────────────────────────────
+
+responsible_repos:
+  owner: "INFX (L4-TOOLS)"
+  design_owner: "unified-design"
+  skills:
+    - "kg-l-indexer (GeriCode/.kilo/skills/kg-l-indexer/)"
+    - "causal-conflict-resolver (GeriCode/.kilo/skills/causal-conflict-resolver/)"
+    - "causal-edge-validator (GeriCode/.kilo/skills/causal-edge-validator/)"
+  dependent_repos:
+    - "CTULU (simulation_orchestrator)"
+    - "TRIX (dispatch.zig workers)"
+    - "KIX (process lifecycle)"
+    - "KG-L (anamorphic indexer)"
+    - "MOX (guardrail pipeline)"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# GOVERNANCE
+# ──────────────────────────────────────────────────────────────────────────────
+
+governance:
+  gates:
+    - gate: "GATE 0"
+      criterion: "Design validé (pas de ✅ FAIT, statuts MOX)"
+      responsible: "MOX"
+    - gate: "GATE 1"
+      criterion: "Design validé admg-ml-lint"
+      responsible: "unified-design"
+    - gate: "GATE 2"
+      criterion: "Code implémenté, tests unitaires 100%"
+      responsible: "INFX Owner"
+    - gate: "GATE 3"
+      criterion: "Benchmarks E5620 passent (latence, mémoire, CPU)"
+      responsible: "TRIX/INFX Owner"
+    - gate: "GATE 4"
+      criterion: "Intégration CTULU Simulation Orchestrator"
+      responsible: "CTULU Owner"
+    - gate: "GATE 5"
+      criterion: "Déploiement E5620 opérationnel (100k itérations, 0 violations)"
+      responsible: "INFX Owner"
+  adr_references:
+    - "ADR-2026-09-03-001-EGMI-ARCHITECTURE"
+    - "ADR-2026-09-03-002-ANAMORPHIC-INFERENCE"
+    - "ADR-2026-08-14-PIPELINE-ASCENDANT-KG"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# MÉTADONNÉES
+# ──────────────────────────────────────────────────────────────────────────────
+
+metadata:
+  created: "2026-09-03"
+  author: "gerivdb"
+  source_repo: "gerivdb/unified-design"
+  source_path: "unified-design/designs/anamorphic_morphism.yaml"
+  parent_prd: "PRD-MOC-INFX-ANAMORPHIC-2026-09-03"
+  intent_hash: "0xDESIGN_ANAMORPHIC_MORPHISM_20260903"
