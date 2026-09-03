@@ -1,0 +1,32 @@
+# Code Owners
+
+# Global owners
+* @gerivdb
+
+# Meta-Design (MDU) core
+META-DESIGN.md @gerivdb
+meta-design.yaml @gerivdb
+
+# Designs
+designs/ @gerivdb
+
+# Atoms catalogue
+atoms/ @gerivdb
+
+# Schemas
+schemas/ @gerivdb
+
+# Governance
+ADR/ @gerivdb
+EPICS/ @gerivdb
+INTENTS/ @gerivdb
+PRD/ @gerivdb
+CROSSLINKS/ @gerivdb
+
+# Validation
+scripts/compliance_scanner.py @gerivdb
+scripts/rss_lint.py @gerivdb
+
+# CI/CD
+.pre-commit-config.yaml @gerivdb
+.github/ @gerivdb

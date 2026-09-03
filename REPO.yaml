@@ -12,7 +12,23 @@ description: |
 owner: gerivdb
 status: active
 created: 2026-07-15
-last_updated: 2026-07-15
+last_updated: 2026-09-03
+
+# Compliance RSS-v2.3
+compliance_audit:
+  last_audited: "2026-09-03"
+  baseline_score: 45
+  target_score: 100
+  rss_version: "2.3"
+  profile: "CRITICAL"
+  rss_depth: 4
+  structure_hash: "sha256:TBD"
+  compliance_scanner:
+    design_registered: TBD
+    atom_registered: TBD
+    citizen_registered: TBD
+    adr_indexed: TBD
+    mdu_checkpoint: TBD
 
 # RSS-v2 compliance
 profile: CRITICAL
