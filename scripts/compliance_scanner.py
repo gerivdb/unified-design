@@ -96,10 +96,13 @@ def discover_designs(designs_dir: Path) -> list[str]:
 def check_repo_compliance(repo_name: str) -> dict:
     """Vérifie la conformité MDU complète pour un repo donné."""
     
+    # Normalize repo name for comparisons (catalog keys are lowercase)
+    repo_key = repo_name.lower()
+    
     # 1. Design registered (dans catalog ou discovery)
     catalog_designs = load_catalog_designs()
     discovered_designs = discover_designs(DESIGNS_DIR)
-    has_design = repo_name in catalog_designs or repo_name in discovered_designs
+    has_design = repo_key in catalog_designs or repo_key in discovered_designs
     
     # 2. Atom registered
     atom_path = ATOMS_DIR / f"{repo_name}.yaml"
@@ -107,12 +110,12 @@ def check_repo_compliance(repo_name: str) -> dict:
     
     # 3. Citizen registered
     citizens = load_citizens()
-    has_citizen = any(c.get("id") == repo_name for c in citizens)
+    has_citizen = any(c.get("id", "").lower() == repo_key for c in citizens)
     
     # 4. ADR indexed (cherche ADRs du repo dans catalog)
     catalog_adrs = load_catalog_adrs()
     repo_adrs = [adr for adr, entry in catalog_adrs.items() 
-                 if entry.get("source_repo") == repo_name]
+                 if entry.get("source_repo", "").lower() == repo_key]
     has_adr_indexed = len(repo_adrs) > 0
     
     # 5. MDU checkpoint
@@ -121,7 +124,7 @@ def check_repo_compliance(repo_name: str) -> dict:
     if checkpoint:
         # Vérifier si le repo est dans le checkpoint
         checkpoint_repos = checkpoint.get("repo", "")
-        has_checkpoint = repo_name in checkpoint_repos or checkpoint_repos == "gerivdb/" + repo_name
+        has_checkpoint = repo_key in checkpoint_repos.lower() or checkpoint_repos.lower() == "gerivdb/" + repo_key
     
     checks = {
         "design_registered": has_design,
