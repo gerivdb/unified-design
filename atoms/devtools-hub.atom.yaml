@@ -6,7 +6,7 @@
 # IntentHash: 0xDEVTOOLS_HUB_ATOM_20260904
 
 id: devtools-hub
-version: "1.0"
+version: "1.1"
 layer: L0
 capability: devtools-hub
 status: proposed
@@ -98,6 +98,26 @@ scripts:
     priority: P0
     status: EXISTING
     intent_hash: ""
+  - name: ecos-sync-watchdog.ps1
+    phase: 2
+    priority: P1
+    status: DONE
+    intent_hash: 0xECOS_SYNC_WATCHDOG_20260904
+  - name: ecos-strata-audit.ps1
+    phase: 5
+    priority: P1
+    status: DONE
+    intent_hash: 0xECOS_STRATA_AUDIT_20260904
+  - name: ecos-wal-compact.ps1
+    phase: 5
+    priority: P1
+    status: DONE
+    intent_hash: 0xECOS_WAL_COMPACT_20260904
+  - name: ecos-zombie-cleanup.ps1
+    phase: 5
+    priority: P1
+    status: DONE
+    intent_hash: 0xECOS_ZOMBIE_CLEANUP_20260904
 
 piv_phases:
   1:
@@ -169,4 +189,4 @@ cross_refs:
   - shared/adr/ADR-2026-09-02-001-EGMI-v03-to-v04-SYNTHESIS-TRANSITION.md
   - shared/adr/ADR-2026-09-03-EGMI-ECOSYSTEM-ALIGNMENT.md
 
-intent_hash: 0xDEVTOOLS_HUB_ATOM_20260904
+intent_hash: 0xDEVTOOLS_HUB_ATOM_20260904_UPDATED
