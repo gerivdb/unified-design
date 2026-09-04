@@ -1,0 +1,172 @@
+# DevTools Hub (L0) — Atom Definition
+# Capability: devtools-hub (L0 Operational Hub)
+# Layer: L0
+# Repo: gerivdb/DevTools
+# Local Path: C:\DevTools
+# IntentHash: 0xDEVTOOLS_HUB_ATOM_20260904
+
+id: devtools-hub
+version: "1.0"
+layer: L0
+capability: devtools-hub
+status: proposed
+repo: gerivdb/DevTools
+local_path: "C:\DevTools"
+remote: "https://github.com/gerivdb/DevTools.git"
+
+description: |
+  DevTools est le Hub Opérationnel Central Unique (L0) de l'écosystème gerivdb.
+  Il héberge TOUS les scripts opérationnels, pipelines, orchestrations, governance,
+  sync, observabilité, chaos engineering, build/deploy, contract tests, baselines.
+
+# RSR Principle: Single Source of Truth opérationnelle
+# Aucune duplication d'infrastructure dans les autres repos
+
+scripts:
+  - name: cross-repo-test.ps1
+    phase: 2
+    priority: P0
+    status: DONE
+    intent_hash: 0xCROSS_REPO_TEST_20260903
+  - name: ecos-deploy-hooks.ps1
+    phase: 1
+    priority: P0
+    status: DONE
+    intent_hash: 0xECOS_DEPLOY_HOOKS_20260903
+  - name: strate_guard.py
+    phase: 1/3
+    priority: P0
+    status: DONE
+    intent_hash: 0xSTRATE_GUARD_20260903
+  - name: ecos-sync.ps1
+    phase: 3
+    priority: P0
+    status: DONE
+    intent_hash: 0xECOS_SYNC_20260903
+  - name: ecos-chaos.ps1
+    phase: 6/8
+    priority: P0
+    status: DONE
+    intent_hash: 0xECOS_CHAOS_20260903
+  - name: ecos-test-daemon.ps1
+    phase: 6/8
+    priority: P1
+    status: DONE
+    intent_hash: 0xECOS_TEST_DAEMON_20260903
+  - name: ecos-metrics.ps1
+    phase: 7
+    priority: P1
+    status: DONE
+    intent_hash: 0xECOS_METRICS_20260903
+  - name: dashboard-monitoring.ps1
+    phase: 7
+    priority: P1
+    status: DONE
+    intent_hash: 0xDASHBOARD_MONITORING_20260903
+  - name: ecos-audit-kiva.ps1
+    phase: 4/5
+    priority: P1
+    status: DONE
+    intent_hash: 0xECOS_AUDIT_KIVA_20260903
+  - name: ecos-audit.ps1
+    phase: 4/5
+    priority: P1
+    status: DONE
+    intent_hash: 0xECOS_AUDIT_20260903
+  - name: ecos-health.ps1
+    phase: 7
+    priority: P1
+    status: PARSING_ERRORS
+    intent_hash: 0xECOS_HEALTH_20260903
+  - name: ecos-sync-audit.ps1
+    phase: 2/5
+    priority: P0
+    status: EXISTING
+    intent_hash: ""
+  - name: hitl-preflight.ps1
+    phase: 1
+    priority: P0
+    status: EXISTING
+    intent_hash: ""
+  - name: build-obscura.ps1
+    phase: 1
+    priority: P0
+    status: EXISTING
+    intent_hash: ""
+  - name: verify-mcp-access.ps1
+    phase: 3
+    priority: P0
+    status: EXISTING
+    intent_hash: ""
+
+piv_phases:
+  1:
+    name: Build & Deploy
+    scripts: [build-obscura.ps1, ecos-deploy-hooks.ps1, strate_guard.py, hitl-preflight.ps1]
+    status: CORE_OK
+    known_issues:
+      - ecos-deploy-hooks.ps1: Test-Path -or syntax error
+  2:
+    name: Contract Tests
+    scripts: [cross-repo-test.ps1, ecos-sync-audit.ps1]
+    status: OK
+  3:
+    name: Integration
+    scripts: [strate_guard.py, ecos-sync.ps1, verify-mcp-access.ps1]
+    status: OK
+  4:
+    name: KG-L Validation
+    scripts: [ecos-audit-kiva.ps1]
+    status: OK
+  5:
+    name: Baselines
+    scripts: [ecos-audit.ps1, ecos-audit-kiva.ps1]
+    status: OK
+  6:
+    name: Chaos Engineering
+    scripts: [ecos-chaos.ps1, ecos-test-daemon.ps1]
+    status: OK
+  7:
+    name: Observability
+    scripts: [ecos-health.ps1, ecos-metrics.ps1, dashboard-monitoring.ps1]
+    status: ISSUES
+    known_issues:
+      - ecos-health.ps1: parsing errors
+      - ecos-metrics.ps1: timeout 60s
+  8:
+    name: Chaos Engineering
+    scripts: [ecos-chaos.ps1, ecos-test-daemon.ps1]
+    status: OK
+
+dependencies:
+  - ecos-root-registry
+  - hitl-gate
+  - strate-registry
+  - sync-orchestrator
+  - governance-gate-script
+  - registry-sync
+  - ecos-root-registry
+
+capabilities:
+  - operational-hub
+  - build-deploy-pipeline
+  - contract-tests
+  - integration-tests
+  - kg-l-validation
+  - performance-baselines
+  - chaos-engineering
+  - observability-stack
+  - chaos-experiments
+
+governance:
+  adr: ADR-2026-09-03-DEVTOOLS-HUB
+  cross_ref: INFX/PRD-MOC/shared/repos/devtools-hub.md
+  unified_design: devtools-hub.atom.yaml
+
+cross_refs:
+  - INFX/PRD-MOC/shared/repos/devtools-hub.md
+  - shared/adr/ADR-2026-09-03-DEVTOOLS-HUB.md
+  - shared/adr/ADR-2026-09-02-001-EGMI-v03-to-v04-SYNTHESIS-TRANSITION.md
+  - shared/adr/ADR-2026-09-03-EGMI-ECOSYSTEM-ALIGNMENT.md
+
+intent_hash: 0xDEVTOOLS_HUB_ATOM_20260904
