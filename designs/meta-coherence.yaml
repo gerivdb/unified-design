@@ -1,21 +1,67 @@
+---
 name: meta-coherence
-description: "Principe P0 de coherence multi-echelle et cross-repo de l'ecosysteme. ARGUS est l'agent operationnel - il detecte les ecarts (GAP, GHOST, DRIFT, COLLISION, ORPHAN, SHADOW, VOID) entre tous les depots gerivdb et propose ou applique des corrections."
-version: 1.0.0
+description: "Principe P0 de coherence multi-echelle et cross-repo de l'ecosysteme. ARGUS est l'agent operationnel - il detecte les ecarts (GAP, GHOST, DRIFT, COLLISION, ORPHAN, SHADOW, VOID, PHANTOM_PATH, ORPHAN_BRANCH, UNTRACKED_MASS) entre tous les depots gerivdb et propose ou applique des corrections."
+version: "2.0"
 status: active
 layer: L1
-intent_hash: 0xDESIGN_META_COHERENCE_20260823
+intent_hash: 0xDESIGN_META_COHERENCE_20260913
 inherits:
-- fractal-engineering-strata
-- ouroboros
+  - fractal-engineering-strata
+  - ouroboros
 depends_on:
-- ATOM-001-ffi-abi-boundary
+  - ATOM-001-ffi-abi-boundary
 bridges:
-- target: ARGUS
-  role: operational_agent
-  protocol: python-import
-- target: ONTOLOGY
-  role: concept_meta_coherence
-  protocol: markdown-link
+  - target: ARGUS
+    role: operational_agent
+    protocol: python-import
+  - target: ONTOLOGY
+    role: concept_meta_coherence
+    protocol: markdown-link
+  - target: WAZAA
+    role: social_bus
+    protocol: wazaa-bus
+  - target: BUZZ-X
+    role: conversation_layer
+    protocol: wazaa-channel
+  - target: N243
+    role: numeric_foundation
+    protocol: zig
+  - target: TRIX
+    role: zig_runtime
+    protocol: zig
+  - target: VERSES
+    role: semantic_engine
+    protocol: wazaa-channel
+  - target: ACT
+    role: autonomous_protocol
+    protocol: wazaa-channel
+  - target: VOLTX
+    role: narrative_vault
+    protocol: wazaa-channel
+  - target: TALEX
+    role: narrative_engine
+    protocol: wazaa-channel
+  - target: CTULU
+    role: orchestrator
+    protocol: wazaa-channel
+  - target: KG-L
+    role: causal_engine
+    protocol: zig
+  - target: BRAIN
+    role: cognitive_layer
+    protocol: wazaa-channel
+  - target: NEXUS
+    role: data_layer
+    protocol: wazaa-channel
+  - target: GOVERNANCE-HUB
+    role: validator
+    protocol: yaml
+  - target: TOPOS
+    role: topology_registry
+    protocol: yaml
+  - target: GeriCode
+    role: platform_harness
+    protocol: local
 
 collision_resolution_note: >
   Distinguer explicitement de l'atom mox-meta-coherence : MOX couvre la
@@ -24,39 +70,62 @@ collision_resolution_note: >
   chemins, bridges, topologie). Les deux sont complementaires, non concurrents.
 
 capabilities:
-- name: multi_scale_scan
-  parameters:
-    layers: [L0, L1, L2, L3, L4, L5]
-- name: drift_detection
-  parameters:
-    scope: SOT vs miroirs vs implementations
-    detector: nexus_reciprocity_check.py
-- name: gap_detection
-  parameters:
-    scope: entites manquantes, bridges manquants
-- name: collision_detection
-  parameters:
-    scope: identifiants ambigus multi-repos
-- name: quarantine_management
-  parameters:
-    zone: .LIMBO/quarantine/
-    hitl_required: true
+  - name: multi_scale_scan
+    parameters:
+      layers: [L0, L1, L2, L3, L4, L5]
+  - name: drift_detection
+    parameters:
+      scope: SOT vs miroirs vs implementations
+      detector: nexus_reciprocity_check.py
+  - name: gap_detection
+    parameters:
+      scope: entites manquantes, bridges manquants
+  - name: collision_detection
+    parameters:
+      scope: identifiants ambigus multi-repos
+  - name: quarantine_management
+    parameters:
+      zone: .LIMBO/quarantine/
+      hitl_required: true
+  - name: branch_hygiene
+    parameters:
+      detectors: [orphan_branches, untracked_cross_repo, stale_worktrees]
+      scanners: [branch-hygiene-auditor, worktree-hygiene-auditor, detect-untracked-cross-repo]
+      auto_remediate: false
+  - name: untracked_audit
+    parameters:
+      threshold: 10000
+      top_repo_alert: true
+      report: C:\DevTools\reports\untracked-audit-<TS>.json
 
 pathologies:
-- {code: GAP, severity: CRITICAL, definition: present SOT absent disque/miroir}
-- {code: GHOST, severity: CRITICAL, definition: present disque absent SOT}
-- {code: DRIFT, severity: WARNING, definition: valeur divergente SOT/implementation}
-- {code: COLLISION, severity: WARNING, definition: meme identifiant deux entites}
-- {code: ORPHAN, severity: WARNING, definition: reference sans parent trace}
-- {code: SHADOW, severity: WARNING, definition: contrat implicite consomme}
-- {code: VOID, severity: INFO, definition: repo enregistre zero fichier integration}
-- {code: PHANTOM_PATH, severity: CRITICAL, definition: chemin cite par un document normatif inexistant au disque — detecte par KG-L/scripts/phantom_path_scanner.py (resolution SOT multi-strategies)}
+  - {code: GAP, severity: CRITICAL, definition: present SOT absent disque/miroir}
+  - {code: GHOST, severity: CRITICAL, definition: present disque absent SOT}
+  - {code: DRIFT, severity: WARNING, definition: valeur divergente SOT/implementation}
+  - {code: COLLISION, severity: WARNING, definition: meme identifiant deux entites}
+  - {code: ORPHAN, severity: WARNING, definition: reference sans parent trace}
+  - {code: SHADOW, severity: WARNING, definition: contrat implicite consomme}
+  - {code: VOID, severity: INFO, definition: repo enregistre zero fichier integration}
+  - {code: PHANTOM_PATH, severity: CRITICAL, definition: chemin cite par un document normatif inexistant au disque — detecte par KG-L/scripts/phantom_path_scanner.py (resolution SOT multi-strategies)}
+  - {code: ORPHAN_BRANCH, severity: WARNING, definition: branche feature sans PR ouverte ni merge — detecte par branch-hygiene-auditor}
+  - {code: UNTRACKED_MASS, severity: WARNING, definition: fichiers non-trackes massifs cross-repo (>10000) — detecte par detect-untracked-cross-repo.ps1}
+  - {code: STALE_WORKTREE, severity: WARNING, definition: worktree kilo/orphelin >24h sans session active — detecte par worktree-hygiene-auditor}
+  - {code: UNVERIFIED_REFERENCE, severity: CRITICAL, definition: reference d'artefact non resolue via balise.resolve — bloquant en A0/A1}
 
 principles:
-- P0_CONSTITUTIONAL pour la coherence cross-repo
-- ARGUS agent operationnel ; ONTOLOGY definit les concepts ; GOVERNANCE-HUB definit les regles
+  - P0_CONSTITUTIONAL pour la coherence cross-repo
+  - ARGUS agent operationnel ; ONTOLOGY definit les concepts ; GOVERNANCE-HUB definit les regles
+  - WAZAA bus social + identites realm-namespaced ; BUZZ-X conversations holographiques
+  - N243 fondement numerique (Base243, Q243, dispatch 243) ; TRIX runtime Zig (westmere)
+  - VERSES moteur semantique ; ACT protocole autonomie ; VOLTX coffre narratif ; TALEX narrateur
+  - CTULU orchestrateur central ; KG-L graphe causal ; BRAIN couche cognitive ; NEXUS donnees
+  - GeriCode harnais plateforme ; GOVERNANCE-HUB validateur ; TOPOS registre topologique
 
 enforcement:
-- scanners: ARGUS/scanners/* (6+ specialised)
-- wal: ARGUS/wal SyncEvent immuable
-- cron: MC7 freshness + limbo + metrics
+  - scanners: ARGUS/scanners/* (10+ specialised: orphan_file, drift, gap, collision, shadow, phantom_path, bridge, reciprocity, branch_hygiene, untracked_audit)
+  - wal: ARGUS/wal SyncEvent immuable
+  - cron: MC7 freshness + limbo + metrics + branch_hygiene + untracked_audit
+  - balise: lease take/release/closeout + check --fresh (CONVERGED/STALE/DIVERGED)
+  - hooks: pre-commit (frontmatter, ontology, design coverage) + pre-push (path audit)
+
+(End of file - total 137 lines)

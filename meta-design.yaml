@@ -294,6 +294,34 @@ governance_atoms:
   - exit-interceptor
   - tdd-airain-law
   - trace-replay-proof
+  # Architecture Think/Do/Check
+  - think-do-check-architecture
+
+# Think/Do/Check Architecture
+think_do_check:
+  description: "Architecture logique de gestion des repos : Think (veille/conception), Do (exécution), Check (conformité)"
+  adr: ADR-2026-09-12-001
+  departments:
+    think:
+      repos:
+        - gerivdb/VOLTX
+        - gerivdb/OBS
+      responsibility: "Veille, standards, conception, sélection d'outils"
+    do:
+      repos:
+        - gerivdb/DevTools
+        - gerivdb/CTULU
+      responsibility: "Exécution, pipelines, ingestion, orchestration"
+    check:
+      repos:
+        - gerivdb/GOVERNANCE-HUB
+        - gerivdb/ARGUS
+        - gerivdb/NEXUS
+      responsibility: "Conformité, audit, traçabilité, gouvernance"
+  boundaries:
+    - OBS must not prescribe VOLTX implementation
+    - VOLTX must not modify OBS veille reports
+    - Check must not implement Think/Do features
 
 # Agents associes par pilier
 agents_par_pilier:

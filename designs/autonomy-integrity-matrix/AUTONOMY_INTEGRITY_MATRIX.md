@@ -63,8 +63,32 @@ design ne devienne pas lui-meme une friction "contrat ecrit, adossement absent" 
 
 - Depend de : AUTONOMY_LADDER (`ONTOLOGY/concepts/autonomy-ladder.md`)
 - Consomme par : RIG, BOOT-5, hooks post-wiring (design hotl-wiring)
+- Connected to : AUTO_DEBUG_INTENTS (`GOVERNANCE-HUB/INTENTS/INTENT-AUTONOM-DEBUG-001.md`)
 - Complete : CONTRACT_TRACEABILITY (les detections journalisees alimentent
   les corrections tracees)
+
+## AUTO-DEBUG Extension
+
+Ce design étend AUTONOMY_INTEGRITY_MATRIX pour intégrer la stratégie AUTO-DEBUG :
+
+| INTENT | AutonomOps Property | Autonomy Level | Design Dependency |
+|--------|---------------------|----------------|-------------------|
+| KIVA-FEEDBACK | hasDecisionFramework | A1 | DESIGN-AUTONOMY-003 |
+| CURX-OPTIMIZER | hasSelfHealing | A2 | DESIGN-AUTONOMY-004 |
+| CITIZENS-CIRCUIT | hasAutonomyLevel | A3 | DESIGN-AUTONOMY-005 |
+| AUTO-ALERTER | hasDecisionFramework | A1 | DESIGN-AUTONOMY-002 |
+
+### Intégration avec AUTO-DISCOVERY
+
+```bash
+# Hook pre-commit avec auto-discovery
+python GOVERNANCE-HUB/scripts/auto_discovery_engine.py --mode quick
+```
+
+### Mapping des Run IDs
+
+- RUN-001 à RUN-012 : Implémentation des INTENTS AUTO-DEBUG
+- RUN-013 à RUN-025 : Phase 2 AutonomOps
 
 ## Voir aussi
 
