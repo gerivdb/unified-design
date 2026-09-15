@@ -1,0 +1,65 @@
+name: dry-run-simulation
+version: 1.0.0
+description: >
+  Simulation complete sans side-effect. Etend le pattern dry-run au-dela
+  du simple no-write vers l'imagination, le debug et la verification.
+  Standardise le contrat d'interface cross-repo.
+status: active
+owner: gerivdb
+intent_hash: 0xDESIGN_DRY_RUN_SIMULATION_20260915
+layer: L0
+inherits:
+  - incremental-growth
+  - graceful-degradation-fallback
+  - script-file-over-inline
+parameters:
+  output_format: [json, yaml, text]
+  trace_level: [minimal, standard, verbose]
+  comparison_mode: true
+  imagination_scenarios: max 10
+  deterministic: true
+capabilities:
+  - name: simulation
+    description: Executer le workflow complet sans side-effect
+  - name: imagination
+    description: Explorer des scenarios alternatifs (what-if)
+  - name: debug-trace
+    description: Tracer le chemin d'execution avec contexte
+  - name: verification
+    description: Valider pre/post-conditions et invariants
+  - name: conflict-detection
+    description: Simuler un merge/operation et detecter les conflits
+constraints:
+  - 'dry-run NE DOIT JAMAIS ecrire, modifier, ou supprimer des fichiers'
+  - 'Sortie deterministe : meme entree = meme sortie (seed fixe si random)'
+  - 'Trace exhaustive : toute action qui aurait eu un side-effect est loggee'
+  - 'Format de sortie standardise : JSON avec schema valide'
+  - 'Code coverage : toute fonction mutante DOIT avoir un equivalent dry-run'
+  - 'Performance : dry-run doit etre <= 2x le temps de l''execution reelle'
+mitigates:
+  - concept: unintended-mutation
+    evidence: ATOM-061/066 demontrent la necessite du dry-run obligatoire
+  - concept: merge-conflict-surprise
+    evidence: Incident TRIX->CTULU 2026-06-19 (push sur mauvais remote)
+  - concept: debugging-overhead
+    evidence: Sessions sans dry-run necessitent des rollbacks couteux
+  - concept: imagination-gap
+    evidence: VERSES genere des verses sans preview -> impossible de comparer
+origin: >
+  Session 2026-09-15 : demande d'unification du pattern dry-run disperse
+  across TRIX, ECOS-CLI, VERSES, CTULU. Le dry-run doit devenir un design
+  first-class de unified-design, pas un flag CLI disperse.
+cross_references:
+  - atom: ATOM-061-dry-run-mandatory
+  - atom: ATOM-066-dry-run-mandatory
+  - atom: ATOM-075-dryrun-builtin-simulators
+  - rule: slm-fragmented-approach
+  - rule: probe-budget-contract
+  - repo: gerivdb/VERSES
+    relation: applies_to
+  - repo: gerivdb/TRIX
+    relation: applies_to
+  - repo: gerivdb/CTULU
+    relation: applies_to
+  - repo: gerivdb/unified-design
+    relation: documents
