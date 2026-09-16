@@ -1,0 +1,73 @@
+atom_id: combination-instruction-set
+version: 1.0.0
+type: atom
+description: >
+  Jeu d instructions de combinaison pour les entites atomiques entre repos.
+  Analogie : SSE 4.2 du Xeon E5620 (54 instructions) -> 14 primitives
+  operationnelles pour manipuler les entites du spectre.
+profile: STANDARD
+consumers: []
+last_verified: '2026-09-17'
+inherits:
+  - incremental-combinatorial-discipline
+  - atomic-fragmentation
+  - multi-repo-fundamental
+parameters:
+  instruction_count: 14
+  hardware_analogy: SSE 4.2 (54 instructions, Xeon E5620)
+  atomic_unit: single_operation_single_entity
+  max_operations_per_routine: 1
+  verification: test_per_operation
+combination_operations:
+  - category: CRUD
+    operations:
+      - op: ADD
+        aliases: [add, create, inject]
+        ontology_concept: ATOM-062-combination-op-add
+      - op: UPDATE
+        aliases: [update, patch, modify]
+        ontology_concept: ATOM-063-combination-op-update
+      - op: DELETE
+        aliases: [delete, remove, forget]
+        ontology_concept: ATOM-064-combination-op-delete
+      - op: REPLACE
+        aliases: [replace, overwrite, substitute]
+        ontology_concept: ATOM-065-combination-op-replace
+  - category: COMPOSITION
+    operations:
+      - op: MERGE
+        aliases: [merge, fuse, combine]
+        ontology_concept: ATOM-066-combination-op-merge
+      - op: FORK
+        aliases: [fork, branch, duplicate]
+        ontology_concept: ATOM-067-combination-op-fork
+      - op: COMPOSE
+        aliases: [compose, assemble, aggregate]
+        ontology_concept: ATOM-068-combination-op-compose
+      - op: SEQUENCE
+        aliases: [sequence, chain, schedule]
+        ontology_concept: ATOM-069-combination-op-sequence
+  - category: TRANSFORMATION
+    operations:
+      - op: MORPH
+        aliases: [morph, transform, deform]
+        ontology_concept: ATOM-070-combination-op-morph
+      - op: TRANSITION
+        aliases: [transition, migrate, evolve]
+        ontology_concept: ATOM-071-combination-op-transition
+  - category: ORCHESTRATION
+    operations:
+      - op: ROUTE
+        aliases: [route, dispatch, direct]
+        ontology_concept: ATOM-072-combination-op-route
+      - op: SCHEDULE
+        aliases: [schedule, plan, timeline]
+        ontology_concept: ATOM-073-combination-op-schedule
+      - op: SYNC
+        aliases: [sync, reconcile, align]
+        ontology_concept: ATOM-074-combination-op-sync
+  - category: REVERSIBILITY
+    operations:
+      - op: ROLLBACK
+        aliases: [rollback, revert, undo]
+        ontology_concept: ATOM-075-combination-op-rollback

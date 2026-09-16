@@ -1,0 +1,58 @@
+atom_id: incremental-combinatorial-discipline
+version: 1.0.0
+type: atom
+description: >
+  Discipline de combinaison incrementale des entites atomiques entre repos.
+  Routine APR : Atomicize -> Pair -> Routine -> Verify.
+profile: STANDARD
+consumers: []
+last_verified: '2026-09-17'
+inherits:
+  - incremental-growth
+  - atomic-fragmentation
+parameters:
+  max_entities_per_routine: 1
+  max_files_per_commit: 3
+  max_minutes_between_commits: 30
+  atomic_unit: single_entity_pair
+  verification: test_per_entity
+  sync_scope: cross_repo_entities
+constraints:
+  - Une entite = un ou plusieurs fichiers atomiques + tests + un commit
+  - La combinaison concerne tout type d'entite du spectre: primitive, atom, agent, citoyen, cybernetic_entity
+  - Toute combinaison doit etre decomposee en paires atomiques avant execution
+  - La routine APR s applique sequentiellement: Atomicize -> Pair -> Routine -> Verify
+  - Aucun commit ne doit melanger une entite combinee avec un autre artefact (docs, config...)
+  - Les tests sont obligatoires et passes avant tout push
+  - Le remote git est verifie avant chaque push (git remote -v)
+  - La preuve d execution horodatee est requise pour chaque entite creee (clause GEN-012 DESIGN-E)
+combination_spectrum:
+  - level: primitive
+    description: Plus petit element de base, sans dependance
+    examples: ["primitive", "constante", "type atomique"]
+  - level: atom
+    description: Atome de design, capable d etre combine
+    examples: ["ATOM-xxx", "design atomique", "fonction pure"]
+  - level: agent
+    description: Agent utils, inspect/execute/report, lie a un repo
+    examples: ["*_utils", "agent de test", "agent de scan"]
+  - level: citizen
+    description: Citoyen, module integre dans un ecosysteme
+    examples: ["citizen module", "service citoyen", "component citizen"]
+  - level: cybernetic_entity
+    description: Entite cybernetique, systeme composite auto-regule
+    examples: ["systeme cybernetique", "meta-agent", "orchestrateur"]
+routine_apr:
+  - step: Atomicize
+    action: decomposer la combinaison en entites atomiques individuelles
+    output: liste d'entites cibles, un par ligne
+  - step: Pair
+    action: associer chaque entite a son repo source et son repo cible
+    output: mapping repo_source -> repo_cible par entite
+  - step: Routine
+    action: "pour chaque entite: creer/update entite + tests, commit atomique, push"
+    loop: true
+    max_iterations: 1000
+  - step: Verify
+    action: lancer les tests sur le repo cible, verifier le remote, verifier la synchronisation
+    output: rapport de synchronisation par entite

@@ -1,7 +1,56 @@
 atom_id: think-do-check
-version: 1.0.0
+version: 2.0.0
 type: atom
-description: ''
+description: >
+  Paradigme ternaire Think-Do-Check etendu par couche meta-operationnelle.
+  THINK garde son role de diagnostic/vision/recherche.
+  DO devient un registre d operations de combinaison (CRUD/COMPOSITION/TRANSFORMATION/ORCHESTRATION/REVERSIBILITY).
+  CHECK devient un controle de coherence et de preuve d execution.
 profile: STANDARD
 consumers: []
-last_verified: '2026-08-16'
+last_verified: '2026-09-17'
+inherits:
+  - ternary-query
+parameters:
+  phases:
+    think:
+      - diagnostic
+      - vision
+      - recherche
+      - meta_coherence_check
+    do:
+      - acquis
+      - besoin
+      - strategie
+      - combination_execute
+    check:
+      - ecart
+      - revision
+      - alignement
+      - proof_of_life
+  recursion: true
+  max_depth: 10
+  combination_ops:
+    - category: CRUD
+      ops: [add, update, delete, replace]
+    - category: COMPOSITION
+      ops: [merge, fork, compose, sequence]
+    - category: TRANSFORMATION
+      ops: [morph, transition]
+    - category: ORCHESTRATION
+      ops: [route, schedule, sync]
+    - category: REVERSIBILITY
+      ops: [rollback]
+constraints:
+  - Chaque phase DOIT avoir 3 sous-phases minimum
+  - La recursion EST optionnelle mais recommandee
+  - La profondeur max DOIT etre respectee
+  - Toute operation DO doit etre categorisee dans combination_ops
+  - Toute operation DO doit produire une preuve d execution horodatee
+  - Toute phase CHECK doit verifier la coherence avec les ATOMs et les ADR references
+references:
+  - combination-instruction-set
+  - incremental-combinatorial-discipline
+  - meta-coherence
+  - moc-governance
+  - capability-awareness
