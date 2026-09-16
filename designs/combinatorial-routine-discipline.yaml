@@ -1,0 +1,73 @@
+name: combinatorial-routine-discipline
+version: 1.0.0
+description: >
+  Discipline de combinaison des utilitaires atomiques entre repos.
+  Tout ajout/modification/suppression d'un agent utils synchronise
+  (N243 <-> AUTO-DEV ou autre paire) suit une routine APR:
+  Atomicize, Pair, Routine, Verify.
+  Ce design est L0 car il gouverne toute combinaison future,
+  quel que soit le repo cible.
+status: active
+owner: gerivdb
+intent_hash: 0xCOMBINATORIAL_ROUTINE_DISCIPLINE_20260916
+layer: L0
+inherits:
+  - atomic-fragmentation
+  - incremental-growth
+parameters:
+  max_agents_per_routine: 1
+  max_files_per_commit: 3
+  max_minutes_between_commits: 30
+  atomic_unit: single_utils_agent_pair
+  verification: pytest_per_agent
+  sync_scope: bidirectional_utils_only
+constraints:
+  - 'Un agent utils = un fichier agents/ + un fichier tests/ + un commit'
+  - 'La synchronisation ne concerne que les paires declares utils (pattern *_utils)'
+  - 'Toute combinaison doit etre decomposee en paires atomiques avant execution'
+  - 'La routine APR s applique sequentiellement: Atomicize -> Pair -> Routine -> Verify'
+  - 'Aucun commit ne doit melanger un agent utils avec un autre artefact (docs, config...)'
+  - 'Les tests pytest sont obligatoires et passes avant tout push'
+  - 'Le remote git est verifie avant chaque push (git remote -v)'
+  - 'La preuve d execution horodatee est requise pour chaque agent cree (clause GEN-012 DESIGN-E)'
+routine_apr:
+  - step: Atomicize
+    action: decomposer la combinaison en agents utils individuels
+    output: 'liste d''agents cibles, un par ligne'
+  - step: Pair
+    action: associer chaque agent utils a son repo source et son repo cible
+    output: 'mapping repo_source -> repo_cible par agent'
+  - step: Routine
+    action: 'pour chaque agent: creer/update agent + tests, commit atomique, push'
+    loop: true
+    max_iterations: 270
+  - step: Verify
+    action: lancer pytest sur le repo cible, verifier le remote, verifier la synchronisation
+    output: 'rapport de synchronisation par agent'
+performance:
+  latency_p99_per_agent: 120.0
+  success_rate_target: 0.99
+mitigates:
+  - concept: cross-repo-combination-blowout
+    evidence: '270 agents utils synchronises N243 <-> AUTO-DEV en 20 commits atomiques (2026-09-16)'
+  - concept: slm-combinatorial-overflow
+  - concept: sync-drift
+  - concept: untracked-cross-repo-leakage
+origin: >
+  Session 2026-09-16 N243 <-> AUTO-DEV utils sync.
+  Deduction: la synchronisation bidirectionnelle de 270 agents utils
+  n est pas un one-off, mais le cas fondateur d une discipline generale
+  de combinaison d utilitaires atomiques entre repos.
+  La routine APR (Atomicize, Pair, Routine, Verify) formalise ce pattern
+  pour toute combinaison future.
+cross_references:
+  - design: atomic-fragmentation
+  - design: incremental-growth
+  - rule: git-atomic-commit
+  - rule: pattern-router
+  - rule: slm-fragmented-approach
+  - concept: cross-repo-agent-sync
+  - concept: batch-agent-creation-routine
+  - concept: dataclass-field-ordering-pattern
+  - concept: cross-platform-path-test-pattern
+  - concept: proof-of-life-gate
