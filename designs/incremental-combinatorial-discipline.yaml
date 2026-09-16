@@ -2,9 +2,10 @@ name: incremental-combinatorial-discipline
 version: 1.0.0
 description: >
   Discipline de combinaison incrementale des entites atomiques entre repos.
-  Tout ajout/modification/suppression d'une entite combinee (agent utils,
-  citoyen, primitive, atom...) entre deux repos ou plus suit une routine
-  A-P-R: Atomicize, Pair, Routine, Verify.
+  La combinaison est definie comme un spectre d entites du plus petit au plus grand:
+  primitive -> atom -> agent -> citoyen -> entité cybernétique.
+  Tout ajout/modification/suppression d'une entite de ce spectre entre deux repos
+  ou plus suit une routine A-P-R: Atomicize, Pair, Routine, Verify.
   Ce design est L0 car il gouverne toute combinaison future,
   quel que soit le type d'entite ou le repo cible.
   Il fait partie de la famille des designs incrementaires, entre
@@ -26,7 +27,7 @@ parameters:
   sync_scope: cross_repo_entities
 constraints:
   - 'Une entite = un ou plusieurs fichiers atomiques + tests + un commit'
-  - 'La combinaison concerne tout type d entite: agent utils, citoyen, primitive, atom, design...'
+  - 'La combinaison concerne tout type d entite du spectre: primitive, atom, agent, citoyen, entité cybernétique'
   - 'Toute combinaison doit etre decomposee en paires atomiques avant execution'
   - 'La routine APR s applique sequentiellement: Atomicize -> Pair -> Routine -> Verify'
   - 'Aucun commit ne doit melanger une entite combinee avec un autre artefact (docs, config...)'
@@ -64,6 +65,22 @@ family:
     - incremental-scan-cache
   parent: atomic-fragmentation
   children: []
+combination_spectrum:
+  - level: primitive
+    description: "Plus petit element de base, sans dependance"
+    examples: ["primitive", "constante", "type atomique"]
+  - level: atom
+    description: "Atome de design, capable d etre combine"
+    examples: ["ATOM-xxx", "design atomique", "fonction pure"]
+  - level: agent
+    description: "Agent utils, inspect/execute/report, lie a un repo"
+    examples: ["*_utils", "agent de test", "agent de scan"]
+  - level: citizen
+    description: "Citoyen, module integre dans un ecosysteme"
+    examples: ["citizen module", "service citoyen", "component citizen"]
+  - level: cybernetic_entity
+    description: "Entité cybernétique, systeme composite auto-regule"
+    examples: ["systeme cybernetique", "meta-agent", "orchestrateur"]
 origin: >
   Session 2026-09-16 N243 <-> AUTO-DEV utils sync.
   Deduction: la synchronisation bidirectionnelle de 270 agents utils
