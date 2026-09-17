@@ -120,6 +120,7 @@ principles:
   - VERSES moteur semantique ; ACT protocole autonomie ; VOLTX coffre narratif ; TALEX narrateur
   - CTULU orchestrateur central ; KG-L graphe causal ; BRAIN couche cognitive ; NEXUS donnees
   - GeriCode harnais plateforme ; GOVERNANCE-HUB validateur ; TOPOS registre topologique
+  - TDC conscience ternaire Think/Do/Check : Think (veille/conception), Do (exécution), Check (conformité)
 
 enforcement:
   - scanners: ARGUS/scanners/* (10+ specialised: orphan_file, drift, gap, collision, shadow, phantom_path, bridge, reciprocity, branch_hygiene, untracked_audit)
