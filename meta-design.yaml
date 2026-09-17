@@ -183,6 +183,54 @@ designs:
     intent_hash: 0xMOC_GOVERNANCE_DESIGN_20260801
     consumers: []
     profile: STANDARD
+  - name: ecosystem-consciousness
+    path: designs/ecosystem-consciousness.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_ECOSYSTEM_CONSCIOUSNESS_20260917
+    consumers: []
+    profile: STANDARD
+  - name: methodological-bon-sens
+    path: designs/methodological-bon-sens.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_METHODOLOGICAL_BON_SENS_20260917
+    consumers: []
+    profile: STANDARD
+  - name: problem-structuring-method
+    path: designs/problem-structuring-method.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_PROBLEM_STRUCTURING_METHOD_20260917
+    consumers: []
+    profile: STANDARD
+  - name: value-machine
+    path: designs/value-machine.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_VALUE_MACHINE_20260917
+    consumers: []
+    profile: STANDARD
+  - name: ecosystem-feedback-loop
+    path: designs/ecosystem-feedback-loop.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_ECOSYSTEM_FEEDBACK_LOOP_20260917
+    consumers: []
+    profile: STANDARD
+  - name: context-engineering
+    path: designs/context-engineering.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CONTEXT_ENGINEERING_20260917
+    consumers: []
+    profile: STANDARD
+  - name: agent-engineering-maturity
+    path: designs/agent-engineering-maturity.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_AGENT_ENGINEERING_MATURITY_20260917
+    consumers: []
+    profile: STANDARD
+  - name: fresh-context-verifier
+    path: designs/fresh-context-verifier.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_FRESH_CONTEXT_VERIFIER_20260917
+    consumers: []
+    profile: STANDARD
 
 # Architecture des quatre piliers
 piliers:
@@ -296,6 +344,27 @@ governance_atoms:
   - trace-replay-proof
   # Architecture Think/Do/Check
   - think-do-check-architecture
+  # TDC Consciousness
+  - think-do-check-consciousness
+  - methodological-bon-sens
+  - problem-structuring-method
+  - value-machine
+  - ecosystem-feedback-loop
+  - context-engineering
+  - agent-engineering-maturity
+  - fresh-context-verifier
+  # Engineering ideas atoms
+  - external-verification-mandatory
+  - gate-layers
+  - independent-sources-rule
+  - confidence-threshold
+  - stop-condition
+  - carry-forward-principle
+  - reject-work-principle
+  - delta-check
+  - meta-edit-loop
+  - learning-curve-expectation
+  - deployment-patterns
 
 # Think/Do/Check Architecture
 think_do_check:
