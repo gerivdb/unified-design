@@ -2,7 +2,7 @@
 name: operational-fluidity
 description: "Fluidité opérationnelle globale de l'écosystème gerivdb. Formalise les principes de fluidité, les métriques, et les patterns d'optimisation opérationnelle."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_OPERATIONAL_FLUIDITY_20260917
 inherits:

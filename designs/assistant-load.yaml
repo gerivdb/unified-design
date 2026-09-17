@@ -2,7 +2,7 @@
 name: assistant-load
 description: "Charge de l'assistant (Kilo) dans l'écosystème gerivdb. Formalise la mesure de la charge, les patterns de décharge, et l'équilibre de la dette technique."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_ASSISTANT_LOAD_20260917
 inherits:
