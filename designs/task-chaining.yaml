@@ -1,0 +1,23 @@
+---
+name: task-chaining
+description: "Chainage des tâches dans l'écosystème gerivdb. Formalise les dépendances, les séquences, et les points de jonction entre tâches."
+version: "1.0.0"
+status: draft
+layer: L0
+intent_hash: 0xDESIGN_TASK_CHAINING_20260917
+inherits:
+  - task-planning
+depends_on:
+  - task-planning
+capabilities:
+  - name: dependency-mapping
+    description: "Cartographie des dépendances entre tâches"
+    parameters:
+      types: [sequential, parallel, conditional]
+  - name: chain-execution
+    description: "Exécution de chains de tâches"
+    parameters:
+      modes: [sync, async, mixed]
+principles:
+  - P0_CHAINING: les tâches sont chainées explicitement
+  - P0_TRACEABILITY: chaque chaine est tracée dans le WAL
