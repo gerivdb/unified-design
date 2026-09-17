@@ -231,6 +231,14 @@ OK semantic_loops: No cycles detected
 | autonomy-fluidity | 1.0.0 | Fluidité d'autonomie : niveaux AXE-0, transitions A0→A3, droits d'écriture |
 | conversation-aggregator | 1.0.0 | Agrégateur de conversations : Agent Manager + Buzz + sessions KiloCode |
 | conversation-to-execution-bridge | 1.0.0 | Pont conversation→exécution : instructions, modèles, designs, pipelines |
+| task-planning | 1.0.0 | Planification des tâches : décomposition, estimation, scheduling |
+| task-chaining | 1.0.0 | Chainage des tâches : dépendances, séquences, jonctions, WAL |
+| hitl-assistance | 1.0.0 | Assistance HITL : points d'escalade, décharge de dette technique |
+| debt-relief | 1.0.0 | Décharge de dette technique : patterns de réduction, priorisations, métriques |
+| ergonomics | 1.0.0 | Ergonomie des workflows : principes d'ergonomie, patterns d'interaction, feedback |
+| operational-fluidity | 1.0.0 | Fluidité opérationnelle globale : métriques, patterns d'optimisation |
+| elegance | 1.0.0 | Élégance des solutions : critères, patterns de simplicité, mesure de complexité |
+| assistant-load | 1.0.0 | Charge de l'assistant : mesure, patterns de décharge, équilibre dette technique |
 | kg-causal-engine | 1.0.0 | Architecture KG-CAUSAL : pipeline CLM, do-calculus, résolution conflits, flux entrants/sortants |
 | causal-semantic-bridge | 1.0.0 | Pont KG-CAUSAL ↔ VERSES : annotation causale des concepts sémantiques |
 | narrative-causal-fusion | 1.0.0 | Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité |
