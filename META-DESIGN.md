@@ -216,12 +216,38 @@ OK semantic_loops: No cycles detected
 | Design | Version | Description |
 |---|---|---|
 | moc-governance | 1.0.0 | MOC governance design for artifact hierarchy and session control |
+| ecosystem-consciousness | 1.0.0 | Conscience écosystémique ternaire Think/Do/Check |
+| methodological-bon-sens | 1.0.0 | Méthodologie quinquepartite (qui/quoi/où/quand/comment/pourquoi) |
+| problem-structuring-method | 1.0.0 | Filetree problématisation : décomposition arborescente de problèmes |
+| value-machine | 1.0.0 | Machine à valeur : transformation inputs -> outputs via pipeline de valeur |
+| ecosystem-feedback-loop | 1.0.0 | Boucle de feedback DevTools ↔ Obsidian : technique ↔ narration |
+| context-engineering | 1.0.0 | Ingénierie de contexte : fenêtres glissantes, fraîcheur, embedding |
+| agent-engineering-maturity | 1.0.0 | Hiérarchie des disciplines d'ingénierie agentique 2026 (5 axes, 5 niveaux) |
+| fresh-context-verifier | 1.0.0 | Fresh-Context Vérificateur : TTL, embedding drift, source integrity, cross-model agreement |
 
 ### Atoms L0-L3 (extraits)
 
 | Atom | Type | Description |
 |---|---|---|
 | ATOM-065-co-abductive-halo | Atom | Interface Co-abductive HALO (L3 - Emergence) Observation -> DIVERGE -> LEAP -> CONVERGE |
+
+### TDC Consciousness Atoms (nouveaux)
+
+| Atom | Type | Description |
+|---|---|---|
+| ATOM-THINK-DO-CHECK-CONSCIOUSNESS | Atom | Conscience ternaire Think/Do/Check de l'écosystème gerivdb |
+| ATOM-METHODOLOGICAL-BON-SENS | Atom | Méthodologie quinquepartite (qui/quoi/où/quand/comment/pourquoi) |
+| ATOM-EXTERNAL-VERIFICATION-MANDATORY | Atom | "L'agent ne se relit pas" : vérification externe obligatoire |
+| ATOM-GATE-LAYERS | Atom | Barrière de contrôle à 4 couches (L1 technique, L2 architecture, L3 gouvernance, L4 humain) |
+| ATOM-INDEPENDENT-SOURCES-RULE | Atom | 2 sources indépendantes requises pour décision critique |
+| ATOM-CONFIDENCE-THRESHOLD | Atom | Seuil de confiance 0.6 minimum pour décision/validation |
+| ATOM-STOP-CONDITION | Atom | Loop Engineering : condition d'arrêt explicite pour toute boucle |
+| ATOM-CARRY-FORWARD-PRINCIPLE | Atom | Carry Forward : travail valide reporté, rejet documenté |
+| ATOM-REJECT-WORK-PRINCIPLE | Atom | Reject Work : rejet préférable à accommodation |
+| ATOM-DELTA-CHECK | Atom | Delta Check : écart entre attendu et réel |
+| ATOM-META-EDIT-LOOP | Atom | Méta-boucle d'édition : vérification après chaque modification |
+| ATOM-LEARNING-CURVE-EXPECTATION | Atom | Courbe d'apprentissage : évaluation avant adoption |
+| ATOM-DEPLOYMENT-PATTERNS | Atom | Patterns de déploiement : blue-green, canary, rolling, immuable |
 
 ### L1-INFRA (nouveaux)
 
