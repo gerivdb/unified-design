@@ -224,6 +224,8 @@ OK semantic_loops: No cycles detected
 | context-engineering | 1.0.0 | Ingénierie de contexte : fenêtres glissantes, fraîcheur, embedding |
 | agent-engineering-maturity | 1.0.0 | Hiérarchie des disciplines d'ingénierie agentique 2026 (5 axes, 5 niveaux) |
 | fresh-context-verifier | 1.0.0 | Fresh-Context Vérificateur : TTL, embedding drift, source integrity, cross-model agreement |
+| meta-coherence | 2.0 | Principe P0 de cohérence multi-échelle et cross-repo : ARGUS détecte GAP/GHOST/DRIFT/COLLISION/ORPHAN/SHADOW/VOID/PHANTOM_PATH/UNTRACKED_MASS |
+| consciousness | 3.0.0 | État subjectif premier : Think/Do/Check consciousness, MDU reflet élégant, engineering ideas integration |
 | kg-causal | 1.0.0 | Draft : graphe causal déterministe KG-CAUSAL, bloqué par ADR-KG-CAUSAL-001-20260916 proposed |
 | chain-fluidity | 1.0.0 | Fluidité des chaînes Think→Do→Check : réduction des frictions, pipelines, orchestration |
 | autonomy-fluidity | 1.0.0 | Fluidité d'autonomie : niveaux AXE-0, transitions A0→A3, droits d'écriture |
