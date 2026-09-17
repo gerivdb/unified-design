@@ -1,0 +1,57 @@
+---
+name: agent-engineering-maturity
+description: "Hiérarchie des disciplines d'ingénierie agentique 2026 inspirée de D:\GG-knox\engineering ideas\300-kimi-k3\16.md. Évalue la maturité d'un agent selon 5 axes : fiabilité, autonomie, sécurité, observabilité, gouvernance. Chaque axe a 5 niveaux de maturité."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_AGENT_ENGINEERING_MATURITY_20260917
+inherits:
+  - context-engineering
+depends_on:
+  - context-engineering
+bridges:
+  - target: repo:GOVERNANCE-HUB
+    role: validator
+    protocol: yaml
+    channel: L0-CANON/GOVERNANCE-HUB/agent-maturity/validation
+  - target: repo:ARGUS
+    role: auditor
+    protocol: wazaa-channel
+    channel: L4-TOOLS/ARGUS/agent-maturity/audit
+  - target: repo:VOLTX
+    role: narrative-vault
+    protocol: wazaa-channel
+    channel: L0-CANON/VOLTX/agent-maturity/narrative
+
+capabilities:
+  - name: reliability-axis
+    description: "Axe Fiabilité : taux de succès, reprise sur erreur, isolation"
+    parameters:
+      levels: [L1_manual, L2_assisted, L3_autonomous, L4_self_healing, L5_autonomic]
+      metrics: [success_rate, mttr, error_handling_coverage]
+  - name: autonomy-axis
+    description: "Axe Autonomie : capacité à opérer sans HITL, à escalader, à décider"
+    parameters:
+      levels: [L1_manual, L2_assisted, L3_autonomous, L4_self_healing, L5_autonomic]
+      metrics: [hitl_frequency, escalation_accuracy, decision_autonomy]
+  - name: security-axis
+    description: "Axe Sécurité : isolation, permissions, audit, chiffrement"
+    parameters:
+      levels: [L1_manual, L2_assisted, L3_autonomous, L4_self_healing, L5_autonomic]
+      metrics: [permission_violations, audit_coverage, encryption_coverage]
+  - name: observability-axis
+    description: "Axe Observabilité : logs, métriques, traces, alertes"
+    parameters:
+      levels: [L1_manual, L2_assisted, L3_autonomous, L4_self_healing, L5_autonomic]
+      metrics: [log_coverage, metric_cardinality, trace_completeness]
+  - name: governance-axis
+    description: "Axe Gouvernance : ADR backing, PoL, pre-commit, conformité"
+    parameters:
+      levels: [L1_manual, L2_assisted, L3_autonomous, L4_self_healing, L5_autonomic]
+      metrics: [adr_coverage, pol_compliance, pre_commit_pass_rate]
+
+principles:
+  - P0_FIVE_AXES : évaluation sur 5 axes obligatoires
+  - P0_LEVELS : chaque axe a 5 niveaux de maturité
+  - P0_MEASURABLE : chaque niveau est mesuré par des métriques objectives
+  - P0_GOVERNANCE : l'axe gouvernance est obligatoire et prépondérant
