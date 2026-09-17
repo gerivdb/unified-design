@@ -231,84 +231,84 @@ designs:
     intent_hash: 0xDESIGN_FRESH_CONTEXT_VERIFIER_20260917
     consumers: []
     profile: STANDARD
-   - name: kg-causal
-     path: designs/kg-causal.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_KG_CAUSAL_20260916
-     consumers: []
-     profile: DRAFT
-   - name: chain-fluidity
-     path: designs/chain-fluidity.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
-     consumers: []
-     profile: DRAFT
-   - name: autonomy-fluidity
-     path: designs/autonomy-fluidity.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
-     consumers: []
-     profile: DRAFT
-   - name: conversation-aggregator
-     path: designs/conversation-aggregator.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
-     consumers: []
-     profile: DRAFT
-   - name: conversation-to-execution-bridge
-     path: designs/conversation-to-execution-bridge.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
-     consumers: []
-     profile: DRAFT
-   - name: task-planning
-     path: designs/task-planning.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_TASK_PLANNING_20260917
-     consumers: []
-     profile: DRAFT
-   - name: task-chaining
-     path: designs/task-chaining.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_TASK_CHAINING_20260917
-     consumers: []
-     profile: DRAFT
-   - name: hitl-assistance
-     path: designs/hitl-assistance.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_HITL_ASSISTANCE_20260917
-     consumers: []
-     profile: DRAFT
-   - name: debt-relief
-     path: designs/debt-relief.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_DEBT_RELIEF_20260917
-     consumers: []
-     profile: DRAFT
-   - name: ergonomics
-     path: designs/ergonomics.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_ERGONOMICS_20260917
-     consumers: []
-     profile: DRAFT
-   - name: operational-fluidity
-     path: designs/operational-fluidity.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_OPERATIONAL_FLUIDITY_20260917
-     consumers: []
-     profile: DRAFT
-   - name: elegance
-     path: designs/elegance.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_ELEGANCE_20260917
-     consumers: []
-     profile: DRAFT
-   - name: assistant-load
-     path: designs/assistant-load.yaml
-     version: '1.0.0'
-     intent_hash: 0xDESIGN_ASSISTANT_LOAD_20260917
-     consumers: []
-     profile: DRAFT
+    - name: kg-causal
+      path: designs/kg-causal.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_KG_CAUSAL_20260916
+      consumers: []
+      profile: DRAFT
+    - name: chain-fluidity
+      path: designs/chain-fluidity.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: autonomy-fluidity
+      path: designs/autonomy-fluidity.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: conversation-aggregator
+      path: designs/conversation-aggregator.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: conversation-to-execution-bridge
+      path: designs/conversation-to-execution-bridge.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: task-planning
+      path: designs/task-planning.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_TASK_PLANNING_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: task-chaining
+      path: designs/task-chaining.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_TASK_CHAINING_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: hitl-assistance
+      path: designs/hitl-assistance.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_HITL_ASSISTANCE_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: debt-relief
+      path: designs/debt-relief.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_DEBT_RELIEF_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: ergonomics
+      path: designs/ergonomics.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_ERGONOMICS_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: operational-fluidity
+      path: designs/operational-fluidity.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_OPERATIONAL_FLUIDITY_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: elegance
+      path: designs/elegance.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_ELEGANCE_20260917
+      consumers: []
+      profile: ACTIVE
+    - name: assistant-load
+      path: designs/assistant-load.yaml
+      version: '1.0.0'
+      intent_hash: 0xDESIGN_ASSISTANT_LOAD_20260917
+      consumers: []
+      profile: ACTIVE
   - name: chain-fluidity
     path: designs/chain-fluidity.yaml
     version: '1.0.0'
@@ -487,9 +487,17 @@ governance_atoms:
    - fresh-context-verifier
    - chain-fluidity
    - autonomy-fluidity
-   - conversation-aggregator
-   - conversation-to-execution-bridge
-   - kg-causal
+    - conversation-aggregator
+    - conversation-to-execution-bridge
+    - task-planning
+    - task-chaining
+    - hitl-assistance
+    - debt-relief
+    - ergonomics
+    - operational-fluidity
+    - elegance
+    - assistant-load
+    - kg-causal
    - kg-causal-engine
    - causal-semantic-bridge
    - narrative-causal-fusion
@@ -603,3 +611,4 @@ references:
   - ADR-2026-07-31-004-EXIT-INTERCEPTOR
   - ADR-2026-07-31-005-TDD-AIRAIN-LAW
   - ADR-2026-07-31-006-TRACE-REPLAY-PROOF
+  - ADR-2026-09-17-OPERATIONAL-DESIGNS-GOVERNANCE
