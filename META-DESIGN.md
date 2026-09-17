@@ -225,6 +225,15 @@ OK semantic_loops: No cycles detected
 | agent-engineering-maturity | 1.0.0 | Hiérarchie des disciplines d'ingénierie agentique 2026 (5 axes, 5 niveaux) |
 | fresh-context-verifier | 1.0.0 | Fresh-Context Vérificateur : TTL, embedding drift, source integrity, cross-model agreement |
 | kg-causal | 1.0.0 | Draft : graphe causal déterministe KG-CAUSAL, bloqué par ADR-KG-CAUSAL-001-20260916 proposed |
+| chain-fluidity | 1.0.0 | Fluidité des chaînes Think→Do→Check : réduction des frictions, pipelines, orchestration |
+| autonomy-fluidity | 1.0.0 | Fluidité d'autonomie : niveaux AXE-0, transitions A0→A3, droits d'écriture |
+| conversation-aggregator | 1.0.0 | Agrégateur de conversations : Agent Manager + Buzz + sessions KiloCode |
+| conversation-to-execution-bridge | 1.0.0 | Pont conversation→exécution : instructions, modèles, designs, pipelines |
+| kg-causal-engine | 1.0.0 | Architecture KG-CAUSAL : pipeline CLM, do-calculus, résolution conflits, flux entrants/sortants |
+| causal-semantic-bridge | 1.0.0 | Pont KG-CAUSAL ↔ VERSES : annotation causale des concepts sémantiques |
+| narrative-causal-fusion | 1.0.0 | Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité |
+| meta-kg-engine | 1.0.0 | Méta-KG unifiée : 4 engines (KG-L, VOLTX, KG-CAUSAL, VERSES), ingestion/production/cycles |
+| kg-causal-integration-pattern | 1.0.0 | Pattern d'intégration KG-CAUSAL → KG-L (similaire ATOM-056 ARGUS→KG-L) |
 
 ### Atoms L0-L3 (extraits)
 
@@ -314,6 +323,18 @@ OK semantic_loops: No cycles detected
 | ARGUS | Meta-coherence, orphan detection, .LIMBO transit, scanners | `L1-INFRA/ARGUS/` |
 | WAZAA | Bus multi-transport + reseau social entites (realms, presence, inbox) | `L4-TOOLS/WAZAA/` |
 | GOVERNANCE-HUB | GEN-014 STENTOR : gate moc-close -RequireOperational, ide_open, registre fenetres (design `ide-window-lifecycle`) | `L0-CANON/GOVERNANCE-HUB/scripts/balise.ps1` |
+| KG-CAUSAL | Graphe causal déterministe : pipeline CLM, do-calculus, résolution conflits, intégration KG-L | `L4-TOOLS/KG-CAUSAL/` |
+| VOLTX | Vault narratif : preuves horodatées, narration gouvernance, méta-KG introspection | `L4-TOOLS/VOLTX/` |
+| VERSES | Couche sémantique : concepts ONTOLOGY ↔ versets, validation frontmatter, audit versets | `L0-CANON/VERSES/` |
+
+### Crosslinks méta-KG
+
+| Crosslink | Source | Cible | Rôle |
+|-----------|--------|-------|------|
+| `CROSSLINKS/talex-unified-graph.md` | unified-design | TALEX | Ingestion designs TALEX |
+| `CROSSLINKS/kg-causal-unified-graph.md` | unified-design | KG-CAUSAL | Ingestion designs KG-CAUSAL (à créer) |
+| `CROSSLINKS/voltx-unified-graph.md` | unified-design | VOLTX | Ingestion designs VOLTX (à créer) |
+| `CROSSLINKS/verses-unified-graph.md` | unified-design | VERSES | Ingestion designs VERSES (à créer) |
 
 ### Bridges implémentés
 

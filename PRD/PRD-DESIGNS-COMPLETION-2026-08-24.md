@@ -109,6 +109,59 @@ Créer dans `unified-design` les 13 designs listés au MOC §11 (7 fonctionnels 
 - PRD-MOC-GEN-011 v2.2 (parent, toutes sections 11.x détaillées)
 - artifact-structure-standard.md (REPO-STANDARDS, placement/numérotation)
 - designs/moc-governance.yaml, prd-moc-progress-sync.yaml (patterns hérités)
+- PRD-MOC-TDC-CONSCIOUSNESS-MASTER.md (livrables TDC additionnels)
+- ADR-KG-CAUSAL-001-20260916 (ADR backing KG-CAUSAL)
+
+---
+
+## 9. Livrables additionnels — TDC Consciousness & méta-KG (2026-09-17)
+
+> Ajouté par l'analyse de méta-KG du 2026-09-17 : les 13 designs initiaux couvrent la gouvernance opérationnelle, mais pas la couverture des 4 KG-engines (KG-L, VOLTX, KG-CAUSAL, VERSES) ni les carrefours Think/Do/Check.
+
+### 9.1 Designs TDC Consciousness
+
+| ID | Livrable | Chemin cible | Type | État | Blocage |
+|---|---|---|---|---|---|
+| 14 | Design `ecosystem-consciousness` | `designs/ecosystem-consciousness.yaml` | Créer | ✅ Implémenté | — |
+| 15 | Design `chain-fluidity` | `designs/chain-fluidity.yaml` | Créer | 🟡 Draft | ADR gouvernance requis |
+| 16 | Design `autonomy-fluidity` | `designs/autonomy-fluidity.yaml` | Créer | 🟡 Draft | ADR gouvernance requis |
+| 17 | Design `conversation-aggregator` | `designs/conversation-aggregator.yaml` | Créer | 🟡 Draft | ADR gouvernance requis |
+| 18 | Design `conversation-to-execution-bridge` | `designs/conversation-to-execution-bridge.yaml` | Créer | 🟡 Draft | ADR gouvernance requis |
+
+### 9.2 Designs méta-KG
+
+| ID | Livrable | Chemin cible | Type | État | Blocage |
+|---|---|---|---|---|---|
+| 19 | Design `kg-causal` | `designs/kg-causal.yaml` | Créer | 🟡 Draft | ADR `ADR-KG-CAUSAL-001-20260916` proposé |
+| 20 | Design `kg-causal-engine` | `designs/kg-causal-engine.yaml` | Créer | 🟡 Draft | Dépend de `kg-causal` + ADR gouvernance |
+| 21 | Design `causal-semantic-bridge` | `designs/causal-semantic-bridge.yaml` | Créer | 🟡 Draft | ADR gouvernance requis |
+| 22 | Design `narrative-causal-fusion` | `designs/narrative-causal-fusion.yaml` | Créer | 🟡 Draft | ADR gouvernance requis |
+| 23 | Design `meta-kg-engine` | `designs/meta-kg-engine.yaml` | Créer | 🟡 Draft | ADR gouvernance requis |
+| 24 | Design `kg-causal-integration-pattern` | `designs/kg-causal-integration-pattern.yaml` | Créer | 🟡 Draft | ADR gouvernance requis |
+
+### 9.3 Crosslinks
+
+| ID | Livrable | Chemin cible | Type | État | Blocage |
+|---|---|---|---|---|---|
+| 25 | Crosslink `kg-causal-unified-graph` | `CROSSLINKS/kg-causal-unified-graph.md` | Créer | 🟡 Draft | Dépend du design `kg-causal` |
+| 26 | Crosslink `voltx-unified-graph` | `CROSSLINKS/voltx-unified-graph.md` | Créer | 🟡 Draft | ADR gouvernance requis |
+| 27 | Crosslink `verses-unified-graph` | `CROSSLINKS/verses-unified-graph.md` | Créer | 🟡 Draft | ADR gouvernance requis |
+
+### 9.4 Atoms additionnels
+
+| ID | Livrable | Chemin cible | Type | État | Blocage |
+|---|---|---|---|---|---|
+| 28 | Atom `kg-causal-consciousness` | `atoms/ATOM-KG-CAUSAL-CONSCIOUSNESS.md` | Créer | 🟡 Draft | Dépend du design `kg-causal` |
+
+### 9.5 Critères d'acceptation additionnels
+
+1. Tous les designs TDC et méta-KG existent et parsent en YAML valide.
+2. `META-DESIGN.md` et `meta-design.yaml` référencent chaque nouveau design/atom/crosslink.
+3. `CROSSLINKS/` contient les crosslinks pour KG-CAUSAL, VOLTX et VERSES.
+4. Aucun DESIGN_GHOST ni DESIGN_GAP sur l'ensemble étendu (40 designs).
+5. Pre-commit passe sans blocage encoding sur tous les nouveaux fichiers.
+6. ADR `ADR-KG-CAUSAL-001-20260916` accepté pour débloquer les designs KG-CAUSAL.
+7. ADR de gouvernance créé pour les designs opérationnels (chain-fluidity, autonomy-fluidity, conversation-aggregator, conversation-to-execution-bridge).
 
 ---
 
@@ -119,3 +172,4 @@ Créer dans `unified-design` les 13 designs listés au MOC §11 (7 fonctionnels 
 - [x] **Phase A/B — 13 designs + ATOM-053 + registre + META** : vérification machine Test-Path → 13/13 designs OK, ATOM-053 présent, atoms_registry.yaml et META-DESIGN.md présents.
 - [x] **Scan de couverture ARGUS** : design_coverage_scanner.py → **designs=76, H=0.9218, 0 DESIGN_GHOST / 0 DESIGN_GAP / 0 COLLISION** (57 DESIGN_ORPHAN INFO = chantier bridges résiduel tracé). Rapport JSON : ARGUS/reports/DESIGN_COVERAGE_20260824T003023Z.json.
 - [x] **Intégrité cascade** : cascade_integrity_scanner.py --moc GEN-011 → ce fichier passe de SUBALTERN_UNPROVEN à prouvé (présente section).
+- [x] **Section 9 ajoutée** : 14 livrables additionnels TDC + méta-KG identifiés, avec chemins, statuts et blocages gouvernance.

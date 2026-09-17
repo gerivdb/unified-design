@@ -231,6 +231,66 @@ designs:
     intent_hash: 0xDESIGN_FRESH_CONTEXT_VERIFIER_20260917
     consumers: []
     profile: STANDARD
+  - name: kg-causal
+    path: designs/kg-causal.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_KG_CAUSAL_20260916
+    consumers: []
+    profile: STANDARD
+  - name: chain-fluidity
+    path: designs/chain-fluidity.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
+    consumers: []
+    profile: STANDARD
+  - name: autonomy-fluidity
+    path: designs/autonomy-fluidity.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
+    consumers: []
+    profile: STANDARD
+  - name: conversation-aggregator
+    path: designs/conversation-aggregator.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
+    consumers: []
+    profile: STANDARD
+  - name: conversation-to-execution-bridge
+    path: designs/conversation-to-execution-bridge.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
+    consumers: []
+    profile: STANDARD
+  - name: kg-causal-engine
+    path: designs/kg-causal-engine.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_KG_CAUSAL_ENGINE_20260917
+    consumers: []
+    profile: STANDARD
+  - name: causal-semantic-bridge
+    path: designs/causal-semantic-bridge.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CAUSAL_SEMANTIC_BRIDGE_20260917
+    consumers: []
+    profile: STANDARD
+  - name: narrative-causal-fusion
+    path: designs/narrative-causal-fusion.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_NARRATIVE_CAUSAL_FUSION_20260917
+    consumers: []
+    profile: STANDARD
+  - name: meta-kg-engine
+    path: designs/meta-kg-engine.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_META_KG_ENGINE_20260917
+    consumers: []
+    profile: STANDARD
+  - name: kg-causal-integration-pattern
+    path: designs/kg-causal-integration-pattern.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_KG_CAUSAL_INTEGRATION_PATTERN_20260917
+    consumers: []
+    profile: STANDARD
 
 # Architecture des quatre piliers
 piliers:
@@ -342,8 +402,8 @@ governance_atoms:
   - exit-interceptor
   - tdd-airain-law
   - trace-replay-proof
-  # Architecture Think/Do/Check
-  - think-do-check-architecture
+   # Architecture Think/Do/Check
+   - think-do-check-architecture
    # TDC Consciousness
    - think-do-check-consciousness
    - methodological-bon-sens
@@ -353,7 +413,16 @@ governance_atoms:
    - context-engineering
    - agent-engineering-maturity
    - fresh-context-verifier
+   - chain-fluidity
+   - autonomy-fluidity
+   - conversation-aggregator
+   - conversation-to-execution-bridge
    - kg-causal
+   - kg-causal-engine
+   - causal-semantic-bridge
+   - narrative-causal-fusion
+   - meta-kg-engine
+   - kg-causal-integration-pattern
    # Engineering ideas atoms
    - external-verification-mandatory
    - gate-layers
@@ -367,6 +436,7 @@ governance_atoms:
    - learning-curve-expectation
    - deployment-patterns
    - kg-causal-consciousness
+
 
 # Think/Do/Check Architecture
 think_do_check:
