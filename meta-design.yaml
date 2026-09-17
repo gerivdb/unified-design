@@ -231,6 +231,18 @@ designs:
     intent_hash: 0xDESIGN_FRESH_CONTEXT_VERIFIER_20260917
     consumers: []
     profile: STANDARD
+  - name: meta-coherence
+    path: designs/meta-coherence.yaml
+    version: '2.0'
+    intent_hash: 0xDESIGN_META_COHERENCE_20260913
+    consumers: []
+    profile: ACTIVE
+  - name: consciousness
+    path: designs/consciousness.yaml
+    version: '3.0.0'
+    intent_hash: 0xDESIGN_CONSCIOUSNESS_20260913
+    consumers: []
+    profile: ACTIVE
   - name: kg-causal
     path: designs/kg-causal.yaml
     version: '1.0.0'
