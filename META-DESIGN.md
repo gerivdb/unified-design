@@ -224,6 +224,7 @@ OK semantic_loops: No cycles detected
 | context-engineering | 1.0.0 | Ingénierie de contexte : fenêtres glissantes, fraîcheur, embedding |
 | agent-engineering-maturity | 1.0.0 | Hiérarchie des disciplines d'ingénierie agentique 2026 (5 axes, 5 niveaux) |
 | fresh-context-verifier | 1.0.0 | Fresh-Context Vérificateur : TTL, embedding drift, source integrity, cross-model agreement |
+| kg-causal | 1.0.0 | Draft : graphe causal déterministe KG-CAUSAL, bloqué par ADR-KG-CAUSAL-001-20260916 proposed |
 
 ### Atoms L0-L3 (extraits)
 
@@ -248,6 +249,7 @@ OK semantic_loops: No cycles detected
 | ATOM-META-EDIT-LOOP | Atom | Méta-boucle d'édition : vérification après chaque modification |
 | ATOM-LEARNING-CURVE-EXPECTATION | Atom | Courbe d'apprentissage : évaluation avant adoption |
 | ATOM-DEPLOYMENT-PATTERNS | Atom | Patterns de déploiement : blue-green, canary, rolling, immuable |
+| ATOM-KG-CAUSAL-CONSCIOUSNESS | Atom | Conscience de KG-CAUSAL : graphe causal déterministe, draft bloqué par ADR proposed |
 
 ### L1-INFRA (nouveaux)
 

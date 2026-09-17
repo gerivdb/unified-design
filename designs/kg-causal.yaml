@@ -1,0 +1,58 @@
+---
+name: kg-causal
+description: "Design draft pour KG-CAUSAL : graphe causal déterministe du pipeline CLM. Bloqué en draft tant que ADR-KG-CAUSAL-001-20260916 n'est pas accepté. Couvre Observation/Cause/Effet, arêtes CAUSES/PREVENTS/CONFOUNDS, API resolve(), do-calculus, bridges TIMX/ROOTX/LLUX/TALEX."
+version: "1.0.0"
+status: draft
+layer: L4
+intent_hash: 0xDESIGN_KG_CAUSAL_DRAFT_20260917
+adr_status: proposed
+adr: ADR-KG-CAUSAL-001-20260916
+inherits:
+  - ecosystem-consciousness
+depends_on:
+  - ecosystem-consciousness
+bridges:
+  - target: repo:TIMX
+    role: observation-source
+    protocol: wazaa-channel
+    channel: L4-TOOLS/TIMX/causal/observation
+  - target: repo:ROOTX
+    role: effect-sink
+    protocol: wazaa-channel
+    channel: L4-TOOLS/ROOTX/causal/effect
+  - target: repo:LLUX
+    role: learning-replay
+    protocol: wazaa-channel
+    channel: L4-TOOLS/LLUX/causal/replay
+  - target: repo:TALEX
+    role: narrative-engine
+    protocol: wazaa-channel
+    channel: L4-TOOLS/TALEX/causal/narrative
+  - target: repo:KG-L
+    role: fractal-validation
+    protocol: wazaa-channel
+    channel: L4-TOOLS/KG-L/causal/validate
+capabilities:
+  - name: deterministic-causal-graph
+    description: "Graphe causal déterministe : Observation → Cause → Effet"
+    parameters:
+      nodes: [observation, cause, effet]
+      edges: [CAUSES, PREVENTS, CONFOUNDS]
+  - name: resolve-api
+    description: "API resolve(observation) → causal_path"
+    parameters:
+      input: observation
+      output: causal_path
+  - name: do-calculus
+    description: "Implémentation do-calculus pour interventions"
+    parameters:
+      operations: [do, see, fix]
+  - name: clm-pipeline
+    description: "Pipeline CLM : Observation → TIMX → KG-CAUSAL → LLUX → ROOTX → TALEX → VOLTX"
+    parameters:
+      engines: [TIMX, KG-CAUSAL, LLUX, ROOTX, TALEX, VOLTX]
+      excluded: [VERSES]
+principles:
+  - P0_DRAFT: design en draft jusqu'à acceptation ADR
+  - P0_CAUSAL_DETERMINISM: pas de narration dans le pipeline critique
+  - P0_BRIDGE_VALIDATION: chaque bridge doit être validé par KG-L fractal

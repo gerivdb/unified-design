@@ -344,27 +344,29 @@ governance_atoms:
   - trace-replay-proof
   # Architecture Think/Do/Check
   - think-do-check-architecture
-  # TDC Consciousness
-  - think-do-check-consciousness
-  - methodological-bon-sens
-  - problem-structuring-method
-  - value-machine
-  - ecosystem-feedback-loop
-  - context-engineering
-  - agent-engineering-maturity
-  - fresh-context-verifier
-  # Engineering ideas atoms
-  - external-verification-mandatory
-  - gate-layers
-  - independent-sources-rule
-  - confidence-threshold
-  - stop-condition
-  - carry-forward-principle
-  - reject-work-principle
-  - delta-check
-  - meta-edit-loop
-  - learning-curve-expectation
-  - deployment-patterns
+   # TDC Consciousness
+   - think-do-check-consciousness
+   - methodological-bon-sens
+   - problem-structuring-method
+   - value-machine
+   - ecosystem-feedback-loop
+   - context-engineering
+   - agent-engineering-maturity
+   - fresh-context-verifier
+   - kg-causal
+   # Engineering ideas atoms
+   - external-verification-mandatory
+   - gate-layers
+   - independent-sources-rule
+   - confidence-threshold
+   - stop-condition
+   - carry-forward-principle
+   - reject-work-principle
+   - delta-check
+   - meta-edit-loop
+   - learning-curve-expectation
+   - deployment-patterns
+   - kg-causal-consciousness
 
 # Think/Do/Check Architecture
 think_do_check:
