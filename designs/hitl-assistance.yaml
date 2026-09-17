@@ -2,7 +2,7 @@
 name: hitl-assistance
 description: "Assistance HITL (Human-In-The-Loop) pour l'écosystème gerivdb. Formalise les points d'assistance, les escalades, et la décharge de dette technique vers l'humain."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_HITL_ASSISTANCE_20260917
 inherits:

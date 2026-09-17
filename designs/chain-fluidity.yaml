@@ -2,7 +2,7 @@
 name: chain-fluidity
 description: "Fluidité du chainage des tâches dans l'écosystème gerivdb. Formalise les transitions entre étapes d'un pipeline, les dépendances, et les points de fluidité opérationnelle."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
 inherits:

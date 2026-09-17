@@ -2,7 +2,7 @@
 name: task-planning
 description: "Planification des tâches dans l'écosystème gerivdb. Formalise la décomposition, l'estimation, et le scheduling des tâches."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_TASK_PLANNING_20260917
 inherits:
