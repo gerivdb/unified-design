@@ -1,0 +1,23 @@
+---
+name: ergonomics
+description: "Ergonomie des workflows et interfaces pour l'écosystème gerivdb. Formalise les principes d'ergonomie, les patterns d'interaction, et l'expérience utilisateur."
+version: "1.0.0"
+status: draft
+layer: L0
+intent_hash: 0xDESIGN_ERGONOMICS_20260917
+inherits:
+  - debt-relief
+depends_on:
+  - debt-relief
+capabilities:
+  - name: workflow-ergonomics
+    description: "Ergonomie des workflows"
+    parameters:
+      principles: [simplicity, feedback, recovery]
+  - name: interaction-patterns
+    description: "Patterns d'interaction standardisés"
+    parameters:
+      modes: [cli, gui, api]
+principles:
+  - P0_ERGONOMICS: les workflows sont ergonomiques par défaut
+  - P0_FEEDBACK: chaque action a un retour visible
