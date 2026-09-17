@@ -2,7 +2,7 @@
 name: ergonomics
 description: "Ergonomie des workflows et interfaces pour l'écosystème gerivdb. Formalise les principes d'ergonomie, les patterns d'interaction, et l'expérience utilisateur."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_ERGONOMICS_20260917
 inherits:

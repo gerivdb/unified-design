@@ -2,7 +2,7 @@
 name: debt-relief
 description: "Décharge de dette technique pour l'écosystème gerivdb. Formalise les patterns de réduction de dette, les priorisations, et les métriques de suivi."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_DEBT_RELIEF_20260917
 inherits:
