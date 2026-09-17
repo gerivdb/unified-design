@@ -2,7 +2,7 @@
 name: autonomy-fluidity
 description: "Fluidité d'autonomie des agents dans l'écosystème gerivdb. Formalise les niveaux d'autonomie, les transitions, et les gardes d'autonomie."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
 inherits:

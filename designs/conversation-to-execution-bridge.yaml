@@ -2,7 +2,7 @@
 name: conversation-to-execution-bridge
 description: "Pont conversation → exécution. Formalise la transformation des décisions de conversation en actions exécutables."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
 inherits:

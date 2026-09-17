@@ -2,7 +2,7 @@
 name: conversation-aggregator
 description: "Agrégation des conversations en livrables PRD/MOC. Formalise le flux de conversation vers artefacts de gouvernance."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
 inherits:
