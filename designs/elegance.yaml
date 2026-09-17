@@ -1,0 +1,25 @@
+---
+name: elegance
+description: "Élégance des solutions dans l'écosystème gerivdb. Formalise les critères d'élégance, les patterns de simplicité, et la mesure de la complexité."
+version: "1.0.0"
+status: draft
+layer: L0
+intent_hash: 0xDESIGN_ELEGANCE_20260917
+inherits:
+  - debt-relief
+  - operational-fluidity
+depends_on:
+  - debt-relief
+  - operational-fluidity
+capabilities:
+  - name: elegance-criteria
+    description: "Critères d'élégance d'une solution"
+    parameters:
+      criteria: [simplicity, clarity, minimalism, composability]
+  - name: complexity-measurement
+    description: "Mesure de la complexité"
+    parameters:
+      metrics: [cyclomatic, cognitive, structural]
+principles:
+  - P0_ELEGANCE: la solution la plus élégante est préférée
+  - P0_SIMPLICITY: la simplicité est la sophistication suprême

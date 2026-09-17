@@ -1,0 +1,25 @@
+---
+name: assistant-load
+description: "Charge de l'assistant (Kilo) dans l'écosystème gerivdb. Formalise la mesure de la charge, les patterns de décharge, et l'équilibre de la dette technique."
+version: "1.0.0"
+status: draft
+layer: L0
+intent_hash: 0xDESIGN_ASSISTANT_LOAD_20260917
+inherits:
+  - hitl-assistance
+  - debt-relief
+depends_on:
+  - hitl-assistance
+  - debt-relief
+capabilities:
+  - name: load-measurement
+    description: "Mesure de la charge de l'assistant"
+    parameters:
+      metrics: [context_size, task_count, error_rate, turnaround]
+  - name: offload-patterns
+    description: "Patterns de décharge vers humain"
+    parameters:
+      patterns: [delegation, automation, documentation]
+principles:
+  - P0_LOAD_BALANCE: la charge de l'assistant est équilibrée
+  - P0_DEBT_OFFLOAD: la dette technique est déchargée vers l'humain
