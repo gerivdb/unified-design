@@ -1,0 +1,23 @@
+---
+name: autonomy-fluidity
+description: "Fluidité d'autonomie des agents dans l'écosystème gerivdb. Formalise les niveaux d'autonomie, les transitions, et les gardes d'autonomie."
+version: "1.0.0"
+status: draft
+layer: L0
+intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
+inherits:
+  - chain-fluidity
+depends_on:
+  - chain-fluidity
+capabilities:
+  - name: autonomy-levels
+    description: "Niveaux d'autonomie des agents"
+    parameters:
+      levels: [A0, A1, A2, A3]
+  - name: autonomy-transition
+    description: "Transition entre niveaux d'autonomie"
+    parameters:
+      guards: [human_approval, budget_check, governance]
+principles:
+  - P0_AUTONOMY_FLUIDITY: transitions d'autonomie fluides et tracées
+  - P0_GUARD: toute transition respecte les gardes définies

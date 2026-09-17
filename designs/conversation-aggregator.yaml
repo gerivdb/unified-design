@@ -1,0 +1,23 @@
+---
+name: conversation-aggregator
+description: "Agrégation des conversations en livrables PRD/MOC. Formalise le flux de conversation vers artefacts de gouvernance."
+version: "1.0.0"
+status: draft
+layer: L0
+intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
+inherits:
+  - artifact-ownership-routing
+depends_on:
+  - artifact-ownership-routing
+capabilities:
+  - name: conversation-ingest
+    description: "Ingestion de conversations"
+    parameters:
+      sources: [kilo, task, agent_manager]
+  - name: artifact-generation
+    description: "Génération d'artefacts depuis conversations"
+    parameters:
+      types: [PRD, MOC, ADR, INTENT]
+principles:
+  - P0_AGGREGATION: toute conversation aboutit à un artefact tracé
+  - P0_OWNERSHIP: chaque artefact a un owner et un IntentHash
