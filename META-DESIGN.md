@@ -240,10 +240,10 @@ OK semantic_loops: No cycles detected
 | operational-fluidity | 1.0.0 | Fluidité opérationnelle globale : métriques, patterns d'optimisation |
 | elegance | 1.0.0 | Élégance des solutions : critères, patterns de simplicité, mesure de complexité |
 | assistant-load | 1.0.0 | Charge de l'assistant : mesure, patterns de décharge, équilibre dette technique |
-| kg-causal-engine | 1.0.0 | Architecture KG-CAUSAL : pipeline CLM, do-calculus, résolution conflits, flux entrants/sortants |
-| causal-semantic-bridge | 1.0.0 | Pont KG-CAUSAL ↔ VERSES : annotation causale des concepts sémantiques |
-| narrative-causal-fusion | 1.0.0 | Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité |
-| meta-kg-engine | 1.0.0 | Méta-KG unifiée : 4 engines (KG-L, VOLTX, KG-CAUSAL, VERSES), ingestion/production/cycles |
+| kg-causal-engine | 1.0.0 | Architecture KG-CAUSAL : pipeline CLM, do-calculus, résolution conflits, flux entrants/sortants | DRAFT |
+| causal-semantic-bridge | 1.0.0 | Pont KG-CAUSAL ↔ VERSES : annotation causale des concepts sémantiques | DRAFT |
+| narrative-causal-fusion | 1.0.0 | Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité | DRAFT |
+| meta-kg-engine | 1.0.0 | Méta-KG unifiée : 4 engines (KG-L, VOLTX, KG-CAUSAL, VERSES), ingestion/production/cycles | DRAFT |
 | kg-causal-integration-pattern | 1.0.0 | Pattern d'intégration KG-CAUSAL → KG-L (similaire ATOM-056 ARGUS→KG-L) |
 | umodel-agent-ready-data | 1.0.0 | Modèle de données unifié Alibaba UModel : 4 piliers Agent-Ready, graphe sémantique, U-SPL, MCP |
 | reasoningbank-persistent-strategy | 1.0.0 | Banque de Raisonnement : distillation de traces en stratégies, compression multi-niveaux, réinjection prompts |

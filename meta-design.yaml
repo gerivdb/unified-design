@@ -354,27 +354,27 @@ designs:
   - name: kg-causal-engine
     path: designs/kg-causal-engine.yaml
     version: '1.0.0'
-    intent_hash: 0xDESIGN_KG_CAUSAL_ENGINE_20260917
+    intent_hash: 0xDESIGN_KG_CAUSAL_ENGINE_20260916
     consumers: []
-    profile: STANDARD
+    profile: DRAFT
   - name: causal-semantic-bridge
     path: designs/causal-semantic-bridge.yaml
     version: '1.0.0'
-    intent_hash: 0xDESIGN_CAUSAL_SEMANTIC_BRIDGE_20260917
+    intent_hash: 0xDESIGN_CAUSAL_SEMANTIC_BRIDGE_20260916
     consumers: []
-    profile: STANDARD
+    profile: DRAFT
   - name: narrative-causal-fusion
     path: designs/narrative-causal-fusion.yaml
     version: '1.0.0'
-    intent_hash: 0xDESIGN_NARRATIVE_CAUSAL_FUSION_20260917
+    intent_hash: 0xDESIGN_NARRATIVE_CAUSAL_FUSION_20260916
     consumers: []
-    profile: STANDARD
+    profile: DRAFT
   - name: meta-kg-engine
     path: designs/meta-kg-engine.yaml
     version: '1.0.0'
-    intent_hash: 0xDESIGN_META_KG_ENGINE_20260917
+    intent_hash: 0xDESIGN_META_KG_ENGINE_20260916
     consumers: []
-    profile: STANDARD
+    profile: DRAFT
   - name: deterministic-execution-log-clipping
     path: atoms/ATOM-DETERMINISTIC-EXECUTION-LOG-CLIPPING.md
     version: '1.0.0'
