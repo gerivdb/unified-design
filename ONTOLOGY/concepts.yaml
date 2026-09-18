@@ -1,0 +1,66 @@
+# unified-design/ONTOLOGY/concepts.yaml
+# Concepts fondamentaux pour OLM (Ontology Language Model)
+# Couche L0-CANON — unified-design
+# Version: 1.0.0 | Date: 2026-09-19 | Statut: ACTIF
+
+version: 1.0.0
+ontology:
+  name: unified-design-ontology
+  description: Concepts fondamentaux pour OLM depuis unified-design
+  layer: L0-CANON
+  owner: gerivdb
+
+concepts:
+  - id: role-definition
+    name: Role Definition
+    type: ontology-concept
+    definition: "Rôle déclaré pour un composant de l'écosystème. Source de vérité pour OLM."
+    relations:
+      - defines: OLM
+      - source_for: pseudo-lm-from-role
+    status: active
+    introduced: 2026-09-19
+
+  - id: dry-run-mandatory
+    name: Dry-run Mandatory
+    type: governance-constraint
+    definition: "Toute mutation doit être validée en dry-run avant engagement réel."
+    relations:
+      - enforces: dry-run-simulation
+      - required_by: DLM
+      - required_by: OLM
+    status: active
+    introduced: 2026-09-19
+
+  - id: causal-coherence
+    name: Causal Coherence
+    type: quality-attribute
+    definition: "Toute action doit préserver la cohérence causale du graphe KG-L."
+    relations:
+      - validates: KG-L
+      - enforced_by: KG-L-type-guard
+      - required_by: pseudo-lm-from-role
+    status: active
+    introduced: 2026-09-19
+
+  - id: intent-traceability
+    name: Intent Traceability
+    type: traceability
+    definition: "Toute décision/action doit être tracée via intent_hash et CAUSAL_DIFF.md."
+    relations:
+      - traces: intent-hash
+      - produces: CAUSAL_DIFF.md
+      - required_by: pseudo-lm-from-role
+    status: active
+    introduced: 2026-09-19
+
+  - id: production-readiness
+    name: Production Readiness
+    type: maturity-level
+    definition: "État où un composant est testé, documenté, et opérationnel en environnement live."
+    relations:
+      - measures: DLM
+      - measures: OLM
+      - measured_by: proof-of-life
+    status: active
+    introduced: 2026-09-19
