@@ -1,0 +1,56 @@
+---
+name: agent-observability-architecture
+description: "Architecture d'observabilité pour agents autonomes : UModel (graphe sémantique orienté-objet, U-SPL), Trace Engineering (DAG causal, rejouabilité déterministe, Event Sourcing), taxonomie Log/Trajectoire/Trace, pipeline de distillation multi-niveaux, détection d'anomalies MAD/entropie, triple magasin de données."
+version: "1.0.0"
+status: active
+layer: L1
+intent_hash: 0xDESIGN_AGENT_OBSERVABILITY_20260918
+inherits:
+  - meta-coherence
+  - consciousness
+depends_on:
+  - meta-coherence
+  - consciousness
+  - kg-causal
+capabilities:
+  - name: umodel-semantic-graph
+    description: "Graphe sémantique orienté-objet pour standardiser microservices, signaux et playbooks"
+    parameters:
+      pillars: [semantically-rich, contextualized, actionable, structured-standardized]
+      query_interface: U-SPL
+  - name: trace-engineering
+    description: "Trace Engineering : DAG causal, rejouabilité déterministe, Event Sourcing"
+    parameters:
+      replay: [mocked-replay, live-state-resumption]
+      causal_localization: true
+      deterministic_verification: true
+  - name: taxonomy-log-trajectory-trace
+    description: "Taxonomie : Log (texte brut), Trajectoire (séquence État-Action-Observation), Trace (DAG causal)"
+    parameters:
+      replay_fidelity: [extremely-low, medium, complete]
+      causal_traceability: [none, linear, explicit]
+  - name: distillation-pipeline
+    description: "Pipeline de distillation multi-niveaux : élision AST/stdout, déduplication sémantique, élagage graphe causal"
+    parameters:
+      compression: [60-85%, 30-50%, 70-90%]
+      output: reasoning-bank
+  - name: anomaly-detection
+    description: "Détection d'anomalies : MAD du nombre d'étapes, variance de l'entropie des tokens"
+    parameters:
+      mad_threshold: 3.5
+      entropy_variance_threshold: 0.02
+      consecutive_spans: 4
+  - name: triple-datastore
+    description: "Triple magasin de données : séries temporelles (Prometheus/M3), OLAP columnar (ClickHouse), graphe/vecteurs (RAG)"
+    parameters:
+      timeseries: Prometheus/M3
+      olap: ClickHouse
+      graph_vector: RAG
+principles:
+  - P0_AGENT_READY: les données doivent être sémantiquement riches, contextualisées, actionnables, structurées
+  - P0_TRACE_CAUSAL: la trace est un DAG causal, pas un arbre ni un log plat
+  - P0_DETERMINISTIC_REPLAY: toute exécution doit être rejouable déterministiquement depuis un ledger append-only
+  - P0_DISTILLATION: ne jamais injecter de traces brutes dans le contexte LLM ; toujours distiller
+  - P0_ANTI_HALLUCINATION: vérification par capteurs déterministes sur les spans, pas par évaluateur LLM seul
+  - P0_PERFORMANCE: émission de spans asynchrone, découplage registre de rejeu / magasin d'analyse
+  - P0_OBSERVABILITY_IS_FUNDAMENTAL: l'observabilité n'est pas un afterthought, c'est une infrastructure active

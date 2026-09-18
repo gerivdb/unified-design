@@ -243,6 +243,12 @@ designs:
     intent_hash: 0xDESIGN_CONSCIOUSNESS_20260913
     consumers: []
     profile: ACTIVE
+  - name: agent-observability-architecture
+    path: designs/agent-observability-architecture.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_AGENT_OBSERVABILITY_20260918
+    consumers: []
+    profile: ACTIVE
   - name: kg-causal
     path: designs/kg-causal.yaml
     version: '1.0.0'
@@ -528,6 +534,7 @@ governance_atoms:
   - learning-curve-expectation
   - deployment-patterns
   - kg-causal-consciousness
+  - deterministic-execution-log-clipping
 
 
 # Think/Do/Check Architecture

@@ -226,6 +226,7 @@ OK semantic_loops: No cycles detected
 | fresh-context-verifier | 1.0.0 | Fresh-Context Vérificateur : TTL, embedding drift, source integrity, cross-model agreement |
 | meta-coherence | 2.0 | Principe P0 de cohérence multi-échelle et cross-repo : ARGUS détecte GAP/GHOST/DRIFT/COLLISION/ORPHAN/SHADOW/VOID/PHANTOM_PATH/UNTRACKED_MASS |
 | consciousness | 3.0.0 | État subjectif premier : Think/Do/Check consciousness, MDU reflet élégant, engineering ideas integration |
+| agent-observability-architecture | 1.0.0 | Observabilité agents : UModel (graphe sémantique, U-SPL), Trace Engineering (DAG causal, Event Sourcing, rejouabilité), taxonomie Log/Trajectoire/Trace, distillation multi-niveaux, triple magasin de données |
 | kg-causal | 1.0.0 | Draft : graphe causal déterministe KG-CAUSAL, bloqué par ADR-KG-CAUSAL-001-20260916 proposed |
 | chain-fluidity | 1.0.0 | Fluidité des chaînes Think→Do→Check : réduction des frictions, pipelines, orchestration |
 | autonomy-fluidity | 1.0.0 | Fluidité d'autonomie : niveaux AXE-0, transitions A0→A3, droits d'écriture |
@@ -269,6 +270,7 @@ OK semantic_loops: No cycles detected
 | ATOM-LEARNING-CURVE-EXPECTATION | Atom | Courbe d'apprentissage : évaluation avant adoption |
 | ATOM-DEPLOYMENT-PATTERNS | Atom | Patterns de déploiement : blue-green, canary, rolling, immuable |
 | ATOM-KG-CAUSAL-CONSCIOUSNESS | Atom | Conscience de KG-CAUSAL : graphe causal déterministe, draft bloqué par ADR proposed |
+| ATOM-DETERMINISTIC-EXECUTION-LOG-CLIPPING | Atom | Vérification anti-hallucination par capture déterministe des logs d'exécution (inspiré de DeepMind Co-Scientist) |
 
 ### L1-INFRA (nouveaux)
 
