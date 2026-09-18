@@ -1,0 +1,104 @@
+{
+  "repo": "unified-design",
+  "scope_dir": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design",
+  "targets": [
+    {
+      "category": "routine",
+      "name": "ontology_term_gate",
+      "status": "existing",
+      "path": "CONTRIBUTING.md",
+      "references": [
+        "CONTRIBUTING.md"
+      ],
+      "rationale": "Routine Python/PS1 existante: ontology_term_gate"
+    },
+    {
+      "category": "routine",
+      "name": "approval_readiness",
+      "status": "existing",
+      "path": "designs\\approval-readiness.yaml",
+      "references": [
+        "designs\\approval-readiness.yaml"
+      ],
+      "rationale": "Routine Python/PS1 existante: approval_readiness"
+    },
+    {
+      "category": "routine",
+      "name": "auto_discovery_engine",
+      "status": "existing",
+      "path": "designs\\autonomy-integrity-matrix\\AUTONOMY_INTEGRITY_MATRIX.md",
+      "references": [
+        "designs\\autonomy-integrity-matrix\\AUTONOMY_INTEGRITY_MATRIX.md"
+      ],
+      "rationale": "Routine Python/PS1 existante: auto_discovery_engine"
+    },
+    {
+      "category": "routine",
+      "name": "bootstrap_runner",
+      "status": "missing",
+      "path": null,
+      "references": [
+        "designs\\bootstrap\\design.yaml"
+      ],
+      "rationale": "Mentionné dans contexte KG (KG-L/VOLTX/VERSES) mais routine non formalisée"
+    },
+    {
+      "category": "routine",
+      "name": "session_boot",
+      "status": "existing",
+      "path": "designs\\moc-governance.yaml",
+      "references": [
+        "designs\\moc-governance.yaml"
+      ],
+      "rationale": "Routine Python/PS1 existante: session_boot"
+    },
+    {
+      "category": "skill",
+      "name": "registry-sync-checker",
+      "status": "missing",
+      "path": null,
+      "references": [
+        "scripts\\scanner_report.json"
+      ],
+      "rationale": "Mentionné dans conversation/ONTOLOGY mais non implémenté"
+    },
+    {
+      "category": "primitive",
+      "name": "registry-sync-checker",
+      "status": "missing",
+      "path": null,
+      "references": [
+        "scripts\\scanner_report.json"
+      ],
+      "rationale": "Mentionné dans PRD-MOC/GEN-058 ou pattern-router mais non implémenté"
+    },
+    {
+      "category": "routine",
+      "name": "registry-sync-checker",
+      "status": "missing",
+      "path": null,
+      "references": [
+        "scripts\\scanner_report.json"
+      ],
+      "rationale": "Mentionné dans conversation/ONTOLOGY mais routine non formalisée"
+    }
+  ],
+  "patterns": [
+    {
+      "pattern_name": "WAZAA event",
+      "frequency": 2,
+      "files": [
+        "designs\\autonomous-ops-integration.yaml"
+      ],
+      "automation_target": "wazaa-event-router"
+    },
+    {
+      "pattern_name": "auto-dev cycle",
+      "frequency": 2,
+      "files": [
+        "repos\\structure.yaml"
+      ],
+      "automation_target": "auto-dev-cycle-runner"
+    }
+  ]
+}
