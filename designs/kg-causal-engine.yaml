@@ -1,0 +1,42 @@
+---
+name: kg-causal-engine
+description: "Architecture KG-CAUSAL : pipeline CLM, do-calculus, résolution conflits, flux entrants/sortants. Draft, bloqué par ADR-KG-CAUSAL-001-20260916 proposed."
+version: "1.0.0"
+status: draft
+layer: L4
+intent_hash: 0xDESIGN_KG_CAUSAL_ENGINE_20260916
+inherits:
+  - meta-coherence
+  - consciousness
+depends_on:
+  - kg-causal
+  - meta-kg-engine
+capabilities:
+  - name: clm-pipeline
+    description: "Pipeline CLM : Causal Language Model pour extraction causalité"
+    parameters:
+      input: text
+      output: causal_graph
+      confidence_threshold: 0.6
+  - name: do-calculus
+    description: "Do-calculus : identification effets causaux vs corrélation"
+    parameters:
+      intervention_detection: required
+      backdoor_adjustment: required
+      frontdoor_adjustment: supported
+  - name: conflict-resolution
+    description: "Résolution conflits : règles de priorité entre sources causales"
+    parameters:
+      strategy: confidence_weighted
+      tie_breaker: recency
+      audit_trail: required
+  - name: flux-management
+    description: "Flux entrants/sortants : ingestion/export graphes causaux"
+    parameters:
+      ingestion: kg-l, voltx, verses
+      export: kg-l, voltx, verses
+      format: causal_jsonl
+principles:
+  - P0_DETERMINISTIC_CAUSALITY: toute inférence causale doit être déterministe
+  - P0_CONFIDENCE_THRESHOLD: seuil de confiance 0.6 minimum pour valider un edge causal
+  - P0_AUDIT_TRAIL: toute résolution de conflit laisse une trace vérifiable

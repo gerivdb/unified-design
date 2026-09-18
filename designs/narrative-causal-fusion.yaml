@@ -1,0 +1,36 @@
+---
+name: narrative-causal-fusion
+description: "Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité. Draft, bloqué par ADR-KG-CAUSAL-001-20260916 proposed."
+version: "1.0.0"
+status: draft
+layer: L4
+intent_hash: 0xDESIGN_NARRATIVE_CAUSAL_FUSION_20260916
+inherits:
+  - kg-causal-engine
+  - voltx
+depends_on:
+  - kg-causal-engine
+  - voltx
+  - narrative-causal-fusion
+capabilities:
+  - name: proof-causal-annotation
+    description: "Annotation causale des preuves VOLTX : timestamped causal tags"
+    parameters:
+      annotation: causal_tag
+      timestamp: iso8601_utc
+      confidence: required
+  - name: narrative-fusion
+    description: "Fusion récits narratifs avec graphe causal : story ↔ causality"
+    parameters:
+      fusion_mode: weighted_evidence
+      weight_source: confidence_score
+      verification: deterministic
+  - name: causal-replay
+    description: "Rejeu déterministe des preuves annotées causalement"
+    parameters:
+      replay_mode: deterministic
+      verification: required
+principles:
+  - P0_PROOF_TIMESTAMP: toute preuve annotée causalement est horodatée UTC
+  - P0_DETERMINISTIC_REPLAY: le rejeu des preuves est déterministe
+  - P0_CAUSAL_EVIDENCE_WEIGHT: les poids des edges causaux sont vérifiables

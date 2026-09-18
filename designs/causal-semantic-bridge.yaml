@@ -1,0 +1,36 @@
+---
+name: causal-semantic-bridge
+description: "Pont KG-CAUSAL ↔ VERSES : annotation causale des concepts sémantiques. Draft, bloqué par ADR-KG-CAUSAL-001-20260916 proposed."
+version: "1.0.0"
+status: draft
+layer: L4
+intent_hash: 0xDESIGN_CAUSAL_SEMANTIC_BRIDGE_20260916
+inherits:
+  - kg-causal-engine
+  - verses
+depends_on:
+  - kg-causal-engine
+  - verses
+  - kg-l
+capabilities:
+  - name: causal-annotation
+    description: "Annotation causale des concepts VERSES : CAUSES, PREVENTS, CONFOUNDS"
+    parameters:
+      annotation_format: causal_tag
+      validation: required
+      confidence: required
+  - name: semantic-alignment
+    description: "Alignement sémantique entre graphe causal et concepts VERSES"
+    parameters:
+      matching: fuzzy_semantic
+      threshold: 0.8
+      fallback: manual_review
+  - name: bidirectional-sync
+    description: "Synchronisation bidirectionnelle KG-CAUSAL ↔ VERSES"
+    parameters:
+      sync_mode: eventual_consistency
+      conflict_resolution: kg_causal_priority
+principles:
+  - P0_CAUSAL_TAG_INTEGRITY: les tags causaux ne sont jamais supprimés sans trace
+  - P0_SEMANTIC_ALIGNMENT: tout concept VERSES doit avoir au moins un alignement causal si applicable
+  - P0_BRIDGE_AUDIT: chaque synchronisation est tracée dans VOLTX

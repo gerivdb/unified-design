@@ -1,0 +1,41 @@
+---
+name: meta-kg-engine
+description: "Méta-KG unifiée : 4 engines (KG-L, VOLTX, KG-CAUSAL, VERSES), ingestion/production/cycles. Draft, bloqué par ADR-KG-CAUSAL-001-20260916 proposed."
+version: "1.0.0"
+status: draft
+layer: L4
+intent_hash: 0xDESIGN_META_KG_ENGINE_20260916
+inherits:
+  - kg-causal-engine
+  - causal-semantic-bridge
+  - narrative-causal-fusion
+depends_on:
+  - kg-causal-engine
+  - causal-semantic-bridge
+  - narrative-causal-fusion
+  - kg-l
+  - voltx
+  - verses
+capabilities:
+  - name: unified-ingestion
+    description: "Ingestion unifiée depuis KG-L, VOLTX, KG-CAUSAL, VERSES"
+    parameters:
+      sources: [kg-l, voltx, kg-causal, verses]
+      format: unified_jsonl
+      validation: required
+  - name: meta-graph-construction
+    description: "Construction méta-graphe : nœuds et edges cross-engine"
+    parameters:
+      node_types: [concept, proof, causal_edge, semantic_tag]
+      edge_types: [INSTANCE_OF, CAUSES, PREVENTS, CONFOUNDS, NARRATES]
+      deduplication: required
+  - name: cross-engine-cycles
+    description: "Cycles cross-engine : feedback loops entre les 4 engines"
+    parameters:
+      cycle_detection: required
+      convergence_check: required
+      max_iterations: 10
+principles:
+  - P0_META_COHERENCE: le méta-graphe maintient la cohérence cross-engine
+  - P0_INGESTION_IDEMPOTENT: l'ingestion est idempotente
+  - P0_CYCLE_BOUNDED: les cycles cross-engine sont bornés et détectés
