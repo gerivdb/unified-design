@@ -1,0 +1,10 @@
+- atom_id: ATOM-053
+    name: Workspace Draft Convention
+    status: active
+    layer: L0
+    path: atoms/ATOM-053-workspace-draft-convention.md
+    intent_hash: 0xATOM_053_WORKSPACE_DRAFT_CONVENTION_20260823
+    bridges: [ARGUS, NEXUS, KG-L]
+    required: true
+    dependencies: []
+    updated: "2026-09-16"
