@@ -1,19 +1,23 @@
 ---
 name: CAUSEX
-version: "1.0.0"
+version: "2.0.0"
 status: proposed
 strate: L4-TOOLS
+layer: L4-TOOLS
 type: cognitive
 intent_hash: 0xCAUSEX_CAUSAL_RUNNER_20260821
 description: >
   CAUSEX — Runner causal avance. Detecte les relations de cause a effet dans les graphes de dependances.
+  V2.0.0 : ajout capacité detection relations, pont KG-CAUSAL, integration ROOTX + KG-L.
 
 dependencies:
     - knowledge-graph-memory
+    - KG-CAUSAL
 
 consumers:
   - ROOTX
   - KG-L
+  - KG-CAUSAL
 
 capabilities:
   - name: primary-function
@@ -22,6 +26,32 @@ capabilities:
       input: string
     outputs:
       - result: object
+  - name: causal-relation-detector
+    description: Détecte relations cause/effet dans graphes de dépendances
+    parameters:
+      input: dependency_graph
+      output: causal_edges
+      edge_kinds:
+        - causes
+        - prevents
+        - confounds
+  - name: kg-causal-provider
+    description: Producteur d'arêtes pour KG-CAUSAL
+    parameters:
+      protocol: wazaa-channel
+      input: detected_relations
+      output: kg_causal_edges
+
+bridges:
+  - target: repo:KG-CAUSAL
+    role: provider
+    protocol: wazaa-channel
+  - target: repo:ROOTX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:KG-L
+    role: consumer
+    protocol: wazaa-channel
 
 constraints:
   - cpu_only: true

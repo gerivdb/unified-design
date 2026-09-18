@@ -1,7 +1,12 @@
+---
 name: llux
-version: 2.0.0
+version: "2.0.0"
 status: active
 profile: STANDARD
+layer: L3-CITIZENS
+description: >
+  LLUX — Moteur d'inférence ternaire (Zig/GGML/Base243). Fournit le décodage
+  contraint, les kernels SSE4.2, et les runners pour le pipeline CLM.
 consumers: []
 
 # Causal Resolution Principles (derived from LLUX 7B .q243 silent fail resolution)
@@ -188,6 +193,43 @@ derived_tools:
     purpose: "Generate CAUSAL_DIFF.md from git diff + domain_links.json + intent_hash"
     status: to_create
     repo: CTULU/tools/kg-l-causal-diff
+
+  - name: kvcache-ternary
+    type: LLUX component
+    purpose: "Mémoire séquentielle pour autoreg (P0 bloquant CLM)"
+    status: active
+    repo: LLUX/src/kernels/kvcache_ternary.c
+     
+  - name: q243-quantization
+    type: LLUX component
+    purpose: "Quantization Base243 pour poids LLM (P0 bloquant CLM)"
+    status: active
+    repo: LLUX/src/kernels/q243.c
+     
+  - name: stream-compute-graph
+    type: LLUX component
+    purpose: "Compute graph séquentiel pour pipeline (P1)"
+    status: active
+    repo: LLUX/src/core/stream.c
+     
+  - name: llux-replay
+    type: LLUX runner
+    purpose: "Rejeu WAL via batmcp + WAL (P2)"
+    status: active
+    repo: LLUX/src/runners/replay_engine.zig
+     
+  - name: llux-learn
+    type: LLUX runner
+    purpose: "Apprentissage depuis ONTOLOGY (P2)"
+    status: active
+    repo: LLUX/src/runners/learn_engine.zig
+
+  - name: gbnf-llux-validator
+    type: LLUX/TALEX fallback
+    purpose: "Validation causale GBNF Python quand libgbnf Zig indisponible"
+    status: active
+    repo: LLUX/gbnf/llux_gbnf.py
+    integration: TALEX.validate_gbnf_output
 
 # Meta-coherence verification (KG-L)
 meta_coherence_checks:

@@ -91,31 +91,31 @@ capabilities:
     description: Cascade checkpoint rollback (GF-11 compliant)
     parameters:
       recovery_ms: 10
-  components:
-  - type: cycle_engine
-    repo: gerivdb/KG-L
-    path: KG-L/kilocode/core/cycle.py
-  - type: causal_graph
-    repo: gerivdb/KG-L
-    path: KG-L/edges/
-  - type: entropy
-    repo: gerivdb/KG-L
-    path: KG-L/kilocode/core/entropy.py
-  - type: ethics
-    repo: gerivdb/KG-L
-    path: KG-L/kilocode/core/ethics.py
-  - type: memory
-    repo: gerivdb/KG-L
-    path: KG-L/kilocode/core/memory.py
-  - type: rollback
-    repo: gerivdb/KG-L
-    path: KG-L/kilocode/core/rollback.py
-  - type: design_enforcer
-    repo: gerivdb/KG-L
-    path: KG-L/kilocode/guards/design_enforcement/
-  - type: axles
-    repo: gerivdb/KG-L
-    path: KG-L/kilocode/axes/
+components:
+- type: cycle_engine
+  repo: gerivdb/KG-L
+  path: KG-L/kilocode/core/cycle.py
+- type: causal_graph
+  repo: gerivdb/KG-L
+  path: KG-L/edges/
+- type: entropy
+  repo: gerivdb/KG-L
+  path: KG-L/kilocode/core/entropy.py
+- type: ethics
+  repo: gerivdb/KG-L
+  path: KG-L/kilocode/core/ethics.py
+- type: memory
+  repo: gerivdb/KG-L
+  path: KG-L/kilocode/core/memory.py
+- type: rollback
+  repo: gerivdb/KG-L
+  path: KG-L/kilocode/core/rollback.py
+- type: design_enforcer
+  repo: gerivdb/KG-L
+  path: KG-L/kilocode/guards/design_enforcement/
+- type: axles
+  repo: gerivdb/KG-L
+  path: KG-L/kilocode/axes/
 bridges:
   - target: repo:LLUX
     role: consumer
@@ -132,6 +132,9 @@ bridges:
   - target: repo:GoverNANCE-HUB
     role: consumer
     protocol: yaml
+  - target: repo:KG-CAUSAL
+    role: consumer
+    protocol: wazaa-channel
 dependencies:
   - repo: gerivdb/LLUX
   - repo: gerivdb/RLM-243
@@ -140,7 +143,13 @@ dependencies:
   - repo: gerivdb/UAE
   - repo: gerivdb/NEXUS
   - repo: gerivdb/GOVERNANCE-HUB
+  - repo: gerivdb/KG-CAUSAL
 constraints:
   - cpu_only: true
   - memory_24gb: true
   - ram_share_with_agents: true
+notes: >
+  KG-L n'est PAS un graphe causal déterministe. C'est un moteur de validation
+  fractale (FractalEngine + EGMI Validator). Le graphe causal déterministe
+  (Observation/Cause/Effet avec do-calculus) est fourni par KG-CAUSAL (L4-TOOLS).
+  KG-L valide la cohérence fractale et l'intégrité EGMI de structures existantes.
