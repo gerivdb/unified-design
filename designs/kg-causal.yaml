@@ -11,6 +11,11 @@ inherits:
   - ecosystem-consciousness
 depends_on:
   - ecosystem-consciousness
+hardware_profile:
+  cpu: "E5620 Westmere, SSE4.2"
+  gpu: "FORBIDDEN"
+  ram_max_gb: 24
+  execution_mode: "CPU-only"
 bridges:
   - target: repo:TIMX
     role: observation-source
@@ -51,8 +56,10 @@ capabilities:
     description: "Pipeline CLM : Observation → TIMX → KG-CAUSAL → LLUX → ROOTX → TALEX → VOLTX"
     parameters:
       engines: [TIMX, KG-CAUSAL, LLUX, ROOTX, TALEX, VOLTX]
-      excluded: [VERSES]
+      excluded_from_clm_production: [VERSES]
+      note: "VERSES reste actif hors pipeline CLM production (évaluation ML + routing sémantique, CPU-only, Quadro 2000 interdite)"
 principles:
   - P0_DRAFT: design en draft jusqu'à acceptation ADR
   - P0_CAUSAL_DETERMINISM: pas de narration dans le pipeline critique
   - P0_BRIDGE_VALIDATION: chaque bridge doit être validé par KG-L fractal
+  - P0_ENV2_CPU_ONLY: toute exécution est CPU-only ; GPU FORBIDDEN

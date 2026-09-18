@@ -5,6 +5,11 @@ version: "1.0.0"
 status: active
 layer: L0
 intent_hash: 0xDESIGN_ECOSYSTEM_CONSCIOUSNESS_20260917
+hardware_profile:
+  cpu: "E5620 Westmere, SSE4.2"
+  gpu: "FORBIDDEN"
+  ram_max_gb: 24
+  execution_mode: "CPU-only"
 inherits:
   - consciousness
   - meta-coherence
