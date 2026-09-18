@@ -375,14 +375,33 @@ designs:
     intent_hash: 0xDESIGN_META_KG_ENGINE_20260917
     consumers: []
     profile: STANDARD
-  - name: kg-causal-integration-pattern
-    path: designs/kg-causal-integration-pattern.yaml
+  - name: deterministic-execution-log-clipping
+    path: atoms/ATOM-DETERMINISTIC-EXECUTION-LOG-CLIPPING.md
     version: '1.0.0'
-    intent_hash: 0xDESIGN_KG_CAUSAL_INTEGRATION_PATTERN_20260917
+    intent_hash: 0xATOM_DETERMINISTIC_EXECUTION_LOG_CLIPPING_20260918
     consumers: []
-    profile: STANDARD
+    profile: ACTIVE
+  - name: umodel-agent-ready-data
+    path: designs/umodel-agent-ready-data.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_UMODEL_AGENT_READY_DATA_20260918
+    consumers: []
+    profile: ACTIVE
+  - name: reasoningbank-persistent-strategy
+    path: designs/reasoningbank-persistent-strategy.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_REASONINGBANK_PERSISTENT_STRATEGY_20260918
+    consumers: []
+    profile: ACTIVE
+  - name: deepmind-co-scientist-reliability
+    path: designs/deepmind-co-scientist-reliability.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_DEEPMIND_CO_SCIENTIST_RELIABILITY_20260918
+    consumers: []
+    profile: ACTIVE
 
-# Architecture des quatre piliers
+
+# Think/Do/Check Architecture
 piliers:
   - name: "Sonar-Driven Design"
     abbr: "SDD"
@@ -535,6 +554,9 @@ governance_atoms:
   - deployment-patterns
   - kg-causal-consciousness
   - deterministic-execution-log-clipping
+  - umodel-agent-ready-data
+  - reasoningbank-persistent-strategy
+  - deepmind-co-scientist-reliability
 
 
 # Think/Do/Check Architecture
@@ -631,3 +653,6 @@ references:
   - ADR-2026-07-31-005-TDD-AIRAIN-LAW
   - ADR-2026-07-31-006-TRACE-REPLAY-PROOF
   - ADR-2026-09-17-OPERATIONAL-DESIGNS-GOVERNANCE
+  - ADR-2026-09-18-UMODEL-AGENT-READY-DATA
+  - ADR-2026-09-18-REASONINGBANK-PERSISTENT-STRATEGY
+  - ADR-2026-09-18-DEEPMIND-CO-SCIENTIST-RELIABILITY

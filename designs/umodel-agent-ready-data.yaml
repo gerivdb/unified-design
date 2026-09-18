@@ -1,0 +1,50 @@
+---
+name: umodel-agent-ready-data
+description: "Modèle de données unifié d'Alibaba Cloud pour rendre l'observabilité exploitable par des agents à grande échelle. Quatre piliers Agent-Ready : sémantiquement riche, contextualisé, actionnable, structuré/standardisé. Architecture : graphe sémantique orienté-objet, U-SPL, intégration MCP. Résultats : +8% précision localisation causes racines, élimination hallucinations multi-joins, réduction 58.4% délai détection incidents."
+version: "1.0.0"
+status: active
+layer: L1
+intent_hash: 0xDESIGN_UMODEL_AGENT_READY_DATA_20260918
+inherits:
+  - agent-observability-architecture
+  - consciousness
+depends_on:
+  - agent-observability-architecture
+  - consciousness
+  - meta-coherence
+capabilities:
+  - name: semantically-rich-data
+    description: "Les données sont auto-descriptives : métadonnées explicites sur unité, type, et requête"
+    parameters:
+      example: node_cpu_seconds_total -> objet métadonné
+  - name: contextualized-knowledge-graph
+    description: "Remplacer les événements isolés par un Graphe de Connaissances : entités=nœuds, dépendances=arêtes explicites"
+    parameters:
+      entities: [microservices, databases, playbooks]
+      traversal: follow-dependencies
+  - name: actionable-observability
+    description: "L'observabilité fournit des interfaces pour agir (lier alerte à script) et pré-traiter (filtrer, agréger)"
+    parameters:
+      link_pattern: alert -> cleanup_script
+      context_budget: preserve
+  - name: unified-object-store
+    description: "Magasin d'Objets Unifié masquant l'hétérogénéité des sources (Prometheus, Elasticsearch, Jaeger)"
+    parameters:
+      sources: [Prometheus, Elasticsearch, Jaeger]
+      schema: unified
+  - name: u-spl-query-interface
+    description: "Interface de requête Pipeline U-SPL : abstraction des dialectes bruts en opérations sémantiques intuitives"
+    parameters:
+      input: semantic_operations
+      output: PromQL/SQL
+      hallucination_reduction: near-zero
+  - name: mcp-integration
+    description: "Intégration MCP en production : exposition topologie temps réel aux agents"
+    parameters:
+      protocol: Model Context Protocol
+      throughput: 10_000_000 ops/sec
+principles:
+  - P0_AGENT_READY_DATA: les données doivent être sémantiquement riches, contextualisées, actionnables, structurées
+  - P0_KNOWLEDGE_GRAPH_FIRST: les événements isolés sont remplacés par un graphe de connaissances navigable
+  - P0_ACTIONABLE_NOT_READ_ONLY: l'observabilité expose des leviers d'action, pas seulement des tableaux de bord
+  - P0_UNIFIED_SCHEMA: une seule vue sémantique sur des sources hétérogènes
