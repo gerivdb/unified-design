@@ -118,9 +118,9 @@ instances:
     role: ontology-language-model
     description: "Generalisation LABO 27 : LM unifie depuis role ontologique"
     repo: ONTOLOGY
-    path: ONTOLOGY/
+    path: D:\DO\WEB\TOOLS\L0-CANON\ONTOLOGY
     status: proposed
-    note: ONTOLOGY directory exists under D:\DO\WEB (no standalone .git). Content populated with 13 core concepts. Git structure needs HITL validation.
+    note: ONTOLOGY repo exists at L0-CANON with .git, 2038 files. ONTOLOGY.yaml added with 13 core concepts. Git structure confirmed.
 
 pipeline_template:
   think:
