@@ -245,6 +245,9 @@ OK semantic_loops: No cycles detected
 | narrative-causal-fusion | 1.0.0 | Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité |
 | meta-kg-engine | 1.0.0 | Méta-KG unifiée : 4 engines (KG-L, VOLTX, KG-CAUSAL, VERSES), ingestion/production/cycles |
 | kg-causal-integration-pattern | 1.0.0 | Pattern d'intégration KG-CAUSAL → KG-L (similaire ATOM-056 ARGUS→KG-L) |
+| umodel-agent-ready-data | 1.0.0 | Modèle de données unifié Alibaba UModel : 4 piliers Agent-Ready, graphe sémantique, U-SPL, MCP |
+| reasoningbank-persistent-strategy | 1.0.0 | Banque de Raisonnement : distillation de traces en stratégies, compression multi-niveaux, réinjection prompts |
+| deepmind-co-scientist-reliability | 1.0.0 | Fiabilité agents DeepMind Co-Scientist : vérification déterministe, fabrication 4%, 0.0% fabrication complète |
 
 ### Atoms L0-L3 (extraits)
 
@@ -271,6 +274,9 @@ OK semantic_loops: No cycles detected
 | ATOM-DEPLOYMENT-PATTERNS | Atom | Patterns de déploiement : blue-green, canary, rolling, immuable |
 | ATOM-KG-CAUSAL-CONSCIOUSNESS | Atom | Conscience de KG-CAUSAL : graphe causal déterministe, draft bloqué par ADR proposed |
 | ATOM-DETERMINISTIC-EXECUTION-LOG-CLIPPING | Atom | Vérification anti-hallucination par capture déterministe des logs d'exécution (inspiré de DeepMind Co-Scientist) |
+| ATOM-UMODEL-AGENT-READY-DATA | Atom | Modèle de données unifié UModel Alibaba : 4 piliers Agent-Ready, graphe sémantique, U-SPL, MCP |
+| ATOM-REASONINGBANK-PERSISTENT-STRATEGY | Atom | Banque de Raisonnement : distillation de traces en stratégies, compression multi-niveaux, réinjection prompts |
+| ATOM-DEEP-MIND-CO-SCIENTIST-RELIABILITY | Atom | Fiabilité agents DeepMind Co-Scientist : vérification déterministe, fabrication 4%, 0.0% fabrication complète |
 
 ### L1-INFRA (nouveaux)
 
