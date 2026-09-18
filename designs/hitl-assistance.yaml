@@ -1,0 +1,23 @@
+---
+name: hitl-assistance
+description: "Assistance HITL (Human-In-The-Loop) pour l'écosystème gerivdb. Formalise les points d'assistance, les escalades, et la décharge de dette technique vers l'humain."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_HITL_ASSISTANCE_20260917
+inherits:
+  - approval-readiness
+depends_on:
+  - approval-readiness
+capabilities:
+  - name: escalation-points
+    description: "Points d'escalade vers humain"
+    parameters:
+      triggers: [confidence < 0.6, conflict, governance]
+  - name: debt-offload
+    description: "Décharge de dette technique vers humain"
+    parameters:
+      categories: [decision, validation, cleanup]
+principles:
+  - P0_HITL: l'humain est assisté, pas substitué
+  - P0_DEBT_RELIEF: chaque assistance réduit la dette technique

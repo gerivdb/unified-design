@@ -1,0 +1,57 @@
+---
+name: context-engineering
+description: "Ingénierie de contexte inspirée de D:\GG-knox\engineering ideas\300-kimi-k3\16.md. Conception et maintenance du contexte d'exécution des agents : fenêtres glissantes, fraîcheur, embedding, compression, sélection pertinente. Garantit que chaque agent dispose du contexte optimal pour sa tâche."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_CONTEXT_ENGINEERING_20260917
+inherits:
+  - ecosystem-feedback-loop
+depends_on:
+  - ecosystem-feedback-loop
+bridges:
+  - target: repo:BRAIN
+    role: cognitive-layer
+    protocol: wazaa-channel
+    channel: L4-TOOLS/BRAIN/context-engineering/cognitive
+  - target: repo:KG-L
+    role: causal-engine
+    protocol: wazaa-channel
+    channel: L4-TOOLS/KG-L/context-engineering/causal
+  - target: repo:VOLTX
+    role: narrative-vault
+    protocol: wazaa-channel
+    channel: L0-CANON/VOLTX/context-engineering/narrative
+
+capabilities:
+  - name: context-window-management
+    description: "Gestion des fenêtres de contexte : sliding window, compression, sélection"
+    parameters:
+      window_size: 8192
+      compression_ratio: 0.7
+      selection_strategy: relevance_scores
+  - name: freshness-management
+    description: "Gestion de la fraîcheur du contexte : TTL, invalidation, refresh"
+    parameters:
+      ttl_seconds: 3600
+      freshness_check_interval: 60
+      auto_refresh: true
+  - name: embedding-strategy
+    description: "Stratégie d'embedding pour la sélection de contexte"
+    parameters:
+      model: text-embedding-3-small
+      dimension: 1536
+      similarity_metric: cosine
+      top_k: 10
+  - name: context-selection
+    description: "Sélection du contexte pertinent pour une tâche donnée"
+    parameters:
+      algorithm: MMR (Maximal Marginal Relevance)
+      diversity_weight: 0.3
+      max_tokens: 4096
+
+principles:
+  - P0_FRESHNESS : le contexte doit être frais (TTL, invalidation, refresh)
+  - P0_RELEVANCE : le contexte sélectionné est le plus pertinent pour la tâche
+  - P0_DIVERSITY : le contexte est diversifié pour éviter la myopie
+  - P0_COMPRESSION : le contexte est compressé sans perte d'information critique

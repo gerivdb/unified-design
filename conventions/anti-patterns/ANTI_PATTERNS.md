@@ -21,6 +21,7 @@ Les anti-patterns sont des schémas de pensée ou de développement qui, s'ils l
 | **Branch Orphan** | Branches sans PR ou travail associé | Branch Lifecycle, Orphan Branch Dispatcher |
 | **Silent Failure** | Échec sans signalement visible | Logs obligatoires, Evidence Required (ATOM-028) |
 | **Context Bleeding** | Fuite d'état entre sessions | Isolation par worktree, checkpoint nettoyé |
+| **Hardcode** | Valeurs/chemins/rôles codés en dur | Path Manager Anything, Registry Sync, ENV resolver |
 
 ## Détection
 
@@ -42,6 +43,11 @@ Les anti-patterns sont des schémas de pensée ou de développement qui, s'ils l
 ### Prompt Drift
 - Résultats qui s'écartent du attendu
 - **Détecteur** : Semantic Drift Detector (ATOM-015)
+
+### Hardcode
+- Chemins, ports, rôles, ou constantes codés en dur dans le code
+- Impossibilité de déploiement sur un autre environnement
+- **Détecteur** : Path Manager Anything, Registry Sync, ENV resolver
 
 ## Lutte
 

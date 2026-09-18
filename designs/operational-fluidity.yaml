@@ -1,0 +1,25 @@
+---
+name: operational-fluidity
+description: "Fluidité opérationnelle globale de l'écosystème gerivdb. Formalise les principes de fluidité, les métriques, et les patterns d'optimisation opérationnelle."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_OPERATIONAL_FLUIDITY_20260917
+inherits:
+  - chain-fluidity
+  - graceful-degradation-fallback
+depends_on:
+  - chain-fluidity
+  - graceful-degradation-fallback
+capabilities:
+  - name: fluidity-metrics
+    description: "Métriques de fluidité opérationnelle"
+    parameters:
+      metrics: [latency, throughput, error_rate, recovery_time]
+  - name: optimization-patterns
+    description: "Patterns d'optimisation de la fluidité"
+    parameters:
+      patterns: [caching, batching, parallelization, prefetching]
+principles:
+  - P0_FLUIDITY: l'opérationnel est fluide par défaut
+  - P0_MEASUREMENT: la fluidité est mesurée en continu

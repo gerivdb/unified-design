@@ -1,0 +1,23 @@
+---
+name: debt-relief
+description: "Décharge de dette technique pour l'écosystème gerivdb. Formalise les patterns de réduction de dette, les priorisations, et les métriques de suivi."
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_DEBT_RELIEF_20260917
+inherits:
+  - hitl-assistance
+depends_on:
+  - hitl-assistance
+capabilities:
+  - name: debt-measurement
+    description: "Mesure de la dette technique"
+    parameters:
+      metrics: [complexity, duplication, coverage, age]
+  - name: debt-prioritization
+    description: "Priorisation de la dette à résorber"
+    parameters:
+      strategy: [impact, effort, risk]
+principles:
+  - P0_DEBT_VISIBILITY: toute dette est mesurée et visible
+  - P0_RELIEF: la dette est résorbée par touches atomiques

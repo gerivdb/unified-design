@@ -1,0 +1,104 @@
+name: incremental-combinatorial-discipline
+version: 1.0.0
+description: >
+  Discipline de combinaison incrementale des entites atomiques entre repos.
+  La combinaison est definie comme un spectre d entites du plus petit au plus grand:
+  primitive -> atom -> agent -> citoyen -> entité cybernétique.
+  Tout ajout/modification/suppression d'une entite de ce spectre entre deux repos
+  ou plus suit une routine A-P-R: Atomicize, Pair, Routine, Verify.
+  Ce design est L0 car il gouverne toute combinaison future,
+  quel que soit le type d'entite ou le repo cible.
+  Il fait partie de la famille des designs incrementaires, entre
+  incremental-growth (decomposition atomique) et les designs de combinaison
+  specifiques par entite.
+status: active
+owner: gerivdb
+intent_hash: 0xINCREMENTAL_COMBINATORIAL_DISCIPLINE_20260916
+layer: L0
+inherits:
+  - incremental-growth
+  - atomic-fragmentation
+parameters:
+  max_entities_per_routine: 1
+  max_files_per_commit: 3
+  max_minutes_between_commits: 30
+  atomic_unit: single_entity_pair
+  verification: test_per_entity
+  sync_scope: cross_repo_entities
+constraints:
+  - 'Une entite = un ou plusieurs fichiers atomiques + tests + un commit'
+  - 'La combinaison concerne tout type d entite du spectre: primitive, atom, agent, citoyen, entité cybernétique'
+  - 'Toute combinaison doit etre decomposee en paires atomiques avant execution'
+  - 'La routine APR s applique sequentiellement: Atomicize -> Pair -> Routine -> Verify'
+  - 'Aucun commit ne doit melanger une entite combinee avec un autre artefact (docs, config...)'
+  - 'Les tests sont obligatoires et passes avant tout push'
+  - 'Le remote git est verifie avant chaque push (git remote -v)'
+  - 'La preuve d execution horodatee est requise pour chaque entite creee (clause GEN-012 DESIGN-E)'
+routine_apr:
+  - step: Atomicize
+    action: decomposer la combinaison en entites atomiques individuelles
+    output: 'liste d''entites cibles, un par ligne'
+  - step: Pair
+    action: associer chaque entite a son repo source et son repo cible
+    output: 'mapping repo_source -> repo_cible par entite'
+  - step: Routine
+    action: 'pour chaque entite: creer/update entite + tests, commit atomique, push'
+    loop: true
+    max_iterations: 1000
+  - step: Verify
+    action: lancer les tests sur le repo cible, verifier le remote, verifier la synchronisation
+    output: 'rapport de synchronisation par entite'
+performance:
+  latency_p99_per_entity: 120.0
+  success_rate_target: 0.99
+mitigates:
+  - concept: cross-repo-combination-blowout
+    evidence: '270 agents utils synchronises N243 <-> AUTO-DEV en 20 commits atomiques (2026-09-16)'
+  - concept: slm-combinatorial-overflow
+  - concept: sync-drift
+  - concept: untracked-cross-repo-leakage
+family:
+  name: incremental-design-family
+  level: L0
+  siblings:
+    - incremental-growth
+    - incremental-scan-cache
+  parent: atomic-fragmentation
+  children: []
+combination_spectrum:
+  - level: primitive
+    description: "Plus petit element de base, sans dependance"
+    examples: ["primitive", "constante", "type atomique"]
+  - level: atom
+    description: "Atome de design, capable d etre combine"
+    examples: ["ATOM-xxx", "design atomique", "fonction pure"]
+  - level: agent
+    description: "Agent utils, inspect/execute/report, lie a un repo"
+    examples: ["*_utils", "agent de test", "agent de scan"]
+  - level: citizen
+    description: "Citoyen, module integre dans un ecosysteme"
+    examples: ["citizen module", "service citoyen", "component citizen"]
+  - level: cybernetic_entity
+    description: "Entité cybernétique, systeme composite auto-regule"
+    examples: ["systeme cybernetique", "meta-agent", "orchestrateur"]
+origin: >
+  Session 2026-09-16 N243 <-> AUTO-DEV utils sync.
+  Deduction: la synchronisation bidirectionnelle de 270 agents utils
+  n est pas un one-off, mais le cas fondateur d une discipline generale
+  de combinaison d entites atomiques entre repos.
+  La routine APR (Atomicize, Pair, Routine, Verify) formalise ce pattern
+  pour toute combinaison future, tout type d'entite confondu.
+  Ce design rejoint la famille incrementale (incremental-growth,
+  incremental-scan-cache) comme patron de combinaison incremental.
+cross_references:
+  - design: atomic-fragmentation
+  - design: incremental-growth
+  - design: incremental-scan-cache
+  - rule: git-atomic-commit
+  - rule: pattern-router
+  - rule: slm-fragmented-approach
+  - concept: cross-repo-agent-sync
+  - concept: batch-agent-creation-routine
+  - concept: dataclass-field-ordering-pattern
+  - concept: cross-platform-path-test-pattern
+  - concept: proof-of-life-gate

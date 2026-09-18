@@ -55,3 +55,11 @@ cross_references:
   - adr: ADR-2026-08-25-001-L6-BOUNDARY-POLICY
   - prd_moc: PRD-MOC-GEN-024-delivery-engine-mutualise-l6-2026-08-26
   - intent: INTENT-008-delivery-engine-mutualise
+hardware_profile:
+  cpu: E5620 Westmere SSE4.2
+  gpu: FORBIDDEN
+  ram_max_gb: 24
+  execution_mode: CPU-only
+  notes: >
+    ENV2 contrainte. Aucun composant du pipeline production ne doit dépendre de CUDA/GPU.
+    Quadro 2000 interdite.

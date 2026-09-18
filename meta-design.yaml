@@ -183,6 +183,204 @@ designs:
     intent_hash: 0xMOC_GOVERNANCE_DESIGN_20260801
     consumers: []
     profile: STANDARD
+  - name: ecosystem-consciousness
+    path: designs/ecosystem-consciousness.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_ECOSYSTEM_CONSCIOUSNESS_20260917
+    consumers: []
+    profile: STANDARD
+  - name: methodological-bon-sens
+    path: designs/methodological-bon-sens.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_METHODOLOGICAL_BON_SENS_20260917
+    consumers: []
+    profile: STANDARD
+  - name: problem-structuring-method
+    path: designs/problem-structuring-method.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_PROBLEM_STRUCTURING_METHOD_20260917
+    consumers: []
+    profile: STANDARD
+  - name: value-machine
+    path: designs/value-machine.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_VALUE_MACHINE_20260917
+    consumers: []
+    profile: STANDARD
+  - name: ecosystem-feedback-loop
+    path: designs/ecosystem-feedback-loop.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_ECOSYSTEM_FEEDBACK_LOOP_20260917
+    consumers: []
+    profile: STANDARD
+  - name: context-engineering
+    path: designs/context-engineering.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CONTEXT_ENGINEERING_20260917
+    consumers: []
+    profile: STANDARD
+  - name: agent-engineering-maturity
+    path: designs/agent-engineering-maturity.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_AGENT_ENGINEERING_MATURITY_20260917
+    consumers: []
+    profile: STANDARD
+  - name: fresh-context-verifier
+    path: designs/fresh-context-verifier.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_FRESH_CONTEXT_VERIFIER_20260917
+    consumers: []
+    profile: STANDARD
+  - name: meta-coherence
+    path: designs/meta-coherence.yaml
+    version: '2.0'
+    intent_hash: 0xDESIGN_META_COHERENCE_20260913
+    consumers: []
+    profile: ACTIVE
+  - name: consciousness
+    path: designs/consciousness.yaml
+    version: '3.0.0'
+    intent_hash: 0xDESIGN_CONSCIOUSNESS_20260913
+    consumers: []
+    profile: ACTIVE
+  - name: agent-observability-architecture
+    path: designs/agent-observability-architecture.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_AGENT_OBSERVABILITY_20260918
+    consumers: []
+    profile: ACTIVE
+  - name: kg-causal
+    path: designs/kg-causal.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_KG_CAUSAL_20260916
+    consumers: []
+    profile: DRAFT
+  - name: chain-fluidity
+    path: designs/chain-fluidity.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: autonomy-fluidity
+    path: designs/autonomy-fluidity.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: conversation-aggregator
+    path: designs/conversation-aggregator.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: conversation-to-execution-bridge
+    path: designs/conversation-to-execution-bridge.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: task-planning
+    path: designs/task-planning.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_TASK_PLANNING_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: task-chaining
+    path: designs/task-chaining.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_TASK_CHAINING_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: hitl-assistance
+    path: designs/hitl-assistance.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_HITL_ASSISTANCE_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: debt-relief
+    path: designs/debt-relief.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_DEBT_RELIEF_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: ergonomics
+    path: designs/ergonomics.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_ERGONOMICS_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: operational-fluidity
+    path: designs/operational-fluidity.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_OPERATIONAL_FLUIDITY_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: elegance
+    path: designs/elegance.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_ELEGANCE_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: assistant-load
+    path: designs/assistant-load.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_ASSISTANT_LOAD_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: chain-fluidity
+    path: designs/chain-fluidity.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: autonomy-fluidity
+    path: designs/autonomy-fluidity.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: conversation-aggregator
+    path: designs/conversation-aggregator.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: conversation-to-execution-bridge
+    path: designs/conversation-to-execution-bridge.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
+    consumers: []
+    profile: ACTIVE
+  - name: kg-causal-engine
+    path: designs/kg-causal-engine.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_KG_CAUSAL_ENGINE_20260917
+    consumers: []
+    profile: STANDARD
+  - name: causal-semantic-bridge
+    path: designs/causal-semantic-bridge.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CAUSAL_SEMANTIC_BRIDGE_20260917
+    consumers: []
+    profile: STANDARD
+  - name: narrative-causal-fusion
+    path: designs/narrative-causal-fusion.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_NARRATIVE_CAUSAL_FUSION_20260917
+    consumers: []
+    profile: STANDARD
+  - name: meta-kg-engine
+    path: designs/meta-kg-engine.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_META_KG_ENGINE_20260917
+    consumers: []
+    profile: STANDARD
+  - name: kg-causal-integration-pattern
+    path: designs/kg-causal-integration-pattern.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_KG_CAUSAL_INTEGRATION_PATTERN_20260917
+    consumers: []
+    profile: STANDARD
 
 # Architecture des quatre piliers
 piliers:
@@ -296,6 +494,48 @@ governance_atoms:
   - trace-replay-proof
   # Architecture Think/Do/Check
   - think-do-check-architecture
+  # TDC Consciousness
+  - think-do-check-consciousness
+  - methodological-bon-sens
+  - problem-structuring-method
+  - value-machine
+  - ecosystem-feedback-loop
+  - context-engineering
+  - agent-engineering-maturity
+  - fresh-context-verifier
+  - chain-fluidity
+  - autonomy-fluidity
+  - conversation-aggregator
+  - conversation-to-execution-bridge
+  - task-planning
+  - task-chaining
+  - hitl-assistance
+  - debt-relief
+  - ergonomics
+  - operational-fluidity
+  - elegance
+  - assistant-load
+  - kg-causal
+  - kg-causal-engine
+  - causal-semantic-bridge
+  - narrative-causal-fusion
+  - meta-kg-engine
+  - kg-causal-integration-pattern
+  # Engineering ideas atoms
+  - external-verification-mandatory
+  - gate-layers
+  - independent-sources-rule
+  - confidence-threshold
+  - stop-condition
+  - carry-forward-principle
+  - reject-work-principle
+  - delta-check
+  - meta-edit-loop
+  - learning-curve-expectation
+  - deployment-patterns
+  - kg-causal-consciousness
+  - deterministic-execution-log-clipping
+
 
 # Think/Do/Check Architecture
 think_do_check:
@@ -390,3 +630,4 @@ references:
   - ADR-2026-07-31-004-EXIT-INTERCEPTOR
   - ADR-2026-07-31-005-TDD-AIRAIN-LAW
   - ADR-2026-07-31-006-TRACE-REPLAY-PROOF
+  - ADR-2026-09-17-OPERATIONAL-DESIGNS-GOVERNANCE

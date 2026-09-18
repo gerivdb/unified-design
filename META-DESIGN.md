@@ -216,12 +216,61 @@ OK semantic_loops: No cycles detected
 | Design | Version | Description |
 |---|---|---|
 | moc-governance | 1.0.0 | MOC governance design for artifact hierarchy and session control |
+| ecosystem-consciousness | 1.0.0 | Conscience écosystémique ternaire Think/Do/Check |
+| methodological-bon-sens | 1.0.0 | Méthodologie quinquepartite (qui/quoi/où/quand/comment/pourquoi) |
+| problem-structuring-method | 1.0.0 | Filetree problématisation : décomposition arborescente de problèmes |
+| value-machine | 1.0.0 | Machine à valeur : transformation inputs -> outputs via pipeline de valeur |
+| ecosystem-feedback-loop | 1.0.0 | Boucle de feedback DevTools ↔ Obsidian : technique ↔ narration |
+| context-engineering | 1.0.0 | Ingénierie de contexte : fenêtres glissantes, fraîcheur, embedding |
+| agent-engineering-maturity | 1.0.0 | Hiérarchie des disciplines d'ingénierie agentique 2026 (5 axes, 5 niveaux) |
+| fresh-context-verifier | 1.0.0 | Fresh-Context Vérificateur : TTL, embedding drift, source integrity, cross-model agreement |
+| meta-coherence | 2.0 | Principe P0 de cohérence multi-échelle et cross-repo : ARGUS détecte GAP/GHOST/DRIFT/COLLISION/ORPHAN/SHADOW/VOID/PHANTOM_PATH/UNTRACKED_MASS |
+| consciousness | 3.0.0 | État subjectif premier : Think/Do/Check consciousness, MDU reflet élégant, engineering ideas integration |
+| agent-observability-architecture | 1.0.0 | Observabilité agents : UModel (graphe sémantique, U-SPL), Trace Engineering (DAG causal, Event Sourcing, rejouabilité), taxonomie Log/Trajectoire/Trace, distillation multi-niveaux, triple magasin de données |
+| kg-causal | 1.0.0 | Draft : graphe causal déterministe KG-CAUSAL, bloqué par ADR-KG-CAUSAL-001-20260916 proposed |
+| chain-fluidity | 1.0.0 | Fluidité des chaînes Think→Do→Check : réduction des frictions, pipelines, orchestration |
+| autonomy-fluidity | 1.0.0 | Fluidité d'autonomie : niveaux AXE-0, transitions A0→A3, droits d'écriture |
+| conversation-aggregator | 1.0.0 | Agrégateur de conversations : Agent Manager + Buzz + sessions KiloCode |
+| conversation-to-execution-bridge | 1.0.0 | Pont conversation→exécution : instructions, modèles, designs, pipelines |
+| task-planning | 1.0.0 | Planification des tâches : décomposition, estimation, scheduling |
+| task-chaining | 1.0.0 | Chainage des tâches : dépendances, séquences, jonctions, WAL |
+| hitl-assistance | 1.0.0 | Assistance HITL : points d'escalade, décharge de dette technique |
+| debt-relief | 1.0.0 | Décharge de dette technique : patterns de réduction, priorisations, métriques |
+| ergonomics | 1.0.0 | Ergonomie des workflows : principes d'ergonomie, patterns d'interaction, feedback |
+| operational-fluidity | 1.0.0 | Fluidité opérationnelle globale : métriques, patterns d'optimisation |
+| elegance | 1.0.0 | Élégance des solutions : critères, patterns de simplicité, mesure de complexité |
+| assistant-load | 1.0.0 | Charge de l'assistant : mesure, patterns de décharge, équilibre dette technique |
+| kg-causal-engine | 1.0.0 | Architecture KG-CAUSAL : pipeline CLM, do-calculus, résolution conflits, flux entrants/sortants |
+| causal-semantic-bridge | 1.0.0 | Pont KG-CAUSAL ↔ VERSES : annotation causale des concepts sémantiques |
+| narrative-causal-fusion | 1.0.0 | Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité |
+| meta-kg-engine | 1.0.0 | Méta-KG unifiée : 4 engines (KG-L, VOLTX, KG-CAUSAL, VERSES), ingestion/production/cycles |
+| kg-causal-integration-pattern | 1.0.0 | Pattern d'intégration KG-CAUSAL → KG-L (similaire ATOM-056 ARGUS→KG-L) |
 
 ### Atoms L0-L3 (extraits)
 
 | Atom | Type | Description |
 |---|---|---|
 | ATOM-065-co-abductive-halo | Atom | Interface Co-abductive HALO (L3 - Emergence) Observation -> DIVERGE -> LEAP -> CONVERGE |
+
+### TDC Consciousness Atoms (nouveaux)
+
+| Atom | Type | Description |
+|---|---|---|
+| ATOM-THINK-DO-CHECK-CONSCIOUSNESS | Atom | Conscience ternaire Think/Do/Check de l'écosystème gerivdb |
+| ATOM-METHODOLOGICAL-BON-SENS | Atom | Méthodologie quinquepartite (qui/quoi/où/quand/comment/pourquoi) |
+| ATOM-EXTERNAL-VERIFICATION-MANDATORY | Atom | "L'agent ne se relit pas" : vérification externe obligatoire |
+| ATOM-GATE-LAYERS | Atom | Barrière de contrôle à 4 couches (L1 technique, L2 architecture, L3 gouvernance, L4 humain) |
+| ATOM-INDEPENDENT-SOURCES-RULE | Atom | 2 sources indépendantes requises pour décision critique |
+| ATOM-CONFIDENCE-THRESHOLD | Atom | Seuil de confiance 0.6 minimum pour décision/validation |
+| ATOM-STOP-CONDITION | Atom | Loop Engineering : condition d'arrêt explicite pour toute boucle |
+| ATOM-CARRY-FORWARD-PRINCIPLE | Atom | Carry Forward : travail valide reporté, rejet documenté |
+| ATOM-REJECT-WORK-PRINCIPLE | Atom | Reject Work : rejet préférable à accommodation |
+| ATOM-DELTA-CHECK | Atom | Delta Check : écart entre attendu et réel |
+| ATOM-META-EDIT-LOOP | Atom | Méta-boucle d'édition : vérification après chaque modification |
+| ATOM-LEARNING-CURVE-EXPECTATION | Atom | Courbe d'apprentissage : évaluation avant adoption |
+| ATOM-DEPLOYMENT-PATTERNS | Atom | Patterns de déploiement : blue-green, canary, rolling, immuable |
+| ATOM-KG-CAUSAL-CONSCIOUSNESS | Atom | Conscience de KG-CAUSAL : graphe causal déterministe, draft bloqué par ADR proposed |
+| ATOM-DETERMINISTIC-EXECUTION-LOG-CLIPPING | Atom | Vérification anti-hallucination par capture déterministe des logs d'exécution (inspiré de DeepMind Co-Scientist) |
 
 ### L1-INFRA (nouveaux)
 
@@ -286,6 +335,18 @@ OK semantic_loops: No cycles detected
 | ARGUS | Meta-coherence, orphan detection, .LIMBO transit, scanners | `L1-INFRA/ARGUS/` |
 | WAZAA | Bus multi-transport + reseau social entites (realms, presence, inbox) | `L4-TOOLS/WAZAA/` |
 | GOVERNANCE-HUB | GEN-014 STENTOR : gate moc-close -RequireOperational, ide_open, registre fenetres (design `ide-window-lifecycle`) | `L0-CANON/GOVERNANCE-HUB/scripts/balise.ps1` |
+| KG-CAUSAL | Graphe causal déterministe : pipeline CLM, do-calculus, résolution conflits, intégration KG-L | `L4-TOOLS/KG-CAUSAL/` |
+| VOLTX | Vault narratif : preuves horodatées, narration gouvernance, méta-KG introspection | `L4-TOOLS/VOLTX/` |
+| VERSES | Couche sémantique : concepts ONTOLOGY ↔ versets, validation frontmatter, audit versets | `L0-CANON/VERSES/` |
+
+### Crosslinks méta-KG
+
+| Crosslink | Source | Cible | Rôle |
+|-----------|--------|-------|------|
+| `CROSSLINKS/talex-unified-graph.md` | unified-design | TALEX | Ingestion designs TALEX |
+| `CROSSLINKS/kg-causal-unified-graph.md` | unified-design | KG-CAUSAL | Ingestion designs KG-CAUSAL (à créer) |
+| `CROSSLINKS/voltx-unified-graph.md` | unified-design | VOLTX | Ingestion designs VOLTX (à créer) |
+| `CROSSLINKS/verses-unified-graph.md` | unified-design | VERSES | Ingestion designs VERSES (à créer) |
 
 ### Bridges implémentés
 

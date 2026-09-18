@@ -608,3 +608,9 @@ entries:
     source_path: "designs/compliance-scanner/compliance-scanner.md"
     status: "active"
     updated: "2026-08-28"
+  - type: design
+    id: "dry-run-simulation"
+    source_repo: "unified-design"
+    source_path: "designs/dry-run-simulation.yaml"
+    status: "active"
+    updated: "2026-09-15"

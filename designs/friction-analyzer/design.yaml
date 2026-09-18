@@ -29,3 +29,11 @@ capabilities:
 
 constraints:
   - cpu_only: true
+hardware_profile:
+  cpu: E5620 Westmere SSE4.2
+  gpu: FORBIDDEN
+  ram_max_gb: 24
+  execution_mode: CPU-only
+  notes: >
+    ENV2 contrainte. Aucun composant du pipeline production ne doit dépendre de CUDA/GPU.
+    Quadro 2000 interdite.
