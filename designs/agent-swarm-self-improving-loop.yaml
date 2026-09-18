@@ -1,0 +1,59 @@
+---
+name: agent-swarm-self-improving-loop
+description: "Architecture agentique auto-améliorante : 3 piliers (loop auto-arrêtante, graphe mémoire structurée, auto-amélioration par correction accumulée). Agent Swarm jusqu'à 300 sous-agents, 4000 étapes. Condition d'arrêt explicite. SKILL.md comme versionnage d'intention séparée du prompt."
+version: "1.0.0"
+status: active
+layer: L1
+intent_hash: 0xDESIGN_AGENT_SWARM_SELF_IMPROVING_LOOP_20260918
+inherits:
+  - consciousness
+  - agent-observability-architecture
+depends_on:
+  - consciousness
+  - agent-observability-architecture
+  - meta-coherence
+capabilities:
+  - name: self-stopping-loop
+    description: "Boucle qui s'arrête d'elle-même par condition d'arrêt explicite (compteurs, pas adjectifs)"
+    parameters:
+      stop_conditions:
+        - "40 nodes verified at 2+ independent sources each"
+        - "3 full passes completed with no new verified node"
+      hard_caps:
+        agents: 300
+        wall_clock_minutes: 45
+        retries_per_node: 2
+  - name: structured-memory-graph
+    description: "Graphe donnant une mémoire structurée aux agents : nœuds vérifiés, edges de correction accumulée"
+    parameters:
+      node_verification: independent_sources
+      correction_accumulation: true
+      state_fingerprinting: true
+  - name: auto-improvement-by-correction
+    description: "Mécanisme d'auto-amélioration par correction accumulée : chaque erreur corrigée renforce le système"
+    parameters:
+      correction_persistence: true
+      learning_mechanism: graph_weight_update
+      feedback_loop: closed
+  - name: agent-swarm-orchestration
+    description: "Orchestration d'essaim : 300 sous-agents pour exécuter 4000 étapes de manière dynamique"
+    parameters:
+      max_agents: 300
+      max_steps: 4000
+      orchestration: graph_state_cyclic
+  - name: skill-md-versioning
+    description: "Séparation prompt (échantillon d'intention) / SKILL.md (intention versionnée)"
+    parameters:
+      prompt_role: sample
+      skill_md_role: versioned_contract
+      layers:
+        - L0 primitives
+        - L1 skills
+        - L2 patterns
+        - L3 metaskills
+principles:
+  - P0_SELF_STOPPING_LOOP: toute boucle agentique doit avoir une condition d'arrêt explicite et vérifiable
+  - P0_GRAPH_MEMORY_FIRST: la mémoire des agents est un graphe, pas une liste plate
+  - P0_CORRECTION_ACCUMULATION: chaque correction renforce le système ; pas de répétition d'erreur
+  - P0_PROMPT_SKILL_SEPARATION: le prompt est un échantillon, SKILL.md est le contrat versionné
+  - P0_AGENT_SWARM_BOUNDED: l'essaim est borné par des hard caps explicites

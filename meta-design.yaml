@@ -399,6 +399,18 @@ designs:
     intent_hash: 0xDESIGN_DEEPMIND_CO_SCIENTIST_RELIABILITY_20260918
     consumers: []
     profile: ACTIVE
+  - name: agent-swarm-self-improving-loop
+    path: designs/agent-swarm-self-improving-loop.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_AGENT_SWARM_SELF_IMPROVING_LOOP_20260918
+    consumers: []
+    profile: ACTIVE
+  - name: harness-engineering-reliable-agents
+    path: designs/harness-engineering-reliable-agents.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_HARNESS_ENGINEERING_RELIABLE_AGENTS_20260918
+    consumers: []
+    profile: ACTIVE
 
 
 # Think/Do/Check Architecture
@@ -557,6 +569,8 @@ governance_atoms:
   - umodel-agent-ready-data
   - reasoningbank-persistent-strategy
   - deepmind-co-scientist-reliability
+  - agent-swarm-self-improving-loop
+  - harness-engineering-reliable-agents
 
 
 # Think/Do/Check Architecture
@@ -656,3 +670,5 @@ references:
   - ADR-2026-09-18-UMODEL-AGENT-READY-DATA
   - ADR-2026-09-18-REASONINGBANK-PERSISTENT-STRATEGY
   - ADR-2026-09-18-DEEPMIND-CO-SCIENTIST-RELIABILITY
+  - ADR-2026-09-18-AGENT-SWARM-SELF-IMPROVING-LOOP
+  - ADR-2026-09-18-HARNESS-ENGINEERING-RELIABLE-AGENTS

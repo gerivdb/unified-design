@@ -248,6 +248,8 @@ OK semantic_loops: No cycles detected
 | umodel-agent-ready-data | 1.0.0 | Modèle de données unifié Alibaba UModel : 4 piliers Agent-Ready, graphe sémantique, U-SPL, MCP |
 | reasoningbank-persistent-strategy | 1.0.0 | Banque de Raisonnement : distillation de traces en stratégies, compression multi-niveaux, réinjection prompts |
 | deepmind-co-scientist-reliability | 1.0.0 | Fiabilité agents DeepMind Co-Scientist : vérification déterministe, fabrication 4%, 0.0% fabrication complète |
+| agent-swarm-self-improving-loop | 1.0.0 | Architecture agentique auto-améliorante : loop auto-arrêtante, graphe mémoire, correction accumulée, Agent Swarm 300/4000, SKILL.md versionné |
+| harness-engineering-reliable-agents | 1.0.0 | Harness Engineering : 6 couches (Contract Validator, Context Compiler, Policy Engine, State Manager, Verification Engine, Trace Recorder) ; modèle probabiliste -> exécutant déterministe |
 
 ### Atoms L0-L3 (extraits)
 
@@ -277,6 +279,8 @@ OK semantic_loops: No cycles detected
 | ATOM-UMODEL-AGENT-READY-DATA | Atom | Modèle de données unifié UModel Alibaba : 4 piliers Agent-Ready, graphe sémantique, U-SPL, MCP |
 | ATOM-REASONINGBANK-PERSISTENT-STRATEGY | Atom | Banque de Raisonnement : distillation de traces en stratégies, compression multi-niveaux, réinjection prompts |
 | ATOM-DEEP-MIND-CO-SCIENTIST-RELIABILITY | Atom | Fiabilité agents DeepMind Co-Scientist : vérification déterministe, fabrication 4%, 0.0% fabrication complète |
+| ATOM-AGENT-SWARM-SELF-IMPROVING-LOOP | Atom | Architecture agentique auto-améliorante : loop auto-arrêtante, graphe mémoire, correction accumulée, Agent Swarm 300/4000, SKILL.md versionné |
+| ATOM-HARNESS-ENGINEERING-RELIABLE-AGENTS | Atom | Harness Engineering : 6 couches (Contract Validator, Context Compiler, Policy Engine, State Manager, Verification Engine, Trace Recorder) ; modèle probabiliste -> exécutant déterministe |
 
 ### L1-INFRA (nouveaux)
 
