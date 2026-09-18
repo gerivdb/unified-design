@@ -1,5 +1,64 @@
+---
 name: rlm-243
-version: 1.0.0
+version: "1.0.0"
 status: active
-profile: STANDARD
-consumers: []
+profile: CRITICAL
+layer: L4-TOOLS
+intent_hash: 0xRLM_243_DESIGN_20260919
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  RLM-243 — Noyau ternaire Base243. Fondement mathématique du pipeline CLM
+  distribué. Fournit la validation ternaire et les opérations Base243 pour
+  l'ensemble de l'écosystème gerivdb.
+consumers:
+  - LLUX
+  - TIMX
+  - TALEX
+  - KG-CAUSAL
+capabilities:
+  - name: ternary-validation
+    description: Validation ternaire Base243 pour le pipeline CLM
+    parameters:
+      base: 243
+      encoding: RVBA
+      checksum: ternary_xor
+  - name: feature-store
+    description: Feature store temporel pour signatures 243-dim
+    parameters:
+      signature_format: temporal_vector
+      max_dimensions: 243
+      compression: ternary
+  - name: pipeline-foundation
+    description: Fondement mathématique du pipeline CLM L0→L6
+    parameters:
+      pipeline_stage: L2
+      role: validator
+      input: TIMX_signature
+      output: validated_ternary
+components:
+  - type: core
+    repo: gerivdb/RLM-243
+    path: RLM-243/
+bridges:
+  - target: repo:TIMX
+    role: consumer
+    protocol: http
+  - target: repo:LLUX
+    role: provider
+    protocol: python-import
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:KG-CAUSAL
+    role: provider
+    protocol: wazaa-channel
+dependencies:
+  - repo: gerivdb/TIMX
+  - repo: gerivdb/LLUX
+  - repo: gerivdb/TALEX
+constraints:
+  - cpu_only: true
+  - e5620_sse42: true
+  - memory_24gb: true

@@ -1,19 +1,23 @@
 ---
 name: ROOTX
-version: "1.0.0"
+version: "2.0.0"
 status: active
 strate: L4-TOOLS
+layer: L4-TOOLS
 type: cognitive
 intent_hash: 0xROOTX_CAUSAL_TREE_RUNNER_20260821
 description: >
   ROOTX — Runner de causalite racine. Construit des arbres de causes multiples et valide la causalite en < 50ms.
+  V2.0.0 : ajout garde pré-génération LLUX, consommateur KG-CAUSAL, métriques P99.
 
 dependencies:
     - knowledge-graph-memory
+    - KG-CAUSAL
 
 consumers:
   - TALEX
   - CAUSEX
+  - LLUX
 
 capabilities:
   - name: primary-function
@@ -22,6 +26,34 @@ capabilities:
       input: string
     outputs:
       - result: object
+  - name: pre-generation-guard
+    description: Garde pré-génération pour LLUX (< 50ms P99)
+    parameters:
+      input: causal_path
+      output: validation_score
+      latency_target_ms: 50
+  - name: post-hoc-validation
+    description: Validation post-hoc des chaînes causales générées
+    parameters:
+      input: generated_text
+      output: causal_score
+  - name: kg-causal-consumer
+    description: Consommateur du graphe KG-CAUSAL pour validation
+    parameters:
+      protocol: wazaa-channel
+      input: kg_causal_path
+
+bridges:
+  - target: repo:KG-CAUSAL
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:LLUX
+    role: provider
+    protocol: wazaa-channel
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
 
 constraints:
   - cpu_only: true
+  - latency_p99_ms: 50

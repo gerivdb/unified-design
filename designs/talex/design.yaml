@@ -2,6 +2,9 @@ name: talex
 version: "14.8"
 design_version: "1.0"
 intent_hash: "0xADMG_GERIVDB_V19.2_20260801"
+description: >
+  TALEX — Narrative engine. Produit les récits curriculum, HOLMES, et les
+  validations causales pour le pipeline CLM distribué.
 inherits:
   - moc-governance
 status: active
@@ -58,6 +61,28 @@ capabilities:
     profile: STANDARD
     parameters:
       failure_rate_target: 0.005
+  - port_id: kg-causal-resolve
+    description: Résout les chemins causaux via KG-CAUSAL pour narration CLM
+    profile: CRITICAL
+    parameters:
+      input: observation
+      output: causal_path
+      protocol: wazaa-channel
+  - port_id: causal-chain-generator
+    description: Template Jinja2 pour formater Observation → Cause → Effet
+    profile: STANDARD
+    parameters:
+      template: causal_chain_generator.py
+      output_format: narrative
+  - port_id: curx-runner
+    description: Curriculum-centric learning avec métriques CURX
+    profile: STANDARD
+    parameters:
+      metrics:
+        - causal_accuracy
+        - generalization
+        - counterfactual_depth
+        - fragility
 design_rules:
   - name: no-circular-inheritance
     check: graph_is_acyclic
