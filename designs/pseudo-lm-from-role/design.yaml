@@ -1,0 +1,186 @@
+name: pseudo-lm-from-role
+version: 1.0.0
+status: active
+owner: gerivdb
+intent_hash: 0xDESIGN_PSEUDO_LM_FROM_ROLE_20260918
+layer: L0-CANON
+type: pipeline-pattern
+inherits:
+  - dry-run-simulation
+  - llux
+  - LOOPX-Routines
+  - meta-coherence
+depends_on:
+  - CTULU
+  - LLUX
+  - LOOPX
+  - ONTOLOGY
+  - KG-L
+bridges:
+  - target: CTULU
+    role: pipeline-executor
+    protocol: cli
+  - target: LLUX
+    role: cognitive-engine
+    protocol: rest
+  - target: LOOPX
+    role: loop-orchestrator
+    protocol: cli
+  - target: ONTOLOGY
+    role: role-definition-source
+    protocol: yaml
+  - target: KG-L
+    role: causal-filter
+    protocol: json
+
+description: >
+  Pseudo-LM From Role — 3e patron de pipeline unifie L0. Transforme tout
+  role declare (ONTOLOGY + unified-design) en comportement LM via dry-run
+  + causalite, sans entrainement. CLM/DLM/LOOPX en sont les incarnations
+  concretes. OLM (Ontology LM) est la generalisation cible.
+
+parameters:
+  role_source:
+    - ONTOLOGY.yaml
+    - unified-design/designs/*/design.yaml
+    - unified-design/ONTOLOGY/*.yaml
+  dryrun_modes:
+    - simulation
+    - imagination
+    - verification
+    - conflict-detection
+  causal_validation:
+    - KG-CAUSAL.validate()
+    - KG-L domain_links.json
+    - intent_hash traceability
+  loop_levels:
+    macro: CLM
+    micro: DLM
+    meta: LOOPX
+
+capabilities:
+  - name: role-to-behavior
+    description: Derive un comportement LM depuis un role declare, pas depuis des poids entrainés.
+    input: role_definition (YAML/MD)
+    output: pipeline_behavior (deterministic)
+  - name: dryrun-gated-execution
+    description: Toute execution passe par dry-run CHECK avant DO.
+    input: task + context
+    output: simulated | rejected | committed
+  - name: causal-traceability
+    description: Chaque commit porte son intent_hash + causal lineage.
+    input: mutation
+    output: CAUSAL_DIFF.md
+  - name: loop-orchestration
+    description: LOOPX orchestre CLM/DLM/OLM comme workers planifies.
+    input: routine manifest
+    output: scheduled_runs + telemetry
+
+constraints:
+  - 'Pseudo-LM NE DOIT JAMAIS ecrire/muter en mode simulation'
+  - 'Toute mutation DOIT porter un intent_hash valide'
+  - 'KG-L domain_links.json DOIT etre frais (< 30 jours) avant execution'
+  - 'Axe 19 seuils H/TM sont des gardes obligatoires pour tout LM derive'
+  - 'Performance dry-run <= 2x execution reelle'
+
+mitigates:
+  - concept: unintended-mutation
+    evidence: DLM PRD-MOC Section 2.1, ATOM-061/066
+  - concept: merge-conflict-surprise
+    evidence: Incident TRIX->CTULU 2026-06-19
+  - concept: training-data-bias
+    evidence: CLM/DLM naissent de dryrun + causalite, pas de weights
+  - concept: role-ambiguity
+    evidence: ONTOLOGY anchoring + KG-L type-guard
+
+instances:
+  - name: CLM
+    role: macro-loop
+    description: Boucle ecosystemique complete L0->L6
+    repo: GeriCode
+    path: src/act/autonomous-mode-engine.ts
+    status: active
+  - name: DLM
+    role: micro-loop
+    description: Boucle LM/agent avant engagement reel
+    repo: GOVERNANCE-HUB
+    path: PRD-MOC/PRD-MOC-DLM-DRYRUN-LANGUAGE-MODEL-20260918.md
+    status: approved
+    implementation: LLUX-LEARN Zig runner (learn_engine.zig, tests passants)
+  - name: LOOPX
+    role: meta-orchestrator
+    description: Scheduler + daemon pour CLM/DLM/OLM
+    repo: LOOPX
+    path: D:\DO\WEB\TOOLS\L3-CITIZENS\LOOPX
+    status: active
+    operational: engine.py + pyproject.toml + CLI entry point
+  - name: OLM
+    role: ontology-language-model
+    description: "Generalisation LABO 27 : LM unifie depuis role ontologique"
+    repo: ONTOLOGY
+    path: ONTOLOGY/
+    status: proposed
+    note: ONTOLOGY directory exists under D:\DO\WEB (no standalone .git). Content populated with 13 core concepts. Git structure needs HITL validation.
+
+pipeline_template:
+  think:
+    - compute_embedding()
+    - compute_confidence()
+    - generate_proposals()
+  check:
+    - confidence >= min_confidence
+    - KG-CAUSAL.validate()
+    - Axe 19 ethics_check_hook()
+    - anti_fragility_gate()
+  do:
+    - publish_to_kg()
+    - notify_talex()
+    - validate_rootx()
+    - commit_with_intent_hash()
+
+cross_references:
+  - design: dry-run-simulation
+    relation: extends
+  - design: llux
+    relation: cognitive_engine_for
+  - design: LOOPX-Routines
+    relation: orchestrated_by
+  - atom: ATOM-025-loop-engineering
+    relation: implements
+  - atom: ATOM-061-dry-run-mandatory
+    relation: enforces
+  - atom: ATOM-066-dry-run-mandatory
+    relation: enforces
+  - repo: gerivdb/CTULU
+    relation: pipeline_3rd_pattern
+  - repo: gerivdb/LLUX
+    relation: cognitive_backend
+  - repo: gerivdb/LOOPX
+    relation: loop_orchestrator
+  - repo: gerivdb/ONTOLOGY
+    relation: role_source
+  - prd_moc: PRD-MOC-DLM-DRYRUN-LANGUAGE-MODEL-20260918
+    relation: documents
+  - prd_moc: PRD-MOC-LLUX-LEARN-20260916
+    relation: use_case
+  - prd_moc: PRD-MOC-CLM-RUNNERS-AUDIT-20260916
+    relation: documents
+  - rule: slm-fragmented-approach
+    relation: guided_by
+  - rule: probe-budget-contract
+    relation: respects
+
+origin: >
+  Session 2026-09-18 : unification de CLM/DLM/LOOPX sous le patron
+  pseudo-lm-from-role. LABO 27 propose OLM comme generalisation.
+  CTULU devient le 3e pipeline design pattern L0 apres DLM et CLM.
+
+validation:
+  - check: design.yaml schema valid
+    tool: gerivdb design validate
+  - check: intent_hash unique
+    tool: governance-hub intent-check
+  - check: cross_references resolvable
+    tool: mox-validator
+  - check: kg_l domain_links fresh
+    tool: kg-l-coherence-watchdog
