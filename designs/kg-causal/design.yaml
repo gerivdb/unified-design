@@ -1,0 +1,91 @@
+---
+name: kg-causal
+version: "1.0.0"
+status: proposed
+profile: CRITICAL
+layer: L4-TOOLS
+intent_hash: 0xKG_CAUSAL_DESIGN_20260919
+inherits:
+  - kg-l
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  KG-CAUSAL — Graphe causal déterministe. Stocke {Observation}--CAUSES--> {Cause}
+  --CAUSES--> {Effet} avec validation do-calculus et interventions.
+  Complète KG-L FractalEngine (validation fractale) par une couche logique N2
+  dédiée à la causalité.
+consumers:
+  - ROOTX
+  - TALEX
+  - LLUX
+capabilities:
+  - name: causal-graph
+    description: Graphe causal déterministe avec nœuds Obs/Cause/Effet
+    parameters:
+      node_kinds:
+        - observation
+        - cause
+        - effet
+      edge_kinds:
+        - causes
+        - prevents
+        - confounds
+        - implies
+        - requires
+  - name: do-calculus
+    description: Validation causale par do-calculus
+    parameters:
+      min_confidence: 0.95
+      max_latency_ms: 3000
+  - name: intervention-engine
+    description: Moteur d'interventions do(x) sur le graphe
+    parameters:
+      max_interventions: 10
+  - name: resolve
+    description: Résout une observation en chemin causal
+    parameters:
+      input: observation
+      output: causal_path
+  - name: validate
+    description: Valide un chemin causal
+    parameters:
+      input: causal_path
+      output: validation_result
+components:
+  - type: causal_graph
+    repo: gerivdb/KG-CAUSAL
+    path: KG-CAUSAL/src/graph.py
+  - type: do_calculus
+    repo: gerivdb/KG-CAUSAL
+    path: KG-CAUSAL/src/do_calculus.py
+  - type: intervention_engine
+    repo: gerivdb/KG-CAUSAL
+    path: KG-CAUSAL/src/intervention.py
+bridges:
+  - target: repo:KG-L
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:ROOTX
+    role: provider
+    protocol: wazaa-channel
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:LLUX
+    role: provider
+    protocol: python-import
+  - target: repo:TIMX
+    role: consumer
+    protocol: http
+dependencies:
+  - repo: gerivdb/KG-L
+  - repo: gerivdb/ROOTX
+  - repo: gerivdb/TALEX
+  - repo: gerivdb/LLUX
+  - repo: gerivdb/TIMX
+constraints:
+  - cpu_only: true
+  - memory_24gb: true
+  - e5620_sse42: true
+  - max_ram_mb: 500
+  - max_latency_ms: 3000

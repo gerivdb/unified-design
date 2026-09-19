@@ -1,0 +1,89 @@
+---
+name: verses
+version: "1.0.0"
+status: active
+profile: STANDARD
+layer: L4-TOOLS
+intent_hash: 0xVERSES_DESIGN_20260919
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  VERSES — Évaluation ML + activation adaptative + routing sémantique.
+  Composant actif de l'écosystème, MAIS hors pipeline CLM production.
+  Fournit : GNN Classifier (Axe 16), Transformer Generator (Axe 17),
+  adaptive activation φ-CPS, concept-routing via ENDPOINTS.yaml.
+  Contrainte ENV2 : CPU-only, Quadro 2000 interdite.
+consumers:
+  - TALEX
+  - KG-L
+  - CTULU
+capabilities:
+  - name: gnn-classifier
+    description: GNN Classifier (Axe 16) pour évaluation de modèles
+    parameters:
+      graph_conv: true
+      classes: 7
+      features_dim: 512
+      device: cpu
+  - name: transformer-generator
+    description: Transformer Generator (Axe 17) GPT-style decoder
+    parameters:
+      vocab: 577
+      embed_dim: 256
+      heads: 8
+      layers: 4
+      device: cpu
+  - name: adaptive-activation
+    description: Activation adaptative basée sur φ-CPS moyen
+    parameters:
+      threshold: phi_cps
+      rollback: true
+      wal_logging: true
+  - name: concept-routing
+    description: Routage sémantique via ENDPOINTS.yaml
+    parameters:
+      endpoints:
+        - concept-routing
+        - infrastructure-routing
+        - ontology-sync
+  - name: verses-generation
+    description: Génération contrainte de vers (ontologie Gotham Batman)
+    parameters:
+      manifest: MANIFEST.yaml
+      total_vers: 748
+      conformes: 661
+components:
+  - type: gnn_classifier
+    repo: gerivdb/VERSES
+    path: VERSES/src/gnn_classifier.py
+  - type: transformer_generator
+    repo: gerivdb/VERSES
+    path: VERSES/src/transformer_generator.py
+  - type: adaptive_activation
+    repo: gerivdb/VERSES
+    path: VERSES/src/adaptive_activation.py
+  - type: manifest
+    repo: gerivdb/VERSES
+    path: VERSES/MANIFEST.yaml
+bridges:
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:KG-L
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:CTULU
+    role: consumer
+    protocol: pipeline_routing
+dependencies:
+  - repo: gerivdb/TALEX
+  - repo: gerivdb/KG-L
+constraints:
+  - cpu_only: true
+  - no_quadro_2000: true
+  - out_of_clm_production: true
+notes: >
+  VERSES n'est PAS un composant du pipeline CLM production.
+  Il reste actif pour l'évaluation ML et le routing sémantique.
+  Contrainte ENV2 : CPU-only, Quadro 2000 interdite.

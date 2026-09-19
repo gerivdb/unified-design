@@ -1,0 +1,60 @@
+---
+name: voltx
+version: "1.0.0"
+status: active
+profile: STANDARD
+layer: L0-CANON
+intent_hash: 0xVOLTX_VAULT_ORCHESTRATOR_20260919
+inherits:
+  - meta-coherence
+description: >
+  VOLTX — Vault Orchestrator Root. Stocke les récits CURX daily et les narratives
+  TALEX. Point de sortie du pipeline CLM distribué L0→L6.
+  Pas un moteur d'optimisation de chemin : c'est un vault de stockage de récits.
+consumers:
+  - TALEX
+  - CURX
+capabilities:
+  - name: narrative-vault
+    description: Stockage des daily narratives CURX et TALEX
+    parameters:
+      formats:
+        - markdown
+        - json
+        - jinja2
+      max_size_gb: 10
+  - name: template-engine
+    description: Templates Jinja2 pour génération de récits
+    parameters:
+      template_dir: templates
+      output_formats:
+        - narrative
+        - report
+  - name: crosslinks
+    description: Liens sémantiques vers N243, WAZAA, KG-L, VERSES
+    parameters:
+      targets:
+        - N243
+        - WAZAA
+        - KG-L
+        - VERSES
+components:
+  - type: vault
+    repo: gerivdb/VOLTX
+    path: VOLTX/narratives/
+  - type: templates
+    repo: gerivdb/VOLTX
+    path: VOLTX/templates/
+bridges:
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:CURX
+    role: provider
+    protocol: python-import
+dependencies:
+  - repo: gerivdb/TALEX
+  - repo: gerivdb/CURX
+constraints:
+  - cpu_only: true
+  - read_only: true
