@@ -411,6 +411,12 @@ designs:
     intent_hash: 0xDESIGN_HARNESS_ENGINEERING_RELIABLE_AGENTS_20260918
     consumers: []
     profile: ACTIVE
+  - name: safe-action-pattern
+    path: designs/safe-action-pattern.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_SAFE_ACTION_PATTERN_20260919
+    consumers: []
+    profile: STANDARD
 
 
 # Think/Do/Check Architecture
@@ -571,6 +577,7 @@ governance_atoms:
   - deepmind-co-scientist-reliability
   - agent-swarm-self-improving-loop
   - harness-engineering-reliable-agents
+  - safe-action-gate
 
 
 # Think/Do/Check Architecture

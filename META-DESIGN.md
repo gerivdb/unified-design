@@ -240,6 +240,19 @@ OK semantic_loops: No cycles detected
 | operational-fluidity | 1.0.0 | Fluidité opérationnelle globale : métriques, patterns d'optimisation |
 | elegance | 1.0.0 | Élégance des solutions : critères, patterns de simplicité, mesure de complexité |
 | assistant-load | 1.0.0 | Charge de l'assistant : mesure, patterns de décharge, équilibre dette technique |
+| chain-fluidity | 1.0.0 | Fluidité des chaînes Think→Do→Check : réduction des frictions, pipelines, orchestration |
+| autonomy-fluidity | 1.0.0 | Fluidité d'autonomie : niveaux AXE-0, transitions A0→A3, droits d'écriture |
+| conversation-aggregator | 1.0.0 | Agrégateur de conversations : Agent Manager + Buzz + sessions KiloCode |
+| conversation-to-execution-bridge | 1.0.0 | Pont conversation→exécution : instructions, modèles, designs, pipelines |
+| task-planning | 1.0.0 | Planification des tâches : décomposition, estimation, scheduling |
+| task-chaining | 1.0.0 | Chainage des tâches : dépendances, séquences, jonctions, WAL |
+| hitl-assistance | 1.0.0 | Assistance HITL : points d'escalade, décharge de dette technique |
+| debt-relief | 1.0.0 | Décharge de dette technique : patterns de réduction, priorisations, métriques |
+| ergonomics | 1.0.0 | Ergonomie des workflows : principes d'ergonomie, patterns d'interaction, feedback |
+| operational-fluidity | 1.0.0 | Fluidité opérationnelle globale : métriques, patterns d'optimisation |
+| elegance | 1.0.0 | Élégance des solutions : critères, patterns de simplicité, mesure de complexité |
+| assistant-load | 1.0.0 | Charge de l'assistant : mesure, patterns de décharge, équilibre dette technique |
+| safe-action-pattern | 1.0.0 | Patron universel d'action : 7 fonctions + 3 états + 1 invariant + 4 gènes |
 | kg-causal-engine | 1.0.0 | Architecture KG-CAUSAL : pipeline CLM, do-calculus, résolution conflits, flux entrants/sortants | DRAFT |
 | causal-semantic-bridge | 1.0.0 | Pont KG-CAUSAL ↔ VERSES : annotation causale des concepts sémantiques | DRAFT |
 | narrative-causal-fusion | 1.0.0 | Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité | DRAFT |
@@ -281,6 +294,7 @@ OK semantic_loops: No cycles detected
 | ATOM-DEEP-MIND-CO-SCIENTIST-RELIABILITY | Atom | Fiabilité agents DeepMind Co-Scientist : vérification déterministe, fabrication 4%, 0.0% fabrication complète |
 | ATOM-AGENT-SWARM-SELF-IMPROVING-LOOP | Atom | Architecture agentique auto-améliorante : loop auto-arrêtante, graphe mémoire, correction accumulée, Agent Swarm 300/4000, SKILL.md versionné |
 | ATOM-HARNESS-ENGINEERING-RELIABLE-AGENTS | Atom | Harness Engineering : 6 couches (Contract Validator, Context Compiler, Policy Engine, State Manager, Verification Engine, Trace Recorder) ; modèle probabiliste -> exécutant déterministe |
+| safe-action-gate | Atom | Gate d'action universelle : 7 fonctions + 3 états + 1 invariant + 4 gènes + anti-patrons |
 
 ### L1-INFRA (nouveaux)
 
