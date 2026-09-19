@@ -25,8 +25,8 @@ repos:
         name: Validate MDU designs (strict)
         entry: python scripts/validate_designs.py --strict
         language: system
-        pass_filenames: false
-        always_run: true
+        pass_filenames: true
+        files: ^designs/.*\.yaml$
         stages: [pre-commit]
       - id: branch-taxonomy-check
         name: Validate branch taxonomy

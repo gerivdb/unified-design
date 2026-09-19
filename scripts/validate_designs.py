@@ -29,10 +29,21 @@ def validate_design(path: Path) -> tuple[bool, str]:
     return True, "OK"
 
 
+def find_design_files(paths: list[Path] | None = None) -> list[Path]:
+    if paths:
+        return sorted(p for p in paths if p.exists())
+    # Support both designs/<name>/design.yaml and designs/<name>.yaml
+    return sorted(
+        set(DESIGNS_ROOT.glob("*/design.yaml")) |
+        set(DESIGNS_ROOT.glob("*.yaml"))
+    )
+
+
 def main() -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description="Validate MDU designs.")
+    parser.add_argument("paths", nargs="*", help="Specific design paths to validate")
     parser.add_argument("--strict", action="store_true", help="Fail if any design is invalid")
     args = parser.parse_args()
 
@@ -40,7 +51,7 @@ def main() -> int:
         print(f"[FAIL] Designs root missing: {DESIGNS_ROOT}")
         return 1
 
-    design_files = sorted(DESIGNS_ROOT.glob("*/design.yaml"))
+    design_files = find_design_files([Path(p) for p in args.paths] if args.paths else None)
     if not design_files:
         print("[FAIL] No design.yaml files found")
         return 1
