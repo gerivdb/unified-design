@@ -1,0 +1,127 @@
+name: safe-action-pattern
+version: 1.0.0
+status: proposed
+layer: L0
+intent_hash: 0xDESIGN_SAFE_ACTION_PATTERN_20260919
+inherits:
+  - chain-engineering
+  - delivery-engine
+  - approval-readiness
+  - think-do-check-consciousness
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+description: >
+  PATRON-0 extrait : patron universel de toute action sûre en environnement incertain.
+  7 fonctions + 3 états + 1 invariant + 4 gènes + anti-patrons.
+  Micro-design qui rend opérationnels Think/Do/Check + gate-layers + approval-readiness.
+states:
+  - name: PROJECT
+    nature: virtuel, réversible
+    gate_to_next: VALIDER
+    question: "Ai-je tout perçu, évalué, modélisé, réservé ?"
+  - name: PROGRESS
+    nature: engagé, irréversible
+    gate_to_next: VALIDER_RÉEL
+    question: "Mes invariants tiennent-ils en temps réel ?"
+  - name: BILAN
+    nature: constaté, mémorisé
+    question: "Le monde a-t-il confirmé ? Qu'est-ce que j'en hérite ?"
+functions:
+  - id: F1
+    name: PERCEVOIR
+    state: PROJECT
+    description: "Échantillonnage multi-source ordonné, redondant"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: ÉVALUER
+    state: PROJECT
+    description: "Évaluation multi-axes indépendants"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F3
+    name: SE_MODÉLISER
+    state: PROJECT
+    description: "Auto-modèle : capacité propre + incertitude propre"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F4
+    name: RÉSERVER
+    state: PROJECT
+    description: "Marge de sûreté / plan de repli"
+    implements: ATOM-STOP-CONDITION
+  - id: F5
+    name: VALIDER
+    state: PROJECT→PROGRESS
+    description: "Gate : les 4 précédents sont-ils suffisants ?"
+    implements: ATOM-GATE-LAYERS
+    veto: true
+  - id: F6
+    name: AGIR + MONITORER
+    state: PROGRESS
+    description: "Engagement irréversible + surveillance invariants"
+    implements: delivery-engine
+  - id: F7
+    name: VALIDER_RÉEL + ENREGISTRER
+    state: PROGRESS→BILAN
+    description: "Succès constaté dans le monde, pas prédit → mémoire"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY, ATOM-DELTA-CHECK, ATOM-CARRY-FORWARD-PRINCIPLE
+invariant: "Le succès n'est jamais déclaré avant la fin réelle de l'action."
+genes:
+  - id: G1
+    name: pluralité
+    description: "Une seule source de perception est toujours insuffisante"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: G2
+    name: auto-modèle
+    description: "L'agent doit modéliser sa propre capacité et son incertitude"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: G3
+    name: réserve
+    description: "Toute action engage une marge (rollback, budget, plan de repli)"
+    implements: ATOM-STOP-CONDITION
+  - id: G4
+    name: validation-réelle
+    description: "Le succès n'existe que constaté, jamais prédit"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY, approval-readiness
+anti_patterns:
+  - missing_gene: pluralité
+    pathology: "L'IA ne lit que le prompt → hallucination, code hors contexte"
+    mdu_atom: ATOM-INDEPENDENT-SOURCES-RULE
+  - missing_gene: auto-modèle
+    pathology: "L'IA croit tout savoir → surconfiance, pas de « je ne sais pas »"
+    mdu_atom: ATOM-UMODEL-AGENT-READY-DATA
+  - missing_gene: réserve
+    pathology: "Pas de rollback, pas de tests de repli → casse en prod"
+    mdu_atom: ATOM-STOP-CONDITION
+  - missing_gene: validation-réelle
+    pathology: "« Ça marche chez moi » → échec réel"
+    mdu_atom: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+inheritance_loop: |
+  PROJECT → gate → PROGRESS → measure → BILAN → ENREGISTRER
+                                                │
+                                                ▼
+                                    gène muté (règle, test, garde-fou)
+                                                │
+                                                ▼
+                                    injecté dans le PROJECT suivant
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: enforces
+  - repo: gerivdb/CTULU
+    relation: orchestrates
+  - repo: gerivdb/DevTools
+    relation: executes
+  - repo: gerivdb/ARGUS
+    relation: audits
+  - adr: ADR-2026-09-19-SAFE-ACTION-PATTERN
+  - adr: ADR-2026-09-12-001-THINK-DO-CHECK-ARCHITECTURE
+  - intent: INTENT-2026-09-19-SAFE-ACTION-PATTERN
+  - prd_moc: PRD-MOC-SAFE-ACTION-PATTERN-20260919
+  - moc: MOC-SAFE-ACTION-PATTERN-20260919
