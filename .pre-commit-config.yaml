@@ -21,3 +21,16 @@ repos:
         pass_filenames: false
         always_run: true
         stages: [pre-commit]
+      - id: design-validate
+        name: Validate MDU designs (strict)
+        entry: python scripts/validate_designs.py --strict
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+      - id: branch-taxonomy-check
+        name: Validate branch taxonomy
+        entry: python scripts/branch-taxonomy-validator.py
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]

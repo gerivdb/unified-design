@@ -30,6 +30,12 @@ def validate_design(path: Path) -> tuple[bool, str]:
 
 
 def main() -> int:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Validate MDU designs.")
+    parser.add_argument("--strict", action="store_true", help="Fail if any design is invalid")
+    args = parser.parse_args()
+
     if not DESIGNS_ROOT.exists():
         print(f"[FAIL] Designs root missing: {DESIGNS_ROOT}")
         return 1
@@ -47,8 +53,19 @@ def main() -> int:
             failures += 1
         print(f"[{status}] {path}: {msg}")
 
-    print(f"\n{len(design_files) - failures}/{len(design_files)} designs valid")
-    return 1 if failures else 0
+    total = len(design_files)
+    valid = total - failures
+    print(f"\n{valid}/{total} designs valid")
+
+    if failures:
+        msg = f"[FAIL] {failures} invalid design(s) detected"
+        if args.strict:
+            print(msg)
+            return 1
+        print(msg)
+        return 0
+
+    return 0
 
 
 if __name__ == "__main__":
