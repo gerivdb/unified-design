@@ -198,6 +198,62 @@ OK semantic_loops: No cycles detected
 
 ---
 
+## Git Workflow (ALFRED / BRGS)
+
+### Push vers main
+
+Le push direct sur `main` est interdit par ALFRED. Workflow obligatoire :
+
+1. `git checkout -b feat/<jurisdiction>-<slug>-<id>`
+2. `git push origin feat/<jurisdiction>-<slug>-<id>`
+3. `git checkout main && git merge --no-ff feat/<jurisdiction>-<slug>-<id>`
+4. `git push origin main`
+
+### Suppression de branche distante
+
+BRGS interdit à `main` de supprimer une branche distante. Contournement :
+
+1. `git checkout -b feat/cleanup-<slug>`
+2. `git push origin --delete <branche-a-supprimer>`
+3. `git checkout main && git branch -d feat/cleanup-<slug>`
+
+### Taxonomie des branches
+
+Pattern obligatoire : `type/jurisdiction-slug-id`
+
+- **Types autorisés** : `feat`, `fix`, `docs`, `chore`, `refactor`, `perf`, `test`, `hotfix`, `emergency`, `release`, `experiment`, `deploy`, `rollback`
+- **Jurisdiction** : `env2`, `lxc`, `mdu`, `kiva`, `ecos`, `unified-design`, `governance`, `ctulu`, `argus`, etc.
+- **Slug** : lowercase, chiffres, tirets
+- **ID** : numérique ou date `YYYYMMDD`
+
+Exemple : `feat/safe-action-001`, `fix/ecos-cli-20260919`
+
+### Keyring GitHub
+
+Pour utiliser l'API GitHub (création PR, merge, etc.) :
+
+```bash
+# Stocker le token
+gh auth login
+# ou
+python -c "import keyring; keyring.set_password('gh:github.com', 'user', '<token>')"
+
+# Vérifier
+python -c "import keyring; print(keyring.get_password('gh:github.com', 'user'))"
+```
+
+### Fallback ECOS-CLI / KIVA-CLI
+
+ECOS-CLI n'expose pas de commande `merge`. KIVA-CLI peut être absent du PATH. Fallback officiel :
+
+```bash
+git checkout main
+git merge --no-ff feat/<jurisdiction>-<slug>-<id>
+git push origin main
+```
+
+---
+
 ## Atoms catalogues
 
 ### L0-CANON
