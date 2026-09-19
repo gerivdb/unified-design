@@ -1,0 +1,140 @@
+---
+type: PRD-MOC
+version: "1.0.0"
+date: "2026-09-19"
+status: proposed
+intent_hash: 0xPRD_MOC_SAFE_ACTION_PATTERN_20260919
+author: gerivdb
+source_repo: gerivdb/unified-design
+parent_doc: INTENT-2026-09-19-SAFE-ACTION-PATTERN.md
+governance:
+  strate: L0-CANON
+  profil: master
+  rss_depth: 0
+related_adr: ADR-2026-09-19-SAFE-ACTION-PATTERN.md
+related_intent: INTENT-2026-09-19-SAFE-ACTION-PATTERN.md
+related_moc: MOC-SAFE-ACTION-PATTERN-20260919.md
+---
+
+# PRD-MOC — PATRON-0 : Micro-design d'action universelle dans le MDU
+
+> **Parent** : INTENT-2026-09-19-SAFE-ACTION-PATTERN.md
+> **Périmètre** : ce dépôt uniquement — création du design `safe-action-pattern`, de l'atom `safe-action-gate`, et enregistrement dans `META-DESIGN.md` / `meta-design.yaml`.
+> **Coordination transverse** : voir MOC §3 (livrables, dépendances).
+
+---
+
+## 1. Objectif
+
+Intégrer PATRON-0 (patron universel de toute action sûre en environnement incertain — 7 fonctions + 3 états + 1 invariant + 4 gènes + anti-patrons) comme micro-design d'action enforceable dans le Meta-Design Unifié (MDU) de `unified-design`.
+
+## 2. Livrables assignés
+
+| ID | Livrable | Chemin cible | Type |
+|---|---|---|---|
+| L1 | Design `safe-action-pattern` | `designs/safe-action-pattern.yaml` | Créer |
+| L2 | Atom `safe-action-gate` | `atoms/safe-action-gate.md` | Créer |
+| L3 | ADR backing | `ADR/ADR-2026-09-19-SAFE-ACTION-PATTERN.md` | Créer |
+| L4 | Mise à jour `META-DESIGN.md` | `META-DESIGN.md` | Modifier |
+| L5 | Mise à jour `meta-design.yaml` | `meta-design.yaml` | Modifier |
+
+## 3. Tâches
+
+### Phase A — Design et atom
+1. `safe-action-pattern.yaml` : design PATRON-0 avec states, functions, invariant, genes, anti_patterns, depends_on, inherits, cross_references
+2. `safe-action-gate.md` : atom enforceable avec states, functions, rules, anti-patterns
+
+### Phase B — Documentation MDU
+3. `ADR/ADR-2026-09-19-SAFE-ACTION-PATTERN.md` : décision architecturale backing adoption PATRON-0
+4. `META-DESIGN.md` : enregistrement design + atom dans sections appropriées
+5. `meta-design.yaml` : ajout entrées dans `designs:` et `governance_atoms:`
+
+## 4. Contraintes
+
+- Encodage UTF-8 strict (hook pre-commit bloque non-ASCII)
+- Chaque YAML suit le template MDU (name, version, status, layer, intent_hash, inherits, depends_on, bridges/cross_references, capabilities si applicable)
+- Commits atomiques <= 3 fichiers ; un commit par phase
+- Pas de doublon avec `think-do-check-consciousness` : PATRON-0 est la micro-structure à l'intérieur de chaque phase Think/Do/Check
+
+## 5. Plan de commits proposé
+
+| Commit | Fichiers |
+|---|---|
+| `feat(design): add safe-action-pattern` | `designs/safe-action-pattern.yaml` |
+| `feat(atom): add safe-action-gate` | `atoms/safe-action-gate.md` |
+| `docs(adr): add SAFE-ACTION-PATTERN ADR` | `ADR/ADR-2026-09-19-SAFE-ACTION-PATTERN.md` |
+| `docs(meta-design): register safe-action-pattern` | `META-DESIGN.md`, `meta-design.yaml` |
+
+## 6. Adossement (PF2)
+
+- **Implémentation** : ce PRD-MOC, exécuté par agent Kilo session suivante
+- **Vérificateur** : `gerivdb design validate --strict` sur `designs/safe-action-pattern.yaml` ; hooks pre-commit (`design-validate`, `frontmatter-guardian`, `check-yaml`)
+- **Propriétaire** : gerivdb / GOVERNANCE-HUB N+4
+
+## 7. Critères d'acceptation
+
+1. Le design `safe-action-pattern.yaml` parse en YAML valide, respecte le schéma `meta-design.yaml`, et passe `gerivdb design validate --strict`.
+2. L'atom `safe-action-gate.md` est créé et référencé dans `META-DESIGN.md` et `meta-design.yaml`.
+3. L'ADR `ADR-2026-09-19-SAFE-ACTION-PATTERN` est créée avec frontmatter valide.
+4. Aucune violation DAG n'est introduite (vérifier `depends_on` et `inherits`).
+5. Les pre-commit hooks passent sans blocage encoding sur tous les fichiers.
+6. Le mapping PATRON-0 → MDU est documenté : chaque fonction PATRON-0 pointe vers un atom/design MDU existant.
+7. Les anti-patrons PATRON-0 sont intégrés dans l'atom `safe-action-gate`.
+
+## 8. Proof-of-Life
+
+- [x] 2026-09-19T20:52:20+02:00 — Création PRD-MOC PATRON-0 / safe-action-pattern (commit atomique)
+- [ ] Phase A — Design + atom créés et validés
+- [ ] Phase B — ADR + META-DESIGN + meta-design.yaml mis à jour
+- [ ] Validation CI — `gerivdb design validate --strict` PASS
+- [ ] Hooks — pre-commit pass sur tous les fichiers
+
+## 9. Références
+
+- **Intent** : `INTENT-2026-09-19-SAFE-ACTION-PATTERN.md`
+- **Design cible** : `designs/safe-action-pattern.yaml`
+- **Atom cible** : `atoms/safe-action-gate.md`
+- **ADR cible** : `ADR/ADR-2026-09-19-SAFE-ACTION-PATTERN.md`
+- **MDU** : `META-DESIGN.md`, `meta-design.yaml`
+- **Parent MDU** : `ATOM-THINK-DO-CHECK-CONSCIOUSNESS`, `ATOM-GATE-LAYERS`, `ATOM-EXTERNAL-VERIFICATION-MANDATORY`, `ATOM-STOP-CONDITION`, `ATOM-CONFIDENCE-THRESHOLD`, `ATOM-INDEPENDENT-SOURCES-RULE`, `ATOM-UMODEL-AGENT-READY-DATA`, `ATOM-DELTA-CHECK`, `ATOM-CARRY-FORWARD-PRINCIPLE`
+- **Designs MDU** : `designs/chain-engineering.yaml`, `designs/delivery-engine.yaml`, `designs/approval-readiness.yaml`, `designs/think-do-check-consciousness.yaml`
+
+---
+
+## Annexes
+
+### A. PATRON-0 — Anatomie du gène universel
+
+```
+[PROJECT]  1. PERCEVOIR      (multi-source, ordonné, redondant)
+           2. ÉVALUER        (multi-axes, indépendants)
+           3. SE_MODÉLISER   (capacité propre + incertitude propre)
+           4. RÉSERVER       (marge de sûreté / plan de repli)
+           5. VALIDER        (gate : les 4 précédents sont-ils suffisants ?)
+
+[PROGRESS] 6. AGIR           (engagement, irréversible)
+              + MONITORER    (invariants tenus pendant l'action)
+
+[BILAN]    7. VALIDER_RÉEL   (succès constaté dans le monde, pas prédit)
+              + ENREGISTRER  (mémoire → héritage)
+```
+
+**Invariant central** : *le succès n'est jamais déclaré avant la fin réelle de l'action.*
+
+**4 gènes universels** :
+1. **Pluralité** — une seule source de perception est toujours insuffisante
+2. **Auto-modèle** — l'agent doit modéliser sa propre capacité et son incertitude
+3. **Réserve** — toute action engage une marge (rollback, budget, plan de repli)
+4. **Validation réelle** — le succès n'existe que constaté, jamais prédit
+
+### B. Anti-patrons PATRON-0
+
+| Gène manquant | Pathologie en dev IA |
+|---|---|
+| Pluralité | L'IA ne lit que le prompt → hallucination, code hors contexte |
+| Auto-modèle | L'IA croit tout savoir → surconfiance, pas de « je ne sais pas » |
+| Réserve | Pas de rollback, pas de tests de repli → casse en prod |
+| Validation réelle | « Ça marche chez moi » → échec réel |
+| Gate pré-action | Code écrit avant d'avoir compris → refactor permanent |
+| 3 états | Pas de distinction projet/en-cours/bilan → confusion, pas d'apprentissage |
+| Enregistrement | Aucune mémoire → mêmes erreurs répétées |
