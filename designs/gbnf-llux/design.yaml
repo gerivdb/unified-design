@@ -1,0 +1,52 @@
+---
+name: gbnf-llux
+version: "1.0.0"
+status: proposed
+profile: STANDARD
+layer: L3-CITIZENS
+intent_hash: 0xGBNF_LLUX_CONSTRAINED_DECODING_20260919
+inherits:
+  - llux
+description: >
+  GBNF-LLUX — Contrainte de décodage causale pour LLUX. Aucune intégration Zig
+  n'est disponible dans l'écosystème ; le validateur Python est le chemin
+  opérationnel. Il valide la structure Observation → Cause → Effet et est
+  câblé comme fallback dans TALEX (`validate_gbnf_output`).
+consumers:
+  - TALEX
+capabilities:
+  - name: constrained-decoding
+    description: Décodage contraint par grammaire causale simplifiée
+    parameters:
+      grammar: |
+        root ::= observation "→" cause "→" effet
+        observation ::= token+
+        cause ::= token+
+        effet ::= token+
+      backend: python-fallback
+      fallback: talex-api
+  - name: grammar-validation
+    description: Validation de conformité à la structure causale
+    parameters:
+      target_conformance: 1.0
+      validator: llux_gbnf.validate_causal_output
+components:
+  - type: grammar_engine
+    repo: gerivdb/LLUX
+    path: LLUX/gbnf/llux_gbnf.py
+  - type: grammar_spec
+    repo: gerivdb/LLUX
+    path: LLUX/gbnf/causal.gbnf
+bridges:
+  - target: repo:TALEX
+    role: consumer
+    protocol: python-api
+dependencies:
+  - repo: gerivdb/TALEX
+constraints:
+  - cpu_only: true
+  - zig_integration: false
+  - max_latency_overhead_ms: 50
+notes: >
+  L'intégration Zig via libgbnf reste bloquée faute de librairie disponible.
+  Le fallback Python est conforme au contrat CLM et validé par tests unitaires.

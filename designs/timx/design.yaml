@@ -34,6 +34,13 @@ capabilities:
         - 1h
         - 4h
         - 1d
+  - name: llux-alignment
+    description: Mapping TIMX_signature (243-dim) vers LLUX_input_vector pour pipeline CLM
+    parameters:
+      input_format: temporal_vector
+      output_format: llux_input
+      dimensions: 243
+      encoding: ternary
 components:
   - type: feature_store
     repo: TIMX-FEATURE-STORE

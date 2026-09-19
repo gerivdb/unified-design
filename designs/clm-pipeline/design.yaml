@@ -1,0 +1,106 @@
+---
+name: clm-pipeline
+version: "1.0.0"
+status: proposed
+profile: CRITICAL
+layer: L0-CANON
+intent_hash: 0xCLM_PIPELINE_DISTRIBUTED_20260919
+inherits:
+  - timx
+  - rlm-243
+  - llux
+  - rootx
+  - talex
+  - voltx
+description: >
+  CLM-PIPELINE — Pipeline distribué L0→L6 pour CLM causal réalisable sur ENV2.
+  Architecture : Observation → TIMX → RLM-243 → LLUX → ROOTX → TALEX → VOLTX.
+  Remplace la pentarchie DeepSeek abandonnée (CURVX inexistant, VERSES/VOLTX hors production).
+consumers:
+  - GeriCode
+  - CTULU
+capabilities:
+  - name: pipeline-orchestration
+    description: Orchestration séquentielle L0→L6
+    parameters:
+      stages:
+        - L1-TIMX
+        - L2-RLM-243
+        - L3-LLUX
+        - L4-ROOTX
+        - L5-TALEX
+        - L6-VOLTX
+      target_latency_ms: 100
+  - name: causal-chain
+    description: Génération de chaînes causales Observation → Cause → Effet
+    parameters:
+      format: narrative
+      validation: ROOTX
+  - name: constrained-decoding
+    description: Contrainte GBNF pour structure causale
+    parameters:
+      grammar: gbnf-llux
+      backend: LLUX
+  - name: memory-bounded
+    description: Respect des contraintes ENV2
+    parameters:
+      max_ram_gb: 2
+      max_cpu_core_percent: 100
+      cpu: E5620
+      simd: SSE4.2
+components:
+  - type: timx
+    repo: gerivdb/TIMX
+    path: TIMX-FEATURE-STORE/
+  - type: rlm-243
+    repo: gerivdb/RLM-243
+    path: RLM-243/
+  - type: llux
+    repo: gerivdb/LLUX
+    path: LLUX/
+  - type: rootx
+    repo: gerivdb/ROOTX
+    path: ROOTX/
+  - type: talex
+    repo: gerivdb/TALEX
+    path: TALEX/
+  - type: voltx
+    repo: gerivdb/VOLTX
+    path: VOLTX/
+bridges:
+  - target: repo:TIMX
+    role: provider
+    protocol: python-import
+  - target: repo:RLM-243
+    role: provider
+    protocol: http
+  - target: repo:LLUX
+    role: consumer
+    protocol: zig-backend
+  - target: repo:ROOTX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:VOLTX
+    role: consumer
+    protocol: wazaa-channel
+  - target: repo:KG-CAUSAL
+    role: consumer
+    protocol: wazaa-channel
+dependencies:
+  - repo: gerivdb/TIMX
+  - repo: gerivdb/RLM-243
+  - repo: gerivdb/LLUX
+  - repo: gerivdb/ROOTX
+  - repo: gerivdb/TALEX
+  - repo: gerivdb/VOLTX
+  - repo: gerivdb/KG-CAUSAL
+constraints:
+  - cpu_only: true
+  - memory_24gb: true
+  - e5620_sse42: true
+  - max_ram_gb: 2
+  - max_cpu_core_percent: 100
+  - target_latency_ms: 100
