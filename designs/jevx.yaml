@@ -22,7 +22,20 @@ hardware_profile:
   gpu: "FORBIDDEN"
   ram_max_gb: 24
   execution_mode: "CPU-only"
-  runtime: "Bun 1.2+"
+  runtime: "Python 3.12 + llama.cpp / Bun 1.2+ optionnel"
+  deployment_wsl1:
+    preferred_runtime: "Python 3.12"
+    alternative_runtime: "Bun 1.2+"
+    inference_backend: "llama.cpp compilé en statique avec fallback AVX1"
+    isolation: "chroot ou proot pour dépendances Python si nécessaire"
+    notes: |
+      WSL1 n'est pas supporté nativement par tous les backends.
+      - NanoJev / jevlike / minojev : compatibles WSL1 directs (Python pur).
+      - jev_local : nécessite patch WSL1 (remplacer appels wsl.exe par Bash direct).
+      - llama.cpp doit être compilé avec -mavx (AVX1) sans -mavx2.
+    upstream_adapter:
+      pattern: "script Python qui traduit état Jev → prompt de classification → JSON valide → probabilités normalisées"
+      reference: githubnext/localjev (pattern adaptateur TypeScript, transposé en Python)
 components:
   - type: decision-engine
     repo: gerivdb/JEVX
@@ -147,3 +160,23 @@ constraints:
   - max_inflight: 2
   - questions_per_call: 16
   - outcomes_per_call: 128
+  - temperature: 0
+  - response_format: json_schema
+  - calibration_required: true
+  - semantic_equivalence: partial
+security_guardrails:
+  - id: decision_safety_filter
+    description: "Filtre de sécurité sur les décisions à haut risque (actions irréversibles, accès privilégiés)"
+    mechanism: "schema_validation + confidence_threshold + human_escalation"
+    confidence_threshold: 0.85
+    action_risk_levels: [low, medium, high, critical]
+    critical_actions_require_hitl: true
+  - id: false_negative_prevention
+    description: "Prévention des faux négatifs sur les actions risquées (inverse de false positive)"
+    mechanism: "consensus_minimum + entropy_upper_bound + fallback_human"
+    consensus_minimum: 2
+    entropy_upper_bound: 0.3
+  - id: audit_trail
+    description: "Trail d'audit complet pour toute décision automatisée"
+    sink: kix-wal
+    includes: [input_hash, backend_id, model_id, seed, probabilities, confidence, retry_count, latency_ms]
