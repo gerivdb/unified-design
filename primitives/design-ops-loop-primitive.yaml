@@ -1,0 +1,82 @@
+---
+name: design-ops-loop-primitive
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPRIMITIVE_DESIGN_OPS_LOOP_20260920
+description: >
+  Primitive de boucle THINK/DO/CHECK pour le MDU.
+  Garantit que toute correction structurelle naît d'un besoin écosystémique
+  (THINK), est exécutée avec vérification des invariants (DO),
+  et est validée par le réel (CHECK).
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+states:
+  - name: THINK
+    question: "L'écosystème exprime-t-il un besoin nouveau ou un gap ?"
+  - name: DO
+    question: "Les mutations respectent-elles les invariants écosystémiques ?"
+  - name: CHECK
+    question: "Le monde a-t-il confirmé ? Qu'héritons-nous ?"
+functions:
+  - id: F1-THINK
+    name: PERCEVOIR_BESOINS
+    description: "Échantillonnage multi-source des besoins écosystémiques"
+  - id: F2-THINK
+    name: ÉVALUER_BESOINS
+    description: "Évaluation des besoins vs capacité écosystémique"
+  - id: F3-THINK
+    name: MODÉLISER_IMPACT
+    description: "Auto-modèle d'impact : que va changer cette correction ?"
+  - id: F4-THINK
+    name: RÉSERVER_COHÉRENCE
+    description: "Marge de cohérence : plan de rollback"
+  - id: F5-THINK
+    name: VALIDER_BESOINS
+    description: "Gate : les besoins sont-ils suffisamment fondés ?"
+    veto: true
+  - id: F6-DO
+    name: AGIR_CORRECTION
+    description: "Engagement irréversible : application de la correction"
+  - id: F7-DO
+    name: MONITORER_INVARIANTS
+    description: "Surveillance des invariants pendant la correction"
+  - id: F8-CHECK
+    name: VALIDER_RÉEL
+    description: "Succès constaté dans le monde"
+  - id: F9-CHECK
+    name: ENREGISTRER_TRACE
+    description: "Mémoire : preuve horodatée, traçabilité causale"
+invariant: "Le MDU n'est jamais considéré comme méta-cohérent tant qu'une friction non résolue subsiste."
+genes:
+  - id: G1
+    name: think-first
+    description: "Toute correction naît d'un besoin écosystémique identifié"
+  - id: G2
+    name: causal-traceability
+    description: "Toute correction est tracée : friction → root cause → fix → proof"
+  - id: G3
+    name: adaptive-coherence
+    description: "Le MDU s'adapte aux besoins de l'écosystème"
+  - id: G4
+    name: verification-real
+    description: "Une correction n'est jamais déclarée réussie sans preuve"
+anti_patterns:
+  - missing_gene: think-first
+    pathology: "Correction sans besoin validé → dette technique"
+  - missing_gene: causal-traceability
+    pathology: "Correction sans traçabilité → impossibilité d'auditer"
+  - missing_gene: adaptive-coherence
+    pathology: "MDU figé, besoins ignorés → écosystème frustré"
+  - missing_gene: verification-real
+    pathology: "Correction déclarée réussie sans preuve → échec silencieux"
+cross_references:
+  - design: ecosystem-meta-coherence
+  - design: chain-fluidity
+  - design: safe-action-pattern
+  - atom: ecosystem-meta-coherence-gate

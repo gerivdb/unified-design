@@ -49,26 +49,49 @@ Vérifie qu'un livrable est prod-ready opérationnel à 100% avant toute implém
 
 ## Process
 
+### ÉTAPE-0 — Orphelins
+Détecter les branches orphelines et fichiers orphelins avant toute validation.
+- `git reflog | grep -i "deleted\|pruned\|branch"`
+- `git branch -r --merged origin/main | Where-Object { $_ -notmatch 'main|HEAD' }`
+
 ### ÉTAPE-1 — Présence
 Vérifier que tous les fichiers attendus existent physiquement.
 
 ### ÉTAPE-2 — Validité YAML
 Parser chaque YAML avec `yaml.safe_load()`.
+- Extraire le frontmatter YAML (entre `---` et `---`) pour fichiers Markdown
+- Ne pas parser le Markdown comme du YAML
 
 ### ÉTAPE-3 — Frontmatter
 Vérifier le frontmatter de chaque document de gouvernance.
+- **Champs requis selon le type** :
+  - `design.yaml` : `name`, `version`, `status`, `layer`, `description`
+  - `atom.yaml` : `name`, `version`, `status`, `layer`, `type`
+  - `pipeline.yaml` : `name`, `version`, `status`, `layer`, `type`
+  - `PRD-MOC-*.md` : `type`, `version`, `date`, `status`, `intent_hash`, `author`, `source_repo`
 
 ### ÉTAPE-4 — Validation MDU
 Exécuter `validate_designs.py --strict` sur le design cible.
+- Le validateur résout les concepts MDU (`meta-coherence`, `rootx`, etc.) depuis `META-DESIGN.md` et `meta-design.yaml`
 
 ### ÉTAPE-5 — Hooks
 Vérifier que les pre-commit hooks passent.
+- `design-validate`
+- `branch-taxonomy-check`
+- `ascii-fixer`
 
 ### ÉTAPE-6 — Cross-references
 Vérifier que les références croisées sont cohérentes.
+- `depends_on` résolus dans MDU
+- `inherits` résolus dans MDU
+- `cross_references` valides
 
 ### ÉTAPE-7 — Merge
 Vérifier que le merge sur `main` est possible.
+- `git status -sb`
+- `git log --oneline -3`
+- `git branch`
+- **Test merge préventif** : `git merge --no-commit --no-ff <branch>`
 
 ## Anti-patterns
 - Skip dryrun pour gagner du temps

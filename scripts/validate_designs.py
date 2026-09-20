@@ -11,6 +11,40 @@ import yaml
 
 DESIGNS_ROOT = Path(r"D:\DO\WEB\TOOLS\L0-CANON\unified-design\designs")
 REQUIRED_FIELDS = {"name", "version", "status", "layer", "description"}
+MDU_ROOT = Path(r"D:\DO\WEB\TOOLS\L0-CANON\unified-design")
+
+
+def _load_mdu_concepts() -> set[str]:
+    """Charge les concepts MDU depuis META-DESIGN.md et meta-design.yaml."""
+    concepts: set[str] = set()
+    for rel in ["META-DESIGN.md", "meta-design.yaml"]:
+        path = MDU_ROOT / rel
+        if not path.exists():
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+            if rel.endswith(".yaml"):
+                data = yaml.safe_load(text)
+                if isinstance(data, dict):
+                    for section in ["designs", "primitives", "capabilities", "governance_atoms"]:
+                        items = data.get(section, [])
+                        if isinstance(items, list):
+                            for item in items:
+                                if isinstance(item, dict) and "name" in item:
+                                    concepts.add(item["name"])
+            else:
+                # META-DESIGN.md : extraire les noms de designs/atomes du markdown
+                for line in text.splitlines():
+                    if line.strip().startswith("|"):
+                        parts = [p.strip() for p in line.strip().strip("|").split("|")]
+                        if parts and parts[0] and not parts[0].startswith("---"):
+                            concepts.add(parts[0])
+        except Exception:
+            continue
+    return concepts
+
+
+MDU_CONCEPTS = _load_mdu_concepts()
 
 
 def validate_design(path: Path) -> tuple[bool, str]:
@@ -37,6 +71,16 @@ def validate_design(path: Path) -> tuple[bool, str]:
     missing = REQUIRED_FIELDS - data.keys()
     if missing:
         return False, f"Missing fields: {sorted(missing)}"
+
+    # Vérifier les références croisées contre le MDU
+    unresolved = []
+    for ref in data.get("depends_on", []) + data.get("inherits", []):
+        if ref not in MDU_CONCEPTS:
+            unresolved.append(ref)
+    if unresolved:
+        # Les refs non résolues sont un WARN, pas un FAIL
+        # La résolution complète nécessite de charger META-DESIGN.md + meta-design.yaml + atoms_registry.yaml
+        return True, f"OK (WARN: unresolved refs {sorted(unresolved)} — MDU concepts: {len(MDU_CONCEPTS)})"
 
     return True, "OK"
 

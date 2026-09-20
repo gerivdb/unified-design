@@ -1,0 +1,61 @@
+---
+name: artifact-layers-primitive
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPRIMITIVE_ARTIFACT_LAYERS_20260920
+description: >
+  Primitive des 7 layers standardisés d'un repo gerivdb.
+  Garantit que tout repo active possède : src/, config/, tools/,
+  scripts/, tests/, docs/, markdown/.
+inherits:
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+capabilities:
+  - name: validate-layers
+    description: "Valide la présence des 7 layers"
+  - name: report-missing
+    description: "Signale les layers manquants"
+  - name: suggest-structure
+    description: "Suggère la structure cible"
+layers:
+  - name: src
+    description: "Code source"
+    required: true
+  - name: config
+    description: "Configuration"
+    required: true
+  - name: tools
+    description: "Outils"
+    required: true
+  - name: scripts
+    description: "Scripts"
+    required: true
+  - name: tests
+    description: "Tests"
+    required: true
+  - name: docs
+    description: "Documentation"
+    required: true
+  - name: markdown
+    description: "Markdown"
+    required: true
+invariant: "Tout repo actif possède les 7 layers standardisés."
+genes:
+  - id: G1
+    name: completeness
+    description: "Tous les layers requis doivent être présents"
+  - id: G2
+    name: consistency
+    description: "La structure doit être cohérente across repos"
+anti_patterns:
+  - missing_gene: completeness
+    pathology: "Repo incomplet → difficulté de maintenance"
+  - missing_gene: consistency
+    pathology: "Structure variable → confusion cross-repo"
+cross_references:
+  - design: artifact-layers-design
+  - skill: artifact-layers-validator
+  - citizen: artifact-layers-auditor
