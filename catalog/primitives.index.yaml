@@ -47,3 +47,45 @@ entries:
   status: active
   type: primitive
   updated: '2026-09-21'
+- name: artifact-layers-primitive
+  path: primitives\artifact-layers-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_ARTIFACT_LAYERS_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: causal-traceability-primitive
+  path: primitives\causal-traceability-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_CAUSAL_TRACEABILITY_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: design-ops-loop-primitive
+  path: primitives\design-ops-loop-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_DESIGN_OPS_LOOP_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: ecosystem-meta-coherence
+  path: primitives\ecosystem-meta-coherence.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: safe-action-gate-primitive
+  path: primitives\safe-action-gate-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_SAFE_ACTION_GATE_20260921
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: session-boot-primitive
+  path: primitives\session-boot-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_SESSION_BOOT_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
