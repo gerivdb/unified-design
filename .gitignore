@@ -55,3 +55,4 @@ Thumbs.db
 .cron-out/scripts/clean_unicode.py
 # fix-encoding.ps1 (root only - moved to scripts/utils/)
 settings.local.yaml
+kg-integration/
