@@ -25,6 +25,7 @@ backends:
     repo: zeredy879/minojev
     license: MIT
     model: 547k params (scalaire pur)
+    params: 547k
     ram_gb: <0.1
     cpu_req: "tout x86_64"
     avx_req: aucun
@@ -36,6 +37,38 @@ backends:
     confidence: 90
     legacy_fit: LEGACY_FIT
     use_case: "décision minimale < 100ms, routing, garde-fous"
+  - id: kev-0.5b
+    repo: jaredpalmer/kev
+    license: Apache-2.0
+    model: Qwen2.5-0.5B + LoRA rank 16 + tête 2 couches
+    params: 0.5B (9.3M entraînables)
+    ram_gb: ~0.4
+    cpu_req: AVX1
+    avx_req: AVX1
+    wsl1_compat: true
+    docker_req: false
+    patch_effort: 0
+    expected_latency_ms: 50-150
+    token_output: variable
+    confidence: 90
+    legacy_fit: LEGACY_FIT
+    use_case: "décision standard API TypeSafe-compatible, fork direct Z600"
+  - id: laya
+    repo: NandhaKishorM/laya
+    license: Apache-2.0
+    model: ModernBERT-large 421M + tête PPO
+    params: 421M
+    ram_gb: ~0.4
+    cpu_req: AVX1
+    avx_req: AVX1
+    wsl1_compat: true
+    docker_req: false
+    patch_effort: 0
+    expected_latency_ms: 50-200
+    token_output: variable
+    confidence: 85
+    legacy_fit: LEGACY_FIT
+    use_case: "décision ModernBERT + PPO, CPU-only, Apache 2.0"
   - id: nanojev
     repo: TianyuCodings/NanoJev
     license: MIT
@@ -55,19 +88,59 @@ backends:
   - id: jevlike
     repo: vinnylarouge/jevlike
     license: MIT
-    model: scorer entraîné from scratch
-    params: "< 1 Go RAM"
-    ram_gb: <1.0
-    cpu_req: AVX1
-    avx_req: AVX1
+    model: encodeur d'embeddings d'octets from scratch
+    params: 40k
+    ram_gb: <0.01
+    cpu_req: scalaire
+    avx_req: aucun
     wsl1_compat: true
     docker_req: false
     patch_effort: 0
-    expected_latency_ms: variable
-    token_output: variable
-    confidence: 80
+    expected_latency_ms: 1-10
+    token_output: 0
+    confidence: 95
     legacy_fit: LEGACY_FIT
-    use_case: "scorer custom, calibration souveraine, entraînement CPU"
+    use_case: "prototypage minimaliste, CPU quelconque, 40 Ko RAM"
+  - id: bespoke-nimble
+    repo: bespokelabsai/nimble
+    license: Apache-2.0
+    model: Qwen3.5-9B + LoRA fine-tune
+    params: 9B
+    ram_gb: ~5.0
+    cpu_req: AVX1 (llama.cpp Q4)
+    avx_req: AVX1
+    wsl1_compat: patchable
+    docker_req: false
+    patch_effort: moyen (quantification Q4 + recompilation llama.cpp)
+    expected_latency_ms: 5000-15000
+    token_output: variable
+    confidence: 60
+    legacy_fit: LEGACY_PATCHABLE
+    use_case: "scorer high-quality 90% vs Jev, latence CPU élevée"
+    patches_required:
+      - "Quantifier en Q4 via llama.cpp -mavx"
+      - "Adapter le scorer Python à llama.cpp"
+      - "Tester latence CPU sur Z600"
+  - id: semif
+    repo: TheoLeeCJ/SemIf
+    license: MIT (présumé)
+    model: Qwen3.5-4B + classificateur NLI 3-classes
+    params: 4B
+    ram_gb: ~2.5
+    cpu_req: AVX1 (llama.cpp)
+    avx_req: AVX1
+    wsl1_compat: patchable
+    docker_req: false
+    patch_effort: moyen (remplacer CUDA par llama.cpp CPU)
+    expected_latency_ms: 2000-5000
+    token_output: variable
+    confidence: 65
+    legacy_fit: LEGACY_PATCHABLE
+    use_case: "NLI sur Qwen3.5, patch WSL1 requis"
+    patches_required:
+      - "Remplacer CUDA par llama.cpp CPU"
+      - "Porter le classificateur NLI sur dernière couche logits"
+      - "Tester sous WSL1"
   - id: jev_local
     repo: Argos1111/jev_local
     license: MIT (présumé)
@@ -96,39 +169,90 @@ backends:
     ram_gb: ">16 (probablement ~20)"
     cpu_req: non testé
     avx_req: inconnu
-    wsl1_compat: partiel
-    docker_req: false
-    patch_effort: élevé
+    wsl1_compat: non
+    docker_req: true
+    patch_effort: impossible
     expected_latency_ms: non mesuré
     token_output: variable
-    confidence: 30
+    confidence: 20
     legacy_fit: LEGACY_INSPIRE
-    use_case: "référence architecturale uniquement — pattern adaptateur TypeScript"
+    use_case: "pattern canvas diffusion uniquement — transposition conceptuelle"
     verdict: INCOMPATIBLE_Z600
     reason: "26B params hors de portée RAM sur Z600 (24 Go total)"
 selection_matrix:
-  - use_case: "décision minimale < 100ms"
+  - use_case: "décision minimale < 100ms, routing, garde-fous"
     backend: minojev
     priority: 1
+  - use_case: "décision standard API TypeSafe-compatible, fork direct"
+    backend: kev-0.5b
+    priority: 2
   - use_case: "décision standard (noul/choice/score)"
     backend: nanojev
-    priority: 2
-  - use_case: "scorer custom, calibration souveraine"
-    backend: jevlike
     priority: 3
+  - use_case: "décision ModernBERT + PPO, CPU-only"
+    backend: laya
+    priority: 4
+  - use_case: "prototypage minimaliste 40 Ko"
+    backend: jevlike
+    priority: 5
+  - use_case: "scorer custom high-quality 90%"
+    backend: bespoke-nimble
+    priority: 6
+    condition: "quantification Q4 + latence CPU acceptée"
   - use_case: "API compatible LocalJev existante"
     backend: jev_local
-    priority: 4
+    priority: 7
     condition: "patch WSL1 appliqué"
+  - use_case: "NLI sur Qwen3.5"
+    backend: semif
+    priority: 8
+    condition: "patch llama.cpp CPU appliqué"
   - use_case: "référence architecturale / inspiration"
     backend: localjev
-    priority: 5
+    priority: 9
     condition: "uniquement pour pattern, jamais pour exécution sur Z600"
+galaxy_map:
+  - id: kev-0.5b
+    layer: L0
+    edge_kind: DIRECT_TOOL
+    degree: 0.95
+    resonance: "38 Mo, CPU-only, API Jev"
+  - id: jevlike
+    layer: L0
+    edge_kind: DIRECT_TOOL
+    degree: 0.90
+    resonance: "40 Ko, attention légère"
+  - id: laya
+    layer: L0
+    edge_kind: DIRECT_TOOL
+    degree: 0.85
+    resonance: "ModernBERT + PPO, Apache 2.0"
+  - id: bespoke-nimble
+    layer: L1
+    edge_kind: METHOD_TRANSFER
+    degree: 0.75
+    resonance: "Curation contrastive, LoRA"
+  - id: semif
+    layer: L1
+    edge_kind: METHOD_TRANSFER
+    degree: 0.70
+    resonance: "NLI sur Qwen3.5"
+  - id: localjev
+    layer: L2
+    edge_kind: DOMAIN_ANALOGY
+    degree: 0.55
+    resonance: "Canvas diffusion, logits readout"
+  - id: typesafe-jev
+    layer: L3
+    edge_kind: SOVEREIGN_ALERT
+    degree: 0.20
+    resonance: "API cloud, clé obligatoire"
 principles:
   - P0_BACKEND_SOVEREIGNTY: aucun backend ne nécessite de clé API cloud ou trafic sortant non médié
   - P0_Z600_COMPATIBILITY: tous les backends LEGACY_FIT/PATCHABLE doivent fonctionner sur Z600/ENV2 (24 Go, AVX1, CPU-only)
   - P0_WSL1_FIRST: privilégier les backends compatibles WSL1 sans modification
   - P0_CALIBRATION_REQUIRED: tout backend auto-reporte ses probabilités ; calibration externe requise avant usage décisionnel conséquent
+  - P0_DATA_SOVEREIGNTY: aucun backend ne doit envoyer de données hors ENV sans médiation JEVX
 constraints:
   - ram_max_gb: 24
   - gpu_forbidden: true
@@ -137,3 +261,4 @@ constraints:
   - docker_forbidden: true
   - calibration_required: true
   - semantic_equivalence: partial
+  - synthetic_data_only: true

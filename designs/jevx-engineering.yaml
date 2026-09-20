@@ -114,6 +114,8 @@ principles:
   - P0_CPU_ONLY: exécution CPU-only ; GPU interdit
   - P0_MALFORMED_RETRY: toute sortie JSON invalide déclenche une correction contextuelle, pas un échec silencieux
   - P0_SECURITY_GUARDRAILS: toute décision automatisée sur action risquée nécessite un consensus minimum + seuil de confiance + possibilité d'escalade HITL
+  - P0_DATA_SOVEREIGNTY: aucun backend ne doit envoyer de données hors ENV sans médiation JEVX
+  - P0_SYNTHETIC_DATA_ONLY: tous les clones connus sont entraînés sur données 100% synthétiques ; calibration externe obligatoire avant usage décisionnel conséquent
 constraints:
   - cpu_only: true
   - gpu_forbidden: true
@@ -126,3 +128,38 @@ constraints:
   - response_format: json_schema
   - calibration_required: true
   - semantic_equivalence: partial
+  - synthetic_data_only: true
+architecture_hypotheses:
+  - name: ModernBERT
+    status: consensus_stable
+    evidence:
+      - "Laya : ModernBERT-large 421M + tête PPO atteint 0.595 vs 0.480 sur DAIR Emotion"
+      - "typed-decisions (kotoba-lang) teste ModernBERT, DeBERTa-v3, RoBERTa, LLaDA-MoE"
+    pros:
+      - "Attention bidirectionnelle naturelle pour lire état + confronter options"
+      - "Stable et facile à reproduire sur CPU"
+    cons:
+      - "Fenêtre contexte limitée (512–1024 tokens) vs 32k–64k revendiqués par Jev"
+      - "Confiance basée sur entropie, pas calibrée"
+    implication: "JEVX peut implémenter un encodeur ModernBERT-like comme backbone souverain"
+  - name: diffusion
+    status: consensus_elegant
+    evidence:
+      - "DiffusionGemmaJev : 88.4% vs 90.8% Jev en 1 passe (H100)"
+      - "Canvas fixe + lecture logits sur positions = parallélisme natif"
+    pros:
+      - "Évalue tous les champs d'une décision structurée en une seule passe"
+      - "Pattern canvas transposable à llama.cpp via logit_bias"
+    cons:
+      - "Architecture gourmande en VRAM ; 26B-A4B hors de portée Z600"
+      - "Implémentation CPU non triviale"
+    implication: "JEVX transpose le pattern diffusion via constrained-parallel-decoding sur CPU"
+security_gaps:
+  - finding: "Aucun clone n'intègre de guardrails de décision"
+    source: "Rapport veille 15-20 sept 2026 §7"
+    impact: "Risque de faux négatifs sur actions risquées"
+    mitigation: "JEVX ajoute consensus minimum + seuil de confiance + escalation HITL"
+  - finding: "Données 100% synthétiques pour tous les clones"
+    source: "Rapport veille 15-20 sept 2026 §7"
+    impact: "Calibration hors distribution non vérifiée"
+    mitigation: "Calibration externe obligatoire avant usage décisionnel conséquent"
