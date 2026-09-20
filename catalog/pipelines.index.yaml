@@ -5,33 +5,52 @@ entries:
   status: active
   type: pipeline
   updated: '2026-09-20'
+  path: pipelines\mdu-validation.yaml
+  version: 1.0.0
 - id: pipeline-sot-completeness
   source_path: pipelines/pipeline-sot-completeness.yaml
   source_repo: unified-design
   status: active
   type: pipeline
   updated: '2026-09-20'
+  path: pipelines\pipeline-sot-completeness.yaml
+  version: 1.0.0
 - id: pipeline-yaml-structure-validation
   source_path: pipelines/pipeline-yaml-structure-validation.yaml
   source_repo: unified-design
   status: active
   type: pipeline
   updated: '2026-09-20'
+  path: pipelines\pipeline-yaml-structure-validation.yaml
+  version: 1.0.0
 - id: pipeline-dryrun-causal-audit
   source_path: pipelines/pipeline-dryrun-causal-audit.yaml
   source_repo: unified-design
   status: active
   type: pipeline
   updated: '2026-09-20'
+  path: pipelines\pipeline-dryrun-causal-audit.yaml
+  version: 1.0.0
 - id: pipeline-session-boot-closeout
   source_path: pipelines/pipeline-session-boot-closeout.yaml
   source_repo: unified-design
   status: active
   type: pipeline
   updated: '2026-09-20'
+  path: pipelines\pipeline-session-boot-closeout.yaml
+  version: 1.0.0
 - id: pipeline-friction-analysis-to-fix
   source_path: pipelines/pipeline-friction-analysis-to-fix.yaml
   source_repo: unified-design
   status: active
   type: pipeline
   updated: '2026-09-20'
+  path: pipelines\pipeline-friction-analysis-to-fix.yaml
+  version: 1.0.0
+- name: jevx-design-validation
+  path: pipelines\jevx-design-validation.yaml
+  version: 1.0.0
+  intent_hash: 0xPIPELINE_JEVX_DESIGN_VALIDATION_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
