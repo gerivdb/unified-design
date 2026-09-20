@@ -1,7 +1,12 @@
 atom_id: pipeline-anamorphique-capture
 version: 1.0.0
 type: atom
-description: ''
-profile: STANDARD
+description: "Capture et analyse des conversations KiloCode pour l'extraction de concepts, frictions et patterns de design. Intègre le système d'extraction d'artefacts."
+profile: ACTIVE
 consumers: []
-last_verified: '2026-08-16'
+last_verified: '2026-09-20'
+depends_on:
+  - ATOM-ARTIFACT-EXTRACTION-STATUS
+  - ATOM-CONVERSATION-ANCHORING
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-EXTRACTION-REPORT-FORMAT
