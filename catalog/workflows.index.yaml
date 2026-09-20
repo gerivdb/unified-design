@@ -2,15 +2,19 @@ entries:
 - id: dryrun-causal-audit
   source_path: workflows/dryrun-causal-audit.md
   source_repo: unified-design
-  status: active
+  status: ACTIVE
   type: workflow
   updated: '2026-09-20'
+  path: workflows\dryrun-causal-audit.md
+  version: 1.0.0
 - id: structural-fix-pipeline
   source_path: workflows/structural-fix-pipeline.md
   source_repo: unified-design
-  status: active
+  status: ACTIVE
   type: workflow
   updated: '2026-09-20'
+  path: workflows\structural-fix-pipeline.md
+  version: 1.0.0
 - id: workflow-dryrun-causal-audit
   source_path: workflows/dryrun-causal-audit.md
   source_repo: unified-design
@@ -41,3 +45,38 @@ entries:
   status: active
   type: workflow
   updated: '2026-09-20'
+- name: branch-orphan-conflict-resolver
+  path: workflows\branch-orphan-conflict-resolver.md
+  version: 1.0.0
+  intent_hash: 0xDESIGN_BRANCH_ORPHAN_CONFLICT_RESOLVER_20260920
+  status: ACTIVE
+  profile: STANDARD
+  consumers: []
+- name: friction-to-fix
+  path: workflows\friction-to-fix.md
+  version: 1.0.0
+  intent_hash: ''
+  status: ACTIVE
+  profile: STANDARD
+  consumers: []
+- name: mdu-daily-sync
+  path: workflows\mdu-daily-sync.md
+  version: 1.0.0
+  intent_hash: ''
+  status: ACTIVE
+  profile: STANDARD
+  consumers: []
+- name: pre-push-validation
+  path: workflows\pre-push-validation.md
+  version: 1.0.0
+  intent_hash: ''
+  status: ACTIVE
+  profile: STANDARD
+  consumers: []
+- name: session-boot-closeout
+  path: workflows\session-boot-closeout.md
+  version: 1.0.0
+  intent_hash: ''
+  status: ACTIVE
+  profile: STANDARD
+  consumers: []

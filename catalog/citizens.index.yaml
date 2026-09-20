@@ -47,3 +47,31 @@ entries:
   status: active
   type: citizen
   updated: '2026-09-20'
+- name: artifact-layers-auditor
+  path: citizens\artifact-layers-auditor\citizen.yaml
+  version: 1.0.0
+  intent_hash: 0xCITIZEN_ARTIFACT_LAYERS_AUDITOR_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: design-ops-loop-citizen
+  path: citizens\design-ops-loop-citizen\citizen.yaml
+  version: 1.0.0
+  intent_hash: 0xCITIZEN_DESIGN_OPS_LOOP_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: meta-coherence-auditor
+  path: citizens\meta-coherence-auditor\citizen.yaml
+  version: 1.0.0
+  intent_hash: 0xCITIZEN_META_COHERENCE_AUDITOR_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: session-boot-citizen
+  path: citizens\session-boot-citizen\citizen.yaml
+  version: 1.0.0
+  intent_hash: 0xCITIZEN_SESSION_BOOT_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
