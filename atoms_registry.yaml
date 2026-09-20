@@ -8,3 +8,16 @@
     required: true
     dependencies: []
     updated: "2026-09-16"
+- atom_id: ATOM-067
+    name: toroidal-invariant
+    status: active
+    layer: L0
+    path: atoms/ATOM-067-toroidal-invariant.atom.yaml
+    intent_hash: 0xATOM_067_TOROIDAL_INVARIANT_20260920
+    bridges: [FLEX, LLUX, CTULU, TRIX, WAZAA, KG-L]
+    required: true
+    dependencies:
+      - ATOM-FLEX-NUMA-DETECT
+      - ATOM-FLEX-CACHE-SLICE
+      - ATOM-FLEX-AFFINITY-SET
+    updated: "2026-09-20"

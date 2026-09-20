@@ -13,7 +13,6 @@ parameters:
 inherits:
   - safe-action-pattern
   - sovereign-vector-memory
----
 
 # Atom : typed-decision-api
 

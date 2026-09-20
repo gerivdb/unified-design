@@ -216,6 +216,13 @@ if [ -f "$HOTL_SCRIPT" ]; then
 fi
 
 ###############################################################################
+
+# --- Check éthique transversal (PRD-MOC-ETHIQUE-TRANSVERSALE-HOOKS-2026-09-20) ---
+ETHICS_HOOK="${REPO_ROOT}/scripts/pre-push-ethics-check.ps1"
+if [ -f "${ETHICS_HOOK}" ]; then
+    cmd /c powershell -ExecutionPolicy ByPass -File "${ETHICS_HOOK}" || exit $?
+fi
+
 # SORTIE
 #################################################################################
 
