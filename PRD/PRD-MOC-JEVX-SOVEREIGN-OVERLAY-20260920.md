@@ -109,7 +109,8 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 - [x] 2026-09-20T20:11:03+02:00 — Design `jevx-backend-matrix.yaml` créé
 - [x] 2026-09-20T20:11:03+02:00 — Design `jevx-engineering.yaml` avec patterns
 - [x] 2026-09-20T20:11:03+02:00 — Atom `typed-decision-api.yaml` avec backends
-- [ ] 2026-09-20T20:11:03+02:00 — Mise à jour `META-DESIGN.md` et `meta-design.yaml` (Phase B)
+- [x] 2026-09-20T20:15:00+02:00 — Mise à jour `META-DESIGN.md` et `meta-design.yaml` (Phase B)
+- [x] 2026-09-20T20:15:00+02:00 — Designs et atom enregistrés dans MDU
 - [ ] 2026-09-20T20:11:03+02:00 — Validation `gerivdb design validate --strict` PASS
 - [ ] 2026-09-20T20:11:03+02:00 — Pre-commit hooks PASS
 - [ ] 2026-09-20T20:11:03+02:00 — Intégration KIX (si applicable)
@@ -118,8 +119,8 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 
 | Critère d'acceptation | État | Preuve |
 |---|---|---|
-| 1. YAML valide + validation stricte | ⏳ | En attente Phase B |
-| 2. Atom référencé MDU | ⏳ | En attente Phase B |
+| 1. YAML valide + validation stricte | ⏳ | En attente validation ciblée |
+| 2. Atom référencé MDU | ✅ | `META-DESIGN.md` + `meta-design.yaml` |
 | 3. 3+ backends Z600 documentés | ✅ | NanoJev, jevlike, minojev, jev_local |
 | 4. Security guardrails définies | ✅ | consensus_minimum, confidence_threshold, HITL, audit_trail |
 | 5. Patterns documentés | ✅ | constrained-parallel-decoding, sovereign-adapter-pattern |
@@ -129,7 +130,7 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 | 9. ADR-0111 référencée | ✅ | Référencée dans tous les designs |
 | 10. Proof-of-Life horodatés | ✅ | Section 8 |
 
-**Verdict** : ✅ **Partiellement implémenté** — Phase A complète (designs + atom), Phase B en cours (META-DESIGN.md + meta-design.yaml).
+**Verdict** : ✅ **Phase A + Phase B complètes** — Designs, atom et enregistrement MDU implémentés. Validation ciblée et intégration KIX en suspens.
 
 ## 10. Références
 
