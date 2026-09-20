@@ -16,6 +16,7 @@
 - **ADR-038** : [Trace Replay Proof (L6 Workshop)](ADR-038-trace-replay-proof.md)
 - **ADR-040** : [MOC-3 DIP / Ports & Adapters Inter-Strates](ADR-040-moc3-dip-ports-adapters.md)
 - **ADR-041** : [MOC-2 OCP / Auto-Découverte des Atomes par Manifests](ADR-041-moc2-ocp-auto-discovery.md)
+- **ADR-2026-09-20-001** : [Artifact Extraction MDU Extension](ADR-2026-09-20-001-ARTIFACT-EXTRACTION-MDU.md)
 
 ## ADRs GOVERNANCE-HUB (méta-gouvernance)
 
