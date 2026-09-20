@@ -1,0 +1,63 @@
+---
+name: session-boot-citizen
+description: >
+  Citoyen qui exécute les checks BOOT au démarrage et la clôture à la fin.
+  Pilote les sessions multi-repo via session_boot.py.
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xCITIZEN_SESSION_BOOT_20260920
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: boot-session
+    description: "Exécute les checks BOOT de session"
+  - name: closeout-session
+    description: "Clôture la session : auto-commit, push"
+states:
+  - name: IDLE
+    gate_to_next: SESSION_STARTED
+  - name: BOOT
+    gate_to_next: BOOT_OK
+  - name: WORK
+    gate_to_next: WORK_DONE
+  - name: CLOSEOUT
+    gate_to_next: CLOSEOUT_OK
+functions:
+  - id: F1
+    name: BOOT_SESSION
+    state: IDLE→BOOT
+    description: "Exécute les checks BOOT"
+  - id: F2
+    name: WORK_SESSION
+    state: BOOT→WORK
+    description: "Travail de session"
+  - id: F3
+    name: CLOSEOUT_SESSION
+    state: WORK→CLOSEOUT
+    description: "Clôture la session"
+invariant: "Toute session multi-repo passe par BOOT et CLOSEOUT."
+genes:
+  - id: G1
+    name: boot-first
+    description: "Toujours boot avant de travailler"
+  - id: G2
+    name: closeout-last
+    description: "Toujours closeout après le travail"
+anti_patterns:
+  - missing_gene: boot-first
+    pathology: "Session sans boot → frictions non détectées"
+  - missing_gene: closeout-last
+    pathology: "Session sans closeout → working tree sale"
+cross_references:
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: uses
+  - design: session-boot-design
+  - skill: session-boot-skill
+  - workflow: workflow-session-boot-closeout
+  - pipeline: pipeline-session-boot-closeout

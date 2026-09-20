@@ -1,0 +1,67 @@
+---
+name: artifact-layers-auditor
+description: >
+  Citoyen passif qui audite la structure des repos et propose les corrections.
+  Vérifie que src/, config/, tools/, scripts/, tests/, docs/, markdown/
+  existent et sont conformes.
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xCITIZEN_ARTIFACT_LAYERS_AUDITOR_20260920
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: audit-layers
+    description: "Audite les 7 layers d'un repo"
+  - name: propose-fixes
+    description: "Propose les corrections structurelles"
+states:
+  - name: IDLE
+    gate_to_next: AUDIT_REQUESTED
+  - name: AUDITING
+    gate_to_next: AUDIT_COMPLETE
+  - name: REMEDIATING
+    gate_to_next: REMEDIATION_VERIFIED
+  - name: DONE
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: AUDIT_LAYERS
+    state: IDLE→AUDITING
+    description: "Audite les 7 layers d'un repo"
+  - id: F2
+    name: PROPOSE_FIXES
+    state: AUDITING→REMEDIATING
+    description: "Propose les corrections structurelles"
+  - id: F3
+    name: APPLY_FIXES
+    state: REMEDIATING
+    description: "Applique les corrections"
+  - id: F4
+    name: VALIDATE_FIXES
+    state: REMEDIATING→DONE
+    description: "Valide les corrections"
+invariant: "Tout repo actif possède les 7 layers standardisés."
+genes:
+  - id: G1
+    name: completeness
+    description: "Tous les layers requis doivent être présents"
+  - id: G2
+    name: consistency
+    description: "La structure doit être cohérente across repos"
+anti_patterns:
+  - missing_gene: completeness
+    pathology: "Repo incomplet → difficulté de maintenance"
+  - missing_gene: consistency
+    pathology: "Structure variable → confusion cross-repo"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: audits
+  - design: artifact-layers-design
+  - skill: artifact-layers-validator
+  - workflow: workflow-artifact-layers-validation

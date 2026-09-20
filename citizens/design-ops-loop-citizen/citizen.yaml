@@ -1,0 +1,98 @@
+---
+name: design-ops-loop-citizen
+description: >
+  Citoyen pilote de la boucle THINK/DO/CHECK du MDU.
+  Orchestre les skills design-ops-loop-skill, dryrun-causal-auditor,
+  ecosystem-meta-coherence-analyzer pour garantir que toute correction
+  respecte les invariants écosystémiques.
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xCITIZEN_DESIGN_OPS_LOOP_20260920
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: orchestrate-think
+    description: "Orchestre la phase THINK : dryrun-causal-auditor, ecosystem-meta-coherence-analyzer"
+  - name: orchestrate-do
+    description: "Orchestre la phase DO : implémentation atomique"
+  - name: orchestrate-check
+    description: "Orchestre la phase CHECK : pre-push-auditor, validation"
+states:
+  - name: IDLE
+    gate_to_next: ACTION_RECEIVED
+  - name: THINK
+    gate_to_next: NEEDS_VALIDATED
+  - name: DO
+    gate_to_next: EXECUTION_VERIFIED
+  - name: CHECK
+    gate_to_next: REAL_VALIDATED
+  - name: DONE
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: ORCHESTRATE_THINK
+    state: IDLE→THINK
+    description: "Orchestre la phase THINK"
+  - id: F2
+    name: VALIDATE_NEEDS
+    state: THINK
+    description: "Valide que les besoins sont fondés"
+    veto: true
+  - id: F3
+    name: ORCHESTRATE_DO
+    state: THINK→DO
+    description: "Orchestre la phase DO"
+  - id: F4
+    name: MONITOR_INVARIANTS
+    state: DO
+    description: "Surveille les invariants pendant l'exécution"
+  - id: F5
+    name: ORCHESTRATE_CHECK
+    state: DO→CHECK
+    description: "Orchestre la phase CHECK"
+  - id: F6
+    name: VALIDATE_REAL
+    state: CHECK
+    description: "Valide que le monde confirme"
+  - id: F7
+    name: RECORD_PROOF
+    state: CHECK→DONE
+    description: "Enregistre les preuves"
+invariant: "Le MDU n'est jamais considéré comme méta-cohérent tant qu'une friction non résolue subsiste."
+genes:
+  - id: G1
+    name: think-first
+    description: "Toute correction naît d'un besoin écosystémique"
+  - id: G2
+    name: causal-traceability
+    description: "Toute correction est tracée"
+  - id: G3
+    name: adaptive-coherence
+    description: "Le MDU s'adapte aux besoins"
+  - id: G4
+    name: verification-real
+    description: "Une correction n'est jamais déclarée réussie sans preuve"
+anti_patterns:
+  - missing_gene: think-first
+    pathology: "Correction sans besoin validé → dette technique"
+  - missing_gene: causal-traceability
+    pathology: "Correction sans traçabilité → impossibilité d'auditer"
+  - missing_gene: adaptive-coherence
+    pathology: "MDU figé → écosystème frustré"
+  - missing_gene: verification-real
+    pathology: "Correction déclarée réussie sans preuve → échec silencieux"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: orchestrates
+  - design: design-ops-loop
+  - design: ecosystem-meta-coherence
+  - skill: design-ops-loop-skill
+  - skill: dryrun-causal-auditor
+  - skill: ecosystem-meta-coherence-analyzer
+  - citizen: meta-coherence-auditor
