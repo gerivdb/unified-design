@@ -93,7 +93,7 @@ backends:
     license: MIT
     model: DiffusionGemma-26B-A4B-it-4bit
     params: 26B (A4B actifs)
-    ram_gb: >16 (probablement ~20)
+    ram_gb: ">16 (probablement ~20)"
     cpu_req: non testé
     avx_req: inconnu
     wsl1_compat: partiel
