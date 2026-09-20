@@ -87,7 +87,9 @@ def scan_designs() -> list[dict]:
             data = load_yaml(yaml_file)
         except Exception:
             continue
-        name = data.get("name", yaml_file.stem)
+        name = data.get("name") or yaml_file.stem
+        if not name:
+            continue
         entries.append({
             "name": name,
             "path": str(rel),

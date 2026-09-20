@@ -1,6 +1,6 @@
 ---
 name: value-machine
-description: "Machine à valeur inspirée de D:\GG-knox\engineering ideas\Obsidian\Machine à valeur -penser une problématique.md. Transforme les inputs (problèmes, idées, intentions) en outputs (designs, atoms, code, tests) via un pipeline de valeur ajoutée. Chaque étape du pipeline ajoute de la valeur mesurable."
+description: "Machine à valeur inspirée de GG-knox/engineering-ideas/Obsidian/Machine à valeur -penser une problématique.md. Transforme les inputs (problèmes, idées, intentions) en outputs (designs, atoms, code, tests) via un pipeline de valeur ajoutée. Chaque étape du pipeline ajoute de la valeur mesurable."
 version: "1.0.0"
 status: active
 layer: L0

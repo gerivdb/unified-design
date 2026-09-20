@@ -1,6 +1,6 @@
 ---
 name: problem-structuring-method
-description: "Méthode de structuration de problème inspirée de D:\GG-knox\engineering ideas\Obsidian\penser une problématique.md. Filetree problématisation : décomposer un problème complexe en arborescence de sous-problèmes atomiques, chacun avec sa propre question, contraintes, et livrable."
+description: "Méthode de structuration de problème inspirée de GG-knox/engineering-ideas/Obsidian/penser une problématique.md. Filetree problématisation : décomposer un problème complexe en arborescence de sous-problèmes atomiques, chacun avec sa propre question, contraintes, et livrable."
 version: "1.0.0"
 status: active
 layer: L0

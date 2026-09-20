@@ -1,6 +1,6 @@
 ---
 name: fresh-context-verifier
-description: "Fresh-Context Vérificateur inspiré de D:\GG-knox\engineering ideas\300-kimi-k3\3.md. Vérifie que le contexte d'un agent est frais avant exécution : TTL, embedding drift, source integrity, cross-model agreement. Bloque l'exécution si le contexte est stale."
+description: "Fresh-Context Vérificateur inspiré de GG-knox/engineering-ideas/300-kimi-k3/3.md. Vérifie que le contexte d'un agent est frais avant exécution : TTL, embedding drift, source integrity, cross-model agreement. Bloque l'exécution si le contexte est stale."
 version: "1.0.0"
 status: active
 layer: L0
