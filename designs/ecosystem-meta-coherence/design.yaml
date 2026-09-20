@@ -1,0 +1,166 @@
+---
+name: ecosystem-meta-coherence
+description: >
+  Méta-cohérence écosystémique Think/Do/Check : garantit que le MDU reste aligné
+  avec les besoins de l'écosystème (Think), l'écosystème lui-même (Do),
+  et la vérification de l'écosystème (Check). Fusionne meta-coherence
+  (détection d'écarts cross-repo) et friction-analyzer (corrections structurelles
+  de session) en un pattern unifié de gouvernance adaptative.
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_20260920
+inherits:
+  - meta-coherence
+  - chain-fluidity
+  - safe-action-pattern
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+capabilities:
+  - name: think-needs-analysis
+    description: "Analyse des besoins de l'écosystème : signaux faibles, gaps, impensés"
+    parameters:
+      mode: [passive, active, predictive]
+  - name: do-ecosystem-execution
+    description: "Exécution de l'écosystème : pipelines, ingestion, orchestration, mutations"
+    parameters:
+      mode: [atomic, batch, workflow]
+  - name: check-ecosystem-verification
+    description: "Vérification de l'écosystème : conformité, audit, traçabilité, preuves"
+    parameters:
+      mode: [reactive, proactive, continuous]
+  - name: friction-detection
+    description: "Détection des frictions de session : ERR-ALFRED, ERR-BRGS, ERR-VALIDATOR, etc."
+    parameters:
+      categories: [git, ci, tools, encoding, structural]
+      severity: [critical, high, medium, low, info]
+  - name: structural-remediation
+    description: "Corrections structurelles : workflow ALFRED/BRGS, validators, hooks, scripts"
+    parameters:
+      scope: [mdu, repo, cross-repo]
+      automation: [manual, semi-auto, auto]
+  - name: causal-traceability
+    description: "Traçabilité causale : chaque correction est liée à une friction → root cause → fix"
+    parameters:
+      format: [json, markdown, yaml]
+      storage: [voltx, wal, governance-hub]
+states:
+  - name: THINK
+    nature: besoins émergents, signaux faibles
+    gate_to_next: NEEDS_VALIDATED
+    question: "L'écosystème exprime-t-il un besoin nouveau ou un gap ?"
+  - name: DO
+    nature: mutations engagées, irréversibles
+    gate_to_next: EXECUTION_VERIFIED
+    question: "Les mutations respectent-elles les invariants écosystémiques ?"
+  - name: CHECK
+    nature: constaté, mémorisé, audité
+    question: "Le monde a-t-il confirmé ? Qu'héritons-nous ?"
+functions:
+  - id: F1-THINK
+    name: PERCEVOIR_BESOINS
+    state: THINK
+    description: "Échantillonnage multi-source des besoins écosystémiques"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2-THINK
+    name: ÉVALUER_BESOINS
+    state: THINK
+    description: "Évaluation des besoins vs capacité écosystémique"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F3-THINK
+    name: MODÉLISER_IMPACT
+    state: THINK
+    description: "Auto-modèle d'impact : que va changer cette correction ?"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F4-THINK
+    name: RÉSERVER_COHÉRENCE
+    state: THINK
+    description: "Marge de cohérence : plan de rollback si correction casse autre chose"
+    implements: ATOM-STOP-CONDITION
+  - id: F5-THINK
+    name: VALIDER_BESOINS
+    state: THINK→DO
+    description: "Gate : les besoins sont-ils suffisamment fondés pour engager une correction ?"
+    implements: ATOM-GATE-LAYERS
+    veto: true
+  - id: F6-DO
+    name: AGIR_CORRECTION
+    state: DO
+    description: "Engagement irréversible : application de la correction structurelle"
+    implements: chain-fluidity
+  - id: F7-DO
+    name: MONITORER_INVARIANTS
+    state: DO
+    description: "Surveillance des invariants écosystémiques pendant la correction"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: F8-CHECK
+    name: VALIDER_RÉEL
+    state: DO→CHECK
+    description: "Succès constaté dans le monde : la correction a-t-elle résolu la friction ?"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY, ATOM-DELTA-CHECK
+  - id: F9-CHECK
+    name: ENREGISTRER_TRACE
+    state: CHECK
+    description: "Mémoire : preuve horodatée, traçabilité causale, héritage"
+    implements: ATOM-CARRY-FORWARD-PRINCIPLE
+invariant: "Le MDU n'est jamais considéré comme méta-cohérent tant qu'une friction de session non résolue subsiste."
+genes:
+  - id: G1
+    name: think-first
+    description: "Toute correction structurelle naît d'un besoin écosystémique identifié, pas d'un caprice."
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: G2
+    name: causal-traceability
+    description: "Toute correction est tracée : friction → root cause → fix → preuve."
+    implements: ATOM-CARRY-FORWARD-PRINCIPLE
+  - id: G3
+    name: adaptive-coherence
+    description: "Le MDU s'adapte aux besoins de l'écosystème, pas l'inverse."
+    implements: meta-coherence
+  - id: G4
+    name: verification-real
+    description: "Une correction n'est jamais déclarée réussie sans preuve horodatée."
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+anti_patterns:
+  - missing_gene: think-first
+    pathology: "Correction appliquée sans besoin écosystémique validé → dette technique"
+    mdu_atom: ATOM-INDEPENDENT-SOURCES-RULE
+  - missing_gene: causal-traceability
+    pathology: "Correction sans traçabilité → impossibilité d'auditer, répétition des erreurs"
+    mdu_atom: ATOM-CARRY-FORWARD-PRINCIPLE
+  - missing_gene: adaptive-coherence
+    pathology: "MDU figé, besoins écosystémiques ignorés → écosystème frustré"
+    mdu_atom: meta-coherence
+  - missing_gene: verification-real
+    pathology: "Correction déclarée réussie sans preuve → échec silencieux"
+    mdu_atom: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: enforces
+  - repo: gerivdb/ARGUS
+    relation: audits
+  - repo: gerivdb/TALEX
+    relation: narrates
+  - repo: gerivdb/VOLTX
+    relation: stores_proofs
+  - repo: gerivdb/KG-CAUSAL
+    relation: causal_graph
+  - adr: ADR-2026-09-19-SAFE-ACTION-PATTERN
+  - adr: ADR-2026-09-12-001-THINK-DO-CHECK-ARCHITECTURE
+  - intent: INTENT-2026-09-19-SAFE-ACTION-PATTERN
+  - prd_moc: PRD-MOC-SAFE-ACTION-PATTERN-20260919
+  - moc: MOC-SAFE-ACTION-PATTERN-20260919
+  - design: meta-coherence
+  - design: chain-fluidity
+  - design: safe-action-pattern
+  - design: friction-analyzer
