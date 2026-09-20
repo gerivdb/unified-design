@@ -1,0 +1,115 @@
+---
+name: jevx
+description: "Decision-engine souverain JEVX : surcouche locale sur upstream LocalJev (githubnext/localjev). API Jev-compatible POST /v1/systemone, questions typées (noul/choice/score), probabilités normalisées, confiance entropique, retry malformed. Composant CLM TIMX → KG-CAUSAL → JEVX → ROOTX → TALEX → VOLTX."
+version: "1.0.0"
+status: active
+layer: L4
+type: citizen
+profile: STANDARD
+intent_hash: 0xINTENT_JEVX_SOVEREIGN_OVERLAY_20260919
+adr: ADR-0111-JEVX-SOVEREIGN-OVERLAY
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+  - dev-tool-wrapper
+depends_on:
+  - kg-causal
+  - kix
+  - rootx
+  - talex
+hardware_profile:
+  cpu: "E5620 Westmere, SSE4.2"
+  gpu: "FORBIDDEN"
+  ram_max_gb: 24
+  execution_mode: "CPU-only"
+  runtime: "Bun 1.2+"
+components:
+  - type: decision-engine
+    repo: gerivdb/JEVX
+    path: D:\DO\WEB\TOOLS\L4-TOOLS\JEVX
+    entrypoint: src/server.ts
+    runtime: bun
+  - type: typed-api
+    protocol: http
+    endpoint: /v1/systemone
+    port: 8080
+  - type: probability-normalizer
+    description: "Normalisation des vecteurs de probabilité, calcul de confiance entropique"
+  - type: upstream-adapter
+    description: "Adaptateur OpenAI-compatible vers LocalJev wire protocol"
+    upstream: githubnext/localjev
+dependencies:
+  - repo: gerivdb/KG-CAUSAL
+  - repo: gerivdb/KIX
+  - repo: gerivdb/ROOTX
+  - repo: gerivdb/TALEX
+  - repo: gerivdb/VOLTX
+  - repo: githubnext/localjev
+bridges:
+  - target: repo:KG-CAUSAL
+    role: consumer
+    protocol: http
+    channel: L4-TOOLS/JEVX/clm/observation
+  - target: repo:KIX
+    role: service-registry
+    protocol: kix-discovery
+    channel: L1-INFRA/KIX/services/jevx
+  - target: repo:ROOTX
+    role: effect-sink
+    protocol: http
+    channel: L4-TOOLS/JEVX/clm/effect
+  - target: repo:TALEX
+    role: narrative-engine
+    protocol: wazaa-channel
+    channel: L4-TOOLS/TALEX/causal/narrative
+  - target: repo:VOLTX
+    role: vault-orchestrator
+    protocol: wazaa-channel
+    channel: L0-CANON/VOLTX/decisions
+  - target: repo:localjev-upstream
+    role: upstream-backend
+    protocol: openai-chat-completions
+    channel: L5-ARCHIVE/localjev-upstream
+capabilities:
+  - name: typed-decisions
+    description: "Questions typées Jev : noul (yes/no), choice (classification), score (échelle)"
+    parameters:
+      question_types: [noul, choice, score]
+      max_questions_per_call: 16
+      max_outcomes_per_call: 128
+  - name: probability-inference
+    description: "Inférence probabiliste via prompt classification + JSON schema strict"
+    parameters:
+      backend: openai-chat-completions
+      model: diffusiongemma-26B-A4B-it-4bit
+      response_format: json_schema
+      seed_canvas: true
+  - name: entropy-confidence
+    description: "Calcul de confiance basé sur l'entropie du vecteur de probabilités"
+    parameters:
+      formula: "1 - entropy / log(n)"
+      range: [0, 1]
+  - name: malformed-retry
+    description: "Retry automatique avec correction contextuelle pour sorties JSON invalides"
+    parameters:
+      max_retries: 2
+      correction_prompt: true
+  - name: semaphore-backpressure
+    description: "Backpressure par sémaphore pour limiter les appels upstream concurrents"
+    parameters:
+      max_inflight: 2
+      max_queue: 64
+principles:
+  - P0_SOVEREIGNTY: JEVX est une surcouche souveraine sur upstream LocalJev ; aucun trafic ne quitte l'ENV sans mediation JEVX
+  - P0_WIRE_COMPATIBILITY: compatibilité wire avec Jev TypeSafe SDK, mais non-équivalence mathématique avec OpenJev logit read
+  - P0_PROBABILITY_CALIBRATION: les probabilités sont auto-rapportées par le modèle ; calibration requise avant usage décisionnel conséquent
+  - P0_BRIDGE_TRACEABILITY: chaque décision est tracée dans WAL via KIX → VOLTX
+  - P0_CPU_ONLY: exécution CPU-only ; GPU interdit
+constraints:
+  - cpu_only: true
+  - gpu_forbidden: true
+  - runtime: bun
+  - upstream_required: true
+  - max_inflight: 2
+  - questions_per_call: 16
+  - outcomes_per_call: 128
