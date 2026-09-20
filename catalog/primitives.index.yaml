@@ -41,3 +41,27 @@ entries:
   status: active
   type: primitive
   updated: '2026-09-20'
+- id: design-ops-loop-primitive
+  source_path: primitives/design-ops-loop-primitive.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-20'
+- id: artifact-layers-primitive
+  source_path: primitives/artifact-layers-primitive.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-20'
+- id: session-boot-primitive
+  source_path: primitives/session-boot-primitive.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-20'
+- id: causal-traceability-primitive
+  source_path: primitives/causal-traceability-primitive.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-20'

@@ -5,3 +5,33 @@ entries:
   status: active
   type: pipeline
   updated: '2026-09-20'
+- id: pipeline-sot-completeness
+  source_path: pipelines/pipeline-sot-completeness.yaml
+  source_repo: unified-design
+  status: active
+  type: pipeline
+  updated: '2026-09-20'
+- id: pipeline-yaml-structure-validation
+  source_path: pipelines/pipeline-yaml-structure-validation.yaml
+  source_repo: unified-design
+  status: active
+  type: pipeline
+  updated: '2026-09-20'
+- id: pipeline-dryrun-causal-audit
+  source_path: pipelines/pipeline-dryrun-causal-audit.yaml
+  source_repo: unified-design
+  status: active
+  type: pipeline
+  updated: '2026-09-20'
+- id: pipeline-session-boot-closeout
+  source_path: pipelines/pipeline-session-boot-closeout.yaml
+  source_repo: unified-design
+  status: active
+  type: pipeline
+  updated: '2026-09-20'
+- id: pipeline-friction-analysis-to-fix
+  source_path: pipelines/pipeline-friction-analysis-to-fix.yaml
+  source_repo: unified-design
+  status: active
+  type: pipeline
+  updated: '2026-09-20'

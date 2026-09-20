@@ -653,3 +653,39 @@ entries:
   status: active
   type: skill
   updated: '2026-09-20'
+- id: unified-design/design-ops-loop-skill
+  source_path: skills/design-ops-loop-skill/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-20'
+- id: unified-design/artifact-layers-validator
+  source_path: skills/artifact-layers-validator/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-20'
+- id: unified-design/registry-sync-checker-skill
+  source_path: skills/registry-sync-checker-skill/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-20'
+- id: unified-design/ontology-term-gate-skill
+  source_path: skills/ontology-term-gate-skill/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-20'
+- id: unified-design/inventory-reconciler-interpreter-skill
+  source_path: skills/inventory-reconciler-interpreter-skill/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-20'
+- id: unified-design/session-boot-skill
+  source_path: skills/session-boot-skill/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-20'

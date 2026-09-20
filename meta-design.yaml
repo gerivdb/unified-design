@@ -1,737 +1,829 @@
-# AUTO-GENERATED FILE - DO NOT EDIT DIRECTLY
-# Source: manifests + tools/meta-design-gen.py
-# Regenerate: python tools/meta-design-gen.py
-# Meta-Design Schema (MDU) v2.1
-# Schema de validation YAML pour l'architecture gerivdb
-# Version 2.1 : ajout des 6 atoms "Graph of Loops" (L1-L6)
-
-version: "2.1.0"
+version: 2.1.0
 intent_hash: 0xMDU_SCHEMA_20260731_V2_1_GRAPH_OF_LOOPS
 status: active
-
-
-# Heritage multiple de designs abstraits
 inherits: []
-
-# Capacites heritees (mixins) - EXTENDUES avec 6 nouvelles capacites Graph of Loops
 capabilities:
-  - port_id: latency-bound
-    description: "Le design impose une limite de latence"
-    consumers: []
-    profile: STANDARD
-    parameters:
-      max_latency_ms: 10
-  - port_id: power-capped
-    description: "Le design impose une limite de puissance"
-    consumers: []
-    profile: STANDARD
-    parameters:
-      max_power_w: 150
-  - port_id: attention-mechanism
-    description: "Mecanisme d'attention universelle inspire d'UAE"
-    consumers: []
-    profile: STANDARD
-    parameters:
-      scaling_factor: "1/sqrt(d)"
-      temperature: 1.0
-      num_heads: 8
-  
-  # --- Nouvelles capacites Graph of Loops (L1-L6) ---
-  - port_id: symbol-retrieval
-    description: "Recuperation symboles via MCP au lieu lecture fichiers complets (L3 Serena)"
-    consumers: []
-    profile: STANDARD
-    parameters:
-      max_symbols_per_call: 50
-      context_savings_tokens: 16000
-  - port_id: worktree-isolation
-    description: "Isolation physique agents via git worktree avec dry-run pre-merge (G2)"
-    consumers: []
-    profile: STANDARD
-    parameters:
-      dry_run_enabled: true
-      abort_on_conflict: true
-      max_parallel_worktrees: 8
-      cleanup_on_complete: true
-  - port_id: beads-sql-memory
-    description: "Memoire SQL versionnee (SQLite+WAL) - graphe insights + compression 70% (L1 Beads)"
-    consumers: []
-    profile: STANDARD
-    parameters:
-      compression_ratio: 0.70
-      survival_modes:
-        - "context_reset"
-        - "account_rotation"
-      query_interface: "sql"
-      schema_version: 1
-      index_strategy: "btree+fulltext"
-  - port_id: exit-interceptor
-    description: "Stop hook bloquant exit agent + validation cross-model avant liberation (L5)"
-    consumers: []
-    profile: STANDARD
-    parameters:
-      block_on_exit: true
-      validation_artifact: "review.md"
-      require_signed_review: true
-      timeout_seconds: 300
-      self_review_prevention: true
-  - port_id: tdd-airain-law
-    description: "No Test No Code - suppression code prod sans test echoue prealable (L4 Superpowers)"
-    consumers: []
-    profile: STANDARD
-    parameters:
-      enforce_test_first: true
-      delete_on_violation: true
-      violation_action: "delete_and_restart"
-      test_must_fail_first: true
-      coverage_threshold: 0.85
-  - port_id: trace-replay-proof
-    description: "Preuve par re-execution trace - capture + replay + assertions SQL (L6 Workshop)"
-    consumers: []
-    profile: STANDARD
-    parameters:
-      capture_mode: "full_trace"
-      replay_target: "local_daemon"
-      verification_method: "sql_assertions"
-      trace_storage: "sqlite+wal"
-      comparison_strategy: "exact_trace_match"
-      pass_criteria: "all_assertions_pass"
-
-# Regles de validation du graphe de dependances - EXTENDUES
+- port_id: latency-bound
+  description: Le design impose une limite de latence
+  consumers: []
+  profile: STANDARD
+  parameters:
+    max_latency_ms: 10
+- port_id: power-capped
+  description: Le design impose une limite de puissance
+  consumers: []
+  profile: STANDARD
+  parameters:
+    max_power_w: 150
+- port_id: attention-mechanism
+  description: Mecanisme d'attention universelle inspire d'UAE
+  consumers: []
+  profile: STANDARD
+  parameters:
+    scaling_factor: 1/sqrt(d)
+    temperature: 1.0
+    num_heads: 8
+- port_id: symbol-retrieval
+  description: Recuperation symboles via MCP au lieu lecture fichiers complets (L3
+    Serena)
+  consumers: []
+  profile: STANDARD
+  parameters:
+    max_symbols_per_call: 50
+    context_savings_tokens: 16000
+- port_id: worktree-isolation
+  description: Isolation physique agents via git worktree avec dry-run pre-merge (G2)
+  consumers: []
+  profile: STANDARD
+  parameters:
+    dry_run_enabled: true
+    abort_on_conflict: true
+    max_parallel_worktrees: 8
+    cleanup_on_complete: true
+- port_id: beads-sql-memory
+  description: Memoire SQL versionnee (SQLite+WAL) - graphe insights + compression
+    70% (L1 Beads)
+  consumers: []
+  profile: STANDARD
+  parameters:
+    compression_ratio: 0.7
+    survival_modes:
+    - context_reset
+    - account_rotation
+    query_interface: sql
+    schema_version: 1
+    index_strategy: btree+fulltext
+- port_id: exit-interceptor
+  description: Stop hook bloquant exit agent + validation cross-model avant liberation
+    (L5)
+  consumers: []
+  profile: STANDARD
+  parameters:
+    block_on_exit: true
+    validation_artifact: review.md
+    require_signed_review: true
+    timeout_seconds: 300
+    self_review_prevention: true
+- port_id: tdd-airain-law
+  description: No Test No Code - suppression code prod sans test echoue prealable
+    (L4 Superpowers)
+  consumers: []
+  profile: STANDARD
+  parameters:
+    enforce_test_first: true
+    delete_on_violation: true
+    violation_action: delete_and_restart
+    test_must_fail_first: true
+    coverage_threshold: 0.85
+- port_id: trace-replay-proof
+  description: Preuve par re-execution trace - capture + replay + assertions SQL (L6
+    Workshop)
+  consumers: []
+  profile: STANDARD
+  parameters:
+    capture_mode: full_trace
+    replay_target: local_daemon
+    verification_method: sql_assertions
+    trace_storage: sqlite+wal
+    comparison_strategy: exact_trace_match
+    pass_criteria: all_assertions_pass
 design_rules:
-  - name: "no-circular-inheritance"
-    check: "graph_is_acyclic"
-  - name: "capability-conflict"
-    check: "no_conflicting_capabilities"
-  # Nouvelles regles Graph of Loops
-  - name: "symbol-retrieval-mandatory"
-    check: "mcp_symbol_access_required"
-    description: "Toute lecture code doit passer par MCP symbol-retrieval, pas Read/Edit direct"
-  - name: "worktree-isolation-enforced"
-    check: "agent_worktree_isolation"
-    description: "Chaque agent parallele doit avoir son worktree isole avec dry-run"
-  - name: "beads-sql-memory-persistence"
-    check: "sql_memory_survival"
-    description: "Insights doivent survivre reset contexte + rotation compte (compression 70%)"
-  - name: "exit-interceptor-mandatory"
-    check: "cross_model_validation_on_exit"
-    description: "Exit agent bloque tant qu'un second modele n'a pas signe review.md"
-  - name: "tdd-airain-law-enforced"
-    check: "test_first_or_delete"
-    description: "Code prod sans test echoue prealable -> suppression immediate"
-  - name: "trace-replay-verification"
-    check: "replay_assertions_pass"
-    description: "Replay trace exacte contre code modifie + assertions SQL valident corrections"
-
-# Complexite maximale autorisee par atome/design
+- name: no-circular-inheritance
+  check: graph_is_acyclic
+- name: capability-conflict
+  check: no_conflicting_capabilities
+- name: symbol-retrieval-mandatory
+  check: mcp_symbol_access_required
+  description: Toute lecture code doit passer par MCP symbol-retrieval, pas Read/Edit
+    direct
+- name: worktree-isolation-enforced
+  check: agent_worktree_isolation
+  description: Chaque agent parallele doit avoir son worktree isole avec dry-run
+- name: beads-sql-memory-persistence
+  check: sql_memory_survival
+  description: Insights doivent survivre reset contexte + rotation compte (compression
+    70%)
+- name: exit-interceptor-mandatory
+  check: cross_model_validation_on_exit
+  description: Exit agent bloque tant qu'un second modele n'a pas signe review.md
+- name: tdd-airain-law-enforced
+  check: test_first_or_delete
+  description: Code prod sans test echoue prealable -> suppression immediate
+- name: trace-replay-verification
+  check: replay_assertions_pass
+  description: Replay trace exacte contre code modifie + assertions SQL valident corrections
 complexity_gates:
   cognitive_complexity: 15
   max_capabilities_per_design: 8
   max_rules_per_atom: 10
   max_nesting_depth: 3
-
-# Schema etendu pour les fichiers design.yaml generes
 design_schema:
-  # Champs obligatoires
   required_fields:
-    - version
-    - name
-    - inherits
-    - capabilities
-    - design_version
-    - intent_hash
-  
-  # Champs optionnels avec valeurs par defaut
+  - version
+  - name
+  - inherits
+  - capabilities
+  - design_version
+  - intent_hash
   optional_fields:
     deprecated_capabilities: []
-    priority_resolution: "order"
+    priority_resolution: order
     deprecation_period_days: 90
-  
-  # Versionnage semantique des designs
   versioning:
-    major: "Breaking changes (removed capabilities)"
-    minor: "Added capabilities or new optional fields"
-    patch: "Bug fixes, parameter adjustments"
-  
-  # Heritage multiple
+    major: Breaking changes (removed capabilities)
+    minor: Added capabilities or new optional fields
+    patch: Bug fixes, parameter adjustments
   multiple_inheritance:
     supported: true
-    conflict_resolution: "priority"  # priority = ordre d'heritage
-    parameter_merge: "override"    # override = dernier parametre gagne
-  
-  # Gestion des capacites depreciees
+    conflict_resolution: priority
+    parameter_merge: override
   deprecation_policy:
     warning_days: 30
     error_days: 90
-    removal_strategy: "soft-delete"
-
-# Detection de boucles de dependances semantiques
-
-# Industrialisation : generation et validation de designs
+    removal_strategy: soft-delete
 industrialization:
   generator:
-    template_repo: "https://github.com/gerivdb/unified-design-template"
-    output_dir: "../generated-designs"
+    template_repo: https://github.com/gerivdb/unified-design-template
+    output_dir: ../generated-designs
   validator:
-    command: "connard-validator --strict"
-
-# Designs enregistres
+    command: connard-validator --strict
 designs:
-  - name: moc-governance
-    path: designs/moc-governance.yaml
-    version: '1.0.0'
-    intent_hash: 0xMOC_GOVERNANCE_DESIGN_20260801
-    consumers: []
-    profile: STANDARD
-  - name: ecosystem-consciousness
-    path: designs/ecosystem-consciousness.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_ECOSYSTEM_CONSCIOUSNESS_20260917
-    consumers: []
-    profile: STANDARD
-  - name: methodological-bon-sens
-    path: designs/methodological-bon-sens.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_METHODOLOGICAL_BON_SENS_20260917
-    consumers: []
-    profile: STANDARD
-  - name: problem-structuring-method
-    path: designs/problem-structuring-method.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_PROBLEM_STRUCTURING_METHOD_20260917
-    consumers: []
-    profile: STANDARD
-  - name: value-machine
-    path: designs/value-machine.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_VALUE_MACHINE_20260917
-    consumers: []
-    profile: STANDARD
-  - name: ecosystem-feedback-loop
-    path: designs/ecosystem-feedback-loop.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_ECOSYSTEM_FEEDBACK_LOOP_20260917
-    consumers: []
-    profile: STANDARD
-  - name: context-engineering
-    path: designs/context-engineering.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_CONTEXT_ENGINEERING_20260917
-    consumers: []
-    profile: STANDARD
-  - name: agent-engineering-maturity
-    path: designs/agent-engineering-maturity.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_AGENT_ENGINEERING_MATURITY_20260917
-    consumers: []
-    profile: STANDARD
-  - name: fresh-context-verifier
-    path: designs/fresh-context-verifier.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_FRESH_CONTEXT_VERIFIER_20260917
-    consumers: []
-    profile: STANDARD
-  - name: meta-coherence
-    path: designs/meta-coherence.yaml
-    version: '2.0'
-    intent_hash: 0xDESIGN_META_COHERENCE_20260913
-    consumers: []
-    profile: ACTIVE
-  - name: consciousness
-    path: designs/consciousness.yaml
-    version: '3.0.0'
-    intent_hash: 0xDESIGN_CONSCIOUSNESS_20260913
-    consumers: []
-    profile: ACTIVE
-  - name: agent-observability-architecture
-    path: designs/agent-observability-architecture.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_AGENT_OBSERVABILITY_20260918
-    consumers: []
-    profile: ACTIVE
-  - name: kg-causal
-    path: designs/kg-causal.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_KG_CAUSAL_20260916
-    consumers: []
-    profile: DRAFT
-  - name: chain-fluidity
-    path: designs/chain-fluidity.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: autonomy-fluidity
-    path: designs/autonomy-fluidity.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: conversation-aggregator
-    path: designs/conversation-aggregator.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: conversation-to-execution-bridge
-    path: designs/conversation-to-execution-bridge.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: task-planning
-    path: designs/task-planning.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_TASK_PLANNING_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: task-chaining
-    path: designs/task-chaining.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_TASK_CHAINING_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: hitl-assistance
-    path: designs/hitl-assistance.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_HITL_ASSISTANCE_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: debt-relief
-    path: designs/debt-relief.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_DEBT_RELIEF_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: ergonomics
-    path: designs/ergonomics.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_ERGONOMICS_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: operational-fluidity
-    path: designs/operational-fluidity.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_OPERATIONAL_FLUIDITY_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: elegance
-    path: designs/elegance.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_ELEGANCE_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: assistant-load
-    path: designs/assistant-load.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_ASSISTANT_LOAD_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: chain-fluidity
-    path: designs/chain-fluidity.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: autonomy-fluidity
-    path: designs/autonomy-fluidity.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: conversation-aggregator
-    path: designs/conversation-aggregator.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: conversation-to-execution-bridge
-    path: designs/conversation-to-execution-bridge.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
-    consumers: []
-    profile: ACTIVE
-  - name: kg-causal-engine
-    path: designs/kg-causal-engine.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_KG_CAUSAL_ENGINE_20260916
-    consumers: []
-    profile: DRAFT
-  - name: causal-semantic-bridge
-    path: designs/causal-semantic-bridge.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_CAUSAL_SEMANTIC_BRIDGE_20260916
-    consumers: []
-    profile: DRAFT
-  - name: narrative-causal-fusion
-    path: designs/narrative-causal-fusion.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_NARRATIVE_CAUSAL_FUSION_20260916
-    consumers: []
-    profile: DRAFT
-  - name: meta-kg-engine
-    path: designs/meta-kg-engine.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_META_KG_ENGINE_20260916
-    consumers: []
-    profile: DRAFT
-  - name: deterministic-execution-log-clipping
-    path: atoms/ATOM-DETERMINISTIC-EXECUTION-LOG-CLIPPING.md
-    version: '1.0.0'
-    intent_hash: 0xATOM_DETERMINISTIC_EXECUTION_LOG_CLIPPING_20260918
-    consumers: []
-    profile: ACTIVE
-  - name: umodel-agent-ready-data
-    path: designs/umodel-agent-ready-data.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_UMODEL_AGENT_READY_DATA_20260918
-    consumers: []
-    profile: ACTIVE
-  - name: reasoningbank-persistent-strategy
-    path: designs/reasoningbank-persistent-strategy.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_REASONINGBANK_PERSISTENT_STRATEGY_20260918
-    consumers: []
-    profile: ACTIVE
-  - name: deepmind-co-scientist-reliability
-    path: designs/deepmind-co-scientist-reliability.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_DEEPMIND_CO_SCIENTIST_RELIABILITY_20260918
-    consumers: []
-    profile: ACTIVE
-  - name: agent-swarm-self-improving-loop
-    path: designs/agent-swarm-self-improving-loop.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_AGENT_SWARM_SELF_IMPROVING_LOOP_20260918
-    consumers: []
-    profile: ACTIVE
-  - name: harness-engineering-reliable-agents
-    path: designs/harness-engineering-reliable-agents.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_HARNESS_ENGINEERING_RELIABLE_AGENTS_20260918
-    consumers: []
-    profile: ACTIVE
-  - name: safe-action-pattern
-    path: designs/safe-action-pattern.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_SAFE_ACTION_PATTERN_20260919
-    consumers: []
-    profile: STANDARD
-  - name: ecosystem-meta-coherence
-    path: designs/ecosystem-meta-coherence/design.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_20260920
-    consumers: []
-    profile: ACTIVE
-  - name: jevx
-    path: designs/jevx.yaml
-    version: '1.0.0'
-    intent_hash: 0xINTENT_JEVX_SOVEREIGN_OVERLAY_20260919
-    consumers: []
-    profile: STANDARD
-  - name: jevx-engineering
-    path: designs/jevx-engineering.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_JEVX_ENGINEERING_20260920
-    consumers: []
-    profile: STANDARD
-  - name: jevx-backend-matrix
-    path: designs/jevx-backend-matrix.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_JEVX_BACKEND_MATRIX_20260920
-    consumers: []
-    profile: STANDARD
-  - name: constrained-parallel-decoding
-    path: primitives/constrained-parallel-decoding/design.yaml
-    version: '1.0.0'
-    intent_hash: 0xPRIMITIVE_CONSTRAINED_PARALLEL_DECODING_20260920
-    consumers: []
-    profile: ACTIVE
-  - name: sovereign-adapter-pattern
-    path: primitives/sovereign-adapter-pattern/design.yaml
-    version: '1.0.0'
-    intent_hash: 0xPRIMITIVE_SOVEREIGN_ADAPTER_PATTERN_20260920
-    consumers: []
-    profile: ACTIVE
-  - name: branch-orphan-conflict-resolver
-    path: designs/branch-orphan-conflict-resolver/design.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_BRANCH_ORPHAN_CONFLICT_RESOLVER_20260920
-    consumers: []
-    profile: ACTIVE
-  - name: merge-fork-balance
-    path: designs/merge-fork-balance/design.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_MERGE_FORK_BALANCE_20260920
-    consumers: []
-    profile: ACTIVE
-  - name: conflict-resolver-pattern
-    path: designs/conflict-resolver-pattern/design.yaml
-    version: '1.0.0'
-    intent_hash: 0xDESIGN_CONFLICT_RESOLVER_PATTERN_20260920
-    consumers: []
-    profile: ACTIVE
-
-
-# Think/Do/Check Architecture
+- name: moc-governance
+  path: designs/moc-governance.yaml
+  version: 1.0.0
+  intent_hash: 0xMOC_GOVERNANCE_DESIGN_20260801
+  consumers: []
+  profile: STANDARD
+- name: ecosystem-consciousness
+  path: designs/ecosystem-consciousness.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ECOSYSTEM_CONSCIOUSNESS_20260917
+  consumers: []
+  profile: STANDARD
+- name: methodological-bon-sens
+  path: designs/methodological-bon-sens.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_METHODOLOGICAL_BON_SENS_20260917
+  consumers: []
+  profile: STANDARD
+- name: problem-structuring-method
+  path: designs/problem-structuring-method.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_PROBLEM_STRUCTURING_METHOD_20260917
+  consumers: []
+  profile: STANDARD
+- name: value-machine
+  path: designs/value-machine.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_VALUE_MACHINE_20260917
+  consumers: []
+  profile: STANDARD
+- name: ecosystem-feedback-loop
+  path: designs/ecosystem-feedback-loop.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ECOSYSTEM_FEEDBACK_LOOP_20260917
+  consumers: []
+  profile: STANDARD
+- name: context-engineering
+  path: designs/context-engineering.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CONTEXT_ENGINEERING_20260917
+  consumers: []
+  profile: STANDARD
+- name: agent-engineering-maturity
+  path: designs/agent-engineering-maturity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_AGENT_ENGINEERING_MATURITY_20260917
+  consumers: []
+  profile: STANDARD
+- name: fresh-context-verifier
+  path: designs/fresh-context-verifier.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_FRESH_CONTEXT_VERIFIER_20260917
+  consumers: []
+  profile: STANDARD
+- name: meta-coherence
+  path: designs/meta-coherence.yaml
+  version: '2.0'
+  intent_hash: 0xDESIGN_META_COHERENCE_20260913
+  consumers: []
+  profile: ACTIVE
+- name: consciousness
+  path: designs/consciousness.yaml
+  version: 3.0.0
+  intent_hash: 0xDESIGN_CONSCIOUSNESS_20260913
+  consumers: []
+  profile: ACTIVE
+- name: agent-observability-architecture
+  path: designs/agent-observability-architecture.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_AGENT_OBSERVABILITY_20260918
+  consumers: []
+  profile: ACTIVE
+- name: kg-causal
+  path: designs/kg-causal.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_KG_CAUSAL_20260916
+  consumers: []
+  profile: DRAFT
+- name: chain-fluidity
+  path: designs/chain-fluidity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
+  consumers: []
+  profile: ACTIVE
+- name: autonomy-fluidity
+  path: designs/autonomy-fluidity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
+  consumers: []
+  profile: ACTIVE
+- name: conversation-aggregator
+  path: designs/conversation-aggregator.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
+  consumers: []
+  profile: ACTIVE
+- name: conversation-to-execution-bridge
+  path: designs/conversation-to-execution-bridge.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
+  consumers: []
+  profile: ACTIVE
+- name: task-planning
+  path: designs/task-planning.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_TASK_PLANNING_20260917
+  consumers: []
+  profile: ACTIVE
+- name: task-chaining
+  path: designs/task-chaining.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_TASK_CHAINING_20260917
+  consumers: []
+  profile: ACTIVE
+- name: hitl-assistance
+  path: designs/hitl-assistance.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_HITL_ASSISTANCE_20260917
+  consumers: []
+  profile: ACTIVE
+- name: debt-relief
+  path: designs/debt-relief.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_DEBT_RELIEF_20260917
+  consumers: []
+  profile: ACTIVE
+- name: ergonomics
+  path: designs/ergonomics.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ERGONOMICS_20260917
+  consumers: []
+  profile: ACTIVE
+- name: operational-fluidity
+  path: designs/operational-fluidity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_OPERATIONAL_FLUIDITY_20260917
+  consumers: []
+  profile: ACTIVE
+- name: elegance
+  path: designs/elegance.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ELEGANCE_20260917
+  consumers: []
+  profile: ACTIVE
+- name: assistant-load
+  path: designs/assistant-load.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ASSISTANT_LOAD_20260917
+  consumers: []
+  profile: ACTIVE
+- name: chain-fluidity
+  path: designs/chain-fluidity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
+  consumers: []
+  profile: ACTIVE
+- name: autonomy-fluidity
+  path: designs/autonomy-fluidity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
+  consumers: []
+  profile: ACTIVE
+- name: conversation-aggregator
+  path: designs/conversation-aggregator.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
+  consumers: []
+  profile: ACTIVE
+- name: conversation-to-execution-bridge
+  path: designs/conversation-to-execution-bridge.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
+  consumers: []
+  profile: ACTIVE
+- name: kg-causal-engine
+  path: designs/kg-causal-engine.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_KG_CAUSAL_ENGINE_20260916
+  consumers: []
+  profile: DRAFT
+- name: causal-semantic-bridge
+  path: designs/causal-semantic-bridge.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CAUSAL_SEMANTIC_BRIDGE_20260916
+  consumers: []
+  profile: DRAFT
+- name: narrative-causal-fusion
+  path: designs/narrative-causal-fusion.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_NARRATIVE_CAUSAL_FUSION_20260916
+  consumers: []
+  profile: DRAFT
+- name: meta-kg-engine
+  path: designs/meta-kg-engine.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_META_KG_ENGINE_20260916
+  consumers: []
+  profile: DRAFT
+- name: deterministic-execution-log-clipping
+  path: atoms/ATOM-DETERMINISTIC-EXECUTION-LOG-CLIPPING.md
+  version: 1.0.0
+  intent_hash: 0xATOM_DETERMINISTIC_EXECUTION_LOG_CLIPPING_20260918
+  consumers: []
+  profile: ACTIVE
+- name: umodel-agent-ready-data
+  path: designs/umodel-agent-ready-data.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_UMODEL_AGENT_READY_DATA_20260918
+  consumers: []
+  profile: ACTIVE
+- name: reasoningbank-persistent-strategy
+  path: designs/reasoningbank-persistent-strategy.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_REASONINGBANK_PERSISTENT_STRATEGY_20260918
+  consumers: []
+  profile: ACTIVE
+- name: deepmind-co-scientist-reliability
+  path: designs/deepmind-co-scientist-reliability.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_DEEPMIND_CO_SCIENTIST_RELIABILITY_20260918
+  consumers: []
+  profile: ACTIVE
+- name: agent-swarm-self-improving-loop
+  path: designs/agent-swarm-self-improving-loop.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_AGENT_SWARM_SELF_IMPROVING_LOOP_20260918
+  consumers: []
+  profile: ACTIVE
+- name: harness-engineering-reliable-agents
+  path: designs/harness-engineering-reliable-agents.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_HARNESS_ENGINEERING_RELIABLE_AGENTS_20260918
+  consumers: []
+  profile: ACTIVE
+- name: safe-action-pattern
+  path: designs/safe-action-pattern.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_SAFE_ACTION_PATTERN_20260919
+  consumers: []
+  profile: STANDARD
+- name: ecosystem-meta-coherence
+  path: designs/ecosystem-meta-coherence/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_20260920
+  consumers: []
+  profile: ACTIVE
+- name: jevx
+  path: designs/jevx.yaml
+  version: 1.0.0
+  intent_hash: 0xINTENT_JEVX_SOVEREIGN_OVERLAY_20260919
+  consumers: []
+  profile: STANDARD
+- name: jevx-engineering
+  path: designs/jevx-engineering.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_JEVX_ENGINEERING_20260920
+  consumers: []
+  profile: STANDARD
+- name: jevx-backend-matrix
+  path: designs/jevx-backend-matrix.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_JEVX_BACKEND_MATRIX_20260920
+  consumers: []
+  profile: STANDARD
+- name: constrained-parallel-decoding
+  path: primitives/constrained-parallel-decoding/design.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_CONSTRAINED_PARALLEL_DECODING_20260920
+  consumers: []
+  profile: ACTIVE
+- name: sovereign-adapter-pattern
+  path: primitives/sovereign-adapter-pattern/design.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_SOVEREIGN_ADAPTER_PATTERN_20260920
+  consumers: []
+  profile: ACTIVE
+- name: branch-orphan-conflict-resolver
+  path: designs/branch-orphan-conflict-resolver/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_BRANCH_ORPHAN_CONFLICT_RESOLVER_20260920
+  consumers: []
+  profile: ACTIVE
+- name: merge-fork-balance
+  path: designs/merge-fork-balance/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_MERGE_FORK_BALANCE_20260920
+  consumers: []
+  profile: ACTIVE
+- name: conflict-resolver-pattern
+  path: designs/conflict-resolver-pattern/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CONFLICT_RESOLVER_PATTERN_20260920
+  consumers: []
+  profile: ACTIVE
+- name: workflow-sot-completeness
+  path: designs/workflow-sot-completeness/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_WORKFLOW_SOT_COMPLETENESS_20260920
+  consumers: []
+  profile: STANDARD
+- name: workflow-yaml-structure-validator
+  path: designs/workflow-yaml-structure-validator/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_WORKFLOW_YAML_STRUCTURE_VALIDATOR_20260920
+  consumers: []
+  profile: STANDARD
+- name: design-ops-loop
+  path: designs/design-ops-loop/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_DESIGN_OPS_LOOP_20260920
+  consumers: []
+  profile: ACTIVE
+- name: artifact-layers-design
+  path: designs/artifact-layers-design/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ARTIFACT_LAYERS_20260920
+  consumers: []
+  profile: STANDARD
+- name: session-boot-design
+  path: designs/session-boot-design/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_SESSION_BOOT_20260920
+  consumers: []
+  profile: ACTIVE
 piliers:
-  - name: "Sonar-Driven Design"
-    abbr: "SDD"
-    role: "Observabilite"
-    color: "#4CAF50"
-    invariants:
-      - name: "Ping/Echo"
-        description: "Message minimal avec ID unique + timestamp"
-      - name: "Sonar Map"
-        description: "Structure partagee d'etat temps reel"
-      - name: "PRF"
-        description: "Pulse Repetition Frequency"
-      - name: "Latence P99"
-        valeur: 45
-        unite: "ms"
-      - name: "Puissance"
-        valeur: 12
-        unite: "W"
-
-  - name: "Triadic Compound Eye"
-    abbr: "TCE"
-    role: "Orchestration Agents"
-    color: "#2196F3"
-    invariants:
-      - name: "Triade C-E-Obs"
-        description: "Communication -> Execution -> Observation"
-      - name: "Swarm Intelligence"
-        description: "Agents autonomes evolutifs"
-      - name: "HITL Gate"
-        description: "Validation humaine pour modifications critiques"
-
-  - name: "MorphoHDL Anamorphic Growth"
-    abbr: "MAG"
-    role: "Optimisation Materielle"
-    color: "#9C27B0"
-    invariants:
-      - name: "Croissance Experimentale"
-        description: "Circuits adaptatifs"
-      - name: "Base 243"
-        description: "Structure ternaire native 3^5"
-      - name: "RVBA"
-        description: "Canaux de couleur semantique"
-      - name: "O(1) Index"
-        description: "Acces constant via index ternaire"
-
-  - name: "Connard Design"
-    abbr: "CD"
-    role: "Controle Qualite"
-    color: "#F44336"
-    invariants:
-      - name: "Heritage"
-        max: 3
-        description: "Profondeur d'abstraction"
-      - name: "Latence P99"
-        valeur: 45
-        unite: "ms"
-      - name: "Puissance"
-        valeur: 12
-        unite: "W"
-      - name: "Roast Automatique"
-        description: "Feedback negatif constructif"
-
-# Regles transversales
+- name: Sonar-Driven Design
+  abbr: SDD
+  role: Observabilite
+  color: '#4CAF50'
+  invariants:
+  - name: Ping/Echo
+    description: Message minimal avec ID unique + timestamp
+  - name: Sonar Map
+    description: Structure partagee d'etat temps reel
+  - name: PRF
+    description: Pulse Repetition Frequency
+  - name: Latence P99
+    valeur: 45
+    unite: ms
+  - name: Puissance
+    valeur: 12
+    unite: W
+- name: Triadic Compound Eye
+  abbr: TCE
+  role: Orchestration Agents
+  color: '#2196F3'
+  invariants:
+  - name: Triade C-E-Obs
+    description: Communication -> Execution -> Observation
+  - name: Swarm Intelligence
+    description: Agents autonomes evolutifs
+  - name: HITL Gate
+    description: Validation humaine pour modifications critiques
+- name: MorphoHDL Anamorphic Growth
+  abbr: MAG
+  role: Optimisation Materielle
+  color: '#9C27B0'
+  invariants:
+  - name: Croissance Experimentale
+    description: Circuits adaptatifs
+  - name: Base 243
+    description: Structure ternaire native 3^5
+  - name: RVBA
+    description: Canaux de couleur semantique
+  - name: O(1) Index
+    description: Acces constant via index ternaire
+- name: Connard Design
+  abbr: CD
+  role: Controle Qualite
+  color: '#F44336'
+  invariants:
+  - name: Heritage
+    max: 3
+    description: Profondeur d'abstraction
+  - name: Latence P99
+    valeur: 45
+    unite: ms
+  - name: Puissance
+    valeur: 12
+    unite: W
+  - name: Roast Automatique
+    description: Feedback negatif constructif
 regles_transversales:
-  - name: "Composition"
-    description: "Profondeur dependance <= 3 niveaux"
-    action: "Wall of Shame"
-  
-  - name: "Latence"
-    description: "P99 <= 45ms pour operations critiques"
-    action: "Roast automatique"
-  
-  - name: "Puissance"
-    description: "<= 12W par inference"
-    action: "Optimisation PIANO"
-  
-  - name: "Observation"
-    description: "Tout systeme critique doit etre observable"
-    action: "Ajout de probes Sonar"
-  
-  - name: "Validation"
-    description: "Toute modification passe par Connard"
-    commandes:
-      - "gerivdb connard validate <path>"
-      - "gerivdb connard roast <path>"
-      - "gerivdb connard watch <path>"
-      - "gerivdb design validate [--path <path>] [--strict] [--output text|json]"
-
-# Couche de gouvernance - Mise a jour pour refleter la realite physique complete
-# Atomes de gouvernance (extraits de GOVERNANCE-HUB) - EXTENDUS
+- name: Composition
+  description: Profondeur dependance <= 3 niveaux
+  action: Wall of Shame
+- name: Latence
+  description: P99 <= 45ms pour operations critiques
+  action: Roast automatique
+- name: Puissance
+  description: <= 12W par inference
+  action: Optimisation PIANO
+- name: Observation
+  description: Tout systeme critique doit etre observable
+  action: Ajout de probes Sonar
+- name: Validation
+  description: Toute modification passe par Connard
+  commandes:
+  - gerivdb connard validate <path>
+  - gerivdb connard roast <path>
+  - gerivdb connard watch <path>
+  - gerivdb design validate [--path <path>] [--strict] [--output text|json]
 governance_atoms:
-  - meta-design-triad
-  - pre-action-validation
-  - structural-relations
-  - clusterwave-operator
-  - fixpoint-validator
-  - constitutional-sot
-  - stratified-repository-registry
-  - ternary-governance
-  - gated-boot-sequence
-  - absolute-rules-enforcement
-  - adr-prd-epics-intents
-  # Nouveaux atoms Graph of Loops
-  - symbol-retrieval-mcp
-  - agent-worktree-isolation
-  - beads-sql-memory
-  - exit-interceptor
-  - tdd-airain-law
-  - trace-replay-proof
-  # Architecture Think/Do/Check
-  - think-do-check-architecture
-  # TDC Consciousness
-  - think-do-check-consciousness
-  - methodological-bon-sens
-  - problem-structuring-method
-  - value-machine
-  - ecosystem-feedback-loop
-  - context-engineering
-  - agent-engineering-maturity
-  - fresh-context-verifier
-  - chain-fluidity
-  - autonomy-fluidity
-  - conversation-aggregator
-  - conversation-to-execution-bridge
-  - task-planning
-  - task-chaining
-  - hitl-assistance
-  - debt-relief
-  - ergonomics
-  - operational-fluidity
-  - elegance
-  - assistant-load
-  - kg-causal
-  - kg-causal-engine
-  - causal-semantic-bridge
-  - narrative-causal-fusion
-  - meta-kg-engine
-  - kg-causal-integration-pattern
-  # Engineering ideas atoms
-  - external-verification-mandatory
-  - gate-layers
-  - independent-sources-rule
-  - confidence-threshold
-  - stop-condition
-  - carry-forward-principle
-  - reject-work-principle
-  - delta-check
-  - meta-edit-loop
-  - learning-curve-expectation
-  - deployment-patterns
-  - kg-causal-consciousness
-  - deterministic-execution-log-clipping
-  - umodel-agent-ready-data
-  - reasoningbank-persistent-strategy
-  - deepmind-co-scientist-reliability
-  - agent-swarm-self-improving-loop
-  - harness-engineering-reliable-agents
-  - safe-action-gate
-  - ecosystem-meta-coherence-gate
-  - typed-decision-api
-
-
-# Think/Do/Check Architecture
+- meta-design-triad
+- pre-action-validation
+- structural-relations
+- clusterwave-operator
+- fixpoint-validator
+- constitutional-sot
+- stratified-repository-registry
+- ternary-governance
+- gated-boot-sequence
+- absolute-rules-enforcement
+- adr-prd-epics-intents
+- symbol-retrieval-mcp
+- agent-worktree-isolation
+- beads-sql-memory
+- exit-interceptor
+- tdd-airain-law
+- trace-replay-proof
+- think-do-check-architecture
+- think-do-check-consciousness
+- methodological-bon-sens
+- problem-structuring-method
+- value-machine
+- ecosystem-feedback-loop
+- context-engineering
+- agent-engineering-maturity
+- fresh-context-verifier
+- chain-fluidity
+- autonomy-fluidity
+- conversation-aggregator
+- conversation-to-execution-bridge
+- task-planning
+- task-chaining
+- hitl-assistance
+- debt-relief
+- ergonomics
+- operational-fluidity
+- elegance
+- assistant-load
+- kg-causal
+- kg-causal-engine
+- causal-semantic-bridge
+- narrative-causal-fusion
+- meta-kg-engine
+- kg-causal-integration-pattern
+- external-verification-mandatory
+- gate-layers
+- independent-sources-rule
+- confidence-threshold
+- stop-condition
+- carry-forward-principle
+- reject-work-principle
+- delta-check
+- meta-edit-loop
+- learning-curve-expectation
+- deployment-patterns
+- kg-causal-consciousness
+- deterministic-execution-log-clipping
+- umodel-agent-ready-data
+- reasoningbank-persistent-strategy
+- deepmind-co-scientist-reliability
+- agent-swarm-self-improving-loop
+- harness-engineering-reliable-agents
+- safe-action-gate
+- ecosystem-meta-coherence-gate
+- typed-decision-api
 think_do_check:
-  description: "Architecture logique de gestion des repos : Think (veille/conception), Do (exécution), Check (conformité)"
+  description: 'Architecture logique de gestion des repos : Think (veille/conception),
+    Do (exécution), Check (conformité)'
   adr: ADR-2026-09-12-001
   departments:
     think:
       repos:
-        - gerivdb/VOLTX
-        - gerivdb/OBS
-      responsibility: "Veille, standards, conception, sélection d'outils"
+      - gerivdb/VOLTX
+      - gerivdb/OBS
+      responsibility: Veille, standards, conception, sélection d'outils
     do:
       repos:
-        - gerivdb/DevTools
-        - gerivdb/CTULU
-      responsibility: "Exécution, pipelines, ingestion, orchestration"
+      - gerivdb/DevTools
+      - gerivdb/CTULU
+      responsibility: Exécution, pipelines, ingestion, orchestration
     check:
       repos:
-        - gerivdb/GOVERNANCE-HUB
-        - gerivdb/ARGUS
-        - gerivdb/NEXUS
-      responsibility: "Conformité, audit, traçabilité, gouvernance"
+      - gerivdb/GOVERNANCE-HUB
+      - gerivdb/ARGUS
+      - gerivdb/NEXUS
+      responsibility: Conformité, audit, traçabilité, gouvernance
   boundaries:
-    - OBS must not prescribe VOLTX implementation
-    - VOLTX must not modify OBS veille reports
-    - Check must not implement Think/Do features
-
-# Agents associes par pilier
+  - OBS must not prescribe VOLTX implementation
+  - VOLTX must not modify OBS veille reports
+  - Check must not implement Think/Do features
 agents_par_pilier:
   SDD:
-    - "NEXUS"
-    - "ECOYSTEM"
-    - "BRAIN"
+  - NEXUS
+  - ECOYSTEM
+  - BRAIN
   TCE:
-    - "FLUENCE"
-    - "CANDIDATOR"
-    - "KRONOS"
-    - "IRIS"
+  - FLUENCE
+  - CANDIDATOR
+  - KRONOS
+  - IRIS
   MAG:
-    - "LADYBIRD"
-    - "PIANO"
-    - "KEEL"
+  - LADYBIRD
+  - PIANO
+  - KEEL
   CD:
-    - "CoPaw"
-    - "SABRE"
-    - "Alfred"
-
-# Validation
+  - CoPaw
+  - SABRE
+  - Alfred
 validation:
-  schema: "meta-design.yaml"
-  adr: "ADR-012, ADR-015, ADR-016, ADR-017, ADR-2026-07-31-001, ADR-2026-07-31-002, ADR-2026-07-31-003, ADR-2026-07-31-004, ADR-2026-07-31-005, ADR-2026-07-31-006"
-  cli: "gerivdb meta validate"
+  schema: meta-design.yaml
+  adr: ADR-012, ADR-015, ADR-016, ADR-017, ADR-2026-07-31-001, ADR-2026-07-31-002,
+    ADR-2026-07-31-003, ADR-2026-07-31-004, ADR-2026-07-31-005, ADR-2026-07-31-006
+  cli: gerivdb meta validate
   hooks:
     pre_commit: true
     pre_push: true
-
-# Politique Git
 git_policy:
   default_branch: main
   protected: true
-  feature_prefix: "feat/"
-  hotfix_prefix: "hotfix/"
+  feature_prefix: feat/
+  hotfix_prefix: hotfix/
   require_pr: true
   require_ci_passing: true
   min_approvals: 1
   disallow_direct_push_to_main: true
   disallow_direct_push_to_master: true
-
-# References
 references:
-  - ATOM-050
-  - ATOM-051
-  - ATOM-052
-  - ATOM-053
-  - ATOM-054
-  - ATOM-055
-  - ADR-2026-07-30-004
-  - ADR-012-meta-design-validation-protocol
-  - ADR-015-unified-design-v2
-  - ADR-016-loop-engine
-  - ADR-017-attention-mechanism-atom
-  - ADR-018-governance-hub-mdu-extraction
-  - ADR-2026-06-28-001-logical-architecture-n1-n4
-  - ADR-CONNARD-001-connard-design-protocol
-  - ADR-20260715-002-DESIGN-VALIDATE-CLI
-  - INT-CONNARD-001
-  - EPIC-CONNARD-001
-  # Nouveaux ADRs Graph of Loops
-  - ADR-2026-07-31-001-SYMBOL-RETRIEVAL-MCP
-  - ADR-2026-07-31-002-AGENT-WORKTREE-ISOLATION
-  - ADR-2026-07-31-003-BEADS-SQL-MEMORY
-  - ADR-2026-07-31-004-EXIT-INTERCEPTOR
-  - ADR-2026-07-31-005-TDD-AIRAIN-LAW
-  - ADR-2026-07-31-006-TRACE-REPLAY-PROOF
-  - ADR-2026-09-17-OPERATIONAL-DESIGNS-GOVERNANCE
-  - ADR-2026-09-18-UMODEL-AGENT-READY-DATA
-  - ADR-2026-09-18-REASONINGBANK-PERSISTENT-STRATEGY
-  - ADR-2026-09-18-DEEPMIND-CO-SCIENTIST-RELIABILITY
-  - ADR-2026-09-18-AGENT-SWARM-SELF-IMPROVING-LOOP
-  - ADR-2026-09-18-HARNESS-ENGINEERING-RELIABLE-AGENTS
+- ATOM-050
+- ATOM-051
+- ATOM-052
+- ATOM-053
+- ATOM-054
+- ATOM-055
+- ADR-2026-07-30-004
+- ADR-012-meta-design-validation-protocol
+- ADR-015-unified-design-v2
+- ADR-016-loop-engine
+- ADR-017-attention-mechanism-atom
+- ADR-018-governance-hub-mdu-extraction
+- ADR-2026-06-28-001-logical-architecture-n1-n4
+- ADR-CONNARD-001-connard-design-protocol
+- ADR-20260715-002-DESIGN-VALIDATE-CLI
+- INT-CONNARD-001
+- EPIC-CONNARD-001
+- ADR-2026-07-31-001-SYMBOL-RETRIEVAL-MCP
+- ADR-2026-07-31-002-AGENT-WORKTREE-ISOLATION
+- ADR-2026-07-31-003-BEADS-SQL-MEMORY
+- ADR-2026-07-31-004-EXIT-INTERCEPTOR
+- ADR-2026-07-31-005-TDD-AIRAIN-LAW
+- ADR-2026-07-31-006-TRACE-REPLAY-PROOF
+- ADR-2026-09-17-OPERATIONAL-DESIGNS-GOVERNANCE
+- ADR-2026-09-18-UMODEL-AGENT-READY-DATA
+- ADR-2026-09-18-REASONINGBANK-PERSISTENT-STRATEGY
+- ADR-2026-09-18-DEEPMIND-CO-SCIENTIST-RELIABILITY
+- ADR-2026-09-18-AGENT-SWARM-SELF-IMPROVING-LOOP
+- ADR-2026-09-18-HARNESS-ENGINEERING-RELIABLE-AGENTS
+pipelines:
+- name: pipeline-sot-completeness
+  path: pipelines/pipeline-sot-completeness.yaml
+  version: 1.0.0
+  intent_hash: 0xPIPELINE_SOT_COMPLETENESS_20260920
+  status: active
+- name: pipeline-yaml-structure-validation
+  path: pipelines/pipeline-yaml-structure-validation.yaml
+  version: 1.0.0
+  intent_hash: 0xPIPELINE_YAML_STRUCTURE_VALIDATION_20260920
+  status: active
+- name: pipeline-dryrun-causal-audit
+  path: pipelines/pipeline-dryrun-causal-audit.yaml
+  version: 1.0.0
+  intent_hash: 0xPIPELINE_DRYRUN_CAUSAL_AUDIT_20260920
+  status: active
+- name: pipeline-session-boot-closeout
+  path: pipelines/pipeline-session-boot-closeout.yaml
+  version: 1.0.0
+  intent_hash: 0xPIPELINE_SESSION_BOOT_CLOSEOUT_20260920
+  status: active
+- name: pipeline-friction-analysis-to-fix
+  path: pipelines/pipeline-friction-analysis-to-fix.yaml
+  version: 1.0.0
+  intent_hash: 0xPIPELINE_FRICTION_ANALYSIS_TO_FIX_20260920
+  status: active
+workflows:
+- name: workflow-dryrun-causal-audit
+  path: workflows/dryrun-causal-audit.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_DRYRUN_CAUSAL_AUDIT_20260920
+  status: active
+- name: workflow-structural-fix-pipeline
+  path: workflows/structural-fix-pipeline.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_STRUCTURAL_FIX_PIPELINE_20260920
+  status: active
+- name: workflow-session-boot-closeout
+  path: workflows/session-boot-closeout.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_SESSION_BOOT_CLOSEOUT_20260920
+  status: active
+- name: workflow-pre-push-validation
+  path: workflows/pre-push-validation.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_PRE_PUSH_VALIDATION_20260920
+  status: active
+- name: workflow-friction-to-fix
+  path: workflows/friction-to-fix.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_FRICTION_TO_FIX_20260920
+  status: active
+primitives:
+- name: design-ops-loop-primitive
+  path: primitives/design-ops-loop-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_DESIGN_OPS_LOOP_20260920
+  status: active
+- name: artifact-layers-primitive
+  path: primitives/artifact-layers-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_ARTIFACT_LAYERS_20260920
+  status: active
+- name: session-boot-primitive
+  path: primitives/session-boot-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_SESSION_BOOT_20260920
+  status: active
+- name: causal-traceability-primitive
+  path: primitives/causal-traceability-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_CAUSAL_TRACEABILITY_20260920
+  status: active
+skills:
+- name: design-ops-loop-skill
+  path: skills/design-ops-loop-skill/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_DESIGN_OPS_LOOP_20260920
+  status: active
+- name: artifact-layers-validator
+  path: skills/artifact-layers-validator/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_ARTIFACT_LAYERS_VALIDATOR_20260920
+  status: active
+- name: registry-sync-checker-skill
+  path: skills/registry-sync-checker-skill/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_REGISTRY_SYNC_CHECKER_20260920
+  status: active
+- name: ontology-term-gate-skill
+  path: skills/ontology-term-gate-skill/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_ONTOLOGY_TERM_GATE_20260920
+  status: active
+- name: inventory-reconciler-interpreter-skill
+  path: skills/inventory-reconciler-interpreter-skill/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_INVENTORY_RECONCILER_INTERPRETER_20260920
+  status: active
+- name: session-boot-skill
+  path: skills/session-boot-skill/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_SESSION_BOOT_20260920
+  status: active
+citizens:
+- name: design-ops-loop-citizen
+  path: citizens/design-ops-loop-citizen/citizen.yaml
+  version: 1.0.0
+  intent_hash: 0xCITIZEN_DESIGN_OPS_LOOP_20260920
+  status: active
+- name: artifact-layers-auditor
+  path: citizens/artifact-layers-auditor/citizen.yaml
+  version: 1.0.0
+  intent_hash: 0xCITIZEN_ARTIFACT_LAYERS_AUDITOR_20260920
+  status: active
+- name: session-boot-citizen
+  path: citizens/session-boot-citizen/citizen.yaml
+  version: 1.0.0
+  intent_hash: 0xCITIZEN_SESSION_BOOT_20260920
+  status: active

@@ -328,6 +328,59 @@ git push origin main
 | branch-orphan-conflict-resolver | 1.0.0 | Résolution causale des branches orphelines et conflits cross-repo : reflog, saturation analysis, resurrection protocol, dryrun prevention |
 | merge-fork-balance | 1.0.0 | Équilibre des forks et merges cross-repo : détection orphelins, saturation analysis, stratégies resurrection/absorption/cherry-pick |
 | conflict-resolver-pattern | 1.0.0 | Pattern de résolution de conflits git : stratégies main_authority/manual/cherry-pick, détection saturation, prévention dryrun causal |
+| workflow-sot-completeness | 1.0.0 | Workflow SOT completeness : détection champs manquants → auto-fix → validate |
+| workflow-yaml-structure-validator | 1.0.0 | Workflow YAML validation : backup → parse → validate → fix → re-validate |
+| design-ops-loop | 1.0.0 | Boucle THINK/DO/CHECK opérationnelle : perception besoins → exécution → validation réel |
+| artifact-layers-design | 1.0.0 | 7 layers standardisés repo : src/, config/, tools/, scripts/, tests/, docs/, markdown/ |
+| session-boot-design | 1.0.0 | Checks BOOT/CLOSEOUT session : TALEX, WAZAA, 5sexter, auto-commit, push |
+
+### Pipelines enregistrés
+
+| Pipeline | Version | Description |
+|---|---|---|
+| pipeline-sot-completeness | 1.0.0 | Détection champs SOT manquants → auto-fix → validate |
+| pipeline-yaml-structure-validation | 1.0.0 | Backup → parse → validate → fix → re-validate |
+| pipeline-dryrun-causal-audit | 1.0.0 | 7 étapes : présence, YAML, frontmatter, MDU, hooks, crossref, merge |
+| pipeline-session-boot-closeout | 1.0.0 | BOOT checks → travail → closeout → auto-commit → push |
+| pipeline-friction-analysis-to-fix | 1.0.0 | Détect → classify → prioritize → implement → validate → record proof |
+
+### Workflows enregistrés
+
+| Workflow | Version | Description |
+|---|---|---|
+| workflow-dryrun-causal-audit | 1.0.0 | Dryrun causal avant implémentation/merge |
+| workflow-structural-fix-pipeline | 1.0.0 | Corrections structurelles via TALEX |
+| workflow-session-boot-closeout | 1.0.0 | BOOT/CLOSEOUT session multi-repo |
+| workflow-pre-push-validation | 1.0.0 | Validation YAML + SOT + tests avant push |
+| workflow-friction-to-fix | 1.0.0 | Friction → root cause → fix → proof |
+
+### Primitives enregistrées
+
+| Primitive | Version | Description |
+|---|---|---|
+| design-ops-loop-primitive | 1.0.0 | Boucle THINK/DO/CHECK réutilisable |
+| artifact-layers-primitive | 1.0.0 | 7 layers standardisés d'un repo |
+| session-boot-primitive | 1.0.0 | Checks BOOT/CLOSEOUT standardisés |
+| causal-traceability-primitive | 1.0.0 | Format friction → root cause → fix → proof |
+
+### Skills enregistrés
+
+| Skill | Version | Description |
+|---|---|---|
+| design-ops-loop-skill | 1.0.0 | Orchestration THINK/DO/CHECK du MDU |
+| artifact-layers-validator | 1.0.0 | Validation structure repo (7 layers) |
+| registry-sync-checker-skill | 1.0.0 | Cohérence registre tripartite |
+| ontology-term-gate-skill | 1.0.0 | Validation termes ontologiques PRD/EPIC |
+| inventory-reconciler-interpreter-skill | 1.0.0 | Filtre faux positifs inventory reconciler |
+| session-boot-skill | 1.0.0 | Exécution BOOT/CLOSEOUT session |
+
+### Citizens enregistrés
+
+| Citizen | Version | Description |
+|---|---|---|
+| design-ops-loop-citizen | 1.0.0 | Pilote boucle THINK/DO/CHECK |
+| artifact-layers-auditor | 1.0.0 | Audit structure repos |
+| session-boot-citizen | 1.0.0 | Exécution BOOT/CLOSEOUT |
 
 ### Atoms L0-L3 (extraits)
 

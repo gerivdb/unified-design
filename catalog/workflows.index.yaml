@@ -11,3 +11,33 @@ entries:
   status: active
   type: workflow
   updated: '2026-09-20'
+- id: workflow-dryrun-causal-audit
+  source_path: workflows/dryrun-causal-audit.md
+  source_repo: unified-design
+  status: active
+  type: workflow
+  updated: '2026-09-20'
+- id: workflow-structural-fix-pipeline
+  source_path: workflows/structural-fix-pipeline.md
+  source_repo: unified-design
+  status: active
+  type: workflow
+  updated: '2026-09-20'
+- id: workflow-session-boot-closeout
+  source_path: workflows/session-boot-closeout.md
+  source_repo: unified-design
+  status: active
+  type: workflow
+  updated: '2026-09-20'
+- id: workflow-pre-push-validation
+  source_path: workflows/pre-push-validation.md
+  source_repo: unified-design
+  status: active
+  type: workflow
+  updated: '2026-09-20'
+- id: workflow-friction-to-fix
+  source_path: workflows/friction-to-fix.md
+  source_repo: unified-design
+  status: active
+  type: workflow
+  updated: '2026-09-20'

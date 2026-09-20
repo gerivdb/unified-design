@@ -725,3 +725,33 @@ entries:
   status: active
   type: primitive
   updated: '2026-09-20'
+- id: workflow-sot-completeness
+  source_path: designs/workflow-sot-completeness/design.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'
+- id: workflow-yaml-structure-validator
+  source_path: designs/workflow-yaml-structure-validator/design.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'
+- id: design-ops-loop
+  source_path: designs/design-ops-loop/design.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'
+- id: artifact-layers-design
+  source_path: designs/artifact-layers-design/design.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'
+- id: session-boot-design
+  source_path: designs/session-boot-design/design.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'

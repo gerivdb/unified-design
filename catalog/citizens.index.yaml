@@ -29,3 +29,21 @@ entries:
   status: active
   type: citizen
   updated: '2026-09-20'
+- id: unified-design:design-ops-loop-citizen
+  source_path: citizens/design-ops-loop-citizen/citizen.yaml
+  source_repo: unified-design
+  status: active
+  type: citizen
+  updated: '2026-09-20'
+- id: unified-design:artifact-layers-auditor
+  source_path: citizens/artifact-layers-auditor/citizen.yaml
+  source_repo: unified-design
+  status: active
+  type: citizen
+  updated: '2026-09-20'
+- id: unified-design:session-boot-citizen
+  source_path: citizens/session-boot-citizen/citizen.yaml
+  source_repo: unified-design
+  status: active
+  type: citizen
+  updated: '2026-09-20'
