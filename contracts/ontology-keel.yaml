@@ -1,0 +1,98 @@
+---
+type: CONTRACT
+version: "1.0.0"
+date: "2026-09-20"
+status: active
+intent_hash: 0xCONTRACT_ONTOLOGY_KEEL_20260920
+source_repo: unified-design
+source_path: "contracts/ontology-keel.yaml"
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+  - contract-centrality
+bridges:
+  - target: ONTOLOGY
+    role: source_of_truth
+    protocol: yaml-file
+    implementation: "ONTOLOGY/ONTOLOGY.yaml"
+  - target: KEEL
+    role: consumer
+    protocol: python-script
+    implementation: "KEEL/scripts/validate-ontology-concepts.py"
+  - target: GOVERNANCE-HUB
+    role: audit_traceability
+    protocol: yaml-file
+    implementation: "GOVERNANCE-HUB/known_repositories.yaml"
+---
+
+name: ontology-keel
+description: >
+  Premier contrat d'interface declaratif entre ONTOLOGY (source de verite des concepts
+  metier) et KEEL (consommateur qui expose les concepts comme mots-cles). Formalise
+  le mecanisme de validation pre-compile : KEEL verifie l'existence du concept dans
+  ONTOLOGY avant compilation, tel qu'exige par la v0.3 et ADR-013.
+
+contract_id: ontology-keel
+layer: L0_CANON
+owner: unified-design
+parties:
+  - ONTOLOGY
+  - KEEL
+  - GOVERNANCE-HUB
+
+frontier: "concepts metier declaratifs ONTOLOGY -> mots-cles KEEL"
+
+scope:
+  ontology_source: "ONTOLOGY/ONTOLOGY.yaml"
+  keel_validation_hook: "KEEL/scripts/validate-ontology-concepts.py"
+  keel_gate: "R11 — ONTOLOGY Concept Existence"
+  mapping_file: "unified-design/contracts/ontology-keel-mapping.yaml"
+  test_file: "KEEL/tests/test_ontology_validation.py"
+
+obligations:
+  ontology:
+    - MAINtenir ONTOLOGY.yaml comme source de verite unique des concepts
+    - TAGUER chaque concept avec un id, name, definition, status
+    - NOTIFIER les changements de concepts (ajout/suppression/rename) via WAZAA
+  keel:
+    - VALIDER chaque concept reference dans KEEL contre ONTOLOGY.yaml avant compilation
+    - BLOQUER la compilation si un concept absent est detecte (gate R11 CRITICAL)
+    - METTRE A JOUR le mapping ontology-keel-mapping.yaml lors de l'ajout de mots-cles
+  governance_hub:
+    - AUDITER le contrat lors de chaque changement de concepts ONTOLOGY
+    - TRACER les violations dans le registre des incidents
+
+validation:
+  pre_compile:
+    script: "KEEL/scripts/validate-ontology-concepts.py"
+    gate: "R11"
+    severity: CRITICAL
+    behavior: "BLOCK — compilation arretee si concept absent"
+  integration_test:
+    file: "KEEL/tests/test_ontology_validation.py"
+    scenario_concept_absent: "concept absent dans ONTOLOGY -> erreur KEEL"
+    scenario_concept_present: "concept present dans ONTOLOGY -> PASS"
+
+change_management:
+  protocol: >
+    Tout changement de concept dans ONTOLOGY necessite:
+    1. Mise a jour de ONTOLOGY.yaml
+    2. Mise a jour de ontology-keel-mapping.yaml
+    3. Mise a jour de validate-ontology-concepts.py
+    4. Validation du test d'integration
+    5. Commit atomique (max 3 fichiers)
+  hitl_required: true
+  owners_approval: "one-word approval from ONTOLOGY and KEEL owners"
+
+references:
+  - ADR-013-meta-design-validation-protocol
+  - v0.3 Amendements R24-028 (4e regime Contractuel/Meta)
+  - Cycle KG R24-028 (Axe 6 — Causal, Axe 35 — Meta)
+  - ONTOLOGY/ONTOLOGY.yaml
+  - KEEL/KEEL-CONFORMANCE.yaml
+  - unified-design/designs/contract-centrality.yaml
+
+proof_of_life:
+  - contract_created: "2026-09-20"
+  - hook_deployed: false
+  - test_passing: false
