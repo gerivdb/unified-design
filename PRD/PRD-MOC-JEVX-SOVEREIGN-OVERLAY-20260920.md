@@ -41,9 +41,15 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 | L2 | Design `jevx-engineering` | `designs/jevx-engineering.yaml` | Créer | ✅ |
 | L3 | Design `jevx-backend-matrix` | `designs/jevx-backend-matrix.yaml` | Créer | ✅ |
 | L4 | Atom `typed-decision-api` | `atoms/typed-decision-api.yaml` | Créer | ✅ |
-| L5 | Mise à jour `META-DESIGN.md` | `META-DESIGN.md` | Modifier | ✅ |
-| L6 | Mise à jour `meta-design.yaml` | `meta-design.yaml` | Modifier | ✅ |
-| L7 | Intégration KIX | `D:\DO\WEB\TOOLS\L2-PLATFORM\KIX\config\runners.yaml` | Modifier | ✅ |
+| L5 | Primitive `constrained-parallel-decoding` | `primitives/constrained-parallel-decoding/design.yaml` | Créer | ✅ |
+| L6 | Primitive `sovereign-adapter-pattern` | `primitives/sovereign-adapter-pattern/design.yaml` | Créer | ✅ |
+| L7 | Skill `jevx-backend-selector` | `skills/jevx-backend-selector/SKILL.md` | Créer | ✅ |
+| L8 | Pipeline `jevx-design-validation` | `pipelines/jevx-design-validation.yaml` | Créer | ✅ |
+| L9 | Mise à jour workflow | `workflows/structural-fix-pipeline.md` | Modifier | ✅ |
+| L10 | Mise à jour `META-DESIGN.md` | `META-DESIGN.md` | Modifier | ✅ |
+| L11 | Mise à jour `meta-design.yaml` | `meta-design.yaml` | Modifier | ✅ |
+| L12 | Mise à jour `catalog/designs.index.yaml` | `catalog/designs.index.yaml` | Modifier | ✅ |
+| L13 | Intégration KIX | `D:\DO\WEB\TOOLS\L2-PLATFORM\KIX\config\runners.yaml` | Modifier | ✅ |
 | L7 | Intégration KIX | `D:\DO\WEB\TOOLS\L2-PLATFORM\KIX\config\runners.yaml` | Modifier | ✅ |
 
 ## 3. Tâches
@@ -54,15 +60,23 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 3. `jevx-backend-matrix.yaml` : matrice de sélection backend (5 backends, cas d'usage)
 4. `typed-decision-api.yaml` : atom avec backends souverains, compromis, WSL1
 
+### Phase A2 — Primitives et skills déduits
+5. `primitives/constrained-parallel-decoding/design.yaml` : primitive décodage parallèle contraint
+6. `primitives/sovereign-adapter-pattern/design.yaml` : primitive adaptateur souverain
+7. `skills/jevx-backend-selector/SKILL.md` : skill sélection backend selon contraintes
+
 ### Phase B — Documentation MDU
-5. `META-DESIGN.md` : enregistrement des designs et atoms JEVX
-6. `meta-design.yaml` : ajout entrées dans `designs:` et `governance_atoms:`
+8. `META-DESIGN.md` : enregistrement des designs, atoms, primitives et skills JEVX
+9. `meta-design.yaml` : ajout entrées dans `designs:` et `governance_atoms:`
+10. `catalog/designs.index.yaml` : mise à jour index
 
 ### Phase C — Validation et intégration
-7. Validation YAML : `gerivdb design validate --strict` sur tous les designs
-8. Validation design coverage : pre-commit hook
-9. Intégration KIX : enregistrement dans `config/runners.yaml` + vérification `/runners`
-10. Intégration KG-CAUSAL : connexion observation/effect channels
+11. Validation YAML : `gerivdb design validate --strict` sur tous les designs
+12. Validation design coverage : pre-commit hook
+13. Pipeline JEVX : `pipelines/jevx-design-validation.yaml`
+14. Workflow structural fix : mise à jour `workflows/structural-fix-pipeline.md`
+15. Intégration KIX : enregistrement dans `config/runners.yaml` + vérification `/runners`
+16. Intégration KG-CAUSAL : connexion observation/effect channels
 
 ## 4. Contraintes
 
@@ -117,6 +131,13 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 - [x] 2026-09-20T20:33:14+02:00 — Correction YAML `jevx-backend-matrix.yaml` (ram_gb scalar)
 - [x] 2026-09-20T20:33:14+02:00 — Atom `typed-decision-api.yaml` référencé MDU (validateur designs ne cible pas `atoms/`)
 - [x] 2026-09-20T20:54:00+02:00 — Intégration KIX : enregistrement dans `config/runners.yaml` + vérification `/runners` PASS
+- [x] 2026-09-20T21:06:00+02:00 — Création primitive `constrained-parallel-decoding`
+- [x] 2026-09-20T21:06:00+02:00 — Création primitive `sovereign-adapter-pattern`
+- [x] 2026-09-20T21:06:00+02:00 — Création skill `jevx-backend-selector`
+- [x] 2026-09-20T21:06:00+02:00 — Création pipeline `jevx-design-validation.yaml`
+- [x] 2026-09-20T21:06:00+02:00 — Mise à jour workflow `structural-fix-pipeline.md`
+- [x] 2026-09-20T21:06:00+02:00 — Enregistrement primitives/skills dans `meta-design.yaml` et `META-DESIGN.md`
+- [x] 2026-09-20T21:06:00+02:00 — Mise à jour `catalog/designs.index.yaml`
 
 ## 9. Évaluation
 
