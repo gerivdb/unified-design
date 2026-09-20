@@ -89,13 +89,18 @@ Pour chaque backend dans la matrice :
 
 ## Backends connus
 
-| Backend | RAM | Latence | WSL1 | Confiance | Usage |
-|---------|-----|---------|------|-----------|-------|
-| minojev | < 100 Mo | 13–23 ms | ✅ | 90% | Décision minimale |
-| NanoJev | ~1.2 Go | 50–200 ms | ✅ | 85% | Décision standard |
-| jevlike | < 1 Go | variable | ✅ | 80% | Scorer custom |
-| jev_local | ~1.3 Go | 200–500 ms | ⚠️ patch | 70% | API LocalJev |
-| localjev | > 16 Go | — | ❌ | 30% | INCOMPATIBLE Z600 |
+| Backend | Repo | Licence | Modèle | RAM | Latence | WSL1 | Confiance | Usage |
+|---------|------|---------|--------|-----|---------|------|-----------|-------|
+| minojev | zeredy879/minojev | MIT | 547k params scalaire | < 100 Mo | 13–23 ms | ✅ | 90% | Décision minimale |
+| kev-0.5b | jaredpalmer/kev | Apache-2.0 | Qwen2.5-0.5B + LoRA | ~400 Mo | 50–150 ms | ✅ | 90% | API TypeSafe-compatible, fork direct |
+| laya | NandhaKishorM/laya | Apache-2.0 | ModernBERT-large 421M + PPO | ~400 Mo Q4 | 50–200 ms | ✅ | 85% | ModernBERT + PPO, CPU-only |
+| nanojev | TianyuCodings/NanoJev | MIT | Qwen3-0.6B + 3 têtes | ~1.2 Go | 50–200 ms | ✅ | 85% | Décision standard |
+| jevlike | vinnylarouge/jevlike | MIT | Embedding 40 Ko from scratch | < 10 Mo | 1–10 ms | ✅ | 95% | Prototypage minimaliste |
+| bespoke-nimble | bespokelabsai/nimble | Apache-2.0 | Qwen3.5-9B + LoRA | ~5 Go Q4 | 5–15 s | ⚠️ patch | 60% | Scorer high-quality, latence CPU élevée |
+| semif | TheoLeeCJ/SemIf | MIT (présumé) | Qwen3.5-4B + NLI 3-classes | ~2.5 Go Q4 | 2–5 s | ⚠️ patch | 65% | NLI sur Qwen3.5 |
+| jev_local | Argos1111/jev_local | MIT (présumé) | LFM2.5-1.2B Q8_0 | ~1.3 Go | 200–500 ms | ⚠️ patch | 70% | API LocalJev, bridge upstream |
+| localjev | githubnext/localjev | MIT | DiffusionGemma-26B-A4B | > 16 Go | — | ❌ | 20% | INCOMPATIBLE Z600 — pattern uniquement |
+| typesafe-jev | TypeSafe AI | Propriétaire | Jev officiel | cloud | cloud | ❌ | — | REJETÉ — dépendance cloud, clé obligatoire |
 
 ## Exemples
 

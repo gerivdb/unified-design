@@ -56,7 +56,6 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 | L11 | Mise à jour `meta-design.yaml` | `meta-design.yaml` | Modifier | ✅ |
 | L12 | Mise à jour `catalog/designs.index.yaml` | `catalog/designs.index.yaml` | Modifier | ✅ |
 | L13 | Intégration KIX | `D:\DO\WEB\TOOLS\L2-PLATFORM\KIX\config\runners.yaml` | Modifier | ✅ |
-| L7 | Intégration KIX | `D:\DO\WEB\TOOLS\L2-PLATFORM\KIX\config\runners.yaml` | Modifier | ✅ |
 
 ## 3. Tâches
 
@@ -92,11 +91,23 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 - **Backend** : LEGACY_FIT immédiat (NanoJev, jevlike, minojev) ; LEGACY_PATCHABLE (jev_local)
 - **Souveraineté** : aucun trafic ne quitte l'ENV sans médiation JEVX
 - **Calibration** : probabilités auto-rapportées ; calibration externe requise avant usage décisionnel conséquent
+- **Synthetic data** : tous les clones connus sont entraînés sur données 100% synthétiques ; calibration externe obligatoire
 - **Security** : consensus minimum + seuil de confiance + HITL pour actions critiques
 - **Encoding** : UTF-8 strict (hook pre-commit bloque non-ASCII)
 - **Commits** : atomiques <= 3 fichiers
 
-## 5. Plan de commits proposé
+## 5. Synthèse opérationnelle Z600
+
+La pile minimale souveraine est **Kev-0.5B (décision ultra-légère) + Jevlike (prototypage) + Laya (ModernBERT, qualité)**. Nimble et SemIf sont patchables en Q4, mais la latence CPU sera de plusieurs secondes. Le pattern diffusion est à transposer conceptuellement, pas à forker. Aucun clone n'égale la calibration du Jev officiel, mais l'ensemble couvre 80 % des cas d'usage sans aucune dépendance cloud.
+
+JEVX fournit :
+- Un **backend selector** qui choisit automatiquement le clone adapté aux contraintes du Z600
+- Une **primitive de décodage parallèle contraint** qui reproduit le mécanisme Jev sur CPU
+- Un **pattern d'adaptateur souverain** qui expose une API Jev-compatible sans dépendance cloud
+
+Hypothèse architecture Jev : **ModernBERT** (consensus stable) ou **diffusion** (consensus élégant pour parallélisme).
+
+## 6. Plan de commits proposé
 
 | Commit | Fichiers | Description |
 |---|---|---|
@@ -151,8 +162,8 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 |---|---|---|
 | 1. YAML valide + validation stricte | ✅ | `validate_designs.py --strict` PASS sur 3/3 designs JEVX |
 | 2. Atom référencé MDU | ✅ | `META-DESIGN.md` + `meta-design.yaml` |
-| 3. 3+ backends Z600 documentés | ✅ | NanoJev, jevlike, minojev, jev_local |
-| 4. Security guardrails définies | ✅ | consensus_minimum, confidence_threshold, HITL, audit_trail |
+| 3. 3+ backends Z600 documentés | ✅ | Kev-0.5B, Laya, NanoJev, Jevlike, minojev (LEGACY_FIT) |
+| 4. Security guardrails définies | ✅ | consensus_minimum, confidence_threshold, HITL, audit_trail + synthetic_data_only |
 | 5. Patterns documentés | ✅ | constrained-parallel-decoding, sovereign-adapter-pattern |
 | 6. WSL1 déployé documenté | ✅ | Python 3.12, llama.cpp AVX1, chroot/proot |
 | 7. Pas de violation DAG | ✅ | depends_on cohérent, pas de cycle détecté |
@@ -160,6 +171,7 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 | 9. ADR-0111 référencée | ✅ | Référencée dans tous les designs |
 | 10. Proof-of-Life horodatés | ✅ | Section 8 complétée |
 | 11. Intégration KIX | ✅ | `config/runners.yaml` + vérification `/runners` PASS |
+| 12. Données synthétiques documentées | ✅ | Tous les clones entraînés sur 100% données synthétiques ; calibration externe obligatoire |
 
 **Verdict** : ✅ **Phase A + Phase B + Phase C + Intégration KIX complètes** — Designs, atom, enregistrement MDU, validation ciblée et intégration KIX implémentés.
 
@@ -171,7 +183,7 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 - **Atom** : `atoms/typed-decision-api.yaml`
 - **MDU** : `META-DESIGN.md`, `meta-design.yaml`
 - **Upstream** : `githubnext/localjev`
-- **Backends** : `TianyuCodings/NanoJev`, `vinnylarouge/jevlike`, `zeredy879/minojev`, `Argos1111/jev_local`
+- **Backends** : `jaredpalmer/kev`, `NandhaKishorM/laya`, `vinnylarouge/jevlike`, `TianyuCodings/NanoJev`, `zeredy879/minojev`, `bespokelabsai/nimble`, `TheoLeeCJ/SemIf`, `Argos1111/jev_local`, `githubnext/localjev`
 
 ## 11. PRD-MOC associés
 
