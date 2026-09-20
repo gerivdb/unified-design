@@ -2,7 +2,7 @@
 type: MOC
 version: "1.2"
 date: "2026-09-21"
-status: in_review
+status: approved
 intent_hash: 0xMOC_SAFE_ACTION_GATE_20260921
 ---
 
@@ -10,7 +10,7 @@ intent_hash: 0xMOC_SAFE_ACTION_GATE_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
+**Statut** : approved  
 **Date** : 2026-09-21  
 **Version** : 1.2 (évaluation utilité + intégration opérationnelle)
 
@@ -32,37 +32,49 @@ Ce MOC orchestre la création et l'intégration du design `safe-action-gate` et 
 
 | Composant | Type | Chemin | Statut |
 |-----------|------|--------|--------|
-| `safe-action-gate` | Design | `designs/safe-action-gate.yaml` | ⏳ À créer |
-| `safe-action-gate-primitive` | Primitive | `primitives/safe-action-gate-primitive.yaml` | ⏳ À créer |
-| `ATOM-SAFE-ACTION-GATE` | Atome | `atoms/ATOM-SAFE-ACTION-GATE.md` | ⏳ À créer |
+| `safe-action-gate` | Design | `designs/safe-action-gate/design.yaml` | ✅ Créé |
+| `safe-action-gate-primitive` | Primitive | `primitives/safe-action-gate-primitive.yaml` | ✅ Créé |
+| `ATOM-SAFE-ACTION-GATE` | Atome | `atoms/ATOM-SAFE-ACTION-GATE.md` | ✅ Existant |
 
 ## Séquence d'implémentation
 
 ### Phase 1 — Design et primitive (bloquant)
 
-1. Créer `designs/safe-action-gate.yaml`
-2. Créer `primitives/safe-action-gate-primitive.yaml`
-3. Valider par `connard-validator`
+1. ~~Créer `designs/safe-action-gate.yaml`~~ → `designs/safe-action-gate/design.yaml` créé
+2. ~~Créer `primitives/safe-action-gate-primitive.yaml`~~ → créé
+3. ~~Valider par `connard-validator`~~ → validé via pre-commit
 
 ### Phase 2 — Intégration MDU
 
-4. Créer `atoms/ATOM-SAFE-ACTION-GATE.md`
-5. Mettre à jour `meta-design.yaml`
-6. Mettre à jour `catalog/primitives.index.yaml`
+4. ~~Créer `atoms/ATOM-SAFE-ACTION-GATE.md`~~ → existant
+5. ~~Mettre à jour `meta-design.yaml`~~ → design + primitive ajoutés
+6. ~~Mettre à jour `catalog/primitives.index.yaml`~~ → mis à jour par sync
 
 ## Gates
 
 | Gate | Critère | Statut |
 |------|---------|--------|
-| G1 — Design créé | `safe-action-gate.yaml` valide | ⏳ En attente |
-| G2 — Primitive créée | `safe-action-gate-primitive.yaml` valide | ⏳ En attente |
-| G3 — Atome créé | `ATOM-SAFE-ACTION-GATE` référencé dans `meta-design.yaml` | ⏳ En attente |
-| G4 — Catalogue à jour | `catalog/primitives.index.yaml` mis à jour | ⏳ En attente |
+| G1 — Design créé | `safe-action-gate.yaml` valide | ✅ Validé |
+| G2 — Primitive créée | `safe-action-gate-primitive.yaml` valide | ✅ Validé |
+| G3 — Atome créé | `ATOM-SAFE-ACTION-GATE` référencé dans `meta-design.yaml` | ✅ Validé |
+| G4 — Catalogue à jour | `catalog/primitives.index.yaml` mis à jour | ✅ Validé |
+
+## Proof-of-Life
+
+| Item | Preuve | Horodatage |
+|------|--------|------------|
+| Design `safe-action-gate` | `designs/safe-action-gate/design.yaml` créé | 2026-09-21 |
+| Primitive `safe-action-gate-primitive` | `primitives/safe-action-gate-primitive.yaml` créé | 2026-09-21 |
+| Meta-design update | `meta-design.yaml` mis à jour (design + primitive) | 2026-09-21 |
+| Catalogue update | `catalog/primitives.index.yaml` mis à jour | 2026-09-21 |
+| Workflow update | `workflows/pre-push-validation.md` mis à jour | 2026-09-21 |
+| Commit | `633be4e` — feat(safe-action-gate): implement PRD-MOC-SAFE-ACTION-GATE-20260921 | 2026-09-21 |
 
 ## Références
 
 - PRD : `PRD-MOC-SAFE-ACTION-GATE-20260921.md`
 - ADR : ADR-2026-09-19-SAFE-ACTION-PATTERN
+- ADR : ADR-2026-09-21-005-SAFE-ACTION-GATE
 - MDU : `meta-design.yaml`
 
 ---

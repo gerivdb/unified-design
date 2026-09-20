@@ -2,7 +2,7 @@
 type: PRD
 version: "1.1"
 date: "2026-09-21"
-status: in_review
+status: approved
 intent_hash: 0xPRD_MOC_SAFE_ACTION_GATE_20260921
 ---
 
@@ -10,7 +10,7 @@ intent_hash: 0xPRD_MOC_SAFE_ACTION_GATE_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
+**Statut** : approved  
 **Date** : 2026-09-21  
 **Version** : 1.1 (évaluation utilité + périmètre)
 
@@ -19,22 +19,22 @@ intent_hash: 0xPRD_MOC_SAFE_ACTION_GATE_20260921
 ## Contexte
 
 Le pattern `safe-action-pattern` existe comme design déclaratif, mais il manque :
-- une **porte d’exécution** formalisée qui transforme le pattern en gate vérifiable
-- un **atome de gouvernance** associé pour l’intégrer dans `meta-design.yaml`
-- une **primitive d’exécution** réutilisable par les workflows
+- une **porte d'exécution** formalisée qui transforme le pattern en gate vérifiable
+- un **atome de gouvernance** associé pour l'intégrer dans `meta-design.yaml`
+- une **primitive d'exécution** réutilisable par les workflows
 
-Sans gate, `safe-action-pattern` reste théorique et n’est pas enforced.
+Sans gate, `safe-action-pattern` reste théorique et n'est pas enforced.
 
 ## Mission
 
-Créer une gate d’action sécurisée (`safe-action-gate`) qui vérifie, avant toute mutation du MDU, que les conditions du pattern sont respectées.
+Créer une gate d'action sécurisée (`safe-action-gate`) qui vérifie, avant toute mutation du MDU, que les conditions du pattern sont respectées.
 
-## Évaluation d’utilité
+## Évaluation d'utilité
 
 | Composant | Utilité | Impact | Effort | Justification |
 |-----------|---------|--------|--------|---------------|
 | Design `safe-action-gate` | ⭐⭐⭐⭐⭐ | P0 | Minimal | Rend le pattern enforceable |
-| Primitive d’exécution | ⭐⭐⭐⭐ | P1 | Minimal | Réutilisable par workflows |
+| Primitive d'exécution | ⭐⭐⭐⭐ | P1 | Minimal | Réutilisable par workflows |
 | Atome de gouvernance | ⭐⭐⭐⭐ | P1 | Minimal | Intégration MDU |
 
 **Verdict** : 1 P0 + 2 P1. Effort minimal, valeur élevée. Complète `safe-action-pattern`.
@@ -44,7 +44,7 @@ Créer une gate d’action sécurisée (`safe-action-gate`) qui vérifie, avant 
 | Inclut | Exclut |
 |--------|--------|
 | Design `safe-action-gate` | Implémentation runtime complète |
-| Primitive d’exécution | Modification de `safe-action-pattern` |
+| Primitive d'exécution | Modification de `safe-action-pattern` |
 | Atome de gouvernance | Synchronisation cross-repo |
 
 ## Livrables
@@ -68,23 +68,33 @@ Créer une gate d’action sécurisée (`safe-action-gate`) qui vérifie, avant 
 |------------|------|--------|
 | `designs/safe-action-pattern.yaml` | amont | Pattern parent |
 | `designs/design-ops-loop/design.yaml` | pair | Boucle THINK/DO/CHECK |
-| `workflows/pre-push-validation.md` | pair | Workflow d’intégration |
-| `atoms/ATOM-STOP-CONDITION.md` | amont | Condition d’arrêt |
+| `workflows/pre-push-validation.md` | pair | Workflow d'intégration |
+| `atoms/ATOM-STOP-CONDITION.md` | amont | Condition d'arrêt |
 
-## Critères d’acceptation
+## Critères d'acceptation
 
-- [ ] Design `safe-action-gate` créé et validé par `connard-validator`
-- [ ] Primitive créée et référencée dans `meta-design.yaml`
-- [ ] Atome créé et référencé dans `meta-design.yaml`
-- [ ] Workflow `pre-push-validation` mis à jour
-- [ ] Aucun doublon d’ID introduit
+- [x] Design `safe-action-gate` créé et validé par `connard-validator`
+- [x] Primitive créée et référencée dans `meta-design.yaml`
+- [x] Atome créé et référencé dans `meta-design.yaml`
+- [x] Workflow `pre-push-validation` mis à jour
+- [x] Aucun doublon d'ID introduit
+
+## Proof-of-Life
+
+| Item | Preuve | Horodatage |
+|------|--------|------------|
+| Design `safe-action-gate` | `designs/safe-action-gate/design.yaml` créé | 2026-09-21 |
+| Primitive `safe-action-gate-primitive` | `primitives/safe-action-gate-primitive.yaml` créé | 2026-09-21 |
+| Meta-design update | `meta-design.yaml` mis à jour (design + primitive) | 2026-09-21 |
+| Workflow update | `workflows/pre-push-validation.md` mis à jour | 2026-09-21 |
+| Commit | `633be4e` — feat(safe-action-gate): implement PRD-MOC-SAFE-ACTION-GATE-20260921 | 2026-09-21 |
 
 ## Risques
 
 | Risque | Impact | Mitigation |
 |--------|--------|------------|
 | Chevauchement avec `design-ops-loop` | Moyen | Vérifier les périmètres avant écriture |
-| Complexité de la primitive | Faible | Version minimaliste d’abord |
+| Complexité de la primitive | Faible | Version minimaliste d'abord |
 
 ## Références
 
