@@ -32,7 +32,7 @@ target_processes:
   - name: "zig-cache-cleanup"
     reason: "Background Zig cache processes"
   - pattern: "*.exe"
-    cwd_filter: "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LLUX\\*"
+    cwd_filter: "D:/DO/WEB/TOOLS\\L3-CITIZENS\\LLUX\\*"
     reason: "Any exe running from LLUX workspace"
 
 # Implementation
@@ -89,7 +89,7 @@ cli:
   commands:
     - "ctulu-auto-cleanup [--dry-run] [--verbose] [--force]"
     - "ctulu-auto-cleanup --list-only"
-    - "ctulu-auto-cleanup --pattern 'llux*' --cwd 'D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LLUX'"
+    - "ctulu-auto-cleanup --pattern 'llux*' --cwd 'D:/DO/WEB/TOOLS\\L3-CITIZENS\\LLUX'"
 
 # Configuration
 config:
@@ -106,9 +106,9 @@ patterns_config:
     - "zig.exe"
     - "*.exe" # with cwd filter
   cwd_filters:
-    - "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LLUX"
-    - "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU"
-    - "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design"
+    - "D:/DO/WEB/TOOLS\\L3-CITIZENS\\LLUX"
+    - "D:/DO/WEB/TOOLS\\L4-TOOLS\\CTULU"
+    - "D:/DO/WEB/TOOLS\\L0-CANON\\unified-design"
   exclude:
     - "pytest.exe" # test runners
     - "python.exe" # python interpreters
