@@ -1,0 +1,125 @@
+---
+name: safe-action-gate
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_SAFE_ACTION_GATE_20260921
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+description: >
+  Gate d'exécution sécurisée qui transforme le pattern safe-action en vérification
+  mécanique avant toute mutation du MDU. Formalise les préconditions, invariants
+  et preuves horodatées requises pour autoriser une action.
+states:
+  - name: IDLE
+    nature: en attente de déclenchement
+    gate_to_next: VERIFY
+    question: "Une action nécessite-t-elle une validation sécurisée ?"
+  - name: VERIFY
+    nature: vérification des préconditions et invariants
+    gate_to_next: ALLOW | BLOCK
+    question: "Les préconditions sont-elles réunies ? Les invariants tiennent-ils ?"
+  - name: ALLOW
+    nature: action autorisée
+    gate_to_next: PROGRESS
+    question: "La preuve horodatée est-elle présente et valide ?"
+  - name: BLOCK
+    nature: action refusée
+    question: "Quelle précondition ou invariant a échoué ?"
+functions:
+  - id: F1
+    name: PERCEVOIR_CONTEXTE
+    state: IDLE→VERIFY
+    description: "Collecte multi-source du contexte d'action"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: ÉVALUER_PRÉCONDITIONS
+    state: VERIFY
+    description: "Vérification des préconditions obligatoires"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F3
+    name: VÉRIFIER_INVARIANTS
+    state: VERIFY
+    description: "Contrôle des invariants du MDU"
+    implements: ATOM-GATE-LAYERS
+  - id: F4
+    name: VALIDER_PREUVE
+    state: VERIFY→ALLOW
+    description: "Validation de la preuve horodatée"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+    veto: true
+  - id: F5
+    name: BLOQUER_SI_NON_CONFORME
+    state: VERIFY→BLOCK
+    description: "Blocage immédiat si préconditions ou invariants échouent"
+    implements: ATOM-STOP-CONDITION
+    veto: true
+  - id: F6
+    name: AUTORISER_ACTION
+    state: ALLOW→PROGRESS
+    description: "Autorisation formelle de l'action"
+    implements: safe-action-pattern
+  - id: F7
+    name: ENREGISTRER_DÉCISION
+    state: ALLOW | BLOCK
+    description: "Enregistrement horodaté de la décision de gate"
+    implements: ATOM-DELTA-CHECK, ATOM-CARRY-FORWARD-PRINCIPLE
+invariant: "Aucune mutation du MDU ne peut passer l'état VERIFY sans preuve horodatée valide et invariants confirmés."
+genes:
+  - id: G1
+    name: verification-systematic
+    description: "Toute action passe par VERIFY avant ALLOW ou BLOCK"
+    implements: ATOM-GATE-LAYERS
+  - id: G2
+    name: proof-horodatee
+    description: "La preuve d'exécution est horodatée et vérifiable"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: G3
+    name: invariant-protection
+    description: "Les invariants du MDU sont protégés par le gate"
+    implements: ATOM-STOP-CONDITION
+  - id: G4
+    name: decision-traceability
+    description: "Toute décision de gate est tracée et horodatée"
+    implements: ATOM-DELTA-CHECK, ATOM-CARRY-FORWARD-PRINCIPLE
+anti_patterns:
+  - missing_gene: verification-systematic
+    pathology: "Mutation sans validation → écart structurel non détecté"
+    mdu_atom: ATOM-GATE-LAYERS
+  - missing_gene: proof-horodatee
+    pathology: "Action sans preuve → échec silencieux"
+    mdu_atom: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - missing_gene: invariant-protection
+    pathology: "Invariant cassé sans détection → perte de métacohérence"
+    mdu_atom: ATOM-STOP-CONDITION
+  - missing_gene: decision-traceability
+    pathology: "Décision non tracée → impossibilité d'auditer"
+    mdu_atom: ATOM-DELTA-CHECK
+inheritance_loop: |
+  IDLE → VERIFY → ALLOW → PROGRESS → BILAN → ENREGISTRER
+                                              │
+                                              ▼
+                                  injecté dans le IDLE suivant
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - atom: ATOM-SAFE-ACTION-GATE
+  - primitive: safe-action-gate-primitive
+  - skill: mdu-integrity-checker
+  - workflow: workflow-pre-push-validation
+  - adr: ADR-2026-09-19-SAFE-ACTION-PATTERN
+  - adr: ADR-2026-09-21-005-SAFE-ACTION-GATE
+  - prd_moc: PRD-MOC-SAFE-ACTION-GATE-20260921
+  - moc: MOC-SAFE-ACTION-GATE-20260921

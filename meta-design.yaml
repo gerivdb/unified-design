@@ -418,6 +418,12 @@ designs:
   intent_hash: 0xPIPELINE_MDU_VALIDATION_20260921
   consumers: []
   profile: ACTIVE
+- name: safe-action-gate
+  path: designs/safe-action-gate/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_SAFE_ACTION_GATE_20260921
+  consumers: []
+  profile: ACTIVE
 piliers:
 - name: Sonar-Driven Design
   abbr: SDD
@@ -744,6 +750,11 @@ primitives:
   path: primitives/causal-traceability-primitive.yaml
   version: 1.0.0
   intent_hash: 0xPRIMITIVE_CAUSAL_TRACEABILITY_20260920
+  status: active
+- name: safe-action-gate-primitive
+  path: primitives/safe-action-gate-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_SAFE_ACTION_GATE_20260921
   status: active
 skills:
 - name: design-ops-loop-skill
