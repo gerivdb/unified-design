@@ -1,6 +1,6 @@
 ---
 name: ecosystem-feedback-loop
-description: "Boucle de feedback entre l'écosystème technique et l'écosystème de création. Inspiré de D:\GG-knox\engineering ideas\Obsidian\De l'Écosystème Technique à l'Écosystème de Création.md. Pont DevTools ↔ Obsidian : chaque modification technique génère une narration, chaque narration peut déclencher une modification technique."
+description: "Boucle de feedback entre l'écosystème technique et l'écosystème de création. Inspiré de GG-knox/engineering-ideas/Obsidian/De l'Écosystème Technique à l'Écosystème de Création.md. Pont DevTools ↔ Obsidian : chaque modification technique génère une narration, chaque narration peut déclencher une modification technique."
 version: "1.0.0"
 status: active
 layer: L0

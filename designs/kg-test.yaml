@@ -53,7 +53,7 @@ capabilities:
 principles:
   - "Dépendance unidirectionnelle : KG-Test → KG-L (jamais l'inverse)"
   - "Imports KG-L comme bibliothèque: from kg_l import ..."
-  - "Pas d'écriture dans C:\DevTools"
+  - "Pas d'écriture dans C:/DevTools"
   - "CTULU via subprocess/adapter"
   - "BDCP permanent : pas de gh CLI"
 

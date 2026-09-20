@@ -123,7 +123,7 @@ principles:
   - TDC conscience ternaire Think/Do/Check : Think (veille/conception), Do (exécution), Check (conformité)
 
 enforcement:
-  - scanners: ARGUS/scanners/* (10+ specialised: orphan_file, drift, gap, collision, shadow, phantom_path, bridge, reciprocity, branch_hygiene, untracked_audit)
+  - scanners: "ARGUS/scanners/* (10+ specialised: orphan_file, drift, gap, collision, shadow, phantom_path, bridge, reciprocity, branch_hygiene, untracked_audit)"
   - wal: ARGUS/wal SyncEvent immuable
   - cron: MC7 freshness + limbo + metrics + branch_hygiene + untracked_audit
   - balise: lease take/release/closeout + check --fresh (CONVERGED/STALE/DIVERGED)

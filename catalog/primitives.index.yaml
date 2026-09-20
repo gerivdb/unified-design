@@ -1,75 +1,49 @@
 entries:
-- id: CTULU_IO_TYPES
-  source_path: primitives/CTULU_IO_TYPES.md
-  source_repo: ONTOLOGY
-  status: active
-  type: primitive
-  updated: '2026-08-08'
-- id: academic-query-primitives
-  source_path: primitives/academic-query-primitives.yaml
-  source_repo: ONTOLOGY
-  status: active
-  type: primitive
-  updated: '2026-08-08'
-- id: autodata_isomorphisme
-  source_path: primitives/autodata_isomorphisme.yaml
-  source_repo: ONTOLOGY
-  status: active
-  type: primitive
-  updated: '2026-08-08'
-- id: autoresearch_loop
-  source_path: primitives/autoresearch_loop.yaml
-  source_repo: ONTOLOGY
-  status: active
-  type: primitive
-  updated: '2026-08-08'
-- id: phi-cps-evaluator
-  source_path: primitives/phi-cps-evaluator.yaml
-  source_repo: ONTOLOGY
-  status: active
-  type: primitive
-  updated: '2026-08-08'
-- id: primitive
-  source_path: primitives/primitive.md
-  source_repo: ONTOLOGY
-  status: active
-  type: primitive
-  updated: '2026-08-08'
-- id: design-ops-loop-primitive
-  source_path: primitives/design-ops-loop-primitive.yaml
-  source_repo: unified-design
-  status: active
-  type: primitive
-  updated: '2026-09-20'
-  path: primitives\design-ops-loop-primitive.yaml
-  version: 1.0.0
-- id: artifact-layers-primitive
+- id: artifact-layers-primitive.yaml
   source_path: primitives/artifact-layers-primitive.yaml
   source_repo: unified-design
   status: active
   type: primitive
-  updated: '2026-09-20'
-  path: primitives\artifact-layers-primitive.yaml
-  version: 1.0.0
-- id: session-boot-primitive
-  source_path: primitives/session-boot-primitive.yaml
-  source_repo: unified-design
-  status: active
-  type: primitive
-  updated: '2026-09-20'
-  path: primitives\session-boot-primitive.yaml
-  version: 1.0.0
-- id: causal-traceability-primitive
+  updated: '2026-09-21'
+- id: causal-traceability-primitive.yaml
   source_path: primitives/causal-traceability-primitive.yaml
   source_repo: unified-design
   status: active
   type: primitive
-  updated: '2026-09-20'
-  path: primitives\causal-traceability-primitive.yaml
-  version: 1.0.0
-- id: artifact-extraction-card
+  updated: '2026-09-21'
+- id: design-ops-loop-primitive.yaml
+  source_path: primitives/design-ops-loop-primitive.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-21'
+- id: ecosystem-meta-coherence.yaml
+  source_path: primitives/ecosystem-meta-coherence.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-21'
+- id: session-boot-primitive.yaml
+  source_path: primitives/session-boot-primitive.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-21'
+- id: artifact-extraction-card__design.yaml
   source_path: primitives/artifact-extraction-card/design.yaml
   source_repo: unified-design
   status: active
   type: primitive
-  updated: '2026-09-20'
+  updated: '2026-09-21'
+- id: constrained-parallel-decoding__design.yaml
+  source_path: primitives/constrained-parallel-decoding/design.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-21'
+- id: sovereign-adapter-pattern__design.yaml
+  source_path: primitives/sovereign-adapter-pattern/design.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-21'
