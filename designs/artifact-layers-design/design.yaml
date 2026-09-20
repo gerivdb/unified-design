@@ -1,0 +1,62 @@
+---
+name: artifact-layers-design
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_ARTIFACT_LAYERS_20260920
+description: >
+  Design des 7 layers standardisés d'un repo gerivdb.
+  Garantit que tout repo actif possède : src/, config/, tools/,
+  scripts/, tests/, docs/, markdown/.
+inherits:
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+capabilities:
+  - name: validate-layers
+    description: "Valide la présence des 7 layers"
+  - name: report-missing
+    description: "Signale les layers manquants"
+  - name: suggest-structure
+    description: "Suggère la structure cible"
+states:
+  - name: AUDIT
+    gate_to_next: AUDIT_DONE
+  - name: FIX
+    gate_to_next: FIXED
+  - name: VALIDATE
+    gate_to_next: VALIDATED
+functions:
+  - id: F1
+    name: AUDIT_LAYERS
+    state: AUDIT
+    description: "Audite les 7 layers"
+  - id: F2
+    name: FIX_LAYERS
+    state: FIX
+    description: "Corrige les layers manquants"
+  - id: F3
+    name: VALIDATE_LAYERS
+    state: VALIDATE
+    description: "Valide la structure finale"
+invariant: "Tout repo actif possède les 7 layers standardisés."
+genes:
+  - id: G1
+    name: completeness
+    description: "Tous les layers requis doivent être présents"
+  - id: G2
+    name: consistency
+    description: "La structure doit être cohérente across repos"
+anti_patterns:
+  - missing_gene: completeness
+    pathology: "Repo incomplet → difficulté de maintenance"
+  - missing_gene: consistency
+    pathology: "Structure variable → confusion cross-repo"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - primitive: artifact-layers-primitive
+  - skill: artifact-layers-validator
+  - citizen: artifact-layers-auditor
+  - workflow: workflow-artifact-layers-validation

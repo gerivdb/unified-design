@@ -1,0 +1,75 @@
+---
+name: toroidal-invariant
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xTOROIDAL_INVARIANT_20260920
+description: >
+  Invariant toroidal transverse de l'écosystème gerivdb.
+  Noyau mathématique commun aux strates L0-L5 : χ=2, 53 triplets, 3 modes,
+  8 cœurs NUMA, transferts XMM 128-bit, cache L2 ≤ 256 KB/core, L3 ≤ 12 MB.
+  Source de vérité unique pour toute consommation/instanciation toroidale.
+
+depends_on:
+  - ATOM-FLEX-NUMA-DETECT
+  - ATOM-FLEX-CACHE-SLICE
+  - ATOM-FLEX-AFFINITY-SET
+
+bridges:
+  - target: llux
+    role: consumer
+    protocol: zig-ffi
+  - target: kg-l
+    role: provider
+    protocol: json-schema
+  - target: ctulu
+    role: consumer
+    protocol: pipeline-event
+  - target: wazaa
+    role: consumer
+    protocol: event-bus
+
+capabilities:
+  - name: toroidal-state
+    description: État toroïdal canonique (53 triplets, invariant χ=2)
+    parameters:
+      triplets_count: 53
+      chi: 2
+      modes: [0, 1, 2]
+  - name: step
+    description: Exécuter une itération du pipeline toroïdal
+    parameters:
+      mode: enum [Glace, Plasma, Hybride]
+  - name: invariant-check
+    description: Vérifier que l'invariant χ=2 est préservé
+    parameters:
+      triplet: Triplet
+
+constraints:
+  - chi_must_be_2: true
+  - triplets_count: 53
+  - cores_numa: 8
+  - sockets: 2
+  - vector_width: 128
+  - l2_max_kb: 256
+  - l3_max_mb: 12
+
+parameters:
+  seed_default: 42
+  lambda_range: [0.0, 1.0]
+  temperature_range: [0.0, 1.0]
+
+relationships:
+  - type: implements
+    target: unified-design/designs/flex/design.yaml
+  - type: consumed_by
+    target: unified-design/designs/llux/design.yaml
+  - type: enforced_by
+    target: unified-design/designs/kg-l/design.yaml
+
+references:
+  - FLEX/src/core/toroidal/pipeline.zig
+  - FLEX/src/core/hybrid/pipeline.zig
+  - ADR-2026-09-05-002-graph-versioning-wazaa.md
+  - ADR-2026-07-30-002-fractal-engineering-strata.md
+  - PRD-MOC-LLUX-FLEX-INTEGRATION.md

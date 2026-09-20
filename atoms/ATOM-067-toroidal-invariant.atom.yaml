@@ -1,0 +1,12 @@
+atom_id: ATOM-067-toroidal-invariant
+version: 1.0.0
+type: atom
+description: Invariant toroidal transverse χ=2, 53 triplets, 3 modes, 8 cœurs NUMA. Noyau commun aux strates L0-L5.
+profile: STANDARD
+consumers:
+  - flex
+  - llux
+  - ctulu
+  - trix
+  - wazaa
+last_verified: '2026-09-20'
