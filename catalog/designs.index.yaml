@@ -1,4 +1,4 @@
-ntries:
+entries:
 - id: admg-dag3-hierarchy
   source_path: designs/admg-dag3-hierarchy.yaml
   source_repo: unified-design
@@ -679,6 +679,24 @@ ntries:
   updated: '2026-09-20'
 - id: worktree-closure-protocol
   source_path: designs/L2-PLATFORM/worktree-closure-protocol.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'
+- id: ecosystem-meta-coherence
+  source_path: designs/ecosystem-meta-coherence/design.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'
+- id: jevx
+  source_path: designs/jevx.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'
+- id: jevx-engineering
+  source_path: designs/jevx-engineering.yaml
   source_repo: unified-design
   status: active
   type: design

@@ -1,0 +1,13 @@
+--
+name: agentic-git-branching
+description: "Agentic Git Branching Strategy"
+version: "1.0.0"
+parent: unified-design
+inherits: []
+capabilities: []
+stratum: L2_PLATFORM
+status: proposed
+intent_hash: 0xAGENTIC_GIT_BRANCHING_20260808
+bridges: []
+consumers: []
+---

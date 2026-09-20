@@ -1,0 +1,13 @@
+entries:
+- id: ecosystem-meta-coherence-gate
+  source_path: atoms/ecosystem-meta-coherence-gate.md
+  source_repo: unified-design
+  status: active
+  type: atom
+  updated: '2026-09-20'
+- id: typed-decision-api
+  source_path: atoms/typed-decision-api.yaml
+  source_repo: unified-design
+  status: active
+  type: atom
+  updated: '2026-09-20'

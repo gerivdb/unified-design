@@ -1,0 +1,13 @@
+entries:
+- id: dryrun-causal-audit
+  source_path: workflows/dryrun-causal-audit.md
+  source_repo: unified-design
+  status: active
+  type: workflow
+  updated: '2026-09-20'
+- id: structural-fix-pipeline
+  source_path: workflows/structural-fix-pipeline.md
+  source_repo: unified-design
+  status: active
+  type: workflow
+  updated: '2026-09-20'

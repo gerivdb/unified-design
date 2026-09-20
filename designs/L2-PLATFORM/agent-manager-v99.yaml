@@ -1,0 +1,13 @@
+--
+name: agent-manager-v99
+description: "Agent Manager V9.9 Ã¢â‚¬â€ Orchestrateur N+3.5"
+version: "1.0.0"
+parent: unified-design
+inherits: []
+capabilities: []
+stratum: L2_PLATFORM
+status: proposed
+intent_hash: 0xAGENT_MANAGER_V99_20260808
+bridges: []
+consumers: []
+---

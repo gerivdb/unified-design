@@ -1,0 +1,7 @@
+entries:
+- id: mdu-validation
+  source_path: pipelines/mdu-validation.yaml
+  source_repo: unified-design
+  status: active
+  type: pipeline
+  updated: '2026-09-20'
