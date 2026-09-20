@@ -6,6 +6,8 @@ description: >
   security guardrails et patterns d'ingénierie.
 version: "1.0.0"
 status: active
+layer: L4
+type: pipeline
 intent_hash: 0xPIPELINE_JEVX_DESIGN_VALIDATION_20260920
 triggers:
   - pre-commit

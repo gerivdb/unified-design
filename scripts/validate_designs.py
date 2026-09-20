@@ -16,8 +16,18 @@ REQUIRED_FIELDS = {"name", "version", "status", "layer", "description"}
 def validate_design(path: Path) -> tuple[bool, str]:
     try:
         text = path.read_text(encoding="utf-8")
-        # Ne charger que le premier document YAML (frontmatter)
-        data = next(yaml.safe_load_all(text))
+        # Extraire uniquement le frontmatter YAML pour les fichiers Markdown
+        # avec délimiteur ---, ou charger le YAML pur directement
+        if text.startswith("---"):
+            parts = text.split("---", 2)
+            if len(parts) >= 3 and parts[1].strip():
+                yaml_text = parts[1]
+            else:
+                # Pas de frontmatter fermé, traiter comme YAML pur
+                yaml_text = text
+        else:
+            yaml_text = text
+        data = yaml.safe_load(yaml_text)
     except Exception as exc:
         return False, f"YAML error: {exc}"
 

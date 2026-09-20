@@ -1,6 +1,10 @@
 ---
 name: typed-decision-api
 description: "API de décision typée : questions noul (yes/no), choice (classification), score (échelle) avec inférence probabiliste via LLM local. Pattern souverain pour décisions automatisées avec confiance entropique."
+version: "1.0.0"
+status: active
+layer: L4
+type: atom
 parameters:
   question_types: [noul, choice, score]
   noul_range: [0, 1]
@@ -13,6 +17,7 @@ parameters:
 inherits:
   - safe-action-pattern
   - sovereign-vector-memory
+---
 
 # Atom : typed-decision-api
 
