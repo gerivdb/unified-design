@@ -1,0 +1,64 @@
+---
+name: pipeline-session-boot-closeout
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPIPELINE_SESSION_BOOT_CLOSEOUT_20260920
+description: >
+  Pipeline session boot/closeout : exécute les checks BOOT au démarrage et
+  la clôture à la fin de session. Inclut TALEX, WAZAA, 5sexter, auto-commit,
+  push optionnel.
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: boot-checks
+    description: "Exécute les checks BOOT (TALEX, WAZAA, 5sexter)"
+  - name: closeout
+    description: "Clôture de session : auto-commit, push optionnel"
+  - name: git-status
+    description: "Vérifie le statut git"
+states:
+  - name: BOOT
+    gate_to_next: BOOT_OK
+  - name: WORK
+    gate_to_next: WORK_DONE
+  - name: CLOSEOUT
+    gate_to_next: CLOSEOUT_OK
+functions:
+  - id: F1
+    name: BOOT_CHECKS
+    state: BOOT
+    description: "Exécute les checks BOOT"
+  - id: F2
+    name: WORK
+    state: WORK
+    description: "Travail de session"
+  - id: F3
+    name: CLOSEOUT
+    state: CLOSEOUT
+    description: "Clôture de session"
+invariant: "Toute session multi-repo passe par BOOT et CLOSEOUT."
+genes:
+  - id: G1
+    name: boot-first
+    description: "Toujours boot avant de travailler"
+  - id: G2
+    name: closeout-last
+    description: "Toujours closeout après le travail"
+anti_patterns:
+  - missing_gene: boot-first
+    pathology: "Session sans boot → frictions non détectées"
+  - missing_gene: closeout-last
+    pathology: "Session sans closeout → working tree sale"
+cross_references:
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: uses
+  - script: scripts/session_boot.py
+  - design: ecosystem-meta-coherence
+  - design: session-boot-design
+  - workflow: workflow-session-boot-closeout

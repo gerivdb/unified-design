@@ -1,0 +1,94 @@
+---
+name: pipeline-friction-analysis-to-fix
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPIPELINE_FRICTION_ANALYSIS_TO_FIX_20260920
+description: >
+  Pipeline friction analysis to fix : détecte les frictions de session,
+  les classe par sévérité, les priorise, implémente les corrections atomiques,
+  valide les fixes, enregistre les preuves.
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: detect-frictions
+    description: "Détecte les frictions de session via TALEX"
+  - name: classify-frictions
+    description: "Classe les frictions par sévérité"
+  - name: prioritize-fixes
+    description: "Priorise les corrections P1/P2/P3"
+  - name: implement-atomic-tasks
+    description: "Implémente les corrections via tâches atomiques"
+  - name: validate-fixes
+    description: "Valide que les corrections ont résolu les frictions"
+  - name: record-proof
+    description: "Enregistre les preuves dans VOLTX"
+states:
+  - name: DETECT
+    gate_to_next: FRICTIONS_DETECTED
+  - name: CLASSIFY
+    gate_to_next: CLASSIFIED
+  - name: PRIORITIZE
+    gate_to_next: PRIORITIZED
+  - name: IMPLEMENT
+    gate_to_next: IMPLEMENTED
+  - name: VALIDATE
+    gate_to_next: VALIDATED
+  - name: RECORD
+    gate_to_next: RECORDED
+functions:
+  - id: F1
+    name: DETECT_FRICTIONS
+    state: DETECT
+    description: "Détecte les frictions via TALEX"
+  - id: F2
+    name: CLASSIFY_FRICTIONS
+    state: CLASSIFY
+    description: "Classe par sévérité critical/high/medium/low/structural"
+  - id: F3
+    name: PRIORITIZE_FIXES
+    state: PRIORITIZE
+    description: "Priorise P1/P2/P3"
+  - id: F4
+    name: IMPLEMENT_ATOMIC_TASKS
+    state: IMPLEMENT
+    description: "Implémente corrections atomiques"
+  - id: F5
+    name: VALIDATE_FIXES
+    state: VALIDATE
+    description: "Valide que les corrections ont résolu les frictions"
+  - id: F6
+    name: RECORD_PROOF
+    state: RECORD
+    description: "Enregistre preuves dans VOLTX"
+invariant: "Toute friction de session doit être tracée : friction → root cause → fix → proof."
+genes:
+  - id: G1
+    name: detect-first
+    description: "Toujours détecter avant de corriger"
+  - id: G2
+    name: causal-traceability
+    description: "Toute correction est tracée"
+  - id: G3
+    name: verification-real
+    description: "Toujours valider avec preuve"
+anti_patterns:
+  - missing_gene: detect-first
+    pathology: "Correction sans détection → modifications inutiles"
+  - missing_gene: causal-traceability
+    pathology: "Correction sans traçabilité → impossibilité d'auditer"
+  - missing_gene: verification-real
+    pathology: "Correction déclarée réussie sans preuve → échec silencieux"
+cross_references:
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: uses
+  - script: scripts/friction_analyzer_session.py
+  - script: scripts/session_friction_talex_analyzer.py
+  - design: ecosystem-meta-coherence
+  - citizen: meta-coherence-auditor
+  - workflow: workflow-friction-to-fix
