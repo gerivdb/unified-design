@@ -472,7 +472,13 @@ designs:
   intent_hash: 0xDESIGN_SESSION_BOOT_20260920
   consumers: []
   profile: ACTIVE
-piliers:
+ - name: meta-designer-role
+   path: designs/meta-designer-role.yaml
+   version: 1.0.0
+   intent_hash: 0xDESIGN_META_DESIGNER_ROLE_20260920
+   consumers: []
+   profile: STANDARD
+ piliers:
 - name: Sonar-Driven Design
   abbr: SDD
   role: Observabilite
