@@ -1,6 +1,20 @@
 repos:
   - repo: local
     hooks:
+      - id: bom-check
+        name: UTF-8 BOM Checker
+        entry: python tools/check_bom.py
+        language: system
+        pass_filenames: true
+        files: ^(designs|docs|catalog)/.*\.(yaml|yml|md)$
+        stages: [pre-commit]
+      - id: catalog-check
+        name: Catalog ↔ Filesystem Validator
+        entry: python tools/check_catalog.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
       - id: ascii-fixer
         name: ASCII Fixer (auto-correction)
         entry: python tools/ascii_fix.py --fix

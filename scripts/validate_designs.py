@@ -15,7 +15,9 @@ REQUIRED_FIELDS = {"name", "version", "status", "layer", "description"}
 
 def validate_design(path: Path) -> tuple[bool, str]:
     try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        text = path.read_text(encoding="utf-8")
+        # Ne charger que le premier document YAML (frontmatter)
+        data = next(yaml.safe_load_all(text))
     except Exception as exc:
         return False, f"YAML error: {exc}"
 
