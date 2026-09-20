@@ -1,6 +1,7 @@
 ---
-status: proposed
+status: accepted
 date: "2026-09-20"
+accepted_date: "2026-09-21"
 intent_hash: 0xADR_2026_09_20_001_ARTIFACT_EXTRACTION_MDU
 ---
 
@@ -8,8 +9,9 @@ intent_hash: 0xADR_2026_09_20_001_ARTIFACT_EXTRACTION_MDU
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : proposed  
+**Statut** : accepted  
 **Date** : 2026-09-20  
+**Acceptation** : 2026-09-21  
 
 ---
 

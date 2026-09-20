@@ -1,7 +1,7 @@
 ---
 name: meta-designer-role
 version: "1.0.0"
-status: proposed
+status: active
 layer: L0
 intent_hash: 0xDESIGN_META_DESIGNER_ROLE_20260920
 inherits:

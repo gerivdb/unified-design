@@ -1,7 +1,7 @@
 # ATOM-CONFIDENCE-THRESHOLD
 
 > **IntentHash** : `0xATOM_CONFIDENCE_THRESHOLD_20260920`  
-> **Statut** : proposed  
+> **Statut** : active  
 > **Dépôt** : `gerivdb/unified-design`  
 > **Màj requise si** : statut ADR passe à deprecated ou superseded  
 

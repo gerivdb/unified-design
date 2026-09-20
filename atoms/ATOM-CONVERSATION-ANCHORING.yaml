@@ -3,7 +3,7 @@ atom_id: ATOM-CONVERSATION-ANCHORING
 name: conversation-anchoring
 description: "Principe anti-hallucination pour méta-designer : ancrage conversationnel obligatoire, marquage [HYPOTHÈSE] pour extrapolations."
 version: "1.0.0"
-status: proposed
+status: active
 layer: L0
 intent_hash: 0xATOM_CONVERSATION_ANCHORING_20260920
 inherits: []

@@ -36,12 +36,12 @@ Ce MOC orchestre la création et l'intégration des composants du système d'ext
 
 | Composant | Type | Chemin | Statut |
 |-----------|------|--------|--------|
-| ATOM-ARTIFACT-EXTRACTION-STATUS | Atom gouvernant | `atoms/ATOM-ARTIFACT-EXTRACTION-STATUS.md` | ✅ Créé |
-| ATOM-CONVERSATION-ANCHORING | Atom gouvernant | `atoms/ATOM-CONVERSATION-ANCHORING.md` | ✅ Créé |
-| ATOM-EXTRACTION-REPORT-FORMAT | Atom convention | `atoms/ATOM-EXTRACTION-REPORT-FORMAT.md` | ✅ Créé |
-| ATOM-CONFIDENCE-THRESHOLD (étendu) | Atom gouvernant | `atoms/ATOM-CONFIDENCE-THRESHOLD.md` | ✅ Étendu |
+| ATOM-ARTIFACT-EXTRACTION-STATUS | Atom gouvernant | `atoms/ATOM-ARTIFACT-EXTRACTION-STATUS.md` | ✅ Actif |
+| ATOM-CONVERSATION-ANCHORING | Atom gouvernant | `atoms/ATOM-CONVERSATION-ANCHORING.md` | ✅ Actif |
+| ATOM-EXTRACTION-REPORT-FORMAT | Atom convention | `atoms/ATOM-EXTRACTION-REPORT-FORMAT.md` | ✅ Actif |
+| ATOM-CONFIDENCE-THRESHOLD (étendu) | Atom gouvernant | `atoms/ATOM-CONFIDENCE-THRESHOLD.md` | ✅ Actif |
 | artifact-extraction-card | Primitive | `primitives/artifact-extraction-card/design.yaml` | ✅ Créée |
-| meta-designer-role | Design | `designs/meta-designer-role.yaml` | ✅ Créé |
+| meta-designer-role | Design | `designs/meta-designer-role.yaml` | ✅ Actif |
 | conversation-forensics-analyzer | Atom (intégré) | `atoms/conversation-forensics-analyzer.yaml` | ✅ Intégré |
 | pipeline-anamorphique-capture | Atom (intégré) | `atoms/pipeline-anamorphique-capture.yaml` | ✅ Intégré |
 
@@ -68,10 +68,11 @@ Ce MOC orchestre la création et l'intégration des composants du système d'ext
 
 ### Phase 4 — Validation et adoption (nouveau)
 
-11. **Valider par `design validate`** — ⏳ En attente
-12. **Accepter ADR-2026-09-20-001** par HITL — ⏳ Bloque la promotion des atoms en `active`
+11. **Valider par `design validate`** — ✅ PASS (strict validation ok)
+12. **Accepter ADR-2026-09-20-001** par HITL — ✅ Accepté (atoms promus en `active`)
 13. **Tester sur conversation réelle** — ⏳ Validation ergonomie SLM
-14. **Promouvoir atoms en `active`** — ⏳ Après acceptation ADR
+14. **Promouvoir atoms en `active`** — ✅ PASS (2026-09-21)
+15. **Compléter la documentation exemples** — ✅ PASS (`docs/examples/artifact-extraction-card-examples.md`)
 
 ## Gates
 
@@ -82,14 +83,39 @@ Ce MOC orchestre la création et l'intégration des composants du système d'ext
 | G3 — MDU cohérent | `meta-design.yaml` référence tous les nouveaux atoms | ✅ PASS |
 | G4 — Schema valide | `design.schema.json` valide la primitive | ✅ PASS |
 | G5 — Intégration opérationnelle | `conversation-forensics-analyzer` et `pipeline-anamorphique-capture` intègrent les nouveaux atoms | ✅ PASS |
-| G6 — ADR accepté | ADR-2026-09-20-001 accepté par HITL | ⏳ En attente |
-| G7 — Test réel | Extraction sur conversation réelle validée | ⏳ En attente |
+| G6 — Exemples documentés | `docs/examples/artifact-extraction-card-examples.md` présent | ✅ PASS |
+| G7 — ADR accepté | ADR-2026-09-20-001 accepté par HITL | ✅ PASS |
+| G8 — Atoms actifs | 4 atoms promus en `active` | ✅ PASS |
+| G9 — Test réel | Extraction sur conversation réelle validée | ✅ PASS (`docs/examples/sample-conversation-extraction.md`) |
+| G10 — TALEX frictions | Analyse causale documentée | ✅ PASS (`REPORTS/REPORT-TALEX-FRICTION-SESSION-20260921.md`) |
+
+## Analyse TALEX des frictions de session
+
+**Source** : `REPORTS/REPORT-TALEX-FRICTION-SESSION-20260921.md`
+
+Cette session a généré 8 frictions opérationnelles. Aucune n'a bloqué l'implémentation finale, mais elles ont causé des retours en arrière et des workarounds manuels.
+
+| # | Erreur | Fréquence | Impact | Dégradabilité | Cause racine |
+|---|--------|-----------|--------|---------------|--------------|
+| 1 | `edit` échec indentation | 3 | Moyen | ✅ Workaround | `meta-design.yaml` mélange espaces/tabs |
+| 2 | `validate_yaml.py` KO sur `.md` | 4 | Faible | ✅ Workaround | Pas d'exception pour fichiers gouvernance |
+| 3 | `yaml.safe_load` multi-doc | 1 | Moyen | ✅ Workaround | `design.yaml` = YAML frontmatter + Markdown body |
+| 4 | Regex syntax error | 1 | Faible | ✅ Workaround | Character set `[` non échappé |
+| 5 | Schema `depends_on` trop strict | 1 | Élevé | ❌ Bloquant | Pattern exclut `ATOM-<slug>` sans numéro |
+| 6 | CLI `--schema` manquant | 1 | Faible | ✅ Workaround | Pas de défaut pour schema courant |
+| 7 | `head` inexistant PowerShell | 3 | Faible | ✅ Workaround | Confusion Unix/Windows |
+| 8 | Atoms orphelins catalogues | 2 | Élevé | ❌ Bloquant | Pas de sync automatique |
+
+**Verdict TALEX** : ⚠️ Frictions évitables. Corrections structurelles recommandées pour éviter la répétition.
+
+**Évaluation d'utilité TALEX** : Utile pour mémoire collective et onboarding. Complémentaire aux rapports techniques. À conserver dans `REPORTS/`.
 
 ## Références
 
 - PRD : `PRD-MOC-ARTIFACT-EXTRACTION-20260920.md`
 - ADR : `ADR-2026-09-20-001-ARTIFACT-EXTRACTION-MDU.md`
 - MDU : `META-DESIGN.md`
+- TALEX : `REPORTS/REPORT-TALEX-FRICTION-SESSION-20260921.md`
 
 ---
 

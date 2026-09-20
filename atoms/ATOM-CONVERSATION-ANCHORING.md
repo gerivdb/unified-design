@@ -1,7 +1,7 @@
 # ATOM-CONVERSATION-ANCHORING
 
 > **IntentHash** : `0xATOM_CONVERSATION_ANCHORING_20260920`  
-> **Statut** : proposed  
+> **Statut** : active  
 > **Dépôt** : `gerivdb/unified-design`  
 > **Màj requise si** : statut ADR passe à deprecated ou superseded  
 

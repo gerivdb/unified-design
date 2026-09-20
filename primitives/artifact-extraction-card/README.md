@@ -47,19 +47,11 @@ Grille 16 champs pour fiche tout artefact détecté lors d'une extraction conver
 | 7 | Priorité |
 | 8 | Confiance |
 
-## Exemple
+## Exemples
 
-```yaml
-# Exemple de fiche complète
-nom_id: "artifact-extraction-card"
-type: "primitive"
-statut: "actif"
-description: "Grille 16 champs pour extraction d'artefacts."
-structure_causale: "Conversation -> Extraction -> Fiche -> Validation"
-dependances: ["ATOM-CONFIDENCE-THRESHOLD", "ATOM-CONVERSATION-ANCHORING"]
-priorite: "P0"
-confiance: "certain"
-```
+- Exemple complet 16 champs : `docs/examples/artifact-extraction-card-examples.md#exemple-1--design-complet`
+- Variante courte 8 champs : `docs/examples/artifact-extraction-card-examples.md#exemple-2--design-courte-8-champs`
+- Cas à confirmer : `docs/examples/artifact-extraction-card-examples.md#exemple-3--design-a-confirmer`
 
 ## Intégration MDU
 
