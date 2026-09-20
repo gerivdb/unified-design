@@ -5,4 +5,5 @@
 | PRD-CAUSAL-RESOLUTION-METHODOLOGY-2026-08-29 | Causal Resolution Methodology | draft |
 | PRD-DESIGNS-COMPLETION-2026-08-24 | Designs Completion | approved |
 | PRD-MOC-MDU-GAPS-2026-08-16 | MDU Gaps MOC | draft |
+| PRD-MOC-JEVX-SOVEREIGN-OVERLAY-20260920 | JEVX Sovereign Overlay | proposed |
 | PRD-UNIFIED-DESIGN-GOVERNANCE-GAPS-2026-08-16 | Unified Design Governance Gaps | approved |
