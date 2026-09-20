@@ -313,6 +313,8 @@ git push origin main
 | jevx | 1.0.0 | Decision-engine souverain JEVX : surcouche locale sur upstream LocalJev, API Jev-compatible, questions typées, probabilités normalisées, confiance entropique |
 | jevx-engineering | 1.0.0 | Pattern d'ingénierie JEVX : surcouche décisionnelle souveraine, constrained-parallel-decoding, sovereign-adapter-pattern |
 | jevx-backend-matrix | 1.0.0 | Matrice de sélection backend JEVX : mapping cas d'usage → backend recommandé (NanoJev, jevlike, minojev, jev_local) |
+| constrained-parallel-decoding | 1.0.0 | Décodage parallèle contraint : préremplir le contexte une fois, diffuser le KV cache par champ, évaluer tous les champs dans un seul batch |
+| sovereign-adapter-pattern | 1.0.0 | Pattern d'adaptateur souverain : traduit l'état Jev en prompt de classification, valide JSON, normalise probabilités. Transposition Python de localjev |
 | kg-causal-engine | 1.0.0 | Architecture KG-CAUSAL : pipeline CLM, do-calculus, résolution conflits, flux entrants/sortants | DRAFT |
 | causal-semantic-bridge | 1.0.0 | Pont KG-CAUSAL ↔ VERSES : annotation causale des concepts sémantiques | DRAFT |
 | narrative-causal-fusion | 1.0.0 | Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité | DRAFT |

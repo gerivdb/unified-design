@@ -707,3 +707,21 @@ entries:
   status: active
   type: design
   updated: '2026-09-20'
+- id: jevx-backend-matrix
+  source_path: designs/jevx-backend-matrix.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'
+- id: constrained-parallel-decoding
+  source_path: primitives/constrained-parallel-decoding/design.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-20'
+- id: sovereign-adapter-pattern
+  source_path: primitives/sovereign-adapter-pattern/design.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-20'

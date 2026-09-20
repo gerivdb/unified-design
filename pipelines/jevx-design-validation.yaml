@@ -1,0 +1,49 @@
+---
+name: jevx-design-validation
+description: >
+  Pipeline de validation ciblée des designs JEVX.
+  Vérifie la cohérence backend matrix, WSL1 compatibility,
+  security guardrails et patterns d'ingénierie.
+version: "1.0.0"
+status: active
+intent_hash: 0xPIPELINE_JEVX_DESIGN_VALIDATION_20260920
+triggers:
+  - pre-commit
+  - pre-push
+  - manual
+  - "before jevx deployment"
+steps:
+  - name: validate_jevx_designs
+    description: "Valider les designs JEVX (jevx.yaml, jevx-engineering.yaml, jevx-backend-matrix.yaml)"
+    command: "python scripts/validate_designs.py --strict designs/jevx.yaml designs/jevx-engineering.yaml designs/jevx-backend-matrix.yaml"
+    continue_on_error: false
+    timeout: 120
+  - name: validate_backend_matrix
+    description: "Vérifier que la matrice backend documente au moins 3 backends Z600-compatibles"
+    command: "python scripts/validate_backend_matrix.py --min-compatible 3"
+    continue_on_error: false
+    timeout: 60
+  - name: validate_wsl1_compatibility
+    description: "Vérifier que chaque backend LEGACY_FIT/PATCHABLE documente wsl1_compat"
+    command: "python scripts/validate_wsl1_compatibility.py"
+    continue_on_error: false
+    timeout: 60
+  - name: validate_security_guardrails
+    description: "Vérifier que les security guardrails sont présentes dans jevx.yaml"
+    command: "python scripts/validate_security_guardrails.py"
+    continue_on_error: false
+    timeout: 60
+  - name: validate_patterns
+    description: "Vérifier que constrained-parallel-decoding et sovereign-adapter-pattern sont documentés"
+    command: "python scripts/validate_patterns.py --patterns constrained-parallel-decoding,sovereign-adapter-pattern"
+    continue_on_error: false
+    timeout: 60
+artifacts:
+  - path: reports/jevx-design-validation-report.json
+    format: json
+  - path: reports/jevx-design-validation-report.md
+    format: markdown
+governance:
+  adr: ADR-0111-JEVX-SOVEREIGN-OVERLAY
+  design: jevx
+  atom: typed-decision-api

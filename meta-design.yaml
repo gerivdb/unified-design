@@ -441,6 +441,18 @@ designs:
     intent_hash: 0xDESIGN_JEVX_BACKEND_MATRIX_20260920
     consumers: []
     profile: STANDARD
+  - name: constrained-parallel-decoding
+    path: primitives/constrained-parallel-decoding/design.yaml
+    version: '1.0.0'
+    intent_hash: 0xPRIMITIVE_CONSTRAINED_PARALLEL_DECODING_20260920
+    consumers: []
+    profile: ACTIVE
+  - name: sovereign-adapter-pattern
+    path: primitives/sovereign-adapter-pattern/design.yaml
+    version: '1.0.0'
+    intent_hash: 0xPRIMITIVE_SOVEREIGN_ADAPTER_PATTERN_20260920
+    consumers: []
+    profile: ACTIVE
 
 
 # Think/Do/Check Architecture

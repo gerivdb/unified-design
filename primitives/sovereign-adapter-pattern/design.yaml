@@ -1,0 +1,108 @@
+---
+name: sovereign-adapter-pattern
+description: >
+  Pattern d'adaptateur souverain : traduit l'état Jev en prompt de classification,
+  valide JSON, normalise probabilités. Transposition Python de l'adaptateur
+  TypeScript localjev.
+version: "1.0.0"
+status: active
+layer: L4
+type: primitive
+intent_hash: 0xPRIMITIVE_SOVEREIGN_ADAPTER_PATTERN_20260920
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - jevx-engineering
+  - typed-decision-api
+capabilities:
+  - name: state-to-prompt
+    description: "Traduit l'état Jev en prompt de classification"
+  - name: json-validation
+    description: "Valide la sortie JSON selon le schéma Jev"
+  - name: probability-normalization
+    description: "Normalise les probabilités de sortie"
+parameters:
+  response_format: json_schema
+  temperature: 0
+  seed_offset: 7919
+  correction_strategy: context_injection
+principles:
+  - P0_SOVEREIGNTY: l'adaptateur local est le seul point de sortie décisionnel
+  - P0_WIRE_COMPATIBILITY: compatible TypeSafe SDK, mais non-équivalent mathématiquement à OpenJev logit read
+  - P0_JSON_STRICT: toute sortie JSON invalide déclenche une correction contextuelle
+  - P0_WSL1_COMPAT: implémenté en Python 3.12 + llama.cpp, compatible WSL1
+---
+
+# Primitive : Sovereign Adapter Pattern
+
+## Description
+
+Pattern d'adaptateur souverain pour JEVX. Traduit l'état Jev en prompt
+de classification, valide JSON, normalise les probabilités. Transposition
+Python de l'adaptateur TypeScript `localjev`.
+
+## Contexte
+
+`localjev` (githubnext) implémente un adaptateur TypeScript qui :
+- Traduit l'état Jev en prompt de classification
+- Valide le JSON de sortie
+- Normalise les probabilités
+
+Ce pattern est transposé en Python pour WSL1/ENV2.
+
+## Architecture
+
+```
++-------------------+     +---------------------+     +-------------------+
+|   JEVX API        | --> |  Sovereign Adapter  | --> |  llama.cpp /      |
+|   (/v1/systemone) |     |  Pattern            |     |  Backend LLM      |
++-------------------+     +---------------------+     +-------------------+
+                                   |
+                                   v
+                          +-------------------+
+                          |  State Compiler   |
+                          |  (Jev -> Prompt)  |
+                          +-------------------+
+                                   |
+                                   v
+                          +-------------------+
+                          |  JSON Validator   |
+                          |  (schema strict)  |
+                          +-------------------+
+                                   |
+                                   v
+                          +-------------------+
+                          |  Probability      |
+                          |  Normalizer       |
+                          +-------------------+
+```
+
+## Mécanisme
+
+1. **State Compiler** : Traduit l'état Jev (noul/choice/score) en prompt de classification
+2. **LLM Inference** : Appelle le backend via llama.cpp / OpenAI-compatible API
+3. **JSON Validator** : Valide la sortie selon le schéma JSON strict
+4. **Probability Normalizer** : Normalise les probabilités, calcule la confiance entropique
+5. **Retry Loop** : Si JSON invalide, injection du message d'erreur + retry (max 2)
+
+## Contraintes
+
+- `response_format` : json_schema strict
+- `temperature` : 0
+- `seed_offset` : 7919
+- `correction_strategy` : context_injection
+- `max_retries` : 2
+- WSL1 compatible : Python 3.12 + llama.cpp AVX1
+
+## Références
+
+- `githubnext/localjev` : adaptateur TypeScript original
+- `designs/jevx-engineering.yaml` : composant `sovereign-adapter-pattern`
+- `designs/jevx-backend-matrix.yaml` : backends compatibles
+
+## Governance
+
+- **ADR** : ADR-0111-JEVX-SOVEREIGN-OVERLAY
+- **Design** : jevx-engineering
+- **Atom** : typed-decision-api

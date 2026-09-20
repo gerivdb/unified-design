@@ -1,0 +1,101 @@
+---
+name: constrained-parallel-decoding
+description: >
+  Décodage parallèle contraint pour LLM local : préremplir le contexte une fois,
+  diffuser le KV cache par champ, évaluer tous les champs dans un seul batch.
+  Pattern issu de jevmlx, transposé pour llama.cpp CPU.
+version: "1.0.0"
+status: active
+layer: L4
+type: primitive
+intent_hash: 0xPRIMITIVE_CONSTRAINED_PARALLEL_DECODING_20260920
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - jevx-engineering
+  - typed-decision-api
+capabilities:
+  - name: kv-cache-broadcast
+    description: "Préremplir le contexte une fois, réutiliser le KV cache pour tous les champs"
+  - name: logit-bias-per-field
+    description: "Biais de logits sur les tokens autorisés pour chaque champ"
+  - name: batch-evaluation
+    description: "Évaluer tous les champs dans un seul batch pour latence minimale"
+parameters:
+  max_batch_size: 16
+  logit_bias_per_field: true
+  kv_cache_reuse: true
+  expected_latency_ms: "< 1000"
+principles:
+  - P0_SINGLE_PREFILL: le contexte est prérempli une seule fois pour tous les champs
+  - P0_BATCH_EVALUATION: tous les champs sont évalués dans un seul batch
+  - P0_LOGIT_CONSTRAINT: les logits sont biaisés sur les tokens autorisés par champ
+  - P0_CPU_OPTIMIZED: conçu pour CPU-only, pas de dépendance GPU
+---
+
+# Primitive : Constrained Parallel Decoding
+
+## Description
+
+Pattern de décodage parallèle contraint pour LLM local. Permet d'évaluer
+plusieurs champs de décision en une seule passe, réduisant la latence
+sub-seconde sur CPU.
+
+## Contexte
+
+Issu de `jevmlx` (KV cache broadcast) et transposé pour `llama.cpp` CPU
+via `llama_batch` + logits biaisés.
+
+## Architecture
+
+```
++-------------------+     +---------------------+     +-------------------+
+|   Question        | --> |  Constrained        | --> |  Decision Fields  |
+|   Compiler        |     |  Parallel Decoder   |     |  (noul/choice/score)|
++-------------------+     +---------------------+     +-------------------+
+                                   |
+                                   v
+                          +-------------------+
+                          |  KV Cache         |
+                          |  Broadcast        |
+                          +-------------------+
+                                   |
+                                   v
+                          +-------------------+
+                          |  Logit Bias       |
+                          |  Per Field        |
+                          +-------------------+
+                                   |
+                                   v
+                          +-------------------+
+                          |  Batch Eval       |
+                          |  (single pass)    |
+                          +-------------------+
+```
+
+## Mécanisme
+
+1. **Prefill unique** : Le prompt de contexte est prérempli une fois dans le KV cache
+2. **Broadcast** : Le KV cache est réutilisé pour tous les champs de décision
+3. **Logit bias** : Pour chaque champ, les logits sont biaisés sur les tokens autorisés
+4. **Batch evaluation** : Tous les champs sont évalués dans un seul batch `llama_batch`
+
+## Contraintes
+
+- `max_batch_size` : 16 champs par batch
+- `logit_bias_per_field` : true
+- `kv_cache_reuse` : true
+- `expected_latency_ms` : < 1000 ms sur Z600/ENV2
+
+## Références
+
+- `jevmlx` : KV cache broadcast original
+- `mini-jev` / `jev_local` : llama.cpp CPU
+- `designs/jevx-engineering.yaml` : composant `constrained-parallel-decoding`
+
+## Governance
+
+- **ADR** : ADR-0111-JEVX-SOVEREIGN-OVERLAY
+- **Design** : jevx-engineering
+- **Atom** : typed-decision-api
