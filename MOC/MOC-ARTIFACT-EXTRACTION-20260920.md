@@ -1,8 +1,8 @@
 ---
 type: MOC
-version: "1.0"
+version: "1.2"
 date: "2026-09-20"
-status: draft
+status: in_review
 intent_hash: 0xMOC_ARTIFACT_EXTRACTION_20260920
 ---
 
@@ -10,8 +10,9 @@ intent_hash: 0xMOC_ARTIFACT_EXTRACTION_20260920
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : draft  
+**Statut** : in_review  
 **Date** : 2026-09-20  
+**Version** : 1.2 (évaluation utilité + intégration opérationnelle)
 
 ---
 
@@ -19,45 +20,70 @@ intent_hash: 0xMOC_ARTIFACT_EXTRACTION_20260920
 
 Ce MOC orchestre la création et l'intégration des composants du système d'extraction d'artefacts méta-cohérent.
 
+## Évaluation d'utilité
+
+| Composant | Utilité | Impact | Effort | Justification |
+|-----------|---------|--------|--------|---------------|
+| `ATOM-CONVERSATION-ANCHORING` | ⭐⭐⭐⭐⭐ | P0 | Minimal | Garde-fou anti-hallucination. Sans ancrage, tout artefact extrait risque d'être fantôme. Bloque `PHANTOM_PATH`, `GHOST`. Couplé à `meta-coherence`. |
+| `artifact-extraction-card` | ⭐⭐⭐⭐⭐ | P0 | Minimal | Grille 16 champs = socle méthodologique. Variante courte SLM-friendly. Utilisable immédiatement par tout agent. |
+| `ATOM-ARTIFACT-EXTRACTION-STATUS` | ⭐⭐⭐⭐ | P0 | Minimal | Taxonomie A/B indispensable pour classifier. Sans statut, impossible de distinguer création vs màj vs suppression. |
+| `ATOM-EXTRACTION-REPORT-FORMAT` | ⭐⭐⭐ | P1 | Minimal | Standardise la sortie. Utile pour comparaison et traçabilité, mais moins critique que les 3 P0. |
+| `ATOM-CONFIDENCE-THRESHOLD` étendu | ⭐⭐⭐ | P1 | Minimal | Cadre qualitatif + marquage `[HYPOTHÈSE]`. Extension naturelle du seuil numérique 0.6 existant. |
+| `meta-designer-role` | ⭐⭐⭐ | P1 | Minimal | Formalise un rôle émergent. Documentation utile, pas de code nouveau. |
+| Intégration `meta-design.yaml` | ⭐⭐⭐⭐⭐ | P0 | Minimal | Rend les atoms découvrables et gouvernants. Sans intégration, les atoms restent des fichiers orphelins. |
+
 ## Composants
 
 | Composant | Type | Chemin | Statut |
 |-----------|------|--------|--------|
-| ATOM-ARTIFACT-EXTRACTION-STATUS | Atom gouvernant | `atoms/ATOM-ARTIFACT-EXTRACTION-STATUS.md` | À créer |
-| ATOM-CONVERSATION-ANCHORING | Atom gouvernant | `atoms/ATOM-CONVERSATION-ANCHORING.md` | À créer |
-| ATOM-EXTRACTION-REPORT-FORMAT | Atom convention | `atoms/ATOM-EXTRACTION-REPORT-FORMAT.md` | À créer |
-| ATOM-CONFIDENCE-THRESHOLD (étendu) | Atom gouvernant | `atoms/ATOM-CONFIDENCE-THRESHOLD.md` | À étendre |
-| artifact-extraction-card | Primitive | `primitives/artifact-extraction-card/design.yaml` | À créer |
-| meta-designer-role | Design | `designs/meta-designer-role.yaml` | À créer |
+| ATOM-ARTIFACT-EXTRACTION-STATUS | Atom gouvernant | `atoms/ATOM-ARTIFACT-EXTRACTION-STATUS.md` | ✅ Créé |
+| ATOM-CONVERSATION-ANCHORING | Atom gouvernant | `atoms/ATOM-CONVERSATION-ANCHORING.md` | ✅ Créé |
+| ATOM-EXTRACTION-REPORT-FORMAT | Atom convention | `atoms/ATOM-EXTRACTION-REPORT-FORMAT.md` | ✅ Créé |
+| ATOM-CONFIDENCE-THRESHOLD (étendu) | Atom gouvernant | `atoms/ATOM-CONFIDENCE-THRESHOLD.md` | ✅ Étendu |
+| artifact-extraction-card | Primitive | `primitives/artifact-extraction-card/design.yaml` | ✅ Créée |
+| meta-designer-role | Design | `designs/meta-designer-role.yaml` | ✅ Créé |
+| conversation-forensics-analyzer | Atom (intégré) | `atoms/conversation-forensics-analyzer.yaml` | ✅ Intégré |
+| pipeline-anamorphique-capture | Atom (intégré) | `atoms/pipeline-anamorphique-capture.yaml` | ✅ Intégré |
 
 ## Séquence d'implémentation
 
-### Phase 1 — Atoms P0 (bloquant)
+### Phase 1 — Atoms P0 (bloquant) — ✅ Terminée
 
-1. Créer `ATOM-ARTIFACT-EXTRACTION-STATUS`
-2. Créer `ATOM-CONVERSATION-ANCHORING`
-3. Créer `ATOM-EXTRACTION-REPORT-FORMAT`
-4. Étendre `ATOM-CONFIDENCE-THRESHOLD`
+1. ~~Créer `ATOM-ARTIFACT-EXTRACTION-STATUS`~~
+2. ~~Créer `ATOM-CONVERSATION-ANCHORING`~~
+3. ~~Créer `ATOM-EXTRACTION-REPORT-FORMAT`~~
+4. ~~Étendre `ATOM-CONFIDENCE-THRESHOLD`~~
 
-### Phase 2 — Primitive + Design (dépend Phase 1)
+### Phase 2 — Primitive + Design (dépend Phase 1) — ✅ Terminée
 
-5. Créer primitive `artifact-extraction-card`
-6. Créer design `meta-designer-role`
+5. ~~Créer primitive `artifact-extraction-card`~~
+6. ~~Créer design `meta-designer-role`~~
 
-### Phase 3 — Intégration MDU (dépend Phase 1+2)
+### Phase 3 — Intégration MDU (dépend Phase 1+2) — ✅ Terminée
 
-7. Mettre à jour `meta-design.yaml`
-8. Mettre à jour `design.schema.json` (si nécessaire)
-9. Valider par `design validate`
+7. ~~Mettre à jour `meta-design.yaml`~~
+8. ~~Mettre à jour `design.schema.json` (pattern depends_on étendu)~~
+9. ~~Intégrer dans `conversation-forensics-analyzer`~~
+10. ~~Intégrer dans `pipeline-anamorphique-capture`~~
+
+### Phase 4 — Validation et adoption (nouveau)
+
+11. **Valider par `design validate`** — ⏳ En attente
+12. **Accepter ADR-2026-09-20-001** par HITL — ⏳ Bloque la promotion des atoms en `active`
+13. **Tester sur conversation réelle** — ⏳ Validation ergonomie SLM
+14. **Promouvoir atoms en `active`** — ⏳ Après acceptation ADR
 
 ## Gates
 
-| Gate | Critère |
-|------|---------|
-| G1 — Atoms créés | 3 atoms P0 présents dans `atoms/` |
-| G2 — Primitive créée | `primitives/artifact-extraction-card/design.yaml` valide |
-| G3 — MDU cohérent | `meta-design.yaml` référence tous les nouveaux atoms |
-| G4 — Schema valide | `design.schema.json` valide la primitive |
+| Gate | Critère | Statut |
+|------|---------|--------|
+| G1 — Atoms créés | 3 atoms P0 présents dans `atoms/` | ✅ PASS |
+| G2 — Primitive créée | `primitives/artifact-extraction-card/design.yaml` valide | ✅ PASS |
+| G3 — MDU cohérent | `meta-design.yaml` référence tous les nouveaux atoms | ✅ PASS |
+| G4 — Schema valide | `design.schema.json` valide la primitive | ✅ PASS |
+| G5 — Intégration opérationnelle | `conversation-forensics-analyzer` et `pipeline-anamorphique-capture` intègrent les nouveaux atoms | ✅ PASS |
+| G6 — ADR accepté | ADR-2026-09-20-001 accepté par HITL | ⏳ En attente |
+| G7 — Test réel | Extraction sur conversation réelle validée | ⏳ En attente |
 
 ## Références
 

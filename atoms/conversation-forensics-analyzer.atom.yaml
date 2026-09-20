@@ -1,7 +1,12 @@
 atom_id: conversation-forensics-analyzer
 version: 1.0.0
 type: atom
-description: ''
-profile: STANDARD
+description: "Analyse forensique des conversations pour detecter frictions, bugs, ruptures de chaine. Intègre l'extraction d'artefacts via ATOM-ARTIFACT-EXTRACTION-STATUS et ATOM-CONVERSATION-ANCHORING."
+profile: ACTIVE
 consumers: []
-last_verified: '2026-08-16'
+last_verified: '2026-09-20'
+depends_on:
+  - ATOM-ARTIFACT-EXTRACTION-STATUS
+  - ATOM-CONVERSATION-ANCHORING
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-EXTRACTION-REPORT-FORMAT
