@@ -44,7 +44,7 @@ def validate(meta_path: Path, schema_path: Path) -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Valider meta-design.yaml contre JSON Schema")
-    parser.add_argument("--schema", required=True, help="Chemin vers le schma JSON")
+    parser.add_argument("--schema", default="schemas/meta-design.schema.json", help="Chemin vers le schma JSON (dfaut: schemas/meta-design.schema.json)")
     parser.add_argument("file", help="Fichier meta-design.yaml  valider")
     args = parser.parse_args()
 

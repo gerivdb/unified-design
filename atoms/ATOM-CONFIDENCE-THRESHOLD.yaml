@@ -3,7 +3,7 @@ atom_id: ATOM-CONFIDENCE-THRESHOLD
 name: confidence-threshold
 description: "Seuil de confiance 0.6 minimum pour décision/validation, avec cadre qualitatif certain/probable/hypothèse et marquage [HYPOTHÈSE]."
 version: "1.0.0"
-status: proposed
+status: active
 layer: L0
 intent_hash: 0xATOM_CONFIDENCE_THRESHOLD_20260920
 inherits: []

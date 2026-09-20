@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sync catalog/designs.index.yaml with unified-design filesystem."""
+"""Sync catalog/*.index.yaml with unified-design filesystem."""
 from __future__ import annotations
 
 import hashlib
@@ -37,6 +37,40 @@ def discover_designs(designs_root: Path) -> dict[str, dict]:
     return found
 
 
+def discover_atoms(atoms_root: Path) -> dict[str, dict]:
+    found = {}
+    for path in atoms_root.rglob('*.yaml'):
+        rel = path.relative_to(atoms_root)
+        parts = list(rel.parts)
+        if len(parts) >= 2 and parts[0] == 'L2-PLATFORM' and len(parts) == 2:
+            atom_id = path.stem
+        else:
+            atom_id = '__'.join(parts).replace('/', '__').replace('\\', '__')
+            atom_id = atom_id.replace(' ', '_')
+        found[atom_id] = {
+            'source_path': f'atoms/{rel.as_posix()}',
+            'sha256': sha256(path),
+        }
+    return found
+
+
+def discover_primitives(primitives_root: Path) -> dict[str, dict]:
+    found = {}
+    for path in primitives_root.rglob('*.yaml'):
+        rel = path.relative_to(primitives_root)
+        parts = list(rel.parts)
+        if len(parts) >= 2 and parts[0] == 'L2-PLATFORM' and len(parts) == 2:
+            primitive_id = path.stem
+        else:
+            primitive_id = '__'.join(parts).replace('/', '__').replace('\\', '__')
+            primitive_id = primitive_id.replace(' ', '_')
+        found[primitive_id] = {
+            'source_path': f'primitives/{rel.as_posix()}',
+            'sha256': sha256(path),
+        }
+    return found
+
+
 def load_catalog(catalog_path: Path) -> dict[str, dict]:
     if not catalog_path.exists():
         return {}
@@ -44,7 +78,7 @@ def load_catalog(catalog_path: Path) -> dict[str, dict]:
         data = yaml.safe_load(f) or {}
     entries = {}
     for item in data.get('entries', []):
-        if isinstance(item, dict) and item.get('type') == 'design':
+        if isinstance(item, dict) and item.get('id'):
             entries[item.get('id')] = item
     return entries
 
@@ -57,12 +91,13 @@ def save_catalog(catalog_path: Path, entries: list[dict]) -> None:
 
 def sync_catalog(dry_run: bool = False) -> int:
     repo_root = Path(__file__).resolve().parent.parent
+    results = []
+
+    # Sync designs
     designs_root = repo_root / 'designs'
     catalog_path = repo_root / 'catalog' / 'designs.index.yaml'
-
     found = discover_designs(designs_root)
     current = load_catalog(catalog_path)
-
     new_entries = []
     for design_id, info in found.items():
         if design_id not in current:
@@ -72,25 +107,76 @@ def sync_catalog(dry_run: bool = False) -> int:
                 'source_repo': 'unified-design',
                 'status': 'active',
                 'type': 'design',
-                'updated': '2026-09-20',
+                'updated': '2026-09-21',
             }
             new_entries.append(entry)
-            print(f'ADD {design_id} -> {info["source_path"]}')
+            print(f'ADD design {design_id} -> {info["source_path"]}')
         else:
             new_entries.append(current[design_id])
+    if not dry_run:
+        save_catalog(catalog_path, new_entries)
+    results.append(('designs', len(new_entries), len(found)))
+
+    # Sync atoms
+    atoms_root = repo_root / 'atoms'
+    catalog_path = repo_root / 'catalog' / 'atoms.index.yaml'
+    found = discover_atoms(atoms_root)
+    current = load_catalog(catalog_path)
+    new_entries = []
+    for atom_id, info in found.items():
+        if atom_id not in current:
+            entry = {
+                'id': atom_id,
+                'source_path': info['source_path'],
+                'source_repo': 'unified-design',
+                'status': 'active',
+                'type': 'atom',
+                'updated': '2026-09-21',
+            }
+            new_entries.append(entry)
+            print(f'ADD atom {atom_id} -> {info["source_path"]}')
+        else:
+            new_entries.append(current[atom_id])
+    if not dry_run:
+        save_catalog(catalog_path, new_entries)
+    results.append(('atoms', len(new_entries), len(found)))
+
+    # Sync primitives
+    primitives_root = repo_root / 'primitives'
+    catalog_path = repo_root / 'catalog' / 'primitives.index.yaml'
+    found = discover_primitives(primitives_root)
+    current = load_catalog(catalog_path)
+    new_entries = []
+    for primitive_id, info in found.items():
+        if primitive_id not in current:
+            entry = {
+                'id': primitive_id,
+                'source_path': info['source_path'],
+                'source_repo': 'unified-design',
+                'status': 'active',
+                'type': 'primitive',
+                'updated': '2026-09-21',
+            }
+            new_entries.append(entry)
+            print(f'ADD primitive {primitive_id} -> {info["source_path"]}')
+        else:
+            new_entries.append(current[primitive_id])
+    if not dry_run:
+        save_catalog(catalog_path, new_entries)
+    results.append(('primitives', len(new_entries), len(found)))
 
     if dry_run:
-        print(f'[DRY-RUN] {len(new_entries)} entries, {len(found)} designs on disk')
-        return 0
-
-    save_catalog(catalog_path, new_entries)
-    print(f'[OK] Catalog synced: {len(new_entries)} entries')
+        for kind, total, disk in results:
+            print(f'[DRY-RUN] {kind}: {total} entries, {disk} on disk')
+    else:
+        for kind, total, disk in results:
+            print(f'[OK] {kind} catalog synced: {total} entries')
     return 0
 
 
 def main() -> int:
     import argparse
-    parser = argparse.ArgumentParser(description='Sync catalog/designs.index.yaml')
+    parser = argparse.ArgumentParser(description='Sync catalog/*.index.yaml')
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
     return sync_catalog(dry_run=args.dry_run)

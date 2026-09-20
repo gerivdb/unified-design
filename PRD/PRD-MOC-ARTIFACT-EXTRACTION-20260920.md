@@ -101,9 +101,13 @@ unified-design/
 │   └── ATOM-CONFIDENCE-THRESHOLD.{md,yaml} (étendu)
 ├── primitives/
 │   └── artifact-extraction-card/
-│       └── design.yaml
+│       ├── design.yaml
+│       └── README.md
 ├── designs/
 │   └── meta-designer-role.yaml
+├── docs/
+│   └── examples/
+│       └── artifact-extraction-card-examples.md
 └── meta-design.yaml (mis à jour)
 ```
 
@@ -117,6 +121,27 @@ unified-design/
 | `conversation-forensics-analyzer` | amont | Base d'analyse forensique conversations |
 | `pipeline-anamorphique-capture` | amont | Capture conversations ; extraction concepts |
 
+## Analyse TALEX des frictions de session
+
+**Source** : `REPORTS/REPORT-TALEX-FRICTION-SESSION-20260921.md`
+
+Cette session a généré 8 frictions opérationnelles. Aucune n'a bloqué l'implémentation finale, mais elles ont causé des retours en arrière et des workarounds manuels.
+
+| # | Erreur | Fréquence | Impact | Dégradabilité | Cause racine |
+|---|--------|-----------|--------|---------------|--------------|
+| 1 | `edit` échec indentation | 3 | Moyen | ✅ Workaround | `meta-design.yaml` mélange espaces/tabs |
+| 2 | `validate_yaml.py` KO sur `.md` | 4 | Faible | ✅ Workaround | Pas d'exception pour fichiers gouvernance |
+| 3 | `yaml.safe_load` multi-doc | 1 | Moyen | ✅ Workaround | `design.yaml` = YAML frontmatter + Markdown body |
+| 4 | Regex syntax error | 1 | Faible | ✅ Workaround | Character set `[` non échappé |
+| 5 | Schema `depends_on` trop strict | 1 | Élevé | ❌ Bloquant | Pattern exclut `ATOM-<slug>` sans numéro |
+| 6 | CLI `--schema` manquant | 1 | Faible | ✅ Workaround | Pas de défaut pour schema courant |
+| 7 | `head` inexistant PowerShell | 3 | Faible | ✅ Workaround | Confusion Unix/Windows |
+| 8 | Atoms orphelins catalogues | 2 | Élevé | ❌ Bloquant | Pas de sync automatique |
+
+**Verdict TALEX** : ⚠️ Frictions évitables. Corrections structurelles recommandées pour éviter la répétition.
+
+**Évaluation d'utilité TALEX** : Utile pour mémoire collective et onboarding. Complémentaire aux rapports techniques. À conserver dans `REPORTS/`.
+
 ## Critères d'acceptation
 
 - [x] 3 atoms P0 créés et référencés dans `meta-design.yaml`
@@ -125,8 +150,11 @@ unified-design/
 - [x] Design `meta-designer-role` créé et héritage validé
 - [x] Aucun doublon avec atoms existants (`artifact-synced-loop`, `conversation-forensics-analyzer`)
 - [x] Frontmatter YAML valide pour tous les documents de gouvernance
-- [ ] ADR accepté par HITL (bloque la promotion en `active` des atoms)
-- [ ] Test sur conversation réelle (validation ergonomie SLM)
+- [x] Validation `design validate` passée (`validate_designs.py --strict`)
+- [x] Exemples documentés (`docs/examples/artifact-extraction-card-examples.md`)
+- [x] ADR accepté par HITL (atoms promus en `active`)
+- [x] Test sur conversation réelle (validation ergonomie SLM)
+- [x] Analyse TALEX des frictions documentée (`REPORTS/REPORT-TALEX-FRICTION-SESSION-20260921.md`)
 
 ## Risques
 
@@ -136,6 +164,7 @@ unified-design/
 | Grille 16 champs trop lourde pour SLM | Moyen | Variante courte prévue |
 | Taxonomie A/B non adoptée | Faible | Intégration dans `meta-design.yaml` > `governance_atoms` |
 | ADR non accepté | Élevé | Les atoms restent `proposed` ; bloquent l'usage en production |
+| Frictions récurrentes (edit, YAML, catalogues) | Moyen | Corrections structurelles identifiées dans rapport TALEX |
 
 ## Références
 
@@ -145,6 +174,7 @@ unified-design/
 - `atoms/conversation-forensics-analyzer.yaml`
 - `atoms/pipeline-anamorphique-capture.yaml`
 - `schemas/design.schema.json`
+- `REPORTS/REPORT-TALEX-FRICTION-SESSION-20260921.md`
 - ADR-2026-09-20-001 : Artifact Extraction MDU Extension
 
 ---

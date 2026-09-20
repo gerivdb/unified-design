@@ -1,7 +1,7 @@
 # ATOM-ARTIFACT-EXTRACTION-STATUS
 
 > **IntentHash** : `0xATOM_ARTIFACT_EXTRACTION_STATUS_20260920`  
-> **Statut** : proposed  
+> **Statut** : active  
 > **Dépôt** : `gerivdb/unified-design`  
 > **Màj requise si** : statut ADR passe à deprecated ou superseded  
 

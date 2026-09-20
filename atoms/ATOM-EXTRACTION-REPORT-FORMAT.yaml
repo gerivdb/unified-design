@@ -3,7 +3,7 @@ atom_id: ATOM-EXTRACTION-REPORT-FORMAT
 name: extraction-report-format
 description: "Format de rapport standardisé pour sessions d'extraction d'artefacts : tableau + dépendances + top 5 + roadmap + questions ouvertes."
 version: "1.0.0"
-status: proposed
+status: active
 layer: L0
 intent_hash: 0xATOM_EXTRACTION_REPORT_FORMAT_20260920
 inherits: []

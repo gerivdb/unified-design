@@ -3,7 +3,7 @@ atom_id: ATOM-ARTIFACT-EXTRACTION-STATUS
 name: artifact-extraction-status
 description: "Taxonomie de statut pour artefacts détectés en extraction conversationnelle."
 version: "1.0.0"
-status: proposed
+status: active
 layer: L0
 intent_hash: 0xATOM_ARTIFACT_EXTRACTION_STATUS_20260920
 inherits: []
