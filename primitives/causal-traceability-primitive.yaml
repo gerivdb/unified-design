@@ -1,0 +1,61 @@
+---
+name: causal-traceability-primitive
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPRIMITIVE_CAUSAL_TRACEABILITY_20260920
+description: >
+  Primitive de traçabilité causale : friction → root cause → fix → proof.
+  Garantit que toute correction est traçable de bout en bout.
+inherits:
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-DELTA-CHECK
+capabilities:
+  - name: trace-friction
+    description: "Trace la friction initiale"
+  - name: trace-root-cause
+    description: "Trace la cause racine"
+  - name: trace-fix
+    description: "Trace la correction appliquée"
+  - name: trace-proof
+    description: "Trace la preuve de succès"
+format:
+  friction: "Friction ID + description + timestamp"
+  root_cause: "Root cause + analyse + timestamp"
+  fix: "Fix ID + description + fichiers modifiés + timestamp"
+  proof: "Preuve ID + validation + timestamp + checksum"
+storage:
+  - voltx
+  - governance-hub reports
+  - wal
+invariant: "Toute correction est tracée : friction → root cause → fix → proof."
+genes:
+  - id: G1
+    name: trace-friction
+    description: "Toute friction est tracée dès sa détection"
+  - id: G2
+    name: trace-root-cause
+    description: "Toute cause racine est documentée"
+  - id: G3
+    name: trace-fix
+    description: "Toute correction est tracée"
+  - id: G4
+    name: trace-proof
+    description: "Toute preuve est horodatée et vérifiable"
+anti_patterns:
+  - missing_gene: trace-friction
+    pathology: "Friction non tracée → répétition"
+  - missing_gene: trace-root-cause
+    pathology: "Cause racine ignorée → récidive"
+  - missing_gene: trace-fix
+    pathology: "Correction non tracée → impossibilité d'auditer"
+  - missing_gene: trace-proof
+    pathology: "Preuve absente → échec silencieux"
+cross_references:
+  - design: ecosystem-meta-coherence
+  - citizen: meta-coherence-auditor
+  - pipeline: pipeline-friction-analysis-to-fix
+  - workflow: workflow-friction-to-fix
