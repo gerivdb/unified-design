@@ -310,6 +310,9 @@ git push origin main
 | assistant-load | 1.0.0 | Charge de l'assistant : mesure, patterns de décharge, équilibre dette technique |
 | safe-action-pattern | 1.0.0 | Patron universel d'action : 7 fonctions + 3 états + 1 invariant + 4 gènes |
 | ecosystem-meta-coherence | 1.0.0 | Méta-cohérence écosystémique Think/Do/Check : besoins / exécution / vérification + corrections structurelles et causales |
+| jevx | 1.0.0 | Decision-engine souverain JEVX : surcouche locale sur upstream LocalJev, API Jev-compatible, questions typées, probabilités normalisées, confiance entropique |
+| jevx-engineering | 1.0.0 | Pattern d'ingénierie JEVX : surcouche décisionnelle souveraine, constrained-parallel-decoding, sovereign-adapter-pattern |
+| jevx-backend-matrix | 1.0.0 | Matrice de sélection backend JEVX : mapping cas d'usage → backend recommandé (NanoJev, jevlike, minojev, jev_local) |
 | kg-causal-engine | 1.0.0 | Architecture KG-CAUSAL : pipeline CLM, do-calculus, résolution conflits, flux entrants/sortants | DRAFT |
 | causal-semantic-bridge | 1.0.0 | Pont KG-CAUSAL ↔ VERSES : annotation causale des concepts sémantiques | DRAFT |
 | narrative-causal-fusion | 1.0.0 | Fusion VOLTX ↔ KG-CAUSAL : preuves horodatées annotées par causalité | DRAFT |
@@ -353,6 +356,7 @@ git push origin main
 | ATOM-HARNESS-ENGINEERING-RELIABLE-AGENTS | Atom | Harness Engineering : 6 couches (Contract Validator, Context Compiler, Policy Engine, State Manager, Verification Engine, Trace Recorder) ; modèle probabiliste -> exécutant déterministe |
 | safe-action-gate | Atom | Gate d'action universelle : 7 fonctions + 3 états + 1 invariant + 4 gènes + anti-patrons |
 | ecosystem-meta-coherence-gate | Atom | Méta-cohérence écosystémique Think/Do/Check : besoins / exécution / vérification + corrections structurelles et causales |
+| typed-decision-api | Atom | API de décision typée : questions noul/choice/score, inférence probabiliste via LLM local, confiance entropique, backends souverains (NanoJev, jevlike, minojev, jev_local) |
 
 ### L1-INFRA (nouveaux)
 

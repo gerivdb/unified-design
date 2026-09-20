@@ -423,6 +423,24 @@ designs:
     intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_20260920
     consumers: []
     profile: ACTIVE
+  - name: jevx
+    path: designs/jevx.yaml
+    version: '1.0.0'
+    intent_hash: 0xINTENT_JEVX_SOVEREIGN_OVERLAY_20260919
+    consumers: []
+    profile: STANDARD
+  - name: jevx-engineering
+    path: designs/jevx-engineering.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_JEVX_ENGINEERING_20260920
+    consumers: []
+    profile: STANDARD
+  - name: jevx-backend-matrix
+    path: designs/jevx-backend-matrix.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_JEVX_BACKEND_MATRIX_20260920
+    consumers: []
+    profile: STANDARD
 
 
 # Think/Do/Check Architecture
@@ -585,6 +603,7 @@ governance_atoms:
   - harness-engineering-reliable-agents
   - safe-action-gate
   - ecosystem-meta-coherence-gate
+  - typed-decision-api
 
 
 # Think/Do/Check Architecture
