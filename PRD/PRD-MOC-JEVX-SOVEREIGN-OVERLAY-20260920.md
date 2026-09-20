@@ -43,6 +43,8 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 | L4 | Atom `typed-decision-api` | `atoms/typed-decision-api.yaml` | Créer | ✅ |
 | L5 | Mise à jour `META-DESIGN.md` | `META-DESIGN.md` | Modifier | ✅ |
 | L6 | Mise à jour `meta-design.yaml` | `meta-design.yaml` | Modifier | ✅ |
+| L7 | Intégration KIX | `D:\DO\WEB\TOOLS\L2-PLATFORM\KIX\config\runners.yaml` | Modifier | ✅ |
+| L7 | Intégration KIX | `D:\DO\WEB\TOOLS\L2-PLATFORM\KIX\config\runners.yaml` | Modifier | ✅ |
 
 ## 3. Tâches
 
@@ -59,7 +61,7 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 ### Phase C — Validation et intégration
 7. Validation YAML : `gerivdb design validate --strict` sur tous les designs
 8. Validation design coverage : pre-commit hook
-9. Intégration KIX : enregistrement dans KIX Service Discovery
+9. Intégration KIX : enregistrement dans `config/runners.yaml` + vérification `/runners`
 10. Intégration KG-CAUSAL : connexion observation/effect channels
 
 ## 4. Contraintes
@@ -114,7 +116,7 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 - [x] 2026-09-20T20:33:14+02:00 — Validation `gerivdb design validate --strict` PASS sur `jevx.yaml`, `jevx-engineering.yaml`, `jevx-backend-matrix.yaml`
 - [x] 2026-09-20T20:33:14+02:00 — Correction YAML `jevx-backend-matrix.yaml` (ram_gb scalar)
 - [x] 2026-09-20T20:33:14+02:00 — Atom `typed-decision-api.yaml` référencé MDU (validateur designs ne cible pas `atoms/`)
-- [ ] 2026-09-20T20:33:14+02:00 — Intégration KIX (non applicable : repo KIX absent de L1-INFRA et SOT)
+- [x] 2026-09-20T20:54:00+02:00 — Intégration KIX : enregistrement dans `config/runners.yaml` + vérification `/runners` PASS
 
 ## 9. Évaluation
 
@@ -130,8 +132,9 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 | 8. Pre-commit hooks passent | ✅ | PASS sur commits atomiques |
 | 9. ADR-0111 référencée | ✅ | Référencée dans tous les designs |
 | 10. Proof-of-Life horodatés | ✅ | Section 8 complétée |
+| 11. Intégration KIX | ✅ | `config/runners.yaml` + vérification `/runners` PASS |
 
-**Verdict** : ✅ **Phase A + Phase B + Phase C (validation) complètes** — Designs, atom, enregistrement MDU et validation ciblée implémentés. Intégration KIX en suspens (repo absent).
+**Verdict** : ✅ **Phase A + Phase B + Phase C + Intégration KIX complètes** — Designs, atom, enregistrement MDU, validation ciblée et intégration KIX implémentés.
 
 ## 10. Références
 
