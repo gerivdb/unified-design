@@ -1,185 +1,141 @@
 ---
-type: MAPPING
-version: "1.0.0"
-date: "2026-09-20"
-status: active
-intent_hash: 0xMAPPING_ONTOLOGY_KEEL_20260920
-contract: "unified-design/contracts/ontology-keel.yaml"
----
-
-name: ontology-keel-mapping
-description: >
-  Mapping explicite des concepts ONTOLOGY vers les mots-cles utilises dans KEEL.
-  Ce fichier est la reference unique pour la validation pre-compile R11.
-  Tout concept ONTOLOGY absent de ce mapping est considere comme non expose
-  dans KEEL et ne doit pas etre reference dans les fichiers KEEL.
-
-ontology_source: "ONTOLOGY/ONTOLOGY.yaml"
-keel_validation_hook: "KEEL/scripts/validate-ontology-concepts.py"
-
+# Mapping ONTOLOGY concepts -> KEEL keywords
+# Source de vérité pour le hook validate-ontology-concepts.py
+# ADR-013: accepted
+# IntentHash: 0xCONTRACT_ONTOLOGY_KEEL_20260920
 mapping:
   - ontology_id: decision_typed
-    ontology_name: decision_typed
+    ontology_name: Decision Typed
     keel_keywords:
-      - "decision_typed"
-      - "DECISION_TYPED"
+      - decision_typed
+      - typed_decision
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: systemone
-    ontology_name: systemone
+    ontology_name: System One
     keel_keywords:
-      - "systemone"
-      - "SYSTEMONE"
-      - "JEVX"
+      - systemone
+      - system_one
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: localjev
-    ontology_name: localjev
+    ontology_name: Local Jev
     keel_keywords:
-      - "localjev"
-      - "LOCALJEV"
+      - localjev
+      - local_jev
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: jev
     ontology_name: JEVX
     keel_keywords:
-      - "jev"
-      - "JEVX"
-      - "jevx"
+      - jev
+      - jevx
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: pseudo-lm-from-role
     ontology_name: Pseudo-LM From Role
     keel_keywords:
-      - "pseudo-lm-from-role"
-      - "PSEUDO_LM_FROM_ROLE"
-      - "pseudo_lm_from_role"
+      - pseudo_lm_from_role
+      - pseudo-lm-from-role
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: dry-run-simulation
     ontology_name: Dry-run Simulation
     keel_keywords:
-      - "dry-run-simulation"
-      - "DRY_RUN_SIMULATION"
-      - "dry_run_simulation"
+      - dry_run_simulation
+      - dry-run-simulation
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: loop-engineering
     ontology_name: Loop Engineering
     keel_keywords:
-      - "loop-engineering"
-      - "LOOP_ENGINEERING"
-      - "loop_engineering"
+      - loop_engineering
+      - loop-engineering
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: CLM
     ontology_name: Causal Loop Macro
     keel_keywords:
-      - "CLM"
-      - "clm"
-      - "Causal Loop Macro"
+      - clm
+      - causal_loop_macro
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: DLM
     ontology_name: Dry-run Language Model
     keel_keywords:
-      - "DLM"
-      - "dlm"
-      - "Dry-run Language Model"
+      - dlm
+      - dry_run_language_model
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: LOOPX
     ontology_name: Loop Orchestrator
     keel_keywords:
-      - "LOOPX"
-      - "loopx"
-      - "Loop Orchestrator"
+      - loopx
+      - loop_orchestrator
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: OLM
     ontology_name: Ontology Language Model
     keel_keywords:
-      - "OLM"
-      - "olm"
-      - "Ontology Language Model"
+      - olm
+      - ontology_language_model
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: Axe19
     ontology_name: Axe 19 - Éthique
     keel_keywords:
-      - "Axe19"
-      - "axe19"
-      - "AXE_19"
+      - axe19
+      - axe_19
+      - ethics
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: intent-hash
     ontology_name: IntentHash
     keel_keywords:
-      - "intent-hash"
-      - "INTENT_HASH"
-      - "intent_hash"
-      - "IntentHash"
+      - intent_hash
+      - intent-hash
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: causal-lineage
     ontology_name: Causal Lineage
     keel_keywords:
-      - "causal-lineage"
-      - "CAUSAL_LINEAGE"
-      - "causal_lineage"
+      - causal_lineage
+      - causal-lineage
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: CTULU
     ontology_name: CTULU
     keel_keywords:
-      - "CTULU"
-      - "ctulu"
+      - ctulu
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: KG-L
     ontology_name: Knowledge Graph Causal
     keel_keywords:
-      - "KG-L"
-      - "kg-l"
-      - "KG_L"
-      - "kg_l"
-      - "Knowledge Graph Causal"
+      - kg_l
+      - kg-l
+      - knowledge_graph_causal
     status: active
     introduced: "2026-09-20"
 
   - ontology_id: ONTOLOGY
     ontology_name: ONTOLOGY
     keel_keywords:
-      - "ONTOLOGY"
-      - "ontology"
+      - ontology
     status: active
     introduced: "2026-09-20"
-
-change_management:
-  add_concept:
-    - "Ajouter l'entree dans ONTOLOGY.yaml"
-    - "Ajouter le mapping dans ce fichier"
-    - "Re-valider le test d'integration"
-  remove_concept:
-    - "Retirer l'entree de ONTOLOGY.yaml"
-    - "Retirer le mapping de ce fichier"
-    - "Re-valider le test d'integration"
-  rename_concept:
-    - "Renommer dans ONTOLOGY.yaml"
-    - "Mettre a jour l'ontology_id et ontology_name dans ce fichier"
-    - "Re-valider le test d'integration"
