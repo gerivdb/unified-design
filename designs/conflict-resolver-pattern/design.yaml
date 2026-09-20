@@ -1,5 +1,74 @@
+---
 name: conflict-resolver-pattern
-version: 1.0.0
+description: >
+  Pattern de résolution de conflits git. Définit les stratégies de résolution
+  (main_authority, manual, cherry-pick) et les règles de priorité
+  pour les fichiers modifiés. Intègre la détection de saturation de contenu
+  et la prévention par dryrun causal.
+version: "1.0.0"
 status: active
+layer: L0
+type: pattern
 profile: STANDARD
-consumers: []
+intent_hash: 0xDESIGN_CONFLICT_RESOLVER_PATTERN_20260920
+inherits:
+  - merge-fork-balance
+  - branch-orphan-conflict-resolver
+depends_on:
+  - meta-coherence
+  - kg-causal
+capabilities:
+  - name: conflict-detection
+    description: "Détecte les conflits git lors d'un merge"
+    parameters:
+      methods: [git_merge_no_commit, git_status, diff3]
+  - name: conflict-resolution-strategies
+    description: "Stratégies de résolution de conflits"
+    parameters:
+      strategies: [main_authority, manual, cherry-pick, ours, theirs]
+      default_strategy: main_authority
+  - name: content-saturation-analysis
+    description: "Analyse la saturation de contenu pour choisir la stratégie"
+    parameters:
+      overlap_threshold: 0.8
+      unique_files_threshold: 0
+  - name: dryrun-prevention
+    description: "Prévention des conflits par dryrun causal avant merge"
+    parameters:
+      dryrun_before_merge: true
+      max_conflicts_allowed: 5
+principles:
+  - P0_MAIN_AUTHORITY: main fait autorité sur le contenu canonique
+  - P0_TEST_MERGE_PREVENTIVE: tester le merge avec --no-commit --no-ff avant fusion
+  - P0_CONFLICT_LIMIT: max 5 conflits par merge, sinon STOP
+  - P0_DRYRUN_BEFORE_MERGE: dryrun causal obligatoire avant tout merge
+  - P0_HITL_ESCALATION: conflit non résolu → HITL obligatoire
+constraints:
+  - max_conflicts_per_merge: 5
+  - dryrun_required: true
+  - hitl_required_for_complex_conflicts: true
+  - main_authority_default: true
+workflow:
+  - step: detect_conflicts
+    action: git merge --no-commit --no-ff <branch>
+    output: conflict_list
+  - step: analyze_saturation
+    action: git log main..<branch> --oneline
+    output: unique_commits
+  - step: choose_strategy
+    action: main_authority | manual | cherry-pick
+    condition: "overlap > 0.8 ? main_authority : manual"
+  - step: resolve_conflicts
+    action: git show main:<file> > <file> | git cherry-pick <sha> | manual
+    output: resolved_files
+  - step: validate_resolution
+    action: dryrun causal sur fichiers modifiés
+    output: validation_report
+  - step: finalize_merge
+    action: 'git commit -m "merge: integrate <branch> into main"'
+    condition: validation_passed
+governance:
+  adr: ADR-2026-08-28-001-BRANCH-RESURRECTION-PROTOCOL
+  design: branch-orphan-conflict-resolver
+  atom: ATOM-053-workspace-draft-convention
+  workflow: dryrun-causal-audit

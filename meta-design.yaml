@@ -453,6 +453,24 @@ designs:
     intent_hash: 0xPRIMITIVE_SOVEREIGN_ADAPTER_PATTERN_20260920
     consumers: []
     profile: ACTIVE
+  - name: branch-orphan-conflict-resolver
+    path: designs/branch-orphan-conflict-resolver/design.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_BRANCH_ORPHAN_CONFLICT_RESOLVER_20260920
+    consumers: []
+    profile: ACTIVE
+  - name: merge-fork-balance
+    path: designs/merge-fork-balance/design.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_MERGE_FORK_BALANCE_20260920
+    consumers: []
+    profile: ACTIVE
+  - name: conflict-resolver-pattern
+    path: designs/conflict-resolver-pattern/design.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_CONFLICT_RESOLVER_PATTERN_20260920
+    consumers: []
+    profile: ACTIVE
 
 
 # Think/Do/Check Architecture

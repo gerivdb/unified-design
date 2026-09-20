@@ -325,6 +325,9 @@ git push origin main
 | deepmind-co-scientist-reliability | 1.0.0 | Fiabilité agents DeepMind Co-Scientist : vérification déterministe, fabrication 4%, 0.0% fabrication complète |
 | agent-swarm-self-improving-loop | 1.0.0 | Architecture agentique auto-améliorante : loop auto-arrêtante, graphe mémoire, correction accumulée, Agent Swarm 300/4000, SKILL.md versionné |
 | harness-engineering-reliable-agents | 1.0.0 | Harness Engineering : 6 couches (Contract Validator, Context Compiler, Policy Engine, State Manager, Verification Engine, Trace Recorder) ; modèle probabiliste -> exécutant déterministe |
+| branch-orphan-conflict-resolver | 1.0.0 | Résolution causale des branches orphelines et conflits cross-repo : reflog, saturation analysis, resurrection protocol, dryrun prevention |
+| merge-fork-balance | 1.0.0 | Équilibre des forks et merges cross-repo : détection orphelins, saturation analysis, stratégies resurrection/absorption/cherry-pick |
+| conflict-resolver-pattern | 1.0.0 | Pattern de résolution de conflits git : stratégies main_authority/manual/cherry-pick, détection saturation, prévention dryrun causal |
 
 ### Atoms L0-L3 (extraits)
 

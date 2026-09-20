@@ -1,5 +1,57 @@
+---
 name: merge-fork-balance
-version: 1.0.0
+description: >
+  Équilibre des forks et merges cross-repo. Détecte les branches orphelines,
+  analyse la saturation de contenu, et applique la stratégie de résolution
+  appropriée (resurrection, absorption, cherry-pick, suppression).
+  Intègre le protocol de resurrection de branches et la prévention des conflits.
+version: "1.0.0"
 status: active
+layer: L0
+type: pattern
 profile: STANDARD
-consumers: []
+intent_hash: 0xDESIGN_MERGE_FORK_BALANCE_20260920
+inherits:
+  - conflict-resolver-pattern
+  - branch-orphan-conflict-resolver
+  - limbo-transit
+depends_on:
+  - meta-coherence
+  - kg-causal
+  - kix
+capabilities:
+  - name: orphan-detection
+    description: "Détecte les branches orphelines via reflog et branch listing"
+    parameters:
+      methods: [reflog, remote_branch_list, pr_status]
+  - name: content-saturation-analysis
+    description: "Analyse la saturation de contenu entre branche orpheline et main"
+    parameters:
+      overlap_threshold: 0.8
+      unique_files_threshold: 0
+  - name: resurrection-protocol
+    description: "Ressuscite les branches orphelines avec contenu utile absent de main"
+    parameters:
+      reflog_sha_lookup: true
+      test_merge_no_commit: true
+  - name: conflict-prevention
+    description: "Prévention des conflits par dryrun causal avant merge"
+    parameters:
+      dryrun_before_merge: true
+      branch_taxonomy_check: true
+principles:
+  - P0_REFLOG_FIRST: toujours vérifier git reflog avant de déclarer une branche perdue
+  - P0_CONTENT_AUTHORITY: main fait autorité sur le contenu canonique
+  - P0_RESURRECTION_BEFORE_DELETION: tenter la resurrection avant suppression
+  - P0_TEST_MERGE_PREVENTIVE: tester le merge avec --no-commit --no-ff avant fusion
+  - P0_ATOMIC_COMMITS: commits atomiques <= 3 fichiers, max 30 min sans commit
+constraints:
+  - max_branches_orphaned: 10
+  - max_conflicts_per_merge: 5
+  - resurrection_ttl_days: 30
+  - auto_delete_after_merge: true
+governance:
+  adr: ADR-2026-08-28-001-BRANCH-RESURRECTION-PROTOCOL
+  design: branch-orphan-conflict-resolver
+  atom: ATOM-053-workspace-draft-convention
+  workflow: dryrun-causal-audit

@@ -1,0 +1,93 @@
+---
+name: branch-orphan-conflict-resolver
+description: >
+  Résolution causale des branches orphelines et conflits cross-repo.
+  Détecte les branches orphelines via reflog, analyse la saturation de contenu,
+  et applique la stratégie de résolution appropriée (resurrection, absorption,
+  cherry-pick, suppression). Prévention par dryrun causal avant merge.
+version: "1.0.0"
+status: active
+layer: L0
+type: pattern
+profile: STANDARD
+intent_hash: 0xDESIGN_BRANCH_ORPHAN_CONFLICT_RESOLVER_20260920
+inherits:
+  - merge-fork-balance
+  - conflict-resolver-pattern
+  - limbo-transit
+  - ecosystem-meta-coherence
+depends_on:
+  - meta-coherence
+  - kg-causal
+  - kix
+capabilities:
+  - name: orphan-detection
+    description: "Détecte les branches orphelines via git reflog et branch listing"
+    parameters:
+      methods: [reflog, remote_branch_list, pr_status]
+      auto_detect: true
+  - name: content-saturation-analysis
+    description: "Analyse la saturation de contenu entre branche orpheline et main"
+    parameters:
+      overlap_threshold: 0.8
+      unique_files_threshold: 0
+      commit_ancestry_check: true
+  - name: resurrection-protocol
+    description: "Ressuscite les branches orphelines avec contenu utile absent de main"
+    parameters:
+      reflog_sha_lookup: true
+      test_merge_no_commit: true
+      conflict_resolution: main_authority
+  - name: conflict-prevention
+    description: "Prévention des conflits par dryrun causal avant merge"
+    parameters:
+      dryrun_before_merge: true
+      branch_taxonomy_check: true
+      cross_repo_validation: true
+  - name: absorption-policy
+    description: "Politique d'absorption du contenu orphelin vers main"
+    parameters:
+      main_authority: true
+      preserve_feature_additions: true
+      drop_redundant: true
+principles:
+  - P0_REFLOG_FIRST: toujours vérifier git reflog avant de déclarer une branche perdue
+  - P0_CONTENT_AUTHORITY: main fait autorité sur le contenu canonique
+  - P0_RESURRECTION_BEFORE_DELETION: tenter la resurrection avant suppression
+  - P0_TEST_MERGE_PREVENTIVE: tester le merge avec --no-commit --no-ff avant fusion
+  - P0_ATOMIC_COMMITS: commits atomiques <= 3 fichiers, max 30 min sans commit
+  - P0_CROSS_REPO_VALIDATION: valider les chemins et dépendances cross-repo avant merge
+  - P0_DRYRUN_BEFORE_MERGE: dryrun causal obligatoire avant tout merge vers main
+constraints:
+  - max_branches_orphaned: 10
+  - max_conflicts_per_merge: 5
+  - resurrection_ttl_days: 30
+  - auto_delete_after_merge: true
+  - branch_taxonomy_required: true
+workflow:
+  - step: detect_orphans
+    action: git reflog | grep deleted/pruned/branch
+    output: sha_list
+  - step: resurrect_branch
+    action: git branch <name> <sha>
+    condition: sha_found AND content_useful
+  - step: test_merge_preventive
+    action: git merge --no-commit --no-ff <branch>
+    output: conflict_list
+  - step: diagnose_saturation
+    action: git log main..<branch> --oneline
+    output: unique_commits
+  - step: resolve_conflicts
+    action: main_authority | manual | cherry-pick
+    condition: conflict_list NOT EMPTY
+  - step: finalize_merge
+    action: 'git commit -m "merge: integrate <branch> into main"'
+    condition: conflicts_resolved
+  - step: cleanup
+    action: git branch -d <branch> && git push origin --delete <branch>
+    condition: merge_success
+governance:
+  adr: ADR-2026-08-28-001-BRANCH-RESURRECTION-PROTOCOL
+  design: merge-fork-balance
+  atom: ATOM-053-workspace-draft-convention
+  workflow: dryrun-causal-audit
