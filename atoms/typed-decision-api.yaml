@@ -1,0 +1,140 @@
+---
+name: typed-decision-api
+description: "API de décision typée : questions noul (yes/no), choice (classification), score (échelle) avec inférence probabiliste via LLM local. Pattern souverain pour décisions automatisées avec confiance entropique."
+parameters:
+  question_types: [noul, choice, score]
+  noul_range: [0, 1]
+  choice_range: [2, 128]
+  score_range: [2, 10]
+  response_format: json_schema
+  temperature: 0
+  seed_deterministic: true
+  malformed_retry: 2
+inherits:
+  - safe-action-pattern
+  - sovereign-vector-memory
+---
+
+# Atom : typed-decision-api
+
+## Contexte
+
+Pattern d'ingénierie pour services de décision automatisée sur LLM local.
+Défini par JEVX (gerivdb/JEVX) comme surcouche souveraine sur upstream LocalJev.
+
+## Architecture
+
+```
++-------------------+     +---------------------+     +-------------------+
+|   Client SDK      | --> |  Typed Decision API | --> |  Upstream LLM     |
+| (TypeSafe SDK)    |     |  (JEVX / Bun)       |     | (DiffusionGemma)  |
++-------------------+     +---------------------+     +-------------------+
+                                  |
+                                  v
+                         +-------------------+
+                         | Probability Engine |
+                         | - normalize        |
+                         | - entropy          |
+                         | - confidence       |
+                         +-------------------+
+```
+
+## Types de questions
+
+### noul (yes/no)
+```json
+{
+  "type": "noul",
+  "instructions": "Is this a billing issue?",
+  "criteria": {
+    "true": "Payment or subscription problems",
+    "false": "Other types of issues"
+  }
+}
+```
+→ Sortie : probabilité scalaire [0, 1]
+
+### choice (classification)
+```json
+{
+  "type": "choice",
+  "instructions": "Which team should handle this?",
+  "criteria": {
+    "billing": "Payment issues",
+    "technical": "Bugs or integration",
+    "sales": "Pricing questions"
+  }
+}
+```
+→ Sortie : vecteur de probabilités [p_billing, p_technical, p_sales] somme = 1
+
+### score (échelle)
+```json
+{
+  "type": "score",
+  "instructions": "How frustrated is the customer?",
+  "criteria": ["Calm", "Frustrated but civil", "Very angry"]
+}
+```
+→ Sortie : score pondéré + vecteur de probabilités
+
+## Calcul de confiance entropique
+
+```
+entropy = -sum(p_i * log(p_i))
+confidence = 1 - entropy / log(n)
+```
+
+| Confiance | Interprétation |
+|-----------|----------------|
+| 0.8 - 1.0 | Haute confiance |
+| 0.5 - 0.8 | Confiance modérée |
+| 0.0 - 0.5 | Faible confiance (distribution uniforme) |
+
+## Contrat de sortie
+
+```json
+{
+  "answers": {
+    "department": {
+      "type": "choice",
+      "choice": "billing",
+      "probabilities": { "billing": 0.92, "technical": 0.06, "sales": 0.02 },
+      "confidence": 0.94
+    },
+    "frustration": {
+      "type": "score",
+      "score": 1.4,
+      "legend": { "0": "Calm", "1": "Frustrated but civil", "2": "Very angry" },
+      "probabilities": { "0": 0.15, "1": 0.70, "2": 0.15 },
+      "confidence": 0.65
+    },
+    "urgent": {
+      "type": "noul",
+      "noul": 0.87
+    }
+  }
+}
+```
+
+## Principes
+
+1. **Souveraineté** : le wrapper local est le seul point de sortie décisionnel
+2. **Wire compatibility** : compatible TypeSafe SDK, mais non-équivalent mathématiquement à OpenJev logit read
+3. **Calibration requise** : les probabilités sont auto-rapportées par le modèle
+4. **Retry malformed** : toute sortie JSON invalide déclenche une correction contextuelle
+5. **Deterministic seed** : SHA256(state + questions) pour reproductibilité
+
+## Invariants
+
+- Temperature = 0 pour déterminisme
+- response_format = json_schema strict
+- seed_offset = 7919 pour diversification entre groupes
+- max_inflight ≤ 2 pour protéger le backend
+- Retry avec injection du message d'erreur précédent
+
+## Références
+
+- `gerivdb/JEVX` — implémentation de référence
+- `githubnext/localjev` — upstream LocalJev
+- `typesafe_sdk` — SDK client TypeSafe
