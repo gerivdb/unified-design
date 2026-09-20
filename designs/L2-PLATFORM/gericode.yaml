@@ -1,0 +1,40 @@
+---
+name: GeriCode
+description: "Overlay ECOS-CLI sur Kilo Code — extension VS Code agnostique avec citoyens psychologiques Bat-Family."
+version: "1.0.0"
+design_version: "1.0.0"
+parent: unified-design
+inherits:
+  - psy-citizen-governance
+  - citizen-registry
+  - stratum-relay
+capabilities:
+  - name: psy-citizen-governance
+    parameters:
+      psy_patterns: [dual_symmetric, progressive_cascade, oscillating_equilibrium, resilient_baseline, multi_attractor_chaos, trauma_chaos_redemption]
+      states: [NOMINAL, DEGRADED, CHAOS, SYNTHESIS, SURVIVAL]
+      relapse_rule: Tout citoyen avec relapse_risk > 0 doit être surveillé par Alfred
+      disambiguation: required
+      conformity: CONFORME_NEXUS
+  - name: citizen-registry
+    parameters:
+      schema_version: "2.1"
+      total_repos: 193
+      priorities: [P0, P1, P2, P3]
+  - name: stratum-relay
+    parameters:
+      stratum_relay: STRATUM_RELAY.md
+      lifecycle: ACTIVE
+stratum: L2_COMPOSITION
+status: active
+profile: ACTIVE
+intent_hash: 0xGERICODE_DESIGN_20260715
+bridges:
+  - unified-design
+  - GOVERNANCE-HUB
+  - ECOS-CLI
+  - TALEX
+  - KG-L
+  - CTULU
+consumers: []
+---
