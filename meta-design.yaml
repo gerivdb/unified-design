@@ -417,6 +417,12 @@ designs:
     intent_hash: 0xDESIGN_SAFE_ACTION_PATTERN_20260919
     consumers: []
     profile: STANDARD
+  - name: ecosystem-meta-coherence
+    path: designs/ecosystem-meta-coherence/design.yaml
+    version: '1.0.0'
+    intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_20260920
+    consumers: []
+    profile: ACTIVE
 
 
 # Think/Do/Check Architecture
@@ -578,6 +584,7 @@ governance_atoms:
   - agent-swarm-self-improving-loop
   - harness-engineering-reliable-agents
   - safe-action-gate
+  - ecosystem-meta-coherence-gate
 
 
 # Think/Do/Check Architecture
