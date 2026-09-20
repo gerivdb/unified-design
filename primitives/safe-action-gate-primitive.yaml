@@ -1,0 +1,85 @@
+---
+name: safe-action-gate-primitive
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPRIMITIVE_SAFE_ACTION_GATE_20260921
+description: >
+  Primitive de gate d'exécution sécurisée pour le MDU.
+  Garantit que toute mutation du MDU passe par une vérification systématique
+  des préconditions, invariants et preuves horodatées avant autorisation.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop-primitive
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+states:
+  - name: IDLE
+    question: "Une action nécessite-t-elle une validation sécurisée ?"
+  - name: VERIFY
+    question: "Les préconditions sont-elles réunies ? Les invariants tiennent-ils ?"
+  - name: ALLOW
+    question: "La preuve horodatée est-elle présente et valide ?"
+  - name: BLOCK
+    question: "Quelle précondition ou invariant a échoué ?"
+functions:
+  - id: F1
+    name: PERCEVOIR_CONTEXTE
+    description: "Collecte multi-source du contexte d'action"
+  - id: F2
+    name: ÉVALUER_PRÉCONDITIONS
+    description: "Vérification des préconditions obligatoires"
+  - id: F3
+    name: VÉRIFIER_INVARIANTS
+    description: "Contrôle des invariants du MDU"
+  - id: F4
+    name: VALIDER_PREUVE
+    description: "Validation de la preuve horodatée"
+    veto: true
+  - id: F5
+    name: BLOQUER_SI_NON_CONFORME
+    description: "Blocage immédiat si préconditions ou invariants échouent"
+    veto: true
+  - id: F6
+    name: AUTORISER_ACTION
+    description: "Autorisation formelle de l'action"
+  - id: F7
+    name: ENREGISTRER_DÉCISION
+    description: "Enregistrement horodaté de la décision de gate"
+invariant: "Aucune mutation du MDU ne peut passer l'état VERIFY sans preuve horodatée valide et invariants confirmés."
+genes:
+  - id: G1
+    name: verification-systematic
+    description: "Toute action passe par VERIFY avant ALLOW ou BLOCK"
+  - id: G2
+    name: proof-horodatee
+    description: "La preuve d'exécution est horodatée et vérifiable"
+  - id: G3
+    name: invariant-protection
+    description: "Les invariants du MDU sont protégés par le gate"
+  - id: G4
+    name: decision-traceability
+    description: "Toute décision de gate est tracée et horodatée"
+anti_patterns:
+  - missing_gene: verification-systematic
+    pathology: "Mutation sans validation → écart structurel non détecté"
+  - missing_gene: proof-horodatee
+    pathology: "Action sans preuve → échec silencieux"
+  - missing_gene: invariant-protection
+    pathology: "Invariant cassé sans détection → perte de métacohérence"
+  - missing_gene: decision-traceability
+    pathology: "Décision non tracée → impossibilité d'auditer"
+cross_references:
+  - design: safe-action-gate
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - atom: ATOM-SAFE-ACTION-GATE
+  - skill: mdu-integrity-checker
+  - workflow: workflow-pre-push-validation
