@@ -701,3 +701,9 @@ entries:
   status: active
   type: design
   updated: '2026-09-20'
+- id: gericode
+  source_path: designs/L2-PLATFORM/gericode.yaml
+  source_repo: unified-design
+  status: active
+  type: design
+  updated: '2026-09-20'
