@@ -5,20 +5,8 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: admg-dag3-hierarchy
-  source_path: designs/admg-dag3-hierarchy/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: admg-state-model
   source_path: designs/admg-state-model.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: admg-state-model
-  source_path: designs/admg-state-model/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -29,32 +17,34 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\aep-fractal-repo-structure.yaml
+  version: 1.0.0
 - id: agent-manager-json-schema
   source_path: designs/agent-manager-json-schema/design.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\agent-manager-json-schema\design.yaml
+  version: 1.0.0
 - id: approval-readiness
   source_path: designs/approval-readiness.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\approval-readiness.yaml
+  version: 1.0.0
 - id: argus-orphan-scanner
   source_path: designs/argus-orphan-scanner.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\argus-orphan-scanner.yaml
+  version: 1.0.0
 - id: artifact-ownership-routing
   source_path: designs/artifact-ownership-routing.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: artifact-ownership-routing
-  source_path: designs/artifact-ownership-routing/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -65,20 +55,18 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\atomic-fragmentation.yaml
+  version: 1.0.0
 - id: balise-identity-freshness
   source_path: designs/balise-identity-freshness.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\balise-identity-freshness.yaml
+  version: 1.0.0
 - id: buzz-persistent-state
   source_path: designs/buzz-persistent-state.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: buzz-persistent-state
-  source_path: designs/buzz-persistent-state/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -89,20 +77,8 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: capability-awareness
-  source_path: designs/capability-awareness/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: chain-engineering
   source_path: designs/chain-engineering.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: chain-engineering
-  source_path: designs/chain-engineering/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -113,26 +89,16 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: circuit-breaker-pattern
-  source_path: designs/circuit-breaker-pattern/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: clone-dedup-rescue
   source_path: designs/clone-dedup-rescue.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\clone-dedup-rescue.yaml
+  version: 1.0.0
 - id: clone-governance
   source_path: designs/clone-governance.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: clone-governance
-  source_path: designs/clone-governance/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -143,26 +109,16 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: conflict-resolver-pattern
-  source_path: designs/conflict-resolver-pattern/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: contract-centrality
   source_path: designs/contract-centrality.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\contract-centrality.yaml
+  version: 1.0.0
 - id: conversation-semantic-layer
   source_path: designs/conversation-semantic-layer.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: conversation-semantic-layer
-  source_path: designs/conversation-semantic-layer/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -173,44 +129,50 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\cross-package-dual-import.yaml
+  version: 1.0.0
 - id: DAG-3-Design
   source_path: designs/DAG-3-Design/design.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\DAG-3-Design\design.yaml
+  version: 1.0.0
 - id: dag3-triadic-workflow
   source_path: designs/dag3-triadic-workflow.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\dag3-triadic-workflow.yaml
+  version: 1.0.0
 - id: delivery-engine
   source_path: designs/delivery-engine.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\delivery-engine.yaml
+  version: 1.0.0
 - id: design-coverage-scanner
   source_path: designs/design-coverage-scanner.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\design-coverage-scanner.yaml
+  version: 1.0.0
 - id: deterministic-budget-control
   source_path: designs/deterministic-budget-control.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\deterministic-budget-control.yaml
+  version: 1.0.0
 - id: ecosystem-artifact-layers-design
   source_path: designs/ecosystem-artifact-layers-design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: ecosystem-artifact-layers-design
-  source_path: designs/ecosystem-artifact-layers-design/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -221,14 +183,10 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\file-spool-interprocess.yaml
+  version: 1.0.0
 - id: force-path-access
   source_path: designs/force-path-access.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: force-path-access
-  source_path: designs/force-path-access/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -239,20 +197,8 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: fractal-engineering-strata
-  source_path: designs/fractal-engineering-strata/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: fractal-recursion
   source_path: designs/fractal-recursion.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: fractal-recursion
-  source_path: designs/fractal-recursion/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -263,50 +209,48 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: frequency-engineering
-  source_path: designs/frequency-engineering/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: generate-then-syntax-validate
   source_path: designs/generate-then-syntax-validate.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\generate-then-syntax-validate.yaml
+  version: 1.0.0
 - id: gguf-probe-retention
   source_path: designs/gguf-probe-retention.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\gguf-probe-retention.yaml
+  version: 1.0.0
 - id: graceful-degradation-fallback
   source_path: designs/graceful-degradation-fallback.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\graceful-degradation-fallback.yaml
+  version: 1.0.0
 - id: ide-window-lifecycle
   source_path: designs/ide-window-lifecycle.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\ide-window-lifecycle.yaml
+  version: 1.0.0
 - id: impense-register
   source_path: designs/impense-register.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\impense-register.yaml
+  version: 1.0.0
 - id: incremental-growth
   source_path: designs/incremental-growth.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: incremental-growth
-  source_path: designs/incremental-growth/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -317,32 +261,24 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: incremental-scan-cache
-  source_path: designs/incremental-scan-cache/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: kg35-migration
   source_path: designs/kg35-migration.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\kg35-migration.yaml
+  version: 1.0.0
 - id: limbo-transit
   source_path: designs/limbo-transit.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\limbo-transit.yaml
+  version: 1.0.0
 - id: llux
   source_path: designs/llux.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: llux
-  source_path: designs/llux/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -353,14 +289,10 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\local-ci-protocol\design.yaml
+  version: 1.0.0
 - id: m5-production-ontologique
   source_path: designs/m5-production-ontologique.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: m5-production-ontologique
-  source_path: designs/m5-production-ontologique/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -371,20 +303,8 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: maxwell-triad
-  source_path: designs/maxwell-triad/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: merge-fork-balance
   source_path: designs/merge-fork-balance.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: merge-fork-balance
-  source_path: designs/merge-fork-balance/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -395,6 +315,8 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\meta-cluster-design.yaml
+  version: 1.0.0
 - id: meta-coherence
   source_path: designs/meta-coherence.yaml
   source_repo: unified-design
@@ -407,26 +329,16 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: moc-governance
-  source_path: designs/moc-governance/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: multi-repo-fundamental
   source_path: designs/multi-repo-fundamental.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\multi-repo-fundamental.yaml
+  version: 1.0.0
 - id: ouroboros
   source_path: designs/ouroboros.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: ouroboros
-  source_path: designs/ouroboros/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -437,26 +349,16 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: pattern-first-right-capture
-  source_path: designs/pattern-first-right-capture/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: persistent-learning-loop
   source_path: designs/persistent-learning-loop.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\persistent-learning-loop.yaml
+  version: 1.0.0
 - id: plix
   source_path: designs/plix.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: plix
-  source_path: designs/plix/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -467,20 +369,8 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: plix-audio
-  source_path: designs/plix-audio/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: pr-review-resolver-design
   source_path: designs/pr-review-resolver-design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: pr-review-resolver-design
-  source_path: designs/pr-review-resolver-design/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -491,26 +381,16 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
-- id: prd-moc-progress-sync
-  source_path: designs/prd-moc-progress-sync/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
 - id: recovery-tooling
   source_path: designs/recovery-tooling.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\recovery-tooling.yaml
+  version: 1.0.0
 - id: rlm-243
   source_path: designs/rlm-243.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: rlm-243
-  source_path: designs/rlm-243/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -521,20 +401,18 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\script-file-over-inline.yaml
+  version: 1.0.0
 - id: seven-turns-reflection
   source_path: designs/seven-turns-reflection.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\seven-turns-reflection.yaml
+  version: 1.0.0
 - id: spidx
   source_path: designs/spidx.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-27'
-- id: spidx
-  source_path: designs/spidx/design.yaml
   source_repo: unified-design
   status: active
   type: design
@@ -545,50 +423,58 @@ entries:
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\swarm-lease.yaml
+  version: 1.0.0
 - id: teach-learn-asymmetry
   source_path: designs/teach-learn-asymmetry.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\teach-learn-asymmetry.yaml
+  version: 1.0.0
 - id: thought-commit-pipeline
   source_path: designs/thought-commit-pipeline.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\thought-commit-pipeline.yaml
+  version: 1.0.0
 - id: unforeseen-lifecycle
   source_path: designs/unforeseen-lifecycle.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\unforeseen-lifecycle.yaml
+  version: 1.0.0
 - id: unified-design-alignment-dag3
   source_path: designs/unified-design-alignment-dag3.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\unified-design-alignment-dag3.yaml
+  version: 1.0.0
 - id: viable-initial-state
   source_path: designs/viable-initial-state.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\viable-initial-state.yaml
+  version: 1.0.0
 - id: wazaa-social-bus
   source_path: designs/wazaa-social-bus.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-08-27'
+  path: designs\wazaa-social-bus.yaml
+  version: 1.0.0
 - id: radx
   source_path: designs/radx/design.yaml
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-28'
-- id: radx
-  source_path: designs/radx/radx.md
   source_repo: unified-design
   status: active
   type: design
@@ -599,18 +485,14 @@ entries:
   status: active
   type: design
   updated: '2026-08-28'
-- id: compliance-scanner
-  source_path: designs/compliance-scanner/compliance-scanner.md
-  source_repo: unified-design
-  status: active
-  type: design
-  updated: '2026-08-28'
 - id: dry-run-simulation
   source_path: designs/dry-run-simulation.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-09-15'
+  path: designs\dry-run-simulation.yaml
+  version: 1.0.0
 - id: unified-design/jevx
   source_path: designs/jevx.yaml
   source_repo: unified-design
@@ -689,18 +571,24 @@ entries:
   status: active
   type: design
   updated: '2026-09-20'
+  path: designs\ecosystem-meta-coherence\design.yaml
+  version: 1.0.0
 - id: jevx
   source_path: designs/jevx.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-09-20'
+  path: designs\jevx.yaml
+  version: 1.0.0
 - id: jevx-engineering
   source_path: designs/jevx-engineering.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-09-20'
+  path: designs\jevx-engineering.yaml
+  version: 1.0.0
 - id: gericode
   source_path: designs/L2-PLATFORM/gericode.yaml
   source_repo: unified-design
@@ -713,6 +601,8 @@ entries:
   status: active
   type: design
   updated: '2026-09-20'
+  path: designs\jevx-backend-matrix.yaml
+  version: 1.0.0
 - id: constrained-parallel-decoding
   source_path: primitives/constrained-parallel-decoding/design.yaml
   source_repo: unified-design
@@ -731,33 +621,919 @@ entries:
   status: active
   type: design
   updated: '2026-09-20'
+  path: designs\workflow-sot-completeness\design.yaml
+  version: 1.0.0
 - id: workflow-yaml-structure-validator
   source_path: designs/workflow-yaml-structure-validator/design.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-09-20'
+  path: designs\workflow-yaml-structure-validator\design.yaml
+  version: 1.0.0
 - id: design-ops-loop
   source_path: designs/design-ops-loop/design.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-09-20'
+  path: designs\design-ops-loop\design.yaml
+  version: 1.0.0
 - id: artifact-layers-design
   source_path: designs/artifact-layers-design/design.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-09-20'
+  path: designs\artifact-layers-design\design.yaml
+  version: 1.0.0
 - id: session-boot-design
   source_path: designs/session-boot-design/design.yaml
   source_repo: unified-design
   status: active
   type: design
   updated: '2026-09-20'
+  path: designs\session-boot-design\design.yaml
+  version: 1.0.0
 - id: meta-designer-role
   source_path: designs/meta-designer-role.yaml
   source_repo: unified-design
-  status: proposed
+  status: active
   type: design
-  updated: '2026-09-20'
+  updated: '2026-09-21'
+- name: AGENT-MANAGER
+  path: designs\agent-manager\design.yaml
+  version: 1.0.0
+  intent_hash: 0xAGENT_MANAGER_RUNNER_20260820
+  status: active
+  profile: STANDARD
+  consumers:
+  - kix
+  - conversation-cognitive
+- name: Bootstrap Runner
+  path: designs\bootstrap\design.yaml
+  version: 1.0.0
+  intent_hash: 0xBOOTSTRAP_RUNNER_20260820
+  status: active
+  profile: STANDARD
+  consumers:
+  - kix
+- name: branch-orphan-conflict-resolver
+  path: designs\branch-orphan-conflict-resolver\design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_BRANCH_ORPHAN_CONFLICT_RESOLVER_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: CAUSEX
+  path: designs\causex\design.yaml
+  version: 2.0.0
+  intent_hash: 0xCAUSEX_CAUSAL_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - ROOTX
+  - KG-L
+  - KG-CAUSAL
+- name: CHRONOX
+  path: designs\chronox\design.yaml
+  version: 1.0.0
+  intent_hash: 0xCHRONOX_EVOLUTION_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - TALEX
+  - TOPEX
+- name: clm-pipeline
+  path: designs\clm-pipeline\design.yaml
+  version: 1.0.0
+  intent_hash: 0xCLM_PIPELINE_DISTRIBUTED_20260919
+  status: proposed
+  profile: CRITICAL
+  consumers:
+  - GeriCode
+  - CTULU
+- name: Conversation Cognitive Runner
+  path: designs\conversation-cognitive\design.yaml
+  version: 1.0.0
+  intent_hash: 0xCONVERSATION_COGNITIVE_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - Friction Analyzer
+  - KG-L
+- name: DEPLOYEX
+  path: designs\deployex\design.yaml
+  version: 1.0.0
+  intent_hash: 0xDEPLOYEX_DEPLOYMENT_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - KIX
+  - ECOS-CLI
+- name: dual-path-rbf-llm
+  path: designs\dual-path-rbf-llm\design.yaml
+  version: 1.0.0
+  intent_hash: ''
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: FLEX API
+  path: designs\flex-api\design.yaml
+  version: 1.0.0
+  intent_hash: 0xFLEX_API_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - bootstrap
+- name: FLOWX
+  path: designs\flowx\design.yaml
+  version: 1.0.0
+  intent_hash: 0xFLOWX_DATAFLOW_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - WAZAA
+  - KIX
+- name: Friction Analyzer Runner
+  path: designs\friction-analyzer\design.yaml
+  version: 1.0.0
+  intent_hash: 0xFRICTION_ANALYZER_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - ECOS-CLI
+  - KIX
+- name: Gateway Manager
+  path: designs\gateway-manager\design.yaml
+  version: 1.0.0
+  intent_hash: 0xGATEWAY_MANAGER_RUNNER_20260820
+  status: active
+  profile: STANDARD
+  consumers:
+  - bootstrap
+  - kix
+- name: gbnf-llux
+  path: designs\gbnf-llux\design.yaml
+  version: 1.0.0
+  intent_hash: 0xGBNF_LLUX_CONSTRAINED_DECODING_20260919
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - TALEX
+- name: gitex
+  path: designs\gitex\design.yaml
+  version: 1.0.0
+  intent_hash: 0xCAAX_GITEX_TOPOLOGY_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - KIX
+  - SYNCX
+  - DEPLOYEX
+  - REFREX
+- name: HARNEX
+  path: designs\harnex\design.yaml
+  version: 1.0.0
+  intent_hash: 0xHARNEX_HEALTH_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - kix
+  - gateway-manager
+- name: IDENTX
+  path: designs\identx\design.yaml
+  version: 1.0.0
+  intent_hash: 0xIDENTX_IDENTITY_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - KG-L
+  - NEXUS
+- name: kg-l
+  path: designs\kg-l\design.yaml
+  version: '10.0'
+  intent_hash: 0xKG_L_ENGINE_DESIGN_20260829
+  status: active
+  profile: CRITICAL
+  consumers:
+  - LLUX
+  - RLM-243
+  - TALEX
+  - CANDIDATOR
+- name: KG-L Coherence Watchdog
+  path: designs\kg-l-coherence-watchdog\design.yaml
+  version: 1.0.0
+  intent_hash: 0xKG_L_COHERENCE_WATCHDOG_20260827
+  status: active
+  profile: STANDARD
+  consumers:
+  - conversation-cognitive
+- name: KGLX
+  path: designs\kglx\design.yaml
+  version: 1.0.0
+  intent_hash: 0xKGLX_QUALITY_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - conversation-cognitive
+  - kg-l-coherence-watchdog
+- name: kix
+  path: designs\kix\design.yaml
+  version: 1.0.0
+  intent_hash: 0xKIX_ORCHESTRATOR_20260828
+  status: active
+  profile: STANDARD
+  consumers:
+  - RLM-243
+  - LLUX
+  - TLM
+  - TIMX
+  - TALEX
+  - RADX
+- name: korx
+  path: designs\korx\design.yaml
+  version: 1.0.0
+  intent_hash: 0xKORX_DESIGN_20260828
+  status: active
+  profile: STANDARD
+  consumers:
+  - SPIDX
+  - TALEX
+  - N243
+- name: LLM-CORE
+  path: designs\llm-core\design.yaml
+  version: 1.0.0
+  intent_hash: 0xLLM_CORE_RUNNER_20260902
+  status: active
+  profile: STANDARD
+  consumers:
+  - kix
+  - bootstrap
+  - agent-manager
+  - conversation-cognitive
+  - llux-match
+  - llux-learn
+- name: LLUX-INDEX
+  path: designs\llux-index\design.yaml
+  version: 1.0.0
+  intent_hash: 0xLLUX_INDEX_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - llux-match
+  - llux-learn
+- name: LLUX-LEARN
+  path: designs\llux-learn\design.yaml
+  version: 1.0.0
+  intent_hash: 0xLLUX_LEARN_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - llux-index
+  - llux-replay
+- name: LLUX-MATCH
+  path: designs\llux-match\design.yaml
+  version: 1.0.0
+  intent_hash: 0xLLUX_MATCH_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - llux-index
+  - prognex
+  - conversation-cognitive
+- name: LLUX-REPLAY
+  path: designs\llux-replay\design.yaml
+  version: 1.0.0
+  intent_hash: 0xLLUX_REPLAY_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - llux-learn
+  - conversation-cognitive
+- name: MORPHEX
+  path: designs\morphex\design.yaml
+  version: 1.0.0
+  intent_hash: 0xMORPHEX_TRANSFORM_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - KG-L
+  - WAZAA
+- name: neuro-symbolic-model-converter
+  path: designs\neuro-symbolic-model-converter\design.yaml
+  version: 1.0.0
+  intent_hash: ''
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: nodex
+  path: designs\nodex\design.yaml
+  version: 1.0.0
+  intent_hash: 0xNODEX_NATURE_RUNNER_20260821
+  status: active
+  profile: CRITICAL
+  consumers:
+  - KG-L
+  - ROOTX
+  - CAUSEX
+  - TOPEX
+- name: PIANO
+  path: designs\piano\design.yaml
+  version: 1.0.0
+  intent_hash: 0xPIANO_BASE243_RUNNER_20260902
+  status: active
+  profile: STANDARD
+  consumers:
+  - llux-match
+  - llux-index
+  - kix
+- name: procedural-shader-projection
+  path: designs\procedural-shader-projection\design.yaml
+  version: 1.0.0
+  intent_hash: ''
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: PROGNEX
+  path: designs\prognex\design.yaml
+  version: 1.0.0
+  intent_hash: 0xPROGNEX_PREDICTION_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - LLUX-MATCH
+  - TALEX
+- name: pseudo-lm-from-role
+  path: designs\pseudo-lm-from-role\design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_PSEUDO_LM_FROM_ROLE_20260918
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: REFEREX
+  path: designs\referex\design.yaml
+  version: 1.0.0
+  intent_hash: 0xREFEREX_CROSSREF_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - kix
+  - conversation-cognitive
+- name: REPOX
+  path: designs\repoxt\design.yaml
+  version: 1.0.0
+  intent_hash: 0xREPOX_HEALTH_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - kix
+- name: RLM-CONFIG
+  path: designs\rlm-config\design.yaml
+  version: 1.0.0
+  intent_hash: 0xRLM_CONFIG_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - rlm-deploy
+  - rlm-graph
+  - rlm-secure
+  - rlm-incident
+  - rlm-release
+  - rlm-metrics
+- name: RLM-DEPLOY
+  path: designs\rlm-deploy\design.yaml
+  version: 1.0.0
+  intent_hash: 0xRLM_DEPLOY_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - rlm-config
+- name: RLM-GRAPH
+  path: designs\rlm-graph\design.yaml
+  version: 1.0.0
+  intent_hash: 0xRLM_GRAPH_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - rlm-config
+- name: RLM-INCIDENT
+  path: designs\rlm-incident\design.yaml
+  version: 1.0.0
+  intent_hash: 0xRLM_INCIDENT_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - rlm-config
+  - rlm-metrics
+- name: RLM-MDU
+  path: designs\rlm-mdu\design.yaml
+  version: 1.0.0
+  intent_hash: 0xRLM_MDU_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - kix
+- name: RLM-METRICS
+  path: designs\rlm-metrics\design.yaml
+  version: 1.0.0
+  intent_hash: 0xRLM_METRICS_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - kix
+  - wazaa
+- name: RLM-RELEASE
+  path: designs\rlm-release\design.yaml
+  version: 1.0.0
+  intent_hash: 0xRLM_RELEASE_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - rlm-config
+- name: RLM-SECURE
+  path: designs\rlm-secure\design.yaml
+  version: 1.0.0
+  intent_hash: 0xRLM_SECURE_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - kix
+  - rlm-config
+- name: RLM-243
+  path: designs\rlm243\design.yaml
+  version: 1.0.0
+  intent_hash: 0xRLM243_RESOLUTION_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - kix
+- name: ROOTX
+  path: designs\rootx\design.yaml
+  version: 2.0.0
+  intent_hash: 0xROOTX_CAUSAL_TREE_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - TALEX
+  - CAUSEX
+  - LLUX
+- name: SYNCX
+  path: designs\syncx\design.yaml
+  version: 1.0.0
+  intent_hash: 0xSYNCX_SYNC_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - kix
+- name: talex
+  path: designs\talex\design.yaml
+  version: '14.8'
+  intent_hash: 0xADMG_GERIVDB_V19.2_20260801
+  status: active
+  profile: CRITICAL
+  consumers:
+  - GeriCode
+  - TINA
+  - PLIX
+  - KORX
+- name: TELOX
+  path: designs\telox\design.yaml
+  version: 1.0.0
+  intent_hash: 0xTELOX_FINALITY_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - Conversation Cognitive
+- name: timx
+  path: designs\timx\design.yaml
+  version: 1.0.0
+  intent_hash: 0xTIMX_FEATURE_STORE_20260828
+  status: active
+  profile: STANDARD
+  consumers:
+  - LLUX
+  - RLM-243
+  - TALEX
+- name: TIMX-FEATURE-STORE
+  path: designs\timx-feature-store\design.yaml
+  version: 1.0.0
+  intent_hash: 0xTIMX_FEATURE_STORE_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - talex
+  - timx
+- name: tlm
+  path: designs\tlm\design.yaml
+  version: 1.0.0
+  intent_hash: 0xTLM_LANG_GRAMMAR_20260728
+  status: active
+  profile: STANDARD
+  consumers:
+  - RLM-243
+  - KIX
+  - TALEX
+- name: TLM-LANG
+  path: designs\tlm-lang\design.yaml
+  version: 1.0.0
+  intent_hash: 0xTLM_LANG_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - nodex
+  - topex
+- name: TOPEX
+  path: designs\topex\design.yaml
+  version: 1.0.0
+  intent_hash: 0xTOPEX_TOPOLOGY_RUNNER_20260821
+  status: proposed
+  profile: STANDARD
+  consumers:
+  - GITEX
+  - KGLX
+- name: toroidal-invariant
+  path: designs\toroidal-invariant\design.yaml
+  version: 1.0.0
+  intent_hash: 0xTOROIDAL_INVARIANT_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: TRIX
+  path: designs\trix\design.yaml
+  version: 1.0.0
+  intent_hash: 0xTRIX_BACKEND_RUNNER_20260902
+  status: active
+  profile: STANDARD
+  consumers:
+  - trixd
+  - kix
+  - llux-match
+  - conversation-cognitive
+- name: TRIX Daemon
+  path: designs\trixd\design.yaml
+  version: 1.0.0
+  intent_hash: 0xTRIXD_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - kix
+- name: verses
+  path: designs\verses\design.yaml
+  version: 1.0.0
+  intent_hash: 0xVERSES_DESIGN_20260919
+  status: active
+  profile: STANDARD
+  consumers:
+  - TALEX
+  - KG-L
+  - CTULU
+- name: voltx
+  path: designs\voltx\design.yaml
+  version: 1.0.0
+  intent_hash: 0xVOLTX_VAULT_ORCHESTRATOR_20260919
+  status: active
+  profile: STANDARD
+  consumers:
+  - TALEX
+  - CURX
+- name: WAZAA Mission Control
+  path: designs\wazaa\design.yaml
+  version: 1.0.0
+  intent_hash: 0xWAZAA_RUNNER_20260821
+  status: active
+  profile: STANDARD
+  consumers:
+  - bootstrap
+  - kix
+  - conversation-cognitive
+  - kg-l-coherence-watchdog
+- name: zero-heap-ring-buffer
+  path: designs\zero-heap-ring-buffer\design.yaml
+  version: 1.0.0
+  intent_hash: ''
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: agent-observability-architecture
+  path: designs\agent-observability-architecture.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_AGENT_OBSERVABILITY_20260918
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: agent-swarm-self-improving-loop
+  path: designs\agent-swarm-self-improving-loop.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_AGENT_SWARM_SELF_IMPROVING_LOOP_20260918
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: anamorphic_morphism
+  path: designs\anamorphic_morphism.yaml
+  version: 1.0.0
+  intent_hash: ''
+  status: ACTIVE
+  profile: STANDARD
+  consumers: []
+- name: assistant-load
+  path: designs\assistant-load.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ASSISTANT_LOAD_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: autonomy-fluidity
+  path: designs\autonomy-fluidity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_AUTONOMY_FLUIDITY_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: awareness
+  path: designs\awareness.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_AWARENESS_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: big-picture
+  path: designs\big-picture.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_BIG_PICTURE_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: breakthrough
+  path: designs\breakthrough.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_BREAKTHROUGH_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: causal-semantic-bridge
+  path: designs\causal-semantic-bridge.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CAUSAL_SEMANTIC_BRIDGE_20260916
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: chain-fluidity
+  path: designs\chain-fluidity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CHAIN_FLUIDITY_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: codedb-e5620
+  path: designs\codedb-e5620.yaml
+  version: 1.0.0
+  intent_hash: 0xCODEDB_E5620_20260612
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: combination-instruction-set
+  path: designs\combination-instruction-set.yaml
+  version: 1.0.0
+  intent_hash: 0xCOMBINATION_INSTRUCTION_SET_20260916
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: conversation-aggregator
+  path: designs\conversation-aggregator.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CONVERSATION_AGGREGATOR_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: conversation-to-execution-bridge
+  path: designs\conversation-to-execution-bridge.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: debt-relief
+  path: designs\debt-relief.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_DEBT_RELIEF_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: deepmind-co-scientist-reliability
+  path: designs\deepmind-co-scientist-reliability.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_DEEPMIND_CO_SCIENTIST_RELIABILITY_20260918
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: EGMI-v0.3
+  path: designs\EGMI-v0.3.yaml
+  version: 1.0.0
+  intent_hash: 0xEGMI_V03_20260831
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: elegance
+  path: designs\elegance.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ELEGANCE_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: entropy-search
+  path: designs\entropy-search.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ENTROPY_SEARCH_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: ergonomics
+  path: designs\ergonomics.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ERGONOMICS_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: exploration
+  path: designs\exploration.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_EXPLORATION_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: extra-spection
+  path: designs\extra-spection.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_EXTRA_SPECTION_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: flex
+  path: designs\flex.yaml
+  version: 1.0.0
+  intent_hash: 0xFLEX_DESIGN_20260831
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: github-actions-ban
+  path: designs\github-actions-ban.yaml
+  version: 1.0.0
+  intent_hash: ''
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: harness-engineering-reliable-agents
+  path: designs\harness-engineering-reliable-agents.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_HARNESS_ENGINEERING_RELIABLE_AGENTS_20260918
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: hitl-assistance
+  path: designs\hitl-assistance.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_HITL_ASSISTANCE_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: incremental-combinatorial-discipline
+  path: designs\incremental-combinatorial-discipline.yaml
+  version: 1.0.0
+  intent_hash: 0xINCREMENTAL_COMBINATORIAL_DISCIPLINE_20260916
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: infx
+  path: designs\infx.yaml
+  version: 1.0.0
+  intent_hash: 0xINFX_DESIGN_20260830
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: intelligence
+  path: designs\intelligence.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_INTELLIGENCE_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: introspection
+  path: designs\introspection.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_INTROSPECTION_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: kg-causal-engine
+  path: designs\kg-causal-engine.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_KG_CAUSAL_ENGINE_20260916
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: kg-causal
+  path: designs\kg-causal.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_KG_CAUSAL_DRAFT_20260917
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: LOOPX-Routines
+  path: designs\LOOPX-Routines.yaml
+  version: 1.0.0
+  intent_hash: 0xLOOPX_ROUTINES_20260901
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: meta-kg-engine
+  path: designs\meta-kg-engine.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_META_KG_ENGINE_20260916
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: methodological-bon-sens
+  path: designs\methodological-bon-sens.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_METHODOLOGICAL_BON_SENS_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: narrative-causal-fusion
+  path: designs\narrative-causal-fusion.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_NARRATIVE_CAUSAL_FUSION_20260916
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: operational-fluidity
+  path: designs\operational-fluidity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_OPERATIONAL_FLUIDITY_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: pr-review-resolver
+  path: designs\pr-review-resolver-design.yaml
+  version: 1.0.0
+  intent_hash: 0xpr_review_resolve_universal_20260730
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: reasoningbank-persistent-strategy
+  path: designs\reasoningbank-persistent-strategy.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_REASONINGBANK_PERSISTENT_STRATEGY_20260918
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: runner-family-stratification
+  path: designs\runner-family-stratification.yaml
+  version: 1.0.0
+  intent_hash: 0xRUNNER_FAMILY_STRATIFICATION_20260902
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: safe-action-pattern
+  path: designs\safe-action-pattern.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_SAFE_ACTION_PATTERN_20260919
+  status: proposed
+  profile: STANDARD
+  consumers: []
+- name: serendipity
+  path: designs\serendipity.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_SERENDIPITY_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: task-chaining
+  path: designs\task-chaining.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_TASK_CHAINING_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: task-planning
+  path: designs\task-planning.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_TASK_PLANNING_20260917
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: topos
+  path: designs\topos.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_TOPOS_20260828
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: umodel-agent-ready-data
+  path: designs\umodel-agent-ready-data.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_UMODEL_AGENT_READY_DATA_20260918
+  status: active
+  profile: STANDARD
+  consumers: []

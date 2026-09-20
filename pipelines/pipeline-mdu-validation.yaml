@@ -1,0 +1,28 @@
+---
+name: pipeline-mdu-validation
+version: 1.0.0
+intent_hash: 0xPIPELINE_MDU_VALIDATION_20260921
+status: active
+profile: STANDARD
+description: Pipeline MDU complet : lint → sync → dryrun → validation
+inputs:
+  - meta-design.yaml
+  - catalog/*.yaml
+  - designs/
+  - atoms/
+outputs:
+  - rapport JSON lint
+  - rapport JSON sync
+  - validation finale
+steps:
+  - name: lint
+    command: python tools/mdu-lint.py --strict
+    on_failure: abort
+  - name: sync
+    command: python scripts/sync-mdu-catalog.py --all --dry-run
+    on_failure: warn
+  - name: validate
+    command: python tools/mdu-lint.py --strict
+    on_failure: abort
+consumers: []
+---
