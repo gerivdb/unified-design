@@ -472,13 +472,13 @@ designs:
   intent_hash: 0xDESIGN_SESSION_BOOT_20260920
   consumers: []
   profile: ACTIVE
- - name: meta-designer-role
-   path: designs/meta-designer-role.yaml
-   version: 1.0.0
-   intent_hash: 0xDESIGN_META_DESIGNER_ROLE_20260920
-   consumers: []
-   profile: STANDARD
- piliers:
+- name: meta-designer-role
+  path: designs/meta-designer-role.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_META_DESIGNER_ROLE_20260920
+  consumers: []
+  profile: STANDARD
+piliers:
 - name: Sonar-Driven Design
   abbr: SDD
   role: Observabilite
@@ -621,12 +621,12 @@ governance_atoms:
 - harness-engineering-reliable-agents
 - safe-action-gate
 - ecosystem-meta-coherence-gate
-  - typed-decision-api
-  # Artifact Extraction System (2026-09-20)
-  - artifact-extraction-status
-  - conversation-anchoring
-  - extraction-report-format
-  - confidence-threshold
+- typed-decision-api
+# Artifact Extraction System (2026-09-20)
+- artifact-extraction-status
+- conversation-anchoring
+- extraction-report-format
+- confidence-threshold
 think_do_check:
   description: 'Architecture logique de gestion des repos : Think (veille/conception),
     Do (exécution), Check (conformité)'

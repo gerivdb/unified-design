@@ -48,9 +48,9 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^ATOM-[0-9]+-[a-z0-9-]+$"
+        "pattern": "^ATOM(-[0-9]+)?-[a-zA-Z0-9-]+$"
       },
-      "description": "List of atom IDs this design depends on."
+      "description": "List of atom IDs this design depends on. Supports both ATOM-<slug> and ATOM-<number>-<slug> formats."
     },
     "bridges": {
       "type": "array",
