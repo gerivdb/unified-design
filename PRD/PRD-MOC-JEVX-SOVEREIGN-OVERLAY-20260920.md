@@ -41,8 +41,8 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 | L2 | Design `jevx-engineering` | `designs/jevx-engineering.yaml` | Créer | ✅ |
 | L3 | Design `jevx-backend-matrix` | `designs/jevx-backend-matrix.yaml` | Créer | ✅ |
 | L4 | Atom `typed-decision-api` | `atoms/typed-decision-api.yaml` | Créer | ✅ |
-| L5 | Mise à jour `META-DESIGN.md` | `META-DESIGN.md` | Modifier | ⏳ |
-| L6 | Mise à jour `meta-design.yaml` | `meta-design.yaml` | Modifier | ⏳ |
+| L5 | Mise à jour `META-DESIGN.md` | `META-DESIGN.md` | Modifier | ✅ |
+| L6 | Mise à jour `meta-design.yaml` | `meta-design.yaml` | Modifier | ✅ |
 
 ## 3. Tâches
 
@@ -111,15 +111,16 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 - [x] 2026-09-20T20:11:03+02:00 — Atom `typed-decision-api.yaml` avec backends
 - [x] 2026-09-20T20:15:00+02:00 — Mise à jour `META-DESIGN.md` et `meta-design.yaml` (Phase B)
 - [x] 2026-09-20T20:15:00+02:00 — Designs et atom enregistrés dans MDU
-- [ ] 2026-09-20T20:11:03+02:00 — Validation `gerivdb design validate --strict` PASS
-- [ ] 2026-09-20T20:11:03+02:00 — Pre-commit hooks PASS
-- [ ] 2026-09-20T20:11:03+02:00 — Intégration KIX (si applicable)
+- [x] 2026-09-20T20:33:14+02:00 — Validation `gerivdb design validate --strict` PASS sur `jevx.yaml`, `jevx-engineering.yaml`, `jevx-backend-matrix.yaml`
+- [x] 2026-09-20T20:33:14+02:00 — Correction YAML `jevx-backend-matrix.yaml` (ram_gb scalar)
+- [x] 2026-09-20T20:33:14+02:00 — Atom `typed-decision-api.yaml` référencé MDU (validateur designs ne cible pas `atoms/`)
+- [ ] 2026-09-20T20:33:14+02:00 — Intégration KIX (non applicable : repo KIX absent de L1-INFRA et SOT)
 
 ## 9. Évaluation
 
 | Critère d'acceptation | État | Preuve |
 |---|---|---|
-| 1. YAML valide + validation stricte | ⏳ | En attente validation ciblée |
+| 1. YAML valide + validation stricte | ✅ | `validate_designs.py --strict` PASS sur 3/3 designs JEVX |
 | 2. Atom référencé MDU | ✅ | `META-DESIGN.md` + `meta-design.yaml` |
 | 3. 3+ backends Z600 documentés | ✅ | NanoJev, jevlike, minojev, jev_local |
 | 4. Security guardrails définies | ✅ | consensus_minimum, confidence_threshold, HITL, audit_trail |
@@ -128,9 +129,9 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 | 7. Pas de violation DAG | ✅ | depends_on cohérent, pas de cycle détecté |
 | 8. Pre-commit hooks passent | ✅ | PASS sur commits atomiques |
 | 9. ADR-0111 référencée | ✅ | Référencée dans tous les designs |
-| 10. Proof-of-Life horodatés | ✅ | Section 8 |
+| 10. Proof-of-Life horodatés | ✅ | Section 8 complétée |
 
-**Verdict** : ✅ **Phase A + Phase B complètes** — Designs, atom et enregistrement MDU implémentés. Validation ciblée et intégration KIX en suspens.
+**Verdict** : ✅ **Phase A + Phase B + Phase C (validation) complètes** — Designs, atom, enregistrement MDU et validation ciblée implémentés. Intégration KIX en suspens (repo absent).
 
 ## 10. Références
 
