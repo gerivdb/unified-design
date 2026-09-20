@@ -65,3 +65,9 @@ entries:
   status: active
   type: primitive
   updated: '2026-09-20'
+- id: artifact-extraction-card
+  source_path: primitives/artifact-extraction-card/design.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-20'

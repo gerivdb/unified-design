@@ -755,3 +755,9 @@ entries:
   status: active
   type: design
   updated: '2026-09-20'
+- id: meta-designer-role
+  source_path: designs/meta-designer-role.yaml
+  source_repo: unified-design
+  status: proposed
+  type: design
+  updated: '2026-09-20'

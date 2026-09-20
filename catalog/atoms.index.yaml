@@ -11,3 +11,27 @@ entries:
   status: active
   type: atom
   updated: '2026-09-20'
+- id: ATOM-ARTIFACT-EXTRACTION-STATUS
+  source_path: atoms/ATOM-ARTIFACT-EXTRACTION-STATUS.yaml
+  source_repo: unified-design
+  status: proposed
+  type: atom
+  updated: '2026-09-20'
+- id: ATOM-CONVERSATION-ANCHORING
+  source_path: atoms/ATOM-CONVERSATION-ANCHORING.yaml
+  source_repo: unified-design
+  status: proposed
+  type: atom
+  updated: '2026-09-20'
+- id: ATOM-EXTRACTION-REPORT-FORMAT
+  source_path: atoms/ATOM-EXTRACTION-REPORT-FORMAT.yaml
+  source_repo: unified-design
+  status: proposed
+  type: atom
+  updated: '2026-09-20'
+- id: ATOM-CONFIDENCE-THRESHOLD
+  source_path: atoms/ATOM-CONFIDENCE-THRESHOLD.yaml
+  source_repo: unified-design
+  status: proposed
+  type: atom
+  updated: '2026-09-20'
