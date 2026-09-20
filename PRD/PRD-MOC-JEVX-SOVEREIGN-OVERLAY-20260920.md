@@ -14,6 +14,12 @@ governance:
 related_adr: ADR-0111-JEVX-SOVEREIGN-OVERLAY.md
 related_intent: INTENT-JEVX-SOVEREIGN-OVERLAY.md
 related_moc: MOC-JEVX-SOVEREIGN-OVERLAY-20260920.md
+related_prd_moc:
+  - PRD-MOC-JEVX-BACKEND-SELECTOR-20260920.md
+  - PRD-MOC-JEVX-CONSTRAINED-PARALLEL-DECODING-20260920.md
+  - PRD-MOC-JEVX-SOVEREIGN-ADAPTER-PATTERN-20260920.md
+  - PRD-MOC-JEVX-DESIGN-VALIDATION-PIPELINE-20260920.md
+  - PRD-MOC-JEVX-STRUCTURAL-FIX-PIPELINE-20260920.md
 ---
 
 # PRD-MOC — JEVX : Decision-Engine Souverain JEVX
@@ -166,6 +172,16 @@ Intégrer JEVX comme decision-engine souverain dans le Meta-Design Unifié (MDU)
 - **MDU** : `META-DESIGN.md`, `meta-design.yaml`
 - **Upstream** : `githubnext/localjev`
 - **Backends** : `TianyuCodings/NanoJev`, `vinnylarouge/jevlike`, `zeredy879/minojev`, `Argos1111/jev_local`
+
+## 11. PRD-MOC associés
+
+| PRD-MOC | Description |
+|---------|-------------|
+| `PRD-MOC-JEVX-BACKEND-SELECTOR-20260920.md` | Skill de sélection backend selon contraintes matérielles |
+| `PRD-MOC-JEVX-CONSTRAINED-PARALLEL-DECODING-20260920.md` | Primitive décodage parallèle contraint (KV cache broadcast) |
+| `PRD-MOC-JEVX-SOVEREIGN-ADAPTER-PATTERN-20260920.md` | Primitive adaptateur souverain (transposition Python de localjev) |
+| `PRD-MOC-JEVX-DESIGN-VALIDATION-PIPELINE-20260920.md` | Pipeline de validation ciblée des designs JEVX |
+| `PRD-MOC-JEVX-STRUCTURAL-FIX-PIPELINE-20260920.md` | Mise à jour workflow structural-fix-pipeline avec patterns JEVX |
 
 ---
 
