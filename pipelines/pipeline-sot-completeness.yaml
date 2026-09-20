@@ -1,0 +1,64 @@
+---
+name: pipeline-sot-completeness
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPIPELINE_SOT_COMPLETENESS_20260920
+description: >
+  Pipeline SOT completeness : détecte les champs manquants dans les fichiers
+  de la Source of Truth (known_repositories.yaml, AGENT_RAM.yaml, BRIDGES.yaml),
+  applique les corrections automatiques quand elles sont déductibles, puis valide.
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: detect-missing-fields
+    description: "Détecte les champs manquants dans les fichiers SOT"
+  - name: auto-fix-fields
+    description: "Corrige automatiquement les champs déductibles"
+  - name: validate-fields
+    description: "Valide que tous les champs requis sont présents"
+states:
+  - name: DETECT
+    gate_to_next: FIELDS_DETECTED
+  - name: FIX
+    gate_to_next: FIELDS_FIXED
+  - name: VALIDATE
+    gate_to_next: VALIDATION_PASSED
+functions:
+  - id: F1
+    name: DETECT_MISSING_FIELDS
+    state: DETECT
+    description: "Détecte les champs manquants via validate_sot_fields.py"
+  - id: F2
+    name: AUTO_FIX_FIELDS
+    state: FIX
+    description: "Corrige les champs déductibles via fix_sot_fields.py"
+  - id: F3
+    name: VALIDATE_FIELDS
+    state: VALIDATE
+    description: "Valide les champs corrigés"
+invariant: "Tout fichier SOT doit avoir tous les champs requis avant commit/push."
+genes:
+  - id: G1
+    name: detect-first
+    description: "Toujours détecter avant de corriger"
+  - id: G2
+    name: validate-after-fix
+    description: "Toujours valider après correction"
+anti_patterns:
+  - missing_gene: detect-first
+    pathology: "Correction sans détection → modifications inutiles"
+  - missing_gene: validate-after-fix
+    pathology: "Correction sans validation → erreurs silencieuses"
+cross_references:
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: uses
+  - script: scripts/validate_sot_fields.py
+  - script: scripts/fix_sot_fields.py
+  - design: ecosystem-meta-coherence
+  - workflow: workflow-pre-push-validation

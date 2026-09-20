@@ -1,0 +1,98 @@
+---
+name: pipeline-dryrun-causal-audit
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPIPELINE_DRYRUN_CAUSAL_AUDIT_20260920
+description: >
+  Pipeline dryrun causal audit : vérifie qu'un livrable est prod-ready opérationnel
+  à 100% avant toute implémentation ou merge. 7 étapes : présence, YAML, frontmatter,
+  MDU, hooks, cross-references, merge.
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: check-presence
+    description: "Vérifie que tous les fichiers attendus existent"
+  - name: validate-yaml
+    description: "Parse chaque YAML avec yaml.safe_load()"
+  - name: validate-frontmatter
+    description: "Vérifie le frontmatter de chaque document de gouvernance"
+  - name: validate-mdu
+    description: "Exécute validate_designs.py --strict sur le design cible"
+  - name: check-hooks
+    description: "Vérifie que les pre-commit hooks passent"
+  - name: check-crossref
+    description: "Vérifie que les références croisées sont cohérentes"
+  - name: check-merge
+    description: "Vérifie que le merge sur main est possible"
+states:
+  - name: PRESENCE
+    gate_to_next: PRESENCE_OK
+  - name: YAML_VALID
+    gate_to_next: YAML_OK
+  - name: FRONTMATTER
+    gate_to_next: FRONTMATTER_OK
+  - name: MDU
+    gate_to_next: MDU_OK
+  - name: HOOKS
+    gate_to_next: HOOKS_OK
+  - name: CROSSREF
+    gate_to_next: CROSSREF_OK
+  - name: MERGE
+    gate_to_next: MERGE_OK
+functions:
+  - id: F1
+    name: CHECK_PRESENCE
+    state: PRESENCE
+    description: "Vérifie que tous les fichiers attendus existent"
+  - id: F2
+    name: VALIDATE_YAML
+    state: YAML_VALID
+    description: "Parse chaque YAML avec yaml.safe_load()"
+  - id: F3
+    name: VALIDATE_FRONTMATTER
+    state: FRONTMATTER
+    description: "Vérifie le frontmatter de chaque document de gouvernance"
+  - id: F4
+    name: VALIDATE_MDU
+    state: MDU
+    description: "Exécute validate_designs.py --strict"
+  - id: F5
+    name: CHECK_HOOKS
+    state: HOOKS
+    description: "Vérifie que les pre-commit hooks passent"
+  - id: F6
+    name: CHECK_CROSSREF
+    state: CROSSREF
+    description: "Vérifie que les références croisées sont cohérentes"
+  - id: F7
+    name: CHECK_MERGE
+    state: MERGE
+    description: "Vérifie que le merge sur main est possible"
+invariant: "Un livrable n'est jamais déclaré prod-ready sans dryrun causal PASS."
+genes:
+  - id: G1
+    name: presence-first
+    description: "Toujours vérifier la présence avant de valider"
+  - id: G2
+    name: verification-real
+    description: "Toujours valider avec des outils réels, pas des suppositions"
+anti_patterns:
+  - missing_gene: presence-first
+    pathology: "Validation sans vérification de présence → faux negatif"
+  - missing_gene: verification-real
+    pathology: "Validation sans preuve → échec silencieux"
+cross_references:
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: uses
+  - repo: gerivdb/unified-design
+    relation: validates
+  - script: scripts/validate_designs.py
+  - design: ecosystem-meta-coherence
+  - skill: dryrun-causal-auditor
+  - workflow: workflow-dryrun-causal-audit
