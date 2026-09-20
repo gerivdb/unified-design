@@ -1,6 +1,6 @@
---
+-
 name: agent-manager-v99
-description: "Agent Manager V9.9 Ã¢â‚¬â€ Orchestrateur N+3.5"
+description: "Agent Manager V9.9 ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Orchestrateur N+3.5"
 version: "1.0.0"
 parent: unified-design
 inherits: []
