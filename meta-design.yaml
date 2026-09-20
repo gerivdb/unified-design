@@ -615,7 +615,12 @@ governance_atoms:
 - harness-engineering-reliable-agents
 - safe-action-gate
 - ecosystem-meta-coherence-gate
-- typed-decision-api
+  - typed-decision-api
+  # Artifact Extraction System (2026-09-20)
+  - artifact-extraction-status
+  - conversation-anchoring
+  - extraction-report-format
+  - confidence-threshold
 think_do_check:
   description: 'Architecture logique de gestion des repos : Think (veille/conception),
     Do (exécution), Check (conformité)'

@@ -1,0 +1,62 @@
+---
+name: workflow-sot-completeness
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_WORKFLOW_SOT_COMPLETENESS_20260920
+description: >
+  Design du workflow SOT completeness : workflow déclaré pour la validation
+  et la correction des champs SOT manquants. Pipeline : detect → fix → validate.
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: detect-missing
+    description: "Détecte les champs manquants"
+  - name: auto-fix
+    description: "Corrige automatiquement les champs déductibles"
+  - name: validate
+    description: "Valide que tous les champs sont présents"
+states:
+  - name: DETECT
+    gate_to_next: MISSING_DETECTED
+  - name: FIX
+    gate_to_next: FIXED
+  - name: VALIDATE
+    gate_to_next: VALIDATED
+functions:
+  - id: F1
+    name: DETECT_MISSING
+    state: DETECT
+    description: "Détecte les champs manquants"
+  - id: F2
+    name: AUTO_FIX
+    state: FIX
+    description: "Corrige automatiquement"
+  - id: F3
+    name: VALIDATE
+    state: VALIDATE
+    description: "Valide les corrections"
+invariant: "Tout fichier SOT a tous les champs requis avant commit/push."
+genes:
+  - id: G1
+    name: detect-first
+    description: "Toujours détecter avant de corriger"
+  - id: G2
+    name: validate-after-fix
+    description: "Toujours valider après correction"
+anti_patterns:
+  - missing_gene: detect-first
+    pathology: "Correction sans détection → modifications inutiles"
+  - missing_gene: validate-after-fix
+    pathology: "Correction sans validation → erreurs silencieuses"
+cross_references:
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: uses
+  - pipeline: pipeline-sot-completeness
+  - skill: sot-field-completeness-checker
+  - workflow: workflow-pre-push-validation

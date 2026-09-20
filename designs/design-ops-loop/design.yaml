@@ -1,0 +1,115 @@
+---
+name: design-ops-loop
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_DESIGN_OPS_LOOP_20260920
+description: >
+  Boucle THINK/DO/CHECK opérationnelle pour le MDU.
+  Garantit que toute correction structurelle naît d'un besoin écosystémique,
+  est exécutée avec vérification des invariants, et est validée par le réel.
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+  - safe-action-pattern
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+capabilities:
+  - name: think-needs-analysis
+    description: "Analyse des besoins écosystémiques"
+  - name: do-ecosystem-execution
+    description: "Exécution de l'écosystème"
+  - name: check-ecosystem-verification
+    description: "Vérification de l'écosystème"
+  - name: causal-traceability
+    description: "Traçabilité causale"
+states:
+  - name: THINK
+    nature: besoins émergents, signaux faibles
+    gate_to_next: NEEDS_VALIDATED
+    question: "L'écosystème exprime-t-il un besoin nouveau ou un gap ?"
+  - name: DO
+    nature: mutations engagées, irréversibles
+    gate_to_next: EXECUTION_VERIFIED
+    question: "Les mutations respectent-elles les invariants écosystémiques ?"
+  - name: CHECK
+    nature: constaté, mémorisé, audité
+    question: "Le monde a-t-il confirmé ? Qu'héritons-nous ?"
+functions:
+  - id: F1-THINK
+    name: PERCEVOIR_BESOINS
+    state: THINK
+    description: "Échantillonnage multi-source des besoins"
+  - id: F2-THINK
+    name: ÉVALUER_BESOINS
+    state: THINK
+    description: "Évaluation des besoins vs capacité"
+  - id: F3-THINK
+    name: MODÉLISER_IMPACT
+    state: THINK
+    description: "Auto-modèle d'impact"
+  - id: F4-THINK
+    name: RÉSERVER_COHÉRENCE
+    state: THINK
+    description: "Marge de cohérence : rollback"
+  - id: F5-THINK
+    name: VALIDER_BESOINS
+    state: THINK→DO
+    description: "Gate : besoins fondés ?"
+    veto: true
+  - id: F6-DO
+    name: AGIR_CORRECTION
+    state: DO
+    description: "Application de la correction"
+  - id: F7-DO
+    name: MONITORER_INVARIANTS
+    state: DO
+    description: "Surveillance des invariants"
+  - id: F8-CHECK
+    name: VALIDER_RÉEL
+    state: DO→CHECK
+    description: "Succès constaté"
+  - id: F9-CHECK
+    name: ENREGISTRER_TRACE
+    state: CHECK
+    description: "Preuve horodatée"
+invariant: "Le MDU n'est jamais considéré comme méta-cohérent tant qu'une friction non résolue subsiste."
+genes:
+  - id: G1
+    name: think-first
+    description: "Toute correction naît d'un besoin écosystémique"
+  - id: G2
+    name: causal-traceability
+    description: "Toute correction est tracée"
+  - id: G3
+    name: adaptive-coherence
+    description: "Le MDU s'adapte aux besoins"
+  - id: G4
+    name: verification-real
+    description: "Une correction n'est jamais déclarée réussie sans preuve"
+anti_patterns:
+  - missing_gene: think-first
+    pathology: "Correction sans besoin validé → dette technique"
+  - missing_gene: causal-traceability
+    pathology: "Correction sans traçabilité → impossibilité d'auditer"
+  - missing_gene: adaptive-coherence
+    pathology: "MDU figé → écosystème frustré"
+  - missing_gene: verification-real
+    pathology: "Correction déclarée réussie sans preuve → échec silencieux"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - design: ecosystem-meta-coherence
+  - design: chain-fluidity
+  - design: safe-action-pattern
+  - primitive: design-ops-loop-primitive
+  - skill: design-ops-loop-skill
+  - citizen: design-ops-loop-citizen
+  - workflow: workflow-design-ops-loop

@@ -1,0 +1,78 @@
+---
+name: workflow-yaml-structure-validator
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_WORKFLOW_YAML_STRUCTURE_VALIDATOR_20260920
+description: >
+  Design du workflow YAML structure validator : workflow déclaré pour la validation
+  structurelle des fichiers YAML. Pipeline : backup → parse → validate → fix → re-validate.
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: backup-yaml
+    description: "Sauvegarde préalable du fichier YAML"
+  - name: parse-yaml
+    description: "Parse le YAML avec yaml.safe_load()"
+  - name: validate-structure
+    description: "Valide la structure YAML"
+  - name: fix-if-needed
+    description: "Corrige le YAML si nécessaire"
+  - name: re-validate
+    description: "Re-valide après correction"
+states:
+  - name: BACKUP
+    gate_to_next: BACKUP_DONE
+  - name: PARSE
+    gate_to_next: PARSE_OK
+  - name: VALIDATE
+    gate_to_next: VALIDATE_OK
+  - name: FIX
+    gate_to_next: FIX_DONE
+  - name: RE_VALIDATE
+    gate_to_next: RE_VALIDATE_OK
+functions:
+  - id: F1
+    name: BACKUP_YAML
+    state: BACKUP
+    description: "Sauvegarde le fichier YAML"
+  - id: F2
+    name: PARSE_YAML
+    state: PARSE
+    description: "Parse le YAML"
+  - id: F3
+    name: VALIDATE_STRUCTURE
+    state: VALIDATE
+    description: "Valide la structure"
+  - id: F4
+    name: FIX_IF_NEEDED
+    state: FIX
+    description: "Corrige si nécessaire"
+  - id: F5
+    name: RE_VALIDATE
+    state: RE_VALIDATE
+    description: "Re-valide après correction"
+invariant: "Tout fichier YAML est sauvegardé avant modification."
+genes:
+  - id: G1
+    name: backup-first
+    description: "Toujours sauvegarder avant de modifier"
+  - id: G2
+    name: validate-after-fix
+    description: "Toujours valider après correction"
+anti_patterns:
+  - missing_gene: backup-first
+    pathology: "Modification sans sauvegarde → corruption irréversible"
+  - missing_gene: validate-after-fix
+    pathology: "Correction sans validation → erreurs silencieuses"
+cross_references:
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: uses
+  - pipeline: pipeline-yaml-structure-validation
+  - skill: yaml-structure-validator
+  - workflow: workflow-yaml-structure-validator
