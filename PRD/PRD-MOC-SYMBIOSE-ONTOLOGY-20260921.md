@@ -103,6 +103,30 @@ Définir et intégrer le concept ontologique `symbiose` comme **relation réifi�
 
 **Verdict** : 8/8 livrables implémentés. Aucun écart. Le PRD-MOC est **100% exécuté**.
 
+## Gates et critères d'acceptation formels
+
+| Gate | Critère formel | Validation | Statut |
+|------|---------------|------------|--------|
+| **G1** | ADR `ADR-SYMBIOSE-ONTOLOGY-20260921` acceptée par governance gate | Validation humaine / ADR review | ⏳ En attente |
+| **G4** | `bénéficeNet > 0` confirmé par `RLM-METRICS` sur `CTULU ↔ KG-CAUSAL` | Collecte runtime + calcul | ⏳ Baseline créée |
+
+### Critères de validation G1
+
+- ADR proposée, datée, avec IntentHash unique
+- Principes S1-S6 documentés
+- Conséquences positives/négatives/neutres renseignées
+- Alternatives écartées justifiées
+- Références croisées valides
+
+### Critères de validation G4
+
+- Mesure `couverture_avant`, `couverture_après` collectée
+- Mesure `latence_avant`, `latence_après` collectée
+- Mesure `coût_avant`, `coût_après` collectée
+- Mesure `résilience_avant`, `résilience_après` collectée
+- Calcul `bénéficeNet = Σ w_i × Δ(dimension_i)` documenté
+- Résultat `bénéficeNet > 0` pour `CTULU ↔ KG-CAUSAL`
+
 ## Critères d'acceptation
 
 - [x] Concept `symbiose` v3.1 final créé dans `ONTOLOGY/concepts/symbiose.md` (commit `a350fef`, 2026-09-21)
