@@ -1,0 +1,43 @@
+---
+cross_repo_flow:
+  name: batmcp -> skills
+  provider: BatMCP
+  consumers:
+    - SKILLS
+  contract:
+    interface: mcp
+    format: json
+    paths:
+      - BatMCP/skills/*
+      - SKILLS/SKILL.md
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P2
+  status: active
+---
+
+# Flow — BatMCP → SKILLS
+
+## Rôle
+SKILLS est le **registry des skills** natifs/assimilés/externes. BatMCP les expose via le protocole MCP pour les agents.
+
+## Contrat
+- **Provider** : `BatMCP` expose les skills via MCP (`tools/list`, `tools/call`).
+- **Consumer** : `SKILLS` fournit les définitions (`SKILL.md`) et les implémentations.
+- **Boucle** : BatMCP indexe les skills de SKILLS au démarrage.
+
+## Validation
+- `provider_registered` : `BatMCP` est dans `known_repositories.yaml`.
+- `consumer_registered` : `SKILLS` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `BatMCP ↔ SKILLS`.
+- `contract_exists` : `SKILLS/SKILL.md` existe.
+
+## Références
+- `SKILLS/SKILL.md`
+- `BatMCP/skills/`

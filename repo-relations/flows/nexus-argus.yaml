@@ -1,0 +1,46 @@
+---
+cross_repo_flow:
+  name: nexus -> argus
+  provider: NEXUS
+  consumers:
+    - ARGUS
+  contract:
+    interface: file
+    format: yaml
+    paths:
+      - NEXUS/registry/*.yaml
+      - ARGUS/scanners/*.py
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P0
+  status: active
+---
+
+# Flow — NEXUS → ARGUS
+
+## Rôle
+ARGUS est le **scanner cross-repo** qui détecte GAP/GHOST/ORPHAN/DRIFT/COLLISION. NEXUS lui fournit les registres agrégés pour alimenter ses scans.
+
+## Contrat
+- **Provider** : `NEXUS` expose les registres agrégés (`OrgansRegistry.yaml`, `BRIDGES.yaml`, etc.).
+- **Consumer** : `ARGUS` consomme ces registres pour :
+  - `argus_scanner.py` : scan des repos et détection d'anomalies
+  - `friction_detector.py` : détection des frictions cross-repo
+  - `registry-sync-checker` : vérification de cohérence des registres
+- **Boucle** : ARGUS remonte les anomalies à NEXUS via `wal/` et `reports/`.
+
+## Validation
+- `provider_registered` : `NEXUS` est dans `known_repositories.yaml`.
+- `consumer_registered` : `ARGUS` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `NEXUS → ARGUS → NEXUS`.
+- `contract_exists` : `ARGUS/scanners/` existe.
+
+## Références
+- `ARGUS/`
+- `NEXUS/registry/`
