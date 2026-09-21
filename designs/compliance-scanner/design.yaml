@@ -6,7 +6,7 @@ description: |
   Detecte les manques : designs, atoms, citizens, ADRs, checkpoints.
 layer: L0
 capabilities:
-  - repo-audit
+  - name: repo-audit
     parameters:
       checks:
         - design_registered

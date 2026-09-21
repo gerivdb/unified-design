@@ -180,7 +180,3 @@ references:
   - "GF-16 Python: kilocode/guards/gf_16_edgekind_gate.py"
   - "Pre-commit gate: scripts/check_staged_edge_kinds.py"
   - "Phase D contract-centrality: C4→C5_CONTRACTUEL"
-
----
-
-*Design kg-edge-kinds — L0 — 2026-08-28*

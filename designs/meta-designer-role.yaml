@@ -35,6 +35,7 @@ capabilities:
 performance:
   latency_p99: 45
   power_max: 12
+---
 
 # Design : Meta-Designer Role
 
@@ -42,7 +43,6 @@ performance:
 > **Statut** : proposed  
 > **Dépôt** : `gerivdb/unified-design`  
 > **Màj requise si** : statut ADR passe à deprecated ou superseded  
-
 
 ## Description
 

@@ -41,11 +41,11 @@ implementation:
 
   auto_fix_behavior:
     on_format_failure:
-      1. "Run: zig fmt <all_zig_files>"
-      2. "Wait for completion (timeout 30s)"
-      3. "Re-run format check (zig fmt --check)"
-      4. "If passes: set auto_fixed=true, continue validation"
-      5. "If still fails: return Format ❌ with auto_fixed=true"
+      - "Run: zig fmt <all_zig_files>"
+      - "Wait for completion (timeout 30s)"
+      - "Re-run format check (zig fmt --check)"
+      - "If passes: set auto_fixed=true, continue validation"
+      - "If still fails: return Format ❌ with auto_fixed=true"
       
     safety:
       - "Only modifies files tracked by git (git ls-files)"
