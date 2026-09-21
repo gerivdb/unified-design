@@ -1,0 +1,31 @@
+---
+# multi-repo-governance.yaml
+# Branch taxonomy governance for gerivdb ecosystem
+# IntentHash: 0xMULTI_REPO_GOVERNANCE_20260922
+
+version: "1.0.0"
+date: "2026-09-22"
+status: active
+
+repos:
+  gerivdb/unified-design:
+    allowed_branch_prefixes:
+      - "feat/"
+      - "fix/"
+      - "docs/"
+      - "chore/"
+      - "refactor/"
+      - "perf/"
+      - "test/"
+      - "hotfix/"
+      - "emergency/"
+      - "release/"
+      - "experiment/"
+      - "deploy/"
+      - "rollback/"
+    exempt_branches:
+      - "main"
+      - "master"
+      - "dev"
+    taxonomy_pattern: "^(feat|fix|docs|chore|refactor|perf|test|hotfix|emergency|release|experiment|deploy|rollback)/(env[0-5]|infra|web|cross)-[a-z0-9-]+-[0-9]{3}$"
+    guard_mode: "BLOCK"  # WARN or BLOCK

@@ -1483,7 +1483,7 @@ entries:
 - name: symbiose-hot-reload
   path: workflows\symbiose-coordinated-reload.yaml
   version: 1.0.0
-  intent_hash: 0xWORKFLOW_SYMBIOSE_HOT_RELOAD_20260921
+  intent_hash: 0xWORKFLOW_SYMBIOSE_COORDINATED_RELOAD_20260921
   status: active
   profile: STANDARD
   consumers: []
@@ -1491,6 +1491,20 @@ entries:
   path: designs\symbiose-reversible-plugin-architecture.yaml
   version: 1.0.0
   intent_hash: 0xDESIGN_SYMBIOSE_REVERSIBLE_PLUGIN_ARCHITECTURE_20260921
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: branch-taxonomy-gate
+  path: designs\branch-taxonomy-gate.md
+  version: 1.0.0
+  intent_hash: 0xDESIGN_BRANCH_TAXONOMY_GATE_20260922
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: command-resolution-protocol
+  path: designs\command-resolution-protocol.md
+  version: 1.0.0
+  intent_hash: 0xDESIGN_COMMAND_RESOLUTION_PROTOCOL_20260922
   status: active
   profile: STANDARD
   consumers: []

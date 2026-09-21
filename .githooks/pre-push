@@ -127,15 +127,22 @@ fi
 # ÉTAPE 3 : VALIDATION TAXONOMIE BRANCH GOVERNOR
 ###############################################################################
 
-# Pattern unifié : {type}/{juridiction}-{slug}-{id}
-BRANCH_PATTERN='^(feat|fix|docs|chore|refactor|perf|test|hotfix|emergency|release|experiment|deploy|rollback)/(env[0-5]|infra|web|cross)-[a-z0-9-]+-[0-9]{3}$'
+# Exemptions : main, master, dev
+if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ] || [ "$BRANCH" = "dev" ]; then
+    echo "[ALFRED] Branche '$BRANCH' exemptée de la taxonomie"
+    # Continuer vers les autres guards
+else
+    # Pattern canonique : {type}/{juridiction}-{slug}-{id}
+    BRANCH_PATTERN='^(feat|fix|docs|chore|refactor|perf|test|hotfix|emergency|release|experiment|deploy|rollback)/(env[0-5]|infra|web|cross)-[a-z0-9-]+-[0-9]{3}$'
 
-if ! echo "$BRANCH" | grep -qE "$BRANCH_PATTERN"; then
-    echo "[ALFRED WARN] Branche '$BRANCH' non conforme à la taxonomie unifiée"
-    echo "  Pattern attendu: type/jurisdiction-slug-id"
-    echo "  Exemple: feat/env2-lxc-network-001"
-    echo "  Pour forcer: git push --no-verify"
-    # WARN seulement — ne bloque pas (phase adoption)
+    if ! echo "$BRANCH" | grep -qE "$BRANCH_PATTERN"; then
+        echo "[ALFRED BLOCK] Branche '$BRANCH' non conforme à la taxonomie unifiée"
+        echo "  Pattern attendu: type/jurisdiction-slug-id"
+        echo "  Exemple: feat/env2-lxc-network-001"
+        echo "  Pour forcer: git push --no-verify (INTERDIT par BDCP/design)"
+        exit 1
+    fi
+    echo "[ALFRED OK] Branche '$BRANCH' conforme à la taxonomie"
 fi
 
 ###############################################################################
