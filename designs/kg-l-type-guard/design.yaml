@@ -46,11 +46,11 @@ implementation:
     - ci_gate: "GitHub Actions / local CI"
   
   algorithm:
-    1. parse domain_links.json (freshness < 30 days)
-    2. extract all kernel.domain from domain_links.json
-    3. extract all data.produces from loaders in Zig source
-    4. verify ∀ kernel: kernel.domain ⊇ data.domain
-    5. emit structured error with intent_hash if violation
+    - parse domain_links.json (freshness < 30 days)
+    - extract all kernel.domain from domain_links.json
+    - extract all data.produces from loaders in Zig source
+    - verify ∀ kernel: kernel.domain ⊇ data.domain
+    - emit structured error with intent_hash if violation
 
   zig_source_analysis:
     kernel_domains_source: "src/kernels/*.zig → domain metadata"
