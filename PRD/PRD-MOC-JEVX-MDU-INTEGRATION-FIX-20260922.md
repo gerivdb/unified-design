@@ -1,0 +1,119 @@
+---
+type: PRD-MOC
+version: "1.0.0"
+date: "2026-09-22"
+status: proposed
+intent_hash: 0xPRD_MOC_JEVX_MDU_INTEGRATION_FIX_20260922
+author: gerivdb
+source_repo: gerivdb/unified-design
+parent_doc: PRD-MOC-JEVX-SOVEREIGN-OVERLAY-20260920.md
+related_adr: ADR-0111-JEVX-SOVEREIGN-OVERLAY.md
+related_intent: INTENT-JEVX-SOVEREIGN-OVERLAY.md
+related_moc: MOC-JEVX-SOVEREIGN-OVERLAY-20260920.md
+---
+
+# PRD-MOC — JEVX MDU Integration Fix
+
+> **Parent** : PRD-MOC-JEVX-SOVEREIGN-OVERLAY-20260920.md
+> **Périmètre** : corrections d'alignement entre les designs JEVX, le repo JEVX, et les registres de `unified-design` / `GOVERNANCE-HUB`.
+> **Coordination transverse** : voir MOC JEVX §3 (livrables, dépendances).
+
+---
+
+## 1. Objectif
+
+Corriger les incohérences d'intégration de JEVX dans le MDU et les registres écosystémiques, après audit du 2026-09-22.
+
+## 2. Livrables assignés
+
+| ID | Livrable | Chemin cible | Type | Statut |
+|---|---|---|---|---|
+| L1 | Corriger `do_not_create` JEVX | `GOVERNANCE-HUB/known_repositories.yaml` | Modifier | ⬜ |
+| L2 | Corriger `entrypoint` JEVX | `designs/jevx.yaml` | Modifier | ⬜ |
+| L3 | Clarifier `hardware_profile` JEVX | `designs/jevx.yaml` | Modifier | ⬜ |
+| L4 | Aligner `depends_on` JEVX sur MDU | `designs/jevx.yaml`, `designs/jevx-engineering.yaml` | Modifier | ⬜ |
+| L5 | Documenter `consumers` JEVX | `catalog/designs.index.yaml` | Modifier | ⬜ |
+| L6 | Documenter `consumers` pipeline JEVX | `catalog/pipelines.index.yaml` | Modifier | ⬜ |
+| L7 | Ajouter JEVX dans CLM pipeline | `designs/clm-pipeline/design.yaml` | Modifier | ⬜ |
+| L8 | Corriger `SCOPE.yaml` consumer CLM | `JEVX/SCOPE.yaml` | Modifier | ⬜ |
+| L9 | Dédupliquer `ONTOLOGY_DECLARATION.yaml` | `JEVX/ONTOLOGY_DECLARATION.yaml` | Modifier | ⬜ |
+| L10 | Marquer `security_guardrails` draft | `designs/jevx.yaml` | Modifier | ⬜ |
+| L11 | Marquer `constrained-parallel-decoding` draft | `designs/jevx-engineering.yaml` | Modifier | ⬜ |
+| L12 | Aligner `max_queue` sur code | `designs/jevx.yaml` | Modifier | ⬜ |
+
+## 3. Tâches
+
+### Phase A — SOT et registres
+
+1. **L1** : `GOVERNANCE-HUB/known_repositories.yaml` — passer `do_not_create: false` → `true` pour JEVX dans `P4_REPOS`.
+2. **L8** : `JEVX/SCOPE.yaml` — remplacer la référence consumer `gerivdb/CLM` par `gerivdb/ROOTX` ou `gerivdb/KG-CAUSAL`, ou supprimer la référence invalide.
+3. **L9** : `JEVX/ONTOLOGY_DECLARATION.yaml` — supprimer les doublons `jev_variant` et `comparative_study`.
+
+### Phase B — Designs JEVX
+
+4. **L2** : `designs/jevx.yaml` — corriger `entrypoint: src/server.ts` → `src/index.ts`.
+5. **L3** : `designs/jevx.yaml` — clarifier `hardware_profile` :
+   - runtime principal = `Bun`
+   - runtime alternatif = `Python 3.12 + llama.cpp` pour backends légers
+6. **L4** : `designs/jevx.yaml` et `designs/jevx-engineering.yaml` — remplacer les `depends_on` courts non résolus dans le MDU :
+   - `kg-causal` → `kg-causal-engine` ou déplacer vers `dependencies`/`bridges`
+   - `kix` → déplacer vers `bridges`/`dependencies`
+   - `rootx` → déplacer vers `bridges`/`dependencies`
+   - `talex` → déplacer vers `bridges`/`dependencies`
+7. **L10** : `designs/jevx.yaml` — marquer `security_guardrails` comme `draft` tant que non implémentées dans JEVX.
+8. **L11** : `designs/jevx-engineering.yaml` — marquer `constrained-parallel-decoding` comme `draft` tant qu'absent du code JEVX.
+9. **L12** : `designs/jevx.yaml` — aligner `max_queue: 64` sur la sémantique réelle du code (`engine.ts` : compteur `waiting`, pas queue bornée).
+
+### Phase C — Catalogues MDU
+
+10. **L5** : `catalog/designs.index.yaml` — documenter les consumers pour les designs JEVX (`jevx`, `jevx-engineering`, `jevx-backend-matrix`).
+11. **L6** : `catalog/pipelines.index.yaml` — documenter les consumers pour `jevx-design-validation`.
+12. **L7** : `designs/clm-pipeline/design.yaml` — ajouter JEVX comme composant/étape du pipeline CLM, ou corriger la description de `jevx.yaml` pour ne pas l'y référencer.
+
+## 4. Contraintes
+
+- **CPU-only** : GPU interdit (ENV2 / Z600)
+- **WSL1** : runtime prioritaire Python 3.12 + llama.cpp AVX1
+- **RAM max** : 24 Go (après OS et services)
+- **Backend** : LEGACY_FIT immédiat (NanoJev, jevlike, minojev) ; LEGACY_PATCHABLE (jev_local)
+- **Souveraineté** : aucun trafic ne quitte l'ENV sans médiation JEVX
+- **Calibration** : probabilités auto-rapportées ; calibration externe requise avant usage décisionnel conséquent
+- **Synthetic data** : tous les clones connus sont entraînés sur données 100% synthétiques ; calibration externe obligatoire
+- **Encoding** : UTF-8 strict (hook pre-commit bloque non-ASCII)
+- **Commits** : atomiques <= 3 fichiers
+
+## 5. Plan de commits proposé
+
+| Commit | Fichiers | Description |
+|---|---|---|
+| `fix(sot): mark JEVX do_not_create true` | `GOVERNANCE-HUB/known_repositories.yaml` | L1 |
+| `fix(jevx): align entrypoint and hardware profile` | `designs/jevx.yaml` | L2, L3 |
+| `fix(jevx): align depends_on with MDU concepts` | `designs/jevx.yaml`, `designs/jevx-engineering.yaml` | L4 |
+| `fix(jevx): mark guardrails and parallel decoding draft` | `designs/jevx.yaml`, `designs/jevx-engineering.yaml` | L10, L11 |
+| `fix(jevx): align max_queue with code` | `designs/jevx.yaml` | L12 |
+| `docs(catalog): document JEVX consumers` | `catalog/designs.index.yaml`, `catalog/pipelines.index.yaml` | L5, L6 |
+| `fix(clm): add JEVX to CLM pipeline or remove ref` | `designs/clm-pipeline/design.yaml`, `designs/jevx.yaml` | L7 |
+| `fix(jevx): clean SCOPE and ONTOLOGY_DECLARATION` | `JEVX/SCOPE.yaml`, `JEVX/ONTOLOGY_DECLARATION.yaml` | L8, L9 |
+
+## 6. Adossement (PF2)
+
+- **Implémentation** : ce PRD-MOC, exécuté par agent Kilo session suivante
+- **Vérificateur** : `python scripts/validate_designs.py --strict` ; hooks pre-commit (`design-validate`, `frontmatter-guardian`, `check-yaml`)
+- **Propriétaire** : gerivdb / GOVERNANCE-HUB N+4
+
+## 7. Critères d'acceptation
+
+1. `GOVERNANCE-HUB/known_repositories.yaml` : `do_not_create: true` pour JEVX.
+2. `designs/jevx.yaml` : `entrypoint: src/index.ts`, `hardware_profile` clarifié, `max_queue` aligné.
+3. `designs/jevx.yaml` et `designs/jevx-engineering.yaml` : `depends_on` résolus dans le MDU ou déplacés vers `dependencies`/`bridges`.
+4. `designs/jevx.yaml` : `security_guardrails` marquées `draft` si non implémentées.
+5. `designs/jevx-engineering.yaml` : `constrained-parallel-decoding` marqué `draft` si absent du code.
+6. `catalog/designs.index.yaml` et `catalog/pipelines.index.yaml` : consumers documentés.
+7. `designs/clm-pipeline/design.yaml` et `designs/jevx.yaml` : cohérence sur la présence de JEVX dans CLM.
+8. `JEVX/SCOPE.yaml` : aucune référence invalide à `gerivdb/CLM`.
+9. `JEVX/ONTOLOGY_DECLARATION.yaml` : aucun doublon.
+10. Tous les designs passent `python scripts/validate_designs.py --strict`.
+
+## 8. Proof-of-Life
+
+- [ ] 2026-09-22T00:56:04+02:00 — Création PRD-MOC JEVX MDU Integration Fix
