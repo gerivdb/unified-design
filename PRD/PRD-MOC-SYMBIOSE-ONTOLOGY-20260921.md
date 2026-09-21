@@ -76,12 +76,12 @@ Définir et intégrer le concept ontologique `symbiose` comme **relation réifi�
 | L9 | Design reversible plugin architecture | `designs/symbiose-reversible-plugin-architecture.yaml` | ✅ Créé | Commit `7720f29` — 2026-09-22 |
 | L10 | Primitive reversible lifecycle | `primitives/reversible-symbiose-lifecycle.yaml` | ✅ Créé | Commit `7720f29` — 2026-09-22 |
 | L11 | Workflow coordinated reload | `workflows/symbiose-coordinated-reload.yaml` | ✅ Créé | Commit `e8dbee1` — 2026-09-22 |
-| L12 | PRD-MOC reversible architecture | `PRD/PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| L13 | PRD-MOC reversible lifecycle | `PRD/PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| L14 | PRD-MOC coordinated reload | `PRD/PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `à commettre` |
-| L15 | MOC reversible architecture | `MOC/MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| L16 | MOC reversible lifecycle | `MOC/MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| L17 | MOC coordinated reload | `MOC/MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `à commettre` |
+| L12 | PRD-MOC reversible architecture | `PRD/PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| L13 | PRD-MOC reversible lifecycle | `PRD/PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| L14 | PRD-MOC coordinated reload | `PRD/PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| L15 | MOC reversible architecture | `MOC/MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| L16 | MOC reversible lifecycle | `MOC/MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| L17 | MOC coordinated reload | `MOC/MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
 
 ## Dépendances
 
@@ -197,8 +197,8 @@ Définir et intégrer le concept ontologique `symbiose` comme **relation réifi�
 | Design reversible plugin architecture | 2026-09-22 | `7720f29` | `designs/symbiose-reversible-plugin-architecture.yaml` |
 | Primitive reversible lifecycle | 2026-09-22 | `7720f29` | `primitives/reversible-symbiose-lifecycle.yaml` |
 | Workflow coordinated reload | 2026-09-22 | `e8dbee1` | `workflows/symbiose-coordinated-reload.yaml` |
-| PRD-MOC architecture + lifecycle + reload | 2026-09-22 | `à commettre` | 3 PRD-MOC files |
-| MOC architecture + lifecycle + reload | 2026-09-22 | `à commettre` | 3 MOC files |
+| PRD-MOC architecture + lifecycle + reload | 2026-09-22 | `efa046a` | 3 PRD-MOC files |
+| MOC architecture + lifecycle + reload | 2026-09-22 | `efa046a` | 3 MOC files |
 
 ---
 
