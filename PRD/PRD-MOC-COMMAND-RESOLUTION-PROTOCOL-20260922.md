@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-22"
-status: proposed
+status: in_review
 intent_hash: 0xPRD_MOC_COMMAND_RESOLUTION_PROTOCOL_20260922
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -26,7 +26,7 @@ source_repo: gerivdb/unified-design
 | L1 | Design `command-resolution-protocol` | `designs/command-resolution-protocol.md` | Créé | ✅ |
 | L2 | Guard pré-exécution dans `scripts/run-governance-unit-tests.ps1` | `scripts/run-governance-unit-tests.ps1` | Créé | ✅ |
 | L3 | Guard pré-exécution dans `scripts/local_ci.ps1` | `scripts/local_ci.ps1` | Modifier | ✅ |
-| L4 | MOC orchestration | `MOC/MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` | Créer | ⬜ |
+| L4 | MOC orchestration | `MOC/MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` | Créé | ✅ |
 
 ## 3. Tâches
 

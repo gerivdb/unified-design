@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-22"
-status: proposed
+status: in_review
 intent_hash: 0xPRD_MOC_BRANCH_TAXONOMY_ENFORCEMENT_20260922
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -26,7 +26,7 @@ Garantir que toute branche créée dans l'écosystème gerivdb respecte le patte
 | L1 | Design `branch-taxonomy-gate` | `designs/branch-taxonomy-gate.md` | Créé | ✅ |
 | L2 | Guard 6 pré-push | `.githooks/pre-push` | Modifier | ✅ |
 | L3 | `allowed_branch_prefixes` par repo | `multi-repo-governance.yaml` | Créé | ✅ |
-| L4 | MOC orchestration | `MOC/MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` | Créer | ⬜ |
+| L4 | MOC orchestration | `MOC/MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` | Créé | ✅ |
 
 ## 3. Tâches
 

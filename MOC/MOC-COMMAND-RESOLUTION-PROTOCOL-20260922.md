@@ -2,7 +2,7 @@
 type: MOC
 version: "1.0"
 date: "2026-09-22"
-status: proposed
+status: in_review
 intent_hash: 0xMOC_COMMAND_RESOLUTION_PROTOCOL_20260922
 ---
 
@@ -25,9 +25,9 @@ Ce MOC orchestre la création et l'intégration du design `command-resolution-pr
 | # | Livrable | Chemin cible | Statut | Preuve d'exécution |
 |---|----------|--------------|--------|-------------------|
 | L1 | Design command resolution protocol | `designs/command-resolution-protocol.md` | ✅ Créé | Commit `à commettre` |
-| L2 | Guard pré-pytest | `scripts/run-governance-unit-tests.ps1` | ⬜ | — |
-| L3 | Guard pré-push | `.githooks/pre-push.ps1` | ⬜ | — |
-| L4 | PRD-MOC | `PRD/PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` | ✅ Créé | Commit `à commettre` |
+| L2 | Guard pré-pytest | `scripts/run-governance-unit-tests.ps1` | ✅ Fait | Commit `6e8955e` |
+| L3 | Guard pré-push | `.githooks/pre-push.ps1` | ✅ Fait | Commit `6e8955e` |
+| L4 | PRD-MOC | `PRD/PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` | ✅ Fait | Commit `dbb659e` |
 
 ## Dépendances
 
@@ -67,5 +67,5 @@ Ce MOC orchestre la création et l'intégration du design `command-resolution-pr
 | Création design | 2026-09-22 | `9f211a2` | `designs/command-resolution-protocol.md` |
 | Création PRD-MOC | 2026-09-22 | `dbb659e` | `PRD/PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` |
 | Création MOC | 2026-09-22 | `6f025d2` | `MOC/MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` |
-| Création run-governance-unit-tests.ps1 | 2026-09-22 | `à commettre` | `scripts/run-governance-unit-tests.ps1` |
-| Modification local_ci.ps1 | 2026-09-22 | `à commettre` | `scripts/local_ci.ps1` |
+| Création run-governance-unit-tests.ps1 | 2026-09-22 | `0710a0e` | `scripts/run-governance-unit-tests.ps1` |
+| Modification local_ci.ps1 | 2026-09-22 | `6e8955e` | `scripts/local_ci.ps1` |
