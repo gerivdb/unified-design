@@ -56,3 +56,8 @@ Thumbs.db
 # fix-encoding.ps1 (root only - moved to scripts/utils/)
 settings.local.yaml
 kg-integration/
+
+# Temporary helper scripts (session-local)
+fix_designs*.py
+validate_frontmatter.py
+test_fix.py
