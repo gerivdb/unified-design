@@ -133,7 +133,7 @@ if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ] || [ "$BRANCH" = "dev" ]; 
     # Continuer vers les autres guards
 else
     # Pattern canonique : {type}/{juridiction}-{slug}-{id}
-    BRANCH_PATTERN='^(feat|fix|docs|chore|refactor|perf|test|hotfix|emergency|release|experiment|deploy|rollback)/(env[0-5]|infra|web|cross)-[a-z0-9-]+-[0-9]{3}$'
+    BRANCH_PATTERN='^(feat|fix|docs|chore|refactor|perf|test|hotfix|emergency|release|experiment|deploy|rollback)/([a-z0-9-]+)-([a-z0-9-]+)-([0-9]{1,8})$'
 
     if ! echo "$BRANCH" | grep -qE "$BRANCH_PATTERN"; then
         echo "[ALFRED BLOCK] Branche '$BRANCH' non conforme à la taxonomie unifiée"
