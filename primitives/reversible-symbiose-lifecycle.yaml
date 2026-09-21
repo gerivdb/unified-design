@@ -88,6 +88,25 @@ reversibility_rules:
     enforcement: "KG-L edge suppression + WAL compact + WAZAA bye."
   - rule: "Les dépendants sont notifiés avant toute mutation."
     enforcement: "WAZAA maintenance_start + maintenance_end."
+  - rule: "Toute dissolution non planifiée génère un événement ARGUS."
+    enforcement: "ARGUS event = dissolution_cost + pénalité BDCP + notification HITL."
+
+# Dissolution Cost
+dissolution_cost:
+  definition: "Toute dissolution de symbiose génère un coût structurel, documenté et tracé."
+  planned_dissolution:
+    cost: "Pénalité BDCP + logs ARGUS + WAL compact"
+    conditions:
+      - "Contrat de dissolution signé par les deux symbiotes."
+      - "BénéficeNet final calculé et archivé."
+      - "IntentHash de dissolution émis."
+  unplanned_dissolution:
+    cost: "Pénalité BDCP +logs ARGUS + WAL compact + dépendants notifiés + pénalité de réputation"
+    conditions:
+      - "Événement ARGUS automatique (bénéficeNet < 0 | timeout | erreur critique)."
+      - "Notification HITL si dépendants impactés."
+      - "Rollback WAL si possible."
+    guarantee: "Aucune dissolution silencieuse. Tout échec est trace et audité."
 
 # Error Handling
 error_handling:

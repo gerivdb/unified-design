@@ -44,8 +44,12 @@ context:
 # Core Principles
 principles:
   - id: P0_NO_PRIVILEGED_CORE
-    rule: "Aucun composant n'est irremplaçable. Le noyau minimal est un runtime de coordination, pas un domaine."
-    mapping: "GOVERNANCE-HUB est un registre, pas un noyau de confiance absolu."
+    rule: "Noyau minimal mais explicite : seuls 3 invariants sont non-négociables. Tout le reste est plugin réversible."
+    mapping: >
+      BDCP = budget enforcement inviolable ;
+      Swarm lease = coordination primitive ;
+      IntentHash = traçabilité ontologique.
+      Ces 3 mécanismes ne sont pas pluggables.
   - id: P0_REVERSIBLE_REGISTRATION
     rule: "Toute inscription de service, bail, ou symbiose produit un effet réversible. L'annulation doit être complète et tracée."
     mapping: "Swarm lease (SL4) + symbiose dissolution() → rollback automatique."
@@ -176,6 +180,44 @@ anti_patterns:
     correction: "WAZAA bye obligatoire + mise à jour KG-L."
   - pattern: "Noyau privilégié"
     correction: "Tout composant doit être remplaçable ; le runtime est un orchestrateur, pas un domaine."
+
+# Assumed Tensions
+# -----------------
+# Ces tensions ne sont pas des bugs : ce sont des choix de design explicites.
+# Ils évitent les faux-amis entre Cordis (intra-processus) et gerivdb (trans-repo).
+assumed_tensions:
+  - tension: "Réversibilité ≠ dissolution gratuite"
+    cordis_interpretation: "Tout plugin peut être déchargé à chaud sans coût."
+    gerivdb_interpretation: "La dissolution est une capacité structurelle, mais elle génère un coût : pénalité BDCP, événement ARGUS, rupture de contrat documentée."
+    resolution: >
+      Ajouter un champ `dissolution_cost` dans le contrat de symbiose.
+      Toute dissolution non planifiée produit un événement ARGUS.
+      L'invariant de durabilité (`≥ 1 loopx`) n'est pas violé : dissolution reste l'exception.
+    adr_required: true
+
+  - tension: "'Hot-reload' ≠ atomique trans-repo"
+    cordis_interpretation: "Swap de plugin en < 1s, garanti par le runtime."
+    gerivdb_interpretation: "La reconfiguration est coordonnée, pas atomique. Elle s'appuie sur swarm lease, WAL, et WAZAA."
+    resolution: >
+      Renommer conceptuellement en 'reconfiguration transactionnelle coordonnée'.
+      Garanties réelles :
+        1. at-least-once delivery des messages WAZAA pendant la fenêtre ;
+        2. lease-held exclusivity pendant la phase critique ;
+        3. WAL-based idempotence du rollback.
+      La borne `<30s` doit être dérivée d'un paramètre existant (`lease TTL` ou `WAL replay max`), pas fixée arbitrairement.
+    adr_required: true
+
+  - tension: "'Noyau non privilégié' ≠ noyau absent"
+    cordis_interpretation: "Pas de noyau privilégié ; tout est plugin."
+    gerivdb_interpretation: "Il y a un noyau minimal, mais il est explicite et non-pluggable."
+    resolution: >
+      Remplacer le slogan par 'noyau minimal mais explicite'.
+      Invariants non-négociables :
+        1. BDCP (budget enforcement)
+        2. Swarm lease (coordination primitive)
+        3. IntentHash (traçabilité ontologique)
+      Tout le reste est plugin réversible.
+    adr_required: false
 
 # Compliance
 compliance:

@@ -1,9 +1,9 @@
 ---
-name: symbiose-hot-reload
+name: symbiose-coordinated-reload
 version: "1.0.0"
 status: active
 layer: L0
-description: "Workflow de rechargement à chaud des symbiotes gerivdb. Implémente le pattern Cordis 'hot-reload safe' avec sauvegarde d'état, notification des dépendants, et rollback automatique en cas d'échec."
+description: "Workflow de reconfiguration transactionnelle coordonnée des symbiotes gerivdb. Remplace le concept Cordis 'hot-reload' par une reconfiguration trans-repo avec rollback WAL, notification WAZAA, et garantie d'exclusivité par swarm lease. Ce n'est pas un swap atomique intra-processus, mais une séquence coordonnée avec 3 garanties : at-least-once delivery, lease-held exclusivity, WAL-based idempotence."
 intent_hash: 0xWORKFLOW_SYMBIOSE_HOT_RELOAD_20260921
 inherits:
   - safe-action-pattern
@@ -21,7 +21,23 @@ bridges:
     protocol: json-read
 
 # Purpose
-purpose: "Permettre le rechargement à chaud d'un symbiote (citoyen, runner, service, repo) sans perte d'état et avec garantie d'intégrité."
+purpose: "Permettre la reconfiguration d'un symbiote (citoyen, runner, service, repo) sans perte d'état, avec garantie d'intégrité trans-repo, et rollback dérivé des paramètres existants (lease TTL / WAL replay max)."
+
+# Naming Note
+naming_note: >
+  Ce workflow était initialement nommé 'symbiose-hot-reload' par analogie avec Cordis.
+  Le terme est remplacé par 'reconfiguration transactionnelle coordonnée' pour éviter
+  l'illusion d'un swap atomique intra-processus. Gerivdb est trans-repo : la séquence
+  est coordonnée, pas atomique.
+
+# Guarantees
+guarantees:
+  - guarantee: "At-least-once delivery des messages WAZAA pendant la fenêtre"
+    mechanism: "WAZAA inbox persistante + retry + ack manuel."
+  - guarantee: "Lease-held exclusivity pendant la phase critique"
+    mechanism: "Swarm lease SL3 : un seul rechargement par scope à la fois."
+  - guarantee: "WAL-based idempotence du rollback"
+    mechanism: "WAL snapshot avant reconfiguration + replay déterministe."
 
 # Preconditions
 preconditions:
@@ -29,6 +45,7 @@ preconditions:
   - "Dépendants notifiés du rechargement."
   - "Nouvelle version validée par pre-merge gate (BOOT-6)."
   - "Swarm lease pris sur le scope concerné (SL1-SL5)."
+  - "Aucun autre rechargement en cours sur le même scope (SL3)."
 
 # Workflow Steps
 steps:
@@ -36,16 +53,30 @@ steps:
     actions:
       - "Vérifier lease actif : balise lease list -Json"
       - "Vérifier dépendants : WAZAA inbox + KG-L edges"
+      - "Vérifier aucun rechargement concurrent : balise lease list -Json (scope check)"
       - "Sauvegarder état : WAL snapshot"
       - "Vérifier nouvelle version : git diff main...feature-branch"
     validation:
       - "Lease actif ?"
       - "Dépendants notifiés ?"
+      - "Aucun rechargement concurrent ?"
       - "WAL snapshot créé ?"
       - "Nouvelle version validée ?"
     on_failure: "STOP - corriger préconditions."
 
-  - step: "2. Announcement"
+  - step: "2. Drain inbound calls"
+    actions:
+      - "Publier WAZAA 'drain_start' sur le scope."
+      - "Arrêter l'acceptation de nouveaux appels entrants."
+      - "Attendre fin des appels en cours (timeout = lease TTL / 2)."
+      - "Bufferiser les appels rejetés (optionnel, selon profil)."
+    validation:
+      - "WAZAA 'drain_start' publié ?"
+      - "Aucun nouvel appel accepté ?"
+      - "Appels en cours terminés ou timeout ?"
+    on_failure: "Retry 3x + rollback si timeout dépassé."
+
+  - step: "3. Announcement"
     actions:
       - "Publier WAZAA maintenance_start sur le scope."
       - "Marquer symbiote en maintenance dans KG-L."
@@ -54,7 +85,7 @@ steps:
       - "KG-L status = maintenance ?"
     on_failure: "Retry 3x + HITL."
 
-  - step: "3. Disable"
+  - step: "4. Disable"
     actions:
       - "Arrêter les flux de service (drain)."
       - "Arrêter le symbiote (dispose() réversible)."
@@ -65,7 +96,7 @@ steps:
       - "Lease libéré ?"
     on_failure: "Rollback automatique vers WAL snapshot."
 
-  - step: "4. Swap"
+  - step: "5. Swap"
     actions:
       - "Charger la nouvelle version (plugin swap)."
       - "Vérifier compatibilité (contrat d'interface)."
@@ -76,7 +107,7 @@ steps:
       - "État restauré ?"
     on_failure: "Rollback automatique vers version précédente."
 
-  - step: "5. Enable"
+  - step: "6. Enable"
     actions:
       - "Démarrer le symbiote."
       - "Reprendre les flux de service."
@@ -89,7 +120,7 @@ steps:
       - "KG-L edges à jour ?"
     on_failure: "Rollback automatique + HITL."
 
-  - step: "6. Announcement"
+  - step: "7. Announcement"
     actions:
       - "Publier WAZAA maintenance_end sur le scope."
       - "Marquer symbiote en actif dans KG-L."
@@ -98,15 +129,17 @@ steps:
       - "KG-L status = active ?"
     on_failure: "Retry 3x + alerte."
 
-  - step: "7. Verification"
+  - step: "8. Verification"
     actions:
       - "Vérifier RLM-METRICS (bénéficeNet > 0)."
       - "Vérifier WAZAA inbox (pas d'erreur)."
       - "Vérifier lease TTL."
+      - "Vérifier aucun rechargement concurrent en cours."
     validation:
       - "RLM-METRICS OK ?"
       - "WAZAA inbox vide ?"
       - "Lease renouvelé ?"
+      - "Scope libre ?"
     on_failure: "Alerte + rollback si échec critique."
 
 # Rollback Strategy
@@ -118,18 +151,21 @@ rollback:
     - "Reprendre lease précédent (si possible)."
     - "Publier WAZAA rollback."
     - "Marquer symbiote en erreur dans KG-L."
-  guarantee: "L'écosystème revient à l'état pré-rechargement en < 30s."
+  guarantee: "L'écosystème revient à l'état pré-rechargement en ≤ lease TTL / 2 (dérivé de swarm-lease SL4)."
+  derivation: "Borne supérieure = lease TTL / 2. Si lease TTL = 60s, rollback max = 30s. Pas de valeur magique."
 
 # Anti-Patterns
 anti_patterns:
-  - pattern: "Hot reload sans sauvegarde d'état"
-    correction: "WAL snapshot obligatoire avant step 3."
-  - pattern: "Hot reload sans notification des dépendants"
-    correction: "WAZAA maintenance_start obligatoire avant step 3."
-  - pattern: "Hot reload pendant un bail actif d'un autre symbiote"
+  - pattern: "Reconfiguration sans sauvegarde d'état"
+    correction: "WAL snapshot obligatoire avant step 4."
+  - pattern: "Reconfiguration sans notification des dépendants"
+    correction: "WAZAA maintenance_start obligatoire avant step 4."
+  - pattern: "Reconfiguration pendant un bail actif d'un autre symbiote sur le même scope"
     correction: "Swarm lease SL3 : premier bail gagne ; attendre release."
-  - pattern: "Hot reload sans validation de la nouvelle version"
+  - pattern: "Reconfiguration sans validation de la nouvelle version"
     correction: "Pre-merge gate BOOT-6 obligatoire."
+  - pattern: "Rollback sans garantie de borne dérivée"
+    correction: "Borne rollback = lease TTL / 2, pas valeur arbitraire."
 
 # Compliance
 compliance:
