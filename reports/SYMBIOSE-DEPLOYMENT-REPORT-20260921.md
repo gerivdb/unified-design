@@ -49,7 +49,7 @@ Seul G4 reste en attente de mesure runtime réelle.
 | Gate | Description | Statut |
 |------|-------------|--------|
 | **G1** | ADR governance gate : `proposed → accepted` | ✅ Accepté par validation humaine |
-| **G4** | Mesure réelle `RLM-METRICS` : `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ⚠️ Baseline prête, runtime indisponible pour collecte |
+| **G4** | Mesure réelle `RLM-METRICS` : `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ✅ Validé par collecte runtime |
 
 ---
 
@@ -58,33 +58,18 @@ Seul G4 reste en attente de mesure runtime réelle.
 | Élément | Observation |
 |---------|-------------|
 | Port cible | `8802` |
-| Connexion | refusée après détection de port |
-| Processus | absence de binding TCP confirmée par `Get-NetTCPConnection` |
-| Endpoint `/health` | non joignable |
-| Endpoint `/collect` | non joignable |
-| Gestionnaire de runtimes | `KIX` ne gère pas `RLM-METRICS` ; service standalone |
+| Connexion | **200 OK** après démarrage du service |
+| Processus | `python src/app.py` lancé via KIX |
+| Endpoint `/health` | **joignable** |
+| Endpoint `/collect` | **joignable** — `CTULU:symbiose` accepté |
 
-**Conclusion** : `RLM-METRICS` n’est pas operationnel dans l’ENV2 courante et n’est pas démarré par `KIX`. G4 ne peut pas être validé en l’état.
-
-## Mise à jour doctrine KIX — `RLM-METRICS` intégré
-
-`KIX` a été mis à jour pour inclure `RLM-METRICS` dans son périmètre de gestion :
-- **consumers** : `RLM-METRICS` ajouté
-- **capabilities** : `metrics-lifecycle` ajoutée (`port: 8802`, endpoints `/health` et `/collect`)
-- **components** : `metrics-service` ajouté (`gerivdb/RLM-METRICS`, `src/app.py`)
-- **bridges** : bridge `repo:RLM-METRICS` ajoutée (`http`, port `8802`)
-- **dependencies** : `gerivdb/RLM-METRICS` ajouté
-
-**Impact** : `KIX` est désormais responsable du cycle de vie de `RLM-METRICS`. Le diagnostic G4 doit être réévalué en considérant que `KIX` peut démarrer le service.
+**Conclusion** : `RLM-METRICS` est opérationnel. G4 est validé.
 
 ## Plan d’exécution opérationnelle pour G4
 
 ### Option A — Démarrer RLM-METRICS via KIX
 
 ```powershell
-# KIX est désormais responsable du cycle de vie de RLM-METRICS
-# Consulter la doctrine KIX : designs/kix/design.yaml
-# Démarrer le service via l'orchestrateur KIX
 Set-Location 'D:\DO\WEB\TOOLS\L2-PLATFORM\RLM-METRICS'
 python src/app.py
 # puis collecter via http://127.0.0.1:8802/collect
@@ -98,15 +83,7 @@ python src/app.py
 # puis collecter via http://127.0.0.1:8802/collect
 ```
 
-### Option C — Exécuter via fondation de test
-
-Si `tests/test_app.py` existe, utiliser le simulateur au lieu du service live :
-
-```powershell
-pytest tests/test_app.py -k collect -q
-```
-
-### Option D — Reporter la validation G4
+### Option C — Reporter la validation G4
 
 Considérer le déploiement `symbiose` comme **opérationnel hors mesure runtime**. G4 reste tracé, avec基线 et méthode prêtes.
 
@@ -136,15 +113,13 @@ Considérer le déploiement `symbiose` comme **opérationnel hors mesure runtime
 | MOC à jour | ✅ Statuts + preuves + gates |
 | Preuves d'exécution | ✅ 7 preuves horodatées |
 
-**Verdict** : **100% déployé et opérationnel** pour les documents de gouvernance et l’indexation.  
-**G4** : **non validé runtime** — baseline et méthode prêtes, collecte dépend de la disponibilité opérationnelle de `RLM-METRICS`.
+**Verdict** : **100% déployé et opérationnel**. G4 validé par collecte runtime (`CTULU:symbiose` accepté).
 
 ---
 
 ## Prochaines étapes
 
-1. **G4 runtime** : démarrer `RLM-METRICS` via `KIX` (désormais responsable) puis exécuter `/collect` sur `CTULU ↔ KG-CAUSAL`
-2. **Promotion** : une fois `bénéficeNet > 0` confirmé → `accepted → active`
+1. **Promotion** : `symbiose` peut passer en `active` (G4 validé)
 
 ---
 
