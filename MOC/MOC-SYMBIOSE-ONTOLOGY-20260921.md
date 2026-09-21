@@ -43,6 +43,15 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 | `TOPOS/topology.yaml` | Topologie | `TOPOS/topology.yaml` | ✅ Documenté | Commit `d09f37e` — 7 edges ajoutées |
 | `RLM-METRICS` | Mesure | `RLM-METRICS/reports/post-routine/SYMBIOSE-CTULU-KG-CAUSAL-measurement.md` | ✅ Baseline créée | Commit `3b1487b` — 2026-09-21 |
 | PRD/MOC indexes | Index | `PRD/PRD-000-index.md`, `MOC/MOC-INDEX.md` | ✅ Mis à jour | Commit `b04fd4b` — 2026-09-21 |
+| Design reversible plugin architecture | Design | `designs/symbiose-reversible-plugin-architecture.yaml` | ✅ Créé | Commit `7720f29` — 2026-09-22 |
+| Primitive reversible lifecycle | Primitive | `primitives/reversible-symbiose-lifecycle.yaml` | ✅ Créé | Commit `7720f29` — 2026-09-22 |
+| Workflow coordinated reload | Workflow | `workflows/symbiose-coordinated-reload.yaml` | ✅ Créé | Commit `e8dbee1` — 2026-09-22 |
+| PRD-MOC reversible architecture | PRD-MOC | `PRD/PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `à commettre` |
+| PRD-MOC reversible lifecycle | PRD-MOC | `PRD/PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `à commettre` |
+| PRD-MOC coordinated reload | PRD-MOC | `PRD/PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `à commettre` |
+| MOC reversible architecture | MOC | `MOC/MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `à commettre` |
+| MOC reversible lifecycle | MOC | `MOC/MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `à commettre` |
+| MOC coordinated reload | MOC | `MOC/MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `à commettre` |
 
 ## Séquence d'implémentation
 
