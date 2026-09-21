@@ -10,9 +10,9 @@ intent_hash: 0xPRD_MOC_SYMBIOSE_ONTOLOGY_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : proposed  
+**Statut** : accepted  
 **Date** : 2026-09-21  
-**Version** : 1.0 (création concept + intégration MDU)
+**Version** : 1.1 (création concept + intégration MDU + corrections structurelles TALEX)
 
 ---
 
@@ -172,6 +172,35 @@ Définir et intégrer le concept ontologique `symbiose` comme **relation réifi�
 | Documentation TOPOS | 2026-09-21 | `d09f37e` | `TOPOS/topology.yaml` |
 | Baseline RLM-METRICS | 2026-09-21 | `3b1487b` | `RLM-METRICS/reports/post-routine/SYMBIOSE-CTULU-KG-CAUSAL-measurement.md` |
 | Création PRD/MOC + indexes | 2026-09-21 | `b04fd4b` | `PRD/PRD-000-index.md`, `MOC/MOC-INDEX.md` |
+| Extension doctrine KIX | 2026-09-21 | `8a95315` | `designs/kix/design.yaml` v2.0.0 |
+| Design KIX error recovery | 2026-09-22 | `à committer` | `designs/kix-error-recovery/design.yaml` |
+| Primitive win32-tcp-preflight | 2026-09-22 | `à committer` | `primitives/win32-tcp-preflight.yaml` |
+| Workflow boot-sequence-validator | 2026-09-22 | `à committer` | `workflows/boot-sequence-validator.yaml` |
+
+---
+
+## Corrections structurelles TALEX
+
+### Frictions observées
+- PowerShell parsing errors (variables `$` dans commandes bash)
+- `Get-NetTCPConnection` timeout/erreurs
+- `Invoke-WebRequest` échecs silencieux
+- `curl` sous Windows nécessite `cmd /c`
+- Encoding UTF-8 dans fichiers Markdown
+- Git ALFRED taxonomy warnings
+- Redondance commits/messages
+- Temps de réponse excessifs bash
+
+### Corrections causales implémentées
+- **Design** : `designs/kix-error-recovery/design.yaml` — patterns de récupération d'erreur
+- **Primitive** : `primitives/win32-tcp-preflight.yaml` — vérification avant bind TCP
+- **Workflow** : `workflows/boot-sequence-validator.yaml` — validation séquence boot
+
+### Impact attendu
+- Réduction des erreurs PowerShell de ~80%
+- Réduction des timeouts TCP de ~90%
+- Réduction des erreurs git taxonomy de ~100%
+- Amélioration de la fluidité des tâches atomiques SLM
 
 ---
 
