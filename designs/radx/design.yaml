@@ -7,11 +7,11 @@ description: |
 parent: wazaa-social-bus
 layer: L3
 capabilities:
-  - latency-bound
+  - name: latency-bound
     parameters:
       max_latency_ms: 3
       p99_latency_ms: 2.9
-  - fast-path-rbf
+  - name: fast-path-rbf
     parameters:
       neurons: 300
       dimensions: 512

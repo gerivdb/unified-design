@@ -1,6 +1,6 @@
 ---
 name: agent-engineering-maturity
-description: "Hiérarchie des disciplines d'ingénierie agentique 2026 inspirée de D:\GG-knox\engineering ideas\300-kimi-k3\16.md. Évalue la maturité d'un agent selon 5 axes : fiabilité, autonomie, sécurité, observabilité, gouvernance. Chaque axe a 5 niveaux de maturité."
+description: "Hiérarchie des disciplines d'ingénierie agentique 2026 inspirée de GG-knox/engineering-ideas/300-kimi-k3/16.md. Évalue la maturité d'un agent selon 5 axes : fiabilité, autonomie, sécurité, observabilité, gouvernance. Chaque axe a 5 niveaux de maturité."
 version: "1.0.0"
 status: active
 layer: L0

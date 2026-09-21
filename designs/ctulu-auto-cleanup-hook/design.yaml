@@ -41,12 +41,12 @@ implementation_details:
   entry_point: "ctulu_auto_cleanup.py"
   
   algorithm:
-    1. "Scan processes with psutil.process_iter(['pid', 'name', 'exe', 'cwd'])"
-    2. "Filter: name in target_processes OR exe contains LLUX workspace path"
-    3. "For each match: proc.terminate() → proc.wait(timeout=5)"
-    5. "If timeout: proc.kill() → proc.wait(timeout=2)"
-    6. "Log: killed PIDs, names, reason"
-    7. "Return: killed_count, errors"
+    - "Scan processes with psutil.process_iter(['pid', 'name', 'exe', 'cwd'])"
+    - "Filter: name in target_processes OR exe contains LLUX workspace path"
+    - "For each match: proc.terminate() -> proc.wait(timeout=5)"
+    - "If timeout: proc.kill() -> proc.wait(timeout=2)"
+    - "Log: killed PIDs, names, reason"
+    - "Return: killed_count, errors"
     
   safety:
     - "Only targets processes in LLUX workspace (cwd/exe path filter)"

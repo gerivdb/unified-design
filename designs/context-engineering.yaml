@@ -1,6 +1,6 @@
 ---
 name: context-engineering
-description: "Ingénierie de contexte inspirée de D:\GG-knox\engineering ideas\300-kimi-k3\16.md. Conception et maintenance du contexte d'exécution des agents : fenêtres glissantes, fraîcheur, embedding, compression, sélection pertinente. Garantit que chaque agent dispose du contexte optimal pour sa tâche."
+description: "Ingénierie de contexte inspirée de GG-knox/engineering-ideas/300-kimi-k3/16.md. Conception et maintenance du contexte d'exécution des agents : fenêtres glissantes, fraîcheur, embedding, compression, sélection pertinente. Garantit que chaque agent dispose du contexte optimal pour sa tâche."
 version: "1.0.0"
 status: active
 layer: L0

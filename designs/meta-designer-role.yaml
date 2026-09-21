@@ -43,7 +43,6 @@ performance:
 > **Dépôt** : `gerivdb/unified-design`  
 > **Màj requise si** : statut ADR passe à deprecated ou superseded  
 
-
 ## Description
 
 Rôle formalisé de méta-designer : architecte systèmes complexes qui extrait d'une conversation les structures implicites, primitives réutilisables, workflows émergents et mises à jour nécessaires.
