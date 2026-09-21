@@ -19,3 +19,6 @@
 | MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | in_review |
 | MOC-ATOM-MDU-CATALOG-SYNC-20260921 | ATOM MDU Catalog Sync | in_review |
 | MOC-SYMBIOSE-ONTOLOGY-20260921 | Symbiose Ontology | proposed |
+| MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922 | Symbiose Reversible Plugin Architecture | in_review |
+| MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922 | Reversible Symbiose Lifecycle | in_review |
+| MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | in_review |

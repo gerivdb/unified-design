@@ -30,4 +30,7 @@
 | PRD-MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | in_review |
 | PRD-MOC-ATOM-MDU-CATALOG-SYNC-20260921 | ATOM MDU Catalog Sync | in_review |
 | PRD-MOC-SYMBIOSE-ONTOLOGY-20260921 | Symbiose Ontology | proposed |
+| PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922 | Symbiose Reversible Plugin Architecture | in_review |
+| PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922 | Reversible Symbiose Lifecycle | in_review |
+| PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | in_review |
 | PRD-UNIFIED-DESIGN-GOVERNANCE-GAPS-2026-08-16 | Unified Design Governance Gaps | approved |
