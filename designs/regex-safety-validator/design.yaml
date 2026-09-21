@@ -1,0 +1,130 @@
+---
+name: regex-safety-validator
+version: "1.0.0"
+status: active
+layer: L0-CANON
+sub_layer: N+1
+intent_hash: 0xDESIGN_REGEX_SAFETY_VALIDATOR_20260921
+description: >
+  Validateur跨-langage de sécurité des expressions régulières.
+  Détecte les séquences d'échappement invalides, les patterns dangereux
+  et les fuites de regex (ReDoS) avant exécution.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: escape-sequence-validation
+    description: "Valide les séquences d'échappement dans les patterns regex"
+  - name: redos-detection
+    description: "Détecte les patterns de regex vulnérables aux attaques ReDoS"
+  - name:跨-langage-normalization
+    description: "Normalise les patterns regex entre Python, PowerShell, JavaScript"
+  - name: auto-fix-suggestion
+    description: "Suggère les corrections pour les patterns invalides"
+parameters:
+  languages:
+    - python
+    - powershell
+    - javascript
+    - zig
+  validation_rules:
+    - "no_unescaped_special_chars"
+    - "no_nested_quantifiers"
+    - "no_backtracking_catastrophe"
+    - "valid_escape_sequences"
+  severity_matrix:
+    invalid_escape: WARN
+    redos_vulnerability: BLOCK
+   跨-langage_mismatch: WARN
+states:
+  - name: IDLE
+    nature: validation non requise
+    gate_to_next: LOAD_PATTERN
+    question: "Un pattern regex nécessite-t-il une validation ?"
+  - name: LOAD_PATTERN
+    nature: chargement du pattern
+    gate_to_next: VALIDATE_ESCAPE
+    question: "Le pattern est-il chargé ?"
+  - name: VALIDATE_ESCAPE
+    nature: validation des séquences d'échappement
+    gate_to_next: CHECK_REDOS
+    question: "Les séquences d'échappement sont-elles valides ?"
+  - name: CHECK_REDOS
+    nature: détection ReDoS
+    gate_to_next: NORMALIZE
+    question: "Le pattern est-il sûr ?"
+  - name: NORMALIZE
+    nature: normalisation跨-langage
+    gate_to_next: REPORT
+    question: "Le pattern est-il normalisé ?"
+  - name: REPORT
+    nature: génération du rapport
+  - name: BLOCK
+    nature: validation bloquée
+functions:
+  - id: F1
+    name: LOAD_PATTERN
+    state: IDLE->LOAD_PATTERN
+    description: "Charge le pattern regex depuis la source"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: VALIDATE_ESCAPE
+    state: LOAD_PATTERN->VALIDATE_ESCAPE
+    description: "Valide les séquences d'échappement"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F3
+    name: CHECK_REDOS
+    state: VALIDATE_ESCAPE->CHECK_REDOS
+    description: "Détecte les vulnérabilités ReDoS"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F4
+    name: NORMALIZE
+    state: CHECK_REDOS->NORMALIZE
+    description: "Normalise le pattern跨-langage"
+    implements: ATOM-DELTA-CHECK
+  - id: F5
+    name: REPORT
+    state: NORMALIZE->REPORT
+    description: "Génère le rapport de validation"
+    implements: ATOM-CARRY-FORWARD_PRINCIPLE
+invariant: "Tout pattern regex utilisé en production doit être validé avant exécution."
+genes:
+  - id: G1
+    name: escape_safety
+    description: "Toute séquence d'échappement est valide dans le langage cible"
+  - id: G2
+    name: redos_immunity
+    description: "Aucun pattern ne peut causer de backtracking exponentiel"
+  - id: G3
+    name:跨-langage_consistency
+    description: "Le pattern est cohérent entre langages"
+  - id: G4
+    name: actionable_fixes
+    description: "Toute correction suggérée est actionnable"
+anti_patterns:
+  - missing_gene: escape_safety
+    pathology: "Séquences invalides -> SyntaxWarning, comportement imprévisible"
+  - missing_gene: redos_immunity
+    pathology: "ReDoS -> déni de service, consommation CPU excessive"
+  - missing_gene:跨-langage_consistency
+    pathology: "Pattern跨-langage non cohérent -> bugs portabilité"
+  - missing_gene: actionable_fixes
+    pathology: "Suggestions vagues -> corrections non appliquées"
+cross_references:
+  - repo: gerivdb/LOOPX
+    relation: uses
+    path: tests/wrappers/test_wrappers_skills_triggers_verifiers.py
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - primitive: regex-safety-validator-primitive
+  - skill: regex-safety-validator-skill
+  - workflow: workflow-regex-safety-validator
