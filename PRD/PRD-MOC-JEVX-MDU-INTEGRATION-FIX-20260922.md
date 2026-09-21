@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-22"
-status: proposed
+status: in_review
 intent_hash: 0xPRD_MOC_JEVX_MDU_INTEGRATION_FIX_20260922
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -28,15 +28,15 @@ Corriger les incohérences d'intégration de JEVX dans le MDU et les registres �
 
 | ID | Livrable | Chemin cible | Type | Statut |
 |---|---|---|---|---|
-| L1 | Corriger `do_not_create` JEVX | `GOVERNANCE-HUB/known_repositories.yaml` | Modifier | ⏳ Cross-repo |
+| L1 | Corriger `do_not_create` JEVX | `GOVERNANCE-HUB/known_repositories.yaml` | Modifier | ✅ Fait |
 | L2 | Corriger `entrypoint` JEVX | `designs/jevx.yaml` | Modifier | ✅ Fait |
 | L3 | Clarifier `hardware_profile` JEVX | `designs/jevx.yaml` | Modifier | ✅ Fait |
 | L4 | Aligner `depends_on` JEVX sur MDU | `designs/jevx.yaml`, `designs/jevx-engineering.yaml` | Modifier | ✅ Fait |
 | L5 | Documenter `consumers` JEVX | `catalog/designs.index.yaml` | Modifier | ✅ Fait |
 | L6 | Documenter `consumers` pipeline JEVX | `catalog/pipelines.index.yaml` | Modifier | ✅ Fait |
 | L7 | Ajouter JEVX dans CLM pipeline | `designs/clm-pipeline/design.yaml` | Modifier | ✅ Fait |
-| L8 | Corriger `SCOPE.yaml` consumer CLM | `JEVX/SCOPE.yaml` | Modifier | ⏳ Cross-repo |
-| L9 | Dédupliquer `ONTOLOGY_DECLARATION.yaml` | `JEVX/ONTOLOGY_DECLARATION.yaml` | Modifier | ⏳ Cross-repo |
+| L8 | Corriger `SCOPE.yaml` consumer CLM | `JEVX/SCOPE.yaml` | Modifier | ✅ Fait |
+| L9 | Dédupliquer `ONTOLOGY_DECLARATION.yaml` | `JEVX/ONTOLOGY_DECLARATION.yaml` | Modifier | ✅ Fait |
 | L10 | Marquer `security_guardrails` draft | `designs/jevx.yaml` | Modifier | ✅ Fait |
 | L11 | Marquer `constrained-parallel-decoding` draft | `designs/jevx-engineering.yaml` | Modifier | ✅ Fait |
 | L12 | Aligner `max_queue` sur code | `designs/jevx.yaml` | Modifier | ✅ Fait |
@@ -45,9 +45,9 @@ Corriger les incohérences d'intégration de JEVX dans le MDU et les registres �
 
 ### Phase A — SOT et registres
 
-1. **L1** : `GOVERNANCE-HUB/known_repositories.yaml` — passer `do_not_create: false` → `true` pour JEVX dans `P4_REPOS`. ⏳ Cross-repo (GOVERNANCE-HUB)
-2. **L8** : `JEVX/SCOPE.yaml` — remplacer la référence consumer `gerivdb/CLM` par `gerivdb/ROOTX` ou `gerivdb/KG-CAUSAL`, ou supprimer la référence invalide. ⏳ Cross-repo (JEVX)
-3. **L9** : `JEVX/ONTOLOGY_DECLARATION.yaml` — supprimer les doublons `jev_variant` et `comparative_study`. ⏳ Cross-repo (JEVX)
+1. **L1** : `GOVERNANCE-HUB/known_repositories.yaml` — passer `do_not_create: false` → `true` pour JEVX dans `P4_REPOS`. ✅ Fait
+2. **L8** : `JEVX/SCOPE.yaml` — remplacer la référence consumer `gerivdb/CLM` par `gerivdb/ROOTX` ou `gerivdb/KG-CAUSAL`, ou supprimer la référence invalide. ✅ Fait
+3. **L9** : `JEVX/ONTOLOGY_DECLARATION.yaml` — supprimer les doublons `jev_variant` et `comparative_study`. ✅ Fait
 
 ### Phase B — Designs JEVX
 
@@ -103,15 +103,15 @@ Corriger les incohérences d'intégration de JEVX dans le MDU et les registres �
 
 ## 7. Critères d'acceptation
 
-1. `GOVERNANCE-HUB/known_repositories.yaml` : `do_not_create: true` pour JEVX. ⏳ Cross-repo
+1. `GOVERNANCE-HUB/known_repositories.yaml` : `do_not_create: true` pour JEVX. ✅ Fait
 2. `designs/jevx.yaml` : `entrypoint: src/index.ts`, `hardware_profile` clarifié, `max_queue` aligné. ✅ Fait
 3. `designs/jevx.yaml` et `designs/jevx-engineering.yaml` : `depends_on` résolus dans le MDU ou déplacés vers `dependencies`/`bridges`. ✅ Fait
 4. `designs/jevx.yaml` : `security_guardrails` marquées `draft` si non implémentées. ✅ Fait
 5. `designs/jevx-engineering.yaml` : `constrained-parallel-decoding` marqué `draft` si absent du code. ✅ Fait
 6. `catalog/designs.index.yaml` et `catalog/pipelines.index.yaml` : consumers documentés. ✅ Fait
 7. `designs/clm-pipeline/design.yaml` et `designs/jevx.yaml` : cohérence sur la présence de JEVX dans CLM. ✅ Fait
-8. `JEVX/SCOPE.yaml` : aucune référence invalide à `gerivdb/CLM`. ⏳ Cross-repo
-9. `JEVX/ONTOLOGY_DECLARATION.yaml` : aucun doublon. ⏳ Cross-repo
+8. `JEVX/SCOPE.yaml` : aucune référence invalide à `gerivdb/CLM`. ✅ Fait
+9. `JEVX/ONTOLOGY_DECLARATION.yaml` : aucun doublon. ✅ Fait
 10. Tous les designs passent `python scripts/validate_designs.py --strict`. ✅ Passe
 
 ## 8. Proof-of-Life
@@ -119,4 +119,4 @@ Corriger les incohérences d'intégration de JEVX dans le MDU et les registres �
 - [x] 2026-09-22T01:15:20+02:00 — Création PRD-MOC JEVX MDU Integration Fix
 - [x] 2026-09-22T01:15:20+02:00 — L2-L4, L7, L10-L12 implémentés dans unified-design (commits `6e9de0f`, `cd6b2d1`)
 - [x] 2026-09-22T01:15:20+02:00 — L5-L6 consumers documentés dans catalogues
-- [ ] 2026-09-22T01:15:20+02:00 — L1, L8-L9 bloqués cross-repo (GOVERNANCE-HUB, JEVX)
+- [x] 2026-09-22T01:15:20+02:00 — L1, L8-L9 implémentés cross-repo (GOVERNANCE-HUB `do_not_create: true`, JEVX `SCOPE.yaml` et `ONTOLOGY_DECLARATION.yaml` corrigés)
