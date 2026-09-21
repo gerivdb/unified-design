@@ -1446,3 +1446,17 @@ entries:
   status: active
   profile: STANDARD
   consumers: []
+- name: git-atomic-staging
+  path: designs\git-atomic-staging\design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_GIT_ATOMIC_STAGING_20260921
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: regex-safety-validator
+  path: designs\regex-safety-validator\design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_REGEX_SAFETY_VALIDATOR_20260921
+  status: active
+  profile: STANDARD
+  consumers: []
