@@ -1468,7 +1468,7 @@ entries:
   profile: STANDARD
   consumers: []
 - name: symbiose-hot-reload
-  path: workflows\symbiose-hot-reload.yaml
+  path: workflows\symbiose-coordinated-reload.yaml
   version: 1.0.0
   intent_hash: 0xWORKFLOW_SYMBIOSE_HOT_RELOAD_20260921
   status: active
