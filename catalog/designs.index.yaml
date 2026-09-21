@@ -1277,21 +1277,34 @@ entries:
   intent_hash: 0xDESIGN_JEVX_BACKEND_MATRIX_20260920
   status: active
   profile: STANDARD
-  consumers: []
+  consumers:
+  - gerivdb/JEVX
+  - gerivdb/KIX
 - name: jevx-engineering
   path: designs\jevx-engineering.yaml
   version: 1.0.0
   intent_hash: 0xDESIGN_JEVX_ENGINEERING_20260920
   status: active
   profile: STANDARD
-  consumers: []
+  consumers:
+  - gerivdb/JEVX
+  - gerivdb/KG-CAUSAL
+  - gerivdb/ROOTX
+  - gerivdb/TALEX
+  - gerivdb/VOLTX
 - name: jevx
   path: designs\jevx.yaml
   version: 1.0.0
   intent_hash: 0xINTENT_JEVX_SOVEREIGN_OVERLAY_20260919
   status: active
   profile: STANDARD
-  consumers: []
+  consumers:
+  - gerivdb/JEVX
+  - gerivdb/KIX
+  - gerivdb/ROOTX
+  - gerivdb/TALEX
+  - gerivdb/VOLTX
+  - gerivdb/KG-CAUSAL
 - name: kg35-migration
   path: designs\kg35-migration.yaml
   version: 1.0.0
