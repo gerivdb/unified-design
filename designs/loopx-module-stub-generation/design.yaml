@@ -3,6 +3,7 @@ name: loopx-module-stub-generation
 version: "1.0.0"
 status: active
 layer: L3-CITIZENS
+sub_layer: N+2
 intent_hash: 0xDESIGN_LOOPX_MODULE_STUB_GENERATION_20260921
 description: >
   Pattern de génération de stubs pour modules Python manquants dans LOOPX.
@@ -117,6 +118,10 @@ cross_references:
   - repo: gerivdb/LOOPX
     relation: implements
     path: src/loopx_routines/core/
+  - repo: gerivdb/ARGUS
+    relation: audits
+    path: scanners/
+    capability: module_absence_scanner
   - design: safe-action-pattern
   - design: design-ops-loop
   - primitive: loopx-module-stub-generation-primitive

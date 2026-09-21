@@ -3,6 +3,7 @@ name: loopx-registry-entry-point-contract
 version: "1.0.0"
 status: active
 layer: L3-CITIZENS
+sub_layer: N+2
 intent_hash: 0xDESIGN_LOOPX_REGISTRY_ENTRY_POINT_CONTRACT_20260921
 description: >
   Contrat formel entre les entry_points du registry LOOPX et leurs implémentations
@@ -114,6 +115,10 @@ cross_references:
   - repo: gerivdb/LOOPX
     relation: implements
     path: src/loopx_routines/registry.py
+  - repo: gerivdb/ARGUS
+    relation: audits
+    path: scanners/
+    capability: registry_scanner
   - design: safe-action-pattern
   - design: design-ops-loop
   - primitive: loopx-registry-entry-point-contract-primitive

@@ -3,6 +3,7 @@ name: loopx-wrapper-standardization
 version: "1.0.0"
 status: active
 layer: L3-CITIZENS
+sub_layer: N+2
 intent_hash: 0xDESIGN_LOOPX_WRAPPER_STANDARDIZATION_20260921
 description: >
   Standardisation des wrappers LOOPX : comment exposer une classe Python
@@ -128,6 +129,10 @@ cross_references:
   - repo: gerivdb/LOOPX
     relation: implements
     path: src/loopx_routines/wrappers.py
+  - repo: gerivdb/ARGUS
+    relation: audits
+    path: scanners/
+    capability: drift_detector
   - design: safe-action-pattern
   - design: design-ops-loop
   - primitive: loopx-wrapper-standardization-primitive
