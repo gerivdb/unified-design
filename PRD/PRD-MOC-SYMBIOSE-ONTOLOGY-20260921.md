@@ -2,7 +2,7 @@
 type: PRD
 version: "1.0"
 date: "2026-09-21"
-status: proposed
+status: accepted
 intent_hash: 0xPRD_MOC_SYMBIOSE_ONTOLOGY_20260921
 ---
 

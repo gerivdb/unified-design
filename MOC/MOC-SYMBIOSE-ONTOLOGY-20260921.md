@@ -2,7 +2,7 @@
 type: MOC
 version: "1.0"
 date: "2026-09-21"
-status: proposed
+status: accepted
 intent_hash: 0xMOC_SYMBIOSE_ONTOLOGY_20260921
 ---
 
