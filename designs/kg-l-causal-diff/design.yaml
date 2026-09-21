@@ -167,6 +167,3 @@ meta_coherence:
   verifies: "Every commit on main has causal traceability to domain_links + intent_hash"
   source_of_truth: "git history + domain_links.json + kernels.yaml + fixtures.yaml"
   intent_hash: 0xKG_L_CAUSAL_DIFF_20260829
-
-# Intent Hash
-intent_hash: 0xKG_L_CAUSAL_DIFF_20260829

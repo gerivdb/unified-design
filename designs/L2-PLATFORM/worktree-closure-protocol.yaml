@@ -1,4 +1,3 @@
--
 name: worktree-closure-protocol
 description: "Worktree Closure Protocol"
 version: "1.0.0"
@@ -10,4 +9,3 @@ status: proposed
 intent_hash: 0xWORKTREE_CLOSURE_PROTOCOL_20260809
 bridges: []
 consumers: []
----

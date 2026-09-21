@@ -1,6 +1,5 @@
--
 name: GeriCode
-description: "Overlay ECOS-CLI sur Kilo Code ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â extension VS Code agnostique avec citoyens psychologiques Bat-Family."
+description: "Overlay ECOS-CLI sur Kilo Code — extension VS Code agnostique avec citoyens psychologiques Bat-Family."
 version: "1.0.0"
 design_version: "1.0.0"
 parent: unified-design
@@ -13,7 +12,7 @@ capabilities:
     parameters:
       psy_patterns: [dual_symmetric, progressive_cascade, oscillating_equilibrium, resilient_baseline, multi_attractor_chaos, trauma_chaos_redemption]
       states: [NOMINAL, DEGRADED, CHAOS, SYNTHESIS, SURVIVAL]
-      relapse_rule: Tout citoyen avec relapse_risk > 0 doit ÃƒÆ’Ã‚Âªtre surveillÃƒÆ’Ã‚Â© par Alfred
+      relapse_rule: Tout citoyen avec relapse_risk > 0 doit être surveillé par Alfred
       disambiguation: required
       conformity: CONFORME_NEXUS
   - name: citizen-registry
