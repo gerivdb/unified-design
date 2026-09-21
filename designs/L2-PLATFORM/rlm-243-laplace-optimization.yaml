@@ -1,4 +1,3 @@
--
 name: rlm-243-laplace-optimization
 description: "rlm-243-laplace-optimization"
 version: "1.0.0"
@@ -10,4 +9,3 @@ status: proposed
 intent_hash: 0xDESIGN_RLM243_LAPLACE_OPTIMIZATION_20260808
 bridges: []
 consumers: []
----
