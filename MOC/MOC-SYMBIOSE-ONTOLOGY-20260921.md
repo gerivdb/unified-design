@@ -10,9 +10,9 @@ intent_hash: 0xMOC_SYMBIOSE_ONTOLOGY_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : proposed  
+**Statut** : accepted (G1 ✅, G4 ⚠️ bloqué runtime)  
 **Date** : 2026-09-21  
-**Version** : 1.0 (création concept + intégration MDU)
+**Version** : 1.0 (création concept + intégration MDU + documentation G4)
 
 ---
 
@@ -58,20 +58,25 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 5. ✅ Réaliser première mesure `RLM-METRICS` sur `CTULU ↔ KG-CAUSAL` (baseline créée, commit `3b1487b`)
 6. ⏳ Valider `bénéficeNet > 0` pour passage en `active` (mesure réelle en attente)
 
-### Phase 3 — Gouvernance ⏳
+### Phase 3 — Gouvernance
 
-7. ⏳ Promouvoir ADR en `accepted` (en attente governance gate)
-8. ⏳ Promouvoir concept en `accepted` puis `active` après mesure confirmée
+7. ✅ Promouvoir ADR en `accepted` (commit `dcc84924` — GOVERNANCE-HUB)
+8. ⏳ Promouvoir concept en `active` après mesure confirmée
 9. ⏳ Documenter `N_cycles = 3` dans `GOVERNANCE-HUB` si ajustement nécessaire
+
+**Blocage G4** : `RLM-METRICS` n’est pas opérationnel dans l’ENV2 courante :
+- Port `8802` détecté mais connexion refusée
+- `KIX` ne gère pas `RLM-METRICS` (hors périmètre KIX)
+- Baseline et méthode prêtes, collecte reportée
 
 ## Gates
 
 | Gate | Critère | Statut | Preuve |
 |------|---------|--------|--------|
-| G1 — ADR accepté | `ADR-SYMBIOSE-ONTOLOGY-20260921` accepté par governance gate | ⏳ En attente | Commit `c55c479c` créé |
+| G1 — ADR accepté | `ADR-SYMBIOSE-ONTOLOGY-20260921` accepté par governance gate | ✅ Accepté | Commit `dcc84924` — GOVERNANCE-HUB |
 | G2 — Concept indexé | `symbiose` présent dans `KG-L` | ✅ OK | Commit `e4c8b69` — 24 edges |
 | G3 — Instances documentées | `TOPOS/topology.yaml` mentionne les instances candidates | ✅ OK | Commit `d09f37e` — 7 edges |
-| G4 — Mesure confirmée | `RLM-METRICS` confirme `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ⏳ En attente | Baseline créée, mesure réelle nécessaire |
+| G4 — Mesure confirmée | `RLM-METRICS` confirme `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ⚠️ Bloqué runtime | Baseline créée, `RLM-METRICS` non joignable, `KIX` ne gère pas ce service |
 | G5 — Concept actif | `symbiose` passe en `active` après validation | ⏳ En attente | Dépend de G1 + G4 |
 
 ## Références
@@ -98,6 +103,7 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 | Documentation TOPOS | 2026-09-21 | `d09f37e` | `TOPOS/topology.yaml` |
 | Baseline RLM-METRICS | 2026-09-21 | `3b1487b` | `RLM-METRICS/reports/post-routine/SYMBIOSE-CTULU-KG-CAUSAL-measurement.md` |
 | Création PRD/MOC + indexes | 2026-09-21 | `b04fd4b` | `PRD/PRD-000-index.md`, `MOC/MOC-INDEX.md` |
+| Documentation blocage G4 | 2026-09-21 | `0fa8acb` + `caf63b2` | `SYMBIOSE-DEPLOYMENT-REPORT-20260921.md` |
 
 ---
 

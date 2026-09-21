@@ -62,8 +62,18 @@ Seul G4 reste en attente de mesure runtime réelle.
 | Processus | absence de binding TCP confirmée par `Get-NetTCPConnection` |
 | Endpoint `/health` | non joignable |
 | Endpoint `/collect` | non joignable |
+| Gestionnaire de runtimes | `KIX` ne gère pas `RLM-METRICS` ; service standalone |
 
-**Conclusion** : le service `RLM-METRICS` n’est pas operationnel dans l’ENV2 courante au moment de la validation. G4 ne peut pas être validé en l’état.
+**Conclusion** : `RLM-METRICS` n’est pas operationnel dans l’ENV2 courante et n’est pas démarré par `KIX`. G4 ne peut pas être validé en l’état.
+
+## Vérification KIX — gestion des runtimes
+
+`KIX` a été inspecté pour vérifier s’il gérait `RLM-METRICS` :
+- **design.yaml** : ne liste que `RLM-243`, `LLUX`, `TLM-LANG`, `TIMX-FEATURE-STORE`, `TALEX`, `RADX`
+- **Références croisées** : aucun lien `KIX ↔ RLM-METRICS` dans `GOVERNANCE-HUB`, `ECOS-CLI`, `KIVA-CLI`
+- **Conclusion** : `RLM-METRICS` est un **service standalone** hors périmètre `KIX`
+
+**Impact** : le diagnostic G4 ne dépend pas d’un lancement KIX. La collecte doit être tentée directement sur le service `RLM-METRICS`.
 
 ## Plan d’exécution opérationnelle pour G4
 
@@ -120,7 +130,7 @@ Considérer le déploiement `symbiose` comme **opérationnel hors mesure runtime
 
 ## Prochaines étapes
 
-1. **G4 runtime** : démarrer `RLM-METRICS` puis exécuter `/collect` sur `CTULU ↔ KG-CAUSAL`
+1. **G4 runtime** : démarrer `RLM-METRICS` directement (service standalone, pas via `KIX`) puis exécuter `/collect` sur `CTULU ↔ KG-CAUSAL`
 2. **Promotion** : une fois `bénéficeNet > 0` confirmé → `accepted → active`
 
 ---
