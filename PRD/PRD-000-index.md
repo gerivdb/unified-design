@@ -11,6 +11,7 @@
 | PRD-MOC-JEVX-DESIGN-VALIDATION-PIPELINE-20260920 | JEVX Design Validation Pipeline | proposed |
 | PRD-MOC-JEVX-SOVEREIGN-ADAPTER-PATTERN-20260920 | JEVX Sovereign Adapter Pattern | proposed |
 | PRD-MOC-JEVX-STRUCTURAL-FIX-PIPELINE-20260920 | JEVX Structural Fix Pipeline | proposed |
+| PRD-MOC-JEVX-MDU-INTEGRATION-FIX-20260922 | JEVX MDU Integration Fix | proposed |
 | PRD-MOC-ARTIFACT-EXTRACTION-20260920 | Artifact Extraction System | in_review |
 | PRD-MOC-ARTIFACT-LAYERS-20260920 | Artifact Layers | in_review |
 | PRD-MOC-DESIGN-OPS-LOOP-20260920 | Design Ops Loop | in_review |
@@ -33,4 +34,6 @@
 | PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922 | Symbiose Reversible Plugin Architecture | in_review |
 | PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922 | Reversible Symbiose Lifecycle | in_review |
 | PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | in_review |
+| PRD-MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922 | Branch Taxonomy Enforcement | proposed |
+| PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | proposed |
 | PRD-UNIFIED-DESIGN-GOVERNANCE-GAPS-2026-08-16 | Unified Design Governance Gaps | approved |
