@@ -68,6 +68,7 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 - Port `8802` détecté mais connexion refusée
 - `KIX` ne gère pas `RLM-METRICS` (hors périmètre KIX)
 - Baseline et méthode prêtes, collecte reportée
+- **Mise à jour doctrine** : `KIX` intègre désormais `RLM-METRICS` (consumers, capabilities, components, bridges, dependencies)
 
 ## Gates
 

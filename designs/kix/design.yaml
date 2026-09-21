@@ -10,7 +10,8 @@ inherits:
 description: >
   KIX — Orchestrateur central du cycle de vie des runners RLM.
   Gère l'orchestration des runners cognitifs (RLM-243, LLUX, TLM, TIMX, etc.)
-  et leur cycle de vie (boot, run, verify, shutdown). Logical layers: N1, N3.
+  et des services de mesure (RLM-METRICS), ainsi que leur cycle de vie
+  (boot, run, verify, shutdown). Logical layers: N1, N3.
 consumers:
   - RLM-243
   - LLUX
@@ -18,6 +19,7 @@ consumers:
   - TIMX
   - TALEX
   - RADX
+  - RLM-METRICS
 capabilities:
   - name: runner-lifecycle
     description: Orchestrer le cycle de vie complet des runners RLM cognitifs
@@ -39,6 +41,15 @@ capabilities:
     parameters:
       max_concurrency: 6
       memory_guard: true
+  - name: metrics-lifecycle
+    description: Orchestrer le cycle de vie du service RLM-METRICS (baseline, collecte, rapport)
+    parameters:
+      service: RLM-METRICS
+      port: 8802
+      endpoints:
+        - /health
+        - /collect
+      validation_backend: RLM-243
 components:
   - type: orchestrator
     repo: gerivdb/KIX
@@ -50,6 +61,11 @@ components:
     repo: gerivdb/RLM-243
     protocol: http
     port: 8793
+  - type: metrics-service
+    repo: gerivdb/RLM-METRICS
+    path: src/app.py
+    protocol: http
+    port: 8802
 bridges:
   - target: repo:RLM-243
     role: consumer
@@ -64,6 +80,10 @@ bridges:
   - target: repo:TALEX
     role: consumer
     protocol: wazaa-bus
+  - target: repo:RLM-METRICS
+    role: consumer
+    protocol: http
+    port: 8802
 dependencies:
   - repo: gerivdb/RLM-243
   - repo: gerivdb/LLUX
@@ -71,6 +91,7 @@ dependencies:
   - repo: gerivdb/TIMX-FEATURE-STORE
   - repo: gerivdb/TALEX
   - repo: gerivdb/RADX
+  - repo: gerivdb/RLM-METRICS
 constraints:
   - cpu_only: true
   - ram_limit_mb: 24576

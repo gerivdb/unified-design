@@ -66,14 +66,16 @@ Seul G4 reste en attente de mesure runtime réelle.
 
 **Conclusion** : `RLM-METRICS` n’est pas operationnel dans l’ENV2 courante et n’est pas démarré par `KIX`. G4 ne peut pas être validé en l’état.
 
-## Vérification KIX — gestion des runtimes
+## Mise à jour doctrine KIX — `RLM-METRICS` intégré
 
-`KIX` a été inspecté pour vérifier s’il gérait `RLM-METRICS` :
-- **design.yaml** : ne liste que `RLM-243`, `LLUX`, `TLM-LANG`, `TIMX-FEATURE-STORE`, `TALEX`, `RADX`
-- **Références croisées** : aucun lien `KIX ↔ RLM-METRICS` dans `GOVERNANCE-HUB`, `ECOS-CLI`, `KIVA-CLI`
-- **Conclusion** : `RLM-METRICS` est un **service standalone** hors périmètre `KIX`
+`KIX` a été mis à jour pour inclure `RLM-METRICS` dans son périmètre de gestion :
+- **consumers** : `RLM-METRICS` ajouté
+- **capabilities** : `metrics-lifecycle` ajoutée (`port: 8802`, endpoints `/health` et `/collect`)
+- **components** : `metrics-service` ajouté (`gerivdb/RLM-METRICS`, `src/app.py`)
+- **bridges** : bridge `repo:RLM-METRICS` ajoutée (`http`, port `8802`)
+- **dependencies** : `gerivdb/RLM-METRICS` ajouté
 
-**Impact** : le diagnostic G4 ne dépend pas d’un lancement KIX. La collecte doit être tentée directement sur le service `RLM-METRICS`.
+**Impact** : `KIX` est désormais responsable du cycle de vie de `RLM-METRICS`. Le diagnostic G4 doit être réévalué en considérant que `KIX` peut démarrer le service.
 
 ## Plan d’exécution opérationnelle pour G4
 
@@ -130,7 +132,7 @@ Considérer le déploiement `symbiose` comme **opérationnel hors mesure runtime
 
 ## Prochaines étapes
 
-1. **G4 runtime** : démarrer `RLM-METRICS` directement (service standalone, pas via `KIX`) puis exécuter `/collect` sur `CTULU ↔ KG-CAUSAL`
+1. **G4 runtime** : démarrer `RLM-METRICS` via `KIX` (désormais responsable) puis exécuter `/collect` sur `CTULU ↔ KG-CAUSAL`
 2. **Promotion** : une fois `bénéficeNet > 0` confirmé → `accepted → active`
 
 ---
