@@ -29,4 +29,5 @@
 | PRD-MOC-PIPELINE-MDU-VALIDATION-20260921 | Pipeline MDU Validation | in_review |
 | PRD-MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | in_review |
 | PRD-MOC-ATOM-MDU-CATALOG-SYNC-20260921 | ATOM MDU Catalog Sync | in_review |
+| PRD-MOC-SYMBIOSE-ONTOLOGY-20260921 | Symbiose Ontology | proposed |
 | PRD-UNIFIED-DESIGN-GOVERNANCE-GAPS-2026-08-16 | Unified Design Governance Gaps | approved |

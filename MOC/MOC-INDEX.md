@@ -18,3 +18,4 @@
 | MOC-PIPELINE-MDU-VALIDATION-20260921 | Pipeline MDU Validation | in_review |
 | MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | in_review |
 | MOC-ATOM-MDU-CATALOG-SYNC-20260921 | ATOM MDU Catalog Sync | in_review |
+| MOC-SYMBIOSE-ONTOLOGY-20260921 | Symbiose Ontology | proposed |
