@@ -1,5 +1,17 @@
 ---
 name: CodeDB-E5620
+version: 1.0.0
+status: active
+layer: L0
+description: "CodeDB-E5620 — Base de connaissances code pour le processeur Xeon E5620. Stocke patterns, optimisations et contraintes hardware.
+"
+consumers:
+  - kix
+  - infx
+  - flex
+  - llux
+
+name: CodeDB-E5620
 version: "1.0.0"
 status: active
 strate: L4-TOOLS

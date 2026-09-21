@@ -1,4 +1,10 @@
-type: DESIGN
+---
+name: ecosystem-artifact-layers-design
+version: 1.0.0
+status: proposed
+layer: L0
+description: "Design artifact for ecosystem-artifact-layers-design."
+
 version: 1.0.0
 status: proposed
 date: '2026-08-07'

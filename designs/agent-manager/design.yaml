@@ -1,5 +1,15 @@
 ---
 name: AGENT-MANAGER
+version: 1.0.0
+status: active
+layer: L0
+description: "AGENT-MANAGER — Agent Manager GeriCode - Backend d'orchestration des sessions KiloCode.
+"
+consumers:
+  - kix
+  - conversation-cognitive
+
+name: AGENT-MANAGER
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM

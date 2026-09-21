@@ -1,4 +1,16 @@
+---
 name: artifact-ownership-routing
+version: 1.0.0
+status: active
+layer: L0
+description: "Logique de routage déductive : tout artifact est attribué au repo dédié qui en est le gestionnaire canonique. Inclut un mapping sémantique complet par concept structurel (topologie, standards, gouvernance, gateway, bootstrap, runtime, memory, semantic-layer, bus, naming, citizen, registry)."
+profile: STANDARD
+consumers:
+  - CTULU artifact routing
+  - KG-L semantic linker
+  - ECOS-CLI registry sync
+  - pattern-router artifact-type detection
+
 description: "Logique de routage déductive : tout artifact est attribué au repo dédié qui en est le gestionnaire canonique. Inclut un mapping sémantique complet par concept structurel (topologie, standards, gouvernance, gateway, bootstrap, runtime, memory, semantic-layer, bus, naming, citizen, registry)."
 version: 1.0.0
 status: active

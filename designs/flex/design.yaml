@@ -1,5 +1,17 @@
 ---
 name: FLEX
+version: 1.0.0
+status: active
+layer: L0
+description: "FLEX — Framework de Lexique et d'Expression. Gere les lexiques, expressions et patterns semantiques.
+"
+consumers:
+  - kix
+  - llux-match
+  - infx
+  - codedb-e5620
+
+name: FLEX
 version: "1.0.0"
 status: active
 strate: L4-TOOLS

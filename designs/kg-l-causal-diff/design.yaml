@@ -1,6 +1,9 @@
+---
 name: kg-l-causal-diff
 version: 1.0.0
 status: draft
+layer: L0
+description: "Generate causal diff reports from git commits. Transforms 'what changed' (git diff) into 'why it changed causally' by linking to domain_links.json, intent_hash, and fixture migrations."
 profile: STANDARD
 consumers: []
 
@@ -36,11 +39,11 @@ output:
   format: "markdown (CAUSAL_DIFF.md)"
   sections:
     - "Root Cause Analysis"
-    - "Changes & Causal Links" (table: file | change | causal link)
-    - "Domain Links Impact" (domain_links.json diff)
-    - "Kernel Version Changes" (kernels.yaml diff)
-    - "Fixture Migrations" (fixtures.yaml diff)
-    - "Verification" (determinism, validator, tests)
+    - "Changes & Causal Links"
+    - "Domain Links Impact"
+    - "Kernel Version Changes"
+    - "Fixture Migrations"
+    - "Verification"
     - "Intent Hash Traceability"
 
 # Implementation
@@ -49,20 +52,21 @@ implementation:
   entry_point: "kg_l_causal_diff.py"
   
   algorithm:
-    1. "Parse git diff (from..to or single commit)"
-    2. "Extract changed files, functions, types"
-    3. "Load domain_links.json (check freshness < 30 days)"
-    4. "Load kernels.yaml (if exists)"
-    5. "Load fixtures.yaml (if exists)"
-    7. "Extract intent_hash from commit message"
-    8. "For each changed file:"
-        - "Map to domain concept via domain_links.json (file → concept)"
-        - "Determine causal link: domain_generalization / ub_elimination / fixture_migration / path_fix / trace_gate"
-        - "Check kernel registry for version bumps"
-        - "Check fixture registry for migrations"
-    9. "Extract intent_hash from commit message/footer"
-    9. "Generate CAUSAL_DIFF.md with structured sections"
-    10. "Optionally: append to commit as trailer, or write to file"
+    step1: "Parse git diff (from..to or single commit)"
+    step2: "Extract changed files, functions, types"
+    step3: "Load domain_links.json (check freshness < 30 days)"
+    step4: "Load kernels.yaml (if exists)"
+    step5: "Load fixtures.yaml (if exists)"
+    step6: "Extract intent_hash from commit message"
+    step7:
+      description: "For each changed file:"
+      sub_step1: "Map to domain concept via domain_links.json (file -> concept)"
+      sub_step2: "Determine causal link - domain_generalization / ub_elimination / fixture_migration / path_fix / trace_gate"
+      sub_step3: "Check kernel registry for version bumps"
+      sub_step4: "Check fixture registry for migrations"
+    step8: "Extract intent_hash from commit message/footer"
+    step9: "Generate CAUSAL_DIFF.md with structured sections"
+    step10: "Optionally: append to commit as trailer, or write to file"
 
 # Causal Link Taxonomy
 causal_links:

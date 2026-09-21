@@ -1,4 +1,10 @@
+---
 name: <detector_name>
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for <detector_name>."
+
 type: <kix_endpoint | trix_preflight | powershell_script | github_api | mcp_tool>
 implementation:
   - repo: <repo>

@@ -1,4 +1,10 @@
+---
 name: process-zombie-proliferation
+version: 1.0.0
+status: proposed
+layer: L0
+description: "Design artifact for process-zombie-proliferation."
+
 parent_pattern: zombie-symptom
 intent_hash: 0xPROCESS_ZOMBIE_PROLIFERATION_20260809
 repos_target:

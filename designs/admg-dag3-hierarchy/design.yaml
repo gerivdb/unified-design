@@ -1,5 +1,32 @@
+---
 name: admg-dag3-hierarchy
 version: 1.0.0
 status: active
+layer: L0
+description: "Design artifact for admg-dag3-hierarchy."
 profile: STANDARD
-consumers: []
+consumers:
+
+name: admg-dag3-hierarchy
+version: 1.0.0
+status: active
+strate: L0
+type: design
+intent_hash: 0xADMG_DAG3_HIERARCHY
+description: "Design artifact for admg-dag3-hierarchy."
+
+dependencies: []
+
+consumers:
+  - unified-design
+
+capabilities:
+  - name: primary-function
+    description: Fonction principale du design admg-dag3-hierarchy
+    parameters:
+      input: string
+    outputs:
+      - result: object
+
+constraints:
+  - bdcp_only: true
