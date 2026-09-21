@@ -3,6 +3,7 @@ name: loopx-category-registration-protocol
 version: "1.0.0"
 status: active
 layer: L3-CITIZENS
+sub_layer: N+2
 intent_hash: 0xDESIGN_LOOPX_CATEGORY_REGISTRATION_PROTOCOL_20260921
 description: >
   Protocole d'ajout d'une nouvelle catégorie de routines dans LOOPX.
@@ -134,6 +135,10 @@ cross_references:
   - repo: gerivdb/LOOPX
     relation: implements
     path: src/loopx_routines/registry.py
+  - repo: gerivdb/ARGUS
+    relation: audits
+    path: scanners/
+    capability: category_drift_scanner
   - design: safe-action-pattern
   - design: design-ops-loop
   - primitive: loopx-category-registration-protocol-primitive

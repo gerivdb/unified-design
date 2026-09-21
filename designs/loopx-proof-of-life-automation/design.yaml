@@ -3,6 +3,7 @@ name: loopx-proof-of-life-automation
 version: "1.0.0"
 status: active
 layer: L3-CITIZENS
+sub_layer: N+2
 intent_hash: 0xDESIGN_LOOPX_PROOF_OF_LIFE_AUTOMATION_20260921
 description: >
   Automatisation des preuves d'exécution (Proof-of-Life) dans les PRD/MOC LOOPX.
@@ -115,6 +116,10 @@ cross_references:
   - repo: gerivdb/LOOPX
     relation: implements
     path: PRD/PRD-LOOPX-BREAKTHROUGH-INTEGRATION-2026-09-19.md
+  - repo: gerivdb/ARGUS
+    relation: audits
+    path: scanners/
+    capability: proof_staleness_scanner
   - design: safe-action-pattern
   - design: design-ops-loop
   - design: prd-moc-progress-sync

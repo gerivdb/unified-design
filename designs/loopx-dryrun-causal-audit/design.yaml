@@ -3,6 +3,7 @@ name: loopx-dryrun-causal-audit
 version: "1.0.0"
 status: active
 layer: L3-CITIZENS
+sub_layer: N+2
 intent_hash: 0xDESIGN_LOOPX_DRYRUN_CAUSAL_AUDIT_20260921
 description: >
   Audit causal dry-run pour LOOPX : compare le registry (SOT) avec le filesystem
@@ -137,6 +138,10 @@ cross_references:
   - repo: gerivdb/LOOPX
     relation: implements
     path: src/loopx_routines/registry.py
+  - repo: gerivdb/ARGUS
+    relation: audits
+    path: scanners/
+    capability: causal_gap_scanner
   - design: safe-action-pattern
   - design: design-ops-loop
   - design: design-coverage-scanner
