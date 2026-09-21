@@ -50,6 +50,7 @@ Seul G4 reste en attente de mesure runtime réelle.
 |------|-------------|--------|
 | **G1** | ADR governance gate : `proposed → accepted` | ✅ Accepté par validation humaine |
 | **G4** | Mesure réelle `RLM-METRICS` : `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ✅ Validé par collecte runtime |
+| **G6** | Doctrine KIX étendue à tout l’écosystème | ✅ `design.yaml` v2.0.0 |
 
 ---
 
@@ -113,7 +114,27 @@ Considérer le déploiement `symbiose` comme **opérationnel hors mesure runtime
 | MOC à jour | ✅ Statuts + preuves + gates |
 | Preuves d'exécution | ✅ 7 preuves horodatées |
 
-**Verdict** : **100% déployé et opérationnel**. G4 validé par collecte runtime (`CTULU:symbiose` accepté).
+**Verdict** : **100% déployé et opérationnel**. G4 validé par collecte runtime (`CTULU:symbiose` accepté).  
+**G6** : **doctrine KIX étendue** — `design.yaml` v2.0.0, couverture système complète.
+
+---
+
+## Diagnostic KIX — lacunes et résolution
+
+| Lacune | Résolution |
+|--------|------------|
+| consumers limités à 7 repos | Ajout de `DevTools`, `ECOS-CLI`, `KIVA-CLI`, `CTULU`, `WAZAA`, `BRAIN` |
+| capabilities focalisées RLM | Ajout de `process-manager`, `pid-tracker`, `exe-launcher` |
+| components sans couverture système | Ajout de `process-supervisor`, `pid-registry` |
+| bridges sans couverture système | Ajout de bridges `DevTools`, `ECOS-CLI`, `KIVA-CLI` |
+| dependencies tronquées | Ajout de `DevTools`, `ECOS-CLI`, `KIVA-CLI` |
+| pas de policy de fallback | `process-manager` avec `restart_policy: auto` |
+| pas de PID tracking | `pid-tracker` avec `preflight_singleton: true`, `fingerprint_build: true` |
+| pas de mode “system” | `exe-launcher` avec `allowed_paths` système |
+| constraints trop restrictives | Ajout de `system_services: allowed`, `max_processes: 64` |
+| description éditoriale | “Orchestrateur système de l'écosystème gerivdb” |
+
+**Doctrine cible** : `designs/kix/design.yaml` v2.0.0 — KIX est le choix par défaut pour tous les exécutables, PID et services.
 
 ---
 

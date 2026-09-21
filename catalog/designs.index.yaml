@@ -1460,3 +1460,24 @@ entries:
   status: active
   profile: STANDARD
   consumers: []
+- name: reversible-symbiose-lifecycle
+  path: primitives\reversible-symbiose-lifecycle.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_REVERSIBLE_SYMBIOSE_LIFECYCLE_20260921
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: symbiose-hot-reload
+  path: workflows\symbiose-hot-reload.yaml
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_SYMBIOSE_HOT_RELOAD_20260921
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: symbiose-reversible-plugin-architecture
+  path: designs\symbiose-reversible-plugin-architecture.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_SYMBIOSE_REVERSIBLE_PLUGIN_ARCHITECTURE_20260921
+  status: active
+  profile: STANDARD
+  consumers: []

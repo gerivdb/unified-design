@@ -75,6 +75,7 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 | G3 — Instances documentées | `TOPOS/topology.yaml` mentionne les instances candidates | ✅ OK | Commit `d09f37e` — 7 edges |
 | G4 — Mesure confirmée | `RLM-METRICS` confirme `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ✅ Validé | `CTULU:symbiose` accepté par `/collect` |
 | G5 — Concept actif | `symbiose` passe en `active` après validation | ✅ Prêt | Dépend de G1 + G4 |
+| G6 — Doctrine KIX étendue | `KIX` gère tous les exe, PID, services de l’écosystème | ✅ `design.yaml` v2.0.0 | `designs/kix/design.yaml` |
 
 ## Références
 
@@ -87,6 +88,7 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 - KG-L : Knowledge Graph (indexation)
 - RLM-METRICS : Mesure bénéficeNet
 - TOPOS : `TOPOS/topology.yaml`
+- KIX : `designs/kix/design.yaml` — orchestrateur système
 - ARGUS : Audit parasitisme
 
 ## Preuves d'exécution

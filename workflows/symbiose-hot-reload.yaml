@@ -1,0 +1,138 @@
+---
+name: symbiose-hot-reload
+version: "1.0.0"
+status: active
+layer: L0
+description: "Workflow de rechargement à chaud des symbiotes gerivdb. Implémente le pattern Cordis 'hot-reload safe' avec sauvegarde d'état, notification des dépendants, et rollback automatique en cas d'échec."
+intent_hash: 0xWORKFLOW_SYMBIOSE_HOT_RELOAD_20260921
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+depends_on:
+  - reversible-symbiose-lifecycle
+  - swarm-lease
+  - agent-observability-architecture
+bridges:
+  - target: WAZAA/bus
+    role: message_bus
+    protocol: python-call
+  - target: KG-L/exports
+    role: domain_links
+    protocol: json-read
+
+# Purpose
+purpose: "Permettre le rechargement à chaud d'un symbiote (citoyen, runner, service, repo) sans perte d'état et avec garantie d'intégrité."
+
+# Preconditions
+preconditions:
+  - "État sauvegardé (WAL snapshot, leases, KG-L edges)."
+  - "Dépendants notifiés du rechargement."
+  - "Nouvelle version validée par pre-merge gate (BOOT-6)."
+  - "Swarm lease pris sur le scope concerné (SL1-SL5)."
+
+# Workflow Steps
+steps:
+  - step: "1. Preflight"
+    actions:
+      - "Vérifier lease actif : balise lease list -Json"
+      - "Vérifier dépendants : WAZAA inbox + KG-L edges"
+      - "Sauvegarder état : WAL snapshot"
+      - "Vérifier nouvelle version : git diff main...feature-branch"
+    validation:
+      - "Lease actif ?"
+      - "Dépendants notifiés ?"
+      - "WAL snapshot créé ?"
+      - "Nouvelle version validée ?"
+    on_failure: "STOP - corriger préconditions."
+
+  - step: "2. Announcement"
+    actions:
+      - "Publier WAZAA maintenance_start sur le scope."
+      - "Marquer symbiote en maintenance dans KG-L."
+    validation:
+      - "WAZAA message publié ?"
+      - "KG-L status = maintenance ?"
+    on_failure: "Retry 3x + HITL."
+
+  - step: "3. Disable"
+    actions:
+      - "Arrêter les flux de service (drain)."
+      - "Arrêter le symbiote (dispose() réversible)."
+      - "Libérer les baux swarm (SL4)."
+    validation:
+      - "Flux drainés ?"
+      - "Symbiote arrêté ?"
+      - "Lease libéré ?"
+    on_failure: "Rollback automatique vers WAL snapshot."
+
+  - step: "4. Swap"
+    actions:
+      - "Charger la nouvelle version (plugin swap)."
+      - "Vérifier compatibilité (contrat d'interface)."
+      - "Restaurer l'état (replay WAL si nécessaire)."
+    validation:
+      - "Nouvelle version chargée ?"
+      - "Contrat compatible ?"
+      - "État restauré ?"
+    on_failure: "Rollback automatique vers version précédente."
+
+  - step: "5. Enable"
+    actions:
+      - "Démarrer le symbiote."
+      - "Reprendre les flux de service."
+      - "Prendre nouveau lease (SL1-SL5)."
+      - "Mettre à jour KG-L edges."
+    validation:
+      - "Symbiote démarré ?"
+      - "Flux actifs ?"
+      - "Lease actif ?"
+      - "KG-L edges à jour ?"
+    on_failure: "Rollback automatique + HITL."
+
+  - step: "6. Announcement"
+    actions:
+      - "Publier WAZAA maintenance_end sur le scope."
+      - "Marquer symbiote en actif dans KG-L."
+    validation:
+      - "WAZAA message publié ?"
+      - "KG-L status = active ?"
+    on_failure: "Retry 3x + alerte."
+
+  - step: "7. Verification"
+    actions:
+      - "Vérifier RLM-METRICS (bénéficeNet > 0)."
+      - "Vérifier WAZAA inbox (pas d'erreur)."
+      - "Vérifier lease TTL."
+    validation:
+      - "RLM-METRICS OK ?"
+      - "WAZAA inbox vide ?"
+      - "Lease renouvelé ?"
+    on_failure: "Alerte + rollback si échec critique."
+
+# Rollback Strategy
+rollback:
+  trigger: "Échec à any step après step 3."
+  actions:
+    - "Arrêter le symbiote (si démarré)."
+    - "Restaurer WAL snapshot."
+    - "Reprendre lease précédent (si possible)."
+    - "Publier WAZAA rollback."
+    - "Marquer symbiote en erreur dans KG-L."
+  guarantee: "L'écosystème revient à l'état pré-rechargement en < 30s."
+
+# Anti-Patterns
+anti_patterns:
+  - pattern: "Hot reload sans sauvegarde d'état"
+    correction: "WAL snapshot obligatoire avant step 3."
+  - pattern: "Hot reload sans notification des dépendants"
+    correction: "WAZAA maintenance_start obligatoire avant step 3."
+  - pattern: "Hot reload pendant un bail actif d'un autre symbiote"
+    correction: "Swarm lease SL3 : premier bail gagne ; attendre release."
+  - pattern: "Hot reload sans validation de la nouvelle version"
+    correction: "Pre-merge gate BOOT-6 obligatoire."
+
+# Compliance
+compliance:
+  governance: "swarm-lease.md + reversible-symbiose-lifecycle.yaml + safe-action-pattern.yaml"
+  validation: "Pre-commit hook vérifie frontmatter + IntentHash + workflow steps."
+  audit: "KG-L exports + WAZAA inbox + RLM-METRICS + WAL."

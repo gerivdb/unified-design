@@ -1,0 +1,118 @@
+---
+name: reversible-symbiose-lifecycle
+version: "1.0.0"
+status: active
+layer: L0
+description: "Primitive de cycle de vie réversible pour les symbiotes gerivdb. Garantit que toute formation, maintenance, et dissolution de symbiose est tracée, annulable, et conforme à l'invariant de réversibilité."
+intent_hash: 0xPRIMITIVE_REVERSIBLE_SYMBIOSE_LIFECYCLE_20260921
+inherits:
+  - swarm-lease
+  - safe-action-pattern
+depends_on:
+  - swarm-lease
+  - kg-l-causal-diff
+  - agent-observability-architecture
+
+# Purpose
+purpose: "Garantir que toute symbiose peut être créée, maintenue, et dissoute avec rollback complet des effets de bord."
+
+# Lifecycle Phases
+lifecycle:
+  - phase: "formation"
+    preconditions:
+      - "Deux symbiotes identifiés (source, target)."
+      - "Capacités et dépendances déclarées."
+      - "BénéficeNet estimé > 0 (calcul préalable)."
+    actions:
+      - "Émettre IntentHash de formation."
+      - "Prendre swarm lease sur le scope (SL1-SL5)."
+      - "Enregistrer dans KG-L (edges symbiose)."
+      - "Publier WAZAA hello avec symbiose annoncée."
+      - "Sauvegarder état initial (WAL snapshot)."
+    postconditions:
+      - "Lease actif."
+      - "KG-L edges à jour."
+      - "WAZAA hello publié."
+      - "WAL snapshot créé."
+    reversible: true
+    rollback:
+      - "Libérer lease."
+      - "Supprimer edges KG-L."
+      - "Publier WAZAA bye."
+      - "Supprimer WAL snapshot."
+
+  - phase: "maintenance"
+    preconditions:
+      - "Symbiose en cours (lease actif)."
+      - "Mesures RLM-METRICS en cours."
+    actions:
+      - "Mesurer bénéficeNet continu."
+      - "Vérifier lease TTL."
+      - "Heartbeat via WAZAA."
+      - "Détecter dérive (bénéficeNet < 0)."
+    postconditions:
+      - "Mesures à jour."
+      - "Lease renouvelé ou expiré."
+    reversible: true
+    rollback:
+      - "Arrêter mesures."
+      - "Marquer symbiose en dégradé."
+
+  - phase: "dissolution"
+    trigger: "bénéficeNet < 0 | timeout | décision humaine | rollback"
+    preconditions:
+      - "Symbiose identifiée pour dissolution."
+      - "Dépendants notifiés."
+    actions:
+      - "Arrêter les flux de service."
+      - "Libérer les baux swarm (SL4)."
+      - "Révoquer les edges KG-L."
+      - "Notifier les dépendants (WAZAA bye)."
+      - "Sauvegarder l'état final (WAL compact)."
+      - "Émettre IntentHash de dissolution."
+    postconditions:
+      - "Lease libéré."
+      - "KG-L edges supprimés."
+      - "WAZAA bye publié."
+      - "WAL compacté."
+    reversible: false
+    guarantee: "Tout effet est annulé ou pérennisé. Aucun état orphelin."
+
+# Reversibility Rules
+reversibility_rules:
+  - rule: "Toute phase reversible produit un rollback explicite."
+    enforcement: "WAL snapshot avant formation + rollback script."
+  - rule: "Aucune symbiose ne peut être dissoute sans lease release."
+    enforcement: "Swarm lease closeout obligatoire."
+  - rule: "Toute dissolution est tracée par IntentHash."
+    enforcement: "KG-L edge suppression + WAL compact + WAZAA bye."
+  - rule: "Les dépendants sont notifiés avant toute mutation."
+    enforcement: "WAZAA maintenance_start + maintenance_end."
+
+# Error Handling
+error_handling:
+  - error: "Lease expired pendant maintenance"
+    recovery: "Restaurer depuis WAL snapshot + renégocier lease."
+  - error: "Dépendant injoignable pendant dissolution"
+    recovery: "Marquer dépendant en timeout + dissolution différée + alerte."
+  - error: "KG-L update failed"
+    recovery: "Retry avec backoff + fallback WAL local + HITL si échec."
+  - error: "WAZAA bye non publié"
+    recovery: "Retry + fallback log local + closeout manuel."
+
+# Validation
+validation:
+  - check: "Lease actif avant formation"
+    command: "balise lease list -Json"
+  - check: "KG-L edges à jour"
+    command: "python D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\scripts\\export_domain_links.py"
+  - check: "WAZAA inbox vide après dissolution"
+    command: "python D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\scripts\\wazaa_inbox.py list --to <SID>"
+  - check: "RLM-METRICS bénéficeNet > 0"
+    command: "curl http://127.0.0.1:8802/collect"
+
+# Compliance
+compliance:
+  governance: "swarm-lease.md + ADR-2026-08-28-001 + safe-action-pattern.yaml"
+  validation: "Pre-commit hook vérifie frontmatter + IntentHash + symbiose contract."
+  audit: "KG-L exports + WAZAA inbox + RLM-METRICS + WAL."
