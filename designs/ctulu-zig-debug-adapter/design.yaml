@@ -110,6 +110,3 @@ meta_coherence:
   verifies: "Live debug catches UB (@Vector misalignment) before silent hang"
   source_of_truth: "Zig 0.15 DWARF/CodeView + PDB"
   intent_hash: 0xCTULU_ZIG_DEBUG_ADAPTER_20260829
-
-# Intent Hash
-intent_hash: 0xCTULU_ZIG_DEBUG_ADAPTER_20260829
