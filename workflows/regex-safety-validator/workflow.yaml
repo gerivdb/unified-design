@@ -1,0 +1,101 @@
+---
+name: regex-safety-validator
+version: "1.0.0"
+status: active
+layer: L0-CANON
+sub_layer: N+1
+intent_hash: 0xWORKFLOW_REGEX_SAFETY_VALIDATOR_20260921
+description: >
+  Workflow de validation des expressions régulières跨-langage.
+  Intègre la primitive regex-safety-validator dans le pipeline de développement.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: pre-commit-validation
+    description: "Valide les regex avant commit"
+  - name: ci-integration
+    description: "Intègre la validation dans la CI"
+  - name: auto-fix
+    description: "Corrige automatiquement les patterns invalides"
+parameters:
+  trigger: pre-commit
+  languages:
+    - python
+    - powershell
+    - javascript
+  auto_fix: true
+states:
+  - name: IDLE
+    nature: workflow inactif
+    gate_to_next: TRIGGER
+    question: "Un commit nécessite-t-il une validation regex ?"
+  - name: TRIGGER
+    nature: déclenchement du workflow
+    gate_to_next: VALIDATE
+    question: "Le workflow est-il déclenché ?"
+  - name: VALIDATE
+    nature: validation des regex
+    gate_to_next: FIX | PASS
+    question: "Les regex sont-elles valides ?"
+  - name: FIX
+    nature: correction automatique
+    gate_to_next: VALIDATE
+    question: "Les corrections ont-elles été appliquées ?"
+  - name: PASS
+    nature: validation réussie
+    gate_to_next: COMPLETE
+    question: "Tous les patterns sont-ils valides ?"
+  - name: COMPLETE
+    nature: workflow terminé
+functions:
+  - id: F1
+    name: TRIGGER
+    state: IDLE->TRIGGER
+    description: "Déclenche le workflow avant commit"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: VALIDATE
+    state: TRIGGER->VALIDATE
+    description: "Valide tous les patterns regex du commit"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: F3
+    name: FIX
+    state: VALIDATE->FIX
+    description: "Corrige automatiquement les patterns invalides"
+    implements: ATOM-DELTA-CHECK
+invariant: "Tout commit contenant des regex est validé avant d'être accepté."
+genes:
+  - id: G1
+    name: pre_commit_gate
+    description: "Validation avant chaque commit"
+  - id: G2
+    name: auto_remediation
+    description: "Correction automatique des patterns invalides"
+  - id: G3
+    name:跨-langage_coverage
+    description: "Validation sur tous les langages utilisés"
+anti_patterns:
+  - missing_gene: pre_commit_gate
+    pathology: "Regex invalides en production"
+  - missing_gene: auto_remediation
+    pathology: "Corrections manuelles, risque d'erreur"
+  - missing_gene:跨-langage_coverage
+    pathology: "Bugs portabilité"
+cross_references:
+  - repo: gerivdb/LOOPX
+    relation: uses
+    path: tests/wrappers/test_wrappers_skills_triggers_verifiers.py
+  - design: regex-safety-validator
+  - primitive: regex-safety-validator-primitive
+  - skill: regex-safety-validator-skill
+  - workflow: workflow-regex-safety-validator
