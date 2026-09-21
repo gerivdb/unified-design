@@ -49,7 +49,43 @@ Seul G4 reste en attente de mesure runtime réelle.
 | Gate | Description | Statut |
 |------|-------------|--------|
 | **G1** | ADR governance gate : `proposed → accepted` | ✅ Accepté par validation humaine |
-| **G4** | Mesure réelle `RLM-METRICS` : `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ⏳ Baseline créée, mesure en attente |
+| **G4** | Mesure réelle `RLM-METRICS` : `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ⚠️ Baseline prête, runtime indisponible pour collecte |
+
+---
+
+## Diagnostic G4 — runtime RLM-METRICS
+
+| Élément | Observation |
+|---------|-------------|
+| Port cible | `8802` |
+| Connexion | refusée après détection de port |
+| Processus | absence de binding TCP confirmée par `Get-NetTCPConnection` |
+| Endpoint `/health` | non joignable |
+| Endpoint `/collect` | non joignable |
+
+**Conclusion** : le service `RLM-METRICS` n’est pas operationnel dans l’ENV2 courante au moment de la validation. G4 ne peut pas être validé en l’état.
+
+## Plan d’exécution opérationnelle pour G4
+
+### Option A — Démarrer RLM-METRICS localement
+
+```powershell
+Set-Location 'D:\DO\WEB\TOOLS\L2-PLATFORM\RLM-METRICS'
+python src/app.py
+# puis collecter via http://127.0.0.1:8802/collect
+```
+
+### Option B — Exécuter via fondation de test
+
+Si `tests/test_app.py` existe, utiliser le simulateur au lieu du service live :
+
+```powershell
+pytest tests/test_app.py -k collect -q
+```
+
+### Option C — Reporter la validation G4
+
+Considérer le déploiement `symbiose` comme **opérationnel hors mesure runtime**. G4 reste tracé, avec基线 et méthode prêtes.
 
 ---
 
@@ -77,15 +113,15 @@ Seul G4 reste en attente de mesure runtime réelle.
 | MOC à jour | ✅ Statuts + preuves + gates |
 | Preuves d'exécution | ✅ 7 preuves horodatées |
 
-**Verdict** : **100% déployé et opérationnel** pour les documents de gouvernance et l’indexation.
+**Verdict** : **100% déployé et opérationnel** pour les documents de gouvernance et l’indexation.  
+**G4** : **non validé runtime** — baseline et méthode prêtes, collecte dépend de la disponibilité opérationnelle de `RLM-METRICS`.
 
 ---
 
 ## Prochaines étapes
 
-1. **Governance gate** : soumettre `ADR-SYMBIOSE-ONTOLOGY-20260921` à validation `proposed → accepted`
-2. **Mesure réelle** : exécuter `RLM-METRICS /collect` sur `CTULU ↔ KG-CAUSAL`
-3. **Promotion** : une fois `bénéficeNet > 0` confirmé → `proposed → active`
+1. **G4 runtime** : démarrer `RLM-METRICS` puis exécuter `/collect` sur `CTULU ↔ KG-CAUSAL`
+2. **Promotion** : une fois `bénéficeNet > 0` confirmé → `accepted → active`
 
 ---
 
