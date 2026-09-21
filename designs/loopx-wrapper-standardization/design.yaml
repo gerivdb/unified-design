@@ -1,0 +1,135 @@
+---
+name: loopx-wrapper-standardization
+version: "1.0.0"
+status: active
+layer: L3-CITIZENS
+intent_hash: 0xDESIGN_LOOPX_WRAPPER_STANDARDIZATION_20260921
+description: >
+  Standardisation des wrappers LOOPX : comment exposer une classe Python
+  comme routine consommable par le registry. Résout le problème récurrent
+  des entry_points invalides ou des méthodes manquantes dans les wrappers.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+  - LOOPX-Routines
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: class-to-wrapper
+    description: "Transforme une classe Python en wrapper fonctionnel"
+  - name: method-signature-validation
+    description: "Valide que la méthode appelée existe et a la bonne signature"
+  - name: error-standardization
+    description: "Standardise les erreurs dans un format consommable"
+  - name: return-shaping
+    description: "Formate le retour en dict {success, result, error}"
+parameters:
+  wrapper_naming:
+    pattern: "{module}_{class_or_method}_wrapper"
+    example: "skills_research_wrapper"
+  return_shape:
+    success_field: "success"
+    result_field: "result"
+    error_field: "error"
+    metadata_field: "metadata"
+  import_strategy:
+    preferred: "lazy_import_inside_wrapper"
+    forbidden: "top_level_import_with_side_effects"
+  instantiation:
+    pattern: "class_first_then_run"
+    forbidden: "calling_standalone_function_when_class_expected"
+states:
+  - name: IDLE
+    nature: wrapper non appelé
+    gate_to_next: VALIDATE_CLASS
+    question: "La classe cible existe-t-elle ?"
+  - name: VALIDATE_CLASS
+    nature: vérification de la classe et de sa méthode
+    gate_to_next: INSTANTIATE | BLOCK
+    question: "La méthode cible existe-t-elle avec la bonne signature ?"
+  - name: INSTANTIATE
+    nature: instanciation de la classe avec config par défaut
+    gate_to_next: CALL_METHOD
+    question: "L'instanciation a-t-elle réussi ?"
+  - name: CALL_METHOD
+    nature: appel de la méthode avec kwargs
+    gate_to_next: FORMAT_RESULT
+    question: "La méthode a-t-elle retourné un résultat valide ?"
+  - name: FORMAT_RESULT
+    nature: formatage du retour standardisé
+    gate_to_next: RETURN
+    question: "Le retour est-il conforme au shape attendu ?"
+  - name: RETURN
+    nature: retour au consommateur
+  - name: BLOCK
+    nature: wrapper bloqué
+functions:
+  - id: F1
+    name: VALIDATE_CLASS_EXISTS
+    state: IDLE->VALIDATE_CLASS
+    description: "Vérifie que le module et la classe/méthode existent"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: VALIDATE_METHOD_SIGNATURE
+    state: VALIDATE_CLASS
+    description: "Inspecte la signature de la méthode cible"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F3
+    name: INSTANTIATE_CLASS
+    state: VALIDATE_CLASS->INSTANTIATE
+    description: "Crée une instance avec config par défaut ou kwargs"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F4
+    name: CALL_TARGET_METHOD
+    state: INSTANTIATE->CALL_METHOD
+    description: "Appelle la méthode avec les kwargs validés"
+    implements: ATOM-STOP-CONDITION
+  - id: F5
+    name: FORMAT_STANDARD_RETURN
+    state: CALL_METHOD->FORMAT_RESULT
+    description: "Formate le retour en dict standardisé"
+    implements: ATOM-DELTA-CHECK
+  - id: F6
+    name: RETURN_TO_CONSUMER
+    state: FORMAT_RESULT->RETURN
+    description: "Retourne le dict formaté au consommateur"
+    implements: ATOM-CARRY-FORWARD_PRINCIPLE
+invariant: "Tout wrapper LOOPX retourne un dict avec au moins les clés success et result."
+genes:
+  - id: G1
+    name: lazy_import
+    description: "Tout import de classe se fait à l'intérieur du wrapper, jamais en tête de fichier"
+  - id: G2
+    name: class_first
+    description: "Toujours instancier la classe avant d'appeler une méthode ; jamais appeler une fonction standalone quand une classe est attendue"
+  - id: G3
+    name: signature_validation
+    description: "Toute méthode cible est inspectée avant appel pour valider sa signature"
+  - id: G4
+    name: error_standardization
+    description: "Toute exception est capturée et retournée dans le champ error du dict standardisé"
+anti_patterns:
+  - missing_gene: lazy_import
+    pathology: "Import en tête de fichier -> crash au chargement du module si dépendance manquante"
+  - missing_gene: class_first
+    pathology: "Appel de fonction standalone -> oubli d'instanciation, paramètres manquants"
+  - missing_gene: signature_validation
+    pathology: "Méthode appelée avec mauvais paramètres -> TypeError silencieux"
+  - missing_gene: error_standardization
+    pathology: "Exception non capturée -> crash du registry sans diagnostic"
+cross_references:
+  - repo: gerivdb/LOOPX
+    relation: implements
+    path: src/loopx_routines/wrappers.py
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - primitive: loopx-wrapper-standardization-primitive
+  - skill: loopx-wrapper-standardization-skill
+  - workflow: workflow-loopx-wrapper-standardization

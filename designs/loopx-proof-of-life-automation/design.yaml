@@ -1,0 +1,123 @@
+---
+name: loopx-proof-of-life-automation
+version: "1.0.0"
+status: active
+layer: L3-CITIZENS
+intent_hash: 0xDESIGN_LOOPX_PROOF_OF_LIFE_AUTOMATION_20260921
+description: >
+  Automatisation des preuves d'exécution (Proof-of-Life) dans les PRD/MOC LOOPX.
+  Garantit que toute implémentation validée est horodatée, tracée et synchronisée
+  avec les documents de gouvernance. Résout le problème des [x] sans preuve.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+  - prd-moc-progress-sync
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: test-result-capture
+    description: "Capture les résultats de pytest avec horodatage ISO"
+  - name: prd-update
+    description: "Met à jour la section Proof-of-Life du PRD/MOC"
+  - name: cross-reference-validation
+    description: "Valide que les preuves sont cohérentes entre documents"
+parameters:
+  timestamp_format: "ISO8601_UTC"
+  required_fields:
+    - command
+    - result
+    - timestamp
+    - test_count
+  update_strategy:
+    mode: "append_or_replace"
+    keep_history: true
+  validation_rules:
+    - "test_count > 0"
+    - "timestamp within last 24h"
+    - "command matches pytest invocation"
+states:
+  - name: IDLE
+    nature: preuve non nécessaire
+    gate_to_next: CAPTURE_RESULTS
+    question: "Une exécution validée nécessite-t-elle une preuve ?"
+  - name: CAPTURE_RESULTS
+    nature: capture des résultats de test
+    gate_to_next: FORMAT_PROOF
+    question: "Les résultats sont-ils capturés avec horodatage ?"
+  - name: FORMAT_PROOF
+    nature: formatage de la preuve
+    gate_to_next: UPDATE_PRD
+    question: "La preuve est-elle conforme au format attendu ?"
+  - name: UPDATE_PRD
+    nature: mise à jour du PRD/MOC
+    gate_to_next: VALIDATE_CROSS_REFS
+    question: "Le PRD/MOC contient-il la preuve mise à jour ?"
+  - name: VALIDATE_CROSS_REFS
+    nature: validation des références croisées
+    gate_to_next: COMPLETE
+    question: "Les preuves sont-elles cohérentes entre documents liés ?"
+  - name: COMPLETE
+    nature: preuve enregistrée
+  - name: BLOCK
+    nature: preuve bloquée
+functions:
+  - id: F1
+    name: CAPTURE_TEST_RESULTS
+    state: IDLE->CAPTURE_RESULTS
+    description: "Capture pytest --tb=short -q avec horodatage"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: F2
+    name: FORMAT_PROOF_BLOCK
+    state: CAPTURE_RESULTS->FORMAT_PROOF
+    description: "Formate la preuve en markdown avec horodatage ISO"
+    implements: ATOM-DELTA-CHECK
+  - id: F3
+    name: UPDATE_PRD_PROOF_OF_LIFE
+    state: FORMAT_PROOF->UPDATE_PRD
+    description: "Met à jour la section Proof-of-Life du PRD/MOC"
+    implements: ATOM-CARRY-FORWARD_PRINCIPLE
+  - id: F4
+    name: VALIDATE_CROSS_REFS
+    state: UPDATE_PRD->VALIDATE_CROSS_REFS
+    description: "Valide la cohérence entre PRD parent et enfants"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+invariant: "Tout [x] dans un PRD/MOC est accompagné d'une preuve d'exécution horodatée et vérifiable."
+genes:
+  - id: G1
+    name: timestamp_utc
+    description: "Toute preuve est horodatée en UTC (ISO8601)"
+  - id: G2
+    name: command_traceability
+    description: "Toute preuve contient la commande exacte exécutée"
+  - id: G3
+    name: result_verifiable
+    description: "Toute preuve contient un résultat vérifiable (passed/failed/skipped)"
+  - id: G4
+    name: cross_ref_consistency
+    description: "Les preuves sont cohérentes entre PRD parent et enfants"
+anti_patterns:
+  - missing_gene: timestamp_utc
+    pathology: "Preuve sans horodatage -> impossibilité d'auditer la fraîcheur"
+  - missing_gene: command_traceability
+    pathology: "Preuve sans commande -> impossibilité de reproduire"
+  - missing_gene: result_verifiable
+    pathology: "Preuve sans résultat -> [x] invérifiable"
+  - missing_gene: cross_ref_consistency
+    pathology: "Preuves incohérentes -> confusion entre documents"
+cross_references:
+  - repo: gerivdb/LOOPX
+    relation: implements
+    path: PRD/PRD-LOOPX-BREAKTHROUGH-INTEGRATION-2026-09-19.md
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - design: prd-moc-progress-sync
+  - primitive: loopx-proof-of-life-automation-primitive
+  - skill: loopx-proof-of-life-automation-skill
+  - workflow: workflow-loopx-proof-of-life-automation

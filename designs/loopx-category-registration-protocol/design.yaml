@@ -1,0 +1,141 @@
+---
+name: loopx-category-registration-protocol
+version: "1.0.0"
+status: active
+layer: L3-CITIZENS
+intent_hash: 0xDESIGN_LOOPX_CATEGORY_REGISTRATION_PROTOCOL_20260921
+description: >
+  Protocole d'ajout d'une nouvelle catégorie de routines dans LOOPX.
+  Garantit que toute nouvelle catégorie est enregistrée dans RoutineCategory,
+  documentée dans le PRD correspondant, et couverte par des tests.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+  - LOOPX-Routines
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: category-enum-extension
+    description: "Ajoute une nouvelle valeur à RoutineCategory"
+  - name: registry-routine-registration
+    description: "Enregistre les routines de la nouvelle catégorie"
+  - name: documentation-update
+    description: "Met à jour le PRD maître avec la nouvelle catégorie"
+  - name: test-coverage
+    description: "Ajoute des tests pour la nouvelle catégorie"
+parameters:
+  naming_convention:
+    category_name: "snake_case"
+    registry_prefix: "{category}."
+  required_steps:
+    - add_enum_value
+    - register_routines
+    - update_prd
+    - add_tests
+    - update_proof_of_life
+  validation_criteria:
+    min_routines_per_category: 1
+    test_coverage_required: true
+states:
+  - name: IDLE
+    nature: aucune nouvelle catégorie
+    gate_to_next: DEFINE_CATEGORY
+    question: "Une nouvelle catégorie de routines est-elle nécessaire ?"
+  - name: DEFINE_CATEGORY
+    nature: définition de la catégorie
+    gate_to_next: ADD_ENUM | BLOCK
+    question: "Le nom de la catégorie est-il conforme aux conventions ?"
+  - name: ADD_ENUM
+    nature: ajout à RoutineCategory
+    gate_to_next: REGISTER_ROUTINES
+    question: "L'énumération a-t-elle été mise à jour ?"
+  - name: REGISTER_ROUTINES
+    nature: enregistrement des routines
+    gate_to_next: UPDATE_PRD
+    question: "Toutes les routines sont-elles enregistrées ?"
+  - name: UPDATE_PRD
+    nature: mise à jour du PRD
+    gate_to_next: ADD_TESTS
+    question: "Le PRD reflète-t-il la nouvelle catégorie ?"
+  - name: ADD_TESTS
+    nature: ajout des tests
+    gate_to_next: VALIDATE
+    question: "Les tests couvrent-ils la nouvelle catégorie ?"
+  - name: VALIDATE
+    nature: validation finale
+    gate_to_next: COMPLETE
+    question: "Tous les critères sont-ils remplis ?"
+  - name: COMPLETE
+    nature: catégorie ajoutée
+  - name: BLOCK
+    nature: ajout bloqué
+functions:
+  - id: F1
+    name: DEFINE_CATEGORY
+    state: IDLE->DEFINE_CATEGORY
+    description: "Définit le nom et la description de la catégorie"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: ADD_ENUM_VALUE
+    state: DEFINE_CATEGORY->ADD_ENUM
+    description: "Ajoute la nouvelle valeur à RoutineCategory"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F3
+    name: REGISTER_ROUTINES
+    state: ADD_ENUM->REGISTER_ROUTINES
+    description: "Enregistre les routines de la nouvelle catégorie"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F4
+    name: UPDATE_PRD
+    state: REGISTER_ROUTINES->UPDATE_PRD
+    description: "Met à jour le PRD maître avec la nouvelle catégorie"
+    implements: ATOM-DELTA-CHECK
+  - id: F5
+    name: ADD_TESTS
+    state: UPDATE_PRD->ADD_TESTS
+    description: "Ajoute des tests pour la nouvelle catégorie"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: F6
+    name: VALIDATE_COMPLETE
+    state: ADD_TESTS->VALIDATE
+    description: "Valide que tous les critères sont remplis"
+    implements: ATOM-CARRY-FORWARD_PRINCIPLE
+invariant: "Toute nouvelle catégorie de routines est tracée dans RoutineCategory, le registry, le PRD et les tests."
+genes:
+  - id: G1
+    name: naming_convention
+    description: "Toute catégorie suit la convention snake_case"
+  - id: G2
+    name: registry_sync
+    description: "Toute catégorie est immédiatement synchronisée avec le registry"
+  - id: G3
+    name: documentation_first
+    description: "Toute catégorie est documentée dans le PRD avant d'être utilisée"
+  - id: G4
+    name: test_coverage
+    description: "Toute catégorie a au moins un test de non-régression"
+anti_patterns:
+  - missing_gene: naming_convention
+    pathology: "Nom de catégorie non conforme -> incohérence dans le registry"
+  - missing_gene: registry_sync
+    pathology: "Catégorie ajoutée à l'énumération mais pas dans le registry -> routines invisibles"
+  - missing_gene: documentation_first
+    pathology: "Catégorie utilisée avant d'être documentée -> dette de connaissance"
+  - missing_gene: test_coverage
+    pathology: "Catégorie sans test -> régression silencieuse"
+cross_references:
+  - repo: gerivdb/LOOPX
+    relation: implements
+    path: src/loopx_routines/registry.py
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - primitive: loopx-category-registration-protocol-primitive
+  - skill: loopx-category-registration-protocol-skill
+  - workflow: workflow-loopx-category-registration-protocol
