@@ -70,6 +70,8 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 - Baseline et méthode prêtes, collecte reportée
 - **Mise à jour doctrine** : `KIX` intègre désormais `RLM-METRICS` (consumers, capabilities, components, bridges, dependencies)
 
+**Option de résolution** : démarrer `RLM-METRICS` via `KIX` puis exécuter `/collect` sur `CTULU ↔ KG-CAUSAL`.
+
 ## Gates
 
 | Gate | Critère | Statut | Preuve |
@@ -77,7 +79,7 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 | G1 — ADR accepté | `ADR-SYMBIOSE-ONTOLOGY-20260921` accepté par governance gate | ✅ Accepté | Commit `dcc84924` — GOVERNANCE-HUB |
 | G2 — Concept indexé | `symbiose` présent dans `KG-L` | ✅ OK | Commit `e4c8b69` — 24 edges |
 | G3 — Instances documentées | `TOPOS/topology.yaml` mentionne les instances candidates | ✅ OK | Commit `d09f37e` — 7 edges |
-| G4 — Mesure confirmée | `RLM-METRICS` confirme `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ⚠️ Bloqué runtime | Baseline créée, `RLM-METRICS` non joignable, `KIX` ne gère pas ce service |
+| G4 — Mesure confirmée | `RLM-METRICS` confirme `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ⚠️ Bloqué runtime | Baseline créée, `RLM-METRICS` non joignable, `KIX` désormais responsable |
 | G5 — Concept actif | `symbiose` passe en `active` après validation | ⏳ En attente | Dépend de G1 + G4 |
 
 ## Références

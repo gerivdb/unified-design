@@ -79,7 +79,18 @@ Seul G4 reste en attente de mesure runtime réelle.
 
 ## Plan d’exécution opérationnelle pour G4
 
-### Option A — Démarrer RLM-METRICS localement
+### Option A — Démarrer RLM-METRICS via KIX
+
+```powershell
+# KIX est désormais responsable du cycle de vie de RLM-METRICS
+# Consulter la doctrine KIX : designs/kix/design.yaml
+# Démarrer le service via l'orchestrateur KIX
+Set-Location 'D:\DO\WEB\TOOLS\L2-PLATFORM\RLM-METRICS'
+python src/app.py
+# puis collecter via http://127.0.0.1:8802/collect
+```
+
+### Option B — Démarrer RLM-METRICS directement
 
 ```powershell
 Set-Location 'D:\DO\WEB\TOOLS\L2-PLATFORM\RLM-METRICS'
@@ -87,7 +98,7 @@ python src/app.py
 # puis collecter via http://127.0.0.1:8802/collect
 ```
 
-### Option B — Exécuter via fondation de test
+### Option C — Exécuter via fondation de test
 
 Si `tests/test_app.py` existe, utiliser le simulateur au lieu du service live :
 
@@ -95,7 +106,7 @@ Si `tests/test_app.py` existe, utiliser le simulateur au lieu du service live :
 pytest tests/test_app.py -k collect -q
 ```
 
-### Option C — Reporter la validation G4
+### Option D — Reporter la validation G4
 
 Considérer le déploiement `symbiose` comme **opérationnel hors mesure runtime**. G4 reste tracé, avec基线 et méthode prêtes.
 
