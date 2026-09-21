@@ -1,5 +1,12 @@
 ---
 name: runner-family-stratification
+version: 1.0.0
+status: active
+layer: L0
+description: "Stratification des 50 runners du metacluster en 7 sous-familles cohérentes. Audit complet : 21 cognitifs + 29 non-cognitifs. Chaque sous-famille a un rôle fonctionnel unique, un orchestrateur ou point d'entrée clair.
+"
+
+name: runner-family-stratification
 version: "1.0.0"
 status: active
 strate: L0-CANON

@@ -1,4 +1,11 @@
+---
 name: rlm-243-laplace-optimization
+version: 1.0.0
+status: proposed
+layer: L0
+description: rlm-243-laplace-optimization
+consumers:
+
 description: "rlm-243-laplace-optimization"
 version: "1.0.0"
 parent: unified-design

@@ -1,4 +1,12 @@
+---
 name: kg-l-type-guard
+version: 1.0.0
+status: draft
+layer: L0
+description: "Design artifact for kg-l-type-guard."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: draft
 profile: STANDARD

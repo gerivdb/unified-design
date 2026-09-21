@@ -1,4 +1,10 @@
-# Anamorphic Morphism Design
+---
+name: anamorphic_morphism
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for anamorphic_morphism."
+
 # Source: PRD-MOC-INFX-ANAMORPHIC-2026-09-03
 # IntentHash: 0xDESIGN_ANAMORPHIC_MORPHISM_20260903
 

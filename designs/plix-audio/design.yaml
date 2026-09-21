@@ -1,4 +1,12 @@
+---
 name: plix-audio
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for plix-audio."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: active
 profile: STANDARD

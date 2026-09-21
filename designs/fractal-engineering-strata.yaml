@@ -1,4 +1,10 @@
+---
 name: fractal-engineering-strata
+version: 1.0.0
+status: active
+layer: L0-L5
+description: "Design artifact for fractal-engineering-strata."
+
 version: 1.0.0
 status: active
 layer: L0-L5

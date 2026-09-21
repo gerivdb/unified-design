@@ -1,4 +1,12 @@
+---
 name: infx
+version: 1.0.0
+status: active
+layer: L0
+description: "INFX — Composant CITIZEN de l'écosystème gerivdb (strate L4). Héberge EGMI v0.3, le système de gestion des mutations et interactions (16 threads ENV2, Dual Xeon E5620). Exploite FLEX pour NUMA/affinity/cache/thermal et CodeDB-E5620 pour indexation/checkpoints/MCP. Référencé dans GOVERNANCE-HUB/known_repositories.yaml (intent_hash: 0xINFX_CREATE_20260830).
+"
+profile: STANDARD
+
 version: "1.0.0"
 status: active
 strate: L4-TOOLS

@@ -1,5 +1,15 @@
 ---
 name: RLM-METRICS
+version: 1.0.0
+status: active
+layer: L0
+description: "RLM-METRICS — Runner de metriques. Collecte et agrege les metriques de tous les services RLM.
+"
+consumers:
+  - kix
+  - wazaa
+
+name: RLM-METRICS
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM

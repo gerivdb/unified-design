@@ -1,4 +1,10 @@
+---
 name: swarm-lease
+version: 1.0.0
+status: active
+layer: L0-L4
+description: "Design artifact for swarm-lease."
+
 version: 1.0.0
 status: active
 layer: L0-L4

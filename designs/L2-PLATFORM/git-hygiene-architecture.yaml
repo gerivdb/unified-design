@@ -1,4 +1,11 @@
+---
 name: git-hygiene-architecture
+version: 1.0.0
+status: draft
+layer: L0
+description: git-hygiene-architecture
+consumers:
+
 description: "git-hygiene-architecture"
 version: "1.0.0"
 parent: unified-design

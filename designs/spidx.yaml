@@ -1,3 +1,10 @@
+---
+name: spidx
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for spidx."
+
 constraints:
   - cpu_only: true
   - memory_24gb: true

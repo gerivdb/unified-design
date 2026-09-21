@@ -1,4 +1,12 @@
+---
 name: kg-l-kernel-versioner
+version: 1.0.0
+status: draft
+layer: L0
+description: "Design artifact for kg-l-kernel-versioner."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: draft
 profile: STANDARD

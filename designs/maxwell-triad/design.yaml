@@ -1,4 +1,12 @@
+---
 name: maxwell-triad
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for maxwell-triad."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: active
 profile: STANDARD

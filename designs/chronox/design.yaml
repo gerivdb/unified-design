@@ -1,5 +1,15 @@
 ---
 name: CHRONOX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "CHRONOX — Runner d'evolution chronologique. Suit l'evolution des entites et des documents dans le temps.
+"
+consumers:
+  - TALEX
+  - TOPEX
+
+name: CHRONOX
 version: "1.0.0"
 status: proposed
 strate: L4-TOOLS

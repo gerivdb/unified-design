@@ -1,5 +1,15 @@
 ---
 name: MORPHEX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "MORPHEX — Runner de transformation. Applique des transformations structurelles sur les graphes de connaissances.
+"
+consumers:
+  - KG-L
+  - WAZAA
+
+name: MORPHEX
 version: "1.0.0"
 status: proposed
 strate: L4-TOOLS

@@ -1,4 +1,10 @@
+---
 name: approval-readiness
+version: 1.0.0
+status: active
+layer: L0-L4
+description: "Design artifact for approval-readiness."
+
 version: 1.0.0
 status: active
 layer: L0-L4

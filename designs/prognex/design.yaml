@@ -1,5 +1,15 @@
 ---
 name: PROGNEX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "PROGNEX — Runner de prognostic. Predit l'evolution des incidents et des tendances a partir des donnees historiques.
+"
+consumers:
+  - LLUX-MATCH
+  - TALEX
+
+name: PROGNEX
 version: "1.0.0"
 status: proposed
 strate: L4-TOOLS

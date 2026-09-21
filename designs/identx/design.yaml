@@ -1,5 +1,15 @@
 ---
 name: IDENTX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "IDENTX — Runner d'identite. Gere l'identification et l'authentification des entites dans le systeme.
+"
+consumers:
+  - KG-L
+  - NEXUS
+
+name: IDENTX
 version: "1.0.0"
 status: proposed
 strate: L4-TOOLS

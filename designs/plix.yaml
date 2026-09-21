@@ -1,3 +1,9 @@
+---
+name: plix
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for plix."
 constraints:
   - cpu_only: true
   - memory_24gb: true

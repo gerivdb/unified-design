@@ -1,4 +1,12 @@
+---
 name: flex
+version: 1.0.0
+status: active
+layer: L0
+description: "FLEX — Framework de Lexique et d'Expression. Repo maître pour la gestion des lexiques, expressions, et patterns sémantiques. Référencé dans GOVERNANCE-HUB/REGISTRY/runners.yaml.
+"
+profile: STANDARD
+
 version: "1.0.0"
 status: active
 strate: L4-TOOLS

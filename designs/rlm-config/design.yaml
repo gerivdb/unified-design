@@ -1,5 +1,19 @@
 ---
 name: RLM-CONFIG
+version: 1.0.0
+status: active
+layer: L0
+description: "RLM-CONFIG — Service de configuration centralisee pour tous les services RLM.
+"
+consumers:
+  - rlm-deploy
+  - rlm-graph
+  - rlm-secure
+  - rlm-incident
+  - rlm-release
+  - rlm-metrics
+
+name: RLM-CONFIG
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM
