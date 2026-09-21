@@ -54,6 +54,7 @@ def check_g4_rlm_metrics_baseline() -> bool:
 
     if "bénéficeNet" in content and "CTULU ↔ KG-CAUSAL" in content:
         print("[G4] OK: Baseline exists with required sections and benefitNet calculation")
+        print("[G4] NOTE: Runtime collection pending — baseline ready, measurement deferred")
         return True
 
     print("[G4] FAIL: Baseline incomplete")
