@@ -15,8 +15,7 @@ inherits:
   - safe-action-pattern
 depends_on:
   - jevx
-  - kg-causal
-  - kix
+  - typed-decision-api
 components:
   - type: typed-question-compiler
     description: "Compile les questions typées (noul/choice/score) en prompts de classification + schéma JSON"
@@ -33,7 +32,8 @@ components:
     description: "Télémétrie des décisions : input_tokens, output_tokens, confiance, retries"
     sink: kix-wal
   - type: constrained-parallel-decoding
-    description: "Décodage parallèle contraint : préremplir le contexte une fois, diffuser le KV cache par champ, évaluer tous les champs dans un seul batch. Pattern issu de jevmlx, transposé pour llama.cpp CPU."
+    status: draft
+    description: "Décodage parallèle contraint : préremplir le contexte une fois, diffuser le KV cache par champ, évaluer tous les champs dans un seul batch. Pattern issu de jevmlx, transposé pour llama.cpp CPU. Non implémenté dans JEVX."
     mechanism: "llama_batch + logits biaisés sur tokens autorisés par champ + batch unique"
     reference: jevmlx (KV cache broadcast), mini-jev / jev_local (llama.cpp CPU)
     constraints:
