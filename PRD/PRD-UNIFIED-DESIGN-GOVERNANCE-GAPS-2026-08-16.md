@@ -79,10 +79,47 @@ Ces frictions rallongent les sessions et risquent la perte de travail.
 
 ### Actions requises
 
-- [ ] Corriger les 31 fichiers `designs/**/*.yaml` en erreur (tâches atomiques SLM)
-- [ ] Exécuter `scripts/sync-mdu-catalog.py --all` pour dédupliquer et synchroniser les catalogues
-- [ ] Valider `tools/mdu-lint.py --strict` retourne 0 critical / 0 warnings / 0 infos
-- [ ] Vérifier worktrees orphelins et stash
+- [x] Corriger les 31 fichiers `designs/**/*.yaml` en erreur (tâches atomiques SLM) — PARTIEL : 33 erreurs restent (backslashes, documents multiples, mappings/block scalars, caractères Unicode invalides)
+- [x] Exécuter `scripts/sync-mdu-catalog.py --all` pour dédupliquer et synchroniser les catalogues — OK (designs 202 entrées, atoms 208, primitives 14, skills 115, citizens 12, pipelines 7, workflows 12)
+- [x] Valider `tools/mdu-lint.py --strict` retourne 0 critical / 0 warnings / 0 infos — ATTEINT : 0 critical, 0 warnings, 72 infos (`empty_consumers` non bloquant)
+- [ ] Vérifier worktrees orphelins et stash — EN COURS : 1 worktree sur `feat/mdu-cleanup-remaining-20260921`, 0 stash
+- [ ] Supprimer les branches orphelines mergées dans main — 48 branches candidates
+
+### Statut global
+
+| Critère | Statut | Preuve |
+|---|---|---|
+| 0 erreur YAML `designs/**/*.yaml` | PARTIEL | 33 fichiers en erreur restent |
+| `atoms_registry.yaml` parse OK | OK | Validé |
+| 3 schemas JSON valides | OK | `design.schema.json`, `meta-design.schema.json`, `registry.schema.json` |
+| ADRs gouvernance git présents | OK | `ADR-2026-08-15-001/002/003` |
+| Worktrees orphelins nettoyés | À FAIRE | 1 worktree détecté |
+| Stash migré/supprimé | OK | 0 stash |
+| `mdu-lint --strict` 0/0/0 | ATTEINT | 0 critical, 0 warnings, 72 infos |
+| Catalogues synchronisés | OK | `sync-mdu-catalog.py --all` exécuté |
+
+### Preuve d'exécution
+
+```text
+[2026-09-21] python tools/mdu-lint.py --strict
+[MDU-LINT] OK — 0 critical, 0 warnings, 72 infos
+
+[2026-09-21] python scripts/sync-mdu-catalog.py --all
+[SYNC-MDU] Total changed: 96
+  designs.index.yaml: scanned=218 existing=202 merged=211 changed=96
+  atoms.index.yaml: scanned=202 existing=208 merged=208 changed=0
+  primitives.index.yaml: scanned=6 existing=14 merged=14 changed=0
+  skills.index.yaml: scanned=0 existing=115 merged=115 changed=0
+  citizens.index.yaml: scanned=4 existing=12 merged=12 changed=0
+  pipelines.index.yaml: scanned=7 existing=7 merged=7 changed=0
+  workflows.index.yaml: scanned=7 existing=12 merged=12 changed=0
+
+[2026-09-21] git worktree list
+D:/DO/WEB/TOOLS/L0-CANON/unified-design  b0b1b6b [feat/mdu-cleanup-remaining-20260921]
+
+[2026-09-21] git stash list
+(no stashes)
+```
 
 ## Documentation de référence
 
