@@ -24,18 +24,18 @@ Ce MOC orchestre la correction des incohérences d'intégration de JEVX dans le 
 
 | # | Livrable | Chemin cible | Statut | Preuve d'exécution |
 |---|----------|--------------|--------|-------------------|
-| L1 | Corriger `do_not_create` JEVX | `GOVERNANCE-HUB/known_repositories.yaml` | ⬜ | — |
-| L2 | Corriger `entrypoint` JEVX | `designs/jevx.yaml` | ⬜ | — |
-| L3 | Clarifier `hardware_profile` JEVX | `designs/jevx.yaml` | ⬜ | — |
-| L4 | Aligner `depends_on` JEVX sur MDU | `designs/jevx.yaml`, `designs/jevx-engineering.yaml` | ⬜ | — |
-| L5 | Documenter `consumers` JEVX | `catalog/designs.index.yaml` | ⬜ | — |
-| L6 | Documenter `consumers` pipeline JEVX | `catalog/pipelines.index.yaml` | ⬜ | — |
-| L7 | Ajouter JEVX dans CLM pipeline | `designs/clm-pipeline/design.yaml` | ⬜ | — |
-| L8 | Corriger `SCOPE.yaml` consumer CLM | `JEVX/SCOPE.yaml` | ⬜ | — |
-| L9 | Dédupliquer `ONTOLOGY_DECLARATION.yaml` | `JEVX/ONTOLOGY_DECLARATION.yaml` | ⬜ | — |
-| L10 | Marquer `security_guardrails` draft | `designs/jevx.yaml` | ⬜ | — |
-| L11 | Marquer `constrained-parallel-decoding` draft | `designs/jevx-engineering.yaml` | ⬜ | — |
-| L12 | Aligner `max_queue` sur code | `designs/jevx.yaml` | ⬜ | — |
+| L1 | Corriger `do_not_create` JEVX | `GOVERNANCE-HUB/known_repositories.yaml` | ⏳ Cross-repo | — |
+| L2 | Corriger `entrypoint` JEVX | `designs/jevx.yaml` | ✅ Fait | Commit `cd6b2d1` |
+| L3 | Clarifier `hardware_profile` JEVX | `designs/jevx.yaml` | ✅ Fait | Commit `cd6b2d1` |
+| L4 | Aligner `depends_on` JEVX sur MDU | `designs/jevx.yaml`, `designs/jevx-engineering.yaml` | ✅ Fait | Commit `cd6b2d1` |
+| L5 | Documenter `consumers` JEVX | `catalog/designs.index.yaml` | ✅ Fait | Commit `6e9de0f` |
+| L6 | Documenter `consumers` pipeline JEVX | `catalog/pipelines.index.yaml` | ✅ Fait | Commit `6e9de0f` |
+| L7 | Ajouter JEVX dans CLM pipeline | `designs/clm-pipeline/design.yaml` | ✅ Fait | Commit `cd6b2d1` |
+| L8 | Corriger `SCOPE.yaml` consumer CLM | `JEVX/SCOPE.yaml` | ⏳ Cross-repo | — |
+| L9 | Dédupliquer `ONTOLOGY_DECLARATION.yaml` | `JEVX/ONTOLOGY_DECLARATION.yaml` | ⏳ Cross-repo | — |
+| L10 | Marquer `security_guardrails` draft | `designs/jevx.yaml` | ✅ Fait | Commit `cd6b2d1` |
+| L11 | Marquer `constrained-parallel-decoding` draft | `designs/jevx-engineering.yaml` | ✅ Fait | Commit `cd6b2d1` |
+| L12 | Aligner `max_queue` sur code | `designs/jevx.yaml` | ✅ Fait | Commit `cd6b2d1` |
 
 ## Dépendances
 
@@ -52,26 +52,26 @@ Ce MOC orchestre la correction des incohérences d'intégration de JEVX dans le 
 
 | Gate | Critère formel | Validation | Statut |
 |------|---------------|------------|--------|
-| **G1** | `do_not_create: true` pour JEVX dans SOT | `known_repositories.yaml` | ⏳ À faire |
-| **G2** | `entrypoint`, `hardware_profile`, `max_queue` corrigés | `designs/jevx.yaml` | ⏳ À faire |
-| **G3** | `depends_on` résolus ou déplacés | `designs/jevx.yaml`, `designs/jevx-engineering.yaml` | ⏳ À faire |
-| **G4** | `security_guardrails` et `constrained-parallel-decoding` marqués `draft` | designs | ⏳ À faire |
-| **G5** | Consumers documentés dans catalogues | `catalog/designs.index.yaml`, `catalog/pipelines.index.yaml` | ⏳ À faire |
-| **G6** | CLM pipeline cohérent avec JEVX | `designs/clm-pipeline/design.yaml` | ⏳ À faire |
-| **G7** | `SCOPE.yaml` et `ONTOLOGY_DECLARATION.yaml` corrigés | JEVX repo | ⏳ À faire |
+| **G1** | `do_not_create: true` pour JEVX dans SOT | `known_repositories.yaml` | ⏳ Cross-repo |
+| **G2** | `entrypoint`, `hardware_profile`, `max_queue` corrigés | `designs/jevx.yaml` | ✅ Fait |
+| **G3** | `depends_on` résolus ou déplacés | `designs/jevx.yaml`, `designs/jevx-engineering.yaml` | ✅ Fait |
+| **G4** | `security_guardrails` et `constrained-parallel-decoding` marqués `draft` | designs | ✅ Fait |
+| **G5** | Consumers documentés dans catalogues | `catalog/designs.index.yaml`, `catalog/pipelines.index.yaml` | ✅ Fait |
+| **G6** | CLM pipeline cohérent avec JEVX | `designs/clm-pipeline/design.yaml` | ✅ Fait |
+| **G7** | `SCOPE.yaml` et `ONTOLOGY_DECLARATION.yaml` corrigés | JEVX repo | ⏳ Cross-repo |
 
 ## Critères d'acceptation
 
 - [ ] `GOVERNANCE-HUB/known_repositories.yaml` : `do_not_create: true` pour JEVX
-- [ ] `designs/jevx.yaml` : `entrypoint: src/index.ts`, `hardware_profile` clarifié, `max_queue` aligné
-- [ ] `designs/jevx.yaml` et `designs/jevx-engineering.yaml` : `depends_on` résolus
-- [ ] `designs/jevx.yaml` : `security_guardrails` marquées `draft`
-- [ ] `designs/jevx-engineering.yaml` : `constrained-parallel-decoding` marqué `draft`
-- [ ] `catalog/designs.index.yaml` et `catalog/pipelines.index.yaml` : consumers documentés
-- [ ] `designs/clm-pipeline/design.yaml` : cohérence JEVX/CLM
+- [x] `designs/jevx.yaml` : `entrypoint: src/index.ts`, `hardware_profile` clarifié, `max_queue` aligné
+- [x] `designs/jevx.yaml` et `designs/jevx-engineering.yaml` : `depends_on` résolus
+- [x] `designs/jevx.yaml` : `security_guardrails` marquées `draft`
+- [x] `designs/jevx-engineering.yaml` : `constrained-parallel-decoding` marqué `draft`
+- [x] `catalog/designs.index.yaml` et `catalog/pipelines.index.yaml` : consumers documentés
+- [x] `designs/clm-pipeline/design.yaml` : cohérence JEVX/CLM
 - [ ] `JEVX/SCOPE.yaml` : aucune référence invalide
 - [ ] `JEVX/ONTOLOGY_DECLARATION.yaml` : aucun doublon
-- [ ] Tous les designs passent validation
+- [x] Tous les designs passent validation
 
 ## Références
 
@@ -87,4 +87,8 @@ Ce MOC orchestre la correction des incohérences d'intégration de JEVX dans le 
 
 | Action | Date | Commit | Référence |
 |--------|------|--------|-----------|
-| Création MOC | 2026-09-22 | `à commettre` | `MOC/MOC-JEVX-MDU-INTEGRATION-FIX-20260922.md` |
+| Création PRD-MOC | 2026-09-22 | `dbb659e` | `PRD/PRD-MOC-JEVX-MDU-INTEGRATION-FIX-20260922.md` |
+| Création MOC | 2026-09-22 | `6f025d2` | `MOC/MOC-JEVX-MDU-INTEGRATION-FIX-20260922.md` |
+| Alignement designs JEVX | 2026-09-22 | `cd6b2d1` | `designs/jevx.yaml`, `designs/jevx-engineering.yaml` |
+| Update catalog consumers | 2026-09-22 | `6e9de0f` | `catalog/designs.index.yaml`, `catalog/pipelines.index.yaml` |
+| CLM pipeline alignment | 2026-09-22 | `cd6b2d1` | `designs/clm-pipeline/design.yaml` |

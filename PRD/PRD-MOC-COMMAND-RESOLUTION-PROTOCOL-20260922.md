@@ -24,8 +24,8 @@ source_repo: gerivdb/unified-design
 | ID | Livrable | Chemin cible | Type | Statut |
 |---|---|---|---|---|
 | L1 | Design `command-resolution-protocol` | `designs/command-resolution-protocol.md` | Créé | ✅ |
-| L2 | Guard pré-exécution dans `scripts/run-governance-unit-tests.ps1` | `scripts/run-governance-unit-tests.ps1` | Modifier | ⬜ |
-| L3 | Guard pré-exécution dans `.githooks/pre-push.ps1` | `.githooks/pre-push.ps1` | Modifier | ⬜ |
+| L2 | Guard pré-exécution dans `scripts/run-governance-unit-tests.ps1` | `scripts/run-governance-unit-tests.ps1` | Créé | ✅ |
+| L3 | Guard pré-exécution dans `scripts/local_ci.ps1` | `scripts/local_ci.ps1` | Modifier | ✅ |
 | L4 | MOC orchestration | `MOC/MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` | Créer | ⬜ |
 
 ## 3. Tâches
@@ -36,8 +36,8 @@ source_repo: gerivdb/unified-design
 
 ### Phase B — Implémentation
 
-2. **L2** : `scripts/run-governance-unit-tests.ps1` — résoudre `python` avant `pytest`.
-3. **L3** : `.githooks/pre-push.ps1` — résoudre `python` avant `validate_cross_repo.py`.
+2. **L2** : `scripts/run-governance-unit-tests.ps1` — créer avec résolution `python` avant `pytest`.
+3. **L3** : `scripts/local_ci.ps1` — ajouter résolution `python` et `kiva` avant exécution.
 
 ### Phase C — Orchestration
 
@@ -55,8 +55,8 @@ source_repo: gerivdb/unified-design
 | Commit | Fichiers | Description |
 |---|---|---|
 | `feat(protocol): add command resolution protocol design` | `designs/command-resolution-protocol.md` | L1 |
-| `feat(scripts): resolve python before pytest` | `scripts/run-governance-unit-tests.ps1` | L2 |
-| `feat(hooks): resolve python before validate_cross_repo` | `.githooks/pre-push.ps1` | L3 |
+| `feat(scripts): add run-governance-unit-tests with command resolution` | `scripts/run-governance-unit-tests.ps1` | L2 |
+| `feat(ci): add command resolution to local_ci.ps1` | `scripts/local_ci.ps1` | L3 |
 | `feat(moc): add command resolution protocol MOC` | `MOC/MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` | L4 |
 
 ## 6. Adossement (PF2)
@@ -69,9 +69,13 @@ source_repo: gerivdb/unified-design
 
 1. `designs/command-resolution-protocol.md` créé et validé.
 2. `scripts/run-governance-unit-tests.ps1` résout `python` avant `pytest`.
-3. `.githooks/pre-push.ps1` résout `python` avant `validate_cross_repo.py`.
+3. `scripts/local_ci.ps1` résout `python` et `kiva` avant exécution.
 4. MOC `MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` créé.
 
 ## 8. Proof-of-Life
 
-- [ ] 2026-09-22T00:56:04+02:00 — Création PRD-MOC Command Resolution Protocol
+- [x] 2026-09-22T01:15:20+02:00 — Création PRD-MOC Command Resolution Protocol
+- [x] 2026-09-22T01:15:20+02:00 — Design `command-resolution-protocol.md` créé
+- [x] 2026-09-22T01:15:20+02:00 — `scripts/run-governance-unit-tests.ps1` créé avec résolution python
+- [x] 2026-09-22T01:15:20+02:00 — `scripts/local_ci.ps1` modifié avec résolution python + kiva
+- [x] 2026-09-22T01:15:20+02:00 — MOC `MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` créé

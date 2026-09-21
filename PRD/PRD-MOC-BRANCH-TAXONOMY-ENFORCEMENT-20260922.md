@@ -24,8 +24,8 @@ Garantir que toute branche créée dans l'écosystème gerivdb respecte le patte
 | ID | Livrable | Chemin cible | Type | Statut |
 |---|---|---|---|---|
 | L1 | Design `branch-taxonomy-gate` | `designs/branch-taxonomy-gate.md` | Créé | ✅ |
-| L2 | Guard 6 pré-push | `.githooks/pre-push.ps1` | Modifier | ⬜ |
-| L3 | `allowed_branch_prefixes` par repo | `multi-repo-governance.yaml` | Modifier | ⬜ |
+| L2 | Guard 6 pré-push | `.githooks/pre-push` | Modifier | ✅ |
+| L3 | `allowed_branch_prefixes` par repo | `multi-repo-governance.yaml` | Créé | ✅ |
 | L4 | MOC orchestration | `MOC/MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` | Créer | ⬜ |
 
 ## 3. Tâches
@@ -36,7 +36,7 @@ Garantir que toute branche créée dans l'écosystème gerivdb respecte le patte
 
 ### Phase B — Implémentation
 
-2. **L2** : `.githooks/pre-push.ps1` — ajouter Guard 6 après Guard 5 pour valider la taxonomie.
+2. **L2** : `.githooks/pre-push` — ajouter Guard 6 (validation taxonomie branches) avec blocage et exemptions `main`/`dev`.
 3. **L3** : `multi-repo-governance.yaml` — déclarer `allowed_branch_prefixes` par repo.
 
 ### Phase C — Orchestration
@@ -55,8 +55,8 @@ Garantir que toute branche créée dans l'écosystème gerivdb respecte le patte
 | Commit | Fichiers | Description |
 |---|---|---|
 | `feat(branch): add branch taxonomy gate design` | `designs/branch-taxonomy-gate.md` | L1 |
-| `feat(hooks): add Guard 6 branch taxonomy validation` | `.githooks/pre-push.ps1` | L2 |
-| `feat(governance): add allowed_branch_prefixes` | `multi-repo-governance.yaml` | L3 |
+| `feat(hooks): add Guard 6 branch taxonomy validation` | `.githooks/pre-push` | L2 |
+| `feat(governance): add multi-repo-governance.yaml` | `multi-repo-governance.yaml` | L3 |
 | `feat(moc): add branch taxonomy enforcement MOC` | `MOC/MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` | L4 |
 
 ## 6. Adossement (PF2)
@@ -68,10 +68,14 @@ Garantir que toute branche créée dans l'écosystème gerivdb respecte le patte
 ## 7. Critères d'acceptation
 
 1. `designs/branch-taxonomy-gate.md` créé et validé.
-2. Guard 6 bloque les branches non conformes en pré-push.
+2. Guard 6 dans `.githooks/pre-push` bloque les branches non conformes en pré-push.
 3. `multi-repo-governance.yaml` contient `allowed_branch_prefixes` par repo.
 4. MOC `MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` créé.
 
 ## 8. Proof-of-Life
 
-- [ ] 2026-09-22T00:56:04+02:00 — Création PRD-MOC Branch Taxonomy Enforcement
+- [x] 2026-09-22T01:15:20+02:00 — Création PRD-MOC Branch Taxonomy Enforcement
+- [x] 2026-09-22T01:15:20+02:00 — Design `branch-taxonomy-gate.md` créé
+- [x] 2026-09-22T01:15:20+02:00 — Guard 6 implémenté dans `.githooks/pre-push` (BLOCK + exemptions main/dev)
+- [x] 2026-09-22T01:15:20+02:00 — `multi-repo-governance.yaml` créé avec allowed_branch_prefixes
+- [x] 2026-09-22T01:15:20+02:00 — MOC `MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` créé

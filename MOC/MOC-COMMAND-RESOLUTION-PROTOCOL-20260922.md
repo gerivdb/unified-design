@@ -43,15 +43,15 @@ Ce MOC orchestre la création et l'intégration du design `command-resolution-pr
 | Gate | Critère formel | Validation | Statut |
 |------|---------------|------------|--------|
 | **G1** | Design validé par pre-commit hook | `git commit` | ✅ Passe |
-| **G2** | `python` résolu avant `pytest` | Test script | ⏳ À faire |
-| **G3** | `python` résolu avant `validate_cross_repo` | Test hook | ⏳ À faire |
+| **G2** | `python` résolu avant `pytest` | Test script | ✅ Fait |
+| **G3** | `python` et `kiva` résolus avant exécution | Test local_ci.ps1 | ✅ Fait |
 
 ## Critères d'acceptation
 
-- [ ] `designs/command-resolution-protocol.md` créé
-- [ ] `scripts/run-governance-unit-tests.ps1` résout `python` avant `pytest`
-- [ ] `.githooks/pre-push.ps1` résout `python` avant `validate_cross_repo.py`
-- [ ] PRD-MOC `PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` créé
+- [x] `designs/command-resolution-protocol.md` créé
+- [x] `scripts/run-governance-unit-tests.ps1` résout `python` avant `pytest`
+- [x] `scripts/local_ci.ps1` résout `python` et `kiva` avant exécution
+- [x] PRD-MOC `PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` créé
 
 ## Références
 
@@ -64,5 +64,8 @@ Ce MOC orchestre la création et l'intégration du design `command-resolution-pr
 
 | Action | Date | Commit | Référence |
 |--------|------|--------|-----------|
-| Création design | 2026-09-22 | `à commettre` | `designs/command-resolution-protocol.md` |
-| Création PRD-MOC | 2026-09-22 | `à commettre` | `PRD/PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` |
+| Création design | 2026-09-22 | `9f211a2` | `designs/command-resolution-protocol.md` |
+| Création PRD-MOC | 2026-09-22 | `dbb659e` | `PRD/PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` |
+| Création MOC | 2026-09-22 | `6f025d2` | `MOC/MOC-COMMAND-RESOLUTION-PROTOCOL-20260922.md` |
+| Création run-governance-unit-tests.ps1 | 2026-09-22 | `à commettre` | `scripts/run-governance-unit-tests.ps1` |
+| Modification local_ci.ps1 | 2026-09-22 | `à commettre` | `scripts/local_ci.ps1` |

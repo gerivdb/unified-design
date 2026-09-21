@@ -43,15 +43,15 @@ Ce MOC orchestre la création et l'intégration du design `branch-taxonomy-gate`
 | Gate | Critère formel | Validation | Statut |
 |------|---------------|------------|--------|
 | **G1** | Design validé par pre-commit hook | `git commit` | ✅ Passe |
-| **G2** | Guard 6 bloque branches non conformes | Test pré-push | ⏳ À faire |
-| **G3** | `allowed_branch_prefixes` déclaré par repo | `multi-repo-governance.yaml` | ⏳ À faire |
+| **G2** | Guard 6 bloque branches non conformes | Test pré-push | ✅ Fait |
+| **G3** | `allowed_branch_prefixes` déclaré par repo | `multi-repo-governance.yaml` | ✅ Fait |
 
 ## Critères d'acceptation
 
-- [ ] `designs/branch-taxonomy-gate.md` créé
-- [ ] Guard 6 bloque branches non conformes en pré-push
-- [ ] `multi-repo-governance.yaml` contient `allowed_branch_prefixes` par repo
-- [ ] PRD-MOC `PRD-MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` créé
+- [x] `designs/branch-taxonomy-gate.md` créé
+- [x] Guard 6 bloque branches non conformes en pré-push (`.githooks/pre-push` ÉTAPE 3)
+- [x] `multi-repo-governance.yaml` contient `allowed_branch_prefixes` par repo
+- [x] PRD-MOC `PRD-MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` créé
 
 ## Références
 
@@ -64,5 +64,8 @@ Ce MOC orchestre la création et l'intégration du design `branch-taxonomy-gate`
 
 | Action | Date | Commit | Référence |
 |--------|------|--------|-----------|
-| Création design | 2026-09-22 | `à commettre` | `designs/branch-taxonomy-gate.md` |
-| Création PRD-MOC | 2026-09-22 | `à commettre` | `PRD/PRD-MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` |
+| Création design | 2026-09-22 | `9f211a2` | `designs/branch-taxonomy-gate.md` |
+| Création PRD-MOC | 2026-09-22 | `dbb659e` | `PRD/PRD-MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` |
+| Création MOC | 2026-09-22 | `6f025d2` | `MOC/MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922.md` |
+| Implémentation Guard 6 | 2026-09-22 | `à commettre` | `.githooks/pre-push` |
+| Création multi-repo-governance.yaml | 2026-09-22 | `à commettre` | `multi-repo-governance.yaml` |
