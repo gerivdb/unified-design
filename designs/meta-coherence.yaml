@@ -128,5 +128,3 @@ enforcement:
   - cron: MC7 freshness + limbo + metrics + branch_hygiene + untracked_audit
   - balise: lease take/release/closeout + check --fresh (CONVERGED/STALE/DIVERGED)
   - hooks: pre-commit (frontmatter, ontology, design coverage) + pre-push (path audit)
-
-(End of file - total 137 lines)
