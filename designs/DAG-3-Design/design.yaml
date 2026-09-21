@@ -1,4 +1,12 @@
+---
 name: DAG-3-Design
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for DAG-3-Design."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: active
 profile: STANDARD
