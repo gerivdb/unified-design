@@ -17,7 +17,7 @@ capabilities:
       dimensions: 512
       kernel: cosine-similarity
       threshold: 0.48
-  - wazaa-acp
+  - name: wazaa-acp
     parameters:
       protocol: ACP
       fallback: llux

@@ -35,6 +35,7 @@ capabilities:
 performance:
   latency_p99: 45
   power_max: 12
+---
 
 # Design : Meta-Designer Role
 

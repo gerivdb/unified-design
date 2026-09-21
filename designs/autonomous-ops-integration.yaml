@@ -18,6 +18,7 @@ relations:
   - triggers: CRUX/pipeline_optimization
   - influences: CITIZENS/self_assessment
 pattern_link: DESIGN-AUTONOMY-001
+---
 
 # ATOM-054 — AutonomOPS Cross-System Orchestration
 
