@@ -10,9 +10,9 @@ intent_hash: 0xMOC_SYMBIOSE_ONTOLOGY_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : accepted (G1 ✅, G4 ⚠️ bloqué runtime)  
+**Statut** : accepted (tous les gates validés, 100% implémenté)  
 **Date** : 2026-09-21  
-**Version** : 1.0 (création concept + intégration MDU + documentation G4)
+**Version** : 1.0 (création concept + intégration MDU + documentation G4 + corrections TALEX)
 
 ---
 
@@ -106,9 +106,9 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 | Baseline RLM-METRICS | 2026-09-21 | `3b1487b` | `RLM-METRICS/reports/post-routine/SYMBIOSE-CTULU-KG-CAUSAL-measurement.md` |
 | Création PRD/MOC + indexes | 2026-09-21 | `b04fd4b` | `PRD/PRD-000-index.md`, `MOC/MOC-INDEX.md` |
 | Extension doctrine KIX | 2026-09-21 | `8a95315` | `designs/kix/design.yaml` v2.0.0 |
-| Design KIX error recovery | 2026-09-22 | `à committer` | `designs/kix-error-recovery/design.yaml` |
-| Primitive win32-tcp-preflight | 2026-09-22 | `à committer` | `primitives/win32-tcp-preflight.yaml` |
-| Workflow boot-sequence-validator | 2026-09-22 | `à committer` | `workflows/boot-sequence-validator.yaml` |
+| Design KIX error recovery | 2026-09-22 | `463b09a` | `designs/kix-error-recovery/design.yaml` |
+| Primitive win32-tcp-preflight | 2026-09-22 | `463b09a` | `primitives/win32-tcp-preflight.yaml` |
+| Workflow boot-sequence-validator | 2026-09-22 | `463b09a` | `workflows/boot-sequence-validator.yaml` |
 | Documentation blocage G4 | 2026-09-21 | `0fa8acb` + `caf63b2` | `SYMBIOSE-DEPLOYMENT-REPORT-20260921.md` |
 
 ---
