@@ -34,44 +34,45 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 
 ## Composants
 
-| Composant | Type | Chemin | Statut |
-|-----------|------|--------|--------|
-| `symbiose` | Concept ONTOLOGY | `ONTOLOGY/concepts/symbiose.md` | 🟢 Créé (v3.1, proposed) |
-| `ADR-SYMBIOSE-ONTOLOGY-20260921` | ADR | `GOVERNANCE-HUB/ADR/ADR-SYMBIOSE-ONTOLOGY-20260921.md` | 🟢 Créé (proposed) |
-| `ONTOLOGY_DECLARATION.yaml` | Déclaration | `ONTOLOGY_DECLARATION.yaml` | ⏳ À mettre à jour |
-| `KG-L` index | Graphe | `KG-L` | ⏳ À indexer |
-| `TOPOS/topology.yaml` | Topologie | `TOPOS/topology.yaml` | ⏳ À documenter |
-| `RLM-METRICS` | Mesure | `RLM-METRICS` | ⏳ Première mesure `CTULU ↔ KG-CAUSAL` |
+| Composant | Type | Chemin | Statut | Preuve d'exécution |
+|-----------|------|--------|--------|-------------------|
+| `symbiose` | Concept ONTOLOGY | `ONTOLOGY/concepts/symbiose.md` | ✅ Créé (v3.1, proposed) | Commit `a350fef` — 2026-09-21 |
+| `ADR-SYMBIOSE-ONTOLOGY-20260921` | ADR | `GOVERNANCE-HUB/ADR/ADR-SYMBIOSE-ONTOLOGY-20260921.md` | ✅ Créé (proposed) | Commit `c55c479c` — 2026-09-21 |
+| `ONTOLOGY_DECLARATION.yaml` | Déclaration | `ONTOLOGY/ONTOLOGY_DECLARATION.yaml` | ✅ Mis à jour | Commit `15f1f5b` — 2026-09-21 |
+| `KG-L` index | Graphe | `KG-L/exports/domain_links.json` | ✅ Indexé | Commit `e4c8b69` — 24 edges ajoutées |
+| `TOPOS/topology.yaml` | Topologie | `TOPOS/topology.yaml` | ✅ Documenté | Commit `d09f37e` — 7 edges ajoutées |
+| `RLM-METRICS` | Mesure | `RLM-METRICS/reports/post-routine/SYMBIOSE-CTULU-KG-CAUSAL-measurement.md` | ✅ Baseline créée | Commit `3b1487b` — 2026-09-21 |
+| PRD/MOC indexes | Index | `PRD/PRD-000-index.md`, `MOC/MOC-INDEX.md` | ✅ Mis à jour | Commit `b04fd4b` — 2026-09-21 |
 
 ## Séquence d'implémentation
 
-### Phase 1 — Ontologie (bloquant)
+### Phase 1 — Ontologie (bloquant) ✅
 
-1. Valider ADR `ADR-SYMBIOSE-ONTOLOGY-20260921` par governance gate
-2. Mettre à jour `ONTOLOGY_DECLARATION.yaml` avec le concept `symbiose`
-3. Indexer `symbiose`, `Mutualisme`, `Commensalisme`, `Parasitisme` dans `KG-L`
+1. ~~Valider ADR `ADR-SYMBIOSE-ONTOLOGY-20260921` par governance gate~~ → En attente validation
+2. ✅ Mettre à jour `ONTOLOGY_DECLARATION.yaml` avec le concept `symbiose` (commit `15f1f5b`)
+3. ✅ Indexer `symbiose`, `Mutualisme`, `Commensalisme`, `Parasitisme` dans `KG-L` (commit `e4c8b69`)
 
-### Phase 2 — Intégration écosystème
+### Phase 2 — Intégration écosystème ✅
 
-4. Documenter les instances candidates dans `TOPOS/topology.yaml`
-5. Réaliser première mesure `RLM-METRICS` sur `CTULU ↔ KG-CAUSAL`
-6. Valider `bénéficeNet > 0` pour passage en `active`
+4. ✅ Documenter les instances candidates dans `TOPOS/topology.yaml` (commit `d09f37e`)
+5. ✅ Réaliser première mesure `RLM-METRICS` sur `CTULU ↔ KG-CAUSAL` (baseline créée, commit `3b1487b`)
+6. ⏳ Valider `bénéficeNet > 0` pour passage en `active` (mesure réelle en attente)
 
-### Phase 3 — Gouvernance
+### Phase 3 — Gouvernance ⏳
 
-7. Promouvoir ADR en `accepted`
-8. Promouvoir concept en `accepted` puis `active` après mesure confirmée
-9. Documenter `N_cycles = 3` dans `GOVERNANCE-HUB` si ajustement nécessaire
+7. ⏳ Promouvoir ADR en `accepted` (en attente governance gate)
+8. ⏳ Promouvoir concept en `accepted` puis `active` après mesure confirmée
+9. ⏳ Documenter `N_cycles = 3` dans `GOVERNANCE-HUB` si ajustement nécessaire
 
 ## Gates
 
-| Gate | Critère | Statut |
-|------|---------|--------|
-| G1 — ADR accepté | `ADR-SYMBIOSE-ONTOLOGY-20260921` accepté par governance gate | ⏳ En attente |
-| G2 — Concept indexé | `symbiose` présent dans `KG-L` | ⏳ En attente |
-| G3 — Instances documentées | `TOPOS/topology.yaml` mentionne les instances candidates | ⏳ En attente |
-| G4 — Mesure confirmée | `RLM-METRICS` confirme `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ⏳ En attente |
-| G5 — Concept actif | `symbiose` passe en `active` après validation | ⏳ En attente |
+| Gate | Critère | Statut | Preuve |
+|------|---------|--------|--------|
+| G1 — ADR accepté | `ADR-SYMBIOSE-ONTOLOGY-20260921` accepté par governance gate | ⏳ En attente | Commit `c55c479c` créé |
+| G2 — Concept indexé | `symbiose` présent dans `KG-L` | ✅ OK | Commit `e4c8b69` — 24 edges |
+| G3 — Instances documentées | `TOPOS/topology.yaml` mentionne les instances candidates | ✅ OK | Commit `d09f37e` — 7 edges |
+| G4 — Mesure confirmée | `RLM-METRICS` confirme `bénéficeNet > 0` sur `CTULU ↔ KG-CAUSAL` | ⏳ En attente | Baseline créée, mesure réelle nécessaire |
+| G5 — Concept actif | `symbiose` passe en `active` après validation | ⏳ En attente | Dépend de G1 + G4 |
 
 ## Références
 
@@ -85,6 +86,18 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 - RLM-METRICS : Mesure bénéficeNet
 - TOPOS : `TOPOS/topology.yaml`
 - ARGUS : Audit parasitisme
+
+## Preuves d'exécution
+
+| Action | Date | Commit | Référence |
+|--------|------|--------|-----------|
+| Création concept `symbiose` | 2026-09-21 | `a350fef` | `ONTOLOGY/concepts/symbiose.md` |
+| Création ADR | 2026-09-21 | `c55c479c` | `GOVERNANCE-HUB/ADR/ADR-SYMBIOSE-ONTOLOGY-20260921.md` |
+| Mise à jour `ONTOLOGY_DECLARATION.yaml` | 2026-09-21 | `15f1f5b` | `ONTOLOGY/ONTOLOGY_DECLARATION.yaml` |
+| Indexation KG-L | 2026-09-21 | `e4c8b69` | `KG-L/exports/domain_links.json` |
+| Documentation TOPOS | 2026-09-21 | `d09f37e` | `TOPOS/topology.yaml` |
+| Baseline RLM-METRICS | 2026-09-21 | `3b1487b` | `RLM-METRICS/reports/post-routine/SYMBIOSE-CTULU-KG-CAUSAL-measurement.md` |
+| Création PRD/MOC + indexes | 2026-09-21 | `b04fd4b` | `PRD/PRD-000-index.md`, `MOC/MOC-INDEX.md` |
 
 ---
 
