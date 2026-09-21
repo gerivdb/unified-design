@@ -39,9 +39,9 @@ Ce MOC orchestre la création et l'intégration du design `symbiose-reversible-p
 | L2 | Primitive lifecycle | `primitives/reversible-symbiose-lifecycle.yaml` | ✅ Créé | Commit `7720f29` — 2026-09-22 |
 | L3 | Workflow reconfiguration | `workflows/symbiose-coordinated-reload.yaml` | ✅ Créé | Commit `7720f29` — 2026-09-22 |
 | L4 | Catalogue index | `catalog/designs.index.yaml` | ✅ Mis à jour | Commit `7720f29` — 2026-09-22 |
-| L5 | PRD-MOC design | `PRD/PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| L6 | PRD-MOC primitive | `PRD/PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| L7 | PRD-MOC workflow | `PRD/PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `à commettre` |
+| L5 | PRD-MOC design | `PRD/PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| L6 | PRD-MOC primitive | `PRD/PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| L7 | PRD-MOC workflow | `PRD/PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
 | L8 | ADR backing | `GOVERNANCE-HUB/ADR/ADR-SYMBIOSE-REVERSIBLE-ARCHITECTURE-20260922.md` | ⏳ À créer | — |
 
 ## Dépendances
@@ -91,4 +91,4 @@ Ce MOC orchestre la création et l'intégration du design `symbiose-reversible-p
 | Action | Date | Commit | Référence |
 |--------|------|--------|-----------|
 | Création design + primitive + workflow | 2026-09-22 | `7720f29` | 3 artefacts + catalogue |
-| Création PRD-MOCs | 2026-09-22 | `à commettre` | 3 PRD-MOC files |
+| Création PRD-MOCs | 2026-09-22 | `efa046a` | 3 PRD-MOC files |

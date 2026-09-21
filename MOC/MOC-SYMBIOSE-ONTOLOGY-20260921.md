@@ -46,12 +46,12 @@ Ce MOC orchestre la création et l'intégration du concept `symbiose` dans l'ont
 | Design reversible plugin architecture | Design | `designs/symbiose-reversible-plugin-architecture.yaml` | ✅ Créé | Commit `7720f29` — 2026-09-22 |
 | Primitive reversible lifecycle | Primitive | `primitives/reversible-symbiose-lifecycle.yaml` | ✅ Créé | Commit `7720f29` — 2026-09-22 |
 | Workflow coordinated reload | Workflow | `workflows/symbiose-coordinated-reload.yaml` | ✅ Créé | Commit `e8dbee1` — 2026-09-22 |
-| PRD-MOC reversible architecture | PRD-MOC | `PRD/PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| PRD-MOC reversible lifecycle | PRD-MOC | `PRD/PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| PRD-MOC coordinated reload | PRD-MOC | `PRD/PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `à commettre` |
-| MOC reversible architecture | MOC | `MOC/MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| MOC reversible lifecycle | MOC | `MOC/MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `à commettre` |
-| MOC coordinated reload | MOC | `MOC/MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `à commettre` |
+| PRD-MOC reversible architecture | PRD-MOC | `PRD/PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| PRD-MOC reversible lifecycle | PRD-MOC | `PRD/PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| PRD-MOC coordinated reload | PRD-MOC | `PRD/PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| MOC reversible architecture | MOC | `MOC/MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| MOC reversible lifecycle | MOC | `MOC/MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
+| MOC coordinated reload | MOC | `MOC/MOC-SYMBIOSE-COORDINATED-RELOAD-20260922.md` | ✅ Créé | Commit `efa046a` — 2026-09-22 |
 
 ## Séquence d'implémentation
 
