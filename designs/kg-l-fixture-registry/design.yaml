@@ -64,15 +64,15 @@ pre_push_hook:
 # Verification Logic
 verification:
   steps:
-    1. "Parse fixtures.yaml"
-    2. "For each fixture:"
-       - "Resolve path (relative to repo root)"
-       - "Check file exists"
-       - "Compute sha256, compare to registry"
-       - "Verify generator script exists and is executable"
-       - "For each consumer: verify repo exists locally (optional)"
-    3. "Report: OK / MISMATCH (path missing / checksum drift / generator missing)"
-    4. "If --fix: update checksum in fixtures.yaml"
+    - "Parse fixtures.yaml"
+    - "For each fixture:"
+    - "Resolve path (relative to repo root)"
+    - "Check file exists"
+    - "Compute sha256, compare to registry"
+    - "Verify generator script exists and is executable"
+    - "For each consumer: verify repo exists locally (optional)"
+    - "Report: OK / MISMATCH (path missing / checksum drift / generator missing)"
+    - "If --fix: update checksum in fixtures.yaml"
 
 # Fixture Lifecycle
 lifecycle:

@@ -61,14 +61,14 @@ cli:
 # Workflow: Kernel Version Bump
 workflow_bump:
   steps:
-    1. "kg-l kernel bump <name> --version <semver> [--domain NEW_DOMAIN] [--supersedes OLD] [--breaking]"
-    2. "Auto-update kernels.yaml with new version, domain, supersedes"
-    3. "Run kg-l-fixture-registry migrate --kernel <name> --from <old> --to <new>"
-    4. "Auto-generate CHANGELOG.md entry with intent_hash"
-    4. "Auto-update domain_links.json kernel domain if changed"
-    5. "Run kg-l-type-guard to verify new domain subsumption"
-    6. "Run tests with new kernel"
-    7. "Commit with message: 'feat(kernel): <name> vX.Y.Z — intent_hash'"
+    - "kg-l kernel bump <name> --version <semver> [--domain NEW_DOMAIN] [--supersedes OLD] [--breaking]"
+    - "Auto-update kernels.yaml with new version, domain, supersedes"
+    - "Run kg-l-fixture-registry migrate --kernel <name> --from <old> --to <new>"
+    - "Auto-generate CHANGELOG.md entry with intent_hash"
+    - "Auto-update domain_links.json kernel domain if changed"
+    - "Run kg-l-type-guard to verify new domain subsumption"
+    - "Run tests with new kernel"
+    - "Commit with message: 'feat(kernel): <name> vX.Y.Z — intent_hash'"
 
 # Integration Points
 integration:
