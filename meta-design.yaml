@@ -328,6 +328,12 @@ designs:
   intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_20260920
   consumers: []
   profile: ACTIVE
+- name: meta-design-self-healing
+  path: designs/meta-design-self-healing/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_META_DESIGN_SELF_HEALING_20260921
+  consumers: []
+  profile: ACTIVE
 - name: jevx
   path: designs/jevx.yaml
   version: 1.0.0
