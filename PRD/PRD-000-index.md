@@ -16,7 +16,7 @@
 | PRD-MOC-ARTIFACT-LAYERS-20260920 | Artifact Layers | approved |
 | PRD-MOC-DESIGN-OPS-LOOP-20260920 | Design Ops Loop | approved |
 | PRD-MOC-ECOSYSTEM-META-COHERENCE-20260920 | Ecosystem Meta-Coherence | approved |
-| PRD-MOC-ECOSYSTEM-META-COHERENCE-EXTENSION-20260920 | Ecosystem Meta-Coherence Extension | in_review |
+| PRD-MOC-ECOSYSTEM-META-COHERENCE-EXTENSION-20260920 | Ecosystem Meta-Coherence Extension | approved |
 | PRD-MOC-SESSION-BOOT-20260920 | Session Boot | approved |
 | PRD-MOC-SAFE-ACTION-PATTERN-20260919 | Safe Action Pattern | approved |
 | PRD-MOC-MDU-INTEGRITY-CHECKER-20260921 | MDU Integrity Checker | approved |
