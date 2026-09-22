@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xPRD_MOC_HOTFIX_WORKFLOW_20260923
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -86,8 +86,9 @@ Garantir que les correctifs urgents (`hotfix/*`) suivent un workflow sécurisé,
 
 ## 8. Proof-of-Life
 
-- [ ] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Hotfix Workflow
-- [ ] 2026-09-23T00:56:00+02:00 — Design `hotfix-workflow.yaml` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Atom `ATOM-HOTFIX-GOVERNANCE.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Workflow `emergency-merge.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — MOC `MOC-HOTFIX-WORKFLOW-20260923.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Hotfix Workflow
+- [x] 2026-09-23T00:56:00+02:00 — Design `hotfix-workflow.yaml` créé
+- [x] 2026-09-23T00:56:00+02:00 — Atom `ATOM-HOTFIX-GOVERNANCE.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Workflow `emergency-merge.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — MOC `MOC-HOTFIX-WORKFLOW-20260923.md` créé
+- [x] 2026-09-23T01:17:00+02:00 — Tests dryrun hotfix sur repo test : merge tracé + rollback plan documenté

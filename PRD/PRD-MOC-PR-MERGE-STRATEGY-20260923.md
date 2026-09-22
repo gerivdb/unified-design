@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xPRD_MOC_PR_MERGE_STRATEGY_20260923
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -87,8 +87,9 @@ Garantir que toute PR dans l'écosystème gerivdb est fusionnée avec la straté
 
 ## 8. Proof-of-Life
 
-- [ ] 2026-09-23T00:56:00+02:00 — Création PRD-MOC PR Merge Strategy
-- [ ] 2026-09-23T00:56:00+02:00 — Design `pr-merge-strategy.yaml` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Atom `ATOM-PR-MERGE-GOVERNANCE.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Workflow `merge-strategy-validation.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — MOC `MOC-PR-MERGE-STRATEGY-20260923.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Création PRD-MOC PR Merge Strategy
+- [x] 2026-09-23T00:56:00+02:00 — Design `pr-merge-strategy.yaml` créé
+- [x] 2026-09-23T00:56:00+02:00 — Atom `ATOM-PR-MERGE-GOVERNANCE.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Workflow `merge-strategy-validation.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — MOC `MOC-PR-MERGE-STRATEGY-20260923.md` créé
+- [x] 2026-09-23T01:17:00+02:00 — Tests dryrun merge sur repo test : stratégie appliquée + traçabilité WAL OK

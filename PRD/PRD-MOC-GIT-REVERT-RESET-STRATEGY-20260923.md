@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xPRD_MOC_GIT_REVERT_RESET_STRATEGY_20260923
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -87,8 +87,9 @@ ontology:
 
 ## 8. Proof-of-Life
 
-- [ ] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Git Revert / Reset Strategy
-- [ ] 2026-09-23T00:56:00+02:00 — Design `git-revert-reset-strategy.yaml` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Atom `ATOM-REVERT-RESET-GOVERNANCE.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Workflow `safe-rollback.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — MOC `MOC-GIT-REVERT-RESET-STRATEGY-20260923.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Git Revert / Reset Strategy
+- [x] 2026-09-23T00:56:00+02:00 — Design `git-revert-reset-strategy.yaml` créé
+- [x] 2026-09-23T00:56:00+02:00 — Atom `ATOM-REVERT-RESET-GOVERNANCE.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Workflow `safe-rollback.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — MOC `MOC-GIT-REVERT-RESET-STRATEGY-20260923.md` créé
+- [x] 2026-09-23T01:17:00+02:00 — Tests dryrun rollback sur repo test : 0 perte de données, WAL tracé

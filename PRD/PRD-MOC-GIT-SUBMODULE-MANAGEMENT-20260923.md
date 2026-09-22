@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xPRD_MOC_GIT_SUBMODULE_MANAGEMENT_20260923
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -86,8 +86,9 @@ Garantir que les submodules git dans l'écosystème gerivdb suivent un lifecycle
 
 ## 8. Proof-of-Life
 
-- [ ] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Git Submodule Management
-- [ ] 2026-09-23T00:56:00+02:00 — Design `git-submodule-management.yaml` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Atom `ATOM-SUBMODULE-GOVERNANCE.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Workflow `submodule-sync.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — MOC `MOC-GIT-SUBMODULE-MANAGEMENT-20260923.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Git Submodule Management
+- [x] 2026-09-23T00:56:00+02:00 — Design `git-submodule-management.yaml` créé
+- [x] 2026-09-23T00:56:00+02:00 — Atom `ATOM-SUBMODULE-GOVERNANCE.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Workflow `submodule-sync.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — MOC `MOC-GIT-SUBMODULE-MANAGEMENT-20260923.md` créé
+- [x] 2026-09-23T01:17:00+02:00 — Tests dryrun submodule sur repo test : add/update/remove OK, 0 divergence

@@ -2,7 +2,7 @@
 type: MOC
 version: "1.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xMOC_GIT_REBASE_WORKFLOW_20260923
 ---
 
@@ -41,17 +41,17 @@ Ce MOC orchestre la création et l'intégration du design `git-rebase-workflow` 
 
 | Gate | Critère formel | Validation | Statut |
 |------|---------------|------------|--------|
-| **G1** | Design validé par pre-commit hook | `git commit` | ⏳ En attente |
-| **G2** | Atom référencé dans atoms_registry.yaml | `mdu-lint --strict` | ⏳ En attente |
-| **G3** | Workflow testé sur branche test | dryrun rebase | ⏳ En attente |
+| **G1** | Design validé par pre-commit hook | `git commit` | ✅ Passe |
+| **G2** | Atom référencé dans atoms_registry.yaml | `mdu-lint --strict` | ✅ Passe |
+| **G3** | Workflow testé sur branche test | dryrun rebase | ✅ Passe |
 
 ## Critères d'acceptation
 
-- [ ] `designs/git-rebase-workflow.yaml` créé et validé YAML
-- [ ] `ATOM-REBASE-WORKFLOW.md` créé et référencé dans `atoms_registry.yaml`
-- [ ] `workflows/rebase-validation.md` créé
-- [ ] MOC `MOC-GIT-REBASE-WORKFLOW-20260923.md` créé
-- [ ] Tests : dryrun rebase sur branche test → 0 conflit non résolu
+- [x] `designs/git-rebase-workflow.yaml` créé et validé YAML
+- [x] `ATOM-REBASE-WORKFLOW.md` créé et référencé dans `atoms_registry.yaml`
+- [x] `workflows/rebase-validation.md` créé
+- [x] MOC `MOC-GIT-REBASE-WORKFLOW-20260923.md` créé
+- [x] Tests : dryrun rebase sur branche test → 0 conflit non résolu
 
 ## Références
 
@@ -63,5 +63,7 @@ Ce MOC orchestre la création et l'intégration du design `git-rebase-workflow` 
 
 | Action | Date | Commit | Référence |
 |--------|------|--------|-----------|
-| Création PRD-MOC | 2026-09-23 | `à commettre` | `PRD/PRD-MOC-GIT-REBASE-WORKFLOW-20260923.md` |
-| Création MOC | 2026-09-23 | `à commettre` | `MOC/MOC-GIT-REBASE-WORKFLOW-20260923.md` |
+| Création PRD-MOC | 2026-09-23 | `515cbbd` | `PRD/PRD-MOC-GIT-REBASE-WORKFLOW-20260923.md` |
+| Création MOC | 2026-09-23 | `515cbbd` | `MOC/MOC-GIT-REBASE-WORKFLOW-20260923.md` |
+| Implémentation design + atom + workflow | 2026-09-23 | `cec35c2` | `designs/git-rebase-workflow.yaml`, `atoms/methodology/git/ATOM-REBASE-WORKFLOW.md`, `workflows/rebase-validation.md` |
+| Test rebase dryrun | 2026-09-23 | `b486783` | `feat/test-rebase-workflow-001` (test branch) |

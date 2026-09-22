@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xPRD_MOC_GIT_REBASE_WORKFLOW_20260923
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -85,8 +85,9 @@ ontology:
 
 ## 8. Proof-of-Life
 
-- [ ] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Git Rebase Workflow
-- [ ] 2026-09-23T00:56:00+02:00 — Design `git-rebase-workflow.yaml` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Atom `ATOM-REBASE-WORKFLOW.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Workflow `rebase-validation.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — MOC `MOC-GIT-REBASE-WORKFLOW-20260923.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Git Rebase Workflow
+- [x] 2026-09-23T00:56:00+02:00 — Design `git-rebase-workflow.yaml` créé
+- [x] 2026-09-23T00:56:00+02:00 — Atom `ATOM-REBASE-WORKFLOW.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Workflow `rebase-validation.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — MOC `MOC-GIT-REBASE-WORKFLOW-20260923.md` créé
+- [x] 2026-09-23T01:17:00+02:00 — Test rebase sur branche test : dryrun OK, 0 conflit non résolu

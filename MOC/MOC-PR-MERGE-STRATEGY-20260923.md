@@ -2,7 +2,7 @@
 type: MOC
 version: "1.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xMOC_PR_MERGE_STRATEGY_20260923
 ---
 
@@ -41,17 +41,17 @@ Ce MOC orchestre la création et l'intégration du design `pr-merge-strategy` da
 
 | Gate | Critère formel | Validation | Statut |
 |------|---------------|------------|--------|
-| **G1** | Design validé par pre-commit hook | `git commit` | ⏳ En attente |
-| **G2** | Atom référencé dans atoms_registry.yaml | `mdu-lint --strict` | ⏳ En attente |
-| **G3** | Workflow testé sur repo test | dryrun merge | ⏳ En attente |
+| **G1** | Design validé par pre-commit hook | `git commit` | ✅ Passe |
+| **G2** | Atom référencé dans atoms_registry.yaml | `mdu-lint --strict` | ✅ Passe |
+| **G3** | Workflow testé sur repo test | dryrun merge | ✅ Passe |
 
 ## Critères d'acceptation
 
-- [ ] `designs/pr-merge-strategy.yaml` créé et validé YAML
-- [ ] `ATOM-PR-MERGE-GOVERNANCE.md` créé et référencé dans `atoms_registry.yaml`
-- [ ] `workflows/merge-strategy-validation.md` créé
-- [ ] MOC `MOC-PR-MERGE-STRATEGY-20260923.md` créé
-- [ ] Tests : dryrun merge sur repo test → stratégie appliquée + traçabilité WAL
+- [x] `designs/pr-merge-strategy.yaml` créé et validé YAML
+- [x] `ATOM-PR-MERGE-GOVERNANCE.md` créé et référencé dans `atoms_registry.yaml`
+- [x] `workflows/merge-strategy-validation.md` créé
+- [x] MOC `MOC-PR-MERGE-STRATEGY-20260923.md` créé
+- [x] Tests : dryrun merge sur repo test → stratégie appliquée + traçabilité WAL
 
 ## Références
 
@@ -63,5 +63,7 @@ Ce MOC orchestre la création et l'intégration du design `pr-merge-strategy` da
 
 | Action | Date | Commit | Référence |
 |--------|------|--------|-----------|
-| Création PRD-MOC | 2026-09-23 | `à commettre` | `PRD/PRD-MOC-PR-MERGE-STRATEGY-20260923.md` |
-| Création MOC | 2026-09-23 | `à commettre` | `MOC/MOC-PR-MERGE-STRATEGY-20260923.md` |
+| Création PRD-MOC | 2026-09-23 | `d700ba4` | `PRD/PRD-MOC-PR-MERGE-STRATEGY-20260923.md` |
+| Création MOC | 2026-09-23 | `d700ba4` | `MOC/MOC-PR-MERGE-STRATEGY-20260923.md` |
+| Implémentation design + atom + workflow | 2026-09-23 | `c2ca8b6` | `designs/pr-merge-strategy.yaml`, `atoms/methodology/git/ATOM-PR-MERGE-GOVERNANCE.md`, `workflows/merge-strategy-validation.md` |
+| Test merge dryrun | 2026-09-23 | `c2ca8b6` | Stratégie appliquée + traçabilité WAL OK |

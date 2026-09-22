@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xPRD_MOC_GIT_TAG_RELEASE_MANAGEMENT_20260923
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -86,8 +86,9 @@ Garantir que toute release dans l'écosystème gerivdb suit une politique de tag
 
 ## 8. Proof-of-Life
 
-- [ ] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Git Tag / Release Management
-- [ ] 2026-09-23T00:56:00+02:00 — Design `git-tag-release-management.yaml` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Atom `ATOM-TAG-RELEASE-GOVERNANCE.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — Workflow `release-automation.md` créé
-- [ ] 2026-09-23T00:56:00+02:00 — MOC `MOC-GIT-TAG-RELEASE-MANAGEMENT-20260923.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Création PRD-MOC Git Tag / Release Management
+- [x] 2026-09-23T00:56:00+02:00 — Design `git-tag-release-management.yaml` créé
+- [x] 2026-09-23T00:56:00+02:00 — Atom `ATOM-TAG-RELEASE-GOVERNANCE.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — Workflow `release-automation.md` créé
+- [x] 2026-09-23T00:56:00+02:00 — MOC `MOC-GIT-TAG-RELEASE-MANAGEMENT-20260923.md` créé
+- [x] 2026-09-23T01:17:00+02:00 — Tests dryrun release sur repo test : SemVer validé, changelog check OK

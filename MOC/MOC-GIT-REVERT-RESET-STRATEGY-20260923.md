@@ -2,7 +2,7 @@
 type: MOC
 version: "1.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xMOC_GIT_REVERT_RESET_STRATEGY_20260923
 ---
 
@@ -41,17 +41,17 @@ Ce MOC orchestre la création et l'intégration du design `git-revert-reset-stra
 
 | Gate | Critère formel | Validation | Statut |
 |------|---------------|------------|--------|
-| **G1** | Design validé par pre-commit hook | `git commit` | ⏳ En attente |
-| **G2** | Atom référencé dans atoms_registry.yaml | `mdu-lint --strict` | ⏳ En attente |
-| **G3** | Workflow testé sur repo test | dryrun rollback | ⏳ En attente |
+| **G1** | Design validé par pre-commit hook | `git commit` | ✅ Passe |
+| **G2** | Atom référencé dans atoms_registry.yaml | `mdu-lint --strict` | ✅ Passe |
+| **G3** | Workflow testé sur repo test | dryrun rollback | ✅ Passe |
 
 ## Critères d'acceptation
 
-- [ ] `designs/git-revert-reset-strategy.yaml` créé et validé YAML
-- [ ] `ATOM-REVERT-RESET-GOVERNANCE.md` créé et référencé dans `atoms_registry.yaml`
-- [ ] `workflows/safe-rollback.md` créé
-- [ ] MOC `MOC-GIT-REVERT-RESET-STRATEGY-20260923.md` créé
-- [ ] Tests : dryrun rollback sur repo test → 0 perte de données, WAL tracé
+- [x] `designs/git-revert-reset-strategy.yaml` créé et validé YAML
+- [x] `ATOM-REVERT-RESET-GOVERNANCE.md` créé et référencé dans `atoms_registry.yaml`
+- [x] `workflows/safe-rollback.md` créé
+- [x] MOC `MOC-GIT-REVERT-RESET-STRATEGY-20260923.md` créé
+- [x] Tests : dryrun rollback sur repo test → 0 perte de données, WAL tracé
 
 ## Références
 
@@ -63,5 +63,7 @@ Ce MOC orchestre la création et l'intégration du design `git-revert-reset-stra
 
 | Action | Date | Commit | Référence |
 |--------|------|--------|-----------|
-| Création PRD-MOC | 2026-09-23 | `à commettre` | `PRD/PRD-MOC-GIT-REVERT-RESET-STRATEGY-20260923.md` |
-| Création MOC | 2026-09-23 | `à commettre` | `MOC/MOC-GIT-REVERT-RESET-STRATEGY-20260923.md` |
+| Création PRD-MOC | 2026-09-23 | `44e8d91` | `PRD/PRD-MOC-GIT-REVERT-RESET-STRATEGY-20260923.md` |
+| Création MOC | 2026-09-23 | `44e8d91` | `MOC/MOC-GIT-REVERT-RESET-STRATEGY-20260923.md` |
+| Implémentation design + atom + workflow | 2026-09-23 | `eef9bf7` | `designs/git-revert-reset-strategy.yaml`, `atoms/methodology/git/ATOM-REVERT-RESET-GOVERNANCE.md`, `workflows/safe-rollback.md` |
+| Test rollback dryrun | 2026-09-23 | `eef9bf7` | 0 perte de données, WAL tracé |

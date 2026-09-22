@@ -2,7 +2,7 @@
 type: MOC
 version: "1.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xMOC_HOTFIX_WORKFLOW_20260923
 ---
 
@@ -41,17 +41,17 @@ Ce MOC orchestre la création et l'intégration du design `hotfix-workflow` dans
 
 | Gate | Critère formel | Validation | Statut |
 |------|---------------|------------|--------|
-| **G1** | Design validé par pre-commit hook | `git commit` | ⏳ En attente |
-| **G2** | Atom référencé dans atoms_registry.yaml | `mdu-lint --strict` | ⏳ En attente |
-| **G3** | Workflow testé sur repo test | dryrun hotfix | ⏳ En attente |
+| **G1** | Design validé par pre-commit hook | `git commit` | ✅ Passe |
+| **G2** | Atom référencé dans atoms_registry.yaml | `mdu-lint --strict` | ✅ Passe |
+| **G3** | Workflow testé sur repo test | dryrun hotfix | ✅ Passe |
 
 ## Critères d'acceptation
 
-- [ ] `designs/hotfix-workflow.yaml` créé et validé YAML
-- [ ] `ATOM-HOTFIX-GOVERNANCE.md` créé et référencé dans `atoms_registry.yaml`
-- [ ] `workflows/emergency-merge.md` créé
-- [ ] MOC `MOC-HOTFIX-WORKFLOW-20260923.md` créé
-- [ ] Tests : dryrun hotfix sur repo test → merge tracé + rollback plan documenté
+- [x] `designs/hotfix-workflow.yaml` créé et validé YAML
+- [x] `ATOM-HOTFIX-GOVERNANCE.md` créé et référencé dans `atoms_registry.yaml`
+- [x] `workflows/emergency-merge.md` créé
+- [x] MOC `MOC-HOTFIX-WORKFLOW-20260923.md` créé
+- [x] Tests : dryrun hotfix sur repo test → merge tracé + rollback plan documenté
 
 ## Références
 
@@ -63,5 +63,7 @@ Ce MOC orchestre la création et l'intégration du design `hotfix-workflow` dans
 
 | Action | Date | Commit | Référence |
 |--------|------|--------|-----------|
-| Création PRD-MOC | 2026-09-23 | `à commettre` | `PRD/PRD-MOC-HOTFIX-WORKFLOW-20260923.md` |
-| Création MOC | 2026-09-23 | `à commettre` | `MOC/MOC-HOTFIX-WORKFLOW-20260923.md` |
+| Création PRD-MOC | 2026-09-23 | `b1a7e04` | `PRD/PRD-MOC-HOTFIX-WORKFLOW-20260923.md` |
+| Création MOC | 2026-09-23 | `b1a7e04` | `MOC/MOC-HOTFIX-WORKFLOW-20260923.md` |
+| Implémentation design + atom + workflow | 2026-09-23 | `39d2741` | `designs/hotfix-workflow.yaml`, `atoms/methodology/git/ATOM-HOTFIX-GOVERNANCE.md`, `workflows/emergency-merge.md` |
+| Test hotfix dryrun | 2026-09-23 | `39d2741` | Merge tracé + rollback plan documenté |
