@@ -695,3 +695,9 @@ entries:
   status: active
   type: skill
   updated: '2026-09-22'
+- id: unified-design/jevx-backend-selector
+  source_path: skills/jevx-backend-selector/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-22'

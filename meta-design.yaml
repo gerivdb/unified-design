@@ -832,6 +832,11 @@ skills:
   version: 1.0.0
   intent_hash: 0xSKILL_MDU_INTEGRITY_CHECKER_20260921
   status: active
+- name: jevx-backend-selector
+  path: skills/jevx-backend-selector/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_JEVX_BACKEND_SELECTOR_20260920
+  status: active
 citizens:
 - name: design-ops-loop-citizen
   path: citizens/design-ops-loop-citizen/citizen.yaml

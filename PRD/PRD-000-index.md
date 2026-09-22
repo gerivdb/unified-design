@@ -5,7 +5,7 @@
 | PRD-CAUSAL-RESOLUTION-METHODOLOGY-2026-08-29 | Causal Resolution Methodology | approved |
 | PRD-DESIGNS-COMPLETION-2026-08-24 | Designs Completion | approved |
 | PRD-MOC-MDU-GAPS-2026-08-16 | MDU Gaps MOC | draft |
-| PRD-MOC-JEVX-SOVEREIGN-OVERLAY-20260920 | JEVX Sovereign Overlay | proposed |
+| PRD-MOC-JEVX-SOVEREIGN-OVERLAY-20260920 | JEVX Sovereign Overlay | approved |
 | PRD-MOC-JEVX-BACKEND-SELECTOR-20260920 | JEVX Backend Selector | approved |
 | PRD-MOC-JEVX-CONSTRAINED-PARALLEL-DECODING-20260920 | JEVX Constrained Parallel Decoding | approved |
 | PRD-MOC-JEVX-DESIGN-VALIDATION-PIPELINE-20260920 | JEVX Design Validation Pipeline | approved |
