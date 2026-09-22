@@ -878,3 +878,8 @@ citizens:
   version: 1.0.0
   intent_hash: 0xCITIZEN_SESSION_BOOT_20260920
   status: active
+- name: talex-friction-analyzer-citizen
+  path: citizens/talex-friction-analyzer-citizen/citizen.yaml
+  version: 1.0.0
+  intent_hash: 0xCITIZEN_TALEX_FRICTION_ANALYZER_20260922
+  status: active

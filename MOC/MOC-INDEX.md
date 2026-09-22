@@ -27,3 +27,4 @@
 | MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | approved |
 | MOC-JEVX-MDU-INTEGRATION-FIX-20260922 | JEVX MDU Integration Fix | approved |
 | MOC-MDU-GAPS-2026-08-16 | MDU Gaps MOC | approved |
+| MOC-TALEX-FRICTION-ANALYZER-20260922 | TALEX Friction Analyzer | approved |
