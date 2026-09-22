@@ -10,6 +10,13 @@ parent_doc: PRD-MOC-JEVX-SOVEREIGN-OVERLAY-20260920.md
 related_adr: ADR-0111-JEVX-SOVEREIGN-OVERLAY.md
 related_intent: INTENT-JEVX-SOVEREIGN-OVERLAY.md
 related_moc: MOC-JEVX-SOVEREIGN-OVERLAY-20260920.md
+ontology:
+  concepts:
+    - jevx-decision-engine
+    - dry-run-causal
+    - branch-taxonomy-enforcement
+    - command-resolution-protocol
+  repo: gerivdb/ONTOLOGY
 ---
 
 # PRD-MOC — JEVX MDU Integration Fix

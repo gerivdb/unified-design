@@ -6,6 +6,11 @@ status: in_review
 intent_hash: 0xPRD_MOC_BRANCH_TAXONOMY_ENFORCEMENT_20260922
 author: gerivdb
 source_repo: gerivdb/unified-design
+ontology:
+  concepts:
+    - branch-taxonomy-enforcement
+    - command-resolution-protocol
+  repo: gerivdb/ONTOLOGY
 ---
 
 # PRD-MOC — Branch Taxonomy Enforcement

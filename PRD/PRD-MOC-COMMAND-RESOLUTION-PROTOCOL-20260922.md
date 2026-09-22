@@ -6,6 +6,11 @@ status: in_review
 intent_hash: 0xPRD_MOC_COMMAND_RESOLUTION_PROTOCOL_20260922
 author: gerivdb
 source_repo: gerivdb/unified-design
+ontology:
+  concepts:
+    - command-resolution-protocol
+    - branch-taxonomy-enforcement
+  repo: gerivdb/ONTOLOGY
 ---
 
 # PRD-MOC — Command Resolution Protocol
