@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-20"
-status: proposed
+status: approved
 intent_hash: 0xPRD_MOC_ECOSYSTEM_META_COHERENCE_20260920
 author: gerivdb
 source_repo: gerivdb/unified-design

@@ -280,6 +280,12 @@ designs:
   intent_hash: 0xDESIGN_META_KG_ENGINE_20260916
   consumers: []
   profile: DRAFT
+- name: kg-causal-integration-pattern
+  path: designs/kg-causal-integration-pattern/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_KG_CAUSAL_INTEGRATION_PATTERN_20260921
+  consumers: []
+  profile: ACTIVE
 - name: deterministic-execution-log-clipping
   path: atoms/ATOM-DETERMINISTIC-EXECUTION-LOG-CLIPPING.md
   version: 1.0.0
@@ -579,6 +585,8 @@ governance_atoms:
 - harness-engineering-reliable-agents
 - safe-action-gate
 - ecosystem-meta-coherence-gate
+- primitive-atomicity-contract
+- mdu-catalog-sync
 - typed-decision-api
 # Artifact Extraction System (2026-09-20)
 - artifact-extraction-status
@@ -772,6 +780,11 @@ primitives:
   path: primitives/ecosystem-meta-coherence-gate-primitive.yaml
   version: 1.0.0
   intent_hash: 0xPRIMITIVE_ECOSYSTEM_META_COHERENCE_GATE_20260921
+  status: active
+- name: primitive-atomicity-contract
+  path: primitives/primitive-atomicity-contract.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_ATOMICITY_CONTRACT_20260921
   status: active
 skills:
 - name: design-ops-loop-skill

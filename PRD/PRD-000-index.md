@@ -12,23 +12,23 @@
 | PRD-MOC-JEVX-SOVEREIGN-ADAPTER-PATTERN-20260920 | JEVX Sovereign Adapter Pattern | proposed |
 | PRD-MOC-JEVX-STRUCTURAL-FIX-PIPELINE-20260920 | JEVX Structural Fix Pipeline | proposed |
 | PRD-MOC-JEVX-MDU-INTEGRATION-FIX-20260922 | JEVX MDU Integration Fix | proposed |
-| PRD-MOC-ARTIFACT-EXTRACTION-20260920 | Artifact Extraction System | in_review |
+| PRD-MOC-ARTIFACT-EXTRACTION-20260920 | Artifact Extraction System | approved |
 | PRD-MOC-ARTIFACT-LAYERS-20260920 | Artifact Layers | in_review |
 | PRD-MOC-DESIGN-OPS-LOOP-20260920 | Design Ops Loop | in_review |
-| PRD-MOC-ECOSYSTEM-META-COHERENCE-20260920 | Ecosystem Meta-Coherence | in_review |
+| PRD-MOC-ECOSYSTEM-META-COHERENCE-20260920 | Ecosystem Meta-Coherence | approved |
 | PRD-MOC-ECOSYSTEM-META-COHERENCE-EXTENSION-20260920 | Ecosystem Meta-Coherence Extension | in_review |
-| PRD-MOC-SESSION-BOOT-20260920 | Session Boot | in_review |
+| PRD-MOC-SESSION-BOOT-20260920 | Session Boot | approved |
 | PRD-MOC-SAFE-ACTION-PATTERN-20260919 | Safe Action Pattern | proposed |
 | PRD-MOC-MDU-INTEGRITY-CHECKER-20260921 | MDU Integrity Checker | in_review |
 | PRD-MOC-SYNC-MDU-CATALOG-20260921 | Sync MDU Catalog | in_review |
 | PRD-MOC-MDU-LINT-20260921 | MDU Lint | in_review |
-| PRD-MOC-KG-CAUSAL-INTEGRATION-PATTERN-20260921 | KG Causal Integration Pattern | in_review |
+| PRD-MOC-KG-CAUSAL-INTEGRATION-PATTERN-20260921 | KG Causal Integration Pattern | approved |
 | PRD-MOC-SAFE-ACTION-GATE-20260921 | Safe Action Gate | approved |
 | PRD-MOC-ECOSYSTEM-META-COHERENCE-GATE-20260921 | Ecosystem Meta-Coherence Gate | approved |
 | PRD-MOC-PRIMITIVE-ATOMICITY-CONTRACT-20260921 | Primitive Atomicity Contract | in_review |
 | PRD-MOC-META-DESIGN-SELF-HEALING-20260921 | Meta-Design Self-Healing | approved |
-| PRD-MOC-PIPELINE-MDU-VALIDATION-20260921 | Pipeline MDU Validation | in_review |
-| PRD-MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | in_review |
+| PRD-MOC-PIPELINE-MDU-VALIDATION-20260921 | Pipeline MDU Validation | approved |
+| PRD-MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | approved |
 | PRD-MOC-ATOM-MDU-CATALOG-SYNC-20260921 | ATOM MDU Catalog Sync | in_review |
 | PRD-MOC-SYMBIOSE-ONTOLOGY-20260921 | Symbiose Ontology | proposed |
 | PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922 | Symbiose Reversible Plugin Architecture | in_review |
