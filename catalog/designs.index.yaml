@@ -1508,3 +1508,10 @@ entries:
   status: active
   profile: STANDARD
   consumers: []
+- name: talex-friction-analyzer
+  path: designs\talex-friction-analyzer\design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_TALEX_FRICTION_ANALYZER_20260922
+  status: active
+  profile: ACTIVE
+  consumers: []

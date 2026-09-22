@@ -445,6 +445,12 @@ designs:
   intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_GATE_20260921
   consumers: []
   profile: ACTIVE
+- name: talex-friction-analyzer
+  path: designs/talex-friction-analyzer/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_TALEX_FRICTION_ANALYZER_20260922
+  consumers: []
+  profile: ACTIVE
 piliers:
 - name: Sonar-Driven Design
   abbr: SDD
@@ -591,6 +597,7 @@ governance_atoms:
 - primitive-atomicity-contract
 - mdu-catalog-sync
 - typed-decision-api
+- ATOM-TALEX-FRICTION-ANALYZER
 # Artifact Extraction System (2026-09-20)
 - artifact-extraction-status
 - conversation-anchoring
@@ -758,6 +765,11 @@ workflows:
   version: 1.0.0
   intent_hash: 0xWORKFLOW_ARTIFACT_LAYERS_VALIDATION_20260920
   status: active
+- name: workflow-talex-friction-analysis
+  path: workflows/workflow-talex-friction-analysis.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_TALEX_FRICTION_ANALYSIS_20260922
+  status: active
 - name: workflow-design-ops-loop
   path: workflows/workflow-design-ops-loop.md
   version: 1.0.0
@@ -799,6 +811,11 @@ primitives:
   version: 1.0.0
   intent_hash: 0xPRIMITIVE_ATOMICITY_CONTRACT_20260921
   status: active
+- name: talex-friction-analyzer-primitive
+  path: primitives/talex-friction-analyzer-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_TALEX_FRICTION_ANALYZER_20260922
+  status: active
 skills:
 - name: design-ops-loop-skill
   path: skills/design-ops-loop-skill/SKILL.md
@@ -839,6 +856,11 @@ skills:
   path: skills/jevx-backend-selector/SKILL.md
   version: 1.0.0
   intent_hash: 0xSKILL_JEVX_BACKEND_SELECTOR_20260920
+  status: active
+- name: talex-friction-analyzer
+  path: skills/talex-friction-analyzer/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_TALEX_FRICTION_ANALYZER_20260922
   status: active
 citizens:
 - name: design-ops-loop-citizen
