@@ -1,3 +1,6 @@
+# AUTO-GENERATED FILE - DO NOT EDIT DIRECTLY
+# Source: manifests .atom.yaml + tools/meta-design-gen.py
+# Regenerate: python tools/meta-design-gen.py
 version: 2.1.0
 intent_hash: 0xMDU_SCHEMA_20260731_V2_1_GRAPH_OF_LOOPS
 status: active

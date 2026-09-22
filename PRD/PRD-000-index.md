@@ -4,7 +4,7 @@
 |----|-------|--------|
 | PRD-CAUSAL-RESOLUTION-METHODOLOGY-2026-08-29 | Causal Resolution Methodology | approved |
 | PRD-DESIGNS-COMPLETION-2026-08-24 | Designs Completion | approved |
-| PRD-MOC-MDU-GAPS-2026-08-16 | MDU Gaps MOC | draft |
+| PRD-MOC-MDU-GAPS-2026-08-16 | MDU Gaps MOC | approved |
 | PRD-MOC-JEVX-SOVEREIGN-OVERLAY-20260920 | JEVX Sovereign Overlay | approved |
 | PRD-MOC-JEVX-BACKEND-SELECTOR-20260920 | JEVX Backend Selector | approved |
 | PRD-MOC-JEVX-CONSTRAINED-PARALLEL-DECODING-20260920 | JEVX Constrained Parallel Decoding | approved |
@@ -31,9 +31,9 @@
 | PRD-MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | approved |
 | PRD-MOC-ATOM-MDU-CATALOG-SYNC-20260921 | ATOM MDU Catalog Sync | approved |
 | PRD-MOC-SYMBIOSE-ONTOLOGY-20260921 | Symbiose Ontology | approved |
-| PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922 | Symbiose Reversible Plugin Architecture | in_review |
-| PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922 | Reversible Symbiose Lifecycle | in_review |
-| PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | in_review |
+| PRD-MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922 | Symbiose Reversible Plugin Architecture | approved |
+| PRD-MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922 | Reversible Symbiose Lifecycle | approved |
+| PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | approved |
 | PRD-MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922 | Branch Taxonomy Enforcement | approved |
 | PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | approved |
 | PRD-MOC-STRUCTURAL-COHERENCE-20260922 | Structural Coherence | approved |

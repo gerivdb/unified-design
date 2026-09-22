@@ -20,9 +20,10 @@
 | MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | approved |
 | MOC-ATOM-MDU-CATALOG-SYNC-20260921 | ATOM MDU Catalog Sync | approved |
 | MOC-SYMBIOSE-ONTOLOGY-20260921 | Symbiose Ontology | approved |
-| MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922 | Symbiose Reversible Plugin Architecture | in_review |
-| MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922 | Reversible Symbiose Lifecycle | in_review |
-| MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | in_review |
+| MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922 | Symbiose Reversible Plugin Architecture | approved |
+| MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922 | Reversible Symbiose Lifecycle | approved |
+| MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | approved |
 | MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922 | Branch Taxonomy Enforcement | approved |
 | MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | approved |
 | MOC-JEVX-MDU-INTEGRATION-FIX-20260922 | JEVX MDU Integration Fix | approved |
+| MOC-MDU-GAPS-2026-08-16 | MDU Gaps MOC | approved |
