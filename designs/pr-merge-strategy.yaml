@@ -1,0 +1,71 @@
+---
+name: pr-merge-strategy
+description: "Sélection de la stratégie de merge PR : merge commit, squash, rebase. Règles de décision par contexte, et traçabilité du merge."
+version: "1.0.0"
+status: draft
+layer: L0
+type: design
+profile: STANDARD
+intent_hash: 0xDESIGN_PR_MERGE_STRATEGY_20260923
+adr: ADR-014-git-policy, ADR-2026-08-29-001-BRANCH-RESURRECTION-PROTOCOL
+inherits:
+  - merge-fork-balance
+  - conflict-resolver-pattern
+depends_on:
+  - branch-orphan-conflict-resolver
+  - atomic-fragmentation
+capabilities:
+  - name: merge-strategy-selection
+    description: "Sélection de la stratégie de merge"
+    parameters:
+      default: merge_commit
+      squash_allowed_on: [wip_branches, feat_under_5_commits]
+      rebase_allowed_on: [local_only, not_shared]
+  - name: merge-validation
+    description: "Validation avant merge"
+    parameters:
+      dryrun_required: true
+      conflict_limit: 5
+      branch_taxonomy_check: true
+  - name: merge-traceability
+    description: "Traçabilité du merge"
+    parameters:
+      wal_logging: true
+      strategy_annotation: true
+      auto_delete_branch: true
+principles:
+  - P0_MERGE_COMMIT_DEFAULT: merge commit par défaut pour branches de feature publiques
+  - P0_SQUASH_FOR_WIP: squash autorisé uniquement pour branches WIP ou feat/* avec < 5 commits
+  - P0_REBASE_INTERDICTED_ON_SHARED: git rebase INTERDIT sur branche avec PR ouverte et reviews
+  - P0_STRATEGY_ANNOTATION: toute PR DOIT avoir la stratégie annotée dans la description
+  - P0_NO_FF_WITH_REASON: --no-ff autorisé uniquement avec justification explicite
+constraints:
+  - default_strategy: merge_commit
+  - squash_max_commits: 5
+  - rebase_local_only: true
+  - strategy_annotation_required: true
+  - auto_delete_branch: true
+workflow:
+  - step: annotate_strategy
+    action: "PR description: /merge-strategy merge|squash|rebase"
+    output: strategy_annotation
+  - step: dryrun_merge
+    action: "git merge --no-commit --no-ff <branch>"
+    output: dryrun_result
+  - step: validate_taxonomy
+    action: "branch taxonomy check"
+    output: taxonomy_ok
+  - step: execute_merge
+    action: "git merge --no-ff|--squash <branch>"
+    output: merge_commit
+  - step: trace_merge
+    action: "Write-WAL MERGE: strategy=<strategy> sha=<sha> branch=<name>"
+    output: wal_entry
+  - step: cleanup
+    action: "git branch -d <branch> && git push origin --delete <branch>"
+    condition: "auto_delete_branch"
+governance:
+  adr: ADR-014-git-policy
+  design: merge-fork-balance
+  atom: ATOM-PR-MERGE-GOVERNANCE
+  workflow: merge-strategy-validation
