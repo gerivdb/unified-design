@@ -1,0 +1,149 @@
+---
+name: talex-friction-analyzer-citizen
+description: >
+  Citoyen dédié à l'analyse et la résolution des frictions TALEX.
+  Détecte, classe, analyse causalement et corrige les erreurs système
+  de manière automatique et tracée.
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xCITIZEN_TALEX_FRICTION_ANALYZER_20260922
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+  - talex-friction-analyzer-primitive
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+capabilities:
+  - name: friction-detection
+    description: "Détection systématique des frictions de session"
+  - name: error-classification
+    description: "Classification des erreurs par type et impact P0/P1/P2"
+  - name: causal-root-analysis
+    description: "Analyse causale des causes racines (5 Pourquoi)"
+  - name: corrective-action-generation
+    description: "Génération d'actions correctives atomiques"
+  - name: auto-correction
+    description: "Application automatique des corrections safe"
+  - name: traceability
+    description: "Toute friction et correction est tracée et horodatée"
+states:
+  - name: IDLE
+    nature: en attente de déclenchement
+    gate_to_next: FRICTION_DETECTED
+    question: "Des frictions sont-elles détectées ?"
+  - name: DETECTING
+    nature: collecte des frictions
+    gate_to_next: FRICTIONS_COLLECTED
+    question: "Toutes les frictions sont-elles collectées ?"
+  - name: CLASSIFYING
+    nature: classification par sévérité
+    gate_to_next: CLASSIFIED
+    question: "Les frictions sont-elles classifiées ?"
+  - name: ANALYZING
+    nature: analyse causale
+    gate_to_next: ROOT_CAUSES_IDENTIFIED
+    question: "Les causes racines sont-elles identifiées ?"
+  - name: PROPOSING
+    nature: proposition de corrections
+    gate_to_next: FIXES_PROPOSED
+    question: "Les actions correctives sont-elles proposées ?"
+  - name: APPLYING
+    nature: application des corrections
+    gate_to_next: FIXES_APPLIED
+    question: "Les actions sont-elles appliquées ?"
+  - name: VERIFYING
+    nature: vérification post-correction
+    gate_to_next: VERIFIED
+    question: "Les corrections sont-elles vérifiées ?"
+  - name: DONE
+    nature: audit terminé, mémoire mise à jour
+    question: "Le MDU est-il maintenant méta-cohérent ?"
+functions:
+  - id: F1
+    name: DETECT_FRICTIONS
+    state: IDLE→DETECTING
+    description: "Collecte des frictions de session"
+    implements: proactive-friction-sensor
+  - id: F2
+    name: CLASSIFY_FRICTIONS
+    state: DETECTING→CLASSIFYING
+    description: "Classification P0/P1/P2"
+    implements: ATOM-GATE-LAYERS
+  - id: F3
+    name: ANALYZE_ROOT_CAUSES
+    state: CLASSIFYING→ANALYZING
+    description: "Analyse causale 5 Pourquoi"
+    implements: kg-causal
+  - id: F4
+    name: PROPOSE_FIXES
+    state: ANALYZING→PROPOSING
+    description: "Génération d'actions correctives atomiques"
+    implements: ATOM-CARRY-FORWARD-PRINCIPLE
+  - id: F5
+    name: APPLY_FIXES
+    state: PROPOSING→APPLYING
+    description: "Application des corrections validées"
+    implements: chain-fluidity
+  - id: F6
+    name: VERIFY_FIXES
+    state: APPLYING→VERIFYING
+    description: "Vérification post-correction"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: F7
+    name: RECORD_PROOF
+    state: VERIFYING→DONE
+    description: "Enregistrement des preuves"
+    implements: ATOM-CARRY-FORWARD-PRINCIPLE
+invariant: "Toute friction de session est détectée, classifiée, analysée causalement, et résolue par des actions correctives atomiques vérifiées."
+genes:
+  - id: G1
+    name: systematic-detection
+    description: "Détection systématique de toutes les frictions"
+  - id: G2
+    name: causal-tracing
+    description: "Tracé causal de chaque friction → correction"
+  - id: G3
+    name: auto-correction
+    description: "Corrections automatiques quand safe"
+  - id: G4
+    name: traceability
+    description: "Toute friction et correction est tracée et horodatée"
+anti_patterns:
+  - missing_gene: systematic-detection
+    pathology: "Frictions silencieuses → accumulation de dettes"
+  - missing_gene: causal-tracing
+    pathology: "Corrections superficielles → récidives"
+  - missing_gene: auto-correction
+    pathology: "Corrections manuelles répétitives → perte de temps"
+  - missing_gene: traceability
+    pathology: "Impossibilité d'auditer les corrections"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: enforces
+  - repo: gerivdb/TALEX
+    relation: narrates
+  - repo: gerivdb/VOLTX
+    relation: stores_proofs
+  - repo: gerivdb/KG-CAUSAL
+    relation: causal_graph
+  - design: talex-friction-analyzer
+  - design: ecosystem-meta-coherence
+  - design: meta-coherence
+  - design: chain-fluidity
+  - primitive: talex-friction-analyzer-primitive
+  - atom: ATOM-TALEX-FRICTION-ANALYZER
+  - skill: talex-friction-analyzer
+  - workflow: workflow-talex-friction-analysis
+  - tool: tools/talex_friction_analyzer.py
+  - pipeline: pipeline-friction-analysis-to-fix
+  - citizen: meta-coherence-auditor
