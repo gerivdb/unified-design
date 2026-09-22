@@ -1,8 +1,8 @@
 ---
 type: MOC
 version: "1.2"
-date: "2026-09-21"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xMOC_SYNC_MDU_CATALOG_20260921
 ---
 
@@ -10,7 +10,7 @@ intent_hash: 0xMOC_SYNC_MDU_CATALOG_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
+**Statut** : approved  
 **Date** : 2026-09-21  
 **Version** : 1.2 (évaluation utilité + intégration opérationnelle)
 
