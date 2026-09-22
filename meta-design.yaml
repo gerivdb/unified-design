@@ -424,6 +424,12 @@ designs:
   intent_hash: 0xDESIGN_SAFE_ACTION_GATE_20260921
   consumers: []
   profile: ACTIVE
+- name: ecosystem-meta-coherence-gate
+  path: designs/ecosystem-meta-coherence-gate/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_GATE_20260921
+  consumers: []
+  profile: ACTIVE
 piliers:
 - name: Sonar-Driven Design
   abbr: SDD
@@ -755,6 +761,11 @@ primitives:
   path: primitives/safe-action-gate-primitive.yaml
   version: 1.0.0
   intent_hash: 0xPRIMITIVE_SAFE_ACTION_GATE_20260921
+  status: active
+- name: ecosystem-meta-coherence-gate-primitive
+  path: primitives/ecosystem-meta-coherence-gate-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_ECOSYSTEM_META_COHERENCE_GATE_20260921
   status: active
 skills:
 - name: design-ops-loop-skill
