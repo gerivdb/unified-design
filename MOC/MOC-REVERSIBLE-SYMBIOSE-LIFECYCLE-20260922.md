@@ -2,7 +2,7 @@
 type: MOC
 version: "1.0"
 date: "2026-09-22"
-status: in_review
+status: approved
 intent_hash: 0xMOC_REVERSIBLE_SYMBIOSE_LIFECYCLE_20260922
 ---
 
@@ -10,7 +10,7 @@ intent_hash: 0xMOC_REVERSIBLE_SYMBIOSE_LIFECYCLE_20260922
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
+**Statut** : approved  
 **Date** : 2026-09-22  
 **Version** : 1.0 (création primitive + dissolution_cost)
 
