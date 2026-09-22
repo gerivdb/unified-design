@@ -750,6 +750,16 @@ workflows:
   version: 1.0.0
   intent_hash: 0xWORKFLOW_MDU_DAILY_SYNC_20260921
   status: active
+- name: workflow-artifact-layers-validation
+  path: workflows/workflow-artifact-layers-validation.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_ARTIFACT_LAYERS_VALIDATION_20260920
+  status: active
+- name: workflow-design-ops-loop
+  path: workflows/workflow-design-ops-loop.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_DESIGN_OPS_LOOP_20260920
+  status: active
 primitives:
 - name: design-ops-loop-primitive
   path: primitives/design-ops-loop-primitive.yaml
