@@ -2,7 +2,7 @@
 type: MOC
 version: "1.0"
 date: "2026-09-22"
-status: in_review
+status: approved
 intent_hash: 0xMOC_JEVX_MDU_INTEGRATION_FIX_20260922
 ---
 
