@@ -3,7 +3,7 @@
 | ID | Sujet | Statut |
 |----|-------|--------|
 | MOC-UNIFIED-DESIGN-GOVERNANCE-20260816 | Unified Design Governance | approved |
-| MOC-SAFE-ACTION-PATTERN-20260919 | Safe Action Pattern | proposed |
+| MOC-SAFE-ACTION-PATTERN-20260919 | Safe Action Pattern | approved |
 | MOC-ECOSYSTEM-META-COHERENCE-20260920 | Ecosystem Meta-Coherence | approved |
 | MOC-SESSION-BOOT-20260920 | Session Boot | approved |
 | MOC-CAUSAL-RESOLUTION-METHODOLOGY-2026-08-29 | Causal Resolution Methodology | draft |
@@ -24,5 +24,5 @@
 | MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922 | Reversible Symbiose Lifecycle | in_review |
 | MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | in_review |
 | MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922 | Branch Taxonomy Enforcement | proposed |
-| MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | proposed |
-| MOC-JEVX-MDU-INTEGRATION-FIX-20260922 | JEVX MDU Integration Fix | proposed |
+| MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | approved |
+| MOC-JEVX-MDU-INTEGRATION-FIX-20260922 | JEVX MDU Integration Fix | approved |
