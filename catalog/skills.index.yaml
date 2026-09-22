@@ -689,3 +689,9 @@ entries:
   status: active
   type: skill
   updated: '2026-09-20'
+- id: unified-design/mdu-integrity-checker
+  source_path: skills/mdu-integrity-checker/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-22'
