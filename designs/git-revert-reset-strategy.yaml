@@ -1,0 +1,72 @@
+---
+name: git-revert-reset-strategy
+description: "Decision tree revert vs reset, procédure de rollback sécurisée, et prévention de perte de travail."
+version: "1.0.0"
+status: draft
+layer: L0
+type: design
+profile: STANDARD
+intent_hash: 0xDESIGN_GIT_REVERT_RESET_STRATEGY_20260923
+adr: ADR-094-git-remote-safety-protocol
+inherits:
+  - conflict-resolver-pattern
+  - branch-orphan-conflict-resolver
+depends_on:
+  - merge-fork-balance
+  - atomic-fragmentation
+capabilities:
+  - name: revert-decision
+    description: "Décide entre revert et reset selon le contexte"
+    parameters:
+      revert_public: true
+      reset_local_only: true
+      force_push_banned: true
+  - name: safe-rollback
+    description: "Rollback sécurisé avec backup"
+    parameters:
+      backup_required: true
+      reflog_first: true
+      wal_logging: true
+  - name: data-loss-prevention
+    description: "Prévention de perte de données"
+    parameters:
+      no_hard_reset_without_backup: true
+      no_force_push: true
+      verify_before_delete: true
+principles:
+  - P0_REVERT_PUBLIC: git revert est la commande par défaut pour annuler un commit public
+  - P0_RESET_LOCAL_ONLY: git reset autorisé UNIQUEMENT sur branches locales non poussées
+  - P0_BACKUP_BEFORE_RESET: tout git reset --hard DOIT être précédé d'un backup
+  - P0_REFLOG_FIRST: avant toute opération de rollback, vérifier git reflog
+  - P0_FORCE_PUSH_BANNED: git push --force interdit ; utiliser --force-with-lease uniquement
+constraints:
+  - revert_public: true
+  - reset_local_only: true
+  - backup_required: true
+  - reflog_first: true
+  - no_hard_reset_without_backup: true
+  - no_force_push: true
+workflow:
+  - step: check_reflog
+    action: "git reflog | tail -20"
+    output: reflog_entries
+  - step: decide_action
+    action: "public_branch? -> revert | local_branch? -> reset"
+    output: action
+  - step: create_backup
+    action: "git branch backup-<date>-<branch>"
+    condition: "action == reset"
+  - step: execute_revert
+    action: "git revert <sha>"
+    output: revert_commit
+  - step: execute_reset
+    action: "git reset --hard <sha>"
+    condition: "action == reset AND backup_created"
+  - step: verify
+    action: "git status --short && git log --oneline -5"
+    output: verification_result
+governance:
+  adr: ADR-094-git-remote-safety-protocol
+  design: conflict-resolver-pattern
+  atom: ATOM-REVERT-RESET-GOVERNANCE
+  workflow: safe-rollback
