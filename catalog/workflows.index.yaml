@@ -80,3 +80,10 @@ entries:
   status: ACTIVE
   profile: STANDARD
   consumers: []
+- name: workflow-talex-friction-analysis
+  path: workflows\workflow-talex-friction-analysis.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_TALEX_FRICTION_ANALYSIS_20260922
+  status: active
+  profile: STANDARD
+  consumers: []

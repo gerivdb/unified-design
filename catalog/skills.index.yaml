@@ -701,3 +701,9 @@ entries:
   status: active
   type: skill
   updated: '2026-09-22'
+- id: unified-design/talex-friction-analyzer
+  source_path: skills/talex-friction-analyzer/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-22'
