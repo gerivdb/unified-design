@@ -21,3 +21,73 @@
       - ATOM-FLEX-CACHE-SLICE
       - ATOM-FLEX-AFFINITY-SET
     updated: "2026-09-20"
+- atom_id: ATOM-REBASE-WORKFLOW
+    name: Git Rebase Workflow
+    status: active
+    layer: L0
+    path: atoms/methodology/git/ATOM-REBASE-WORKFLOW.md
+    intent_hash: 0xATOM_REBASE_WORKFLOW_20260923
+    bridges: [GOVERNANCE-HUB, KG-L]
+    required: true
+    dependencies:
+      - ATOM-050-agent-worktree-isolation
+      - ATOM-053-workspace-draft-convention
+    updated: "2026-09-23"
+- atom_id: ATOM-TAG-RELEASE-GOVERNANCE
+    name: Git Tag Release Governance
+    status: active
+    layer: L0
+    path: atoms/methodology/git/ATOM-TAG-RELEASE-GOVERNANCE.md
+    intent_hash: 0xATOM_TAG_RELEASE_GOVERNANCE_20260923
+    bridges: [GOVERNANCE-HUB, KG-L]
+    required: true
+    dependencies:
+      - ATOM-021-SemVer-Changelog
+    updated: "2026-09-23"
+- atom_id: ATOM-HOTFIX-GOVERNANCE
+    name: Hotfix Governance
+    status: active
+    layer: L0
+    path: atoms/methodology/git/ATOM-HOTFIX-GOVERNANCE.md
+    intent_hash: 0xATOM_HOTFIX_GOVERNANCE_20260923
+    bridges: [GOVERNANCE-HUB, KG-L]
+    required: true
+    dependencies:
+      - ATOM-050-agent-worktree-isolation
+      - ATOM-053-workspace-draft-convention
+    updated: "2026-09-23"
+- atom_id: ATOM-SUBMODULE-GOVERNANCE
+    name: Git Submodule Governance
+    status: active
+    layer: L0
+    path: atoms/methodology/git/ATOM-SUBMODULE-GOVERNANCE.md
+    intent_hash: 0xATOM_SUBMODULE_GOVERNANCE_20260923
+    bridges: [GOVERNANCE-HUB, KG-L, CLONE-CAUSAL-PREVENTION]
+    required: true
+    dependencies:
+      - ATOM-066-clone-topology-watch
+    updated: "2026-09-23"
+- atom_id: ATOM-REVERT-RESET-GOVERNANCE
+    name: Git Revert Reset Governance
+    status: active
+    layer: L0
+    path: atoms/methodology/git/ATOM-REVERT-RESET-GOVERNANCE.md
+    intent_hash: 0xATOM_REVERT_RESET_GOVERNANCE_20260923
+    bridges: [GOVERNANCE-HUB, KG-L]
+    required: true
+    dependencies:
+      - ATOM-094-git-remote-safety
+      - ATOM-053-workspace-draft-convention
+    updated: "2026-09-23"
+- atom_id: ATOM-PR-MERGE-GOVERNANCE
+    name: PR Merge Governance
+    status: active
+    layer: L0
+    path: atoms/methodology/git/ATOM-PR-MERGE-GOVERNANCE.md
+    intent_hash: 0xATOM_PR_MERGE_GOVERNANCE_20260923
+    bridges: [GOVERNANCE-HUB, KG-L]
+    required: true
+    dependencies:
+      - ATOM-014-git-policy
+      - ATOM-053-workspace-draft-convention
+    updated: "2026-09-23"

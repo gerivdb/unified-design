@@ -1515,3 +1515,45 @@ entries:
   status: active
   profile: ACTIVE
   consumers: []
+- name: git-rebase-workflow
+  path: designs\git-rebase-workflow.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_GIT_REBASE_WORKFLOW_20260923
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: git-tag-release-management
+  path: designs\git-tag-release-management.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_GIT_TAG_RELEASE_MANAGEMENT_20260923
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: hotfix-workflow
+  path: designs\hotfix-workflow.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_HOTFIX_WORKFLOW_20260923
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: git-submodule-management
+  path: designs\git-submodule-management.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_GIT_SUBMODULE_MANAGEMENT_20260923
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: git-revert-reset-strategy
+  path: designs\git-revert-reset-strategy.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_GIT_REVERT_RESET_STRATEGY_20260923
+  status: draft
+  profile: STANDARD
+  consumers: []
+- name: pr-merge-strategy
+  path: designs\pr-merge-strategy.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_PR_MERGE_STRATEGY_20260923
+  status: draft
+  profile: STANDARD
+  consumers: []
