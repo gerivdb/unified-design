@@ -1,0 +1,66 @@
+---
+name: git-submodule-management
+description: "Lifecycle complet des submodules git : add, update, sync, remove, et synchronisation cross-repo."
+version: "1.0.0"
+status: draft
+layer: L0
+type: design
+profile: STANDARD
+intent_hash: 0xDESIGN_GIT_SUBMODULE_MANAGEMENT_20260923
+adr: ADR-039-clone-topology-watch
+inherits:
+  - clone-dedup-rescue
+  - chain-engineering
+depends_on:
+  - artifact-ownership-routing
+  - meta-coherence
+capabilities:
+  - name: submodule-lifecycle
+    description: "Lifecycle complet des submodules"
+    parameters:
+      registry_required: true
+      version_pinning: true
+      sync_on_pull: true
+  - name: submodule-sync
+    description: "Synchronisation cross-repo des submodules"
+    parameters:
+      cross_repo_consistency: true
+      release_tag_sync: true
+  - name: submodule-remove
+    description: "Suppression sécurisée de submodule"
+    parameters:
+      wal_logging: true
+      gitmodules_update: true
+principles:
+  - P0_SUBMODULE_REGISTRY: tout submodule DOIT être enregistré dans known_repositories.yaml avant add
+  - P0_VERSION_PINNING: submodules DOIVENT être pinnés sur commit SHA, jamais sur branche mobile
+  - P0_NO_SUBMODULE_IN_HOTPATH: interdiction de submodule dans src/, bin/, config/
+  - P0_SYNC_AFTER_PULL: git submodule update --init --recursive obligatoire après git pull
+  - P0_REMOVE_TRACE: suppression de submodule DOIT être tracée dans WAL + .gitmodules mis à jour
+constraints:
+  - registry_required: true
+  - version_pinning: true
+  - no_submodule_in_hotpath: true
+  - sync_after_pull: true
+  - wal_logging: true
+workflow:
+  - step: register_submodule
+    action: "add entry to known_repositories.yaml"
+    output: registry_entry
+  - step: add_submodule
+    action: "git submodule add <url> <path>"
+    output: submodule_added
+  - step: pin_version
+    action: "git submodule update --init --recursive && git add <path>"
+    output: version_pinned
+  - step: sync_submodule
+    action: "git submodule update --init --recursive"
+    output: sync_complete
+  - step: remove_submodule
+    action: "git submodule deinit -f <path> && git rm -f <path> && rm -rf .git/modules/<path>"
+    output: submodule_removed
+governance:
+  adr: ADR-039-clone-topology-watch
+  design: clone-dedup-rescue
+  atom: ATOM-SUBMODULE-GOVERNANCE
+  workflow: submodule-sync
