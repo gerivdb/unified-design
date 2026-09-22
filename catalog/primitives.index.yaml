@@ -53,6 +53,12 @@ entries:
   status: active
   type: primitive
   updated: '2026-09-22'
+- id: primitive-atomicity-contract.yaml
+  source_path: primitives/primitive-atomicity-contract.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-22'
 - name: artifact-layers-primitive
   path: primitives\artifact-layers-primitive.yaml
   version: 1.0.0
@@ -92,6 +98,13 @@ entries:
   path: primitives\ecosystem-meta-coherence-gate-primitive.yaml
   version: 1.0.0
   intent_hash: 0xPRIMITIVE_ECOSYSTEM_META_COHERENCE_GATE_20260921
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: primitive-atomicity-contract
+  path: primitives\primitive-atomicity-contract.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_ATOMICITY_CONTRACT_20260921
   status: active
   profile: STANDARD
   consumers: []

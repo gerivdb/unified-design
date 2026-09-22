@@ -14,7 +14,7 @@
 | MOC-KG-CAUSAL-INTEGRATION-PATTERN-20260921 | KG Causal Integration Pattern | approved |
 | MOC-SAFE-ACTION-GATE-20260921 | Safe Action Gate | approved |
 | MOC-ECOSYSTEM-META-COHERENCE-GATE-20260921 | Ecosystem Meta-Coherence Gate | approved |
-| MOC-PRIMITIVE-ATOMICITY-CONTRACT-20260921 | Primitive Atomicity Contract | in_review |
+| MOC-PRIMITIVE-ATOMICITY-CONTRACT-20260921 | Primitive Atomicity Contract | approved |
 | MOC-META-DESIGN-SELF-HEALING-20260921 | Meta-Design Self-Healing | approved |
 | MOC-PIPELINE-MDU-VALIDATION-20260921 | Pipeline MDU Validation | approved |
 | MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | approved |

@@ -2,7 +2,7 @@
 
 | ID | Sujet | Statut |
 |----|-------|--------|
-| PRD-CAUSAL-RESOLUTION-METHODOLOGY-2026-08-29 | Causal Resolution Methodology | draft |
+| PRD-CAUSAL-RESOLUTION-METHODOLOGY-2026-08-29 | Causal Resolution Methodology | approved |
 | PRD-DESIGNS-COMPLETION-2026-08-24 | Designs Completion | approved |
 | PRD-MOC-MDU-GAPS-2026-08-16 | MDU Gaps MOC | draft |
 | PRD-MOC-JEVX-SOVEREIGN-OVERLAY-20260920 | JEVX Sovereign Overlay | proposed |
@@ -25,7 +25,7 @@
 | PRD-MOC-KG-CAUSAL-INTEGRATION-PATTERN-20260921 | KG Causal Integration Pattern | approved |
 | PRD-MOC-SAFE-ACTION-GATE-20260921 | Safe Action Gate | approved |
 | PRD-MOC-ECOSYSTEM-META-COHERENCE-GATE-20260921 | Ecosystem Meta-Coherence Gate | approved |
-| PRD-MOC-PRIMITIVE-ATOMICITY-CONTRACT-20260921 | Primitive Atomicity Contract | in_review |
+| PRD-MOC-PRIMITIVE-ATOMICITY-CONTRACT-20260921 | Primitive Atomicity Contract | approved |
 | PRD-MOC-META-DESIGN-SELF-HEALING-20260921 | Meta-Design Self-Healing | approved |
 | PRD-MOC-PIPELINE-MDU-VALIDATION-20260921 | Pipeline MDU Validation | approved |
 | PRD-MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | approved |
