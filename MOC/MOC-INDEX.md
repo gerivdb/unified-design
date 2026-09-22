@@ -6,7 +6,7 @@
 | MOC-SAFE-ACTION-PATTERN-20260919 | Safe Action Pattern | approved |
 | MOC-ECOSYSTEM-META-COHERENCE-20260920 | Ecosystem Meta-Coherence | approved |
 | MOC-SESSION-BOOT-20260920 | Session Boot | approved |
-| MOC-CAUSAL-RESOLUTION-METHODOLOGY-2026-08-29 | Causal Resolution Methodology | draft |
+| MOC-CAUSAL-RESOLUTION-METHODOLOGY-2026-08-29 | Causal Resolution Methodology | approved |
 | MOC-ARTIFACT-EXTRACTION-20260920 | Artifact Extraction System | approved |
 | MOC-MDU-INTEGRITY-CHECKER-20260921 | MDU Integrity Checker | approved |
 | MOC-SYNC-MDU-CATALOG-20260921 | Sync MDU Catalog | approved |
