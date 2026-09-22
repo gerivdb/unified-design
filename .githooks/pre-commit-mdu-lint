@@ -1,0 +1,21 @@
+#!/bin/bash
+# pre-commit hook — MDU Integrity Check
+# Bloque le commit si mdu-lint --strict détecte des écarts critiques.
+
+set -euo pipefail
+
+echo "[HOOK] Running mdu-lint --strict..."
+python tools/mdu-lint.py --strict
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -eq 1 ]; then
+  echo "[HOOK] BLOCKED: mdu-lint detected critical MDU inconsistencies."
+  echo "[HOOK] Fix the issues above before committing."
+  exit 1
+elif [ $EXIT_CODE -eq 2 ]; then
+  echo "[HOOK] WARNING: mdu-lint detected warnings (non-blocking)."
+else
+  echo "[HOOK] MDU integrity check passed."
+fi
+
+exit 0

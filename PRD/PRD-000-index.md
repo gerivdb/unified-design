@@ -19,7 +19,7 @@
 | PRD-MOC-ECOSYSTEM-META-COHERENCE-EXTENSION-20260920 | Ecosystem Meta-Coherence Extension | in_review |
 | PRD-MOC-SESSION-BOOT-20260920 | Session Boot | approved |
 | PRD-MOC-SAFE-ACTION-PATTERN-20260919 | Safe Action Pattern | approved |
-| PRD-MOC-MDU-INTEGRITY-CHECKER-20260921 | MDU Integrity Checker | in_review |
+| PRD-MOC-MDU-INTEGRITY-CHECKER-20260921 | MDU Integrity Checker | approved |
 | PRD-MOC-SYNC-MDU-CATALOG-20260921 | Sync MDU Catalog | approved |
 | PRD-MOC-MDU-LINT-20260921 | MDU Lint | approved |
 | PRD-MOC-KG-CAUSAL-INTEGRATION-PATTERN-20260921 | KG Causal Integration Pattern | approved |
