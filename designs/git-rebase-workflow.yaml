@@ -2,7 +2,7 @@
 name: git-rebase-workflow
 description: "Workflow standardisé pour git rebase : décision rebase vs merge, rebase interactif, autosquash, résolution de conflits, et cleanup post-rebase."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 type: design
 profile: STANDARD

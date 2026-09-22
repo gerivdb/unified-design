@@ -2,7 +2,7 @@
 name: hotfix-workflow
 description: "Workflow de correctif urgent : création branche hotfix/*, merge d'urgence, rollback, et post-mortem."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 type: design
 profile: STANDARD

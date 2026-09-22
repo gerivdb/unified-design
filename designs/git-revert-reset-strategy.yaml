@@ -2,7 +2,7 @@
 name: git-revert-reset-strategy
 description: "Decision tree revert vs reset, procédure de rollback sécurisée, et prévention de perte de travail."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 type: design
 profile: STANDARD

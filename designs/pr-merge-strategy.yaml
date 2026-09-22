@@ -2,7 +2,7 @@
 name: pr-merge-strategy
 description: "Sélection de la stratégie de merge PR : merge commit, squash, rebase. Règles de décision par contexte, et traçabilité du merge."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 type: design
 profile: STANDARD

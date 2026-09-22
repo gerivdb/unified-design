@@ -2,7 +2,7 @@
 name: git-tag-release-management
 description: "Politique de taggit et workflow de release : SemVer strict, signed tags, release branch, changelog automatique, et gouvernance des versions."
 version: "1.0.0"
-status: draft
+status: active
 layer: L0
 type: design
 profile: STANDARD
