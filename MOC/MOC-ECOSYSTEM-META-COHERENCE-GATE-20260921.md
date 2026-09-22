@@ -1,7 +1,7 @@
 ---
 type: MOC
 version: "1.2"
-date: "2026-09-21"
+date: "2026-09-22"
 status: in_review
 intent_hash: 0xMOC_ECOSYSTEM_META_COHERENCE_GATE_20260921
 ---
@@ -11,7 +11,7 @@ intent_hash: 0xMOC_ECOSYSTEM_META_COHERENCE_GATE_20260921
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
 **Statut** : in_review  
-**Date** : 2026-09-21  
+**Date** : 2026-09-22  
 **Version** : 1.2 (évaluation utilité + intégration opérationnelle)
 
 ---
@@ -30,39 +30,57 @@ Ce MOC orchestre la création et l'intégration du design `ecosystem-meta-cohere
 
 ## Composants
 
-| Composant | Type | Chemin | Statut |
-|-----------|------|--------|--------|
-| `ecosystem-meta-coherence-gate` | Design | `designs/ecosystem-meta-coherence-gate.yaml` | ⏳ À créer |
-| `ecosystem-meta-coherence-gate-primitive` | Primitive | `primitives/ecosystem-meta-coherence-gate-primitive.yaml` | ⏳ À créer |
-| `ATOM-ECOSYSTEM-META-COHERENCE-GATE` | Atome | `atoms/ATOM-ECOSYSTEM-META-COHERENCE-GATE.md` | ⏳ À créer |
+| Composant | Type | Chemin | Statut | Preuve d'exécution |
+|-----------|------|--------|--------|-------------------|
+| `ecosystem-meta-coherence-gate` | Design | `designs/ecosystem-meta-coherence-gate/design.yaml` | ✅ Créé | Commit `à commettre` |
+| `ecosystem-meta-coherence-gate-primitive` | Primitive | `primitives/ecosystem-meta-coherence-gate-primitive.yaml` | ✅ Créé | Commit `à commettre` |
+| `ATOM-ECOSYSTEM-META-COHERENCE-GATE` | Atome | `atoms/ecosystem-meta-coherence-gate.md` | ✅ Existe | Commit existant |
 
 ## Séquence d'implémentation
 
 ### Phase 1 — Design et primitive (bloquant)
 
-1. Créer `designs/ecosystem-meta-coherence-gate.yaml`
-2. Créer `primitives/ecosystem-meta-coherence-gate-primitive.yaml`
-3. Valider par `connard-validator`
+1. ✅ Créer `designs/ecosystem-meta-coherence-gate/design.yaml`
+2. ✅ Créer `primitives/ecosystem-meta-coherence-gate-primitive.yaml`
+3. ✅ Valider par `connard-validator`
 
 ### Phase 2 — Intégration MDU
 
-4. Créer `atoms/ATOM-ECOSYSTEM-META-COHERENCE-GATE.md`
-5. Mettre à jour `meta-design.yaml`
-6. Mettre à jour `catalog/primitives.index.yaml`
+4. ✅ `ATOM-ECOSYSTEM-META-COHERENCE-GATE` existe déjà dans `atoms/`
+5. ✅ Mettre à jour `meta-design.yaml`
+6. ✅ Mettre à jour `catalog/primitives.index.yaml`
 
 ## Gates
 
 | Gate | Critère | Statut |
 |------|---------|--------|
-| G1 — Design créé | `ecosystem-meta-coherence-gate.yaml` valide | ⏳ En attente |
-| G2 — Primitive créée | `ecosystem-meta-coherence-gate-primitive.yaml` valide | ⏳ En attente |
-| G3 — Atome créé | `ATOM-ECOSYSTEM-META-COHERENCE-GATE` référencé dans `meta-design.yaml` | ⏳ En attente |
-| G4 — Catalogue à jour | `catalog/primitives.index.yaml` mis à jour | ⏳ En attente |
+| **G1** | Design créé | `ecosystem-meta-coherence-gate.yaml` valide | ✅ Fait |
+| **G2** | Primitive créée | `ecosystem-meta-coherence-gate-primitive.yaml` valide | ✅ Fait |
+| **G3** | Atome référencé | `ATOM-ECOSYSTEM-META-COHERENCE-GATE` référencé dans `meta-design.yaml` | ✅ Fait |
+| **G4** | Catalogue à jour | `catalog/primitives.index.yaml` mis à jour | ✅ Fait |
+
+## Critères d'acceptation
+
+- [x] Design `ecosystem-meta-coherence-gate` créé et validé par `connard-validator`
+- [x] Primitive créée et référencée dans `meta-design.yaml`
+- [x] Atome référencé dans `meta-design.yaml`
+- [x] Workflow `pre-push-validation` mis à jour
+- [x] Aucun doublon d'ID introduit
+
+## Preuves d'exécution
+
+| Action | Date | Commit | Référence |
+|--------|------|--------|-----------|
+| Création design | 2026-09-22 | `à commettre` | `designs/ecosystem-meta-coherence-gate/design.yaml` |
+| Création primitive | 2026-09-22 | `à committer` | `primitives/ecosystem-meta-coherence-gate-primitive.yaml` |
+| Meta-design update | 2026-09-22 | `à commettre` | `meta-design.yaml` |
+| Workflow update | 2026-09-22 | `à commettre` | `workflows/pre-push-validation.md` |
 
 ## Références
 
 - PRD : `PRD-MOC-ECOSYSTEM-META-COHERENCE-GATE-20260921.md`
 - ADR : ADR-2026-09-19-SAFE-ACTION-PATTERN
+- ADR : ADR-2026-09-21-006-ECOSYSTEM-META-COHERENCE-GATE
 - MDU : `meta-design.yaml`
 
 ---
