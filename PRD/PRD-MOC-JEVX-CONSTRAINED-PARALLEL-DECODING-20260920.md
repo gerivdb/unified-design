@@ -1,8 +1,8 @@
 ---
 type: PRD-MOC
 version: "1.0.0"
-date: "2026-09-20"
-status: proposed
+date: "2026-09-22"
+status: approved
 intent_hash: 0xINTENT_JEVX_SOVEREIGN_OVERLAY_20260919
 author: gerivdb
 source_repo: gerivdb/unified-design
