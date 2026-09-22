@@ -1,0 +1,74 @@
+---
+name: git-tag-release-management
+description: "Politique de taggit et workflow de release : SemVer strict, signed tags, release branch, changelog automatique, et gouvernance des versions."
+version: "1.0.0"
+status: draft
+layer: L0
+type: design
+profile: STANDARD
+intent_hash: 0xDESIGN_GIT_TAG_RELEASE_MANAGEMENT_20260923
+adr: ADR-2026-08-29-005-KERNEL-VERSIONING-POLICY
+inherits:
+  - atomic-fragmentation
+  - merge-fork-balance
+depends_on:
+  - meta-coherence
+  - safe-action-pattern
+capabilities:
+  - name: tag-governance
+    description: "Gouvernance des tags git"
+    parameters:
+      semver_strict: true
+      signed_tags_required: true
+      tag_naming: "MAJOR.MINOR.PATCH"
+      forbidden_names: [latest, stable, v1, current]
+  - name: release-workflow
+    description: "Workflow de release automatisé"
+    parameters:
+      release_branch_required: true
+      changelog_required: true
+      clean_tree_required: true
+      tag_on_commit: true
+  - name: changelog-automation
+    description: "Génération automatique du changelog"
+    parameters:
+      conventional_commits: true
+      auto_generate: true
+principles:
+  - P0_SEMVER_STRICT: tags MUST follow SemVer 2.0.0 MAJOR.MINOR.PATCH
+  - P0_SIGNED_TAGS: tags de release DOIVENT être signés pour repos critiques
+  - P0_CHANGELOG_OBLIGATORY: tout tag DOIT avoir CHANGELOG.md mis à jour dans le même commit
+  - P0_RELEASE_BRANCH: release DOIT passer par branche release/* ; pas de tag direct sur main
+  - P0_CLEAN_TREE: tag autorisé uniquement sur commit avec working tree clean
+constraints:
+  - semver_strict: true
+  - signed_tags_required: true
+  - changelog_required: true
+  - release_branch_required: true
+  - clean_tree_required: true
+  - tag_naming: "MAJOR.MINOR.PATCH"
+  - forbidden_names: [latest, stable, v1, current]
+workflow:
+  - step: create_release_branch
+    action: "git checkout -b release/v<version> main"
+    output: release_branch
+  - step: update_changelog
+    action: "python scripts/generate_changelog.py --version <version>"
+    output: changelog_updated
+  - step: commit_changelog
+    action: "git add CHANGELOG.md && git commit -m 'docs: update changelog for v<version>'"
+    output: changelog_commit
+  - step: create_tag
+    action: "git tag -s v<version> -m 'Release v<version>'"
+    output: tag_created
+  - step: merge_release
+    action: "git checkout main && git merge --no-ff release/v<version>"
+    output: merge_commit
+  - step: push_release
+    action: "git push origin main --tags && git push origin --delete release/v<version>"
+    output: push_complete
+governance:
+  adr: ADR-2026-08-29-005-KERNEL-VERSIONING-POLICY
+  design: merge-fork-balance
+  atom: ATOM-TAG-RELEASE-GOVERNANCE
+  workflow: release-automation
