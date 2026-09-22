@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-22"
-status: in_review
+status: approved
 intent_hash: 0xPRD_MOC_STRUCTURAL_COHERENCE_20260922
 author: gerivdb
 source_repo: gerivdb/unified-design
