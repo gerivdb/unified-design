@@ -26,7 +26,7 @@
 | PRD-MOC-SAFE-ACTION-GATE-20260921 | Safe Action Gate | approved |
 | PRD-MOC-ECOSYSTEM-META-COHERENCE-GATE-20260921 | Ecosystem Meta-Coherence Gate | approved |
 | PRD-MOC-PRIMITIVE-ATOMICITY-CONTRACT-20260921 | Primitive Atomicity Contract | in_review |
-| PRD-MOC-META-DESIGN-SELF-HEALING-20260921 | Meta-Design Self-Healing | in_review |
+| PRD-MOC-META-DESIGN-SELF-HEALING-20260921 | Meta-Design Self-Healing | approved |
 | PRD-MOC-PIPELINE-MDU-VALIDATION-20260921 | Pipeline MDU Validation | in_review |
 | PRD-MOC-MDU-DAILY-SYNC-20260921 | MDU Daily Sync Workflow | in_review |
 | PRD-MOC-ATOM-MDU-CATALOG-SYNC-20260921 | ATOM MDU Catalog Sync | in_review |
