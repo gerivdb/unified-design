@@ -36,4 +36,5 @@
 | PRD-MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | in_review |
 | PRD-MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922 | Branch Taxonomy Enforcement | proposed |
 | PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | proposed |
+| PRD-MOC-STRUCTURAL-COHERENCE-20260922 | Structural Coherence | in_review |
 | PRD-UNIFIED-DESIGN-GOVERNANCE-GAPS-2026-08-16 | Unified Design Governance Gaps | approved |

@@ -16,6 +16,12 @@ ontology:
     - dry-run-causal
     - branch-taxonomy-enforcement
     - command-resolution-protocol
+    - git-lock-guardian
+    - temporal-inconsistency-detector
+    - cross-repo-reference-validator
+    - ontology-dedup-auditor
+    - design-code-sync
+    - catalog-consumer-auditor
   repo: gerivdb/ONTOLOGY
 ---
 
@@ -101,6 +107,12 @@ Corriger les incohérences d'intégration de JEVX dans le MDU et les registres �
 | `docs(catalog): document JEVX consumers` | `catalog/designs.index.yaml`, `catalog/pipelines.index.yaml` | L5, L6 |
 | `fix(clm): add JEVX to CLM pipeline or remove ref` | `designs/clm-pipeline/design.yaml`, `designs/jevx.yaml` | L7 |
 | `fix(jevx): clean SCOPE and ONTOLOGY_DECLARATION` | `JEVX/SCOPE.yaml`, `JEVX/ONTOLOGY_DECLARATION.yaml` | L8, L9 |
+| `feat(patterns): add git-lock-guardian` | `designs/git-lock-guardian.md` | L13 |
+| `feat(patterns): add temporal-inconsistency-detector` | `designs/temporal-inconsistency-detector.md` | L14 |
+| `feat(patterns): add cross-repo-reference-validator` | `designs/cross-repo-reference-validator.md` | L15 |
+| `feat(pipeline): add structural-coherence-pipeline` | `pipelines/structural-coherence-pipeline.yaml` | L16 |
+| `feat(workflow): add dryrun-causal-workflow` | `workflows/dryrun-causal-workflow.md` | L17 |
+| `feat(report): add TALEX friction analysis` | `reports/REPORT-TALEX-FRICTION-ANALYSIS-20260922.md` | L18 |
 
 ## 6. Adossement (PF2)
 
