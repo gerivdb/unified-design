@@ -23,6 +23,6 @@
 | MOC-SYMBIOSE-REVERSIBLE-PLUGIN-ARCHITECTURE-20260922 | Symbiose Reversible Plugin Architecture | in_review |
 | MOC-REVERSIBLE-SYMBIOSE-LIFECYCLE-20260922 | Reversible Symbiose Lifecycle | in_review |
 | MOC-SYMBIOSE-COORDINATED-RELOAD-20260922 | Symbiose Coordinated Reload | in_review |
-| MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922 | Branch Taxonomy Enforcement | proposed |
+| MOC-BRANCH-TAXONOMY-ENFORCEMENT-20260922 | Branch Taxonomy Enforcement | approved |
 | MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | approved |
 | MOC-JEVX-MDU-INTEGRATION-FIX-20260922 | JEVX MDU Integration Fix | approved |
