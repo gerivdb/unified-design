@@ -36,6 +36,15 @@ Ce MOC orchestre la correction des incohérences d'intégration de JEVX dans le 
 | L10 | Marquer `security_guardrails` draft | `designs/jevx.yaml` | ✅ Fait | Commit `cd6b2d1` |
 | L11 | Marquer `constrained-parallel-decoding` draft | `designs/jevx-engineering.yaml` | ✅ Fait | Commit `cd6b2d1` |
 | L12 | Aligner `max_queue` sur code | `designs/jevx.yaml` | ✅ Fait | Commit `cd6b2d1` |
+| L13 | Pattern `git-lock-guardian` | `designs/git-lock-guardian.md` | ✅ Fait | Commit `416a0b6` |
+| L14 | Pattern `temporal-inconsistency-detector` | `designs/temporal-inconsistency-detector.md` | ✅ Fait | Commit `416a0b6` |
+| L15 | Pattern `cross-repo-reference-validator` | `designs/cross-repo-reference-validator.md` | ✅ Fait | Commit `416a0b6` |
+| L16 | Pipeline `structural-coherence-pipeline` | `pipelines/structural-coherence-pipeline.yaml` | ✅ Fait | Commit `416a0b6` |
+| L17 | Workflow `dryrun-causal-workflow` | `workflows/dryrun-causal-workflow.md` | ✅ Fait | Commit `416a0b6` |
+| L18 | Rapport TALEX friction analysis | `reports/REPORT-TALEX-FRICTION-ANALYSIS-20260922.md` | ✅ Fait | Commit `416a0b6` |
+| L19 | Pattern `ontology-dedup-auditor` | `designs/ontology-dedup-auditor.md` | ✅ Fait | Commit `416a0b6` |
+| L20 | Pattern `design-code-sync` | `designs/design-code-sync.md` | ✅ Fait | Commit `416a0b6` |
+| L21 | Pattern `catalog-consumer-auditor` | `designs/catalog-consumer-auditor.md` | ✅ Fait | Commit `416a0b6` |
 
 ## Dépendances
 
@@ -59,6 +68,10 @@ Ce MOC orchestre la correction des incohérences d'intégration de JEVX dans le 
 | **G5** | Consumers documentés dans catalogues | `catalog/designs.index.yaml`, `catalog/pipelines.index.yaml` | ✅ Fait |
 | **G6** | CLM pipeline cohérent avec JEVX | `designs/clm-pipeline/design.yaml` | ✅ Fait |
 | **G7** | `SCOPE.yaml` et `ONTOLOGY_DECLARATION.yaml` corrigés | JEVX repo | ✅ Fait |
+| **G8** | Patterns structurels créés et validés | designs | ✅ Fait |
+| **G9** | Pipeline `structural-coherence-pipeline` créé | `pipelines/structural-coherence-pipeline.yaml` | ✅ Fait |
+| **G10** | Workflow `dryrun-causal-workflow` créé | `workflows/dryrun-causal-workflow.md` | ✅ Fait |
+| **G11** | Rapport TALEX friction analysis créé | `reports/REPORT-TALEX-FRICTION-ANALYSIS-20260922.md` | ✅ Fait |
 
 ## Critères d'acceptation
 
@@ -72,6 +85,10 @@ Ce MOC orchestre la correction des incohérences d'intégration de JEVX dans le 
 - [x] `JEVX/SCOPE.yaml` : aucune référence invalide
 - [x] `JEVX/ONTOLOGY_DECLARATION.yaml` : aucun doublon
 - [x] Tous les designs passent validation
+- [x] Patterns structurels créés : `git-lock-guardian`, `temporal-inconsistency-detector`, `cross-repo-reference-validator`, `ontology-dedup-auditor`, `design-code-sync`, `catalog-consumer-auditor`
+- [x] Pipeline `structural-coherence-pipeline` créé
+- [x] Workflow `dryrun-causal-workflow` créé
+- [x] Rapport TALEX friction analysis créé
 
 ## Références
 
