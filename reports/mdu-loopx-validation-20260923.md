@@ -1,14 +1,16 @@
 # MDU-LOOPX Validation Report
 Date: 2026-09-23
 Total designs: 121
-Total LOOPX routines: 58
-Mapped: 62
-Unmapped designs: 59
+Total LOOPX routines: 69
+Mapped: 68
+Unmapped designs: 53
 
 ## Coverage
-Coverage: 51.2%
+Coverage: 56.2%
 
 ## Mapped designs (sample)
+- admg-state-model -> causal.kg.engine (causal)
+- agent-observability-architecture -> causal.kg.engine (causal)
 - agent-swarm-self-improving-loop -> meta.list (meta)
 - atomic-fragmentation -> budget.check (budget)
 - awareness -> test.run (test)
@@ -27,6 +29,8 @@ Coverage: 51.2%
 - delivery-engine -> test.run (test)
 - deterministic-budget-control -> meta.list (meta)
 - dry-run-simulation -> verifiers.catalog (governance)
+- ecosystem-consciousness -> causal.kg.engine (causal)
+- elegance -> ops.advanced (advanced)
 - entropy-search -> meta.list (meta)
 - extra-spection -> meta.list (meta)
 - file-spool-interprocess -> git.sync (git)
@@ -55,20 +59,14 @@ Coverage: 51.2%
 - meta-cluster-design -> git.sync (git)
 - meta-coherence -> git.sync (git)
 - meta-designer-role -> git.sync (git)
-- moc-governance -> verifiers.catalog (governance)
-- persistent-learning-loop -> git.sync (git)
-- pr-merge-strategy -> git.sync (git)
-- prd-moc-progress-sync -> git.sync (git)
-- ... and 12 more
+- ... and 18 more
 
 ## Unmapped designs (no LOOPX routine yet)
 - EGMI-v0.3
 - LOOPX-Routines
 - admg-dag3-hierarchy
-- admg-state-model
 - aep-fractal-repo-structure
 - agent-engineering-maturity
-- agent-observability-architecture
 - anamorphic_morphism
 - approval-readiness
 - argus-orphan-scanner
@@ -86,9 +84,7 @@ Coverage: 51.2%
 - cross-package-dual-import
 - debt-relief
 - design-coverage-scanner
-- ecosystem-consciousness
 - ecosystem-feedback-loop
-- elegance
 - ergonomics
 - exploration
 - fractal-engineering-strata
@@ -110,7 +106,6 @@ Coverage: 51.2%
 - plix
 - plix-audio
 - pr-review-resolver
-- problem-structuring-method
 - rlm-243
 - spidx
 - swarm-lease
@@ -120,19 +115,7 @@ Coverage: 51.2%
 - topos
 - trix
 - unforeseen-lifecycle
-- viable-initial-state
-## Dryrun Causal Validation
 
-- [x] All active/approved designs have `intent_hash` and `adr` (0 issues)
-- [x] All LOOPX routines are valid YAML (0 errors)
-- [x] MDU-LOOPX matrix generated with 51.2% coverage (62/121 designs mapped)
-- [x] 58 LOOPX routines created across 21 categories
-- [x] Pre-commit hooks passed for all commits
-
-## Final Status
-
-**MDU designs**: 121 active/approved, 0 draft orphan, 0 missing intent_hash, 0 missing adr
-**LOOPX routines**: 58 created, 0 YAML errors
-**Coverage**: 51.2% (62/121 designs mapped to routines)
-**Gaps**: 59 designs remain unmapped (no specific LOOPX routine yet)
-**Validation**: PASSED
+## Actions required
+- Create LOOPX routines for 53 unmapped designs
+- Refine semantic mapping for better coverage

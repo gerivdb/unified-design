@@ -1,4 +1,6 @@
 design_name,design_path,loopx_routine,routine_path,routine_category
+admg-state-model,designs\admg-state-model.yaml,causal.kg.engine,LOOPX/routines\kg_l\causal_kg_engine.yaml,causal
+agent-observability-architecture,designs\agent-observability-architecture.yaml,causal.kg.engine,LOOPX/routines\kg_l\causal_kg_engine.yaml,causal
 agent-swarm-self-improving-loop,designs\agent-swarm-self-improving-loop.yaml,meta.list,LOOPX/routines\meta\meta_list.yaml,meta
 atomic-fragmentation,designs\atomic-fragmentation.yaml,budget.check,LOOPX/routines\budget\budget_check.yaml,budget
 awareness,designs\awareness.yaml,test.run,LOOPX/routines\test\test_run.yaml,test
@@ -17,6 +19,8 @@ deepmind-co-scientist-reliability,designs\deepmind-co-scientist-reliability.yaml
 delivery-engine,designs\delivery-engine.yaml,test.run,LOOPX/routines\test\test_run.yaml,test
 deterministic-budget-control,designs\deterministic-budget-control.yaml,meta.list,LOOPX/routines\meta\meta_list.yaml,meta
 dry-run-simulation,designs\dry-run-simulation.yaml,verifiers.catalog,LOOPX/routines\verifiers\verifiers_catalog.yaml,governance
+ecosystem-consciousness,designs\ecosystem-consciousness.yaml,causal.kg.engine,LOOPX/routines\kg_l\causal_kg_engine.yaml,causal
+elegance,designs\elegance.yaml,ops.advanced,LOOPX/routines\ops\ops_advanced.yaml,advanced
 entropy-search,designs\entropy-search.yaml,meta.list,LOOPX/routines\meta\meta_list.yaml,meta
 extra-spection,designs\extra-spection.yaml,meta.list,LOOPX/routines\meta\meta_list.yaml,meta
 file-spool-interprocess,designs\file-spool-interprocess.yaml,git.sync,LOOPX/routines\git\git_sync.yaml,git
@@ -49,6 +53,7 @@ moc-governance,designs\moc-governance.yaml,verifiers.catalog,LOOPX/routines\veri
 persistent-learning-loop,designs\persistent-learning-loop.yaml,git.sync,LOOPX/routines\git\git_sync.yaml,git
 pr-merge-strategy,designs\pr-merge-strategy.yaml,git.sync,LOOPX/routines\git\git_sync.yaml,git
 prd-moc-progress-sync,designs\prd-moc-progress-sync.yaml,git.sync,LOOPX/routines\git\git_sync.yaml,git
+problem-structuring-method,designs\problem-structuring-method.yaml,ops.advanced,LOOPX/routines\ops\ops_advanced.yaml,advanced
 reasoningbank-persistent-strategy,designs\reasoningbank-persistent-strategy.yaml,memory.recall,LOOPX/routines\memory\memory_recall.yaml,memory
 recovery-tooling,designs\recovery-tooling.yaml,test.run,LOOPX/routines\test\test_run.yaml,test
 runner-family-stratification,designs\runner-family-stratification.yaml,meta.list,LOOPX/routines\meta\meta_list.yaml,meta
@@ -60,4 +65,5 @@ thought-commit-pipeline,designs\thought-commit-pipeline.yaml,git.sync,LOOPX/rout
 umodel-agent-ready-data,designs\umodel-agent-ready-data.yaml,verifiers.catalog,LOOPX/routines\verifiers\verifiers_catalog.yaml,governance
 unified-design-alignment-dag3,designs\unified-design-alignment-dag3.yaml,meta.list,LOOPX/routines\meta\meta_list.yaml,meta
 value-machine,designs\value-machine.yaml,test.run,LOOPX/routines\test\test_run.yaml,test
+viable-initial-state,designs\viable-initial-state.yaml,causal.kg.engine,LOOPX/routines\kg_l\causal_kg_engine.yaml,causal
 wazaa-social-bus,designs\wazaa-social-bus.yaml,verifiers.catalog,LOOPX/routines\verifiers\verifiers_catalog.yaml,governance
