@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/breakthrough_fix.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Fix breakthrough issues and apply patches"
 examples:
   - "loopx routine breakthrough.fix"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/memory_recall.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Memory recall: search past sessions, retrieve context"
 examples:
   - "loopx routine memory.recall"

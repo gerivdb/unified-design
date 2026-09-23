@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_ecosystem_consciousness.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Ecosystem consciousness validation: awareness, intelligence, exploration, introspection"
 examples:
   - "loopx routine meta.ecosystem.consciousness"

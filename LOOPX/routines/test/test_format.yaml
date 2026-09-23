@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/test_format.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Test format: lint, format, style check"
 examples:
   - "loopx routine test.format"

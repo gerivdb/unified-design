@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/hooks_install.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Install git hooks: pre-commit, pre-push, commit-msg"
 examples:
   - "loopx routine hooks.install"

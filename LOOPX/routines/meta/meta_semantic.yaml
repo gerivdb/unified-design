@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_semantic.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Semantic structure validation: conversation-semantic-layer, m5-production-ontologique"
 examples:
   - "loopx routine meta.semantic"

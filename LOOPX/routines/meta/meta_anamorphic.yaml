@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_anamorphic.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Anamorphic transformation: pattern morphing and recursive restructuring"
 examples:
   - "loopx routine meta.anamorphic"

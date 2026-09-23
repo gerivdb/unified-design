@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_ecosystem_feedback.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Ecosystem feedback loop: persistent-learning-loop, seven-turns-reflection, teach-learn-asymmetry"
 examples:
   - "loopx routine meta.ecosystem.feedback"

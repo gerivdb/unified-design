@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_workflow.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Workflow pattern validation: problem-structuring-method, value-machine"
 examples:
   - "loopx routine meta.workflow"

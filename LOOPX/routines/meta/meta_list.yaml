@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_list.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "List meta components and registry entries"
 examples:
   - "loopx routine meta.list"

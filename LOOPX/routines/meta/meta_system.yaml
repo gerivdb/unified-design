@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_system.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "System architecture validation: EGMI, LOOPX, autonomy, balise, flex, intelligence"
 examples:
   - "loopx routine meta.system"

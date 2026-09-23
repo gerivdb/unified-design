@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_pattern.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Design pattern validation: circuit-breaker, conflict-resolver, pattern-first-right-capture"
 examples:
   - "loopx routine meta.pattern"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/skills_list.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "List available skills and their descriptions"
 examples:
   - "loopx routine skills.list"

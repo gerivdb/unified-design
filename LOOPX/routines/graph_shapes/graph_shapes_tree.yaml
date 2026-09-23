@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/graph_shapes_tree.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Tree graph shape: hierarchical structure, branch analysis"
 examples:
   - "loopx routine graph_shapes.tree"

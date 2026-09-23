@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/git_sync.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Git sync: pull, rebase, conflict resolution, merge strategy"
 examples:
   - "loopx routine git.sync"

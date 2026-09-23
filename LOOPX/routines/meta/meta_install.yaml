@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_install.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Meta component installation and version management"
 examples:
   - "loopx routine meta.install"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/zig_test.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Zig test: run zig test, validate results"
 examples:
   - "loopx routine zig.test"

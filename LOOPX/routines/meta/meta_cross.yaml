@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_cross.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Cross-cutting concern integration: conversation-to-execution, cross-package, file-spool, merge-fork"
 examples:
   - "loopx routine meta.cross"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/kg_l_sync.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "KG-L sync: VERSES pipeline, anchor injection, link validation"
 examples:
   - "loopx routine kg_l.sync"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/deploy_docker.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Docker deployment: container build, push, health check"
 examples:
   - "loopx routine deploy.docker"

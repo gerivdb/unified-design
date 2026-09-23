@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/citizens_inspect.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Inspect citizen modules and validate structure"
 examples:
   - "loopx routine citizens.inspect"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/zig_build.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Zig build: compile with -Dcpu=westmere, validate dispatch"
 examples:
   - "loopx routine zig.build"

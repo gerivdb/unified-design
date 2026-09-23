@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/loop_types_daily.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Daily loop: scan, sync, audit, report"
 examples:
   - "loopx routine loop_types.daily"

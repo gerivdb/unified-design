@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/git_commit.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Git commit: conventional commits, atomic staging, verification"
 examples:
   - "loopx routine git.commit"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/verifiers_ontology.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Verify ontology: term gate, concept validation, anchor check"
 examples:
   - "loopx routine verifiers.ontology"

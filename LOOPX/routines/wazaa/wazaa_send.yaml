@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/wazaa_send.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Wazaa send: broadcast swarm messages"
 examples:
   - "loopx routine wazaa.send"

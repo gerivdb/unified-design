@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_design_governance.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Design governance validation: approval-readiness, hitl-assistance, moc-governance"
 examples:
   - "loopx routine meta.design.governance"

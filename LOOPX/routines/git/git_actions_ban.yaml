@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/git_actions_ban.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "GitHub Actions ban: validate no GH Actions workflows"
 examples:
   - "loopx routine git.actions_ban"

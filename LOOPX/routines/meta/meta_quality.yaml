@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_quality.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Quality pattern validation: atomic-fragmentation, entropy-search, ergonomics, extra-spection"
 examples:
   - "loopx routine meta.quality"

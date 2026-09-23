@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_engineering.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Engineering structure validation: agent-engineering, codedb, deepmind, delivery-engine, harness"
 examples:
   - "loopx routine meta.engineering"

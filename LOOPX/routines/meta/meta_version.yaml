@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_version.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Check meta versions and compatibility matrix"
 examples:
   - "loopx routine meta.version"

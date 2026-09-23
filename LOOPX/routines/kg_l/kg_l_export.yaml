@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/kg_l_export.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "KG-L export: domain links, ontology anchors, semantic graph"
 examples:
   - "loopx routine kg_l.export"

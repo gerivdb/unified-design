@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/citizens_list.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "List all registered citizens and their status"
 examples:
   - "loopx routine citizens.list"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/budget_check.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Check agent budget: RAM/CPU availability before session launch"
 examples:
   - "loopx routine budget.check"

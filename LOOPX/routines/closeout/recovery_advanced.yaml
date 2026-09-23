@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/recovery_advanced.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Advanced recovery: tooling, debt-relief, breakthrough"
 examples:
   - "loopx routine recovery.advanced"

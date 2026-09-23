@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/closeout_session.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Session closeout: D5 gate verification, branch cleanup"
 examples:
   - "loopx routine closeout.session"

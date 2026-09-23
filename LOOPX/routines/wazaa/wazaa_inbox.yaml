@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/wazaa_inbox.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Wazaa inbox: list, read, ack messages"
 examples:
   - "loopx routine wazaa.inbox"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_cognitive.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Cognitive pattern analysis: awareness, consciousness, introspection, exploration"
 examples:
   - "loopx routine meta.cognitive"

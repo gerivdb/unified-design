@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/isolation_worktree.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Worktree isolation: parallel branch work, session separation"
 examples:
   - "loopx routine isolation.worktree"

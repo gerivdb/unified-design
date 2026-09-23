@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/breakthrough_diagnose.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Diagnose breakthrough patterns and failure modes"
 examples:
   - "loopx routine breakthrough.diagnose"

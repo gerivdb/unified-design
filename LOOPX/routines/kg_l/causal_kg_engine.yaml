@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/causal_kg_engine.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Causal knowledge graph engine: narrative-causal fusion, KG-L sync"
 examples:
   - "loopx routine causal.kg.engine"

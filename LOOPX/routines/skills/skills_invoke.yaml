@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/skills_invoke.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Invoke skill by name with parameters"
 examples:
   - "loopx routine skills.invoke"

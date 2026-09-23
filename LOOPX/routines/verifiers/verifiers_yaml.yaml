@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/verifiers_yaml.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Verify YAML: frontmatter, structure, encoding"
 examples:
   - "loopx routine verifiers.yaml"

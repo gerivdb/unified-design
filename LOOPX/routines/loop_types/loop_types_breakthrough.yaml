@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/loop_types_breakthrough.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Breakthrough loop: diagnose, fix, verify cycle"
 examples:
   - "loopx routine loop_types.breakthrough"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/sync_watch.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Watch sync: monitor changes, trigger sync on event"
 examples:
   - "loopx routine sync.watch"

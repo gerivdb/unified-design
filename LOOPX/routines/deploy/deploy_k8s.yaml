@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/deploy_k8s.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Kubernetes deployment: manifest apply, rollout, verification"
 examples:
   - "loopx routine deploy.k8s"

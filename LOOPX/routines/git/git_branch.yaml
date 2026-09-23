@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/git_branch.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Git branch taxonomy: enforce naming convention, validate prefix"
 examples:
   - "loopx routine git.branch"

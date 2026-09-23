@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/skills_validate.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Validate skill invocation and parameters"
 examples:
   - "loopx routine skills.validate"

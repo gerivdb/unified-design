@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/git_push.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Git push: remote safety, pre-push audit, force push guard"
 examples:
   - "loopx routine git.push"

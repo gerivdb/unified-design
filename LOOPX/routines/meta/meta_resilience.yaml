@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_resilience.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Resilience pattern validation: deterministic-budget-control, dry-run-simulation, graceful-degradation"
 examples:
   - "loopx routine meta.resilience"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_spidx.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "SPIDX index validation: dispatch table 243, index coherence, routing rules"
 examples:
   - "loopx routine meta.spidx"

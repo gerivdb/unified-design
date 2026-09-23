@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/wazaa_receive.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Wazaa receive: process incoming messages"
 examples:
   - "loopx routine wazaa.receive"

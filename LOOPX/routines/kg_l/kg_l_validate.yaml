@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/kg_l_validate.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "KG-L validate: anchor dedup, link coherence, schema check"
 examples:
   - "loopx routine kg_l.validate"

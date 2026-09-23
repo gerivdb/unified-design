@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/loop_types_meta.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Meta loop: design, primitive, atom, workflow orchestration"
 examples:
   - "loopx routine loop_types.meta"

@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/memory_store.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Memory store: persist observations, create entities"
 examples:
   - "loopx routine memory.store"

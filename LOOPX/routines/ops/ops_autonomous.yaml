@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/ops_autonomous.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Autonomous operations: self-improving loop, citizen integration"
 examples:
   - "loopx routine ops.autonomous"

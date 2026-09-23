@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/deploy_systemd.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Systemd deployment: service enable, start, status check"
 examples:
   - "loopx routine deploy.systemd"

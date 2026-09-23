@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/isolation_sandbox.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Sandbox isolation: crabbox, diff0-fork, agent isolation"
 examples:
   - "loopx routine isolation.sandbox"

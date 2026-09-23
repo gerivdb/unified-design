@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/test_run.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "Test run: unit, integration, e2e tests"
 examples:
   - "loopx routine test.run"

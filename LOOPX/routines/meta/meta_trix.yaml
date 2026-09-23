@@ -7,5 +7,6 @@ entry_point: "scripts/loopx/meta_trix.py:run"
 dependencies: []
 config_schema:
   properties: {}
+spec: "TRIX dispatch validation: namespace cleanup, dispatch table audit, router coherence"
 examples:
   - "loopx routine meta.trix"
