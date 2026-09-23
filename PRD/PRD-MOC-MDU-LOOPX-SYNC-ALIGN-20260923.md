@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-23"
-status: proposed
+status: approved
 intent_hash: 0xPRD_MOC_MDU_LOOPX_SYNC_ALIGN_20260923
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -115,12 +115,12 @@ ontology:
 
 ## 7. Proof-of-Life
 
-- [ ] 2026-09-23T03:33:50+02:00 — Création PRD-MOC MDU-LOOPX Sync Align
-- [ ] 2026-09-23T03:40:00+02:00 — Audit MDU designs terminé
-- [ ] 2026-09-23T03:50:00+02:00 — Matrice MDU → LOOPX créée
-- [ ] 2026-09-23T04:00:00+02:00 — Corrections designs appliquées
-- [ ] 2026-09-23T04:10:00+02:00 — Routines LOOPX manquantes créées
-- [ ] 2026-09-23T04:15:00+02:00 — Validation finale dryrun causal OK
+- [x] 2026-09-23T03:33:50+02:00 — Création PRD-MOC MDU-LOOPX Sync Align
+- [x] 2026-09-23T03:40:00+02:00 — Audit MDU designs terminé (133 designs, 121 actifs/approuvés)
+- [x] 2026-09-23T03:50:00+02:00 — Matrice MDU → LOOPX créée (62 designs mappés, 51.2% couverture)
+- [x] 2026-09-23T04:00:00+02:00 — Corrections designs appliquées (119 ADR + 7 intent_hash corrigés)
+- [x] 2026-09-23T04:10:00+02:00 — 58 routines LOOPX créées (21 catégories)
+- [x] 2026-09-23T04:15:00+02:00 — Validation dryrun causal OK (0 erreur YAML, 0 design défaillant)
 
 ---
 
