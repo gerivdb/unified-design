@@ -1,0 +1,11 @@
+---
+name: verifiers.ontology
+category: verifiers
+version: v1.0.0
+description: "Verify ontology terms"
+entry_point: "scripts/loopx/verifiers_ontology.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine verifiers.ontology"

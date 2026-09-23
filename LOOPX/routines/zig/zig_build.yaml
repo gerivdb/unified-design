@@ -1,0 +1,11 @@
+---
+name: zig.build
+category: zig
+version: v1.0.0
+description: "Build Zig project"
+entry_point: "scripts/loopx/zig_build.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine zig.build"

@@ -1,0 +1,11 @@
+---
+name: wazaa.send
+category: wazaa
+version: v1.0.0
+description: "Send WAZAA message"
+entry_point: "scripts/loopx/wazaa_send.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine wazaa.send"

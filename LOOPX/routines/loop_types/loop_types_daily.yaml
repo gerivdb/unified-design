@@ -1,0 +1,11 @@
+---
+name: loop_types.daily
+category: loop_types
+version: v1.0.0
+description: "Daily loop execution"
+entry_point: "scripts/loopx/loop_types_daily.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine loop_types.daily"

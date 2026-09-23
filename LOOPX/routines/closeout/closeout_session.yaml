@@ -1,0 +1,11 @@
+---
+name: closeout.session
+category: closeout
+version: v1.0.0
+description: "Closeout session"
+entry_point: "scripts/loopx/closeout_session.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine closeout.session"

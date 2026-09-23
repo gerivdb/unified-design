@@ -1,0 +1,11 @@
+---
+name: skills.validate
+category: skills
+version: v1.0.0
+description: "Validate skill"
+entry_point: "scripts/loopx/skills_validate.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine skills.validate"

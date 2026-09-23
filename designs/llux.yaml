@@ -1,15 +1,15 @@
----
 name: llux
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for llux."
-
+description: Design artifact for llux.
 constraints:
-  - cpu_only: true
-  - memory_24gb: true
-  - requires_zig: true
-  - requires_python: true
-  - latency_p99_ms: 1000
-  - memory_mb: 8192
-  - error_rate: 0.1
+- cpu_only: true
+- memory_24gb: true
+- requires_zig: true
+- requires_python: true
+- latency_p99_ms: 1000
+- memory_mb: 8192
+- error_rate: 0.1
+intent_hash: 0xPRD_MOC_MDU_GAPS_20260816
+adr: ADR-015-unified-design-v2

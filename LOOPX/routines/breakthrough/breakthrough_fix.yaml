@@ -1,0 +1,11 @@
+---
+name: breakthrough.fix
+category: breakthrough
+version: v1.0.0
+description: "Fix breakthrough issues"
+entry_point: "scripts/loopx/breakthrough_fix.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine breakthrough.fix"

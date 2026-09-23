@@ -1,0 +1,11 @@
+---
+name: daily_loops.sync
+category: daily_loops
+version: v1.0.0
+description: "Sync daily loops"
+entry_point: "scripts/loopx/daily_loops_sync.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine daily_loops.sync"

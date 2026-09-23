@@ -1,0 +1,11 @@
+---
+name: sync.watch
+category: sync
+version: v1.0.0
+description: "Watch and sync changes"
+entry_point: "scripts/loopx/sync_watch.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine sync.watch"

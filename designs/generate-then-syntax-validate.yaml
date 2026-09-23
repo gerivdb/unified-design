@@ -1,14 +1,13 @@
 name: generate-then-syntax-validate
-description: >-
-  Toute generation de code (templates, scaffold) est suivie
-  IMMEDIATEMENT d'une validation syntaxique (py_compile/import) avant
-  tout test fonctionnel. Incidents couverts : doubles accolades non
-  dechappees (axes), \n litteraux (guards), indentation aplatie.
+description: 'Toute generation de code (templates, scaffold) est suivie IMMEDIATEMENT
+  d''une validation syntaxique (py_compile/import) avant tout test fonctionnel. Incidents
+  couverts : doubles accolades non dechappees (axes), \n litteraux (guards), indentation
+  aplatie.'
 version: 1.0.0
 status: active
 inherits:
-  - incremental-growth
-  - schema-lint
+- incremental-growth
+- schema-lint
 parameters:
   validate_step: mandatory
   validate_target: import_or_compile_all
@@ -19,7 +18,7 @@ performance:
   latency_p99: 45.0
 intent_hash: 0xgenerate_then_syntax_validate_20260825
 layer: L0
-origin: >-
-  Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient
-  d'un incident reel rencontre et corrige pendant la migration KG-L ->
-  KG 35 V10 (voir CJ-008bis et PRD-MOC/repos/memory-bus.md).
+origin: Session KG35-V10 (2026-08-24/25) - chaque contrainte ci-dessus provient d'un
+  incident reel rencontre et corrige pendant la migration KG-L -> KG 35 V10 (voir
+  CJ-008bis et PRD-MOC/repos/memory-bus.md).
+adr: ADR-015-unified-design-v2

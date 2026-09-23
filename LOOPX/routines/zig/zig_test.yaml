@@ -1,0 +1,11 @@
+---
+name: zig.test
+category: zig
+version: v1.0.0
+description: "Run Zig tests"
+entry_point: "scripts/loopx/zig_test.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine zig.test"

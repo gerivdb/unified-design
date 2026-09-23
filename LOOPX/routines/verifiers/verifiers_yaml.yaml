@@ -1,0 +1,11 @@
+---
+name: verifiers.yaml
+category: verifiers
+version: v1.0.0
+description: "Verify YAML files"
+entry_point: "scripts/loopx/verifiers_yaml.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine verifiers.yaml"

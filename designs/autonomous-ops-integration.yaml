@@ -1,52 +1,43 @@
----
 atom_id: ATOM-054
 name: autonomous-ops-cross-integration
-description: "Orchestration naturelle d'AutonomOPS dans les autres automatismes via sérendipité, curiosité et diff"
+description: "Orchestration naturelle d'AutonomOPS dans les autres automatismes via\
+  \ s\xE9rendipit\xE9, curiosit\xE9 et diff"
 layer: L0
 status: active
-version: "1.0.0"
-tags: [autonomops, orchestration, cross-system, serendipity]
+version: 1.0.0
+tags:
+- autonomops
+- orchestration
+- cross-system
+- serendipity
 dependencies:
-  - WAZAA
-  - CRUX
-  - SELINA
-  - CITIZENS
-  - CURX
+- WAZAA
+- CRUX
+- SELINA
+- CITIZENS
+- CURX
 relations:
-  - consumes: WAZAA/event_bus
-  - produces: WAZAA/autonom_ops_events
-  - triggers: CRUX/pipeline_optimization
-  - influences: CITIZENS/self_assessment
+- consumes: WAZAA/event_bus
+- produces: WAZAA/autonom_ops_events
+- triggers: CRUX/pipeline_optimization
+- influences: CITIZENS/self_assessment
 pattern_link: DESIGN-AUTONOMY-001
-
-# ATOM-054 — AutonomOPS Cross-System Orchestration
-
-## Vision : Intégration naturelle
-
-vision: "L'autonomie n'est pas une contrainte mais une tendance naturelle de l'écosystème"
-
-AutonomOPS ne se contente pas de ses propres décisions : il orchestre la sérendipité entre les systèmes automatisés existants.
-
-## Pattern d'Orchestration
-
-### 1. Événement d'état AutonomOPS → WAZAA
-
-topic: "autonomops.decision"
+vision: "L'autonomie n'est pas une contrainte mais une tendance naturelle de l'\xE9\
+  cosyst\xE8me"
+"AutonomOPS ne se contente pas de ses propres d\xE9cisions": "il orchestre la s\xE9\
+  rendipit\xE9 entre les syst\xE8mes automatis\xE9s existants."
+topic: autonomops.decision
 payload:
-  level: "A1|A2|A3"
+  level: A1|A2|A3
   confidence: 0.85
-  action: "rebalance|optimize|alert"
+  action: rebalance|optimize|alert
   drift_correction: true
-
-## Proof-of-Life
-
 proof_of_life:
-  - "2026-09-13T21:08:41Z : Delta scan exécuté, phantom=-1"
-  - "2026-09-13T20:45:00Z : AutonomOPS intégré à DESIGN-AUTONOMY-001"
-
-## Références
-
+- "2026-09-13T21:08:41Z : Delta scan ex\xE9cut\xE9, phantom=-1"
+- "2026-09-13T20:45:00Z : AutonomOPS int\xE9gr\xE9 \xE0 DESIGN-AUTONOMY-001"
 references:
-  - "DESIGN-AUTONOMY-001 : Autonomy Integrity Matrix"
-  - "WAZAA Event Bus Architecture"
-  - "CRUX Pathway Optimizer v3"
+- 'DESIGN-AUTONOMY-001 : Autonomy Integrity Matrix'
+- WAZAA Event Bus Architecture
+- CRUX Pathway Optimizer v3
+intent_hash: 0xPRD_MOC_MDU_GAPS_20260816
+adr: ADR-015-unified-design-v2

@@ -1,0 +1,11 @@
+---
+name: ops.health
+category: ops
+version: v1.0.0
+description: "Check operational health"
+entry_point: "scripts/loopx/ops_health.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine ops.health"

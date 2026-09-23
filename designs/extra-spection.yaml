@@ -1,22 +1,26 @@
----
 name: extra-spection
-description: "Exploration externe d'un système. Analyse des structures externes, des repos, des bus, des canaux WAZAA. Modalité externe de l'exploration, complémentaire de l'introspection. Terme forgé pour distinguer clairement de introspection. Prérequis pour meta-coherence : on ne peut pas avoir la vue d'ensemble sans explorer l'extérieur."
-version: "1.0.0"
+description: "Exploration externe d'un syst\xE8me. Analyse des structures externes,\
+  \ des repos, des bus, des canaux WAZAA. Modalit\xE9 externe de l'exploration, compl\xE9\
+  mentaire de l'introspection. Terme forg\xE9 pour distinguer clairement de introspection.\
+  \ Pr\xE9requis pour meta-coherence : on ne peut pas avoir la vue d'ensemble sans\
+  \ explorer l'ext\xE9rieur."
+version: 1.0.0
 status: active
 layer: L0
-intent_hash: "0xDESIGN_EXTRA_SPECTION_20260828"
+intent_hash: 0xDESIGN_EXTRA_SPECTION_20260828
 inherits:
-  - exploration
+- exploration
 depends_on:
-  - meta-coherence
-  - topos
+- meta-coherence
+- topos
 bridges:
-  - target: repo:ARGUS
-    role: provider
-    protocol: python-import
-  - target: repo:CTULU
-    role: provider
-    protocol: tool-invocation
-    tools:
-      - anamorphoser
-      - functor-anything
+- target: repo:ARGUS
+  role: provider
+  protocol: python-import
+- target: repo:CTULU
+  role: provider
+  protocol: tool-invocation
+  tools:
+  - anamorphoser
+  - functor-anything
+adr: ADR-015-unified-design-v2

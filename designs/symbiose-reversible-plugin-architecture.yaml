@@ -1,226 +1,212 @@
----
 name: symbiose-reversible-plugin-architecture
-version: "1.0.0"
+version: 1.0.0
 status: active
 layer: L0
-description: "Architecture réversible de type plugin pour les symbiotes gerivdb. Formalise la convergence entre le paradigme 'Everything is a Plugin' (Cordis/DeepSeek Harness) et l'écosystème gerivdb : composition spatiale par scope, composition temporelle réversible, résolution dynamique de services, et symbiose comme contrat réifié révocable."
+description: "Architecture r\xE9versible de type plugin pour les symbiotes gerivdb.\
+  \ Formalise la convergence entre le paradigme 'Everything is a Plugin' (Cordis/DeepSeek\
+  \ Harness) et l'\xE9cosyst\xE8me gerivdb : composition spatiale par scope, composition\
+  \ temporelle r\xE9versible, r\xE9solution dynamique de services, et symbiose comme\
+  \ contrat r\xE9ifi\xE9 r\xE9vocable."
 intent_hash: 0xDESIGN_SYMBIOSE_REVERSIBLE_PLUGIN_ARCHITECTURE_20260921
 inherits:
-  - swarm-lease
-  - safe-action-pattern
-  - design-ops-loop
+- swarm-lease
+- safe-action-pattern
+- design-ops-loop
 depends_on:
-  - swarm-lease
-  - kg-l-causal-diff
-  - agent-observability-architecture
+- swarm-lease
+- kg-l-causal-diff
+- agent-observability-architecture
 bridges:
-  - target: GOVERNANCE-HUB/SOT
-    role: registry_source
-    protocol: yaml-read
-  - target: WAZAA/bus
-    role: message_bus
-    protocol: python-call
-  - target: KG-L/exports
-    role: domain_links
-    protocol: json-read
-
-# Context
+- target: GOVERNANCE-HUB/SOT
+  role: registry_source
+  protocol: yaml-read
+- target: WAZAA/bus
+  role: message_bus
+  protocol: python-call
+- target: KG-L/exports
+  role: domain_links
+  protocol: json-read
 context:
-  problem: >
-    L'écosystème gerivdb modélise des entités autonomes (citoyens, runners, services, repos) 
-    avec des relations de symbiose durables. Il manque une formalisation architecturale de 
-    la réversibilité comme invariant structurel : toute symbiose doit pouvoir être dissoute 
-    proprement, avec rollback des effets de bord et notification des dépendants.
-  inspiration: >
-    DeepSeek Harness (dsh) / Cordis : "Everything is a Plugin" avec composition temporelle 
-    réversible et composition spatiale par Fiber scope. Pas de noyau privilégié ; tout est 
-    plugin remplaçable à chaud avec garantie d'intégrité.
-  gap: >
-    Les micro-services résolvent le découplage par frontière réseau ; Cordis le résout par 
-    frontière de contexte d'exécution (Fiber). L'écosystème gerivdb est à mi-chemin : 
-    distribuée spatialement (repos, runners) mais sans mécanisme de composition/décomposition 
-    dynamique des relations.
-
-# Core Principles
+  problem: "L'\xE9cosyst\xE8me gerivdb mod\xE9lise des entit\xE9s autonomes (citoyens,\
+    \ runners, services, repos)  avec des relations de symbiose durables. Il manque\
+    \ une formalisation architecturale de  la r\xE9versibilit\xE9 comme invariant\
+    \ structurel : toute symbiose doit pouvoir \xEAtre dissoute  proprement, avec\
+    \ rollback des effets de bord et notification des d\xE9pendants.\n"
+  inspiration: "DeepSeek Harness (dsh) / Cordis : \"Everything is a Plugin\" avec\
+    \ composition temporelle  r\xE9versible et composition spatiale par Fiber scope.\
+    \ Pas de noyau privil\xE9gi\xE9 ; tout est  plugin rempla\xE7able \xE0 chaud avec\
+    \ garantie d'int\xE9grit\xE9.\n"
+  gap: "Les micro-services r\xE9solvent le d\xE9couplage par fronti\xE8re r\xE9seau\
+    \ ; Cordis le r\xE9sout par  fronti\xE8re de contexte d'ex\xE9cution (Fiber).\
+    \ L'\xE9cosyst\xE8me gerivdb est \xE0 mi-chemin :  distribu\xE9e spatialement\
+    \ (repos, runners) mais sans m\xE9canisme de composition/d\xE9composition  dynamique\
+    \ des relations.\n"
 principles:
-  - id: P0_NO_PRIVILEGED_CORE
-    rule: "Noyau minimal mais explicite : seuls 3 invariants sont non-négociables. Tout le reste est plugin réversible."
-    mapping: >
-      BDCP = budget enforcement inviolable ;
-      Swarm lease = coordination primitive ;
-      IntentHash = traçabilité ontologique.
-      Ces 3 mécanismes ne sont pas pluggables.
-  - id: P0_REVERSIBLE_REGISTRATION
-    rule: "Toute inscription de service, bail, ou symbiose produit un effet réversible. L'annulation doit être complète et tracée."
-    mapping: "Swarm lease (SL4) + symbiose dissolution() → rollback automatique."
-  - id: P1_SCOPE_ISOLATION
-    rule: "La visibilité d'un service est déterminée par son scope. Un enfant voit les services du parent, pas l'inverse."
-    mapping: "Repo × périmètre(-Paths) = scope d'exclusion. WAZAA channels = Fiber namespaces."
-  - id: P1_DYNAMIC_RESOLUTION
-    rule: "Les dépendances sont résolues à l'exécution par Proxy, pas par import statique."
-    mapping: "ctx.<service> → résolution via KG-L domain_links + WAZAA bus, pas import direct."
-  - id: P2_HOT_RELOAD_SAFE
-    rule: "Tout plugin peut être rechargé à chaud si et seulement si ses dépendants sont notifiés et son état sauvegardé."
-    mapping: "Citoyens, runners, services peuvent être redémarrés sans perdre l'état (WAL, leases)."
-
-# Architecture Mapping
+- id: P0_NO_PRIVILEGED_CORE
+  rule: "Noyau minimal mais explicite : seuls 3 invariants sont non-n\xE9gociables.\
+    \ Tout le reste est plugin r\xE9versible."
+  mapping: "BDCP = budget enforcement inviolable ; Swarm lease = coordination primitive\
+    \ ; IntentHash = tra\xE7abilit\xE9 ontologique. Ces 3 m\xE9canismes ne sont pas\
+    \ pluggables.\n"
+- id: P0_REVERSIBLE_REGISTRATION
+  rule: "Toute inscription de service, bail, ou symbiose produit un effet r\xE9versible.\
+    \ L'annulation doit \xEAtre compl\xE8te et trac\xE9e."
+  mapping: "Swarm lease (SL4) + symbiose dissolution() \u2192 rollback automatique."
+- id: P1_SCOPE_ISOLATION
+  rule: "La visibilit\xE9 d'un service est d\xE9termin\xE9e par son scope. Un enfant\
+    \ voit les services du parent, pas l'inverse."
+  mapping: "Repo \xD7 p\xE9rim\xE8tre(-Paths) = scope d'exclusion. WAZAA channels\
+    \ = Fiber namespaces."
+- id: P1_DYNAMIC_RESOLUTION
+  rule: "Les d\xE9pendances sont r\xE9solues \xE0 l'ex\xE9cution par Proxy, pas par\
+    \ import statique."
+  mapping: "ctx.<service> \u2192 r\xE9solution via KG-L domain_links + WAZAA bus,\
+    \ pas import direct."
+- id: P2_HOT_RELOAD_SAFE
+  rule: "Tout plugin peut \xEAtre recharg\xE9 \xE0 chaud si et seulement si ses d\xE9\
+    pendants sont notifi\xE9s et son \xE9tat sauvegard\xE9."
+  mapping: "Citoyens, runners, services peuvent \xEAtre red\xE9marr\xE9s sans perdre\
+    \ l'\xE9tat (WAL, leases)."
 architecture_mapping:
   cordis_concept:
-    description: "Concept Cordis / DeepSeek Harness"
+    description: Concept Cordis / DeepSeek Harness
     gerivdb_equivalent:
-      - concept: "Plugin"
-        gerivdb: "Symbiote (citoyen, runner, service, repo)"
-      - concept: "Fiber scope"
-        gerivdb: "Repo × périmètre(-Paths) + WAZAA channel"
-      - concept: "inject(ctx, service)"
-        gerivdb: "KG-L domain_links + WAZAA message bus + registry lookup"
-      - concept: "dispose()"
-        gerivdb: "Symbiose dissolution() + lease release + WAL compact"
-      - concept: "effect(traceable, reversible)"
-        gerivdb: "IntentHash + Proof-of-Life + rollback log"
-      - concept: "Proxy résolution"
-        gerivdb: "KG-L semantic linker + TOPOS registry"
-      - concept: "reactive dependencies"
-        gerivdb: "WAZAA notification + swarm lease TTL + closeout"
-
-# Symbiose as Reversible Contract
+    - concept: Plugin
+      gerivdb: Symbiote (citoyen, runner, service, repo)
+    - concept: Fiber scope
+      gerivdb: "Repo \xD7 p\xE9rim\xE8tre(-Paths) + WAZAA channel"
+    - concept: inject(ctx, service)
+      gerivdb: KG-L domain_links + WAZAA message bus + registry lookup
+    - concept: dispose()
+      gerivdb: Symbiose dissolution() + lease release + WAL compact
+    - concept: effect(traceable, reversible)
+      gerivdb: IntentHash + Proof-of-Life + rollback log
+    - concept: "Proxy r\xE9solution"
+      gerivdb: KG-L semantic linker + TOPOS registry
+    - concept: reactive dependencies
+      gerivdb: WAZAA notification + swarm lease TTL + closeout
 symbiose_contract:
-  definition: >
-    Une symbiose est un contrat réifié entre deux symbiotes autonomes : échange de services, 
-    dépendance réciproque, co-évolution, et révocabilité garantie.
+  definition: "Une symbiose est un contrat r\xE9ifi\xE9 entre deux symbiotes autonomes\
+    \ : \xE9change de services,  d\xE9pendance r\xE9ciproque, co-\xE9volution, et\
+    \ r\xE9vocabilit\xE9 garantie.\n"
   lifecycle:
-    - phase: "formation"
-      actions:
-        - "Negocier les termes (bénéficeNet, coût, durée)"
-        - "Émettre un IntentHash de formation"
-        - "Prendre un swarm lease (SL1-SL5)"
-        - "Enregistrer dans KG-L (edges symbiose)"
-        - "Publier dans WAZAA bus (hello)"
-    - phase: "maintenance"
-      actions:
-        - "Mesurer continue (RLM-METRICS)"
-        - "Vérifier bénéficeNet > 0"
-        - "Renouveler lease TTL"
-        - "Heartbeat via WAZAA"
-    - phase: "dissolution"
-      trigger: "bénéficeNet < 0 | timeout | décision humaine | rollback"
-      actions:
-        - "Arrêter les flux de service"
-        - "Libérer les baux swarm"
-        - "Révoquer les edges KG-L"
-        - "Notifier les dépendants (WAZAA bye)"
-        - "Sauvegarder l'état final (WAL compact)"
-        - "Émettre un IntentHash de dissolution"
-      guarantee: "Tout effet de la symbiose est annulé ou pérennisé explicitement. Aucun état orphelin."
+  - phase: formation
+    actions:
+    - "Negocier les termes (b\xE9n\xE9ficeNet, co\xFBt, dur\xE9e)"
+    - "\xC9mettre un IntentHash de formation"
+    - Prendre un swarm lease (SL1-SL5)
+    - Enregistrer dans KG-L (edges symbiose)
+    - Publier dans WAZAA bus (hello)
+  - phase: maintenance
+    actions:
+    - Mesurer continue (RLM-METRICS)
+    - "V\xE9rifier b\xE9n\xE9ficeNet > 0"
+    - Renouveler lease TTL
+    - Heartbeat via WAZAA
+  - phase: dissolution
+    trigger: "b\xE9n\xE9ficeNet < 0 | timeout | d\xE9cision humaine | rollback"
+    actions:
+    - "Arr\xEAter les flux de service"
+    - "Lib\xE9rer les baux swarm"
+    - "R\xE9voquer les edges KG-L"
+    - "Notifier les d\xE9pendants (WAZAA bye)"
+    - "Sauvegarder l'\xE9tat final (WAL compact)"
+    - "\xC9mettre un IntentHash de dissolution"
+    guarantee: "Tout effet de la symbiose est annul\xE9 ou p\xE9rennis\xE9 explicitement.\
+      \ Aucun \xE9tat orphelin."
   invariants:
-    - "Toute symbiose en cours a un lease actif."
-    - "Tout symbiote dissous est notifié à ses dépendants."
-    - "Toute mesure est tracée par IntentHash."
-    - "Aucune symbiose ne peut être créée sans contrat documenté."
-
-# Fiber-Like Scope Isolation for Repos
+  - Toute symbiose en cours a un lease actif.
+  - "Tout symbiote dissous est notifi\xE9 \xE0 ses d\xE9pendants."
+  - "Toute mesure est trac\xE9e par IntentHash."
+  - "Aucune symbiose ne peut \xEAtre cr\xE9\xE9e sans contrat document\xE9."
 fiber_scope_isolation:
-  concept: "Un scope détermine la visibilité des services entre repos/runners, comme un namespace réseau."
+  concept: "Un scope d\xE9termine la visibilit\xE9 des services entre repos/runners,\
+    \ comme un namespace r\xE9seau."
   rules:
-    - "Un repo enfant hérite des services du parent."
-    - "Un repo parent ne voit pas les services de l'enfant."
-    - "Un service peut être publié dans un scope sans être visible ailleurs."
-    - "La résolution ctx.<service> remonte la chaîne de scopes jusqu'au runtime."
+  - "Un repo enfant h\xE9rite des services du parent."
+  - Un repo parent ne voit pas les services de l'enfant.
+  - "Un service peut \xEAtre publi\xE9 dans un scope sans \xEAtre visible ailleurs."
+  - "La r\xE9solution ctx.<service> remonte la cha\xEEne de scopes jusqu'au runtime."
   implementation:
-    - "WAZAA channels = namespaces de communication."
-    - "TOPOS registry = carte des scopes et dépendances."
-    - "KG-L domain_links = contrat sémantique entre services."
-    - "Swarm lease = frontière d'exclusion mutuelle."
-
-# Dynamic Service Resolution
+  - WAZAA channels = namespaces de communication.
+  - "TOPOS registry = carte des scopes et d\xE9pendances."
+  - "KG-L domain_links = contrat s\xE9mantique entre services."
+  - "Swarm lease = fronti\xE8re d'exclusion mutuelle."
 dynamic_resolution:
-  concept: "Un symbiote demande un service par capability, pas par nom fixe."
-  pattern: "ctx.tools.get('kg-causal-diff') → résout vers le repo/runner qui expose cette capability."
+  concept: Un symbiote demande un service par capability, pas par nom fixe.
+  pattern: "ctx.tools.get('kg-causal-diff') \u2192 r\xE9sout vers le repo/runner qui\
+    \ expose cette capability."
   registry:
-    - "source: KG-L exports/domain_links.json"
-    - "source: TOPOS/registry/repos.json"
-    - "source: WAZAA message bus (advertisements)"
-  fallback: "Si aucun provider n'est trouvé → HITL ou erreur structurée, jamais de fallback silencieux."
-
-# Hot Reload Pattern
+  - 'source: KG-L exports/domain_links.json'
+  - 'source: TOPOS/registry/repos.json'
+  - 'source: WAZAA message bus (advertisements)'
+  fallback: "Si aucun provider n'est trouv\xE9 \u2192 HITL ou erreur structur\xE9\
+    e, jamais de fallback silencieux."
 hot_reload:
   preconditions:
-    - "État sauvegardé (WAL, leases, KG-L edges)."
-    - "Dépendants notifiés du rechargement."
-    - "Nouvelle version validée par pre-merge gate."
+  - "\xC9tat sauvegard\xE9 (WAL, leases, KG-L edges)."
+  - "D\xE9pendants notifi\xE9s du rechargement."
+  - "Nouvelle version valid\xE9e par pre-merge gate."
   steps:
-    - "1. Prendre un bail de maintenance sur le scope concerné."
-    - "2. Publier WAZAA 'maintenance_start'."
-    - "3. Sauvegarder l'état actif."
-    - "4. Arrêter le symbiote (dispose() réversible)."
-    - "5. Charger la nouvelle version (plugin swap)."
-    - "6. Restaurer l'état (replay WAL si nécessaire)."
-    - "7. Publier WAZAA 'maintenance_end'."
-    - "8. Libérer le bail."
+  - "1. Prendre un bail de maintenance sur le scope concern\xE9."
+  - 2. Publier WAZAA 'maintenance_start'.
+  - "3. Sauvegarder l'\xE9tat actif."
+  - "4. Arr\xEAter le symbiote (dispose() r\xE9versible)."
+  - 5. Charger la nouvelle version (plugin swap).
+  - "6. Restaurer l'\xE9tat (replay WAL si n\xE9cessaire)."
+  - 7. Publier WAZAA 'maintenance_end'.
+  - "8. Lib\xE9rer le bail."
   anti_patterns:
-    - "Hot reload sans sauvegarde d'état."
-    - "Hot reload sans notification des dépendants."
-    - "Hot reload pendant un bail actif d'un autre symbiote sur le même scope."
-
-# Operational Consequences
+  - "Hot reload sans sauvegarde d'\xE9tat."
+  - "Hot reload sans notification des d\xE9pendants."
+  - "Hot reload pendant un bail actif d'un autre symbiote sur le m\xEAme scope."
 operational_consequences:
-  preflight: "Vérifier lease actif + dépendants notifiés avant toute mutation."
-  identity: "SID = <realm>-<workspace>-<hex6> (identique à swarm-lease)."
-  announcement: "HELLO _swarm avec symbiotes actifs."
-  closeout: "release bail + dissolution() + bye + preserve dirty."
-  verification: "RLM-METRICS mesure bénéficeNet continu ; alerte si < 0."
-
-# Anti-Patterns
+  preflight: "V\xE9rifier lease actif + d\xE9pendants notifi\xE9s avant toute mutation."
+  identity: "SID = <realm>-<workspace>-<hex6> (identique \xE0 swarm-lease)."
+  announcement: HELLO _swarm avec symbiotes actifs.
+  closeout: release bail + dissolution() + bye + preserve dirty.
+  verification: "RLM-METRICS mesure b\xE9n\xE9ficeNet continu ; alerte si < 0."
 anti_patterns:
-  - pattern: "Import statique d'un service"
-    correction: "Utiliser ctx.<service> + résolution dynamique."
-  - pattern: "Création de symbiose sans lease"
-    correction: "Swarm lease obligatoire avant toute inscription."
-  - pattern: "Dissolution sans notification"
-    correction: "WAZAA bye obligatoire + mise à jour KG-L."
-  - pattern: "Noyau privilégié"
-    correction: "Tout composant doit être remplaçable ; le runtime est un orchestrateur, pas un domaine."
-
-# Assumed Tensions
-# -----------------
-# Ces tensions ne sont pas des bugs : ce sont des choix de design explicites.
-# Ils évitent les faux-amis entre Cordis (intra-processus) et gerivdb (trans-repo).
+- pattern: Import statique d'un service
+  correction: "Utiliser ctx.<service> + r\xE9solution dynamique."
+- pattern: "Cr\xE9ation de symbiose sans lease"
+  correction: Swarm lease obligatoire avant toute inscription.
+- pattern: Dissolution sans notification
+  correction: "WAZAA bye obligatoire + mise \xE0 jour KG-L."
+- pattern: "Noyau privil\xE9gi\xE9"
+  correction: "Tout composant doit \xEAtre rempla\xE7able ; le runtime est un orchestrateur,\
+    \ pas un domaine."
 assumed_tensions:
-  - tension: "Réversibilité ≠ dissolution gratuite"
-    cordis_interpretation: "Tout plugin peut être déchargé à chaud sans coût."
-    gerivdb_interpretation: "La dissolution est une capacité structurelle, mais elle génère un coût : pénalité BDCP, événement ARGUS, rupture de contrat documentée."
-    resolution: >
-      Ajouter un champ `dissolution_cost` dans le contrat de symbiose.
-      Toute dissolution non planifiée produit un événement ARGUS.
-      L'invariant de durabilité (`≥ 1 loopx`) n'est pas violé : dissolution reste l'exception.
-    adr_required: true
-
-  - tension: "'Hot-reload' ≠ atomique trans-repo"
-    cordis_interpretation: "Swap de plugin en < 1s, garanti par le runtime."
-    gerivdb_interpretation: "La reconfiguration est coordonnée, pas atomique. Elle s'appuie sur swarm lease, WAL, et WAZAA."
-    resolution: >
-      Renommer conceptuellement en 'reconfiguration transactionnelle coordonnée'.
-      Garanties réelles :
-        1. at-least-once delivery des messages WAZAA pendant la fenêtre ;
-        2. lease-held exclusivity pendant la phase critique ;
-        3. WAL-based idempotence du rollback.
-      La borne `<30s` doit être dérivée d'un paramètre existant (`lease TTL` ou `WAL replay max`), pas fixée arbitrairement.
-    adr_required: true
-
-  - tension: "'Noyau non privilégié' ≠ noyau absent"
-    cordis_interpretation: "Pas de noyau privilégié ; tout est plugin."
-    gerivdb_interpretation: "Il y a un noyau minimal, mais il est explicite et non-pluggable."
-    resolution: >
-      Remplacer le slogan par 'noyau minimal mais explicite'.
-      Invariants non-négociables :
-        1. BDCP (budget enforcement)
-        2. Swarm lease (coordination primitive)
-        3. IntentHash (traçabilité ontologique)
-      Tout le reste est plugin réversible.
-    adr_required: false
-
-# Compliance
+- tension: "R\xE9versibilit\xE9 \u2260 dissolution gratuite"
+  cordis_interpretation: "Tout plugin peut \xEAtre d\xE9charg\xE9 \xE0 chaud sans\
+    \ co\xFBt."
+  gerivdb_interpretation: "La dissolution est une capacit\xE9 structurelle, mais elle\
+    \ g\xE9n\xE8re un co\xFBt : p\xE9nalit\xE9 BDCP, \xE9v\xE9nement ARGUS, rupture\
+    \ de contrat document\xE9e."
+  resolution: "Ajouter un champ `dissolution_cost` dans le contrat de symbiose. Toute\
+    \ dissolution non planifi\xE9e produit un \xE9v\xE9nement ARGUS. L'invariant de\
+    \ durabilit\xE9 (`\u2265 1 loopx`) n'est pas viol\xE9 : dissolution reste l'exception.\n"
+  adr_required: true
+- tension: "'Hot-reload' \u2260 atomique trans-repo"
+  cordis_interpretation: Swap de plugin en < 1s, garanti par le runtime.
+  gerivdb_interpretation: "La reconfiguration est coordonn\xE9e, pas atomique. Elle\
+    \ s'appuie sur swarm lease, WAL, et WAZAA."
+  resolution: "Renommer conceptuellement en 'reconfiguration transactionnelle coordonn\xE9\
+    e'. Garanties r\xE9elles :\n  1. at-least-once delivery des messages WAZAA pendant\
+    \ la fen\xEAtre ;\n  2. lease-held exclusivity pendant la phase critique ;\n \
+    \ 3. WAL-based idempotence du rollback.\nLa borne `<30s` doit \xEAtre d\xE9riv\xE9\
+    e d'un param\xE8tre existant (`lease TTL` ou `WAL replay max`), pas fix\xE9e arbitrairement.\n"
+  adr_required: true
+- tension: "'Noyau non privil\xE9gi\xE9' \u2260 noyau absent"
+  cordis_interpretation: "Pas de noyau privil\xE9gi\xE9 ; tout est plugin."
+  gerivdb_interpretation: Il y a un noyau minimal, mais il est explicite et non-pluggable.
+  resolution: "Remplacer le slogan par 'noyau minimal mais explicite'. Invariants\
+    \ non-n\xE9gociables :\n  1. BDCP (budget enforcement)\n  2. Swarm lease (coordination\
+    \ primitive)\n  3. IntentHash (tra\xE7abilit\xE9 ontologique)\nTout le reste est\
+    \ plugin r\xE9versible.\n"
+  adr_required: false
 compliance:
-  governance: "GOVERNANCE-HUB/SOT + swarm-lease.md SL1-SL5 + ADR-2026-08-28-001"
-  validation: "Pre-commit hook vérifie frontmatter + symbiose contract + IntentHash."
-  audit: "KG-L exports + WAZAA inbox + RLM-METRICS."
+  governance: GOVERNANCE-HUB/SOT + swarm-lease.md SL1-SL5 + ADR-2026-08-28-001
+  validation: "Pre-commit hook v\xE9rifie frontmatter + symbiose contract + IntentHash."
+  audit: KG-L exports + WAZAA inbox + RLM-METRICS.
+adr: ADR-015-unified-design-v2

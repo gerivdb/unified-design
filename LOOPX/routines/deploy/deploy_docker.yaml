@@ -1,0 +1,11 @@
+---
+name: deploy.docker
+category: deploy
+version: v1.0.0
+description: "Deploy with Docker"
+entry_point: "scripts/loopx/deploy_docker.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine deploy.docker"

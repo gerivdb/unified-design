@@ -1,57 +1,70 @@
----
 name: value-machine
-description: "Machine à valeur inspirée de GG-knox/engineering-ideas/Obsidian/Machine à valeur -penser une problématique.md. Transforme les inputs (problèmes, idées, intentions) en outputs (designs, atoms, code, tests) via un pipeline de valeur ajoutée. Chaque étape du pipeline ajoute de la valeur mesurable."
-version: "1.0.0"
+description: "Machine \xE0 valeur inspir\xE9e de GG-knox/engineering-ideas/Obsidian/Machine\
+  \ \xE0 valeur -penser une probl\xE9matique.md. Transforme les inputs (probl\xE8\
+  mes, id\xE9es, intentions) en outputs (designs, atoms, code, tests) via un pipeline\
+  \ de valeur ajout\xE9e. Chaque \xE9tape du pipeline ajoute de la valeur mesurable."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_VALUE_MACHINE_20260917
 inherits:
-  - problem-structuring-method
+- problem-structuring-method
 depends_on:
-  - problem-structuring-method
+- problem-structuring-method
 bridges:
-  - target: repo:CTULU
-    role: orchestrator
-    protocol: wazaa-channel
-    channel: L4-TOOLS/CTULU/value-machine/orchestration
-  - target: repo:KG-L
-    role: causal-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/KG-L/value-machine/causal
-  - target: repo:VOLTX
-    role: narrative-vault
-    protocol: wazaa-channel
-    channel: L0-CANON/VOLTX/value-machine/narrative
-
+- target: repo:CTULU
+  role: orchestrator
+  protocol: wazaa-channel
+  channel: L4-TOOLS/CTULU/value-machine/orchestration
+- target: repo:KG-L
+  role: causal-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/KG-L/value-machine/causal
+- target: repo:VOLTX
+  role: narrative-vault
+  protocol: wazaa-channel
+  channel: L0-CANON/VOLTX/value-machine/narrative
 capabilities:
-  - name: input-transformation
-    description: "Transforme des inputs bruts (problèmes, idées) en structures atomiques"
-    parameters:
-      input_types: [problem, idea, intent, adr]
-      output_types: [design, atom, question_tree]
-  - name: value-measurement
-    description: "Mesure la valeur ajoutée à chaque étape du pipeline"
-    parameters:
-      metrics: [complexity_reduction, coverage_increase, validation_score]
-      baseline: "input state"
-      target: "output state"
-  - name: pipeline-stages
-    description: "Étapes de transformation : Think -> Structure -> Design -> Atom -> Validate"
-    parameters:
-      think: "méta-KG, prospective, topologique"
-      structure: "filetree problématisation"
-      design: "design.yaml atomique"
-      atom: "atom.md implémentable"
-      validate: "PoC + tests + PoL"
-  - name: feedback-loop
-    description: "Boucle de retour : output -> input pour amélioration continue"
-    parameters:
-      loop: true
-      max_iterations: 3
-      improvement_threshold: 0.1
-
+- name: input-transformation
+  description: "Transforme des inputs bruts (probl\xE8mes, id\xE9es) en structures\
+    \ atomiques"
+  parameters:
+    input_types:
+    - problem
+    - idea
+    - intent
+    - adr
+    output_types:
+    - design
+    - atom
+    - question_tree
+- name: value-measurement
+  description: "Mesure la valeur ajout\xE9e \xE0 chaque \xE9tape du pipeline"
+  parameters:
+    metrics:
+    - complexity_reduction
+    - coverage_increase
+    - validation_score
+    baseline: input state
+    target: output state
+- name: pipeline-stages
+  description: "\xC9tapes de transformation : Think -> Structure -> Design -> Atom\
+    \ -> Validate"
+  parameters:
+    think: "m\xE9ta-KG, prospective, topologique"
+    structure: "filetree probl\xE9matisation"
+    design: design.yaml atomique
+    atom: "atom.md impl\xE9mentable"
+    validate: PoC + tests + PoL
+- name: feedback-loop
+  description: "Boucle de retour : output -> input pour am\xE9lioration continue"
+  parameters:
+    loop: true
+    max_iterations: 3
+    improvement_threshold: 0.1
 principles:
-  - P0_VALUE_ADDED : chaque étape du pipeline ajoute de la valeur mesurable
-  - P0_ATOMIC_TRANSFORMATION : chaque transformation est atomique et vérifiable
-  - P0_FEEDBACK_LOOP : la sortie peut redevenir entrée pour amélioration continue
-  - P0_MEASURABLE : la valeur est quantifiée par des métriques objectives
+- P0_VALUE_ADDED: "chaque \xE9tape du pipeline ajoute de la valeur mesurable"
+- P0_ATOMIC_TRANSFORMATION: "chaque transformation est atomique et v\xE9rifiable"
+- P0_FEEDBACK_LOOP: "la sortie peut redevenir entr\xE9e pour am\xE9lioration continue"
+- P0_MEASURABLE: "la valeur est quantifi\xE9e par des m\xE9triques objectives"
+adr: ADR-015-unified-design-v2

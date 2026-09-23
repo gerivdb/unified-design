@@ -1,0 +1,11 @@
+---
+name: graph_shapes.tree
+category: graph_shapes
+version: v1.0.0
+description: "Generate tree graph"
+entry_point: "scripts/loopx/graph_shapes_tree.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine graph_shapes.tree"

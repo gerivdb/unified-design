@@ -1,6 +1,6 @@
 name: incremental-growth
 version: 1.0.0
-description: Croissance incrémentale par héritage additif
+description: "Croissance incr\xE9mentale par h\xE9ritage additif"
 status: active
 owner: Bellard
 inherits: []
@@ -16,3 +16,4 @@ constraints:
 - La profondeur d'heritage DOIT rester <= 3
 intent_hash: 0xincremental_growth_20260730
 layer: L0
+adr: ADR-015-unified-design-v2

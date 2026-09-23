@@ -1,0 +1,11 @@
+---
+name: loop_types.meta
+category: loop_types
+version: v1.0.0
+description: "Meta loop execution"
+entry_point: "scripts/loopx/loop_types_meta.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine loop_types.meta"

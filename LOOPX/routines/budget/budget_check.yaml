@@ -1,0 +1,11 @@
+---
+name: budget.check
+category: budget
+version: v1.0.0
+description: "Check resource budget"
+entry_point: "scripts/loopx/budget_check.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine budget.check"

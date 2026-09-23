@@ -1,0 +1,11 @@
+---
+name: breakthrough.verify
+category: breakthrough
+version: v1.0.0
+description: "Verify breakthrough fixes"
+entry_point: "scripts/loopx/breakthrough_verify.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine breakthrough.verify"

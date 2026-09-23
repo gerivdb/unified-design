@@ -1,0 +1,11 @@
+---
+name: test.run
+category: test
+version: v1.0.0
+description: "Run test suite"
+entry_point: "scripts/loopx/test_run.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine test.run"

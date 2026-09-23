@@ -1,13 +1,8 @@
----
 name: moc-governance
 version: 1.0.0
 status: active
 layer: L0-L4
-description: "Design artifact for moc-governance."
-
-version: 1.0.0
-status: active
-layer: L0-L4
+description: Design artifact for moc-governance.
 intent_hash: 0xmoc_governance_design_20260801
 inherits:
 - fractal-recursion
@@ -59,3 +54,4 @@ constraints:
 - encoding: ascii_only
 - no_clone_without_strate: true
 - bdcp_mode: permanent
+adr: ADR-015-unified-design-v2

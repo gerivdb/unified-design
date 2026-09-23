@@ -1,0 +1,11 @@
+---
+name: sync.all
+category: sync
+version: v1.0.0
+description: "Sync all repositories"
+entry_point: "scripts/loopx/sync_all.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine sync.all"

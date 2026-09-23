@@ -1,0 +1,11 @@
+---
+name: breakthrough.diagnose
+category: breakthrough
+version: v1.0.0
+description: "Diagnose breakthrough issues"
+entry_point: "scripts/loopx/breakthrough_diagnose.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine breakthrough.diagnose"

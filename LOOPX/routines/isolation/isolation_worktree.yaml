@@ -1,0 +1,11 @@
+---
+name: isolation.worktree
+category: isolation
+version: v1.0.0
+description: "Create worktree isolation"
+entry_point: "scripts/loopx/isolation_worktree.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine isolation.worktree"

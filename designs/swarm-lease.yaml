@@ -1,13 +1,8 @@
----
 name: swarm-lease
 version: 1.0.0
 status: active
 layer: L0-L4
-description: "Design artifact for swarm-lease."
-
-version: 1.0.0
-status: active
-layer: L0-L4
+description: Design artifact for swarm-lease.
 intent_hash: 0xDESIGN_SWARM_LEASE_20260825
 inherits:
 - multi-repo-fundamental
@@ -32,10 +27,10 @@ axioms:
 - id: SL4
   rule: Bail expire (TTL) = territoire re-libre automatiquement (leases.jsonl).
 - id: SL5
-  rule: "Scope reserve (SOT GOVERNANCE-HUB) : un seul bail actif a la fois."
+  rule: 'Scope reserve (SOT GOVERNANCE-HUB) : un seul bail actif a la fois.'
 operational_consequences:
   preflight: balise lease list (JSON) avant toute mutation
-  identity: SID = <realm>-<actor>-<hex6> (realm ∈ {kilo, act})
+  identity: "SID = <realm>-<actor>-<hex6> (realm \u2208 {kilo, act})"
   announcement: HELLO _swarm avec baux actifs
   closeout: release bail + bye + preserve dirty + retour main propre
 enforcement:
@@ -49,6 +44,7 @@ constraints:
 - read_free: lecture hors-bail autorisee sans restriction
 violations_documented:
 - case: mutation repo sans bail alors qu'autre session active dans essaim
-  correction: "swarm-lease.md SL3/SL5, balise lease take/release obligatoire"
+  correction: swarm-lease.md SL3/SL5, balise lease take/release obligatoire
 - case: session fermee sans closeout/release
-  correction: "swarm-lease.md SL4, TTL rattrape mais faute loggee"
+  correction: swarm-lease.md SL4, TTL rattrape mais faute loggee
+adr: ADR-015-unified-design-v2

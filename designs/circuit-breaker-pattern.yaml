@@ -1,5 +1,6 @@
 name: circuit-breaker-pattern
-description: Pattern d'arrêt automatique pour les chaînes défaillantes avec fallback.
+description: "Pattern d'arr\xEAt automatique pour les cha\xEEnes d\xE9faillantes avec\
+  \ fallback."
 version: 1.0.0
 status: active
 inherits:
@@ -12,12 +13,13 @@ parameters:
   success_threshold: 2
   health_check_interval: 30s
 constraints:
-- Open après failure_threshold échecs consécutifs
-- Half-open après timeout avec probe limitée
-- Closed après success_threshold succès en half-open
-- Fallback obligatoire en état OPEN
+- "Open apr\xE8s failure_threshold \xE9checs cons\xE9cutifs"
+- "Half-open apr\xE8s timeout avec probe limit\xE9e"
+- "Closed apr\xE8s success_threshold succ\xE8s en half-open"
+- "Fallback obligatoire en \xE9tat OPEN"
 performance:
   latency_p99: 45.0
   power_max: 12.0
 intent_hash: 0xcircuit_breaker_pattern_20260730
 layer: L1
+adr: ADR-015-unified-design-v2

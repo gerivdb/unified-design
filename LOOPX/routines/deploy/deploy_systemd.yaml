@@ -1,0 +1,11 @@
+---
+name: deploy.systemd
+category: deploy
+version: v1.0.0
+description: "Deploy with systemd"
+entry_point: "scripts/loopx/deploy_systemd.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine deploy.systemd"

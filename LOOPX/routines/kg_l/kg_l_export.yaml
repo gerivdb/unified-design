@@ -1,0 +1,11 @@
+---
+name: kg_l.export
+category: kg_l
+version: v1.0.0
+description: "Export KG-L data"
+entry_point: "scripts/loopx/kg_l_export.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine kg_l.export"

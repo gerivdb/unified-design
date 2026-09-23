@@ -46,3 +46,4 @@ ontology_terms:
 - verse_mapping
 intent_hash: 0xdesign_prd_moc_progress_sync_20260807
 layer: L0-L4
+adr: ADR-015-unified-design-v2

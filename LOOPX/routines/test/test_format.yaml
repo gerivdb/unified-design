@@ -1,0 +1,11 @@
+---
+name: test.format
+category: test
+version: v1.0.0
+description: "Format code"
+entry_point: "scripts/loopx/test_format.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine test.format"

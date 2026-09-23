@@ -1,0 +1,11 @@
+---
+name: git.branch
+category: git
+version: v1.0.0
+description: "Branch management operations"
+entry_point: "scripts/loopx/git_branch.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine git.branch"

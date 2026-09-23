@@ -36,3 +36,4 @@ constraints:
 - compression_target: 0.1% de PCM
 intent_hash: 0xplix_audio_design_20260730
 layer: L3-L4
+adr: ADR-015-unified-design-v2

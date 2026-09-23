@@ -1,0 +1,11 @@
+---
+name: isolation.sandbox
+category: isolation
+version: v1.0.0
+description: "Create sandbox isolation"
+entry_point: "scripts/loopx/isolation_sandbox.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine isolation.sandbox"

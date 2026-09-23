@@ -1,7 +1,7 @@
 name: m5-production-ontologique
-description: Mathème M5 de production ontologique - cycle de vie complet d'un concept
-  ONTOLOGY, de sa naissance (detectBirth) à son intégration (integrate) et sa gestion
-  de cycle de vie (lifecycle).
+description: "Math\xE8me M5 de production ontologique - cycle de vie complet d'un\
+  \ concept ONTOLOGY, de sa naissance (detectBirth) \xE0 son int\xE9gration (integrate)\
+  \ et sa gestion de cycle de vie (lifecycle)."
 version: 1.0.0
 status: active
 stratum: L0_CANON
@@ -19,31 +19,31 @@ matheme:
 cycle:
 - phase: detectBirth
   matheme: M2
-  action: Détecter l'émergence d'un concept dans le chat/réflexion
+  action: "D\xE9tecter l'\xE9mergence d'un concept dans le chat/r\xE9flexion"
   output: Embryo concept
 - phase: develop
   matheme: M3
-  action: 'Développer le concept : raffiner la définition, ajouter relations'
+  action: "D\xE9velopper le concept : raffiner la d\xE9finition, ajouter relations"
   output: Developing concept
 - phase: stabilize
   matheme: M1+M4
-  action: Surveiller la dérive, mesurer la stabilité
+  action: "Surveiller la d\xE9rive, mesurer la stabilit\xE9"
   output: Stable concept
 - phase: integrate
   matheme: M3.5
-  action: Intégrer dans ONTOLOGY comme concept formel
+  action: "Int\xE9grer dans ONTOLOGY comme concept formel"
   output: Integrated concept
 - phase: lifecycle
   matheme: M4
-  action: Gérer la maturation, l'obsolescence, l'archivage
+  action: "G\xE9rer la maturation, l'obsolescence, l'archivage"
   output: Lifecycle managed
 states:
 - state: DAY
   description: Concept en maturation active
 - state: NIGHT
-  description: Concept abandonné - rollback sémantique
+  description: "Concept abandonn\xE9 - rollback s\xE9mantique"
 - state: TWILIGHT
-  description: Concept en superposition non effondrée (résonance pure)
+  description: "Concept en superposition non effondr\xE9e (r\xE9sonance pure)"
 integration:
   boot_sequence: BOOT-0.5 (M5 probe)
   skill: m5-production-monitor
@@ -60,3 +60,4 @@ references:
 - PRD-MOC-M5-PRODUCTION-ONTOLOGIQUE-2026-08-07.md
 - unified-design/atoms/GOVERNANCE/artifact-writing-standards.yaml
 intent_hash: 0xdesign_m5_production_ontologique_20260807
+adr: ADR-015-unified-design-v2

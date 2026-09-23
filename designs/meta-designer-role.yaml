@@ -1,98 +1,74 @@
----
 name: meta-designer-role
-version: "1.0.0"
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_META_DESIGNER_ROLE_20260920
 inherits:
+- conversation-aggregator
+- design-documentation-generator
+depends_on:
+- ATOM-ARTIFACT-EXTRACTION-STATUS
+- ATOM-CONVERSATION-ANCHORING
+- ATOM-CONFIDENCE-THRESHOLD
+- ATOM-EXTRACTION-REPORT-FORMAT
+description: "R\xF4le formalis\xE9 de m\xE9ta-designer : architecte syst\xE8mes complexes\
+  \ qui extrait d'une conversation les structures implicites, primitives r\xE9utilisables,\
+  \ workflows \xE9mergents et mises \xE0 jour n\xE9cessaires.\n"
+capabilities:
+- name: conversation_analysis
+  description: "Analyse l'int\xE9gralit\xE9 d'une conversation pour identifier designs,\
+    \ skills, pipelines."
+  parameters:
+    max_tokens_context: 128000
+    extraction_depth: deep
+- name: artifact_extraction
+  description: Produit des fiches artefacts via grille 16 champs.
+  parameters:
+    card_format: full|short
+    confidence_marking: true
+- name: coherence_validation
+  description: "Valide la m\xE9ta-coh\xE9rence des artefacts extraits."
+  parameters:
+    cross_repo_check: true
+    gap_detection: true
+performance:
+  latency_p99: 45
+  power_max: 12
+"R\xF4le formalis\xE9 de m\xE9ta-designer": "architecte syst\xE8mes complexes qui\
+  \ extrait d'une conversation les structures implicites, primitives r\xE9utilisables,\
+  \ workflows \xE9mergents et mises \xE0 jour n\xE9cessaires."
+Excellences:
+- Extraction des structures implicites
+- "Identification des primitives r\xE9utilisables"
+- "D\xE9tection des workflows \xE9mergents"
+- "Proposition de mises \xE0 jour n\xE9cessaires"
+1. **Ancrage conversationnel**: "Tout artefact propos\xE9 doit \xEAtre rattachable\
+  \ \xE0 un passage de la conversation (voir )."
+2. **Grille 16 champs**: Toute fiche artefact utilise .
+"3. **Rapport standardis\xE9**": Toute session se termine par un rapport .
+4. **Classification A/B**: "Tout artefact est class\xE9  (voir )."
+1. **Lecture**: "Analyser l'int\xE9gralit\xE9 de la conversation"
+2. **Extraction**: Identifier les artefacts (designs, skills, citizens, pipelines,
+  primitives, workflows, contrats, protocoles, rituels, conventions)
+3. **Classification**: "Pour chaque artefact, d\xE9terminer le statut A/B"
+4. **Fiche**: Remplir la grille 16 champs (ou variante courte)
+5. **Validation**: "V\xE9rifier l'ancrage conversationnel + confiance"
+6. **Rapport**: "Produire le rapport standardis\xE9 (tableau + d\xE9pendances + top\
+  \ 5 + roadmap)"
+7. **HITL**: "Soumettre les \xE9l\xE9ments  ou  pour validation humaine"
+integration:
+  inherits:
   - conversation-aggregator
   - design-documentation-generator
-depends_on:
+  depends_on:
   - ATOM-ARTIFACT-EXTRACTION-STATUS
   - ATOM-CONVERSATION-ANCHORING
   - ATOM-CONFIDENCE-THRESHOLD
   - ATOM-EXTRACTION-REPORT-FORMAT
-description: >
-  Rôle formalisé de méta-designer : architecte systèmes complexes qui extrait
-  d'une conversation les structures implicites, primitives réutilisables,
-  workflows émergents et mises à jour nécessaires.
-capabilities:
-  - name: conversation_analysis
-    description: "Analyse l'intégralité d'une conversation pour identifier designs, skills, pipelines."
-    parameters:
-      max_tokens_context: 128000
-      extraction_depth: deep
-  - name: artifact_extraction
-    description: "Produit des fiches artefacts via grille 16 champs."
-    parameters:
-      card_format: full|short
-      confidence_marking: true
-  - name: coherence_validation
-    description: "Valide la méta-cohérence des artefacts extraits."
-    parameters:
-      cross_repo_check: true
-      gap_detection: true
-performance:
-  latency_p99: 45
-  power_max: 12
-
-# Design : Meta-Designer Role
-
-
-
-
-
-
-## Description
-
-Rôle formalisé de méta-designer : architecte systèmes complexes qui extrait d'une conversation les structures implicites, primitives réutilisables, workflows émergents et mises à jour nécessaires.
-
-## Rôle
-
-
-
-Excellences :
-- Extraction des structures implicites
-- Identification des primitives réutilisables
-- Détection des workflows émergents
-- Proposition de mises à jour nécessaires
-
-## Contraintes
-
-1. **Ancrage conversationnel** : Tout artefact proposé doit être rattachable à un passage de la conversation (voir ).
-2. **Grille 16 champs** : Toute fiche artefact utilise .
-3. **Rapport standardisé** : Toute session se termine par un rapport .
-4. **Classification A/B** : Tout artefact est classé  (voir ).
-
-## Workflow type
-
-1. **Lecture** : Analyser l'intégralité de la conversation
-2. **Extraction** : Identifier les artefacts (designs, skills, citizens, pipelines, primitives, workflows, contrats, protocoles, rituels, conventions)
-3. **Classification** : Pour chaque artefact, déterminer le statut A/B
-4. **Fiche** : Remplir la grille 16 champs (ou variante courte)
-5. **Validation** : Vérifier l'ancrage conversationnel + confiance
-6. **Rapport** : Produire le rapport standardisé (tableau + dépendances + top 5 + roadmap)
-7. **HITL** : Soumettre les éléments  ou  pour validation humaine
-
-## Intégration MDU
-
-integration:
-  inherits:
-    - conversation-aggregator
-    - design-documentation-generator
-  depends_on:
-    - ATOM-ARTIFACT-EXTRACTION-STATUS
-    - ATOM-CONVERSATION-ANCHORING
-    - ATOM-CONFIDENCE-THRESHOLD
-    - ATOM-EXTRACTION-REPORT-FORMAT
   coupled_to:
-    - meta-coherence
-
-## Références
-
+  - meta-coherence
 references:
-  - ADR-2026-09-20-001 : Artifact Extraction MDU Extension
-  - PRD-MOC-ARTIFACT-EXTRACTION-20260920.md
-  - safe-action-pattern design
-
-
+- ADR-2026-09-20-001: Artifact Extraction MDU Extension
+- PRD-MOC-ARTIFACT-EXTRACTION-20260920.md
+- safe-action-pattern design
+adr: ADR-015-unified-design-v2

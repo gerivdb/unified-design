@@ -1,12 +1,9 @@
----
 name: github-actions-ban
 version: 1.0.0
 status: active
 layer: L0
-description: "Interdiction d'utiliser GitHub Actions ou tout autre service CI externe ; le CI doit être exécuté localement via KIVA/ECOS-CLI."
+description: "Interdiction d'utiliser GitHub Actions ou tout autre service CI externe\
+  \ ; le CI doit \xEAtre ex\xE9cut\xE9 localement via KIVA/ECOS-CLI."
 profile: STANDARD
-
-version: "1.0.0"
-status: active
-profile: STANDARD
-description: Interdiction d'utiliser GitHub Actions ou tout autre service CI externe ; le CI doit être exécuté localement via KIVA/ECOS-CLI.
+intent_hash: 0xPRD_MOC_MDU_GAPS_20260816
+adr: ADR-015-unified-design-v2

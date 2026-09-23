@@ -1,5 +1,5 @@
 name: admg-dag3-hierarchy
-description: Hiérarchie des designs dans ADMG/DAG-3 avec ancrage SOLID/DRY/KISS
+description: "Hi\xE9rarchie des designs dans ADMG/DAG-3 avec ancrage SOLID/DRY/KISS"
 version: 1.0.0
 status: active
 inherits:
@@ -21,3 +21,4 @@ performance:
   power_max: 12.0
 intent_hash: 0xadmg_dag3_hierarchy_20260730
 layer: L0
+adr: ADR-015-unified-design-v2

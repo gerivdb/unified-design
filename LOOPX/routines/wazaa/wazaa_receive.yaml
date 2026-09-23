@@ -1,0 +1,11 @@
+---
+name: wazaa.receive
+category: wazaa
+version: v1.0.0
+description: "Receive WAZAA message"
+entry_point: "scripts/loopx/wazaa_receive.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine wazaa.receive"

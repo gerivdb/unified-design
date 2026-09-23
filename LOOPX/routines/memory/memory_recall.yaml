@@ -1,0 +1,11 @@
+---
+name: memory.recall
+category: memory
+version: v1.0.0
+description: "Recall memory"
+entry_point: "scripts/loopx/memory_recall.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine memory.recall"
