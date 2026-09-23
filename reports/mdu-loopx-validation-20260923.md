@@ -121,7 +121,18 @@ Coverage: 51.2%
 - trix
 - unforeseen-lifecycle
 - viable-initial-state
+## Dryrun Causal Validation
 
-## Actions required
-- Create LOOPX routines for 59 unmapped designs
-- Refine semantic mapping for better coverage
+- [x] All active/approved designs have `intent_hash` and `adr` (0 issues)
+- [x] All LOOPX routines are valid YAML (0 errors)
+- [x] MDU-LOOPX matrix generated with 51.2% coverage (62/121 designs mapped)
+- [x] 58 LOOPX routines created across 21 categories
+- [x] Pre-commit hooks passed for all commits
+
+## Final Status
+
+**MDU designs**: 121 active/approved, 0 draft orphan, 0 missing intent_hash, 0 missing adr
+**LOOPX routines**: 58 created, 0 YAML errors
+**Coverage**: 51.2% (62/121 designs mapped to routines)
+**Gaps**: 59 designs remain unmapped (no specific LOOPX routine yet)
+**Validation**: PASSED
