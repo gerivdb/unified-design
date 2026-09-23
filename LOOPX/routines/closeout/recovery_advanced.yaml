@@ -1,0 +1,11 @@
+---
+name: recovery.advanced
+category: CLOSEOUT
+version: v1.0.0
+description: "Advanced recovery and debt relief"
+entry_point: "scripts/loopx/recovery_advanced.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine recovery.advanced"

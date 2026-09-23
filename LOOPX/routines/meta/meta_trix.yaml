@@ -1,0 +1,11 @@
+---
+name: meta.trix
+category: META
+version: v1.0.0
+description: "TRIX dispatch operations"
+entry_point: "scripts/loopx/meta_trix.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.trix"

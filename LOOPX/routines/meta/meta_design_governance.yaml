@@ -1,0 +1,11 @@
+---
+name: meta.design.governance
+category: META
+version: v1.0.0
+description: "Meta design governance approval"
+entry_point: "scripts/loopx/meta_design_governance.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.design.governance"

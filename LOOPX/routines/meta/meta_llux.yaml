@@ -1,0 +1,11 @@
+---
+name: meta.llux
+category: META
+version: v1.0.0
+description: "LLUX runtime operations"
+entry_point: "scripts/loopx/meta_llux.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.llux"

@@ -1,0 +1,11 @@
+---
+name: meta.spidx
+category: META
+version: v1.0.0
+description: "SPIDX index operations"
+entry_point: "scripts/loopx/meta_spidx.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.spidx"

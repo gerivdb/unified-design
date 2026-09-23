@@ -1,0 +1,11 @@
+---
+name: causal.kg.engine
+category: KG_L
+version: v1.0.0
+description: "Causal KG engine operations"
+entry_point: "scripts/loopx/causal_kg_engine.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine causal.kg.engine"

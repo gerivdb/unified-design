@@ -1,0 +1,11 @@
+---
+name: ops.advanced
+category: OPS
+version: v1.0.0
+description: "Advanced operational fluidity"
+entry_point: "scripts/loopx/ops_advanced.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine ops.advanced"
