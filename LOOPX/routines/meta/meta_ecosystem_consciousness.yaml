@@ -1,0 +1,11 @@
+---
+name: meta.ecosystem.consciousness
+category: META
+version: v1.0.0
+description: "Ecosystem consciousness: awareness, intelligence, exploration, introspection, serendipity, unforeseen-lifecycle, big-picture"
+entry_point: "scripts/loopx/meta_ecosystem_consciousness.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.ecosystem.consciousness"

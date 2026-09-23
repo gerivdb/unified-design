@@ -1,0 +1,11 @@
+---
+name: meta.resilience
+category: META
+version: v1.0.0
+description: "Resilience patterns: graceful-degradation-fallback, deterministic-budget-control, dry-run-simulation"
+entry_point: "scripts/loopx/meta_resilience.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.resilience"

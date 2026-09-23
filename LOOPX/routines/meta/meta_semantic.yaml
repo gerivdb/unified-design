@@ -1,0 +1,11 @@
+---
+name: meta.semantic
+category: META
+version: v1.0.0
+description: "Semantic structures: maxwell-triad, conversation-semantic-layer, m5-production-ontologique"
+entry_point: "scripts/loopx/meta_semantic.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.semantic"

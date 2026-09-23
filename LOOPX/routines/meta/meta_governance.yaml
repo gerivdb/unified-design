@@ -1,0 +1,11 @@
+---
+name: meta.governance
+category: META
+version: v1.0.0
+description: "Governance: hitl-assistance, methodological-bon-sens, elegance"
+entry_point: "scripts/loopx/meta_governance.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.governance"

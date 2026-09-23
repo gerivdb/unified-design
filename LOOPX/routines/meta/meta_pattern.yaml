@@ -1,0 +1,11 @@
+---
+name: meta.pattern
+category: META
+version: v1.0.0
+description: "Design patterns: pattern-first-right-capture, circuit-breaker, conflict-resolver"
+entry_point: "scripts/loopx/meta_pattern.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.pattern"

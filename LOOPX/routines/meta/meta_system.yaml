@@ -1,0 +1,11 @@
+---
+name: meta.system
+category: META
+version: v1.0.0
+description: "System architecture: EGMI, LOOPX, autonomy, balise, big-picture, flex, intelligence, meta-coherence"
+entry_point: "scripts/loopx/meta_system.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+examples:
+  - "loopx routine meta.system"
