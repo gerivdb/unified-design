@@ -2,10 +2,6 @@
 layer: L5_ARCHIVE
 description: "Repos L5-ARCHIVE — archivage, mémoire froide"
 path_prefix: "D:/DO/WEB/TOOLS/L5-ARCHIVE/"
-repos:
-  - name: localjev-upstream
-    description: "Upstream research prototype GitHub Next"
-    status: ACTIVE
-    flows: []
+repos: []
 
 structural_relations: []

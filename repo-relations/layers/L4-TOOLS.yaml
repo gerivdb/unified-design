@@ -78,4 +78,9 @@ repos:
       - file: ../flows/unified-design-repo-standards.yaml
         direction: inbound
 
+  - name: localjev-upstream
+    description: "Upstream research prototype GitHub Next -- pont Jev/TypeSafe vers LLM local"
+    status: ACTIVE
+    flows: []
+
 structural_relations: []
