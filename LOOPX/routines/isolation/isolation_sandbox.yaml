@@ -1,0 +1,12 @@
+---
+name: isolation.sandbox
+category: isolation
+version: v1.0.0
+description: "Create sandbox isolation"
+entry_point: "scripts/loopx/isolation_sandbox.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Sandbox isolation: crabbox, diff0-fork, agent isolation"
+examples:
+  - "loopx routine isolation.sandbox"

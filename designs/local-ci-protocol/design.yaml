@@ -1,4 +1,12 @@
+---
 name: local-ci-protocol
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for local-ci-protocol."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: active
 profile: STANDARD

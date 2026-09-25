@@ -1,0 +1,12 @@
+---
+name: kg_l.sync
+category: kg_l
+version: v1.0.0
+description: "Sync KG-L data"
+entry_point: "scripts/loopx/kg_l_sync.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "KG-L sync: VERSES pipeline, anchor injection, link validation"
+examples:
+  - "loopx routine kg_l.sync"

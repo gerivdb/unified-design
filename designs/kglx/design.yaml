@@ -1,5 +1,15 @@
 ---
 name: KGLX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "KGLX — Runner de qualite KG-L. Valide la qualite des schemas et des donnees du graphe de connaissances.
+"
+consumers:
+  - conversation-cognitive
+  - kg-l-coherence-watchdog
+
+name: KGLX
 version: "1.0.0"
 status: proposed
 strate: L0-CANON

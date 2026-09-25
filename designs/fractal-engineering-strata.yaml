@@ -2,6 +2,7 @@ name: fractal-engineering-strata
 version: 1.0.0
 status: active
 layer: L0-L5
+description: Design artifact for fractal-engineering-strata.
 intent_hash: 0xfractal_engineering_strata_20260730
 inherits:
 - fractal-recursion
@@ -31,3 +32,4 @@ parameters:
 performance:
   latency_p99: 45.0
   power_max: 12.0
+adr: ADR-015-unified-design-v2

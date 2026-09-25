@@ -1,0 +1,54 @@
+name: kix-error-recovery-patterns
+version: 1.0.0
+status: active
+profile: STANDARD
+layer: L2-PLATFORM
+intent_hash: 0xKIX_ERROR_RECOVERY_PATTERNS_20260922
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  Patterns de récupération d'erreur pour KIX.
+  Corrige structurellement les frictions observées :
+  PowerShell parsing, Windows TCP, encoding, git taxonomy,
+  temps de réponse bash, etc. Logical layers: N1, N2.
+consumers:
+  - KIX
+  - ECOS-CLI
+  - KIVA-CLI
+  - DevTools
+capabilities:
+  - name: error-recovery
+    description: Récupération automatique des erreurs courantes
+    parameters:
+      patterns:
+        - powershell-parsing-fix
+        - windows-tcp-preflight
+        - encoding-normalization
+        - git-taxonomy-fallback
+        - bash-timeout-reduction
+  - name: causal-tracing
+    description: Traçabilité causale des erreurs
+    parameters:
+      log_format: structured
+      intent_hash_required: true
+components:
+  - type: error-recovery
+    repo: gerivdb/KIX
+    path: KIX/src/error_recovery.py
+  - type: tracing
+    repo: gerivdb/KIX
+    path: KIX/src/tracing.py
+bridges:
+  - target: repo:KIX
+    role: consumer
+    protocol: local
+  - target: repo:ECOS-CLI
+    role: consumer
+    protocol: cli
+dependencies:
+  - repo: gerivdb/KIX
+  - repo: gerivdb/ECOS-CLI
+constraints:
+  - cpu_only: true
+  - ram_limit_mb: 24576

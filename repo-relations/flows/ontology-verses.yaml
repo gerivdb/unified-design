@@ -1,0 +1,45 @@
+---
+cross_repo_flow:
+  name: ontology -> verses
+  provider: ONTOLOGY
+  consumers:
+    - VERSES
+  contract:
+    interface: file
+    format: json
+    paths:
+      - ONTOLOGY/concepts/*.md
+      - VERSES/ontology_anchors.jsonl
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — ONTOLOGY → VERSES
+
+## Rôle
+VERSES est la **mémoire ontologique** qui sync les concepts depuis `ONTOLOGY` vers `KG-L` et inversement.
+
+## Contrat
+- **Provider** : `ONTOLOGY` expose les concepts canoniques (`ONTOLOGY/concepts/*.md`).
+- **Consumer** : `VERSES` consomme ces concepts pour :
+  - `ontology_anchors.jsonl` : points d'ancrage vers KG-L
+  - `domain_links.json` : liens sémantiques de domaine
+- **Boucle** : VERSES peut proposer de nouveaux concepts à ONTOLOGY via PR.
+
+## Validation
+- `provider_registered` : `ONTOLOGY` est dans `known_repositories.yaml`.
+- `consumer_registered` : `VERSES` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `ONTOLOGY ↔ VERSES`.
+- `contract_exists` : `ontology_anchors.jsonl` existe.
+
+## Références
+- `VERSES/ontology_anchors.jsonl`
+- `ONTOLOGY/concepts/`

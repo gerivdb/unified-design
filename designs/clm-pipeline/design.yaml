@@ -83,12 +83,16 @@ bridges:
   - target: repo:TALEX
     role: consumer
     protocol: wazaa-channel
-  - target: repo:VOLTX
-    role: consumer
-    protocol: wazaa-channel
-  - target: repo:KG-CAUSAL
-    role: consumer
-    protocol: wazaa-channel
+   - target: repo:VOLTX
+     role: consumer
+     protocol: wazaa-channel
+   - target: repo:KG-CAUSAL
+     role: consumer
+     protocol: wazaa-channel
+   - target: repo:JEVX
+     role: decision-engine
+     protocol: http
+     channel: L4-TOOLS/JEVX/v1/systemone
 dependencies:
   - repo: gerivdb/TIMX
   - repo: gerivdb/RLM-243
@@ -97,6 +101,7 @@ dependencies:
   - repo: gerivdb/TALEX
   - repo: gerivdb/VOLTX
   - repo: gerivdb/KG-CAUSAL
+  - repo: gerivdb/JEVX
 constraints:
   - cpu_only: true
   - memory_24gb: true

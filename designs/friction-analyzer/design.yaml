@@ -1,4 +1,14 @@
 ---
+name: "Friction Analyzer Runner"
+version: 1.0.0
+status: active
+layer: L0
+description: "Friction Analyzer Runner — Runner d'analyse et de correction des frictions de session KiloCode. Collecte, classe et corrige les frictions par 8 categories et 4 niveaux de gravite.
+"
+consumers:
+  - ECOS-CLI
+  - KIX
+
 name: Friction Analyzer Runner
 version: "1.0.0"
 status: active

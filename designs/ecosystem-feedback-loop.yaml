@@ -1,63 +1,80 @@
----
 name: ecosystem-feedback-loop
-description: "Boucle de feedback entre l'écosystème technique et l'écosystème de création. Inspiré de GG-knox/engineering-ideas/Obsidian/De l'Écosystème Technique à l'Écosystème de Création.md. Pont DevTools ↔ Obsidian : chaque modification technique génère une narration, chaque narration peut déclencher une modification technique."
-version: "1.0.0"
+description: "Boucle de feedback entre l'\xE9cosyst\xE8me technique et l'\xE9cosyst\xE8\
+  me de cr\xE9ation. Inspir\xE9 de GG-knox/engineering-ideas/Obsidian/De l'\xC9cosyst\xE8\
+  me Technique \xE0 l'\xC9cosyst\xE8me de Cr\xE9ation.md. Pont DevTools \u2194 Obsidian\
+  \ : chaque modification technique g\xE9n\xE8re une narration, chaque narration peut\
+  \ d\xE9clencher une modification technique."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_ECOSYSTEM_FEEDBACK_LOOP_20260917
 inherits:
-  - value-machine
-  - ecosystem-consciousness
+- value-machine
+- ecosystem-consciousness
 depends_on:
-  - value-machine
-  - ecosystem-consciousness
+- value-machine
+- ecosystem-consciousness
 bridges:
-  - target: repo:VOLTX
-    role: narrative-vault
-    protocol: wazaa-channel
-    channel: L0-CANON/VOLTX/feedback-loop/narrative
-  - target: repo:DevTools
-    role: tools-hub
-    protocol: local
-    channel: C:/DevTools/feedback-loop/tools
-  - target: repo:OBS
-    role: observability
-    protocol: wazaa-channel
-    channel: L0-CANON/OBS/feedback-loop/observability
-  - target: repo:TALEX
-    role: narrative-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/TALEX/feedback-loop/narrative
-
+- target: repo:VOLTX
+  role: narrative-vault
+  protocol: wazaa-channel
+  channel: L0-CANON/VOLTX/feedback-loop/narrative
+- target: repo:DevTools
+  role: tools-hub
+  protocol: local
+  channel: C:/DevTools/feedback-loop/tools
+- target: repo:OBS
+  role: observability
+  protocol: wazaa-channel
+  channel: L0-CANON/OBS/feedback-loop/observability
+- target: repo:TALEX
+  role: narrative-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/TALEX/feedback-loop/narrative
 capabilities:
-  - name: technical-to-narrative
-    description: "Transforme une modification technique (commit, PR, déploiement) en narration"
-    parameters:
-      trigger: [git_commit, pr_merged, deployment]
-      output: [narrative, chronicle, post_mortem]
-      format: markdown
-  - name: narrative-to-technical
-    description: "Transforme une narration (intent, ADR, PRD) en modification technique"
-    parameters:
-      trigger: [intent_created, adr_accepted, prd_approved]
-      output: [design, atom, code, test]
-      format: yaml + code
-  - name: bidirectional-sync
-    description: "Synchronisation bidirectionnelle entre technique et narration"
-    parameters:
-      sync_mode: eventual_consistency
-      conflict_resolution: narrative_authority
-      max_lag: 24h
-  - name: pont-devtools-obsidian
-    description: "Pont entre DevTools (C:/DevTools) et Obsidian (D:/GG-knox)"
-    parameters:
-      devtools_path: C:/DevTools
-      obsidian_path: D:/GG-knox
-      sync_interval: 1h
-      bidirectional: true
-
+- name: technical-to-narrative
+  description: "Transforme une modification technique (commit, PR, d\xE9ploiement)\
+    \ en narration"
+  parameters:
+    trigger:
+    - git_commit
+    - pr_merged
+    - deployment
+    output:
+    - narrative
+    - chronicle
+    - post_mortem
+    format: markdown
+- name: narrative-to-technical
+  description: Transforme une narration (intent, ADR, PRD) en modification technique
+  parameters:
+    trigger:
+    - intent_created
+    - adr_accepted
+    - prd_approved
+    output:
+    - design
+    - atom
+    - code
+    - test
+    format: yaml + code
+- name: bidirectional-sync
+  description: Synchronisation bidirectionnelle entre technique et narration
+  parameters:
+    sync_mode: eventual_consistency
+    conflict_resolution: narrative_authority
+    max_lag: 24h
+- name: pont-devtools-obsidian
+  description: Pont entre DevTools (C:/DevTools) et Obsidian (D:/GG-knox)
+  parameters:
+    devtools_path: C:/DevTools
+    obsidian_path: D:/GG-knox
+    sync_interval: 1h
+    bidirectional: true
 principles:
-  - P0_BIDIRECTIONAL : la boucle est bidirectionnelle, pas seulement technique -> narration
-  - P0_EVENTUAL_CONSISTENCY : la synchronisation est éventuelle, pas instantanée
-  - P0_NARRATIVE_AUTHORITY : en cas de conflit, la narration fait autorité
-  - P0_PONT_DEVTOOLS_OBSIDIAN : le pont est explicite et documenté
+- P0_BIDIRECTIONAL: la boucle est bidirectionnelle, pas seulement technique -> narration
+- P0_EVENTUAL_CONSISTENCY: "la synchronisation est \xE9ventuelle, pas instantan\xE9\
+    e"
+- P0_NARRATIVE_AUTHORITY: "en cas de conflit, la narration fait autorit\xE9"
+- P0_PONT_DEVTOOLS_OBSIDIAN: "le pont est explicite et document\xE9"
+adr: ADR-015-unified-design-v2

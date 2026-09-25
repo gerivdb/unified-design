@@ -1,4 +1,12 @@
+---
 name: capability-awareness
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for capability-awareness."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: active
 profile: STANDARD

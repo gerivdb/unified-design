@@ -1,0 +1,12 @@
+---
+name: meta.version
+category: meta
+version: v1.0.0
+description: "Check meta versions"
+entry_point: "scripts/loopx/meta_version.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Check meta versions and compatibility matrix"
+examples:
+  - "loopx routine meta.version"

@@ -1,25 +1,34 @@
----
 name: assistant-load
-description: "Charge de l'assistant (Kilo) dans l'écosystème gerivdb. Formalise la mesure de la charge, les patterns de décharge, et l'équilibre de la dette technique."
-version: "1.0.0"
+description: "Charge de l'assistant (Kilo) dans l'\xE9cosyst\xE8me gerivdb. Formalise\
+  \ la mesure de la charge, les patterns de d\xE9charge, et l'\xE9quilibre de la dette\
+  \ technique."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_ASSISTANT_LOAD_20260917
 inherits:
-  - hitl-assistance
-  - debt-relief
+- hitl-assistance
+- debt-relief
 depends_on:
-  - hitl-assistance
-  - debt-relief
+- hitl-assistance
+- debt-relief
 capabilities:
-  - name: load-measurement
-    description: "Mesure de la charge de l'assistant"
-    parameters:
-      metrics: [context_size, task_count, error_rate, turnaround]
-  - name: offload-patterns
-    description: "Patterns de décharge vers humain"
-    parameters:
-      patterns: [delegation, automation, documentation]
+- name: load-measurement
+  description: Mesure de la charge de l'assistant
+  parameters:
+    metrics:
+    - context_size
+    - task_count
+    - error_rate
+    - turnaround
+- name: offload-patterns
+  description: "Patterns de d\xE9charge vers humain"
+  parameters:
+    patterns:
+    - delegation
+    - automation
+    - documentation
 principles:
-  - P0_LOAD_BALANCE: la charge de l'assistant est équilibrée
-  - P0_DEBT_OFFLOAD: la dette technique est déchargée vers l'humain
+- P0_LOAD_BALANCE: "la charge de l'assistant est \xE9quilibr\xE9e"
+- P0_DEBT_OFFLOAD: "la dette technique est d\xE9charg\xE9e vers l'humain"
+adr: ADR-015-unified-design-v2

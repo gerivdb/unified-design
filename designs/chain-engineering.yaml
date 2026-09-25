@@ -1,6 +1,6 @@
 name: chain-engineering
-description: 'Méta-design de chaînage : combine loop-engineering, circuit-breaker,
-  conflict-resolver et cleanup pour des workflows résilients.'
+description: "M\xE9ta-design de cha\xEEnage : combine loop-engineering, circuit-breaker,\
+  \ conflict-resolver et cleanup pour des workflows r\xE9silients."
 version: 1.0.0
 status: active
 inherits:
@@ -15,10 +15,10 @@ parameters:
   cleanup_after_merge: true
   short_circuit: NEUTRE
 constraints:
-- Toute chaîne doit avoir un circuit breaker
-- Tout conflit doit avoir une résolution ADR-backed
-- Tout merge doit déclencher cleanup-stale-remote
-- La profondeur max de chaîne est 6
+- "Toute cha\xEEne doit avoir un circuit breaker"
+- "Tout conflit doit avoir une r\xE9solution ADR-backed"
+- "Tout merge doit d\xE9clencher cleanup-stale-remote"
+- "La profondeur max de cha\xEEne est 6"
 performance:
   latency_p99: 45.0
   power_max: 12.0
@@ -29,6 +29,6 @@ hardware_profile:
   gpu: FORBIDDEN
   ram_max_gb: 24
   execution_mode: CPU-only
-  notes: >
-    ENV2 contrainte. Aucun composant du pipeline production ne doit dépendre de CUDA/GPU.
-    Quadro 2000 interdite.
+  notes: "ENV2 contrainte. Aucun composant du pipeline production ne doit d\xE9pendre\
+    \ de CUDA/GPU. Quadro 2000 interdite.\n"
+adr: ADR-015-unified-design-v2

@@ -1,0 +1,90 @@
+---
+name: talex-friction-analyzer-primitive
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPRIMITIVE_TALEX_FRICTION_ANALYZER_20260922
+description: >
+  Primitive réutilisable pour l'analyse des frictions TALEX.
+  Formalise les états, fonctions, gènes et invariants
+  pour détecter, classifier et résoudre les frictions de session.
+inherits:
+  - design-ops-loop
+  - ecosystem-meta-coherence
+  - safe-action-pattern
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+states:
+  - name: IDLE
+    question: "Des frictions sont-elles détectées ?"
+  - name: DETECT
+    question: "Toutes les frictions sont-elles collectées ?"
+  - name: CLASSIFY
+    question: "Les frictions sont-elles classifiées ?"
+  - name: ANALYZE
+    question: "Les causes racines sont-elles identifiées ?"
+  - name: PROPOSE
+    question: "Les actions correctives sont-elles proposées ?"
+  - name: APPLY
+    question: "Les actions sont-elles appliquées ?"
+  - name: VERIFY
+    question: "Les corrections sont-elles vérifiées ?"
+functions:
+  - id: F1
+    name: DÉTECTER_FRICTIONS
+    description: "Collecte des frictions de session"
+  - id: F2
+    name: CLASSIFIER_ERREURS
+    description: "Classification par type/impact"
+  - id: F3
+    name: ANALYSER_CAUSES
+    description: "Identification des causes racines"
+  - id: F4
+    name: PROPOSER_CORRECTIONS
+    description: "Génération d'actions correctives"
+  - id: F5
+    name: APPLIQUER_CORRECTIONS
+    description: "Application des corrections"
+    veto: true
+  - id: F6
+    name: VÉRIFIER_CORRECTIONS
+    description: "Vérification post-correction"
+    veto: true
+invariant: "Toute friction est détectée, classifiée, analysée causalement, et résolue par des actions correctives vérifiées."
+genes:
+  - id: G1
+    name: systematic-detection
+    description: "Détection systématique de toutes les frictions"
+  - id: G2
+    name: causal-tracing
+    description: "Tracé causal de chaque friction → correction"
+  - id: G3
+    name: auto-correction
+    description: "Corrections automatiques quand safe"
+  - id: G4
+    name: traceability
+    description: "Toute friction et correction est tracée et horodatée"
+anti_patterns:
+  - missing_gene: systematic-detection
+    pathology: "Frictions silencieuses → accumulation de dettes"
+  - missing_gene: causal-tracing
+    pathology: "Corrections superficielles → récidives"
+  - missing_gene: auto-correction
+    pathology: "Corrections manuelles répétitives → perte de temps"
+  - missing_gene: traceability
+    pathology: "Impossibilité d'auditer les corrections"
+cross_references:
+  - design: talex-friction-analyzer
+  - design: design-ops-loop
+  - design: ecosystem-meta-coherence
+  - atom: ATOM-TALEX-FRICTION-ANALYZER
+  - skill: talex-friction-analyzer
+  - workflow: workflow-talex-friction-analysis
+  - tool: tools/talex_friction_analyzer.py

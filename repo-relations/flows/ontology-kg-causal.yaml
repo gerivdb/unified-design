@@ -1,0 +1,45 @@
+---
+cross_repo_flow:
+  name: ontology -> kg-causal
+  provider: ONTOLOGY
+  consumers:
+    - KG-CAUSAL
+  contract:
+    interface: file
+    format: json
+    paths:
+      - ONTOLOGY/concepts/causal/*.md
+      - KG-CAUSAL/pipelines/*.yaml
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — ONTOLOGY → KG-CAUSAL
+
+## Rôle
+KG-CAUSAL est le **graphe causal déterministe** pour le pipeline CLM (Observation → Cause → Effet). Il consomme les concepts causaux d'ONTOLOGY pour construire des graphes valides.
+
+## Contrat
+- **Provider** : `ONTOLOGY` expose les concepts causaux canoniques.
+- **Consumer** : `KG-CAUSAL` consomme ces concepts pour :
+  - `pipelines/clm/` : pipeline Observation → Cause → Effet
+  - Détection de causalité valide
+- **Boucle** : KG-CAUSAL peut proposer de nouveaux concepts causaux à ONTOLOGY.
+
+## Validation
+- `provider_registered` : `ONTOLOGY` est dans `known_repositories.yaml`.
+- `consumer_registered` : `KG-CAUSAL` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `ONTOLOGY ↔ KG-CAUSAL`.
+- `contract_exists` : `KG-CAUSAL/pipelines/` existe.
+
+## Références
+- `KG-CAUSAL/`
+- `ONTOLOGY/concepts/`

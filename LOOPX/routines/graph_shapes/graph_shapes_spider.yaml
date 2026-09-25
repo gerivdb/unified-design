@@ -1,0 +1,12 @@
+---
+name: graph_shapes.spider
+category: graph_shapes
+version: v1.0.0
+description: "Generate spider graph"
+entry_point: "scripts/loopx/graph_shapes_spider.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Spider graph shape: kanban visualization, dependency matrix"
+examples:
+  - "loopx routine graph_shapes.spider"

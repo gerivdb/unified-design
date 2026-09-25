@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - META-DESIGN.md v2.1.0
 - Piliers SDD, TCE, MAG, CD
-- designs/ per strate (L0-CANON, L1-INFRA, L2-PLATFORM, L3-CITIZENS, L4-TOOLS)
+- designs/ per strate (L0-CANON, L1-INFRA, L2-PLATFORM, L3-CITIZENS, L4-TOOLS, L5-ARCHIVE, L6-WORK)
 - atoms/ universal catalogue
 - schemas/ validation schemas
 - citizens.yaml (RSS-v2.3)

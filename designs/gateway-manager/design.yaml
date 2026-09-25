@@ -1,4 +1,14 @@
 ---
+name: "Gateway Manager"
+version: 1.0.0
+status: active
+layer: L0
+description: "Gateway Manager — Passerelle BDCP-CORE du metacluster. Clapet 18000, routage reseau, anonymat.
+"
+consumers:
+  - bootstrap
+  - kix
+
 name: Gateway Manager
 version: "1.0.0"
 status: active

@@ -1,4 +1,10 @@
+---
 name: incremental-scan-cache
+version: 1.0.0
+status: proposed
+layer: L1-L4
+description: "Design artifact for incremental-scan-cache."
+
 version: 1.0.0
 status: proposed
 layer: L1-L4

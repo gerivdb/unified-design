@@ -1,0 +1,12 @@
+---
+name: citizens.list
+category: citizens
+version: v1.0.0
+description: "List citizens"
+entry_point: "scripts/loopx/citizens_list.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "List all registered citizens and their status"
+examples:
+  - "loopx routine citizens.list"

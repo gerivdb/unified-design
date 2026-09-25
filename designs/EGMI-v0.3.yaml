@@ -2,6 +2,7 @@ name: EGMI-v0.3
 version: 1.0.0
 status: active
 layer: L4-TOOLS
+description: Design artifact for EGMI-v0.3.
 intent_hash: 0xEGMI_V03_20260831
 inherits:
 - fractal-engineering-strata
@@ -34,13 +35,19 @@ parameters:
   fractal:
     pattern: sparse-selective-gating
     max_depth: 3
-    strata: [L0, L1, L2, L3, L4, L5]
+    strata:
+    - L0
+    - L1
+    - L2
+    - L3
+    - L4
+    - L5
     auto_params:
-      - eta
-      - kappa
-      - nu
-      - alpha
-      - lambda_stab
+    - eta
+    - kappa
+    - nu
+    - alpha
+    - lambda_stab
   egmi:
     num_threads: 16
     s_dim: 16
@@ -62,32 +69,46 @@ parameters:
     f_grav_min: 0.05
     nabla_h_max: 0.2
   mue_types:
-    - pupale
-    - ecdysone
-    - martensitique
-    - luciferase
-    - phototropique
-    - sporale
-    - ecdysse
-    - cristalline
-    - amorphe
-    - vesiculaire
-    - fibrillaire
-    - gelatineuse
-    - magnetique
-    - osmotique
-    - electrochromique
-    - piezoelectrique
-    - neotenique
+  - pupale
+  - ecdysone
+  - martensitique
+  - luciferase
+  - phototropique
+  - sporale
+  - ecdysse
+  - cristalline
+  - amorphe
+  - vesiculaire
+  - fibrillaire
+  - gelatineuse
+  - magnetique
+  - osmotique
+  - electrochromique
+  - piezoelectrique
+  - neotenique
   holmes_modules:
-    - epistemverse
-    - criminalverse
-    - mythoverse_h
+  - epistemverse
+  - criminalverse
+  - mythoverse_h
   kg_l_integration:
     fractal_engine: true
     universal_functor: true
     keel_r9_validation: true
-    guards: [GF-1, GF-2, GF-3, GF-4, GF-5, GF-6, GF-7, GF-8, GF-9, GF-10, GF-11, GF-12, GF-13, GF-14]
+    guards:
+    - GF-1
+    - GF-2
+    - GF-3
+    - GF-4
+    - GF-5
+    - GF-6
+    - GF-7
+    - GF-8
+    - GF-9
+    - GF-10
+    - GF-11
+    - GF-12
+    - GF-13
+    - GF-14
     axes_36_39:
       axis_36_f_grav: true
       axis_37_parallelism: true
@@ -98,10 +119,11 @@ parameters:
       steps: 17
       vibe_artifacts: 6
   wazaa_channels:
-    - L4-TOOLS/EGMI/mutations/*
-    - L4-TOOLS/EGMI/metrics/*
-    - L4-TOOLS/EGMI/divergence/*
+  - L4-TOOLS/EGMI/mutations/*
+  - L4-TOOLS/EGMI/metrics/*
+  - L4-TOOLS/EGMI/divergence/*
 performance:
   latency_p99: 50.0
   power_max: 15.0
   memory_gb: 2.0
+adr: ADR-015-unified-design-v2

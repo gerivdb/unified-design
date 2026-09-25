@@ -1,0 +1,12 @@
+---
+name: git.push
+category: git
+version: v1.0.0
+description: "Push commits to remote"
+entry_point: "scripts/loopx/git_push.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Git push: remote safety, pre-push audit, force push guard"
+examples:
+  - "loopx routine git.push"

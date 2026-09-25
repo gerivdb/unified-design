@@ -1,8 +1,8 @@
 ---
 type: PRD
 version: "1.1"
-date: "2026-09-21"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xPRD_MOC_PRIMITIVE_ATOMICITY_CONTRACT_20260921
 ---
 
@@ -10,8 +10,8 @@ intent_hash: 0xPRD_MOC_PRIMITIVE_ATOMICITY_CONTRACT_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
-**Date** : 2026-09-21  
+**Statut** : approved  
+**Date** : 2026-09-22  
 **Version** : 1.1 (évaluation utilité + périmètre)
 
 ---

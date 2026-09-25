@@ -1,82 +1,121 @@
----
 name: ecosystem-consciousness
-description: "Conscience écosystémique ternaire Think/Do/Check. Reflet élégant et structurant de l'écosystème : sélection des dimensions topologiques, sémantiques et métier pour rendre l'écosystème compréhensible, navigable et évolutif. Intègre 4 KG engines (KG-L, VERSES, KG-CAUSAL, VOLTX) + TALEX."
-version: "1.0.0"
+description: "Conscience \xE9cosyst\xE9mique ternaire Think/Do/Check. Reflet \xE9\
+  l\xE9gant et structurant de l'\xE9cosyst\xE8me : s\xE9lection des dimensions topologiques,\
+  \ s\xE9mantiques et m\xE9tier pour rendre l'\xE9cosyst\xE8me compr\xE9hensible,\
+  \ navigable et \xE9volutif. Int\xE8gre 4 KG engines (KG-L, VERSES, KG-CAUSAL, VOLTX)\
+  \ + TALEX."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_ECOSYSTEM_CONSCIOUSNESS_20260917
 hardware_profile:
-  cpu: "E5620 Westmere, SSE4.2"
-  gpu: "FORBIDDEN"
+  cpu: E5620 Westmere, SSE4.2
+  gpu: FORBIDDEN
   ram_max_gb: 24
-  execution_mode: "CPU-only"
+  execution_mode: CPU-only
 inherits:
-  - consciousness
-  - meta-coherence
+- consciousness
+- meta-coherence
 depends_on:
-  - consciousness
-  - meta-coherence
+- consciousness
+- meta-coherence
 bridges:
-  - target: repo:VOLTX
-    role: narrative-vault
-    protocol: wazaa-channel
-    channel: L0-CANON/VOLTX/consciousness/narrative
-  - target: repo:KG-L
-    role: causal-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/KG-L/consciousness/causal
-  - target: repo:VERSES
-    role: semantic-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/VERSES/consciousness/semantic
-  - target: repo:TALEX
-    role: narrative-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/TALEX/consciousness/narrative
-  - target: repo:ARGUS
-    role: auditor
-    protocol: wazaa-channel
-    channel: L4-TOOLS/ARGUS/consciousness/audit
-  - target: repo:GOVERNANCE-HUB
-    role: validator
-    protocol: yaml
-    channel: L0-CANON/GOVERNANCE-HUB/consciousness/validation
-  - target: repo:NEXUS
-    role: data-layer
-    protocol: wazaa-channel
-    channel: L4-TOOLS/NEXUS/consciousness/data
-
+- target: repo:VOLTX
+  role: narrative-vault
+  protocol: wazaa-channel
+  channel: L0-CANON/VOLTX/consciousness/narrative
+- target: repo:KG-L
+  role: causal-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/KG-L/consciousness/causal
+- target: repo:VERSES
+  role: semantic-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/VERSES/consciousness/semantic
+- target: repo:TALEX
+  role: narrative-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/TALEX/consciousness/narrative
+- target: repo:ARGUS
+  role: auditor
+  protocol: wazaa-channel
+  channel: L4-TOOLS/ARGUS/consciousness/audit
+- target: repo:GOVERNANCE-HUB
+  role: validator
+  protocol: yaml
+  channel: L0-CANON/GOVERNANCE-HUB/consciousness/validation
+- target: repo:NEXUS
+  role: data-layer
+  protocol: wazaa-channel
+  channel: L4-TOOLS/NEXUS/consciousness/data
 capabilities:
-  - name: think-consciousness
-    description: "Conscience de Think : veille, standards, conception, méta-KG, prospective, topologique, introspective"
-    parameters:
-      engines: [VOLTX, VERSES, KG-L, TALEX]
-      methodology: quinquepartite (qui/quoi/où/quand/comment/pourquoi)
-  - name: do-consciousness
-    description: "Conscience de Do : exécution, pipelines, orchestration, flux, adaptation"
-    parameters:
-      engines: [CTULU, KG-CAUSAL, KIVA-CLI, ECOS-CLI, TRIX]
-      pipeline: Think -> Do -> Check
-  - name: check-consciousness
-    description: "Conscience de Check : vérification, conformité, traçabilité, gouvernance"
-    parameters:
-      engines: [ARGUS, GOVERNANCE-HUB, NEXUS, VOLTX]
-      validation: Poincaré + pre-commit hooks + PoL
-  - name: mdu-reflection
-    description: "MDU comme reflet élégant et structurant (topologique, sémantique, métier)"
-    parameters:
-      dimensions: [topological, semantic, business]
-      selection: true
-      organization: true
-  - name: engineering-ideas-integration
-    description: "Intégration des concepts opérationnels de GG-knox/engineering-ideas"
-    parameters:
-      source: GG-knox/engineering-ideas
-      concepts: [filetree-problematisation, value-machine, loop-engineering, external-verification-mandatory, gate-layers, delta-check, fresh-context-verifier, agent-engineering-maturity, context-engineering, ecosystem-feedback-loop, deployment-patterns, independent-sources-rule, confidence-threshold, meta-edit-loop, learning-curve-expectation, carry-forward-principle, reject-work-principle]
-
+- name: think-consciousness
+  description: "Conscience de Think : veille, standards, conception, m\xE9ta-KG, prospective,\
+    \ topologique, introspective"
+  parameters:
+    engines:
+    - VOLTX
+    - VERSES
+    - KG-L
+    - TALEX
+    methodology: "quinquepartite (qui/quoi/o\xF9/quand/comment/pourquoi)"
+- name: do-consciousness
+  description: "Conscience de Do : ex\xE9cution, pipelines, orchestration, flux, adaptation"
+  parameters:
+    engines:
+    - CTULU
+    - KG-CAUSAL
+    - KIVA-CLI
+    - ECOS-CLI
+    - TRIX
+    pipeline: Think -> Do -> Check
+- name: check-consciousness
+  description: "Conscience de Check : v\xE9rification, conformit\xE9, tra\xE7abilit\xE9\
+    , gouvernance"
+  parameters:
+    engines:
+    - ARGUS
+    - GOVERNANCE-HUB
+    - NEXUS
+    - VOLTX
+    validation: "Poincar\xE9 + pre-commit hooks + PoL"
+- name: mdu-reflection
+  description: "MDU comme reflet \xE9l\xE9gant et structurant (topologique, s\xE9\
+    mantique, m\xE9tier)"
+  parameters:
+    dimensions:
+    - topological
+    - semantic
+    - business
+    selection: true
+    organization: true
+- name: engineering-ideas-integration
+  description: "Int\xE9gration des concepts op\xE9rationnels de GG-knox/engineering-ideas"
+  parameters:
+    source: GG-knox/engineering-ideas
+    concepts:
+    - filetree-problematisation
+    - value-machine
+    - loop-engineering
+    - external-verification-mandatory
+    - gate-layers
+    - delta-check
+    - fresh-context-verifier
+    - agent-engineering-maturity
+    - context-engineering
+    - ecosystem-feedback-loop
+    - deployment-patterns
+    - independent-sources-rule
+    - confidence-threshold
+    - meta-edit-loop
+    - learning-curve-expectation
+    - carry-forward-principle
+    - reject-work-principle
 principles:
-  - P0_CONSCIOUSNESS : tout agent gerivdb ne peut créer de redondance ni ignorer l'existant
-  - P0_VALIDATION_POINCARE : β₀=1, β₁=0, χ=1
-  - P0_METHODOLOGIE_QUINQUEPARTITE : qui/quoi/où/quand/comment/pourquoi
-  - P0_MDU_REFLET : reflet élégant et structurant, pas mirroring fidèle
-  - P0_ENGINEERING_IDEAS : concepts opérationnels intégrés dans designs/atoms
+- P0_CONSCIOUSNESS: "tout agent gerivdb ne peut cr\xE9er de redondance ni ignorer\
+    \ l'existant"
+- P0_VALIDATION_POINCARE: "\u03B2\u2080=1, \u03B2\u2081=0, \u03C7=1"
+- P0_METHODOLOGIE_QUINQUEPARTITE: "qui/quoi/o\xF9/quand/comment/pourquoi"
+- P0_MDU_REFLET: "reflet \xE9l\xE9gant et structurant, pas mirroring fid\xE8le"
+- P0_ENGINEERING_IDEAS: "concepts op\xE9rationnels int\xE9gr\xE9s dans designs/atoms"
+adr: ADR-015-unified-design-v2

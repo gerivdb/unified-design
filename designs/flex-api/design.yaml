@@ -1,4 +1,13 @@
 ---
+name: "FLEX API"
+version: 1.0.0
+status: active
+layer: L0
+description: "FLEX API — API FLEX (8080), endpoint numa/status. Optionnel au bootstrap.
+"
+consumers:
+  - bootstrap
+
 name: FLEX API
 version: "1.0.0"
 status: active

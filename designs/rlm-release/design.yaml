@@ -1,5 +1,14 @@
 ---
 name: RLM-RELEASE
+version: 1.0.0
+status: active
+layer: L0
+description: "RLM-RELEASE — Service de release. Gere les versions, les tags et les changelogs.
+"
+consumers:
+  - rlm-config
+
+name: RLM-RELEASE
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM

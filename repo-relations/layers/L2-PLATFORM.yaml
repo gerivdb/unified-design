@@ -1,0 +1,32 @@
+---
+layer: L2_PLATFORM
+description: "Repos L2-PLATFORM — plateforme, runners, pipelines, validateurs"
+path_prefix: "D:/DO/WEB/TOOLS/L2-PLATFORM/"
+repos:
+  - name: PLIX
+    description: "Repo PLIX"
+    status: ACTIVE
+    flows: []
+
+  - name: DAG-3
+    description: "Runner DAG-3 - Graph-based recursive memory layer"
+    status: ACTIVE
+    flows: []
+
+  - name: TIMX
+    description: "TIMeline Event eXtractor / Feature Store — signatures temporelles et features vectorielles"
+    status: ACTIVE
+    flows:
+      - file: ../flows/timx-llux.yaml
+        direction: outbound
+      - file: ../flows/timx-rlm243.yaml
+        direction: outbound
+      - file: ../flows/timx-talex.yaml
+        direction: outbound
+
+  - name: CURX
+    description: "Curriculum Engine — curriculum-centric learning engine"
+    status: ACTIVE
+    flows: []
+
+structural_relations: []

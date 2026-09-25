@@ -13,19 +13,19 @@ inherits:
   - meta-coherence
   - dev-tool-wrapper
 depends_on:
-  - kg-causal
-  - kix
-  - rootx
-  - talex
+  - typed-decision-api
+  - sovereign-adapter-pattern
 hardware_profile:
   cpu: "E5620 Westmere, SSE4.2"
   gpu: "FORBIDDEN"
   ram_max_gb: 24
   execution_mode: "CPU-only"
-  runtime: "Python 3.12 + llama.cpp / Bun 1.2+ optionnel"
+  runtime:
+    primary: "Bun"
+    alternative: "Python 3.12 + llama.cpp pour backends légers"
   deployment_wsl1:
-    preferred_runtime: "Python 3.12"
-    alternative_runtime: "Bun 1.2+"
+    preferred_runtime: "Bun"
+    alternative_runtime: "Python 3.12 + llama.cpp"
     inference_backend: "llama.cpp compilé en statique avec fallback AVX1"
     isolation: "chroot ou proot pour dépendances Python si nécessaire"
     notes: |
@@ -40,7 +40,7 @@ components:
   - type: decision-engine
     repo: gerivdb/JEVX
     path: D:\DO\WEB\TOOLS\L4-TOOLS\JEVX
-    entrypoint: src/server.ts
+    entrypoint: src/index.ts
     runtime: bun
   - type: typed-api
     protocol: http
@@ -146,6 +146,7 @@ capabilities:
     parameters:
       max_inflight: 2
       max_queue: 64
+      note: "max_queue reflète le compteur waiting du code ; pas de queue bornée persistante"
 principles:
   - P0_SOVEREIGNTY: JEVX est une surcouche souveraine sur upstream LocalJev ; aucun trafic ne quitte l'ENV sans mediation JEVX
   - P0_WIRE_COMPATIBILITY: compatibilité wire avec Jev TypeSafe SDK, mais non-équivalence mathématique avec OpenJev logit read
@@ -165,6 +166,9 @@ constraints:
   - calibration_required: true
   - semantic_equivalence: partial
 security_guardrails:
+  status: draft
+  description: "Security guardrails décrites mais non implémentées dans JEVX"
+  items:
   - id: decision_safety_filter
     description: "Filtre de sécurité sur les décisions à haut risque (actions irréversibles, accès privilégiés)"
     mechanism: "schema_validation + confidence_threshold + human_escalation"

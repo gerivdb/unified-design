@@ -1,0 +1,12 @@
+---
+name: citizens.promote
+category: citizens
+version: v1.0.0
+description: "Promote citizen"
+entry_point: "scripts/loopx/citizens_promote.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Promote citizen modules to production"
+examples:
+  - "loopx routine citizens.promote"

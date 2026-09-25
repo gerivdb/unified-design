@@ -1,24 +1,28 @@
----
 name: task-planning
-description: "Planification des tâches dans l'écosystème gerivdb. Formalise la décomposition, l'estimation, et le scheduling des tâches."
-version: "1.0.0"
+description: "Planification des t\xE2ches dans l'\xE9cosyst\xE8me gerivdb. Formalise\
+  \ la d\xE9composition, l'estimation, et le scheduling des t\xE2ches."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_TASK_PLANNING_20260917
 inherits:
-  - chain-fluidity
+- chain-fluidity
 depends_on:
-  - chain-fluidity
+- chain-fluidity
 capabilities:
-  - name: task-decomposition
-    description: "Décomposition de tâches complexes en sous-tâches atomiques"
-    parameters:
-      max_depth: 5
-      atomic: true
-  - name: task-estimation
-    description: "Estimation de charge et de durée"
-    parameters:
-      unit: [minutes, tokens, complexity]
+- name: task-decomposition
+  description: "D\xE9composition de t\xE2ches complexes en sous-t\xE2ches atomiques"
+  parameters:
+    max_depth: 5
+    atomic: true
+- name: task-estimation
+  description: "Estimation de charge et de dur\xE9e"
+  parameters:
+    unit:
+    - minutes
+    - tokens
+    - complexity
 principles:
-  - P0_PLANNING: toute tâche complexe est planifiée avant exécution
-  - P0_ATOMIC: les sous-tâches sont atomiques et indépendantes
+- P0_PLANNING: "toute t\xE2che complexe est planifi\xE9e avant ex\xE9cution"
+- P0_ATOMIC: "les sous-t\xE2ches sont atomiques et ind\xE9pendantes"
+adr: ADR-015-unified-design-v2

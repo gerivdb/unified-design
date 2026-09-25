@@ -1,5 +1,15 @@
 ---
 name: RLM-INCIDENT
+version: 1.0.0
+status: active
+layer: L0
+description: "RLM-INCIDENT — Service de gestion des incidents. Cree et suit les incidents systeme.
+"
+consumers:
+  - rlm-config
+  - rlm-metrics
+
+name: RLM-INCIDENT
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM

@@ -1,0 +1,117 @@
+---
+layer: L0_CANON
+description: "Repos L0-CANON — vérité unique, spécifications, conventions, gouvernance"
+path_prefix: "D:/DO/WEB/TOOLS/L0-CANON/"
+repos:
+  - name: GOVERNANCE-HUB
+    description: "SOT execution, règles de gouvernance, registres"
+    status: ACTIVE
+    memory_role: governance
+    structural: true
+    flows:
+      - file: ../flows/govhub-unified-design.yaml
+        direction: outbound
+      - file: ../flows/govhub-nexus.yaml
+        direction: outbound
+      - file: ../flows/govhub-topos.yaml
+        direction: outbound
+      - file: ../flows/govhub-ecos-cli.yaml
+        direction: outbound
+      - file: ../flows/govhub-kiva-cli.yaml
+        direction: outbound
+
+  - name: NEXUS
+    description: "Mega-SOT — registre des registres, gouvernance"
+    status: ACTIVE
+    structural: true
+    flows:
+      - file: ../flows/nexus-argus.yaml
+        direction: outbound
+
+  - name: ONTOLOGY
+    description: "SOT sémantique, dictionnaire canonique, ontologies"
+    status: ACTIVE
+    memory_role: ontology
+    structural: true
+    flows:
+      - file: ../flows/ontology-verses.yaml
+        direction: outbound
+      - file: ../flows/ontology-kgl.yaml
+        direction: outbound
+
+  - name: BRAIN
+    description: "Couche IA, agents cognitifs"
+    status: ACTIVE
+    memory_role: cognitive_memory
+    structural: true
+    flows:
+      - file: ../flows/brain-fluence.yaml
+        direction: outbound
+      - file: ../flows/brain-wazaa.yaml
+        direction: outbound
+
+  - name: unified-design
+    description: "Meta-Design (MDU) — atlas invariants architecturaux"
+    status: ACTIVE
+    memory_role: meta_design
+    structural: true
+    flows:
+      - file: ../flows/govhub-unified-design.yaml
+        direction: inbound
+      - file: ../flows/unified-design-repo-standards.yaml
+        direction: outbound
+
+  - name: VOLTX
+    description: "Vault Orchestrator Root — Moteur Narratif Souverain"
+    status: ACTIVE
+    memory_role: conversational_memory
+    structural: true
+    flows:
+      - file: ../flows/brain-voltx.yaml
+        direction: inbound
+      - file: ../flows/hermes-voltx.yaml
+        direction: inbound
+
+  - name: HERMES
+    description: "SOT mémoire hiérarchique — MEMORY.md, USER.md, Skills, Facts DB"
+    status: ACTIVE
+    memory_role: orchestrator
+    structural: true
+    flows:
+      - file: ../flows/hermes-voltx.yaml
+        direction: outbound
+
+  - name: TQL
+    description: "Ternary Query Language — grammaire, spec, fixtures"
+    status: ACTIVE
+    flows: []
+
+structural_relations:
+  - kind: requires
+    from: GOVERNANCE-HUB
+    to: NEXUS
+    symmetric: false
+  - kind: requires
+    from: GOVERNANCE-HUB
+    to: TOPOS
+    symmetric: false
+  - kind: requires
+    from: GOVERNANCE-HUB
+    to: unified-design
+    symmetric: false
+  - kind: requires
+    from: ONTOLOGY
+    to: NEXUS
+    symmetric: false
+  - kind: complements
+    from: BRAIN
+    to: VOLTX
+    symmetric: true
+  - kind: complements
+    from: unified-design
+    to: REPO-STANDARDS
+    symmetric: true
+  - kind: stabilizes
+    from: GOVERNANCE-HUB
+    to: HERMES
+    symmetric: false

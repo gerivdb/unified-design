@@ -1,0 +1,12 @@
+---
+name: kg_l.validate
+category: kg_l
+version: v1.0.0
+description: "Validate KG-L data"
+entry_point: "scripts/loopx/kg_l_validate.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "KG-L validate: anchor dedup, link coherence, schema check"
+examples:
+  - "loopx routine kg_l.validate"

@@ -1,0 +1,12 @@
+---
+name: loop_types.breakthrough
+category: loop_types
+version: v1.0.0
+description: "Breakthrough loop execution"
+entry_point: "scripts/loopx/loop_types_breakthrough.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Breakthrough loop: diagnose, fix, verify cycle"
+examples:
+  - "loopx routine loop_types.breakthrough"

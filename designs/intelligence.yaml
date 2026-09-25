@@ -1,19 +1,23 @@
----
 name: intelligence
-description: "Capacité à résoudre des problèmes, à apprendre et à adapter son comportement. Liée à la big_picture : la compréhension globale du topos libère des possibilités d'action invisibles. L'intelligence sans big_picture est locale ; la big_picture sans intelligence est vide. inherits=[] (racine ; big-picture dépend de intelligence via depends_on, pas l'inverse)."
-version: "1.0.0"
+description: "Capacit\xE9 \xE0 r\xE9soudre des probl\xE8mes, \xE0 apprendre et \xE0\
+  \ adapter son comportement. Li\xE9e \xE0 la big_picture : la compr\xE9hension globale\
+  \ du topos lib\xE8re des possibilit\xE9s d'action invisibles. L'intelligence sans\
+  \ big_picture est locale ; la big_picture sans intelligence est vide. inherits=[]\
+  \ (racine ; big-picture d\xE9pend de intelligence via depends_on, pas l'inverse)."
+version: 1.0.0
 status: active
 layer: L0
-intent_hash: "0xDESIGN_INTELLIGENCE_20260828"
+intent_hash: 0xDESIGN_INTELLIGENCE_20260828
 inherits: []
 depends_on:
-  - serendipity
-  - entropy-search
+- serendipity
+- entropy-search
 bridges:
-  - target: repo:CTULU
-    role: provider
-    protocol: tool-invocation
-  - target: repo:BRAIN
-    role: provider
-    protocol: wazaa-channel
-    channel: L4-TOOLS/BRAIN/intelligence/cognitive_state
+- target: repo:CTULU
+  role: provider
+  protocol: tool-invocation
+- target: repo:BRAIN
+  role: provider
+  protocol: wazaa-channel
+  channel: L4-TOOLS/BRAIN/intelligence/cognitive_state
+adr: ADR-015-unified-design-v2

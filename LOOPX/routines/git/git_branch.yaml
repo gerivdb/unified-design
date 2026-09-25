@@ -1,0 +1,12 @@
+---
+name: git.branch
+category: git
+version: v1.0.0
+description: "Branch management operations"
+entry_point: "scripts/loopx/git_branch.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Git branch taxonomy: enforce naming convention, validate prefix"
+examples:
+  - "loopx routine git.branch"

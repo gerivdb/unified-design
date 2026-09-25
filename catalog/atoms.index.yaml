@@ -1461,3 +1461,10 @@ entries:
   status: ACTIVE
   profile: STANDARD
   consumers: []
+- name: ATOM-TALEX-FRICTION-ANALYZER
+  path: atoms\ATOM-TALEX-FRICTION-ANALYZER.md
+  version: 1.0.0
+  intent_hash: 0xATOM_TALEX_FRICTION_ANALYZER_20260922
+  status: active
+  profile: STANDARD
+  consumers: []

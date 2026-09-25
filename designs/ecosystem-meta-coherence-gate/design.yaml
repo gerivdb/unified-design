@@ -1,0 +1,140 @@
+---
+name: ecosystem-meta-coherence-gate
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_GATE_20260921
+inherits:
+  - ecosystem-meta-coherence
+  - safe-action-pattern
+  - design-ops-loop
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+description: >
+  Gate d'écosystème méta-cohérente qui vérifie, avant toute mutation du MDU,
+  que les invariants d'intégrité écosystémique sont respectés.
+  Formalise les états THINK/DO/CHECK en vérification mécanique :
+  - THINK : analyse des besoins et détection des écarts
+  - DO : validation des mutations avant engagement
+  - CHECK : vérification post-mutation et traçabilité
+states:
+  - name: IDLE
+    nature: en attente de déclenchement
+    gate_to_next: AUDIT
+    question: "Une mutation du MDU nécessite-t-elle une validation méta-cohérente ?"
+  - name: AUDIT
+    nature: vérification des invariants écosystémiques
+    gate_to_next: PASS | FAIL
+    question: "Les invariants Think/Do/Check sont-ils respectés ? Les cross-références sont-elles canoniques ?"
+  - name: PASS
+    nature: mutation autorisée
+    gate_to_next: PROGRESS
+    question: "La preuve horodatée est-elle présente et valide ?"
+  - name: FAIL
+    nature: mutation refusée
+    question: "Quel invariant écosystémique a échoué ?"
+functions:
+  - id: F1
+    name: PERCEVOIR_BESOINS
+    state: IDLE→AUDIT
+    description: "Collecte multi-source des besoins écosystémiques (signaux faibles, gaps, impensés)"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: ÉVALUER_INVARIANTS
+    state: AUDIT
+    description: "Vérification des invariants Think/Do/Check et des chemins canoniques"
+    implements: ATOM-GATE-LAYERS
+  - id: F3
+    name: VÉRIFIER_CROSS_RÉFÉRENCES
+    state: AUDIT
+    description: "Contrôle des cross-références entre repos, designs, primitives et workflows"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: F4
+    name: VALIDER_PREUVE
+    state: AUDIT→PASS
+    description: "Validation de la preuve horodatée (IntentHash, commit, preuve d'exécution)"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+    veto: true
+  - id: F5
+    name: BLOQUER_SI_NON_CONFORME
+    state: AUDIT→FAIL
+    description: "Blocage immédiat si invariants écosystémiques échouent"
+    implements: ATOM-STOP-CONDITION
+    veto: true
+  - id: F6
+    name: AUTORISER_MUTATION
+    state: PASS→PROGRESS
+    description: "Autorisation formelle de la mutation du MDU"
+    implements: ecosystem-meta-coherence
+  - id: F7
+    name: ENREGISTRER_TRACE
+    state: PASS | FAIL
+    description: "Enregistrement horodaté de la décision de gate avec traçabilité causale"
+    implements: ATOM-DELTA-CHECK, ATOM-CARRY-FORWARD-PRINCIPLE
+invariant: "Aucune mutation du MDU ne peut passer l'état AUDIT sans preuve horodatée valide et invariants Think/Do/Check confirmés."
+genes:
+  - id: G1
+    name: think-first
+    description: "Toute mutation naît d'un besoin écosystémique identifié, pas d'un caprice."
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: G2
+    name: verification-systematic
+    description: "Toute mutation passe par AUDIT avant PASS ou FAIL"
+    implements: ATOM-GATE-LAYERS
+  - id: G3
+    name: proof-horodatee
+    description: "La preuve d'exécution est horodatée et vérifiable"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: G4
+    name: causal-traceability
+    description: "Toute décision de gate est tracée et horodatée"
+    implements: ATOM-DELTA-CHECK, ATOM-CARRY-FORWARD-PRINCIPLE
+anti_patterns:
+  - missing_gene: think-first
+    pathology: "Mutation appliquée sans besoin écosystémique validé → dette technique"
+    mdu_atom: ATOM-INDEPENDENT-SOURCES-RULE
+  - missing_gene: verification-systematic
+    pathology: "Mutation sans validation → écart structurel non détecté"
+    mdu_atom: ATOM-GATE-LAYERS
+  - missing_gene: proof-horodatee
+    pathology: "Action sans preuve → échec silencieux"
+    mdu_atom: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - missing_gene: causal-traceability
+    pathology: "Décision non tracée → impossibilité d'auditer"
+    mdu_atom: ATOM-DELTA-CHECK
+inheritance_loop: |
+  IDLE → AUDIT → PASS → PROGRESS → BILAN → ENREGISTRER
+                                       │
+                                       ▼
+                           injecté dans le IDLE suivant
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: enforces
+  - repo: gerivdb/ARGUS
+    relation: audits
+  - repo: gerivdb/TALEX
+    relation: narrates
+  - repo: gerivdb/VOLTX
+    relation: stores_proofs
+  - repo: gerivdb/KG-CAUSAL
+    relation: causal_graph
+  - design: ecosystem-meta-coherence
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - atom: ATOM-ECOSYSTEM-META-COHERENCE-GATE
+  - primitive: ecosystem-meta-coherence-gate-primitive
+  - skill: mdu-integrity-checker
+  - workflow: workflow-pre-push-validation
+  - adr: ADR-2026-09-19-SAFE-ACTION-PATTERN
+  - adr: ADR-2026-09-21-006-ECOSYSTEM-META-COHERENCE-GATE
+  - prd_moc: PRD-MOC-ECOSYSTEM-META-COHERENCE-GATE-20260921
+  - moc: MOC-ECOSYSTEM-META-COHERENCE-GATE-20260921

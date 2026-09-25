@@ -1,0 +1,52 @@
+name: boot-sequence-validator
+version: 1.0.0
+status: active
+profile: STANDARD
+layer: L2-PLATFORM
+intent_hash: 0xBOOT_SEQUENCE_VALIDATOR_20260922
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  Workflow de validation de séquence de boot.
+  Garantit que les services démarrent dans l'ordre correct,
+  avec vérification de santé entre chaque étape.
+  Évite les démarrages parallèles non coordonnés.
+consumers:
+  - KIX
+  - ECOS-CLI
+  - KIVA-CLI
+  - RLM-METRICS
+capabilities:
+  - name: boot-validation
+    description: Valide la séquence de boot des services
+    parameters:
+      max_parallel: 3
+      health_timeout_ms: 5000
+      retry_on_failure: true
+  - name: dependency-check
+    description: Vérifie les dépendances avant démarrage
+    parameters:
+      strict_mode: true
+      allow_missing: false
+components:
+  - type: validator
+    repo: gerivdb/KIX
+    path: KIX/src/boot_validator.py
+  - type: health-checker
+    repo: gerivdb/KIX
+    path: KIX/src/health.py
+bridges:
+  - target: repo:KIX
+    role: consumer
+    protocol: local
+  - target: repo:RLM-METRICS
+    role: consumer
+    protocol: http
+    port: 8802
+dependencies:
+  - repo: gerivdb/KIX
+  - repo: gerivdb/RLM-METRICS
+constraints:
+  - cpu_only: true
+  - ram_limit_mb: 24576

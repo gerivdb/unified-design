@@ -1,5 +1,15 @@
 ---
 name: HARNEX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "HARNEX — Runner de sante du harness. Verifie l'etat des composants d'infrastructure et des connecteurs.
+"
+consumers:
+  - kix
+  - gateway-manager
+
+name: HARNEX
 version: "1.0.0"
 status: proposed
 strate: L0-CANON

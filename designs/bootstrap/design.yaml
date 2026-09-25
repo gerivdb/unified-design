@@ -1,4 +1,13 @@
 ---
+name: "Bootstrap Runner"
+version: 1.0.0
+status: active
+layer: L0
+description: "Bootstrap Runner — Orchestrateur de l'amorcage systeme. Sequence gateway-manager -> KIX -> Arbiter -> trixd -> wazaa -> flex-api.
+"
+consumers:
+  - kix
+
 name: Bootstrap Runner
 version: "1.0.0"
 status: active

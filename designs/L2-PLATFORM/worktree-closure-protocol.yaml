@@ -1,4 +1,11 @@
+---
 name: worktree-closure-protocol
+version: 1.0.0
+status: proposed
+layer: L0
+description: "Worktree Closure Protocol"
+consumers:
+
 description: "Worktree Closure Protocol"
 version: "1.0.0"
 parent: unified-design

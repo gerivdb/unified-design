@@ -1,5 +1,14 @@
 ---
 name: RLM-GRAPH
+version: 1.0.0
+status: active
+layer: L0
+description: "RLM-GRAPH — Service de graphe de dependances. Construit et maintient le graphe des dependances entre repos.
+"
+consumers:
+  - rlm-config
+
+name: RLM-GRAPH
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM

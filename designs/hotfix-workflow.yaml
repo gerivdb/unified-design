@@ -1,0 +1,71 @@
+---
+name: hotfix-workflow
+description: "Workflow de correctif urgent : création branche hotfix/*, merge d'urgence, rollback, et post-mortem."
+version: "1.0.0"
+status: active
+layer: L0
+type: design
+profile: STANDARD
+intent_hash: 0xDESIGN_HOTFIX_WORKFLOW_20260923
+adr: ADR-014-git-policy, ADR-030-hitl-session-protocol
+inherits:
+  - conflict-resolver-pattern
+  - branch-orphan-conflict-resolver
+depends_on:
+  - merge-fork-balance
+  - atomic-fragmentation
+capabilities:
+  - name: hotfix-creation
+    description: "Création et gestion de branche hotfix/*"
+    parameters:
+      prefix: "hotfix/"
+      base: "main"
+      ttl_days: 7
+  - name: emergency-merge
+    description: "Merge d'urgence avec validation minimale"
+    parameters:
+      min_reviews: 1
+      wal_logging: true
+      rollback_required: true
+  - name: rollback-procedure
+    description: "Procédure de rollback post-hotfix"
+    parameters:
+      revert_commit: true
+      post_mortem_required: true
+principles:
+  - P0_HOTFIX_FROM_MAIN: hotfix DOIT être créé depuis main, jamais depuis une feature branch
+  - P0_EMERGENCY_MERGE_TRACED: merge d'urgence DOIT être tracé dans WAL
+  - P0_ROLLBACK_PLAN: tout hotfix merge DOIT avoir un plan de rollback documenté
+  - P0_POST_MORTEM: hotfix > 2h DOIT générer un post-mortem dans incident/
+  - P0_TTL_HOTFIX: branche hotfix/* DOIT être supprimée dans les 7 jours post-merge
+constraints:
+  - hotfix_branch_required: true
+  - emergency_merge_traced: true
+  - rollback_plan_required: true
+  - post_mortem_threshold_hours: 2
+  - ttl_days: 7
+  - no_force_push_protected: true
+workflow:
+  - step: create_hotfix_branch
+    action: "git checkout -b hotfix/<slug> main"
+    output: hotfix_branch
+  - step: implement_fix
+    action: "git add -A && git commit -m 'fix: <description>'"
+    output: fix_commit
+  - step: emergency_merge
+    action: "git checkout main && git merge --no-ff hotfix/<slug>"
+    output: merge_commit
+  - step: document_rollback
+    action: "echo 'Rollback: git revert <merge_sha>' > rollback-<slug>.md"
+    output: rollback_plan
+  - step: post_mortem_if_needed
+    action: "if resolution_time > 2h then generate post-mortem"
+    output: post_mortem
+  - step: cleanup
+    action: "git branch -d hotfix/<slug> && git push origin --delete hotfix/<slug>"
+    condition: "ttl_expired or merge_success"
+governance:
+  adr: ADR-014-git-policy
+  design: merge-fork-balance
+  atom: ATOM-HOTFIX-GOVERNANCE
+  workflow: emergency-merge

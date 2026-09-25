@@ -1,0 +1,12 @@
+---
+name: meta.cross
+category: META
+version: v1.0.0
+description: "Cross-cutting: conversation-to-execution, cross-package, file-spool, merge-fork, multi-repo, script-file, task-chaining, thought-commit"
+entry_point: "scripts/loopx/meta_cross.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Cross-cutting concern integration: conversation-to-execution, cross-package, file-spool, merge-fork"
+examples:
+  - "loopx routine meta.cross"

@@ -1,0 +1,12 @@
+---
+name: citizens.inspect
+category: citizens
+version: v1.0.0
+description: "Inspect citizen"
+entry_point: "scripts/loopx/citizens_inspect.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Inspect citizen modules and validate structure"
+examples:
+  - "loopx routine citizens.inspect"

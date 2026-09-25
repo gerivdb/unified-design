@@ -1,0 +1,46 @@
+---
+cross_repo_flow:
+  name: kg-causal -> rootx
+  provider: KG-CAUSAL
+  consumers:
+    - ROOTX
+  contract:
+    interface: api
+    format: json
+    paths:
+      - KG-CAUSAL/validate/*.py
+      - ROOTX/src/*.py
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — KG-CAUSAL → ROOTX
+
+## Rôle
+ROOTX est le **validateur de causalité systémique** (<50ms) pour le pipeline CLM. Il consomme les graphes causaux de KG-CAUSAL pour validation.
+
+## Contrat
+- **Provider** : `KG-CAUSAL` expose les graphes causaux à valider.
+- **Consumer** : `ROOTX` valide la cohérence causale :
+  - Pas de cycles causaux
+  - Pas de contradictions
+  - Conformité aux règles de causalité
+- **Boucle** : ROOTX retourne le résultat de validation à KG-CAUSAL.
+
+## Validation
+- `provider_registered` : `KG-CAUSAL` est dans `known_repositories.yaml`.
+- `consumer_registered` : `ROOTX` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `KG-CAUSAL ↔ ROOTX`.
+- `contract_exists` : `ROOTX/src/` existe.
+
+## Références
+- `ROOTX/`
+- `KG-CAUSAL/`

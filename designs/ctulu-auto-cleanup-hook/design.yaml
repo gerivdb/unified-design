@@ -1,4 +1,12 @@
+---
 name: ctulu-auto-cleanup-hook
+version: 1.0.0
+status: draft
+layer: L0
+description: "Design artifact for ctulu-auto-cleanup-hook."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: draft
 profile: STANDARD

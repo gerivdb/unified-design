@@ -1,50 +1,64 @@
----
 name: problem-structuring-method
-description: "Méthode de structuration de problème inspirée de GG-knox/engineering-ideas/Obsidian/penser une problématique.md. Filetree problématisation : décomposer un problème complexe en arborescence de sous-problèmes atomiques, chacun avec sa propre question, contraintes, et livrable."
-version: "1.0.0"
+description: "M\xE9thode de structuration de probl\xE8me inspir\xE9e de GG-knox/engineering-ideas/Obsidian/penser\
+  \ une probl\xE9matique.md. Filetree probl\xE9matisation : d\xE9composer un probl\xE8\
+  me complexe en arborescence de sous-probl\xE8mes atomiques, chacun avec sa propre\
+  \ question, contraintes, et livrable."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_PROBLEM_STRUCTURING_METHOD_20260917
 inherits:
-  - methodological-bon-sens
+- methodological-bon-sens
 depends_on:
-  - methodological-bon-sens
+- methodological-bon-sens
 bridges:
-  - target: repo:VOLTX
-    role: narrative-vault
-    protocol: wazaa-channel
-    channel: L0-CANON/VOLTX/methodology/problem-structuring
-  - target: repo:KG-L
-    role: causal-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/KG-L/methodology/problem-structuring
-
+- target: repo:VOLTX
+  role: narrative-vault
+  protocol: wazaa-channel
+  channel: L0-CANON/VOLTX/methodology/problem-structuring
+- target: repo:KG-L
+  role: causal-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/KG-L/methodology/problem-structuring
 capabilities:
-  - name: filetree-problematisation
-    description: "Décomposition arborescente d'un problème en sous-problèmes atomiques"
-    parameters:
-      max_depth: 5
-      atomic_unit: "une question + contraintes + livrable"
-      output: "filetree de problématisation"
-  - name: question-driven
-    description: "Chaque nœud de l'arbre répond à une question précise"
-    parameters:
-      question_types: [qui, quoi, où, quand, comment, pourquoi]
-      mandatory: true
-  - name: constraint-propagation
-    description: "Les contraintes se propagent du haut vers le bas de l'arbre"
-    parameters:
-      propagation: top-down
-      override: false
-  - name: deliverable-leaf
-    description: "Chaque feuille de l'arbre produit un livrable atomique"
-    parameters:
-      types: [design, atom, script, test, doc]
-      atomic: true
-      slm_compliant: true
-
+- name: filetree-problematisation
+  description: "D\xE9composition arborescente d'un probl\xE8me en sous-probl\xE8mes\
+    \ atomiques"
+  parameters:
+    max_depth: 5
+    atomic_unit: une question + contraintes + livrable
+    output: "filetree de probl\xE9matisation"
+- name: question-driven
+  description: "Chaque n\u0153ud de l'arbre r\xE9pond \xE0 une question pr\xE9cise"
+  parameters:
+    question_types:
+    - qui
+    - quoi
+    - "o\xF9"
+    - quand
+    - comment
+    - pourquoi
+    mandatory: true
+- name: constraint-propagation
+  description: Les contraintes se propagent du haut vers le bas de l'arbre
+  parameters:
+    propagation: top-down
+    override: false
+- name: deliverable-leaf
+  description: Chaque feuille de l'arbre produit un livrable atomique
+  parameters:
+    types:
+    - design
+    - atom
+    - script
+    - test
+    - doc
+    atomic: true
+    slm_compliant: true
 principles:
-  - P0_FILETREE : tout problème complexe se décompose en arborescence de sous-problèmes
-  - P0_ATOMIC_LEAF : chaque feuille produit un livrable atomique SLM-compliant
-  - P0_QUESTION_DRIVEN : chaque nœud répond à une question quinquepartite
-  - P0_CONSTRAINT_PROPAGATION : les contraintes se propagent sans override
+- P0_FILETREE: "tout probl\xE8me complexe se d\xE9compose en arborescence de sous-probl\xE8\
+    mes"
+- P0_ATOMIC_LEAF: chaque feuille produit un livrable atomique SLM-compliant
+- P0_QUESTION_DRIVEN: "chaque n\u0153ud r\xE9pond \xE0 une question quinquepartite"
+- P0_CONSTRAINT_PROPAGATION: les contraintes se propagent sans override
+adr: ADR-015-unified-design-v2

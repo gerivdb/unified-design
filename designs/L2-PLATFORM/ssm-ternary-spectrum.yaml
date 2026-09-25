@@ -1,4 +1,11 @@
+---
 name: ssm-ternary-spectrum
+version: 1.0.0
+status: proposed
+layer: L0
+description: ssm-ternary-spectrum
+consumers:
+
 description: "ssm-ternary-spectrum"
 version: "1.0.0"
 parent: unified-design

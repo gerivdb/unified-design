@@ -1,4 +1,16 @@
 ---
+name: "WAZAA Mission Control"
+version: 1.0.0
+status: active
+layer: L0
+description: "WAZAA Mission Control — Mission Control HTTP/WebSocket (5002). NE PAS confondre avec le bus KG-L 1873.
+"
+consumers:
+  - bootstrap
+  - kix
+  - conversation-cognitive
+  - kg-l-coherence-watchdog
+
 name: WAZAA Mission Control
 version: "1.0.0"
 status: active

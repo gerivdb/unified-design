@@ -18,6 +18,7 @@ intent_hash: 0xATOM_025_LAYER_STRUCTURE
 | `L3-CITIZENS` | Citoyens | Applications et agents autonomes |
 | `L4-TOOLS` | Outils | Scripts, expériences, prototypes |
 | `L5-ARCHIVE` | Archive | Projets gelés, historique, documentation |
+| `L6-WORK` | Work | Espace de travail actif / livrables client |
 
 ## Règles de nommage
 

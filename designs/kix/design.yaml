@@ -8,9 +8,11 @@ inherits:
   - fractal-engineering-strata
   - meta-coherence
 description: >
-  KIX — Orchestrateur central du cycle de vie des runners RLM.
-  Gère l'orchestration des runners cognitifs (RLM-243, LLUX, TLM, TIMX, etc.)
-  et leur cycle de vie (boot, run, verify, shutdown). Logical layers: N1, N3.
+  KIX — Orchestrateur système de l'écosystème gerivdb.
+  Gère tous les exécutables, PID, services Windows et processus
+  (Python, Node, Zig, .exe), ainsi que les runners RLM et services
+  de mesure. Responsable du cycle de vie complet :
+  discover, boot, run, verify, shutdown. Logical layers: N1, N3.
 consumers:
   - RLM-243
   - LLUX
@@ -18,6 +20,13 @@ consumers:
   - TIMX
   - TALEX
   - RADX
+  - RLM-METRICS
+  - DevTools
+  - ECOS-CLI
+  - KIVA-CLI
+  - CTULU
+  - WAZAA
+  - BRAIN
 capabilities:
   - name: runner-lifecycle
     description: Orchestrer le cycle de vie complet des runners RLM cognitifs
@@ -39,6 +48,36 @@ capabilities:
     parameters:
       max_concurrency: 6
       memory_guard: true
+  - name: metrics-lifecycle
+    description: Orchestrer le cycle de vie du service RLM-METRICS (baseline, collecte, rapport)
+    parameters:
+      service: RLM-METRICS
+      port: 8802
+      endpoints:
+        - /health
+        - /collect
+      validation_backend: RLM-243
+  - name: process-manager
+    description: Gestion de tous les processus (exe, py, js, zig, services Windows)
+    parameters:
+      track_pids: true
+      restart_policy: auto
+      max_concurrency: 6
+      memory_guard: true
+  - name: pid-tracker
+    description: Suivi PID, fingerprint, health check
+    parameters:
+      preflight_singleton: true
+      fingerprint_build: true
+  - name: exe-launcher
+    description: Lancement d'exécutables système et utilisateur
+    parameters:
+      allowed_paths:
+        - C:\DevTools
+        - D:\DO\WEB\TOOLS\L4-TOOLS
+        - D:\DO\WEB\TOOLS\L1-INFRA
+        - C:\Program Files
+        - C:\Users\GG\AppData\Local\Programs\Python
 components:
   - type: orchestrator
     repo: gerivdb/KIX
@@ -50,6 +89,16 @@ components:
     repo: gerivdb/RLM-243
     protocol: http
     port: 8793
+  - type: metrics-service
+    repo: gerivdb/RLM-METRICS
+    protocol: http
+    port: 8802
+  - type: process-supervisor
+    repo: gerivdb/KIX
+    path: KIX/src/
+  - type: pid-registry
+    repo: gerivdb/KIX
+    path: KIX/src/
 bridges:
   - target: repo:RLM-243
     role: consumer
@@ -64,6 +113,22 @@ bridges:
   - target: repo:TALEX
     role: consumer
     protocol: wazaa-bus
+  - target: repo:RLM-METRICS
+    role: consumer
+    protocol: http
+    port: 8802
+  - target: repo:DevTools
+    role: system
+    protocol: local
+    path: C:\DevTools
+  - target: repo:ECOS-CLI
+    role: system
+    protocol: cli
+    path: D:\DO\WEB\TOOLS\L1-INFRA\ECOS-CLI
+  - target: repo:KIVA-CLI
+    role: system
+    protocol: cli
+    path: D:\DO\WEB\TOOLS\L1-INFRA\KIVA-CLI
 dependencies:
   - repo: gerivdb/RLM-243
   - repo: gerivdb/LLUX
@@ -71,6 +136,12 @@ dependencies:
   - repo: gerivdb/TIMX-FEATURE-STORE
   - repo: gerivdb/TALEX
   - repo: gerivdb/RADX
+  - repo: gerivdb/RLM-METRICS
+  - repo: gerivdb/DevTools
+  - repo: gerivdb/ECOS-CLI
+  - repo: gerivdb/KIVA-CLI
 constraints:
   - cpu_only: true
   - ram_limit_mb: 24576
+  - system_services: allowed
+  - max_processes: 64

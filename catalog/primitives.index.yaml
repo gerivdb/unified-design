@@ -47,6 +47,18 @@ entries:
   status: active
   type: primitive
   updated: '2026-09-21'
+- id: ecosystem-meta-coherence-gate-primitive.yaml
+  source_path: primitives/ecosystem-meta-coherence-gate-primitive.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-22'
+- id: primitive-atomicity-contract.yaml
+  source_path: primitives/primitive-atomicity-contract.yaml
+  source_repo: unified-design
+  status: active
+  type: primitive
+  updated: '2026-09-22'
 - name: artifact-layers-primitive
   path: primitives\artifact-layers-primitive.yaml
   version: 1.0.0
@@ -82,10 +94,31 @@ entries:
   status: active
   profile: STANDARD
   consumers: []
+- name: ecosystem-meta-coherence-gate-primitive
+  path: primitives\ecosystem-meta-coherence-gate-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_ECOSYSTEM_META_COHERENCE_GATE_20260921
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: primitive-atomicity-contract
+  path: primitives\primitive-atomicity-contract.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_ATOMICITY_CONTRACT_20260921
+  status: active
+  profile: STANDARD
+  consumers: []
 - name: session-boot-primitive
   path: primitives\session-boot-primitive.yaml
   version: 1.0.0
   intent_hash: 0xPRIMITIVE_SESSION_BOOT_20260920
+  status: active
+  profile: STANDARD
+  consumers: []
+- name: talex-friction-analyzer-primitive
+  path: primitives\talex-friction-analyzer-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_TALEX_FRICTION_ANALYZER_20260922
   status: active
   profile: STANDARD
   consumers: []

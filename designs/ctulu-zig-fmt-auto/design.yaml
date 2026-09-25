@@ -1,4 +1,12 @@
+---
 name: ctulu-zig-fmt-auto
+version: 1.0.0
+status: draft
+layer: L0
+description: "Design artifact for ctulu-zig-fmt-auto."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: draft
 profile: STANDARD

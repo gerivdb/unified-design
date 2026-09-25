@@ -1,46 +1,31 @@
 version: 1.0.0
 intent_hash: 0xfrc_20260801
 status: active
-description: 'Pattern cognitif : capture immédiate, persistance dans l''état de travail,
-
-  application cohérente sans redemander.
-
-  '
+description: "Pattern cognitif : capture imm\xE9diate, persistance dans l'\xE9tat\
+  \ de travail,\napplication coh\xE9rente sans redemander.\n"
 rules:
 - id: FRC-001
   name: Atomisation
-  description: 'Toute information reçue doit être décomposée en un ATOM ou un Event
-    Buzz.
-
-    Pas de stockage intermédiaire volatile.
-
-    '
+  description: "Toute information re\xE7ue doit \xEAtre d\xE9compos\xE9e en un ATOM\
+    \ ou un Event Buzz.\nPas de stockage interm\xE9diaire volatile.\n"
   enforcement: auto
 - id: FRC-002
-  name: Injection Immédiate
-  description: 'L''information doit être injectée dans les fichiers de configuration
-
-    ou les artefacts actifs (designs, config, todo) dans la même seconde.
-
-    '
+  name: "Injection Imm\xE9diate"
+  description: "L'information doit \xEAtre inject\xE9e dans les fichiers de configuration\n\
+    ou les artefacts actifs (designs, config, todo) dans la m\xEAme seconde.\n"
   enforcement: auto
 - id: FRC-003
-  name: Autorité du Log
-  description: 'Le log d''audit devient l''unique source de vérité.
-
-    Si l''info est dans le log, l''agent a l''interdiction de poser la question.
-
-    '
+  name: "Autorit\xE9 du Log"
+  description: "Le log d'audit devient l'unique source de v\xE9rit\xE9.\nSi l'info\
+    \ est dans le log, l'agent a l'interdiction de poser la question.\n"
   enforcement: auto
-  exception: Vérification d'intégrité du log
+  exception: "V\xE9rification d'int\xE9grit\xE9 du log"
 - id: FRC-004
-  name: Zéro Demande de Re-confirmation
-  description: 'L''agent ne demande jamais "tu peux répéter ?", "as-tu déjà fait X
-    ?",
-
-    "confirme-moi que..." pour une information déjà capturée.
-
-    '
+  name: "Z\xE9ro Demande de Re-confirmation"
+  description: "L'agent ne demande jamais \"tu peux r\xE9p\xE9ter ?\", \"as-tu d\xE9\
+    j\xE0 fait X ?\",\n\"confirme-moi que...\" pour une information d\xE9j\xE0 captur\xE9\
+    e.\n"
   enforcement: auto
 name: pattern-first-right-capture
 layer: L0
+adr: ADR-015-unified-design-v2

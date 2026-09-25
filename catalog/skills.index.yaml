@@ -689,3 +689,21 @@ entries:
   status: active
   type: skill
   updated: '2026-09-20'
+- id: unified-design/mdu-integrity-checker
+  source_path: skills/mdu-integrity-checker/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-22'
+- id: unified-design/jevx-backend-selector
+  source_path: skills/jevx-backend-selector/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-22'
+- id: unified-design/talex-friction-analyzer
+  source_path: skills/talex-friction-analyzer/SKILL.md
+  source_repo: unified-design
+  status: active
+  type: skill
+  updated: '2026-09-22'

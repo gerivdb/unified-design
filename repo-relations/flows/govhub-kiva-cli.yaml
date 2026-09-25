@@ -1,0 +1,46 @@
+---
+cross_repo_flow:
+  name: governance-hub -> kiva-cli
+  provider: GOVERNANCE-HUB
+  consumers:
+    - KIVA-CLI
+  contract:
+    interface: file
+    format: yaml
+    paths:
+      - known_repositories.yaml
+      - KIVA-CLI/manifest.json
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P0
+  status: active
+---
+
+# Flow — GOVERNANCE-HUB → KIVA-CLI
+
+## Rôle
+KIVA-CLI est le **CLI souverain** pour la validation locale, le scaffolding et le workflow PR. Il consomme `known_repositories.yaml` pour valider les branches, les chemins et les policies.
+
+## Contrat
+- **Provider** : `GOVERNANCE-HUB` expose `known_repositories.yaml`.
+- **Consumer** : `KIVA-CLI` lit la SOT pour :
+  - `kiva validate` : valider la conformité d'un repo
+  - `kiva scaffold` : générer un nouveau repo conforme
+  - `kiva merge` : vérifier les règles de merge par repo
+- **Dérivation** : `enforcement_mode`, `layer`, `status` sont utilisés pour adapter les checks par repo.
+
+## Validation
+- `provider_registered` : `GOVERNANCE-HUB` est dans `known_repositories.yaml`.
+- `consumer_registered` : `KIVA-CLI` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `GOVERNANCE-HUB → KIVA-CLI → GOVERNANCE-HUB`.
+- `contract_exists` : `known_repositories.yaml` est lisible.
+
+## Références
+- `KIVA-CLI/kiva/cli.py`
+- `GOVERNANCE-HUB/known_repositories.yaml`

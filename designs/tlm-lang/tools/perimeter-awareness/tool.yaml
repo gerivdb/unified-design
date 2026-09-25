@@ -1,4 +1,10 @@
-# intent_hash: 0xPERIMETER_AWARENESS_TOOL_20260916
+---
+name: perimeter-awareness
+version: 1.0.0
+status: active
+layer: L0
+description: "Universal Self-Recognition Protocol — Auto-reconnaissance du périmètre d'implémentation depuis n'importe quel repo"
+
 name: "perimeter-awareness"
 version: "1.0.0"
 description: "Universal Self-Recognition Protocol — Auto-reconnaissance du périmètre d'implémentation depuis n'importe quel repo"

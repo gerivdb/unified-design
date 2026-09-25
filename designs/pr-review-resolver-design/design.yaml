@@ -1,4 +1,12 @@
+---
 name: pr-review-resolver-design
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for pr-review-resolver-design."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: active
 profile: STANDARD

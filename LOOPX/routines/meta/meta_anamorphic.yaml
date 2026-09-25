@@ -1,0 +1,12 @@
+---
+name: meta.anamorphic
+category: META
+version: v1.0.0
+description: "Anamorphic morphism operations"
+entry_point: "scripts/loopx/meta_anamorphic.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Anamorphic transformation: pattern morphing and recursive restructuring"
+examples:
+  - "loopx routine meta.anamorphic"

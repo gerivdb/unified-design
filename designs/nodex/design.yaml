@@ -1,4 +1,17 @@
+---
 name: nodex
+version: 1.0.0
+status: active
+layer: L0
+description: "NODEX — Runner de nature des noeuds. Classifie les entities du graphe par type et role. Supervision externe. Consumer de ONTOLOGY et knowledge-graph-memory.
+"
+profile: CRITICAL
+consumers:
+  - KG-L
+  - ROOTX
+  - CAUSEX
+  - TOPEX
+
 version: "1.0.0"
 status: active
 profile: CRITICAL

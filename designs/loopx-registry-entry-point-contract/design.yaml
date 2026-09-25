@@ -1,0 +1,126 @@
+---
+name: loopx-registry-entry-point-contract
+version: "1.0.0"
+status: active
+layer: L3-CITIZENS
+sub_layer: N+2
+intent_hash: 0xDESIGN_LOOPX_REGISTRY_ENTRY_POINT_CONTRACT_20260921
+description: >
+  Contrat formel entre les entry_points du registry LOOPX et leurs implémentations
+  réelles. Garantit que toute routine enregistrée pointe vers un attribut existant
+  et appelable. Résout le problème récurrent des entry_points invalides.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+  - LOOPX-Routines
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: entry-point-resolution
+    description: "Résout un entry_point module:attr en objet appelable"
+  - name: signature-validation
+    description: "Valide que l'objet résolu est appelable et a la bonne signature"
+  - name: missing-detection
+    description: "Détecte les routines dont l'entry_point est manquant ou invalide"
+parameters:
+  entry_point_format:
+    pattern: "{module_path}:{attr_path}"
+    example: "loopx_routines.breakthrough.detector:detect_from_conversations"
+  validation_steps:
+    - module_import
+    - attribute_resolution
+    - callable_check
+    - signature_inspection
+  failure_mode:
+    on_missing_module: "BLOCK"
+    on_missing_attribute: "BLOCK"
+    on_not_callable: "BLOCK"
+states:
+  - name: IDLE
+    nature: routine non vérifiée
+    gate_to_next: RESOLVE_MODULE
+    question: "L'entry_point est-il dans le bon format ?"
+  - name: RESOLVE_MODULE
+    nature: import du module
+    gate_to_next: RESOLVE_ATTR | BLOCK
+    question: "Le module existe-t-il et est-il importable ?"
+  - name: RESOLVE_ATTR
+    nature: résolution de l'attribut
+    gate_to_next: VALIDATE_CALLABLE | BLOCK
+    question: "L'attribut existe-t-il dans le module ?"
+  - name: VALIDATE_CALLABLE
+    nature: vérification que l'objet est appelable
+    gate_to_next: VALIDATE_SIGNATURE | BLOCK
+    question: "L'objet est-il appelable (fonction, méthode, classe) ?"
+  - name: VALIDATE_SIGNATURE
+    nature: inspection de la signature
+    gate_to_next: PASS | BLOCK
+    question: "La signature est-elle compatible avec les attentes du registry ?"
+  - name: PASS
+    nature: entry_point valide
+  - name: BLOCK
+    nature: entry_point invalide
+functions:
+  - id: F1
+    name: RESOLVE_MODULE
+    state: IDLE->RESOLVE_MODULE
+    description: "Importe le module depuis entry_point"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: RESOLVE_ATTR
+    state: RESOLVE_MODULE->RESOLVE_ATTR
+    description: "Résout l'attribut dans le module"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F3
+    name: VALIDATE_CALLABLE
+    state: RESOLVE_ATTR->VALIDATE_CALLABLE
+    description: "Vérifie que l'objet est appelable"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F4
+    name: VALIDATE_SIGNATURE
+    state: VALIDATE_CALLABLE->VALIDATE_SIGNATURE
+    description: "Inspecte la signature de la méthode/fonction"
+    implements: ATOM-STOP-CONDITION
+invariant: "Toute routine enregistrée dans le registry a un entry_point résoluble et appelable."
+genes:
+  - id: G1
+    name: module_first
+    description: "Toujours importer le module avant de résoudre l'attribut"
+  - id: G2
+    name: attr_resolution
+    description: "Toujours résoudre l'attribut complet avant de valider"
+  - id: G3
+    name: callable_check
+    description: "Toujours vérifier que l'objet résolu est appelable"
+  - id: G4
+    name: signature_inspection
+    description: "Toujours inspecter la signature avant de déclarer l'entry_point valide"
+anti_patterns:
+  - missing_gene: module_first
+    pathology: "Import échoue silencieusement -> entry_point considéré comme valide alors que le module est absent"
+  - missing_gene: attr_resolution
+    pathology: "Attribut manquant non détecté -> crash au runtime"
+  - missing_gene: callable_check
+    pathology: "Attribut non appelable (ex: constante) -> crash au runtime"
+  - missing_gene: signature_inspection
+    pathology: "Signature incompatible -> erreur d'appel silencieuse"
+cross_references:
+  - repo: gerivdb/LOOPX
+    relation: implements
+    path: src/loopx_routines/registry.py
+  - repo: gerivdb/ARGUS
+    relation: audits
+    path: scanners/
+    capability: registry_scanner
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - primitive: loopx-registry-entry-point-contract-primitive
+  - skill: loopx-registry-entry-point-contract-skill
+  - workflow: workflow-loopx-registry-entry-point-contract

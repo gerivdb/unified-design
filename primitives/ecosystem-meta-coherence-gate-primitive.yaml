@@ -1,0 +1,87 @@
+---
+name: ecosystem-meta-coherence-gate-primitive
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPRIMITIVE_ECOSYSTEM_META_COHERENCE_GATE_20260921
+description: >
+  Primitive de gate d'écosystème méta-cohérente pour le MDU.
+  Garantit que toute mutation du MDU respecte les invariants Think/Do/Check
+  et les cross-références canoniques avant autorisation.
+inherits:
+  - ecosystem-meta-coherence
+  - safe-action-pattern
+  - design-ops-loop-primitive
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+states:
+  - name: IDLE
+    question: "Une mutation du MDU nécessite-t-elle une validation méta-cohérente ?"
+  - name: AUDIT
+    question: "Les invariants Think/Do/Check sont-ils respectés ? Les cross-références sont-elles canoniques ?"
+  - name: PASS
+    question: "La preuve horodatée est-elle présente et valide ?"
+  - name: FAIL
+    question: "Quel invariant écosystémique a échoué ?"
+functions:
+  - id: F1
+    name: PERCEVOIR_BESOINS
+    description: "Collecte multi-source des besoins écosystémiques (signaux faibles, gaps, impensés)"
+  - id: F2
+    name: ÉVALUER_INVARIANTS
+    description: "Vérification des invariants Think/Do/Check et des chemins canoniques"
+  - id: F3
+    name: VÉRIFIER_CROSS_RÉFÉRENCES
+    description: "Contrôle des cross-références entre repos, designs, primitives et workflows"
+  - id: F4
+    name: VALIDER_PREUVE
+    description: "Validation de la preuve horodatée (IntentHash, commit, preuve d'exécution)"
+    veto: true
+  - id: F5
+    name: BLOQUER_SI_NON_CONFORME
+    description: "Blocage immédiat si invariants écosystémiques échouent"
+    veto: true
+  - id: F6
+    name: AUTORISER_MUTATION
+    description: "Autorisation formelle de la mutation du MDU"
+  - id: F7
+    name: ENREGISTRER_TRACE
+    description: "Enregistrement horodaté de la décision de gate avec traçabilité causale"
+invariant: "Aucune mutation du MDU ne peut passer l'état AUDIT sans preuve horodatée valide et invariants Think/Do/Check confirmés."
+genes:
+  - id: G1
+    name: think-first
+    description: "Toute mutation naît d'un besoin écosystémique identifié, pas d'un caprice."
+  - id: G2
+    name: verification-systematic
+    description: "Toute mutation passe par AUDIT avant PASS ou FAIL"
+  - id: G3
+    name: proof-horodatee
+    description: "La preuve d'exécution est horodatée et vérifiable"
+  - id: G4
+    name: causal-traceability
+    description: "Toute décision de gate est tracée et horodatée"
+anti_patterns:
+  - missing_gene: think-first
+    pathology: "Mutation appliquée sans besoin écosystémique validé → dette technique"
+  - missing_gene: verification-systematic
+    pathology: "Mutation sans validation → écart structurel non détecté"
+  - missing_gene: proof-horodatee
+    pathology: "Action sans preuve → échec silencieux"
+  - missing_gene: causal-traceability
+    pathology: "Décision non tracée → impossibilité d'auditer"
+cross_references:
+  - design: ecosystem-meta-coherence-gate
+  - design: ecosystem-meta-coherence
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - atom: ATOM-ECOSYSTEM-META-COHERENCE-GATE
+  - skill: mdu-integrity-checker
+  - workflow: workflow-pre-push-validation

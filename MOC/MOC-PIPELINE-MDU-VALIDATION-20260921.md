@@ -1,8 +1,8 @@
 ---
 type: MOC
 version: "1.2"
-date: "2026-09-21"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xMOC_PIPELINE_MDU_VALIDATION_20260921
 ---
 
@@ -10,8 +10,8 @@ intent_hash: 0xMOC_PIPELINE_MDU_VALIDATION_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
-**Date** : 2026-09-21  
+**Statut** : approved  
+**Date** : 2026-09-22  
 **Version** : 1.2 (évaluation utilité + intégration opérationnelle)
 
 ---
@@ -30,29 +30,29 @@ Ce MOC orchestre la création et l'intégration du pipeline `pipeline-mdu-valida
 
 ## Composants
 
-| Composant | Type | Chemin | Statut |
-|-----------|------|--------|--------|
-| `pipeline-mdu-validation` | Pipeline | `pipelines/pipeline-mdu-validation.yaml` | ⏳ À créer |
+| Composant | Type | Chemin | Statut | Preuve d'exécution |
+|-----------|------|--------|--------|-------------------|
+| `pipeline-mdu-validation` | Pipeline | `pipelines/pipeline-mdu-validation.yaml` | ✅ Créé | Commit existant |
 
 ## Séquence d'implémentation
 
 ### Phase 1 — Pipeline (bloquant)
 
-1. Créer `pipelines/pipeline-mdu-validation.yaml`
-2. Tester sur `main`
+1. ✅ Créer `pipelines/pipeline-mdu-validation.yaml`
+2. ✅ Tester sur `main`
 
 ### Phase 2 — Intégration
 
-3. Mettre à jour `meta-design.yaml`
-4. Mettre à jour `workflows/pre-push-validation.md`
+3. ✅ Mettre à jour `meta-design.yaml`
+4. ✅ Mettre à jour `workflows/pre-push-validation.md`
 
 ## Gates
 
 | Gate | Critère | Statut |
 |------|---------|--------|
-| G1 — Pipeline créé | `pipeline-mdu-validation.yaml` exécuté avec succès | ⏳ En attente |
-| G2 — Workflow intégré | `pre-push-validation.md` mis à jour | ⏳ En attente |
-| G3 — MDU cohérent | `meta-design.yaml` mis à jour | ⏳ En attente |
+| **G1** | Pipeline créé | `pipeline-mdu-validation.yaml` exécuté avec succès | ✅ Fait |
+| **G2** | Workflow intégré | `pre-push-validation.md` mis à jour | ✅ Fait |
+| **G3** | MDU cohérent | `meta-design.yaml` mis à jour | ✅ Fait |
 
 ## Références
 

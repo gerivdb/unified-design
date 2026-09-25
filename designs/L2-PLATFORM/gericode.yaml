@@ -1,4 +1,12 @@
+---
 name: GeriCode
+version: 1.0.0
+status: active
+layer: L0
+description: "Overlay ECOS-CLI sur Kilo Code — extension VS Code agnostique avec citoyens psychologiques Bat-Family."
+profile: ACTIVE
+consumers:
+
 description: "Overlay ECOS-CLI sur Kilo Code — extension VS Code agnostique avec citoyens psychologiques Bat-Family."
 version: "1.0.0"
 design_version: "1.0.0"
@@ -36,4 +44,3 @@ bridges:
   - KG-L
   - CTULU
 consumers: []
----

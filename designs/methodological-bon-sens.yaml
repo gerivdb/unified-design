@@ -1,58 +1,85 @@
----
 name: methodological-bon-sens
-description: "Méthodologie de pensée structurante quinquepartite pour l'écosystème gerivdb. Répond aux questions : qui/quoi/où/quand/comment/pourquoi. Garantit que toute décision d'architecture est documentée, tracée et alignée sur la finalité métier."
-version: "1.0.0"
+description: "M\xE9thodologie de pens\xE9e structurante quinquepartite pour l'\xE9\
+  cosyst\xE8me gerivdb. R\xE9pond aux questions : qui/quoi/o\xF9/quand/comment/pourquoi.\
+  \ Garantit que toute d\xE9cision d'architecture est document\xE9e, trac\xE9e et\
+  \ align\xE9e sur la finalit\xE9 m\xE9tier."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_METHODOLOGICAL_BON_SENS_20260917
 inherits:
-  - ecosystem-consciousness
+- ecosystem-consciousness
 depends_on:
-  - ecosystem-consciousness
+- ecosystem-consciousness
 bridges:
-  - target: repo:GOVERNANCE-HUB
-    role: validator
-    protocol: yaml
-    channel: L0-CANON/GOVERNANCE-HUB/methodology/bon-sens
-  - target: repo:VOLTX
-    role: narrative-vault
-    protocol: wazaa-channel
-    channel: L0-CANON/VOLTX/methodology/bon-sens
-
+- target: repo:GOVERNANCE-HUB
+  role: validator
+  protocol: yaml
+  channel: L0-CANON/GOVERNANCE-HUB/methodology/bon-sens
+- target: repo:VOLTX
+  role: narrative-vault
+  protocol: wazaa-channel
+  channel: L0-CANON/VOLTX/methodology/bon-sens
 capabilities:
-  - name: qui
-    description: "Quelles entités ? Quels agents ? Quels citoyens ?"
-    parameters:
-      artifacts: [agent-manager-json-schema, citizens.yaml, OrgansRegistry.yaml]
-      validation: "Toute entité doit être enregistrée dans known_repositories.yaml"
-  - name: quoi
-    description: "Quel projet ? Quelle description ? Quel livrable ?"
-    parameters:
-      artifacts: [moc-governance, PRD-MOC, artifact-ownership-routing]
-      validation: "Tout livrable doit avoir un IntentHash unique et un ADR backing"
-  - name: où
-    description: "Quelle topologie ? Quel environnement ? Quelles limites ?"
-    parameters:
-      artifacts: [TOPOS, fractal-engineering-strata, meta-cluster-design]
-      validation: "Toute topologie doit être vérifiée par Poincaré (β₀=1, β₁=0, χ=1)"
-  - name: quand
-    description: "Quelle temporalité ? Quelles horloges ? Quelles fréquences ?"
-    parameters:
-      artifacts: [chronox, frequency-engineering, bootstrap, balise-identity-freshness]
-      validation: "Toute temporalité doit être horodatée UTC avec preuve d'exécution"
-  - name: comment
-    description: "Quelle architecture ? Quelle infrastructure ? Quel pipeline ?"
-    parameters:
-      artifacts: [chain-engineering, delivery-engine, circuit-breaker-pattern, incremental-growth]
-      validation: "Toute architecture doit passer par le pipeline Think -> Do -> Check"
-  - name: pourquoi
-    description: "Quelle finalité ? Quel métier ? Quel objectif ? Quel mobile ?"
-    parameters:
-      artifacts: [impense-register, thought-commit-pipeline, approval-readiness, decision_gate]
-      validation: "Toute finalité doit être tracée dans l'impense-register avec raison d'être"
-
+- name: qui
+  description: "Quelles entit\xE9s ? Quels agents ? Quels citoyens ?"
+  parameters:
+    artifacts:
+    - agent-manager-json-schema
+    - citizens.yaml
+    - OrgansRegistry.yaml
+    validation: "Toute entit\xE9 doit \xEAtre enregistr\xE9e dans known_repositories.yaml"
+- name: quoi
+  description: Quel projet ? Quelle description ? Quel livrable ?
+  parameters:
+    artifacts:
+    - moc-governance
+    - PRD-MOC
+    - artifact-ownership-routing
+    validation: Tout livrable doit avoir un IntentHash unique et un ADR backing
+- name: "o\xF9"
+  description: Quelle topologie ? Quel environnement ? Quelles limites ?
+  parameters:
+    artifacts:
+    - TOPOS
+    - fractal-engineering-strata
+    - meta-cluster-design
+    validation: "Toute topologie doit \xEAtre v\xE9rifi\xE9e par Poincar\xE9 (\u03B2\
+      \u2080=1, \u03B2\u2081=0, \u03C7=1)"
+- name: quand
+  description: "Quelle temporalit\xE9 ? Quelles horloges ? Quelles fr\xE9quences ?"
+  parameters:
+    artifacts:
+    - chronox
+    - frequency-engineering
+    - bootstrap
+    - balise-identity-freshness
+    validation: "Toute temporalit\xE9 doit \xEAtre horodat\xE9e UTC avec preuve d'ex\xE9\
+      cution"
+- name: comment
+  description: Quelle architecture ? Quelle infrastructure ? Quel pipeline ?
+  parameters:
+    artifacts:
+    - chain-engineering
+    - delivery-engine
+    - circuit-breaker-pattern
+    - incremental-growth
+    validation: Toute architecture doit passer par le pipeline Think -> Do -> Check
+- name: pourquoi
+  description: "Quelle finalit\xE9 ? Quel m\xE9tier ? Quel objectif ? Quel mobile\
+    \ ?"
+  parameters:
+    artifacts:
+    - impense-register
+    - thought-commit-pipeline
+    - approval-readiness
+    - decision_gate
+    validation: "Toute finalit\xE9 doit \xEAtre trac\xE9e dans l'impense-register\
+      \ avec raison d'\xEAtre"
 principles:
-  - P0_QUINQUEPARTITE : toute décision architecturale doit répondre aux 6 questions
-  - P0_TRACEABILITY : chaque réponse doit être tracée dans un artefact de gouvernance
-  - P0_ALIGNMENT : les réponses doivent être cohérentes entre les strates L0-L5
-  - P0_MDU_INTEGRATION : la méthodologie est intégrée dans le MDU comme atome de gouvernance
+- P0_QUINQUEPARTITE: "toute d\xE9cision architecturale doit r\xE9pondre aux 6 questions"
+- P0_TRACEABILITY: "chaque r\xE9ponse doit \xEAtre trac\xE9e dans un artefact de gouvernance"
+- P0_ALIGNMENT: "les r\xE9ponses doivent \xEAtre coh\xE9rentes entre les strates L0-L5"
+- P0_MDU_INTEGRATION: "la m\xE9thodologie est int\xE9gr\xE9e dans le MDU comme atome\
+    \ de gouvernance"
+adr: ADR-015-unified-design-v2

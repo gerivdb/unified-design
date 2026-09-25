@@ -1,6 +1,9 @@
+---
 name: ctulu-zig-debug-adapter
 version: 1.0.0
 status: draft
+layer: L0
+description: "Live DWARF/CodeView debugger adapter for Zig 0.15 on Windows. Enables live attach, breakpoints, watch expressions, call stack inspection."
 profile: STANDARD
 consumers: []
 
@@ -31,10 +34,10 @@ architecture:
       language: zig / rust
       purpose: "Map Zig AST constructs (@Vector, @ptrCast, @alignCast, comptime) to DWARF/CodeView expressions"
       special_handling:
-        - "@Vector(4, f32)" → watch expression with 4-f32 array
-        - "@ptrCast" → pointer deref with type info
-        - "comptime" → constant folding display
-        - "error unions" → error/value split display
+        - "\"@Vector(4, f32)\" -> watch expression with 4-f32 array"
+        - "\"@ptrCast\" -> pointer deref with type info"
+        - "\"comptime\" -> constant folding display"
+        - "\"error unions\" -> error/value split display"
         
     - name: dap_server
       protocol: "Debug Adapter Protocol (DAP) JSON-RPC"
@@ -74,23 +77,26 @@ zig_specific:
 # Implementation Roadmap
 roadmap:
   mvp:
-    - cdb.exe wrapper (attach, break, continue, stackTrace)
-    - Basic variable inspection (scalars, arrays)
-    - VS Code launch.json integration
-    target: 2 weeks
+    items:
+      - "cdb.exe wrapper (attach, break, continue, stackTrace)"
+      - "Basic variable inspection (scalars, arrays)"
+      - "VS Code launch.json integration"
+    target: "2 weeks"
     
   v1:
-    - @Vector watch expansion
-    - @ptrCast deref with type
-    - comptime value display
-    - error union split view
-    target: 4 weeks
+    items:
+      - "@Vector watch expansion"
+      - "@ptrCast deref with type"
+      - "comptime value display"
+      - "error union split view"
+    target: "4 weeks"
     
   v2:
-    - Full DAP compliance
-    - Zig AST → DWARF mapper
-    - comptime frame stepping
-    target: 8 weeks
+    items:
+      - "Full DAP compliance"
+      - "Zig AST -> DWARF mapper"
+      - "comptime frame stepping"
+    target: "8 weeks"
 
 # Integration Points
 integration:

@@ -1,0 +1,12 @@
+---
+name: skills.invoke
+category: skills
+version: v1.0.0
+description: "Invoke skill"
+entry_point: "scripts/loopx/skills_invoke.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Invoke skill by name with parameters"
+examples:
+  - "loopx routine skills.invoke"

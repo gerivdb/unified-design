@@ -1,4 +1,12 @@
+---
 name: pattern-first-right-capture
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for pattern-first-right-capture."
+profile: STANDARD
+consumers:
+
 version: 1.0.0
 status: active
 profile: STANDARD

@@ -1,0 +1,12 @@
+---
+name: test.lint
+category: test
+version: v1.0.0
+description: "Run linter"
+entry_point: "scripts/loopx/test_lint.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Test lint: YAML, JSON, TOML validation"
+examples:
+  - "loopx routine test.lint"

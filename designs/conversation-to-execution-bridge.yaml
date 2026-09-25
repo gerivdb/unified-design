@@ -1,23 +1,27 @@
----
 name: conversation-to-execution-bridge
-description: "Pont conversation → exécution. Formalise la transformation des décisions de conversation en actions exécutables."
-version: "1.0.0"
+description: "Pont conversation \u2192 ex\xE9cution. Formalise la transformation des\
+  \ d\xE9cisions de conversation en actions ex\xE9cutables."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_CONVERSATION_TO_EXECUTION_BRIDGE_20260917
 inherits:
-  - conversation-aggregator
+- conversation-aggregator
 depends_on:
-  - conversation-aggregator
+- conversation-aggregator
 capabilities:
-  - name: decision-extraction
-    description: "Extraction de décisions depuis conversations"
-    parameters:
-      confidence_threshold: 0.6
-  - name: execution-trigger
-    description: "Déclenchement d'exécution depuis décisions"
-    parameters:
-      modes: [immediate, scheduled, approved]
+- name: decision-extraction
+  description: "Extraction de d\xE9cisions depuis conversations"
+  parameters:
+    confidence_threshold: 0.6
+- name: execution-trigger
+  description: "D\xE9clenchement d'ex\xE9cution depuis d\xE9cisions"
+  parameters:
+    modes:
+    - immediate
+    - scheduled
+    - approved
 principles:
-  - P0_BRIDGE: toute décision de valeur déclenche une exécution tracée
-  - P0_VERIFICATION: l'exécution est vérifiée par une entité externe
+- P0_BRIDGE: "toute d\xE9cision de valeur d\xE9clenche une ex\xE9cution trac\xE9e"
+- P0_VERIFICATION: "l'ex\xE9cution est v\xE9rifi\xE9e par une entit\xE9 externe"
+adr: ADR-015-unified-design-v2

@@ -1,0 +1,12 @@
+---
+name: memory.store
+category: memory
+version: v1.0.0
+description: "Store memory"
+entry_point: "scripts/loopx/memory_store.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Memory store: persist observations, create entities"
+examples:
+  - "loopx routine memory.store"

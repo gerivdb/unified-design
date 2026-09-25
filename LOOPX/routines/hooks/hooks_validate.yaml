@@ -1,0 +1,12 @@
+---
+name: hooks.validate
+category: hooks
+version: v1.0.0
+description: "Validate git hooks"
+entry_point: "scripts/loopx/hooks_validate.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Validate git hooks: syntax check, execution test"
+examples:
+  - "loopx routine hooks.validate"

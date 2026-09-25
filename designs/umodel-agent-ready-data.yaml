@@ -1,50 +1,71 @@
----
 name: umodel-agent-ready-data
-description: "Modèle de données unifié d'Alibaba Cloud pour rendre l'observabilité exploitable par des agents à grande échelle. Quatre piliers Agent-Ready : sémantiquement riche, contextualisé, actionnable, structuré/standardisé. Architecture : graphe sémantique orienté-objet, U-SPL, intégration MCP. Résultats : +8% précision localisation causes racines, élimination hallucinations multi-joins, réduction 58.4% délai détection incidents."
-version: "1.0.0"
+description: "Mod\xE8le de donn\xE9es unifi\xE9 d'Alibaba Cloud pour rendre l'observabilit\xE9\
+  \ exploitable par des agents \xE0 grande \xE9chelle. Quatre piliers Agent-Ready\
+  \ : s\xE9mantiquement riche, contextualis\xE9, actionnable, structur\xE9/standardis\xE9\
+  . Architecture : graphe s\xE9mantique orient\xE9-objet, U-SPL, int\xE9gration MCP.\
+  \ R\xE9sultats : +8% pr\xE9cision localisation causes racines, \xE9limination hallucinations\
+  \ multi-joins, r\xE9duction 58.4% d\xE9lai d\xE9tection incidents."
+version: 1.0.0
 status: active
 layer: L1
 intent_hash: 0xDESIGN_UMODEL_AGENT_READY_DATA_20260918
 inherits:
-  - agent-observability-architecture
-  - consciousness
+- agent-observability-architecture
+- consciousness
 depends_on:
-  - agent-observability-architecture
-  - consciousness
-  - meta-coherence
+- agent-observability-architecture
+- consciousness
+- meta-coherence
 capabilities:
-  - name: semantically-rich-data
-    description: "Les données sont auto-descriptives : métadonnées explicites sur unité, type, et requête"
-    parameters:
-      example: node_cpu_seconds_total -> objet métadonné
-  - name: contextualized-knowledge-graph
-    description: "Remplacer les événements isolés par un Graphe de Connaissances : entités=nœuds, dépendances=arêtes explicites"
-    parameters:
-      entities: [microservices, databases, playbooks]
-      traversal: follow-dependencies
-  - name: actionable-observability
-    description: "L'observabilité fournit des interfaces pour agir (lier alerte à script) et pré-traiter (filtrer, agréger)"
-    parameters:
-      link_pattern: alert -> cleanup_script
-      context_budget: preserve
-  - name: unified-object-store
-    description: "Magasin d'Objets Unifié masquant l'hétérogénéité des sources (Prometheus, Elasticsearch, Jaeger)"
-    parameters:
-      sources: [Prometheus, Elasticsearch, Jaeger]
-      schema: unified
-  - name: u-spl-query-interface
-    description: "Interface de requête Pipeline U-SPL : abstraction des dialectes bruts en opérations sémantiques intuitives"
-    parameters:
-      input: semantic_operations
-      output: PromQL/SQL
-      hallucination_reduction: near-zero
-  - name: mcp-integration
-    description: "Intégration MCP en production : exposition topologie temps réel aux agents"
-    parameters:
-      protocol: Model Context Protocol
-      throughput: 10_000_000 ops/sec
+- name: semantically-rich-data
+  description: "Les donn\xE9es sont auto-descriptives : m\xE9tadonn\xE9es explicites\
+    \ sur unit\xE9, type, et requ\xEAte"
+  parameters:
+    example: "node_cpu_seconds_total -> objet m\xE9tadonn\xE9"
+- name: contextualized-knowledge-graph
+  description: "Remplacer les \xE9v\xE9nements isol\xE9s par un Graphe de Connaissances\
+    \ : entit\xE9s=n\u0153uds, d\xE9pendances=ar\xEAtes explicites"
+  parameters:
+    entities:
+    - microservices
+    - databases
+    - playbooks
+    traversal: follow-dependencies
+- name: actionable-observability
+  description: "L'observabilit\xE9 fournit des interfaces pour agir (lier alerte \xE0\
+    \ script) et pr\xE9-traiter (filtrer, agr\xE9ger)"
+  parameters:
+    link_pattern: alert -> cleanup_script
+    context_budget: preserve
+- name: unified-object-store
+  description: "Magasin d'Objets Unifi\xE9 masquant l'h\xE9t\xE9rog\xE9n\xE9it\xE9\
+    \ des sources (Prometheus, Elasticsearch, Jaeger)"
+  parameters:
+    sources:
+    - Prometheus
+    - Elasticsearch
+    - Jaeger
+    schema: unified
+- name: u-spl-query-interface
+  description: "Interface de requ\xEAte Pipeline U-SPL : abstraction des dialectes\
+    \ bruts en op\xE9rations s\xE9mantiques intuitives"
+  parameters:
+    input: semantic_operations
+    output: PromQL/SQL
+    hallucination_reduction: near-zero
+- name: mcp-integration
+  description: "Int\xE9gration MCP en production : exposition topologie temps r\xE9\
+    el aux agents"
+  parameters:
+    protocol: Model Context Protocol
+    throughput: 10_000_000 ops/sec
 principles:
-  - P0_AGENT_READY_DATA: les données doivent être sémantiquement riches, contextualisées, actionnables, structurées
-  - P0_KNOWLEDGE_GRAPH_FIRST: les événements isolés sont remplacés par un graphe de connaissances navigable
-  - P0_ACTIONABLE_NOT_READ_ONLY: l'observabilité expose des leviers d'action, pas seulement des tableaux de bord
-  - P0_UNIFIED_SCHEMA: une seule vue sémantique sur des sources hétérogènes
+- P0_AGENT_READY_DATA: "les donn\xE9es doivent \xEAtre s\xE9mantiquement riches, contextualis\xE9\
+    es, actionnables, structur\xE9es"
+- P0_KNOWLEDGE_GRAPH_FIRST: "les \xE9v\xE9nements isol\xE9s sont remplac\xE9s par\
+    \ un graphe de connaissances navigable"
+- P0_ACTIONABLE_NOT_READ_ONLY: "l'observabilit\xE9 expose des leviers d'action, pas\
+    \ seulement des tableaux de bord"
+- P0_UNIFIED_SCHEMA: "une seule vue s\xE9mantique sur des sources h\xE9t\xE9rog\xE8\
+    nes"
+adr: ADR-015-unified-design-v2

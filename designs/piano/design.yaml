@@ -1,5 +1,16 @@
 ---
 name: PIANO
+version: 1.0.0
+status: active
+layer: L0
+description: "PIANO — Calculateur Base243 (golden vector) pour LLUX. Service de calcul mathematique specialise.
+"
+consumers:
+  - llux-match
+  - llux-index
+  - kix
+
+name: PIANO
 version: "1.0.0"
 status: active
 strate: L4-TOOLS

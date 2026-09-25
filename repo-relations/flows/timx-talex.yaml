@@ -1,0 +1,45 @@
+---
+cross_repo_flow:
+  name: timx -> talex
+  provider: TIMX
+  consumers:
+    - TALEX
+  contract:
+    interface: wazaa-channel
+    format: json
+    paths:
+      - TIMX/tools/perimeter-awareness/*.py
+      - TALEX/src/*.py
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — TIMX → TALEX
+
+## Rôle
+TALEX est le **moteur narrative** qui consomme les features de TIMX pour la génération de récits.
+
+## Contrat
+- **Provider** : `TIMX` expose les features via canal WAZAA.
+- **Consumer** : `TALEX` consomme ces features pour :
+  - Extraction/structure/narration
+  - Intégration KIX/TRIX/KIVA
+- **Protocole** : WAZAA channel
+
+## Validation
+- `provider_registered` : `TIMX` est dans `known_repositories.yaml`.
+- `consumer_registered` : `TALEX` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `TIMX ↔ TALEX`.
+- `contract_exists` : `TALEX/src/` existe.
+
+## Références
+- `TIMX/design.yaml`
+- `TALEX/`
