@@ -1,13 +1,8 @@
----
 name: agent-manager-json-schema
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for agent-manager-json-schema."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for agent-manager-json-schema.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_AGENT_MANAGER_JSON_SCHEMA_20260923

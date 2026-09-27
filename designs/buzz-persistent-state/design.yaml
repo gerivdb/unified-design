@@ -1,13 +1,8 @@
----
 name: buzz-persistent-state
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for buzz-persistent-state."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for buzz-persistent-state.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_BUZZ_PERSISTENT_STATE_20260923
