@@ -4,6 +4,7 @@
 |----|-------|--------|
 | PRD-CAUSAL-RESOLUTION-METHODOLOGY-2026-08-29 | Causal Resolution Methodology | approved |
 | PRD-DESIGNS-COMPLETION-2026-08-24 | Designs Completion | approved |
+| PRD-UNIFIED-DESIGN-STRUCTURAL-METACOHERENCE-CHECKER-20260927 | Unified-Design Structural Metacoherence Checker | approved |
 | PRD-MOC-MDU-GAPS-2026-08-16 | MDU Gaps MOC | approved |
 | PRD-MOC-JEVX-SOVEREIGN-OVERLAY-20260920 | JEVX Sovereign Overlay | approved |
 | PRD-MOC-JEVX-BACKEND-SELECTOR-20260920 | JEVX Backend Selector | approved |

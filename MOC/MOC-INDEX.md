@@ -33,3 +33,5 @@
 | MOC-SRC-MIGRATION-20260923 | Src Migration | approved |
 | MOC-DOCS-DEDUPLICATION-20260923 | Documentation Deduplication | approved |
 | MOC-LOCAL-CI-PIPELINE-20260923 | Local CI Pipeline | approved |
+| MOC-STRUCTURAL-COHERENCE-20260922 | Structural Coherence | approved |
+| MOC-UNIFIED-DESIGN-STRUCTURAL-METACOHERENCE-CHECKER-20260927 | Unified-Design Structural Metacoherence Checker | approved |
