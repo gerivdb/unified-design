@@ -1,13 +1,8 @@
----
 name: local-ci-protocol
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for local-ci-protocol."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for local-ci-protocol.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_LOCAL_CI_PROTOCOL_20260923

@@ -12,6 +12,7 @@ description: >
   Corrige structurellement les frictions observées :
   PowerShell parsing, Windows TCP, encoding, git taxonomy,
   temps de réponse bash, etc. Logical layers: N1, N2.
+  S'appuie sur le modèle de rôle/fonction KIX (admin/operator/viewer) pour l'accès aux remediation triggers.
 consumers:
   - KIX
   - ECOS-CLI
