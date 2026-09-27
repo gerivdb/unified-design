@@ -54,36 +54,46 @@ def verify_artifact(artifact: dict, repo_root: Path) -> tuple[bool, str]:
     return True, "file exists and contains required patterns"
 
 
-def verify_design(design_path: Path, strict: bool = False) -> dict:
-    design = load_design(design_path)
-    name = design.get("name", design_path.stem)
-    status = design.get("status", "unknown")
-    layer = design.get("layer", "unknown")
-    intent_hash = design.get("intent_hash", "")
+def _rel(path: Path) -> str:
+    try:
+        return str(path.relative_to(UNIFIED_DESIGN_ROOT))
+    except ValueError:
+        return str(path)
 
-    contract = design.get("implementation_contract")
+
+def verify_design(design_path: Path, strict: bool = False) -> dict:
+    design_path = design_path.resolve()
+    if not design_path.exists():
+        return {'design': str(design_path), 'implemented': False, 'reason': 'file not found'}
+
+    design = load_design(design_path)
+    name = design.get('name', design_path.stem)
+    status = design.get('status', 'unknown')
+    layer = design.get('layer', 'unknown')
+    intent_hash = design.get('intent_hash', '')
+
+    contract = design.get('implementation_contract')
     if not contract:
         return {
-            "design": name,
-            "path": str(design_path.relative_to(UNIFIED_DESIGN_ROOT)),
-            "status": status,
-            "layer": layer,
-            "intent_hash": intent_hash,
-            "implemented": False,
-            "reason": "missing implementation_contract",
-            "artifacts_verified": 0,
-            "artifacts_missing": 0,
-            "tests_passing": None,
-            "coverage_pct": 0.0,
+            'design': name,
+            'path': _rel(design_path),
+            'status': status,
+            'layer': layer,
+            'intent_hash': intent_hash,
+            'implemented': False,
+            'reason': 'missing implementation_contract',
+            'artifacts_verified': 0,
+            'artifacts_missing': 0,
+            'tests_passing': None,
+            'coverage_pct': 0.0,
         }
 
-    repo_name = contract.get("repo", "")
-    repo_root = Path(contract.get("repo_root", ""))
+    repo_name = contract.get('repo', '')
+    repo_root = Path(contract.get('repo_root', '')).resolve()
     if not repo_root or not repo_root.exists():
-        # Try to resolve from known_repositories.yaml if available
-        repo_root = UNIFIED_DESIGN_ROOT.parent.parent / "GOVERNANCE-HUB" / "known_repositories.yaml"
+        repo_root = UNIFIED_DESIGN_ROOT
 
-    artifacts = contract.get("artifacts", [])
+    artifacts = contract.get('artifacts', [])
     verified = 0
     missing = 0
     details = []
@@ -94,13 +104,12 @@ def verify_design(design_path: Path, strict: bool = False) -> dict:
             verified += 1
         else:
             missing += 1
-        details.append({"path": artifact.get("path", ""), "ok": ok, "msg": msg})
+        details.append({'path': artifact.get('path', ''), 'ok': ok, 'msg': msg})
 
-    tests = contract.get("tests", [])
+    tests = contract.get('tests', [])
     tests_passing = None
     if tests:
-        # Lightweight check: just verify test files exist for now
-        test_paths = [t.split("::")[0] for t in tests]
+        test_paths = [t.split('::')[0] for t in tests]
         all_exist = all((repo_root / tp).exists() for tp in test_paths)
         tests_passing = all_exist
 
@@ -109,19 +118,18 @@ def verify_design(design_path: Path, strict: bool = False) -> dict:
     implemented = missing == 0 and (tests_passing is None or tests_passing)
 
     return {
-        "design": name,
-        "path": str(design_path.relative_to(UNIFIED_DESIGN_ROOT)),
-        "status": status,
-        "layer": layer,
-        "intent_hash": intent_hash,
-        "implemented": implemented,
-        "coverage_pct": round(coverage, 1),
-        "artifacts_verified": verified,
-        "artifacts_missing": missing,
-        "tests_passing": tests_passing,
-        "details": details,
+        'design': name,
+        'path': _rel(design_path),
+        'status': status,
+        'layer': layer,
+        'intent_hash': intent_hash,
+        'implemented': implemented,
+        'coverage_pct': round(coverage, 1),
+        'artifacts_verified': verified,
+        'artifacts_missing': missing,
+        'tests_passing': tests_passing,
+        'details': details,
     }
-
 
 def find_designs(targets: list[str] | None = None) -> list[Path]:
     designs_dir = UNIFIED_DESIGN_ROOT / "designs"
