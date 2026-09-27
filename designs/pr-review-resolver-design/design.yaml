@@ -1,13 +1,8 @@
----
 name: pr-review-resolver-design
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for pr-review-resolver-design."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for pr-review-resolver-design.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_PR_REVIEW_RESOLVER_DESIGN_20260923
