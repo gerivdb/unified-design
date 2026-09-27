@@ -1,22 +1,26 @@
 name: dual-path-rbf-llm
-version: "1.0.0"
+version: 1.0.0
 status: draft
-description: |
-  Fast-Path RBF/LLM Dual Engine : aiguillage par score de distance (< 3 ms).
+description: 'Fast-Path RBF/LLM Dual Engine : aiguillage par score de distance (<
+  3 ms).
+
   95% du trafic routé vers RBF déterministe, 5% délégué au LLM.
+
+  '
 parent: unified-design-learning-loop
 layer: L4
 capabilities:
-  - name: fast-path-routing
-    parameters:
-      max_latency_ms: 3
-      threshold: 0.85
-      threads: 16
-  - name: slow-path-fallback
-    parameters:
-      timeout_ms: 50
-      model: llm
+- name: fast-path-routing
+  parameters:
+    max_latency_ms: 3
+    threshold: 0.85
+    threads: 16
+- name: slow-path-fallback
+  parameters:
+    timeout_ms: 50
+    model: llm
 dependencies:
-  - rbf-cluster
-  - activation-vector
-  - runner-contract
+- rbf-cluster
+- activation-vector
+- runner-contract
+intent_hash: 0xDESIGN_DUAL_PATH_RBF_LLM_20260923
