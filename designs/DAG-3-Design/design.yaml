@@ -1,13 +1,8 @@
----
 name: DAG-3-Design
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for DAG-3-Design."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for DAG-3-Design.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_DAG_3_DESIGN_20260923
