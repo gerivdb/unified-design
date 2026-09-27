@@ -1,0 +1,12 @@
+---
+name: closeout.cleanup
+category: closeout
+version: v1.0.0
+description: "Cleanup after closeout"
+entry_point: "scripts/loopx/closeout_cleanup.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Closeout cleanup: branches, stash, WAL reconciliation"
+examples:
+  - "loopx routine closeout.cleanup"

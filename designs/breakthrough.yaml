@@ -1,18 +1,21 @@
----
 name: breakthrough
-description: "Saut qualitatif dans la capacité de résolution d'un problème. Intensification de l'intelligence existante. Gain de puissance cognitive local, pas une reconfiguration topologique. Distincte de big_picture (reconfiguration globale) et de serendipity (découverte inattendue)."
-version: "1.0.0"
+description: "Saut qualitatif dans la capacit\xE9 de r\xE9solution d'un probl\xE8\
+  me. Intensification de l'intelligence existante. Gain de puissance cognitive local,\
+  \ pas une reconfiguration topologique. Distincte de big_picture (reconfiguration\
+  \ globale) et de serendipity (d\xE9couverte inattendue)."
+version: 1.0.0
 status: active
 layer: L0
-intent_hash: "0xDESIGN_BREAKTHROUGH_20260828"
+intent_hash: 0xDESIGN_BREAKTHROUGH_20260828
 inherits:
-  - big-picture
-  - intelligence
+- big-picture
+- intelligence
 depends_on:
-  - serendipity
-  - exploration
+- serendipity
+- exploration
 bridges:
-  - target: repo:KG-L
-    role: consumer
-    protocol: wazaa-channel
-    channel: L4-TOOLS/KG-L/breakthrough/detected
+- target: repo:KG-L
+  role: consumer
+  protocol: wazaa-channel
+  channel: L4-TOOLS/KG-L/breakthrough/detected
+adr: ADR-015-unified-design-v2

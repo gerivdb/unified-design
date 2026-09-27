@@ -1,8 +1,8 @@
 ---
 type: PRD
 version: "1.1"
-date: "2026-09-21"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xPRD_MOC_SYNC_MDU_CATALOG_20260921
 ---
 
@@ -40,6 +40,15 @@ Créer un script de synchronisation atomique MDU qui maintient `meta-design.yaml
 | Rapport de sync | ⭐⭐⭐ | P1 | Minimal | Traçabilité des changements |
 
 **Verdict** : 2 P0 + 3 P1. Effort minimal, valeur élevée. Réduit la dette de sync manuelle.
+
+## État d'implémentation (2026-09-23)
+
+| Composant | État | Preuve |
+|-----------|------|--------|
+| `scripts/sync-mdu-catalog.py` | ✅ Fonctionnel | `python scripts/sync-mdu-catalog.py --all` exécuté avec succès |
+| `workflows/mdu-daily-sync.md` | ✅ Créé | Fichier existe |
+| `pipelines/pipeline-mdu-validation.yaml` | ✅ Créé | Fichier existe |
+| Catalogues à jour | ✅ OK | `designs.index.yaml`: 127 entrées, `atoms.index.yaml`: 36 entrées, toutes avec `source_repo: unified-design` |
 
 ## Périmètre
 

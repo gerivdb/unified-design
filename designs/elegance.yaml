@@ -1,25 +1,34 @@
----
 name: elegance
-description: "Élégance des solutions dans l'écosystème gerivdb. Formalise les critères d'élégance, les patterns de simplicité, et la mesure de la complexité."
-version: "1.0.0"
+description: "\xC9l\xE9gance des solutions dans l'\xE9cosyst\xE8me gerivdb. Formalise\
+  \ les crit\xE8res d'\xE9l\xE9gance, les patterns de simplicit\xE9, et la mesure\
+  \ de la complexit\xE9."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_ELEGANCE_20260917
 inherits:
-  - debt-relief
-  - operational-fluidity
+- debt-relief
+- operational-fluidity
 depends_on:
-  - debt-relief
-  - operational-fluidity
+- debt-relief
+- operational-fluidity
 capabilities:
-  - name: elegance-criteria
-    description: "Critères d'élégance d'une solution"
-    parameters:
-      criteria: [simplicity, clarity, minimalism, composability]
-  - name: complexity-measurement
-    description: "Mesure de la complexité"
-    parameters:
-      metrics: [cyclomatic, cognitive, structural]
+- name: elegance-criteria
+  description: "Crit\xE8res d'\xE9l\xE9gance d'une solution"
+  parameters:
+    criteria:
+    - simplicity
+    - clarity
+    - minimalism
+    - composability
+- name: complexity-measurement
+  description: "Mesure de la complexit\xE9"
+  parameters:
+    metrics:
+    - cyclomatic
+    - cognitive
+    - structural
 principles:
-  - P0_ELEGANCE: la solution la plus élégante est préférée
-  - P0_SIMPLICITY: la simplicité est la sophistication suprême
+- P0_ELEGANCE: "la solution la plus \xE9l\xE9gante est pr\xE9f\xE9r\xE9e"
+- P0_SIMPLICITY: "la simplicit\xE9 est la sophistication supr\xEAme"
+adr: ADR-015-unified-design-v2

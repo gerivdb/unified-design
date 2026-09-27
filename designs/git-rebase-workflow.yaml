@@ -1,0 +1,77 @@
+---
+name: git-rebase-workflow
+description: "Workflow standardisé pour git rebase : décision rebase vs merge, rebase interactif, autosquash, résolution de conflits, et cleanup post-rebase."
+version: "1.0.0"
+status: active
+layer: L0
+type: design
+profile: STANDARD
+intent_hash: 0xDESIGN_GIT_REBASE_WORKFLOW_20260923
+adr: ADR-2026-08-15-003-WIP-BRANCH-WORKFLOW
+inherits:
+  - conflict-resolver-pattern
+  - branch-orphan-conflict-resolver
+depends_on:
+  - merge-fork-balance
+  - atomic-fragmentation
+capabilities:
+  - name: rebase-decision
+    description: "Décide si rebase ou merge selon le contexte"
+    parameters:
+      default: merge
+      rebase_allowed_on: [local_only, not_shared, wip_branches]
+      merge_required_on: [shared, main, develop]
+  - name: rebase-interactive
+    description: "Rebase interactif avec autosquash et validation"
+    parameters:
+      autosquash: true
+      max_conflicts: 5
+      backup_required: true
+  - name: conflict-resolution
+    description: "Résolution de conflits pendant rebase"
+    parameters:
+      strategies: [main_authority, manual, cherry-pick]
+      default_strategy: main_authority
+  - name: post-rebase-validation
+    description: "Validation après rebase"
+    parameters:
+      checks: [git_status, git_log, diff_main]
+principles:
+  - P0_REBASE_LOCAL_ONLY: rebase autorisé uniquement sur branches locales non partagées
+  - P0_MERGE_SHARED: merge obligatoire pour branches partagées ou publiques
+  - P0_BACKUP_BEFORE_REBASE: branche de backup obligatoire avant rebase interactif
+  - P0_CONFLICT_LIMIT: max 5 conflits par rebase, sinon STOP + HITL
+  - P0_POST_REBASE_VALIDATION: validation post-rebase obligatoire
+constraints:
+  - max_conflicts_per_rebase: 5
+  - backup_branch_required: true
+  - autosquash_only_with_validation: true
+  - no_rebase_on_shared_branches: true
+  - post_rebase_validation_required: true
+workflow:
+  - step: decide_strategy
+    action: "context_check -> rebase|merge"
+    output: strategy
+  - step: backup_branch
+    action: "git branch backup-<date>-<branch>"
+    condition: "strategy == rebase"
+  - step: pre_rebase_validation
+    action: "git status --short && git log --oneline -5"
+    condition: "strategy == rebase"
+  - step: execute_rebase
+    action: "git rebase -i --autosquash <base>"
+    condition: "strategy == rebase"
+  - step: resolve_conflicts
+    action: "git status --diff-filter=U | xargs git mergetool"
+    condition: "conflicts_detected"
+  - step: post_rebase_validation
+    action: "git status --short && git log --oneline -5 && git diff main...HEAD --stat"
+    condition: "rebase_success"
+  - step: cleanup
+    action: "git branch -d backup-<date>-<branch>"
+    condition: "validation_passed"
+governance:
+  adr: ADR-2026-08-15-003-WIP-BRANCH-WORKFLOW
+  design: conflict-resolver-pattern
+  atom: ATOM-REBASE-WORKFLOW
+  workflow: rebase-validation

@@ -62,3 +62,13 @@ constraints:
   - cpu_only: true
   - e5620_sse42: true
   - memory_24gb: true
+implementation_contract:
+  repo: RLM-243
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\RLM-243
+  artifacts:
+    - path: build.zig
+      must_contain:
+        - "test_integration"
+    - path: citizens.yaml
+      must_contain:
+        - "RLM"

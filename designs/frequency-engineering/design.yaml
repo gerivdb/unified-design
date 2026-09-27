@@ -1,5 +1,8 @@
 name: frequency-engineering
 version: 1.0.0
 status: active
+layer: L0
+description: Design artifact for frequency-engineering.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_FREQUENCY_ENGINEERING_20260923

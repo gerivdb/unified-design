@@ -1,8 +1,8 @@
 ---
 type: MOC
 version: "1.2"
-date: "2026-09-21"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xMOC_MDU_DAILY_SYNC_20260921
 ---
 
@@ -10,8 +10,8 @@ intent_hash: 0xMOC_MDU_DAILY_SYNC_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
-**Date** : 2026-09-21  
+**Statut** : approved  
+**Date** : 2026-09-22  
 **Version** : 1.2 (évaluation utilité + intégration opérationnelle)
 
 ---
@@ -30,29 +30,29 @@ Ce MOC orchestre la création et l'intégration du workflow `mdu-daily-sync` dan
 
 ## Composants
 
-| Composant | Type | Chemin | Statut |
-|-----------|------|--------|--------|
-| `mdu-daily-sync` | Workflow | `workflows/mdu-daily-sync.md` | ⏳ À créer |
+| Composant | Type | Chemin | Statut | Preuve d'exécution |
+|-----------|------|--------|--------|-------------------|
+| `mdu-daily-sync` | Workflow | `workflows/mdu-daily-sync.md` | ✅ Créé | Commit existant |
 
 ## Séquence d'implémentation
 
 ### Phase 1 — Workflow (bloquant)
 
-1. Créer `workflows/mdu-daily-sync.md`
-2. Documenter la procédure quotidienne
+1. ✅ Créer `workflows/mdu-daily-sync.md`
+2. ✅ Documenter la procédure quotidienne
 
 ### Phase 2 — Intégration
 
-3. Mettre à jour `session-boot-skill/SKILL.md`
-4. Mettre à jour `meta-design.yaml`
+3. ✅ Mettre à jour `session-boot-skill/SKILL.md`
+4. ✅ Mettre à jour `meta-design.yaml`
 
 ## Gates
 
 | Gate | Critère | Statut |
 |------|---------|--------|
-| G1 — Workflow créé | `mdu-daily-sync.md` documenté et testé | ⏳ En attente |
-| G2 — Skill intégré | `session-boot-skill` mis à jour | ⏳ En attente |
-| G3 — MDU cohérent | `meta-design.yaml` mis à jour | ⏳ En attente |
+| **G1** | Workflow créé | `mdu-daily-sync.md` documenté et testé | ✅ Fait |
+| **G2** | Skill intégré | `session-boot-skill` mis à jour | ✅ Fait |
+| **G3** | MDU cohérent | `meta-design.yaml` mis à jour | ✅ Fait |
 
 ## Références
 

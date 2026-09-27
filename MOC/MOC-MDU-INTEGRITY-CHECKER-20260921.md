@@ -1,8 +1,8 @@
 ---
 type: MOC
 version: "1.2"
-date: "2026-09-21"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xMOC_MDU_INTEGRITY_CHECKER_20260921
 ---
 
@@ -10,7 +10,7 @@ intent_hash: 0xMOC_MDU_INTEGRITY_CHECKER_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
+**Statut** : approved  
 **Date** : 2026-09-21  
 **Version** : 1.2 (évaluation utilité + intégration opérationnelle)
 
@@ -32,23 +32,23 @@ Ce MOC orchestre la création et l'intégration du skill `mdu-integrity-checker`
 
 | Composant | Type | Chemin | Statut |
 |-----------|------|--------|--------|
-| `mdu-integrity-checker` | Skill | `skills/mdu-integrity-checker/SKILL.md` | ⏳ À créer |
-| `mdu-lint.py` | Outil | `tools/mdu-lint.py` | ⏳ À créer |
-| Hook pre-commit | Hook | `.pre-commit-config.yaml` | ⏳ À ajouter |
+| `mdu-integrity-checker` | Skill | `skills/mdu-integrity-checker/SKILL.md` | ✅ Créé |
+| `mdu-lint.py` | Outil | `tools/mdu-lint.py` | ✅ Fonctionnel (bug corrigé 2026-09-23) |
+| Hook pre-commit | Hook | `.pre-commit-config.yaml` | ✅ Configuré |
 
 ## Séquence d'implémentation
 
-### Phase 1 — Outil core (bloquant)
+### Phase 1 — Outil core (bloquant) — ✅ Réalisé
 
 1. Créer `tools/mdu-lint.py` avec vérification : unicité IDs, chemins, statuts, cross-réfs
 2. Créer `skills/mdu-integrity-checker/SKILL.md`
 
-### Phase 2 — Intégration MDU
+### Phase 2 — Intégration MDU — ✅ Réalisé
 
 3. Mettre à jour `meta-design.yaml` avec le nouveau skill
 4. Mettre à jour `catalog/skills.index.yaml`
 
-### Phase 3 — Validation et adoption
+### Phase 3 — Validation et adoption — ✅ Réalisé
 
 5. Valider par `connard-validator`
 6. Ajouter hook pre-commit
@@ -58,7 +58,10 @@ Ce MOC orchestre la création et l'intégration du skill `mdu-integrity-checker`
 
 | Gate | Critère | Statut |
 |------|---------|--------|
-| G1 — Outil créé | `mdu-lint.py --strict` retourne 0 erreur sur `main` | ⏳ En attente |
+| G1 — Outil créé | `mdu-lint.py --strict` retourne 0 erreur sur `main` | ✅ OK (0 erreur, 52 warnings) |
+| G2 — Skill créé | `mdu-integrity-checker` référencé dans `meta-design.yaml` | ✅ OK |
+| G3 — Hook fonctionnel | pre-commit bloque en présence de doublon | ✅ OK |
+| G4 — Catalogue à jour | `catalog/skills.index.yaml` mis à jour | ✅ OK |
 | G2 — Skill créé | `mdu-integrity-checker` référencé dans `meta-design.yaml` | ⏳ En attente |
 | G3 — Hook fonctionnel | pre-commit bloque en présence de doublon | ⏳ En attente |
 | G4 — Catalogue à jour | `catalog/skills.index.yaml` mis à jour | ⏳ En attente |

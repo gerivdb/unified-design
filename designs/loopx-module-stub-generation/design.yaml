@@ -1,0 +1,129 @@
+---
+name: loopx-module-stub-generation
+version: "1.0.0"
+status: active
+layer: L3-CITIZENS
+sub_layer: N+2
+intent_hash: 0xDESIGN_LOOPX_MODULE_STUB_GENERATION_20260921
+description: >
+  Pattern de génération de stubs pour modules Python manquants dans LOOPX.
+  Résout le problème récurrent des modules référencés dans le registry mais
+  absents du filesystem, causant des erreurs d'import au runtime.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+  - LOOPX-Routines
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: stub-generation
+    description: "Génère un stub de module Python minimal pour résoudre les imports"
+  - name: placeholder-classes
+    description: "Crée des classes placeholders avec méthodes stub"
+  - name: return-shaping
+    description: "Formate les retours des stubs en dict standardisés"
+parameters:
+  stub_naming:
+    module_pattern: "{module_name}.py"
+    class_pattern: "{ClassName}"
+    method_pattern: "{method_name}"
+  stub_behavior:
+    return_value: '{"success": true, "result": "stub initialized"}'
+    raise_on_call: false
+    log_stub_usage: true
+  allowed_in_stubs:
+    - dataclasses
+    - typing
+    - pathlib
+    - json
+  forbidden_in_stubs:
+    - external_api_calls
+    - file_system_mutations
+    - network_requests
+states:
+  - name: IDLE
+    nature: stub non nécessaire
+    gate_to_next: DETECT_MISSING
+    question: "Un module référencé est-il absent du filesystem ?"
+  - name: DETECT_MISSING
+    nature: détection du module manquant
+    gate_to_next: CREATE_STUB | SKIP
+    question: "Le module est-il référencé dans le registry mais absent ?"
+  - name: CREATE_STUB
+    nature: création du stub minimal
+    gate_to_next: VALIDATE_STUB
+    question: "Le stub est-il créé avec les bonnes conventions ?"
+  - name: VALIDATE_STUB
+    nature: validation du stub
+    gate_to_next: COMMIT | BLOCK
+    question: "Le stub est-il importable et appelable ?"
+  - name: COMMIT
+    nature: commit du stub
+  - name: SKIP
+    nature: stub non nécessaire
+  - name: BLOCK
+    nature: création de stub bloquée
+functions:
+  - id: F1
+    name: DETECT_MISSING_MODULE
+    state: IDLE->DETECT_MISSING
+    description: "Détecte les modules manquants via registry scan"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: CREATE_STUB_MODULE
+    state: DETECT_MISSING->CREATE_STUB
+    description: "Crée le fichier module avec classes/méthodes stub"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F3
+    name: VALIDATE_STUB_IMPORT
+    state: CREATE_STUB->VALIDATE_STUB
+    description: "Valide que le stub est importable"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: F4
+    name: COMMIT_STUB
+    state: VALIDATE_STUB->COMMIT
+    description: "Commit le stub avec message standardisé"
+    implements: ATOM-DELTA-CHECK
+invariant: "Tout module référencé dans le registry DOIT exister dans le filesystem, même sous forme de stub minimal."
+genes:
+  - id: G1
+    name: minimal_surface
+    description: "Un stub ne contient que le strict nécessaire pour résoudre l'import"
+  - id: G2
+    name: no_side_effects
+    description: "Un stub ne fait jamais d'appel réseau, de mutation fichier ou d'I/O"
+  - id: G3
+    name: return_shape_compliance
+    description: "Toute méthode stub retourne un dict conforme au shape standardisé"
+  - id: G4
+    name: traceability
+    description: "Tout stub est tracé dans le registry avec status=stub"
+anti_patterns:
+  - missing_gene: minimal_surface
+    pathology: "Stub surdimensionné -> dette technique, comportement imprévisible"
+  - missing_gene: no_side_effects
+    pathology: "Stub avec effets de bord -> corruption de données, appels réseau involontaires"
+  - missing_gene: return_shape_compliance
+    pathology: "Retour non conforme -> crash des consommateurs"
+  - missing_gene: traceability
+    pathology: "Stub non tracé -> oubli de remplacement par l'implémentation réelle"
+cross_references:
+  - repo: gerivdb/LOOPX
+    relation: implements
+    path: src/loopx_routines/core/
+  - repo: gerivdb/ARGUS
+    relation: audits
+    path: scanners/
+    capability: module_absence_scanner
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - primitive: loopx-module-stub-generation-primitive
+  - skill: loopx-module-stub-generation-skill
+  - workflow: workflow-loopx-module-stub-generation

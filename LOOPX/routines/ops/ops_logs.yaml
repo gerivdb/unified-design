@@ -1,0 +1,12 @@
+---
+name: ops.logs
+category: ops
+version: v1.0.0
+description: "Check operational logs"
+entry_point: "scripts/loopx/ops_logs.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Operations logs: tail, grep, analyze, audit"
+examples:
+  - "loopx routine ops.logs"

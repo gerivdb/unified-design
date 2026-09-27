@@ -1,4 +1,13 @@
 ---
+name: "KG-L Coherence Watchdog"
+version: 1.0.0
+status: active
+layer: L0
+description: "KG-L Coherence Watchdog — Watchdog de metacohérence KG-L. Publie les alertes governance.pathology sur le bus WAZAA.
+"
+consumers:
+  - conversation-cognitive
+
 name: KG-L Coherence Watchdog
 version: "1.0.0"
 status: active

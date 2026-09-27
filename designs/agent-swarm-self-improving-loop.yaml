@@ -1,59 +1,70 @@
----
 name: agent-swarm-self-improving-loop
-description: "Architecture agentique auto-améliorante : 3 piliers (loop auto-arrêtante, graphe mémoire structurée, auto-amélioration par correction accumulée). Agent Swarm jusqu'à 300 sous-agents, 4000 étapes. Condition d'arrêt explicite. SKILL.md comme versionnage d'intention séparée du prompt."
-version: "1.0.0"
+description: "Architecture agentique auto-am\xE9liorante : 3 piliers (loop auto-arr\xEA\
+  tante, graphe m\xE9moire structur\xE9e, auto-am\xE9lioration par correction accumul\xE9\
+  e). Agent Swarm jusqu'\xE0 300 sous-agents, 4000 \xE9tapes. Condition d'arr\xEA\
+  t explicite. SKILL.md comme versionnage d'intention s\xE9par\xE9e du prompt."
+version: 1.0.0
 status: active
 layer: L1
 intent_hash: 0xDESIGN_AGENT_SWARM_SELF_IMPROVING_LOOP_20260918
 inherits:
-  - consciousness
-  - agent-observability-architecture
+- consciousness
+- agent-observability-architecture
 depends_on:
-  - consciousness
-  - agent-observability-architecture
-  - meta-coherence
+- consciousness
+- agent-observability-architecture
+- meta-coherence
 capabilities:
-  - name: self-stopping-loop
-    description: "Boucle qui s'arrête d'elle-même par condition d'arrêt explicite (compteurs, pas adjectifs)"
-    parameters:
-      stop_conditions:
-        - "40 nodes verified at 2+ independent sources each"
-        - "3 full passes completed with no new verified node"
-      hard_caps:
-        agents: 300
-        wall_clock_minutes: 45
-        retries_per_node: 2
-  - name: structured-memory-graph
-    description: "Graphe donnant une mémoire structurée aux agents : nœuds vérifiés, edges de correction accumulée"
-    parameters:
-      node_verification: independent_sources
-      correction_accumulation: true
-      state_fingerprinting: true
-  - name: auto-improvement-by-correction
-    description: "Mécanisme d'auto-amélioration par correction accumulée : chaque erreur corrigée renforce le système"
-    parameters:
-      correction_persistence: true
-      learning_mechanism: graph_weight_update
-      feedback_loop: closed
-  - name: agent-swarm-orchestration
-    description: "Orchestration d'essaim : 300 sous-agents pour exécuter 4000 étapes de manière dynamique"
-    parameters:
-      max_agents: 300
-      max_steps: 4000
-      orchestration: graph_state_cyclic
-  - name: skill-md-versioning
-    description: "Séparation prompt (échantillon d'intention) / SKILL.md (intention versionnée)"
-    parameters:
-      prompt_role: sample
-      skill_md_role: versioned_contract
-      layers:
-        - L0 primitives
-        - L1 skills
-        - L2 patterns
-        - L3 metaskills
+- name: self-stopping-loop
+  description: "Boucle qui s'arr\xEAte d'elle-m\xEAme par condition d'arr\xEAt explicite\
+    \ (compteurs, pas adjectifs)"
+  parameters:
+    stop_conditions:
+    - 40 nodes verified at 2+ independent sources each
+    - 3 full passes completed with no new verified node
+    hard_caps:
+      agents: 300
+      wall_clock_minutes: 45
+      retries_per_node: 2
+- name: structured-memory-graph
+  description: "Graphe donnant une m\xE9moire structur\xE9e aux agents : n\u0153uds\
+    \ v\xE9rifi\xE9s, edges de correction accumul\xE9e"
+  parameters:
+    node_verification: independent_sources
+    correction_accumulation: true
+    state_fingerprinting: true
+- name: auto-improvement-by-correction
+  description: "M\xE9canisme d'auto-am\xE9lioration par correction accumul\xE9e :\
+    \ chaque erreur corrig\xE9e renforce le syst\xE8me"
+  parameters:
+    correction_persistence: true
+    learning_mechanism: graph_weight_update
+    feedback_loop: closed
+- name: agent-swarm-orchestration
+  description: "Orchestration d'essaim : 300 sous-agents pour ex\xE9cuter 4000 \xE9\
+    tapes de mani\xE8re dynamique"
+  parameters:
+    max_agents: 300
+    max_steps: 4000
+    orchestration: graph_state_cyclic
+- name: skill-md-versioning
+  description: "S\xE9paration prompt (\xE9chantillon d'intention) / SKILL.md (intention\
+    \ versionn\xE9e)"
+  parameters:
+    prompt_role: sample
+    skill_md_role: versioned_contract
+    layers:
+    - L0 primitives
+    - L1 skills
+    - L2 patterns
+    - L3 metaskills
 principles:
-  - P0_SELF_STOPPING_LOOP: toute boucle agentique doit avoir une condition d'arrêt explicite et vérifiable
-  - P0_GRAPH_MEMORY_FIRST: la mémoire des agents est un graphe, pas une liste plate
-  - P0_CORRECTION_ACCUMULATION: chaque correction renforce le système ; pas de répétition d'erreur
-  - P0_PROMPT_SKILL_SEPARATION: le prompt est un échantillon, SKILL.md est le contrat versionné
-  - P0_AGENT_SWARM_BOUNDED: l'essaim est borné par des hard caps explicites
+- P0_SELF_STOPPING_LOOP: "toute boucle agentique doit avoir une condition d'arr\xEA\
+    t explicite et v\xE9rifiable"
+- P0_GRAPH_MEMORY_FIRST: "la m\xE9moire des agents est un graphe, pas une liste plate"
+- P0_CORRECTION_ACCUMULATION: "chaque correction renforce le syst\xE8me ; pas de r\xE9\
+    p\xE9tition d'erreur"
+- P0_PROMPT_SKILL_SEPARATION: "le prompt est un \xE9chantillon, SKILL.md est le contrat\
+    \ versionn\xE9"
+- P0_AGENT_SWARM_BOUNDED: "l'essaim est born\xE9 par des hard caps explicites"
+adr: ADR-015-unified-design-v2

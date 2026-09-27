@@ -1,0 +1,150 @@
+---
+name: loopx-dryrun-causal-audit
+version: "1.0.0"
+status: active
+layer: L3-CITIZENS
+sub_layer: N+2
+intent_hash: 0xDESIGN_LOOPX_DRYRUN_CAUSAL_AUDIT_20260921
+description: >
+  Audit causal dry-run pour LOOPX : compare le registry (SOT) avec le filesystem
+  pour détecter les gaps, résoudre les entry_points invalides et valider la
+  conformité prod-ready. Résout le problème récurrent des routines manquantes
+  détectées trop tard.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+  - design-coverage-scanner
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: registry-vs-filesystem-scan
+    description: "Compare les routines enregistrées avec les fichiers existants"
+  - name: entry-point-resolution-check
+    description: "Vérifie que chaque entry_point pointe vers un attribut existant"
+  - name: gap-classification
+    description: "Classifie les gaps par sévérité (BLOCK/WARN/INFO)"
+  - name: auto-fix-suggestion
+    description: "Suggère les corrections pour les gaps détectés"
+parameters:
+  scan_scope:
+    - registry_routines
+    - filesystem_modules
+    - entry_point_resolution
+  severity_matrix:
+    missing_module: BLOCK
+    missing_attribute: BLOCK
+    not_callable: BLOCK
+    signature_mismatch: WARN
+    stale_proof_of_life: WARN
+  output_format:
+    - json_report
+    - markdown_summary
+    - registry_patch
+states:
+  - name: IDLE
+    nature: audit non démarré
+    gate_to_next: LOAD_REGISTRY
+    question: "Un audit dry-run est-il requis ?"
+  - name: LOAD_REGISTRY
+    nature: chargement du registry
+    gate_to_next: SCAN_FILESYSTEM
+    question: "Le registry est-il chargé ?"
+  - name: SCAN_FILESYSTEM
+    nature: scan du filesystem
+    gate_to_next: RESOLVE_ENTRY_POINTS
+    question: "Le filesystem est-il scanné ?"
+  - name: RESOLVE_ENTRY_POINTS
+    nature: résolution des entry_points
+    gate_to_next: CLASSIFY_GAPS
+    question: "Tous les entry_points sont-ils résolus ?"
+  - name: CLASSIFY_GAPS
+    nature: classification des gaps
+    gate_to_next: GENERATE_REPORT
+    question: "Les gaps sont-ils classés par sévérité ?"
+  - name: GENERATE_REPORT
+    nature: génération du rapport
+    gate_to_next: SUGGEST_FIXES
+    question: "Le rapport est-il complet ?"
+  - name: SUGGEST_FIXES
+    nature: suggestions de correction
+    gate_to_next: COMPLETE
+    question: "Les suggestions sont-elles actionnables ?"
+  - name: COMPLETE
+    nature: audit terminé
+  - name: BLOCK
+    nature: audit bloqué par gap critique
+functions:
+  - id: F1
+    name: LOAD_REGISTRY
+    state: IDLE->LOAD_REGISTRY
+    description: "Charge le manifest du registry"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: SCAN_FILESYSTEM
+    state: LOAD_REGISTRY->SCAN_FILESYSTEM
+    description: "Scan les modules Python du filesystem"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F3
+    name: RESOLVE_ENTRY_POINTS
+    state: SCAN_FILESYSTEM->RESOLVE_ENTRY_POINTS
+    description: "Résout chaque entry_point en attribut appelable"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F4
+    name: CLASSIFY_GAPS
+    state: RESOLVE_ENTRY_POINTS->CLASSIFY_GAPS
+    description: "Classifie les gaps par sévérité"
+    implements: ATOM-STOP-CONDITION
+  - id: F5
+    name: GENERATE_REPORT
+    state: CLASSIFY_GAPS->GENERATE_REPORT
+    description: "Génère le rapport JSON/Markdown"
+    implements: ATOM-DELTA-CHECK
+  - id: F6
+    name: SUGGEST_FIXES
+    state: GENERATE_REPORT->SUGGEST_FIXES
+    description: "Suggère les corrections pour chaque gap"
+    implements: ATOM-CARRY-FORWARD_PRINCIPLE
+invariant: "Tout audit dry-run doit identifier 100% des gaps avant de proposer des corrections."
+genes:
+  - id: G1
+    name: registry_authority
+    description: "Le registry est la source de vérité pour les routines attendues"
+  - id: G2
+    name: filesystem_ground_truth
+    description: "Le filesystem est la source de vérité pour les implémentations"
+  - id: G3
+    name: gap_severity
+    description: "Tout gap est classé BLOCK/WARN/INFO selon son impact"
+  - id: G4
+    name: actionable_fixes
+    description: "Toute suggestion de correction est actionnable et testable"
+anti_patterns:
+  - missing_gene: registry_authority
+    pathology: "Registry ignoré -> détection de faux négatifs"
+  - missing_gene: filesystem_ground_truth
+    pathology: "Filesystem ignoré -> détection de faux positifs"
+  - missing_gene: gap_severity
+    pathology: "Gaps non classés -> mauvaise priorisation des corrections"
+  - missing_gene: actionable_fixes
+    pathology: "Suggestions vagues -> corrections non appliquées"
+cross_references:
+  - repo: gerivdb/LOOPX
+    relation: implements
+    path: src/loopx_routines/registry.py
+  - repo: gerivdb/ARGUS
+    relation: audits
+    path: scanners/
+    capability: causal_gap_scanner
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - design: design-coverage-scanner
+  - primitive: loopx-dryrun-causal-audit-primitive
+  - skill: loopx-dryrun-causal-audit-skill
+  - workflow: workflow-loopx-dryrun-causal-audit

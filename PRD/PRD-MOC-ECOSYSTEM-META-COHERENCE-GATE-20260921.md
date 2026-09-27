@@ -1,8 +1,8 @@
 ---
 type: PRD
 version: "1.1"
-date: "2026-09-21"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xPRD_MOC_ECOSYSTEM_META_COHERENCE_GATE_20260921
 ---
 
@@ -10,9 +10,9 @@ intent_hash: 0xPRD_MOC_ECOSYSTEM_META_COHERENCE_GATE_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
-**Date** : 2026-09-21  
-**Version** : 1.1 (évaluation utilité + périmètre)
+**Statut** : approved  
+**Date** : 2026-09-22  
+**Version** : 1.1 (implémentation design + primitive + intégration MDU)
 
 ---
 
@@ -23,18 +23,18 @@ Le MDU dispose de :
 - `atoms/ecosystem-meta-coherence-gate.md`
 - `citizens/meta-coherence-auditor/citizen.yaml`
 
-Mais il manque une **gate exécutable** qui transforme ces principes en vérification mécanique avant toute mutation du MDU.
+Mais il manquait une **gate exécutable** qui transforme ces principes en vérification mécanique avant toute mutation du MDU.
 
 ## Mission
 
-Créer une gate d’écosystème méta-cohérente qui vérifie, avant tout commit/push, que le MDU respecte ses invariants d’intégrité.
+Créer une gate d'écosystème méta-cohérente qui vérifie, avant tout commit/push, que le MDU respecte ses invariants d'intégrité.
 
-## Évaluation d’utilité
+## Évaluation d'utilité
 
 | Composant | Utilité | Impact | Effort | Justification |
 |-----------|---------|--------|--------|---------------|
 | Design `ecosystem-meta-coherence-gate` | ⭐⭐⭐⭐⭐ | P0 | Minimal | Rend les invariants vérifiables |
-| Primitive d’exécution | ⭐⭐⭐⭐ | P1 | Minimal | Réutilisable par workflows |
+| Primitive d'exécution | ⭐⭐⭐⭐ | P1 | Minimal | Réutilisable par workflows |
 | Atome de gouvernance | ⭐⭐⭐⭐ | P1 | Minimal | Intégration MDU |
 
 **Verdict** : 1 P0 + 2 P1. Effort minimal, valeur élevée. Complète `ecosystem-meta-coherence`.
@@ -44,23 +44,23 @@ Créer une gate d’écosystème méta-cohérente qui vérifie, avant tout commi
 | Inclut | Exclut |
 |--------|--------|
 | Design `ecosystem-meta-coherence-gate` | Implémentation runtime complète |
-| Primitive d’exécution | Modification de `ecosystem-meta-coherence` |
+| Primitive d'exécution | Modification de `ecosystem-meta-coherence` |
 | Atome de gouvernance | Synchronisation cross-repo |
 
 ## Livrables
 
 1. **Design `ecosystem-meta-coherence-gate`**
-   - Héritage : `ecosystem-meta-coherence`, `safe-action-pattern`
-   - États : `IDLE` → `AUDIT` → `PASS` / `FAIL`
-   - Critères de validation : invariants MDU, cross-références, canonicalité chemins
+    - Héritage : `ecosystem-meta-coherence`, `safe-action-pattern`
+    - États : `IDLE` → `AUDIT` → `PASS` / `FAIL`
+    - Critères de validation : invariants MDU, cross-références, canonicalité chemins
 
 2. **Primitive `ecosystem-meta-coherence-gate-primitive`**
-   - Implémentation réutilisable du gate
-   - Intégration dans `workflows/pre-push-validation.md`
+    - Implémentation réutilisable du gate
+    - Intégration dans `workflows/pre-push-validation.md`
 
 3. **Atome `ATOM-ECOSYSTEM-META-COHERENCE-GATE`**
-   - Règles de validation
-   - Intégration `meta-design.yaml` > `governance_atoms`
+    - Règles de validation
+    - Intégration `meta-design.yaml` > `governance_atoms`
 
 ## Dépendances
 
@@ -69,22 +69,33 @@ Créer une gate d’écosystème méta-cohérente qui vérifie, avant tout commi
 | `designs/ecosystem-meta-coherence/design.yaml` | amont | Design parent |
 | `designs/safe-action-pattern.yaml` | pair | Pattern de gate |
 | `atoms/ecosystem-meta-coherence-gate.md` | amont | Atome existant à référencer |
-| `citizens/meta-coherence-auditor/citizen.yaml` | pair | Citizen d’audit |
+| `citizens/meta-coherence-auditor/citizen.yaml` | pair | Citizen d'audit |
 
-## Critères d’acceptation
+## Critères d'acceptation
 
-- [ ] Design `ecosystem-meta-coherence-gate` créé et validé par `connard-validator`
-- [ ] Primitive créée et référencée dans `meta-design.yaml`
-- [ ] Atome référencé dans `meta-design.yaml`
-- [ ] Workflow `pre-push-validation` mis à jour
-- [ ] Aucun doublon d’ID introduit
+- [x] Design `ecosystem-meta-coherence-gate` créé et validé par `connard-validator`
+- [x] Primitive créée et référencée dans `meta-design.yaml`
+- [x] Atome référencé dans `meta-design.yaml`
+- [x] Workflow `pre-push-validation` mis à jour
+- [x] Aucun doublon d'ID introduit
+
+## Proof-of-Life
+
+| Item | Preuve | Horodatage |
+|------|--------|------------|
+| Design `ecosystem-meta-coherence-gate` | `designs/ecosystem-meta-coherence-gate/design.yaml` créé | 2026-09-22 |
+| Primitive `ecosystem-meta-coherence-gate-primitive` | `primitives/ecosystem-meta-coherence-gate-primitive.yaml` créé | 2026-09-22 |
+| Meta-design update | `meta-design.yaml` mis à jour (design + primitive) | 2026-09-22 |
+| Workflow update | `workflows/pre-push-validation.md` mis à jour | 2026-09-22 |
+| Catalogue update | `catalog/primitives.index.yaml` mis à jour | 2026-09-22 |
 
 ## Risques
 
 | Risque | Impact | Mitigation |
 |--------|--------|------------|
-| Chevauchement avec `safe-action-gate` | Moyen | Vérifier les périmètres avant écriture |
-| Complexité des invariants | Faible | Version minimaliste d’abord |
+| Chevauchement avec `safe-action-gate` | Moyen | Périmètres distincts : safe-action-gate = préconditions/invariants MDU ; ecosystem-meta-coherence-gate = invariants écosystémiques Think/Do/Check |
+| Complexité des invariants | Faible | Version minimaliste d'abord |
+| Doublon d'ID | Faible | IntentHash unique vérifié |
 
 ## Références
 
@@ -93,6 +104,7 @@ Créer une gate d’écosystème méta-cohérente qui vérifie, avant tout commi
 - `atoms/ecosystem-meta-coherence-gate.md`
 - `citizens/meta-coherence-auditor/citizen.yaml`
 - ADR-2026-09-19-SAFE-ACTION-PATTERN
+- ADR-2026-09-21-006-ECOSYSTEM-META-COHERENCE-GATE
 
 ---
 

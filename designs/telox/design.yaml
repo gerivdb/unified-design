@@ -1,5 +1,14 @@
 ---
 name: TELOX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "TELOX — Runner de finitude teleologique. Evalue la coherence des objectifs et des finalites dans les documents de gouvernance.
+"
+consumers:
+  - Conversation Cognitive
+
+name: TELOX
 version: "1.0.0"
 status: proposed
 strate: L4-TOOLS

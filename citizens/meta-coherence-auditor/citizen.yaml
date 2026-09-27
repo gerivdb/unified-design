@@ -4,7 +4,7 @@ description: >
   Citoyen métier qui audite la méta-cohérence du MDU.
   Détecte les frictions de session, les gaps structurels,
   et propose des corrections alignées sur ecosystem-meta-coherence.
-  Fusionne meta-coherence (détection d'écarts) et friction-analyzer
+  Fusionne meta-coherence (détection d'écarts) et talex-friction-analyzer
   (corrections structurelles) en un citoyen unifié.
 version: "1.0.0"
 status: active
@@ -122,7 +122,7 @@ cross_references:
   - design: meta-coherence
   - design: chain-fluidity
   - design: safe-action-pattern
-  - design: friction-analyzer
+  - design: talex-friction-analyzer
   - atom: ecosystem-meta-coherence-gate
   - atom: safe-action-gate
   - workflow: dryrun-causal-audit

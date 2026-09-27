@@ -21,6 +21,7 @@ capabilities:
         - "D:\DO\WEB\TOOLS\L3-CITIZENS"
         - "D:\DO\WEB\TOOLS\L4-TOOLS"
         - "D:\DO\WEB\TOOLS\L5-ARCHIVE"
+        - "D:\DO\WEB\TOOLS\L6-WORK"
         - "C:\DevTools"
       sot_sources:
         - "known_repositories.yaml"

@@ -1,0 +1,52 @@
+---
+layer: L1_CAUSALITY
+description: "Repos L1-CAUSALITY — infrastructure, gouvernance, hooks, CI, outils de base"
+path_prefix: "D:/DO/WEB/TOOLS/L1-INFRA/"
+repos:
+  - name: KIVA-CLI
+    description: "CLI orchestrateur projets/apps, scaffolding"
+    status: ACTIVE
+    flows:
+      - file: ../flows/govhub-kiva-cli.yaml
+        direction: inbound
+      - file: ../flows/kiva-kiva-cli.yaml
+        direction: inbound
+
+  - name: ECOS-CLI
+    description: "CLI multi-repo, registry, health"
+    status: ACTIVE
+    flows:
+      - file: ../flows/govhub-ecos-cli.yaml
+        direction: inbound
+
+  - name: ARGUS
+    description: "Scanner/gap detector — détection GAP/GHOST/ORPHAN/DRIFT cross-repo"
+    status: ACTIVE
+    memory_role: ecosystem_scanner
+    structural: true
+    flows:
+      - file: ../flows/nexus-argus.yaml
+        direction: inbound
+
+  - name: KIVA
+    description: "Infrastructure runtime, agents, scheduler, WAL"
+    status: ACTIVE
+    flows:
+      - file: ../flows/kiva-kiva-cli.yaml
+        direction: outbound
+      - file: ../flows/kiva-trix.yaml
+        direction: outbound
+
+structural_relations:
+  - kind: requires
+    from: KIVA-CLI
+    to: KIVA
+    symmetric: false
+  - kind: requires
+    from: ECOS-CLI
+    to: TOPOS
+    symmetric: false
+  - kind: complements
+    from: ARGUS
+    to: NEXUS
+    symmetric: true

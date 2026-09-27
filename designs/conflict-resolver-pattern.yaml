@@ -1,6 +1,6 @@
 name: conflict-resolver-pattern
-description: Pattern de résolution de conflits entre logiques chaînées avec règles
-  prioritaires et ADR backing.
+description: "Pattern de r\xE9solution de conflits entre logiques cha\xEEn\xE9es avec\
+  \ r\xE8gles prioritaires et ADR backing."
 version: 1.0.0
 status: active
 inherits:
@@ -14,12 +14,13 @@ parameters:
   blacklist_required: true
   adr_backed: true
 constraints:
-- Les règles sont priorisées (première match gagne)
+- "Les r\xE8gles sont prioris\xE9es (premi\xE8re match gagne)"
 - Blacklist obligatoire pour fichiers sensibles
-- Résolution doit être tracée en ADR
-- Pas de résolution automatique sur conflit non couvert
+- "R\xE9solution doit \xEAtre trac\xE9e en ADR"
+- "Pas de r\xE9solution automatique sur conflit non couvert"
 performance:
   latency_p99: 45.0
   power_max: 12.0
 intent_hash: 0xconflict_resolver_pattern_20260730
 layer: L1
+adr: ADR-015-unified-design-v2

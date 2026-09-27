@@ -1,7 +1,7 @@
 name: conversation-semantic-layer
-description: Couche conversationnelle M5 - 8 concepts sémantiques liés aux ambiguïtés,
-  dérives et quiproquos conversationnels, leurs relations, déclencheurs et métriques
-  de stabilité.
+description: "Couche conversationnelle M5 - 8 concepts s\xE9mantiques li\xE9s aux\
+  \ ambigu\xEFt\xE9s, d\xE9rives et quiproquos conversationnels, leurs relations,\
+  \ d\xE9clencheurs et m\xE9triques de stabilit\xE9."
 version: 1.0.0
 status: active
 stratum: L0_CANON
@@ -18,7 +18,7 @@ matheme:
 concepts:
 - id: conversational_anaphor
   phase: detectBirth
-  description: Référence orpheline non vérifiée dans le chat
+  description: "R\xE9f\xE9rence orpheline non v\xE9rifi\xE9e dans le chat"
   maturity_threshold: 0.2
 - id: register_shift
   phase: develop
@@ -26,23 +26,23 @@ concepts:
   maturity_threshold: 0.5
 - id: context_scope_ambiguity
   phase: develop
-  description: Périmetre flou non borné
+  description: "P\xE9rimetre flou non born\xE9"
   maturity_threshold: 0.5
 - id: lexical_scope_ambiguity
   phase: detectBirth
-  description: Champ lexical large non borné
+  description: "Champ lexical large non born\xE9"
   maturity_threshold: 0.2
 - id: asymmetric_confidence
   phase: stabilize
-  description: Écart de confiance entre system et user
+  description: "\xC9cart de confiance entre system et user"
   maturity_threshold: 0.8
 - id: context_drift
   phase: stabilize
-  description: Accumulation d'écarts sémantiques
+  description: "Accumulation d'\xE9carts s\xE9mantiques"
   maturity_threshold: 0.8
 - id: conversation_semantic_stability
   phase: stabilize
-  description: Propriété de stabilité sémantique conversationnelle
+  description: "Propri\xE9t\xE9 de stabilit\xE9 s\xE9mantique conversationnelle"
   maturity_threshold: 0.8
 - id: quiproquo_lifecycle
   phase: integrate
@@ -77,3 +77,4 @@ references:
 - PRD-MOC-CONVERSATION-SEMANTIC-LAYER-2026-08-07.md
 - unified-design/atoms/GOVERNANCE/artifact-writing-standards.yaml
 intent_hash: 0xdesign_conversation_semantic_layer_20260807
+adr: ADR-015-unified-design-v2

@@ -1,0 +1,35 @@
+---
+type: registry
+version: "1.0.0"
+status: active
+updated: "2026-09-22"
+intent_hash: 0xCITIZENS_REGISTRY_20260922
+description: >
+  Registre des citizens de unified-design.
+  Référence centralisée pour discovery et dépendances.
+citizens:
+  - name: design-ops-loop-citizen
+    path: citizens/design-ops-loop-citizen/citizen.yaml
+    version: 1.0.0
+    intent_hash: 0xCITIZEN_DESIGN_OPS_LOOP_20260920
+    status: active
+  - name: artifact-layers-auditor
+    path: citizens/artifact-layers-auditor/citizen.yaml
+    version: 1.0.0
+    intent_hash: 0xCITIZEN_ARTIFACT_LAYERS_AUDITOR_20260920
+    status: active
+  - name: session-boot-citizen
+    path: citizens/session-boot-citizen/citizen.yaml
+    version: 1.0.0
+    intent_hash: 0xCITIZEN_SESSION_BOOT_20260920
+    status: active
+  - name: meta-coherence-auditor
+    path: citizens/meta-coherence-auditor/citizen.yaml
+    version: 1.0.0
+    intent_hash: 0xCITIZEN_META_COHERENCE_AUDITOR_20260920
+    status: active
+  - name: talex-friction-analyzer-citizen
+    path: citizens/talex-friction-analyzer-citizen/citizen.yaml
+    version: 1.0.0
+    intent_hash: 0xCITIZEN_TALEX_FRICTION_ANALYZER_20260922
+    status: active

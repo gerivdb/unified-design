@@ -1,5 +1,8 @@
 name: fractal-recursion
 version: 1.0.0
 status: active
+layer: L0
+description: Design artifact for fractal-recursion.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_FRACTAL_RECURSION_20260923

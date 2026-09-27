@@ -1,22 +1,21 @@
 name: combination-instruction-set
 version: 1.0.0
-description: >
-  Jeu d instructions de combinaison pour les entites atomiques entre repos.
-  Analogie : SSE 4.2 du Xeon E5620 (54 instructions) -> 14 primitives
-  operationnelles pour manipuler les entites du spectre
-  primitive -> atom -> agent -> citoyen -> cybernetic_entity.
-  Ce design est L0 car il gouverne toute operation de combinaison,
-  quel que soit le type d entite ou le repo cible.
-  Il complete incremental-combinatorial-discipline en y ajoutant
-  le registre explicite des operations disponibles.
+description: 'Jeu d instructions de combinaison pour les entites atomiques entre repos.
+  Analogie : SSE 4.2 du Xeon E5620 (54 instructions) -> 14 primitives operationnelles
+  pour manipuler les entites du spectre primitive -> atom -> agent -> citoyen -> cybernetic_entity.
+  Ce design est L0 car il gouverne toute operation de combinaison, quel que soit le
+  type d entite ou le repo cible. Il complete incremental-combinatorial-discipline
+  en y ajoutant le registre explicite des operations disponibles.
+
+  '
 status: active
 owner: gerivdb
 intent_hash: 0xCOMBINATION_INSTRUCTION_SET_20260916
 layer: L0
 inherits:
-  - incremental-combinatorial-discipline
-  - atomic-fragmentation
-  - multi-repo-fundamental
+- incremental-combinatorial-discipline
+- atomic-fragmentation
+- multi-repo-fundamental
 parameters:
   instruction_count: 14
   hardware_analogy: SSE 4.2 (54 instructions, Xeon E5620)
@@ -24,141 +23,275 @@ parameters:
   max_operations_per_routine: 1
   verification: test_per_operation
 combination_operations:
-  - category: CRUD
-    operations:
-      - op: ADD
-        description: Ajouter une entite dans un repo cible
-        aliases: [add, create, inject]
-        ctulu_tools: [git-anything, migrate-anything, vsix-consciousness-updater]
-        unified_designs: [incremental-combinatorial-discipline, incremental-growth]
-        ontology_concept: ATOM-062-combination-op-add
-      - op: UPDATE
-        description: Mettre a jour une entite existante
-        aliases: [update, patch, modify]
-        ctulu_tools: [patch-anything, topos_reader, intent-index-auto-updater]
-        unified_designs: [incremental-combinatorial-discipline, prd-moc-progress-sync]
-        ontology_concept: ATOM-063-combination-op-update
-      - op: DELETE
-        description: Supprimer une entite
-        aliases: [delete, remove, forget]
-        ctulu_tools: [forget-anything, git-anything, container-anything]
-        unified_designs: [clone-dedup-rescue, kg35-migration]
-        ontology_concept: ATOM-064-combination-op-delete
-      - op: REPLACE
-        description: Remplacer une entite par une autre
-        aliases: [replace, overwrite, substitute]
-        ctulu_tools: [patch-anything, topos_reader]
-        unified_designs: [recovery-tooling]
-        ontology_concept: ATOM-065-combination-op-replace
-  - category: COMPOSITION
-    operations:
-      - op: MERGE
-        description: Fusionner deux entites en une seule
-        aliases: [merge, fuse, combine]
-        ctulu_tools: [act-anything, branch-cleaner, build-anything, causal-drift]
-        unified_designs: [merge-fork-balance, conflict-resolver-pattern, artifact-ownership-routing]
-        ontology_concept: ATOM-066-combination-op-merge
-      - op: FORK
-        description: Dupliquer une entite pour diverger
-        aliases: [fork, branch, duplicate]
-        ctulu_tools: [audit-anything, git_meta_orchestrator]
-        unified_designs: [merge-fork-balance]
-        ontology_concept: ATOM-067-combination-op-fork
-      - op: COMPOSE
-        description: Composer plusieurs entites en une structure plus large
-        aliases: [compose, assemble, aggregate]
-        ctulu_tools: [compose-anything, container-anything, fpick_cli, pipeline-anything, trix-lens-orchestrator]
-        unified_designs: [chain-engineering, cross-package-dual-import]
-        ontology_concept: ATOM-068-combination-op-compose
-      - op: SEQUENCE
-        description: Ordonner des entites selon un DAG
-        aliases: [sequence, chain, schedule]
-        ctulu_tools: [tool-chain-sequencer, vibe-git-cherry-strategist, vibe-governance-synthesizer]
-        unified_designs: [artifact-ownership-routing, approval-readiness, contract-centrality]
-        ontology_concept: ATOM-069-combination-op-sequence
-  - category: TRANSFORMATION
-    operations:
-      - op: MORPH
-        description: Deformer une entite pour reveler une autre forme
-        aliases: [morph, transform, deform]
-        ctulu_tools: [anamorphoser, dag-transducer, maint-anything, morphism_maps, nodetype-morphing]
-        unified_designs: [anamorphic_morphism, EGMI-v0.3, exploration]
-        ontology_concept: ATOM-070-combination-op-morph
-      - op: TRANSITION
-        description: Faire evoluer l etat d une entite selon une matrice de transition
-        aliases: [transition, migrate, evolve]
-        ctulu_tools: [transition-matrix-anything, adr-anything, adr-status-tracker, gate-anything, migrate-anything]
-        unified_designs: [buzz-persistent-state, dag3-triadic-workflow, viable-initial-state]
-        ontology_concept: ATOM-071-combination-op-transition
-  - category: ORCHESTRATION
-    operations:
-      - op: ROUTE
-        description: Router une entite vers un traitement specifique
-        aliases: [route, dispatch, direct]
-        ctulu_tools: [fusion-router, ingress-controller, moe-router-anything, moe-router-intelligence, odo-gate, trix-gateway-router]
-        unified_designs: [anamorphic_morphism, artifact-ownership-routing, atomic-fragmentation]
-        ontology_concept: ATOM-072-combination-op-route
-      - op: SCHEDULE
-        description: Planifier l execution d une operation
-        aliases: [schedule, plan, timeline]
-        ctulu_tools: [cron-scheduler, noise-schedule-anything, odo-gate, odo-reconciliation, scheduler]
-        unified_designs: [artifact-ownership-routing, ide-window-lifecycle]
-        ontology_concept: ATOM-073-combination-op-schedule
-      - op: SYNC
-        description: Synchroniser l etat d une entite entre repos
-        aliases: [sync, reconcile, align]
-        ctulu_tools: [argocd, bridge-sync, ceobs-anything, env2-sync, git_meta_orchestrator, legacy_index_anything, llm-catalog, odo-cli]
-        unified_designs: [incremental-combinatorial-discipline, EGMI-v0.3, approval-readiness]
-        ontology_concept: ATOM-074-combination-op-sync
-  - category: REVERSIBILITY
-    operations:
-      - op: ROLLBACK
-        description: Revenir a un etat anterieur d une entite
-        aliases: [rollback, revert, undo]
-        ctulu_tools: [act-anything, traceability, trix-wal-atomic-writer]
-        unified_designs: [dry-run-simulation, m5-production-ontologique, runner-family-stratification]
-        ontology_concept: ATOM-075-combination-op-rollback
+- category: CRUD
+  operations:
+  - op: ADD
+    description: Ajouter une entite dans un repo cible
+    aliases:
+    - add
+    - create
+    - inject
+    ctulu_tools:
+    - git-anything
+    - migrate-anything
+    - vsix-consciousness-updater
+    unified_designs:
+    - incremental-combinatorial-discipline
+    - incremental-growth
+    ontology_concept: ATOM-062-combination-op-add
+  - op: UPDATE
+    description: Mettre a jour une entite existante
+    aliases:
+    - update
+    - patch
+    - modify
+    ctulu_tools:
+    - patch-anything
+    - topos_reader
+    - intent-index-auto-updater
+    unified_designs:
+    - incremental-combinatorial-discipline
+    - prd-moc-progress-sync
+    ontology_concept: ATOM-063-combination-op-update
+  - op: DELETE
+    description: Supprimer une entite
+    aliases:
+    - delete
+    - remove
+    - forget
+    ctulu_tools:
+    - forget-anything
+    - git-anything
+    - container-anything
+    unified_designs:
+    - clone-dedup-rescue
+    - kg35-migration
+    ontology_concept: ATOM-064-combination-op-delete
+  - op: REPLACE
+    description: Remplacer une entite par une autre
+    aliases:
+    - replace
+    - overwrite
+    - substitute
+    ctulu_tools:
+    - patch-anything
+    - topos_reader
+    unified_designs:
+    - recovery-tooling
+    ontology_concept: ATOM-065-combination-op-replace
+- category: COMPOSITION
+  operations:
+  - op: MERGE
+    description: Fusionner deux entites en une seule
+    aliases:
+    - merge
+    - fuse
+    - combine
+    ctulu_tools:
+    - act-anything
+    - branch-cleaner
+    - build-anything
+    - causal-drift
+    unified_designs:
+    - merge-fork-balance
+    - conflict-resolver-pattern
+    - artifact-ownership-routing
+    ontology_concept: ATOM-066-combination-op-merge
+  - op: FORK
+    description: Dupliquer une entite pour diverger
+    aliases:
+    - fork
+    - branch
+    - duplicate
+    ctulu_tools:
+    - audit-anything
+    - git_meta_orchestrator
+    unified_designs:
+    - merge-fork-balance
+    ontology_concept: ATOM-067-combination-op-fork
+  - op: COMPOSE
+    description: Composer plusieurs entites en une structure plus large
+    aliases:
+    - compose
+    - assemble
+    - aggregate
+    ctulu_tools:
+    - compose-anything
+    - container-anything
+    - fpick_cli
+    - pipeline-anything
+    - trix-lens-orchestrator
+    unified_designs:
+    - chain-engineering
+    - cross-package-dual-import
+    ontology_concept: ATOM-068-combination-op-compose
+  - op: SEQUENCE
+    description: Ordonner des entites selon un DAG
+    aliases:
+    - sequence
+    - chain
+    - schedule
+    ctulu_tools:
+    - tool-chain-sequencer
+    - vibe-git-cherry-strategist
+    - vibe-governance-synthesizer
+    unified_designs:
+    - artifact-ownership-routing
+    - approval-readiness
+    - contract-centrality
+    ontology_concept: ATOM-069-combination-op-sequence
+- category: TRANSFORMATION
+  operations:
+  - op: MORPH
+    description: Deformer une entite pour reveler une autre forme
+    aliases:
+    - morph
+    - transform
+    - deform
+    ctulu_tools:
+    - anamorphoser
+    - dag-transducer
+    - maint-anything
+    - morphism_maps
+    - nodetype-morphing
+    unified_designs:
+    - anamorphic_morphism
+    - EGMI-v0.3
+    - exploration
+    ontology_concept: ATOM-070-combination-op-morph
+  - op: TRANSITION
+    description: Faire evoluer l etat d une entite selon une matrice de transition
+    aliases:
+    - transition
+    - migrate
+    - evolve
+    ctulu_tools:
+    - transition-matrix-anything
+    - adr-anything
+    - adr-status-tracker
+    - gate-anything
+    - migrate-anything
+    unified_designs:
+    - buzz-persistent-state
+    - dag3-triadic-workflow
+    - viable-initial-state
+    ontology_concept: ATOM-071-combination-op-transition
+- category: ORCHESTRATION
+  operations:
+  - op: ROUTE
+    description: Router une entite vers un traitement specifique
+    aliases:
+    - route
+    - dispatch
+    - direct
+    ctulu_tools:
+    - fusion-router
+    - ingress-controller
+    - moe-router-anything
+    - moe-router-intelligence
+    - odo-gate
+    - trix-gateway-router
+    unified_designs:
+    - anamorphic_morphism
+    - artifact-ownership-routing
+    - atomic-fragmentation
+    ontology_concept: ATOM-072-combination-op-route
+  - op: SCHEDULE
+    description: Planifier l execution d une operation
+    aliases:
+    - schedule
+    - plan
+    - timeline
+    ctulu_tools:
+    - cron-scheduler
+    - noise-schedule-anything
+    - odo-gate
+    - odo-reconciliation
+    - scheduler
+    unified_designs:
+    - artifact-ownership-routing
+    - ide-window-lifecycle
+    ontology_concept: ATOM-073-combination-op-schedule
+  - op: SYNC
+    description: Synchroniser l etat d une entite entre repos
+    aliases:
+    - sync
+    - reconcile
+    - align
+    ctulu_tools:
+    - argocd
+    - bridge-sync
+    - ceobs-anything
+    - env2-sync
+    - git_meta_orchestrator
+    - legacy_index_anything
+    - llm-catalog
+    - odo-cli
+    unified_designs:
+    - incremental-combinatorial-discipline
+    - EGMI-v0.3
+    - approval-readiness
+    ontology_concept: ATOM-074-combination-op-sync
+- category: REVERSIBILITY
+  operations:
+  - op: ROLLBACK
+    description: Revenir a un etat anterieur d une entite
+    aliases:
+    - rollback
+    - revert
+    - undo
+    ctulu_tools:
+    - act-anything
+    - traceability
+    - trix-wal-atomic-writer
+    unified_designs:
+    - dry-run-simulation
+    - m5-production-ontologique
+    - runner-family-stratification
+    ontology_concept: ATOM-075-combination-op-rollback
 constraints:
-  - 'Toute operation de combinaison doit etre assignee a une categorie (CRUD, COMPOSITION, TRANSFORMATION, ORCHESTRATION, REVERSIBILITY)'
-  - 'Une operation atomique = un appel outil + une entite cible + un repo cible'
-  - 'La routine APR s applique par operation : Atomicize -> Pair -> Routine -> Verify'
-  - 'Aucune operation ne doit etre omeree dans le registre (MDU design coverage)'
-  - 'Chaque operation est tracee par un IntentHash ontologique'
+- Toute operation de combinaison doit etre assignee a une categorie (CRUD, COMPOSITION,
+  TRANSFORMATION, ORCHESTRATION, REVERSIBILITY)
+- Une operation atomique = un appel outil + une entite cible + un repo cible
+- 'La routine APR s applique par operation : Atomicize -> Pair -> Routine -> Verify'
+- Aucune operation ne doit etre omeree dans le registre (MDU design coverage)
+- Chaque operation est tracee par un IntentHash ontologique
 performance:
   latency_p99_per_operation: 120.0
   success_rate_target: 0.99
 mitigates:
-  - concept: cross-repo-combination-blowout
-  - concept: slm-combinatorial-overflow
-  - concept: sync-drift
-  - concept: untracked-cross-repo-leakage
-  - concept: operation-omission
+- concept: cross-repo-combination-blowout
+- concept: slm-combinatorial-overflow
+- concept: sync-drift
+- concept: untracked-cross-repo-leakage
+- concept: operation-omission
 family:
   name: incremental-design-family
   level: L0
   siblings:
-    - incremental-growth
-    - incremental-scan-cache
-    - incremental-combinatorial-discipline
+  - incremental-growth
+  - incremental-scan-cache
+  - incremental-combinatorial-discipline
   parent: atomic-fragmentation
   children: []
-origin: >
-  Session 2026-09-16. Deduction : la famille incremental-design
-  ne gouverne pas seulement la decomposition atomique, mais aussi
-  le registre des operations de combinaison applicables aux entites.
-  Analogie SSE 4.2 : 54 instructions processeur -> 14 primitives
-  operationnelles pour les entites du spectre.
-  Ce design recense, categorise et relie ontologiquement chaque operation.
+origin: 'Session 2026-09-16. Deduction : la famille incremental-design ne gouverne
+  pas seulement la decomposition atomique, mais aussi le registre des operations de
+  combinaison applicables aux entites. Analogie SSE 4.2 : 54 instructions processeur
+  -> 14 primitives operationnelles pour les entites du spectre. Ce design recense,
+  categorise et relie ontologiquement chaque operation.
+
+  '
 cross_references:
-  - design: atomic-fragmentation
-  - design: incremental-growth
-  - design: incremental-combinatorial-discipline
-  - design: multi-repo-fundamental
-  - design: anamorphic_morphism
-  - design: merge-fork-balance
-  - rule: git-atomic-commit
-  - rule: pattern-router
-  - rule: slm-fragmented-approach
-  - concept: cross-repo-agent-sync
-  - concept: batch-agent-creation-routine
-  - concept: proof-of-life-gate
+- design: atomic-fragmentation
+- design: incremental-growth
+- design: incremental-combinatorial-discipline
+- design: multi-repo-fundamental
+- design: anamorphic_morphism
+- design: merge-fork-balance
+- rule: git-atomic-commit
+- rule: pattern-router
+- rule: slm-fragmented-approach
+- concept: cross-repo-agent-sync
+- concept: batch-agent-creation-routine
+- concept: proof-of-life-gate
+adr: ADR-015-unified-design-v2

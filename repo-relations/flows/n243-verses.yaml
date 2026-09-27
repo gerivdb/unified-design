@@ -1,0 +1,43 @@
+---
+cross_repo_flow:
+  name: n243 -> verses
+  provider: N243
+  consumers:
+    - VERSES
+  contract:
+    interface: api
+    format: json
+    paths:
+      - N243/src/gate/*.py
+      - VERSES/ontology_anchors.jsonl
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — N243 → VERSES
+
+## Rôle
+N243 valide les écritures ontologiques avant qu'elles ne soient persistées dans VERSES.
+
+## Contrat
+- **Provider** : `N243` expose le gate d'écriture mémoire.
+- **Consumer** : `VERSES` soumet les anchors ontologiques à N243 pour validation.
+- **Boucle** : N243 retourne APPROUVER/SUSPENDRE/REJETER.
+
+## Validation
+- `provider_registered` : `N243` est dans `known_repositories.yaml`.
+- `consumer_registered` : `VERSES` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `N243 ↔ VERSES`.
+- `contract_exists` : `VERSES/ontology_anchors.jsonl` existe.
+
+## Références
+- `N243/`
+- `VERSES/`

@@ -1,19 +1,24 @@
----
 name: serendipity
-description: "Découverte heureuse et inattendue qui surgit lors d'une exploration. Liée à l'entropie du système : plus l'exploration est ouverte et diversifiée, plus la serendipity a de chances d'émerger. L'intelligence et la big_picture ne sont pas opposées à la serendipity : elles créent les conditions de son apparition. inherits=[] (racine phénoménologique ; intelligence dépend de serendipity via depends_on)."
-version: "1.0.0"
+description: "D\xE9couverte heureuse et inattendue qui surgit lors d'une exploration.\
+  \ Li\xE9e \xE0 l'entropie du syst\xE8me : plus l'exploration est ouverte et diversifi\xE9\
+  e, plus la serendipity a de chances d'\xE9merger. L'intelligence et la big_picture\
+  \ ne sont pas oppos\xE9es \xE0 la serendipity : elles cr\xE9ent les conditions de\
+  \ son apparition. inherits=[] (racine ph\xE9nom\xE9nologique ; intelligence d\xE9\
+  pend de serendipity via depends_on)."
+version: 1.0.0
 status: active
 layer: L0
-intent_hash: "0xDESIGN_SERENDIPITY_20260828"
+intent_hash: 0xDESIGN_SERENDIPITY_20260828
 inherits: []
 depends_on:
-  - entropy-search
+- entropy-search
 bridges:
-  - target: repo:KG-L
-    role: consumer
-    protocol: wazaa-channel
-    channel: L4-TOOLS/KG-L/serendipity/detected
-  - target: repo:WAZAA
-    role: provider
-    protocol: wazaa-channel
-    channel: L4-TOOLS/*/serendipity/*
+- target: repo:KG-L
+  role: consumer
+  protocol: wazaa-channel
+  channel: L4-TOOLS/KG-L/serendipity/detected
+- target: repo:WAZAA
+  role: provider
+  protocol: wazaa-channel
+  channel: L4-TOOLS/*/serendipity/*
+adr: ADR-015-unified-design-v2

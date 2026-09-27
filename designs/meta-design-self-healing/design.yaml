@@ -1,0 +1,149 @@
+---
+name: meta-design-self-healing
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_META_DESIGN_SELF_HEALING_20260921
+inherits:
+  - design-ops-loop
+  - ecosystem-meta-coherence
+  - safe-action-pattern
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+description: >
+  Design d'auto-guérison du MDU qui détecte les gaps structurels,
+  classe leur criticité, et propose des patches atomiques sans mutation
+  automatique du MDU. Garantit que tout écart est tracé, priorisé,
+  et corrigé via un workflow reproductible.
+capabilities:
+  - name: gap-detection
+    description: "Détection automatique des écarts structurels du MDU"
+    parameters:
+      scan_depth: full
+      detection_modes: [duplicate_ids, ambiguous_paths, orphan_atoms, empty_consumers]
+  - name: criticality-classification
+    description: "Classification des gaps par niveau de criticité"
+    parameters:
+      levels: [CRITICAL, IMPORTANT, MEDIUM, LOW]
+  - name: patch-proposition
+    description: "Proposition de patches atomiques sous forme de diff unifié"
+    parameters:
+      format: unified_diff
+      scope: per_artifact
+  - name: health-reporting
+    description: "Génération de rapports de santé MDU traçables"
+    parameters:
+      output_formats: [json, markdown]
+states:
+  - name: IDLE
+    nature: en attente de déclenchement
+    gate_to_next: SCAN
+    question: "Le MDU nécessite-t-il un scan de santé ?"
+  - name: SCAN
+    nature: détection des écarts structurels
+    gate_to_next: CLASSIFY
+    question: "Des gaps ont-ils été détectés ?"
+  - name: CLASSIFY
+    nature: classification par criticité
+    gate_to_next: PROPOSE
+    question: "Les gaps sont-ils classés par criticité ?"
+  - name: PROPOSE
+    nature: proposition de patches atomiques
+    gate_to_next: APPLY
+    question: "Les patches proposés sont-ils valides et tracés ?"
+  - name: APPLY
+    nature: application des corrections (HITL requis)
+    gate_to_next: IDLE
+    question: "Les corrections ont-elles été appliquées et validées ?"
+functions:
+  - id: F1
+    name: DÉTECTER_GAPS
+    state: IDLE→SCAN
+    description: "Scan complet du MDU pour détecter les écarts structurels"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: CLASSIFIER_CRITICITÉ
+    state: SCAN→CLASSIFY
+    description: "Classification des gaps détectés par niveau de criticité"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F3
+    name: GÉNÉRER_PATCHS
+    state: CLASSIFY→PROPOSE
+    description: "Génération de patches atomiques sous forme de diff unifié par artefact"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F4
+    name: VALIDER_PATCHS
+    state: PROPOSE
+    description: "Validation des patches proposés avant application"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+    veto: true
+  - id: F5
+    name: APPLIQUER_CORRECTIONS
+    state: APPLY
+    description: "Application des corrections validées (HITL obligatoire)"
+    implements: ATOM-STOP-CONDITION
+    veto: true
+  - id: F6
+    name: ENREGISTRER_TRACE
+    state: APPLY→IDLE
+    description: "Enregistrement horodaté des corrections appliquées"
+    implements: ATOM-DELTA-CHECK, ATOM-CARRY-FORWARD-PRINCIPLE
+invariant: "Le MDU n'est jamais modifié sans validation HITL. Tout gap détecté est tracé et classé avant proposition de correction."
+genes:
+  - id: G1
+    name: propose-only
+    description: "Le design propose des corrections mais n'applique jamais automatiquement"
+    implements: ATOM-STOP-CONDITION
+  - id: G2
+    name: atomic-patches
+    description: "Toute correction est atomique et isolée par artefact"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: G3
+    name: criticality-first
+    description: "Les corrections sont priorisées par criticité avant application"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: G4
+    name: traceability
+    description: "Toute correction est tracée : gap → classification → patch → application"
+    implements: ATOM-DELTA-CHECK, ATOM-CARRY-FORWARD-PRINCIPLE
+anti_patterns:
+  - missing_gene: propose-only
+    pathology: "Mutation automatique sans validation HITL → perte de contrôle"
+    mdu_atom: ATOM-STOP-CONDITION
+  - missing_gene: atomic-patches
+    pathology: "Corrections batch complexes → impossibilité de rollback"
+    mdu_atom: ATOM-UMODEL-AGENT-READY-DATA
+  - missing_gene: criticality-first
+    pathology: "Corrections non priorisées → perte de vue des vrais problèmes"
+    mdu_atom: ATOM-CONFIDENCE-THRESHOLD
+  - missing_gene: traceability
+    pathology: "Corrections sans traçabilité → impossibilité d'auditer"
+    mdu_atom: ATOM-DELTA-CHECK
+inheritance_loop: |
+  IDLE → SCAN → CLASSIFY → PROPOSE → APPLY → IDLE
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - repo: gerivdb/GOVERNANCE-HUB
+    relation: enforces
+  - repo: gerivdb/ARGUS
+    relation: audits
+  - design: design-ops-loop
+  - design: ecosystem-meta-coherence
+  - design: safe-action-pattern
+  - atom: ATOM-META-DESIGN-SELF-HEALING
+  - primitive: meta-design-self-healing-primitive
+  - skill: mdu-integrity-checker
+  - workflow: workflow-mdu-daily-sync
+  - pipeline: pipeline-mdu-validation
+  - adr: ADR-2026-09-19-SAFE-ACTION-PATTERN
+  - adr: ADR-2026-09-21-008-META-DESIGN-SELF-HEALING
+  - prd_moc: PRD-MOC-META-DESIGN-SELF-HEALING-20260921
+  - moc: MOC-META-DESIGN-SELF-HEALING-20260921

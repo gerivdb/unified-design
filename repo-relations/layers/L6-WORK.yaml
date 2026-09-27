@@ -1,0 +1,16 @@
+---
+layer: L6_WORK
+description: "Repos L6-WORK — projets métier, travail courant"
+path_prefix: "D:/DO/WEB/TOOLS/L6-WORK/"
+repos:
+  - name: CANDIDATOR
+    description: "Gestion candidatures, CV, lettres"
+    status: ACTIVE
+    flows: []
+
+  - name: LP
+    description: "Gestion événementielle - devis, contrats, facturation, GUSO"
+    status: ACTIVE
+    flows: []
+
+structural_relations: []

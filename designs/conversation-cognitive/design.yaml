@@ -1,4 +1,14 @@
 ---
+name: "Conversation Cognitive Runner"
+version: 1.0.0
+status: active
+layer: L0
+description: "Conversation Cognitive Runner — Runner cognitif conversationnel. Extrait, structure et publie les decisions depuis les conversations KiloCode vers KG-L/KG-WAZAA.
+"
+consumers:
+  - Friction Analyzer
+  - KG-L
+
 name: Conversation Cognitive Runner
 version: "1.0.0"
 status: active

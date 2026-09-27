@@ -1,0 +1,12 @@
+---
+name: ops.status
+category: ops
+version: v1.0.0
+description: "Check operational status"
+entry_point: "scripts/loopx/ops_status.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Operations status: running processes, resource usage"
+examples:
+  - "loopx routine ops.status"

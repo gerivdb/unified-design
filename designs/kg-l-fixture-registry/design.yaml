@@ -1,6 +1,9 @@
+---
 name: kg-l-fixture-registry
 version: 1.0.0
 status: draft
+layer: L0
+description: "Single source of truth for cross-repo fixtures. Fixtures.yaml as canonical registry with checksums, generators, consumers, and pre-push validation."
 profile: STANDARD
 consumers: []
 
@@ -95,19 +98,19 @@ cross_repo:
   generators:
     - repo: PIANO
       scripts:
-        - "scripts/export_q40_fixtures.py → q40_block.bin + q40_summary.json"
-        - "scripts/export_q243.py → q243_runnable.q243 + summary"
-    consumers:
-      - repo: LLUX
-        components:
-          - "q243_loader.zig:dequantizeTensor (uses q40_block.bin)"
-          - "q243_loader.zig:loadAuto (uses q243_runnable.q243)"
-      - repo: CTULU
-        components:
-          - "tools/benchmark_q243.py (uses q40_block.bin)"
+        - "scripts/export_q40_fixtures.py -> q40_block.bin + q40_summary.json"
+        - "scripts/export_q243.py -> q243_runnable.q243 + summary"
+  consumers:
+    - repo: LLUX
+      components:
+        - "q243_loader.zig:dequantizeTensor (uses q40_block.bin)"
+        - "q243_loader.zig:loadAuto (uses q243_runnable.q243)"
+    - repo: CTULU
+      components:
+        - "tools/benchmark_q243.py (uses q40_block.bin)"
   sync_protocol:
-    - "Generator repo updates fixture → updates fixtures.yaml with new checksum/version"
-    - "Consumer repos pull fixtures.yaml → pre-push validates → auto-adapt if --fix"
+    - "Generator repo updates fixture -> updates fixtures.yaml with new checksum/version"
+    - "Consumer repos pull fixtures.yaml -> pre-push validates -> auto-adapt if --fix"
 
 # Tests
 tests:

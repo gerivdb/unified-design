@@ -1,0 +1,12 @@
+---
+name: graph_shapes.dag
+category: graph_shapes
+version: v1.0.0
+description: "Generate DAG graph"
+entry_point: "scripts/loopx/graph_shapes_dag.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "DAG graph shape: dependency analysis, topological sort"
+examples:
+  - "loopx routine graph_shapes.dag"

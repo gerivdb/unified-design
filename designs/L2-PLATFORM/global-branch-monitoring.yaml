@@ -1,4 +1,11 @@
+---
 name: global-branch-monitoring
+version: 1.0.0
+status: proposed
+layer: L0
+description: "Global Branch Monitoring"
+consumers:
+
 description: "Global Branch Monitoring"
 version: "1.0.0"
 parent: unified-design

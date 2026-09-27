@@ -32,3 +32,4 @@ constraints:
 - latency_ms: 100
 intent_hash: 0xmaxwell_triad_design_20260730
 layer: L3-L4
+adr: ADR-015-unified-design-v2

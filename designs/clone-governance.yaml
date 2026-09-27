@@ -1,6 +1,6 @@
 name: clone-governance
-description: Principe d'unicité des dépôts - un seul chemin canonique par repo, interdiction
-  de doublons inter-couches
+description: "Principe d'unicit\xE9 des d\xE9p\xF4ts - un seul chemin canonique par\
+  \ repo, interdiction de doublons inter-couches"
 version: 1.0.0
 status: active
 inherits:
@@ -22,13 +22,8 @@ parameters:
 rules:
 - name: unique_canonical_path
   description: Chaque depot a un chemin canonique unique defini par known_repositories.yaml
-  check: 'Pour tout depot R, il existe exactement un chemin
-
-    local_path dans known_repositories.yaml.
-
-    Toute instance de R en dehors de ce chemin est illégitime.
-
-    '
+  check: "Pour tout depot R, il existe exactement un chemin\nlocal_path dans known_repositories.yaml.\n\
+    Toute instance de R en dehors de ce chemin est ill\xE9gitime.\n"
 - name: no_duplicate_across_layers
   description: Un depot ne peut pas etre duplique entre strates L0-L5
   check: 'Si R existe dans L1-INFRA (canonique), il ne doit pas exister
@@ -40,39 +35,21 @@ rules:
     '
 - name: known_repositories_truth
   description: known_repositories.yaml est la source de verite absolue
-  check: 'Toutes les instances de R doivent etre referencées dans
-
-    known_repositories.yaml avec son chemin canonique.
-
-    Pas de local_path = pas d''autorisation de clone.
-
-    '
+  check: "Toutes les instances de R doivent etre referenc\xE9es dans\nknown_repositories.yaml\
+    \ avec son chemin canonique.\nPas de local_path = pas d'autorisation de clone.\n"
 - name: do_not_create_lock
   description: 'Le champ do_not_create: true bloque toute creation de clone'
-  check: 'Si R a do_not_create: true dans known_repositories.yaml,
-
-    aucun agent ne peut créer une copie. Le chemin canonical_path
-
-    est immuable.
-
-    '
+  check: "Si R a do_not_create: true dans known_repositories.yaml,\naucun agent ne\
+    \ peut cr\xE9er une copie. Le chemin canonical_path\nest immuable.\n"
 - name: stratum_hierarchy
   description: Les strates L0-L5 definiient l'emplacement canonique
-  check: 'L0-CANON     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L0-CANON\\\\
-
-    L1-INFRA     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L1-INFRA\\\\
-
-    L2-PLATFORM  -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L2-PLATFORM\\\\
-
-    L3-CITIZENS  -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L3-CITIZENS\\\\
-
-    L4-TOOLS     -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L4-TOOLS\\\\
-
-    L5-ARCHIVE   -> D:\\\\DO\\\\WEB\\\\TOOLS\\\\L5-ARCHIVE\\\\
-
-    Un depot ne peut pas exister dans deux strates simultanément.
-
-    '
+  check: "L0-CANON     -> D:\\\\\\\\DO\\\\\\\\WEB\\\\\\\\TOOLS\\\\\\\\L0-CANON\\\\\
+    \\\\\nL1-INFRA     -> D:\\\\\\\\DO\\\\\\\\WEB\\\\\\\\TOOLS\\\\\\\\L1-INFRA\\\\\
+    \\\\\nL2-PLATFORM  -> D:\\\\\\\\DO\\\\\\\\WEB\\\\\\\\TOOLS\\\\\\\\L2-PLATFORM\\\
+    \\\\\\\nL3-CITIZENS  -> D:\\\\\\\\DO\\\\\\\\WEB\\\\\\\\TOOLS\\\\\\\\L3-CITIZENS\\\
+    \\\\\\\nL4-TOOLS     -> D:\\\\\\\\DO\\\\\\\\WEB\\\\\\\\TOOLS\\\\\\\\L4-TOOLS\\\
+    \\\\\\\nL5-ARCHIVE   -> D:\\\\\\\\DO\\\\\\\\WEB\\\\\\\\TOOLS\\\\\\\\L5-ARCHIVE\\\
+    \\\\\\\nUn depot ne peut pas exister dans deux strates simultan\xE9ment.\n"
 enforcement:
 - pre_commit_hook: check_no_duplicates
 - ci_check: scan_for_duplicates
@@ -97,3 +74,4 @@ performance:
   power_max: 1.0
 intent_hash: 0xclone_governance_20260731
 layer: L0-L5
+adr: ADR-015-unified-design-v2

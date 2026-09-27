@@ -1,3 +1,6 @@
+# AUTO-GENERATED FILE - DO NOT EDIT DIRECTLY
+# Source: manifests .atom.yaml + tools/meta-design-gen.py
+# Regenerate: python tools/meta-design-gen.py
 version: 2.1.0
 intent_hash: 0xMDU_SCHEMA_20260731_V2_1_GRAPH_OF_LOOPS
 status: active
@@ -280,6 +283,12 @@ designs:
   intent_hash: 0xDESIGN_META_KG_ENGINE_20260916
   consumers: []
   profile: DRAFT
+- name: kg-causal-integration-pattern
+  path: designs/kg-causal-integration-pattern/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_KG_CAUSAL_INTEGRATION_PATTERN_20260921
+  consumers: []
+  profile: ACTIVE
 - name: deterministic-execution-log-clipping
   path: atoms/ATOM-DETERMINISTIC-EXECUTION-LOG-CLIPPING.md
   version: 1.0.0
@@ -326,6 +335,12 @@ designs:
   path: designs/ecosystem-meta-coherence/design.yaml
   version: 1.0.0
   intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_20260920
+  consumers: []
+  profile: ACTIVE
+- name: meta-design-self-healing
+  path: designs/meta-design-self-healing/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_META_DESIGN_SELF_HEALING_20260921
   consumers: []
   profile: ACTIVE
 - name: jevx
@@ -422,6 +437,18 @@ designs:
   path: designs/safe-action-gate/design.yaml
   version: 1.0.0
   intent_hash: 0xDESIGN_SAFE_ACTION_GATE_20260921
+  consumers: []
+  profile: ACTIVE
+- name: ecosystem-meta-coherence-gate
+  path: designs/ecosystem-meta-coherence-gate/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_ECOSYSTEM_META_COHERENCE_GATE_20260921
+  consumers: []
+  profile: ACTIVE
+- name: talex-friction-analyzer
+  path: designs/talex-friction-analyzer/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_TALEX_FRICTION_ANALYZER_20260922
   consumers: []
   profile: ACTIVE
 piliers:
@@ -567,7 +594,10 @@ governance_atoms:
 - harness-engineering-reliable-agents
 - safe-action-gate
 - ecosystem-meta-coherence-gate
+- primitive-atomicity-contract
+- mdu-catalog-sync
 - typed-decision-api
+- ATOM-TALEX-FRICTION-ANALYZER
 # Artifact Extraction System (2026-09-20)
 - artifact-extraction-status
 - conversation-anchoring
@@ -730,6 +760,21 @@ workflows:
   version: 1.0.0
   intent_hash: 0xWORKFLOW_MDU_DAILY_SYNC_20260921
   status: active
+- name: workflow-artifact-layers-validation
+  path: workflows/workflow-artifact-layers-validation.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_ARTIFACT_LAYERS_VALIDATION_20260920
+  status: active
+- name: workflow-talex-friction-analysis
+  path: workflows/workflow-talex-friction-analysis.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_TALEX_FRICTION_ANALYSIS_20260922
+  status: active
+- name: workflow-design-ops-loop
+  path: workflows/workflow-design-ops-loop.md
+  version: 1.0.0
+  intent_hash: 0xWORKFLOW_DESIGN_OPS_LOOP_20260920
+  status: active
 primitives:
 - name: design-ops-loop-primitive
   path: primitives/design-ops-loop-primitive.yaml
@@ -755,6 +800,21 @@ primitives:
   path: primitives/safe-action-gate-primitive.yaml
   version: 1.0.0
   intent_hash: 0xPRIMITIVE_SAFE_ACTION_GATE_20260921
+  status: active
+- name: ecosystem-meta-coherence-gate-primitive
+  path: primitives/ecosystem-meta-coherence-gate-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_ECOSYSTEM_META_COHERENCE_GATE_20260921
+  status: active
+- name: primitive-atomicity-contract
+  path: primitives/primitive-atomicity-contract.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_ATOMICITY_CONTRACT_20260921
+  status: active
+- name: talex-friction-analyzer-primitive
+  path: primitives/talex-friction-analyzer-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_TALEX_FRICTION_ANALYZER_20260922
   status: active
 skills:
 - name: design-ops-loop-skill
@@ -792,6 +852,16 @@ skills:
   version: 1.0.0
   intent_hash: 0xSKILL_MDU_INTEGRITY_CHECKER_20260921
   status: active
+- name: jevx-backend-selector
+  path: skills/jevx-backend-selector/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_JEVX_BACKEND_SELECTOR_20260920
+  status: active
+- name: talex-friction-analyzer
+  path: skills/talex-friction-analyzer/SKILL.md
+  version: 1.0.0
+  intent_hash: 0xSKILL_TALEX_FRICTION_ANALYZER_20260922
+  status: active
 citizens:
 - name: design-ops-loop-citizen
   path: citizens/design-ops-loop-citizen/citizen.yaml
@@ -807,4 +877,9 @@ citizens:
   path: citizens/session-boot-citizen/citizen.yaml
   version: 1.0.0
   intent_hash: 0xCITIZEN_SESSION_BOOT_20260920
+  status: active
+- name: talex-friction-analyzer-citizen
+  path: citizens/talex-friction-analyzer-citizen/citizen.yaml
+  version: 1.0.0
+  intent_hash: 0xCITIZEN_TALEX_FRICTION_ANALYZER_20260922
   status: active

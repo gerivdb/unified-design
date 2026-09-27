@@ -1,70 +1,66 @@
----
-name: mdu-integrity-checker
-description: Vérifie la cohérence du MDU (meta-design.yaml, catalogues, arborescence physique). Utilise tools/mdu-lint.py et scripts/sync-mdu-catalog.py. Utiliser pour audit MDU, pre-commit check, detection doublons IDs, chemins manquants, consumers vides.
-version: 1.0.0
-intent_hash: 0xSKILL_MDU_INTEGRITY_CHECKER_20260921
----
-
 # MDU Integrity Checker
 
-Skill de vérification de la cohérence structurelle du Meta-Design Universe (MDU).
+Skill d'intégrité MDU (Meta-Design Universe) pour unified-design.
+Vérifie la métacoherence des designs, détecte les gaps d'implémentation,
+et enforce le contrat THINK/DO/CHECK.
 
-## Mission
+## Outils
 
-Vérifier, avant tout push ou commit, que `meta-design.yaml`, les catalogues et l'arborescence physique sont mutuellement cohérents.
+| Outil | Chemin | Usage |
+|-------|--------|-------|
+| `design_impl_verifier.py` | `scripts/design_impl_verifier.py` | Vérifie l'implémentation d'un design |
+| `metacoherence_gate.py` | `scripts/metacoherence_gate.py` | Audit métacoherence THINK/DO/CHECK |
+| `gap_combleur.py` | `scripts/gap_combleur.py` | Détecte et reporte les gaps |
+| `pre-commit-design-verifier.py` | `.kilocode/hooks/pre-commit-design-verifier.py` | Hook pre-commit |
 
-## Règles
+## Usage
 
-- Unicité des IDs dans `meta-design.yaml` et `catalog/*.yaml`
-- Existence des chemins référencés
-- Complétude des index (`atoms.index.yaml`, `designs.index.yaml`, etc.)
-- Canonicalité : pas de doublon `.yaml` racine vs `dossier/design.yaml`
-- Harmonisation des `status` (`ACTIVE`, `DRAFT`, `STANDARD`, `DEPRECATED`)
-- `consumers: []` non vide (traçabilité descendante)
-
-## Utilisation
-
-### Lint structurel
+### Vérifier un design individuel
 
 ```bash
-python tools/mdu-lint.py --strict
+python scripts/design_impl_verifier.py designs/TRIX/design.yaml
+python scripts/design_impl_verifier.py --json designs/TRIX/design.yaml
 ```
 
-Exit codes :
-- `0` : conforme
-- `1` : erreurs critiques (doublons IDs, chemins manquants)
-- `2` : avertissements (statuts non harmonisés, consumers vides)
-
-### Sync catalogues
+### Audit métacoherence complet
 
 ```bash
-python scripts/sync-mdu-catalog.py --all --dry-run
-python scripts/sync-mdu-catalog.py --designs
-python scripts/sync-mdu-catalog.py --atoms
+# Vérifier tous les designs
+python scripts/metacoherence_gate.py --check designs/
+
+# Mode strict (échoue si violations)
+python scripts/metacoherence_gate.py --check designs/ --strict
+
+# Période d'audit personnalisée
+python scripts/metacoherence_gate.py --check designs/ --audit-period 7d
 ```
 
-### Workflow recommandé
+### Détecter les gaps
 
-1. Lancer `tools/mdu-lint.py --strict` avant tout commit
-2. Si échec : corriger les écarts critiques
-3. Lancer `scripts/sync-mdu-catalog.py --all --dry-run` pour vérifier la sync
-4. Si `--dry-run` montre des changements : lancer sans `--dry-run` pour appliquer
-5. Relancer `tools/mdu-lint.py --strict` après sync
+```bash
+# Dry-run
+python scripts/gap_combleur.py --check designs/ --dry-run
 
-## Intégration
+# Générer rapport JSON
+python scripts/gap_combleur.py --check designs/ --report gaps-report.json
+```
 
-- **Pre-commit** : `tools/mdu-lint.py --strict` (bloque si exit 1)
-- **Session boot** : `scripts/sync-mdu-catalog.py --all --dry-run`
-- **Pipeline** : `pipelines/pipeline-mdu-validation.yaml`
+### Hook pre-commit
 
-## Dépendances
+```bash
+# Vérifier avant commit
+python .kilocode/hooks/pre-commit-design-verifier.py --threshold 80
+```
 
-- `meta-design.yaml` (source de vérité)
-- `catalog/*.yaml` (indexes)
-- `designs/`, `atoms/`, `pipelines/`, `workflows/`, `primitives/`, `skills/`, `citizens/` (arborescence physique)
+## Critères d'acceptation
+
+- [ ] `design_impl_verifier.py` passe sur tous les designs `active` avec contrat
+- [ ] `metacoherence_gate.py` retourne 0 violations en mode strict
+- [ ] `gap_combleur.py --dry-run` détecte tous les gaps manquants
+- [ ] Hook pre-commit bloque les commits non conformes
 
 ## Références
 
-- PRD-MOC : `PRD-MOC-MDU-INTEGRITY-CHECKER-20260921.md`
-- ADR : `ADR-2026-09-21-001-MDU-INTEGRITY-CHECKER.md`
-- ADR : `ADR-2026-09-19-SAFE-ACTION-PATTERN`
+- **PRD-MOC** : `MOC/PRD-MOC-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION-20260927.md`
+- **Design** : `designs/ecosystem-meta-coherence/design.yaml`
+- **Gouvernance** : `DESIGNS_GOVERNANCE.md`

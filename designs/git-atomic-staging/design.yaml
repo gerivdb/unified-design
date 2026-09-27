@@ -1,0 +1,111 @@
+---
+name: git-atomic-staging
+version: "1.0.0"
+status: active
+layer: L0-CANON
+sub_layer: N+1
+intent_hash: 0xDESIGN_GIT_ATOMIC_STAGING_20260921
+description: >
+  Opérations git atomiques sécurisées pour KiloCode.
+  Garantit que chaque opération git (add, reset, commit, push) est
+  vérifiée avant et après exécution, avec rollback automatique en cas d'erreur.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: safe-staging
+    description: "Stage des fichiers avec vérification du périmètre"
+  - name: safe-reset
+    description: "Reset de l'index avec préservation de la working tree"
+  - name: safe-commit
+    description: "Commit avec vérification du message et des fichiers"
+  - name: safe-push
+    description: "Push avec vérification du remote et de la branche"
+parameters:
+  verification_steps:
+    before: ["git status", "git diff --cached", "git log --oneline -1"]
+    after: ["git status", "git log --oneline -1"]
+  rollback_on_error: true
+  max_files_per_commit: 3
+  required_checks:
+    - "remote_url_matches"
+    - "branch_not_detached"
+    - "no_force_push_without_verify"
+states:
+  - name: IDLE
+    nature: opération git non requise
+    gate_to_next: VERIFY_STATE
+    question: "Une opération git atomique est-elle requise ?"
+  - name: VERIFY_STATE
+    nature: vérification de l'état git
+    gate_to_next: EXECUTE
+    question: "L'état git est-il conforme ?"
+  - name: EXECUTE
+    nature: exécution de l'opération
+    gate_to_next: VERIFY_RESULT
+    question: "L'opération a-t-elle réussi ?"
+  - name: VERIFY_RESULT
+    nature: vérification du résultat
+    gate_to_next: COMPLETE
+    question: "Le résultat est-il conforme ?"
+  - name: COMPLETE
+    nature: opération terminée
+  - name: BLOCK
+    nature: opération bloquée
+functions:
+  - id: F1
+    name: VERIFY_STATE
+    state: IDLE->VERIFY_STATE
+    description: "Vérifie l'état git avant opération"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: EXECUTE
+    state: VERIFY_STATE->EXECUTE
+    description: "Exécute l'opération git atomique"
+    implements: ATOM-CONFIDENCE-THRESHOLD
+  - id: F3
+    name: VERIFY_RESULT
+    state: EXECUTE->VERIFY_RESULT
+    description: "Vérifie le résultat de l'opération"
+    implements: ATOM-DELTA-CHECK
+invariant: "Toute opération git atomique est vérifiée avant et après exécution, avec rollback en cas d'erreur."
+genes:
+  - id: G1
+    name: state_verification
+    description: "L'état git est vérifié avant toute opération"
+  - id: G2
+    name: atomic_execution
+    description: "L'opération est atomique : tout ou rien"
+  - id: G3
+    name: result_verification
+    description: "Le résultat est vérifié après exécution"
+  - id: G4
+    name: rollback_capability
+    description: "Toute opération peut être annulée en cas d'erreur"
+anti_patterns:
+  - missing_gene: state_verification
+    pathology: "Opération sans vérification -> perte de données"
+  - missing_gene: atomic_execution
+    pathology: "Opération partielle -> état git incohérent"
+  - missing_gene: result_verification
+    pathology: "Erreur silencieuse -> corruption du repository"
+  - missing_gene: rollback_capability
+    pathology: "Pas de rollback -> perte irréversible"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: implements
+    path: designs/git-atomic-staging/design.yaml
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - primitive: git-atomic-staging-primitive
+  - skill: git-atomic-staging-skill
+  - workflow: workflow-git-atomic-staging

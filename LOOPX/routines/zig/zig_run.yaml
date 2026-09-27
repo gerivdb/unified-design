@@ -1,0 +1,12 @@
+---
+name: zig.run
+category: zig
+version: v1.0.0
+description: "Run Zig binary"
+entry_point: "scripts/loopx/zig_run.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Zig run: execute binary, capture output"
+examples:
+  - "loopx routine zig.run"

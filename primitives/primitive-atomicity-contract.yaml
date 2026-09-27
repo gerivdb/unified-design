@@ -1,0 +1,84 @@
+---
+name: primitive-atomicity-contract
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xPRIMITIVE_ATOMICITY_CONTRACT_20260921
+description: >
+  Primitive d'atomicité contractuelle pour le MDU.
+  Formalise la règle max_nesting_depth <= 3 et la rend enforceable
+  par les workflows MDU. Garantit que les designs ne dépassent pas
+  une profondeur de dépendance de 3 niveaux.
+inherits:
+  - design-ops-loop
+  - safe-action-pattern
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+states:
+  - name: IDLE
+    question: "Le design respecte-t-il max_nesting_depth <= 3 ?"
+  - name: AUDIT
+    question: "La profondeur de dépendance est-elle <= 3 ?"
+  - name: PASS
+    question: "La preuve horodatée est-elle présente ?"
+  - name: FAIL
+    question: "Quelle dépendance viole la règle ?"
+functions:
+  - id: F1
+    name: AUDITER_DEPENDANCES
+    description: "Audit de la profondeur de dépendance du design"
+  - id: F2
+    name: VÉRIFIER_MAX_NESTING
+    description: "Vérification max_nesting_depth <= 3"
+  - id: F3
+    name: DÉROGATION
+    description: "Gestion des dérogations documentées"
+  - id: F4
+    name: VALIDER_PREUVE
+    description: "Validation de la preuve horodatée"
+    veto: true
+  - id: F5
+    name: BLOQUER_SI_VIOLATION
+    description: "Blocage si max_nesting_depth > 3 sans dérogation"
+    veto: true
+  - id: F6
+    name: ENREGISTRER_TRACE
+    description: "Enregistrement horodaté de la vérification"
+invariant: "Tout design MDU respecte max_nesting_depth <= 3, sauf dérogation documentée."
+genes:
+  - id: G1
+    name: max-nesting-depth
+    description: "La profondeur de dépendance est limitée à 3 niveaux"
+  - id: G2
+    name: documented-derogation
+    description: "Toute dérogation est documentée dans design.schema.json"
+  - id: G3
+    name: verification-systematic
+    description: "Tout design est vérifié avant intégration"
+  - id: G4
+    name: traceability
+    description: "Toute vérification est tracée et horodatée"
+anti_patterns:
+  - missing_gene: max-nesting-depth
+    pathology: "Dépendances profondes → complexité cognitive ingérable"
+  - missing_gene: documented-derogation
+    pathology: "Dérogations implicites → dettes techniques invisibles"
+  - missing_gene: verification-systematic
+    pathology: "Designs non vérifiés → violations silencieuses"
+  - missing_gene: traceability
+    pathology: "Vérifications sans traçabilité → impossibilité d'auditer"
+cross_references:
+  - design: design-ops-loop
+  - design: safe-action-pattern
+  - design: ecosystem-meta-coherence
+  - atom: ATOM-PRIMITIVE-ATOMICITY-CONTRACT
+  - skill: mdu-integrity-checker
+  - workflow: workflow-pre-push-validation

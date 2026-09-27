@@ -1,0 +1,80 @@
+---
+name: structural-coherence-pipeline
+description: "Pipeline de validation de la cohérence structurelle de tous les designs, atoms, primitives, skills, pipelines, workflows et catalogues du MDU. Vérifie les dépendances, les références, les consumers et la synchronisation design/code."
+version: "1.0.0"
+status: active
+layer: L4
+type: pipeline
+profile: STANDARD
+intent_hash: 0xPIPELINE_STRUCTURAL_COHERENCE_20260922
+---
+
+# structural-coherence-pipeline
+
+## Definition
+
+Pipeline de validation de la cohérence structurelle de tous les artifacts du MDU.
+
+## Scope
+
+- Designs (`designs/*.yaml`, `designs/**/*.yaml`)
+- Atoms (`atoms/*.yaml`)
+- Primitives (`primitives/**/*.yaml`)
+- Skills (`skills/*/SKILL.md`)
+- Pipelines (`pipelines/*.yaml`)
+- Workflows (`workflows/*.md`)
+- Catalogues (`catalog/*.yaml`)
+
+## Checks
+
+### 1. YAML validity
+
+```bash
+python scripts/validate_yaml.py --assert name designs/*.yaml
+```
+
+### 2. Design schema validation
+
+```bash
+python scripts/validate_designs.py --strict designs/*.yaml
+```
+
+### 3. Cross-reference validation
+
+```bash
+python scripts/cross-repo-reference-validator.py --strict
+```
+
+### 4. Consumer audit
+
+```bash
+python scripts/catalog-consumer-auditor.py --strict
+```
+
+### 5. Design-code sync
+
+```bash
+python scripts/design-code-sync.py --strict
+```
+
+### 6. Temporal consistency
+
+```bash
+python scripts/temporal-inconsistency-detector.py --strict
+```
+
+## Implementation
+
+- Config : `.github/workflows/structural-coherence.yml`
+- Script : `scripts/run-structural-coherence.ps1`
+- Schedule : on every push to `main` and `feat/*`
+
+## Benefits
+
+- Élimine E1-E10
+- Garantit la cohérence structurelle
+- Améliore la métacohérence
+
+## IntentHash
+
+0xPIPELINE_STRUCTURAL_COHERENCE_20260922

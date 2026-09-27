@@ -1,8 +1,8 @@
 ---
 type: PRD-MOC
 version: "1.0.0"
-date: "2026-09-20"
-status: proposed
+date: "2026-09-22"
+status: approved
 intent_hash: 0xINTENT_JEVX_SOVEREIGN_OVERLAY_20260919
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -20,6 +20,7 @@ related_prd_moc:
   - PRD-MOC-JEVX-SOVEREIGN-ADAPTER-PATTERN-20260920.md
   - PRD-MOC-JEVX-DESIGN-VALIDATION-PIPELINE-20260920.md
   - PRD-MOC-JEVX-STRUCTURAL-FIX-PIPELINE-20260920.md
+  - PRD-MOC-JEVX-MDU-INTEGRATION-FIX-20260922.md
 ---
 
 # PRD-MOC — JEVX : Decision-Engine Souverain JEVX
@@ -194,6 +195,7 @@ Hypothèse architecture Jev : **ModernBERT** (consensus stable) ou **diffusion**
 | `PRD-MOC-JEVX-SOVEREIGN-ADAPTER-PATTERN-20260920.md` | Primitive adaptateur souverain (transposition Python de localjev) |
 | `PRD-MOC-JEVX-DESIGN-VALIDATION-PIPELINE-20260920.md` | Pipeline de validation ciblée des designs JEVX |
 | `PRD-MOC-JEVX-STRUCTURAL-FIX-PIPELINE-20260920.md` | Mise à jour workflow structural-fix-pipeline avec patterns JEVX |
+| `PRD-MOC-JEVX-MDU-INTEGRATION-FIX-20260922.md` | Corrections d'alignement JEVX/MDU : SOT, entrypoint, depends_on, consumers, CLM, guardrails draft |
 
 ---
 

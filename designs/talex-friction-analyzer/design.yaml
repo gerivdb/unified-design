@@ -1,0 +1,123 @@
+---
+name: talex-friction-analyzer
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_TALEX_FRICTION_ANALYZER_20260922
+description: >
+  Analyse des frictions TALEX pour détecter, classifier et résoudre
+  les erreurs système de manière causale et automatisée.
+  Fournit un cadre formel pour transformer les frictions de session
+  en actions correctives structurées.
+capabilities:
+  - name: friction-detection
+    description: "Détection systématique des frictions de session"
+  - name: error-classification
+    description: "Classification des erreurs par type et impact"
+  - name: causal-root-analysis
+    description: "Analyse causale des causes racines"
+  - name: corrective-action-generation
+    description: "Génération d'actions correctives atomiques"
+inherits:
+  - design-ops-loop
+  - ecosystem-meta-coherence
+  - safe-action-pattern
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+states:
+  - name: IDLE
+    question: "Des frictions sont-elles détectées ?"
+    gate_to_next: DETECT
+  - name: DETECT
+    question: "Toutes les frictions sont-elles collectées ?"
+    gate_to_next: CLASSIFY
+  - name: CLASSIFY
+    question: "Les frictions sont-elles classifiées par type/impact ?"
+    gate_to_next: ANALYZE
+  - name: ANALYZE
+    question: "Les causes racines sont-elles identifiées ?"
+    gate_to_next: PROPOSE
+  - name: PROPOSE
+    question: "Les actions correctives sont-elles proposées ?"
+    gate_to_next: APPLY
+  - name: APPLY
+    question: "Les actions sont-elles appliquées (HITL) ?"
+    gate_to_next: VERIFY
+  - name: VERIFY
+    question: "Les corrections sont-elles vérifiées ?"
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: DÉTECTER_FRICTIONS
+    state: IDLE→DETECT
+    description: "Collecte des frictions de session"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F2
+    name: CLASSIFIER_ERREURS
+    state: DETECT→CLASSIFY
+    description: "Classification par type/impact"
+    implements: ATOM-GATE-LAYERS
+  - id: F3
+    name: ANALYSER_CAUSES
+    state: CLASSIFY→ANALYZE
+    description: "Identification des causes racines"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F4
+    name: PROPOSER_CORRECTIONS
+    state: ANALYZE→PROPOSE
+    description: "Génération d'actions correctives atomiques"
+    implements: ATOM-CARRY-FORWARD-PRINCIPLE
+  - id: F5
+    name: APPLIQUER_CORRECTIONS
+    state: APPLY
+    description: "Application des corrections validées"
+    implements: ATOM-STOP-CONDITION
+    veto: true
+  - id: F6
+    name: VÉRIFIER_CORRECTIONS
+    state: VERIFY
+    description: "Vérification post-correction"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+    veto: true
+invariant: "Toute friction de session est détectée, classifiée, analysée causalement, et résolue par des actions correctives atomiques vérifiées."
+genes:
+  - id: G1
+    name: systematic-detection
+    description: "Détection systématique de toutes les frictions"
+  - id: G2
+    name: causal-tracing
+    description: "Tracé causal de chaque friction → correction"
+  - id: G3
+    name: auto-correction
+    description: "Corrections automatiques quand safe"
+  - id: G4
+    name: traceability
+    description: "Toute friction et correction est tracée et horodatée"
+anti_patterns:
+  - missing_gene: systematic-detection
+    pathology: "Frictions silencieuses → accumulation de dettes"
+  - missing_gene: causal-tracing
+    pathology: "Corrections superficielles → récidives"
+  - missing_gene: auto-correction
+    pathology: "Corrections manuelles répétitives → perte de temps"
+  - missing_gene: traceability
+    pathology: "Impossibilité d'auditer les corrections"
+inheritance_loop: |
+  IDLE → DETECT → CLASSIFY → ANALYZE → PROPOSE → APPLY → VERIFY → IDLE
+cross_references:
+  - design: design-ops-loop
+  - design: ecosystem-meta-coherence
+  - design: safe-action-pattern
+  - atom: ATOM-TALEX-FRICTION-ANALYZER
+  - skill: talex-friction-analyzer
+  - workflow: workflow-talex-friction-analysis
+  - tool: tools/talex_friction_analyzer.py
+  - prd_moc: PRD-MOC-TALEX-FRICTION-ANALYZER-20260922
+  - moc: MOC-TALEX-FRICTION-ANALYZER-20260922

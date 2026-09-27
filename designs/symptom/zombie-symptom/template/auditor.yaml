@@ -1,4 +1,10 @@
+---
 name: <auditor_name>
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for <auditor_name>."
+
 wal:
   enabled: true
   prefix: <WAL_PREFIX>

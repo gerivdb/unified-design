@@ -1,0 +1,12 @@
+---
+name: meta.manifest
+category: meta
+version: v1.0.0
+description: "Generate manifest"
+entry_point: "scripts/loopx/meta_manifest.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Generate and validate meta manifests for designs and artifacts"
+examples:
+  - "loopx routine meta.manifest"

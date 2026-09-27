@@ -1,0 +1,92 @@
+---
+name: regex-safety-validator
+version: "1.0.0"
+status: active
+layer: L0-CANON
+sub_layer: N+1
+intent_hash: 0xPRIMITIVE_REGEX_SAFETY_VALIDATOR_20260921
+description: >
+  Primitive de validation跨-langage des expressions régulières.
+  Détecte les séquences d'échappement invalides, les patterns ReDoS
+  et propose des corrections automaticques.
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD_PRINCIPLE
+capabilities:
+  - name: validate_escape_sequences
+    description: "Valide les séquences d'échappement dans un pattern regex"
+  - name: detect_redos
+    description: "Détecte les patterns vulnérables aux attaques ReDoS"
+  - name: normalize_pattern
+    description: "Normalise un pattern regex entre langages"
+parameters:
+  languages:
+    - python
+    - powershell
+    - javascript
+    - zig
+  validation_timeout_ms: 1000
+  max_pattern_length: 1000
+states:
+  - name: IDLE
+    nature: primitive non active
+    gate_to_next: VALIDATE
+    question: "Un pattern regex nécessite-t-il une validation ?"
+  - name: VALIDATE
+    nature: validation du pattern
+    gate_to_next: NORMALIZE | BLOCK
+    question: "Le pattern est-il valide ?"
+  - name: NORMALIZE
+    nature: normalisation跨-langage
+    gate_to_next: COMPLETE
+    question: "Le pattern peut-il être normalisé ?"
+  - name: COMPLETE
+    nature: validation terminée
+  - name: BLOCK
+    nature: validation bloquée
+functions:
+  - id: F1
+    name: VALIDATE
+    state: IDLE->VALIDATE
+    description: "Valide le pattern regex"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: F2
+    name: NORMALIZE
+    state: VALIDATE->NORMALIZE
+    description: "Normalise le pattern"
+    implements: ATOM-DELTA-CHECK
+invariant: "Tout pattern regex doit être validé avant utilisation en production."
+genes:
+  - id: G1
+    name: escape_safety
+    description: "Séquences d'échappement valides"
+  - id: G2
+    name: redos_immunity
+    description: "Pas de vulnérabilité ReDoS"
+  - id: G3
+    name:跨-langage_ready
+    description: "Pattern utilisable跨-langage"
+anti_patterns:
+  - missing_gene: escape_safety
+    pathology: "SyntaxWarning, comportement imprévisible"
+  - missing_gene: redos_immunity
+    pathology: "Déni de service, CPU excessive"
+  - missing_gene:跨-langage_ready
+    pathology: "Bugs de portabilité"
+cross_references:
+  - repo: gerivdb/LOOPX
+    relation: uses
+    path: tests/wrappers/test_wrappers_skills_triggers_verifiers.py
+  - design: regex-safety-validator
+  - primitive: regex-safety-validator-primitive
+  - skill: regex-safety-validator-skill
+  - workflow: workflow-regex-safety-validator

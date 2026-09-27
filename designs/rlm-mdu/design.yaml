@@ -1,5 +1,14 @@
 ---
 name: RLM-MDU
+version: 1.0.0
+status: active
+layer: L0
+description: "RLM-MDU — Module MDU (Multi-Dimension Utility). Role a definir.
+"
+consumers:
+  - kix
+
+name: RLM-MDU
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM

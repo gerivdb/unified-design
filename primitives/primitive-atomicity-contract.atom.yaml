@@ -1,0 +1,7 @@
+atom_id: primitive-atomicity-contract
+version: 1.0.0
+type: primitive
+description: ''
+profile: STANDARD
+consumers: []
+last_verified: '2026-09-22'

@@ -1,4 +1,11 @@
+---
 name: agent-manager-v99
+version: 1.0.0
+status: proposed
+layer: L0
+description: "Agent Manager V9.9 Orchestrateur N+3.5"
+consumers:
+
 description: "Agent Manager V9.9 Orchestrateur N+3.5"
 version: "1.0.0"
 parent: unified-design

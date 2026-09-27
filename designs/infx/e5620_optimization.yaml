@@ -1,4 +1,10 @@
-# E5620 Optimization Design — INFX Anamorphic Engine
+---
+name: e5620_optimization
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for e5620_optimization."
+
 # Source: PRD-MOC-INFX-ANAMORPHIC-2026-09-03
 # IntentHash: 0xDESIGN_INFX_E5620_OPTIMIZATION_20260903
 

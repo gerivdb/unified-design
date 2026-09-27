@@ -18,7 +18,7 @@ inherits: [design-principle]
 Principe de conception : etablissez des conventions logiques par defaut et ne configurez que les cas d'exception.
 
 ## Application dans MDU
-- **Stratification** : L0-CANON, L1-INFRA, L4-TOOLS, L5-ARCHIVE
+- **Stratification** : L0-CANON, L1-INFRA, L2-PLATFORM, L3-CITIZENS, L4-TOOLS, L5-ARCHIVE, L6-WORK
 - **Atomes** : Nomination standardisee, structure YAML coherente
 - **Citizens** : Structure de projet standardisee
 

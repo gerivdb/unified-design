@@ -1,4 +1,17 @@
+---
 name: gitex
+version: 1.0.0
+status: proposed
+layer: L0
+description: "GITEX — Runner de topologie Git. Analyse la structure des dépôts, les branches, les commits et produit un graphe de dépendances. Couche 0 (L0-CANON), type governance.
+"
+profile: STANDARD
+consumers:
+  - KIX
+  - SYNCX
+  - DEPLOYEX
+  - REFREX
+
 version: "1.0.0"
 status: proposed
 profile: STANDARD

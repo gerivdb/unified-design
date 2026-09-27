@@ -1,4 +1,13 @@
 ---
+name: "TRIX Daemon"
+version: 1.0.0
+status: active
+layer: L0
+description: "TRIX Daemon — Daemon conteneurs TRIX (7243). Demarre via KIX ou bootstrap.
+"
+consumers:
+  - kix
+
 name: TRIX Daemon
 version: "1.0.0"
 status: active

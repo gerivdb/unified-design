@@ -1,5 +1,6 @@
 name: merge-fork-balance
-description: Équilibre entre merges et forks pour éviter l'entropie et la sur-ingénierie
+description: "\xC9quilibre entre merges et forks pour \xE9viter l'entropie et la sur-ing\xE9\
+  nierie"
 version: 1.0.0
 status: active
 inherits:
@@ -19,3 +20,4 @@ performance:
   power_max: 12.0
 intent_hash: 0xmerge_fork_balance_20260730
 layer: L2
+adr: ADR-015-unified-design-v2

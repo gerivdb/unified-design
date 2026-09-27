@@ -53,4 +53,5 @@ entries:
   intent_hash: 0xPIPELINE_JEVX_DESIGN_VALIDATION_20260920
   status: active
   profile: STANDARD
-  consumers: []
+  consumers:
+  - gerivdb/unified-design

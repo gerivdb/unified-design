@@ -1,8 +1,8 @@
 ---
 type: MOC
 version: "1.2"
-date: "2026-09-20"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xMOC_ARTIFACT_EXTRACTION_20260920
 ---
 

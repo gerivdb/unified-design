@@ -1,5 +1,16 @@
 ---
 name: LLUX-MATCH
+version: 1.0.0
+status: active
+layer: L0
+description: "LLUX-MATCH — Runner de matching LLUX. Effectue le matching d'incidents contre la base de connaissances.
+"
+consumers:
+  - llux-index
+  - prognex
+  - conversation-cognitive
+
+name: LLUX-MATCH
 version: "1.0.0"
 status: active
 strate: L3-CITIZENS

@@ -1,5 +1,17 @@
 ---
 name: INFX
+version: 1.0.0
+status: active
+layer: L0
+description: "INFX — Composant CITIZEN de l'ecosysteme gerivdb (strate L4). Interface entre hardware et runners cognitifs.
+"
+consumers:
+  - kix
+  - llux-match
+  - llux-learn
+  - conversation-cognitive
+
+name: INFX
 version: "1.0.0"
 status: active
 strate: L4-TOOLS
@@ -28,3 +40,10 @@ capabilities:
 
 constraints:
   - cpu_only: true
+implementation_contract:
+  repo: INFX
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\INFX
+  artifacts:
+    - path: REPO.yaml
+      must_contain:
+        - "INFX"

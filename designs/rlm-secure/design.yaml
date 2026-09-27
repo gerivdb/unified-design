@@ -1,5 +1,15 @@
 ---
 name: RLM-SECURE
+version: 1.0.0
+status: active
+layer: L0
+description: "RLM-SECURE — Service de securite. Scan les repos pour detecter les vulnerabilites et les secrets exposes.
+"
+consumers:
+  - kix
+  - rlm-config
+
+name: RLM-SECURE
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM

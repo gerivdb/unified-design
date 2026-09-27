@@ -1,0 +1,43 @@
+---
+cross_repo_flow:
+  name: brain -> wazaa
+  provider: BRAIN
+  consumers:
+    - WAZAA
+  contract:
+    interface: event
+    format: json
+    paths:
+      - BRAIN/message-bus/*
+      - WAZAA/protocols/*.yaml
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — BRAIN → WAZAA
+
+## Rôle
+WAZAA est l'**event bus** de l'écosystème. BRAIN l'utilise pour émettre et recevoir des événements entre agents.
+
+## Contrat
+- **Provider** : `BRAIN` expose le MessageBus et les agents producteurs d'événements.
+- **Consumer** : `WAZAA` route les événements vers les consommateurs enregistrés.
+- **Boucle** : WAZAA remonte les ACK/NACK à BRAIN pour le suivi.
+
+## Validation
+- `provider_registered` : `BRAIN` est dans `known_repositories.yaml`.
+- `consumer_registered` : `WAZAA` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `BRAIN → WAZAA → BRAIN`.
+- `contract_exists` : `WAZAA/protocols/` existe.
+
+## Références
+- `WAZAA/docs/protocols/swarm-messages.yaml`
+- `BRAIN/message-bus/`

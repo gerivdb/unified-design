@@ -1,0 +1,12 @@
+---
+name: budget.report
+category: budget
+version: v1.0.0
+description: "Generate budget report"
+entry_point: "scripts/loopx/budget_report.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Report agent budget usage and resource consumption"
+examples:
+  - "loopx routine budget.report"

@@ -1,4 +1,10 @@
-# Déformations Anamorphiques — Spécifications Détaillées
+---
+name: deformations
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for deformations."
+
 # Source: PRD-MOC-INFX-ANAMORPHIC-2026-09-03
 # IntentHash: 0xDESIGN_INFX_DEFORMATIONS_20260903
 

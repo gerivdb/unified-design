@@ -13,6 +13,28 @@ inherits:
 depends_on:
   - ATOM-GATE-LAYERS
   - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+layers:
+  - name: src
+    description: "Code source"
+    required: true
+  - name: config
+    description: "Configuration"
+    required: true
+  - name: tools
+    description: "Outils"
+    required: true
+  - name: scripts
+    description: "Scripts"
+    required: true
+  - name: tests
+    description: "Tests"
+    required: true
+  - name: docs
+    description: "Documentation"
+    required: true
+  - name: markdown
+    description: "Markdown"
+    required: true
 capabilities:
   - name: validate-layers
     description: "Valide la présence des 7 layers"

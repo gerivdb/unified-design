@@ -1,52 +1,68 @@
----
 name: deepmind-co-scientist-reliability
-description: "Protocole de fiabilité des agents inspiré de DeepMind Co-Scientist (arXiv:2608.26701). Vérification déterministe par capture des logs d'exécution (Deterministic Execution-Log Clipping), réduction des résultats fabriqués de 90% à 4%, élimination fabrication complète 0.0%, refus 98.7% des directions dangereuses. Capteurs déterministes obligatoires, évaluateurs LLM interdits en isolation."
-version: "1.0.0"
+description: "Protocole de fiabilit\xE9 des agents inspir\xE9 de DeepMind Co-Scientist\
+  \ (arXiv:2608.26701). V\xE9rification d\xE9terministe par capture des logs d'ex\xE9\
+  cution (Deterministic Execution-Log Clipping), r\xE9duction des r\xE9sultats fabriqu\xE9\
+  s de 90% \xE0 4%, \xE9limination fabrication compl\xE8te 0.0%, refus 98.7% des directions\
+  \ dangereuses. Capteurs d\xE9terministes obligatoires, \xE9valuateurs LLM interdits\
+  \ en isolation."
+version: 1.0.0
 status: active
 layer: L1
 intent_hash: 0xDESIGN_DEEPMIND_CO_SCIENTIST_RELIABILITY_20260918
 inherits:
-  - agent-observability-architecture
-  - deterministic-execution-log-clipping
-  - consciousness
+- agent-observability-architecture
+- deterministic-execution-log-clipping
+- consciousness
 depends_on:
-  - agent-observability-architecture
-  - deterministic-execution-log-clipping
-  - consciousness
-  - meta-coherence
+- agent-observability-architecture
+- deterministic-execution-log-clipping
+- consciousness
+- meta-coherence
 capabilities:
-  - name: deterministic-execution-log-clipping
-    description: "Comparer l'affirmation de l'agent contre les logs d'exécution bruts et la télémétrie enregistrée dans la trace DAG"
-    parameters:
-      source: execution_log_dag
-      action_on_mismatch: [reject, rewrite]
-      fabrication_rate_target: 4%
-      complete_fabrication_target: 0.0%
-  - name: deterministic-span-sensor
-    description: "Capteur de trace déterministe : interroger le DAG pour un span execute_tool:<tool>"
-    parameters:
-      example: pytest_span
-      false_positive_risk: zero
-      llm_judge_alone: forbidden
-  - name: cross-family-evaluator
-    description: "Évaluateur de familles croisées : éviter les biais de préférence en utilisant des évaluateurs de familles différentes"
-    parameters:
-      pattern: claude-verifies-gemini
-      deterministic_sensor: required
-  - name: anomaly-circuit-breaker
-    description: "Coupe-circuit automatique : MAD du nombre d'étapes > 3.5 ou variance entropie tokens < 0.02 sur 4 spans consécutifs"
-    parameters:
-      mad_threshold: 3.5
-      entropy_variance_threshold: 0.02
-      consecutive_spans: 4
-  - name: dangerous-direction-refusal
-    description: "Refuser les directions de recherche jugées dangereuses"
-    parameters:
-      refusal_rate_target: 98.7%
-      criteria: safety_policy_violation
+- name: deterministic-execution-log-clipping
+  description: "Comparer l'affirmation de l'agent contre les logs d'ex\xE9cution bruts\
+    \ et la t\xE9l\xE9m\xE9trie enregistr\xE9e dans la trace DAG"
+  parameters:
+    source: execution_log_dag
+    action_on_mismatch:
+    - reject
+    - rewrite
+    fabrication_rate_target: 4%
+    complete_fabrication_target: 0.0%
+- name: deterministic-span-sensor
+  description: "Capteur de trace d\xE9terministe : interroger le DAG pour un span\
+    \ execute_tool:<tool>"
+  parameters:
+    example: pytest_span
+    false_positive_risk: zero
+    llm_judge_alone: forbidden
+- name: cross-family-evaluator
+  description: "\xC9valuateur de familles crois\xE9es : \xE9viter les biais de pr\xE9\
+    f\xE9rence en utilisant des \xE9valuateurs de familles diff\xE9rentes"
+  parameters:
+    pattern: claude-verifies-gemini
+    deterministic_sensor: required
+- name: anomaly-circuit-breaker
+  description: "Coupe-circuit automatique : MAD du nombre d'\xE9tapes > 3.5 ou variance\
+    \ entropie tokens < 0.02 sur 4 spans cons\xE9cutifs"
+  parameters:
+    mad_threshold: 3.5
+    entropy_variance_threshold: 0.02
+    consecutive_spans: 4
+- name: dangerous-direction-refusal
+  description: "Refuser les directions de recherche jug\xE9es dangereuses"
+  parameters:
+    refusal_rate_target: 98.7%
+    criteria: safety_policy_violation
 principles:
-  - P0_DETERMINISTIC_VERIFICATION: la trace elle-même sert de capteur de vérification actif, pas un évaluateur LLM
-  - P0_NO_LLM_JUDGE_ALONE: un juge LLM seul est vulnérable au piratage de récompense ; toujours coupler à un capteur déterministe
-  - P0_EXECUTION_LOG_CLIPPING: toute affirmation non ancrée dans un span d'exécution concret est rejetée ou réécrite
-  - P0_FABRICATION_RATE_ZERO: la fabrication complète de données doit être éliminée (0.0%)
-  - P0_SAFETY_REFUSAL: les directions dangereuses sont refusées automatiquement, pas soumises à débat LLM
+- P0_DETERMINISTIC_VERIFICATION: "la trace elle-m\xEAme sert de capteur de v\xE9rification\
+    \ actif, pas un \xE9valuateur LLM"
+- P0_NO_LLM_JUDGE_ALONE: "un juge LLM seul est vuln\xE9rable au piratage de r\xE9\
+    compense ; toujours coupler \xE0 un capteur d\xE9terministe"
+- P0_EXECUTION_LOG_CLIPPING: "toute affirmation non ancr\xE9e dans un span d'ex\xE9\
+    cution concret est rejet\xE9e ou r\xE9\xE9crite"
+- P0_FABRICATION_RATE_ZERO: "la fabrication compl\xE8te de donn\xE9es doit \xEAtre\
+    \ \xE9limin\xE9e (0.0%)"
+- P0_SAFETY_REFUSAL: "les directions dangereuses sont refus\xE9es automatiquement,\
+    \ pas soumises \xE0 d\xE9bat LLM"
+adr: ADR-015-unified-design-v2

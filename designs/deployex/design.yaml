@@ -1,5 +1,15 @@
 ---
 name: DEPLOYEX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "DEPLOYEX — Runner de deploiement multi-repo. Coordonne les deploiements across multiple repositories.
+"
+consumers:
+  - KIX
+  - ECOS-CLI
+
+name: DEPLOYEX
 version: "1.0.0"
 status: proposed
 strate: L4-TOOLS

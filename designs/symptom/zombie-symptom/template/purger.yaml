@@ -1,4 +1,10 @@
+---
 name: <purger_name>
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for <purger_name>."
+
 type: <orchestrated | sequential | parallel>
 safety:
   - check_before_kill: <true|false>

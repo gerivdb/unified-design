@@ -1,0 +1,12 @@
+---
+name: git.commit
+category: git
+version: v1.0.0
+description: "Commit changes with conventional commits"
+entry_point: "scripts/loopx/git_commit.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Git commit: conventional commits, atomic staging, verification"
+examples:
+  - "loopx routine git.commit"

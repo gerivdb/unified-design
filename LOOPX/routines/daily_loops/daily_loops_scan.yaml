@@ -1,0 +1,12 @@
+---
+name: daily_loops.scan
+category: daily_loops
+version: v1.0.0
+description: "Scan daily loops"
+entry_point: "scripts/loopx/daily_loops_scan.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Daily loop scan: detect drift, friction, orphan branches"
+examples:
+  - "loopx routine daily_loops.scan"

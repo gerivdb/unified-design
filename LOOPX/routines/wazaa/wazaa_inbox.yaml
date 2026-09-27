@@ -1,0 +1,12 @@
+---
+name: wazaa.inbox
+category: wazaa
+version: v1.0.0
+description: "Check WAZAA inbox"
+entry_point: "scripts/loopx/wazaa_inbox.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Wazaa inbox: list, read, ack messages"
+examples:
+  - "loopx routine wazaa.inbox"

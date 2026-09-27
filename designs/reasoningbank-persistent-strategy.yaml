@@ -1,48 +1,61 @@
----
 name: reasoningbank-persistent-strategy
-description: "Banque de Raisonnement (ReasoningBank) : mémoire persistante qui distille des stratégies généralisables à partir de traces réussies et échouées, les stocke et les réutilise pour améliorer les performances des agents. Inspiré de arXiv:2509.25140. Pipeline de compression multi-niveaux : élision AST/stdout 60-85%, déduplication sémantique 30-50%, élagage graphe causal 70-90%."
-version: "1.0.0"
+description: "Banque de Raisonnement (ReasoningBank) : m\xE9moire persistante qui\
+  \ distille des strat\xE9gies g\xE9n\xE9ralisables \xE0 partir de traces r\xE9ussies\
+  \ et \xE9chou\xE9es, les stocke et les r\xE9utilise pour am\xE9liorer les performances\
+  \ des agents. Inspir\xE9 de arXiv:2509.25140. Pipeline de compression multi-niveaux\
+  \ : \xE9lision AST/stdout 60-85%, d\xE9duplication s\xE9mantique 30-50%, \xE9lagage\
+  \ graphe causal 70-90%."
+version: 1.0.0
 status: active
 layer: L1
 intent_hash: 0xDESIGN_REASONINGBANK_PERSISTENT_STRATEGY_20260918
 inherits:
-  - agent-observability-architecture
-  - consciousness
+- agent-observability-architecture
+- consciousness
 depends_on:
-  - agent-observability-architecture
-  - consciousness
-  - meta-coherence
+- agent-observability-architecture
+- consciousness
+- meta-coherence
 capabilities:
-  - name: trace-distillation
-    description: "Distillation de stratégies généralisables à partir de traces (réussites et échecs)"
-    parameters:
-      input: execution_traces
-      output: strategies [heuristics, negative_guardrails]
-  - name: compression-pipeline
-    description: "Pipeline de compression multi-niveaux avant stockage"
-    parameters:
-      stages:
-        - name: ast_stdout_elision
-          compression: 60-85%
-          preserve: [syntax_trees, stack_traces]
-        - name: semantic_deduplication
-          compression: 30-50%
-          pattern: polling_spans -> canonical_span
-        - name: causal_graph_pruning
-          compression: 70-90%
-          filter: read_only_exploratory_not_consumed
-  - name: strategy-reuse
-    description: "Réinjection de stratégies consolidées dans les prompts futurs pour guider l'agent"
-    parameters:
-      injection_point: prompt_template
-      format: heuristic_or_guardrail
-  - name: memory-persistence
-    description: "Stockage persistant des stratégies consolidées"
-    parameters:
-      store: append_only_ledger
-      indexing: semantic
+- name: trace-distillation
+  description: "Distillation de strat\xE9gies g\xE9n\xE9ralisables \xE0 partir de\
+    \ traces (r\xE9ussites et \xE9checs)"
+  parameters:
+    input: execution_traces
+    output: strategies [heuristics, negative_guardrails]
+- name: compression-pipeline
+  description: Pipeline de compression multi-niveaux avant stockage
+  parameters:
+    stages:
+    - name: ast_stdout_elision
+      compression: 60-85%
+      preserve:
+      - syntax_trees
+      - stack_traces
+    - name: semantic_deduplication
+      compression: 30-50%
+      pattern: polling_spans -> canonical_span
+    - name: causal_graph_pruning
+      compression: 70-90%
+      filter: read_only_exploratory_not_consumed
+- name: strategy-reuse
+  description: "R\xE9injection de strat\xE9gies consolid\xE9es dans les prompts futurs\
+    \ pour guider l'agent"
+  parameters:
+    injection_point: prompt_template
+    format: heuristic_or_guardrail
+- name: memory-persistence
+  description: "Stockage persistant des strat\xE9gies consolid\xE9es"
+  parameters:
+    store: append_only_ledger
+    indexing: semantic
 principles:
-  - P0_REASONING_BANK: toute expérience d'agent (succès ou échec) doit alimenter une mémoire de stratégie réutilisable
-  - P0_COMPRESS_BEFORE_STORE: ne jamais stocker de traces brutes dans le ReasoningBank ; toujours distiller
-  - P0_GUARDRAIL_FROM_FAILURE: les échecs produisent des garde-fous négatifs prioritairement
-  - P0_REINJECT_STRATEGY: les stratégies consolidées sont réinjectées dans les prompts, pas seulement consultées
+- P0_REASONING_BANK: "toute exp\xE9rience d'agent (succ\xE8s ou \xE9chec) doit alimenter\
+    \ une m\xE9moire de strat\xE9gie r\xE9utilisable"
+- P0_COMPRESS_BEFORE_STORE: ne jamais stocker de traces brutes dans le ReasoningBank
+    ; toujours distiller
+- P0_GUARDRAIL_FROM_FAILURE: "les \xE9checs produisent des garde-fous n\xE9gatifs\
+    \ prioritairement"
+- P0_REINJECT_STRATEGY: "les strat\xE9gies consolid\xE9es sont r\xE9inject\xE9es dans\
+    \ les prompts, pas seulement consult\xE9es"
+adr: ADR-015-unified-design-v2

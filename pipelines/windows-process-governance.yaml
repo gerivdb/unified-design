@@ -1,0 +1,82 @@
+---
+type: PIPELINE
+version: "1.0.0"
+date: "2026-09-25"
+status: draft
+intent_hash: 0xPIPELINE_WINDOWS_PROCESS_GOVERNANCE_20260925
+related_prd: PRD-MOC-GEN-041-windows-process-governance-2026-09-22.md
+related_moc: PRD-MOC-DAEMON-REGISTRY-20260925.md
+related_adr: ADR-2026-09-25-powershell-daemon-singleton.md
+---
+
+# PIPELINE — Windows Process Governance
+
+## Contexte
+
+L'incident du 2026-09-25 a révélé 11 processus `auto-dispatcher.ps1` orphelins dans `GeriCode/.kilo/orchestrator/`, consommant ~1,1 Go RAM sans aucune mission à traiter.
+
+Ce pipeline couvre l'ensemble de la gouvernance des processus Windows :
+- **P0** : `ProcessManager` KIX — singleton bind + PID registry + bail Swarm-Lease
+- **P1** : Module partagé `win32_process` — extraction primitive NT Job Objects vers `libs/shared-clients/win32_process.py`
+- **P1** : `WindowVisibilityManager` LOOPX — fenêtres cachées par défaut + HITL explicite
+- **P2** : `AdminTaskCoordinator` LOOPX — coordination NSSM/schtasks/services avec bail
+- **P3** : Repo dédié `SVC-MANAGER` si ≥3 consommateurs
+
+## Architecture cible
+
+```
+┌─────────────────────────────────────────────────────┐
+│  KIX ProcessManager (P0)                            │
+│  - Singleton Bind Manager                           │
+│  - PID Registry Manager                             │
+│  - Swarm-Lease integration                          │
+├─────────────────────────────────────────────────────┤
+│  win32_process module partagé (P1)                  │
+│  - OpenProcess / TerminateProcess / handles         │
+│  - NT Job Objects (extrait TRIX)                    │
+│  - Fingerprint d'instance                           │
+├─────────────────────────────────────────────────────┤
+│  LOOPX WindowVisibilityManager (P1)                 │
+│  - Fenêtres cachées par défaut                      │
+│  - HITL explicite pour affichage visible            │
+├─────────────────────────────────────────────────────┤
+│  LOOPX AdminTaskCoordinator (P2)                    │
+│  - NSSM / schtasks / services coordination          │
+│  - Bail Swarm-Lease sur admin tasks                 │
+└─────────────────────────────────────────────────────┘
+```
+
+## Intégration Swarm-Lease
+
+| Composant | Rôle |
+|-----------|------|
+| **KIX** (`L2-PLATFORM`) | Hôte du `ProcessManager` (P0) + endpoint `/process/*` |
+| **LOOPX** (`L3-CITIZENS`) | Hôte du `WindowVisibilityManager` + `AdminTaskCoordinator` (P1/P2) |
+| **TRIX** (`L4-TOOLS`) | Source de l'extraction NT Job Objects → module partagé `libs/shared-clients/win32_process.py` |
+| **PULSE** (`L2-PLATFORM`) | Alignement sur `ntjob.zig` (Zig) pour les limites RAM/CPU |
+| **GOVERNANCE-HUB** (`L0-CANON`) | SOT `known_repositories.yaml` + ADR-106 backing + ADR-2026-09-25 backing |
+| **GeriCode** (`L2-PLATFORM`) | Implémentation P0 daemon registry PowerShell : `auto-dispatcher.ps1` + `dispatcherctl.ps1` + `daemon-registry.ps1` |
+| **Swarm-Lease** (GEN-013) | Intégration baux territoire sur PID registry et admin tasks |
+
+## Proof-of-Life
+
+- [x] `2026-09-22T23:16:22+02:00` — Inspection multi-repo confirmant l'absence de gestionnaire généraliste
+- [x] `2026-09-22T23:16:22+02:00` — ADR-106 identifié comme backing pour NT Job Objects
+- [x] `2026-09-22T23:16:22+02:00` — Mini-spike TRIX↔KIX↔LOOPX cartographiant les points de contact
+- [x] `2026-09-22T23:16:22+02:00` — PRD-MOC GEN-041 créé (`0xGEN_041_WINDOWS_PROCESS_GOVERNANCE_20260922`)
+- [x] `2026-09-22T23:16:22+02:00` — P0 implémenté dans KIX : `src/process_manager.py` + endpoints `/process/*` + tests (12 passants)
+- [x] `2026-09-22T23:16:22+02:00` — P1 module partagé `win32_process` créé dans `libs/shared-clients/win32_process.py` + tests (6 passants, 1 skipped)
+- [x] `2026-09-22T23:16:22+02:00` — P1 `WindowVisibilityManager` LOOPX créé dans `src/loopx_routines/daemon/window_visibility.py` + tests (6 passants)
+- [x] `2026-09-22T23:16:22+02:00` — P2 `AdminTaskCoordinator` LOOPX créé dans `src/loopx_routines/daemon/admin_task_coordinator.py` + tests (5 passants)
+- [ ] P3 : Repo dédié `SVC-MANAGER` si ≥3 consommateurs
+- [x] `2026-09-23T00:01:42+02:00` — Dryrun causal confirmé : P0/P1/P2 prod-ready opérationnels (tests passants, imports OK, intégration effective)
+- [x] `2026-09-25T07:04:34+02:00` — GeriCode daemon registry implémenté : `auto-dispatcher.ps1` singletonisé + `dispatcherctl.ps1` + `daemon-registry.ps1` + `daemon-health-monitor.ps1` + `README-daemon-registry.md`
+- [x] `2026-09-25T07:04:34+02:00` — 9/9 tests passants (`verification/test-daemon-registry.ps1`)
+- [x] `2026-09-25T20:04:35+02:00` — ADR-2026-09-25-powershell-daemon-singleton créé et référencé dans GEN-041
+- [x] `2026-09-25T20:04:35+02:00` — Dryrun causal final confirmé : 100% implémenté, prod-ready opérationnel
+
+---
+
+**IntentHash** : 0xPIPELINE_WINDOWS_PROCESS_GOVERNANCE_20260925
+**Statut** : draft
+**Màj requise si** : statut passe à deprecated ou superseded

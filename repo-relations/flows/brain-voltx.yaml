@@ -1,0 +1,45 @@
+---
+cross_repo_flow:
+  name: brain -> voltx
+  provider: BRAIN
+  consumers:
+    - VOLTX
+  contract:
+    interface: event
+    format: json
+    paths:
+      - BRAIN/agents/cognitive/*
+      - VOLTX/vault/*
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — BRAIN → VOLTX
+
+## Rôle
+VOLTX est le **Vault Orchestrator Root** — Moteur Narratif Souverain. Il consomme la mémoire cognitive de BRAIN pour stocker et orchestrer les récits.
+
+## Contrat
+- **Provider** : `BRAIN` expose les agents cognitifs et la mémoire cognitive.
+- **Consumer** : `VOLTX` consomme ces flux pour :
+  - `vault/` : stockage des récits narratifs
+  - Orchestration des mémoires conversationnelles
+- **Boucle** : VOLTX peut rappeler des mémoires spécifiques via BRAIN.
+
+## Validation
+- `provider_registered` : `BRAIN` est dans `known_repositories.yaml`.
+- `consumer_registered` : `VOLTX` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `BRAIN ↔ VOLTX`.
+- `contract_exists` : `VOLTX/vault/` existe.
+
+## Références
+- `VOLTX/`
+- `BRAIN/agents/`

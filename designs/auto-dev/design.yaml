@@ -1,0 +1,314 @@
+name: auto-dev
+version: 1.0.0
+status: active
+profile: RESEARCH
+layer: L2_PLATFORM
+intent_hash: 0xINTENT_AUTO_DEV_ECOSYSTEM_REUSE_20260927
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+  - ecosystem-consciousness
+description: >
+  AUTO-DEV est le departement R&D autonome de l'ecosysteme gerivdb.
+  Il transpose le paradigme AutoScientists vers l'ingenierie logicielle :
+  une equipe d'agents LLM decentralises s'auto-organise pour proposer,
+  executer, critiquer et valider des ameliorations continues sur les repos
+  gerivdb, sans orchestrateur central, avec la meme rigueur qu'une experience
+  scientifique. Role : R&D Automation. Logical layers: N2, N3, N4.
+  Coverage cible du SOT actif : >= 80% par reuse obligatoire.
+consumers:
+  - NEXUS
+  - TALEX
+  - MIMIR
+  - HERMES
+  - FLUX
+  - ARGUS
+  - KG-L
+  - VERSES
+  - ECOS-CLI
+  - KIVA-CLI
+  - KIVA
+  - TRIX
+  - BRAIN
+  - KEEL
+  - PLIX
+  - N243
+  - WAZAA
+  - EMIT
+  - KIX
+  - RLM-METRICS
+  - ROOTX
+  - KG-CAUSAL
+  - CURX
+  - DAG-3
+  - OBS
+  - UAE
+  - VDB
+  - PHOTON
+  - PIANO
+  - LOOPX
+  - DevTools
+  - SKILLS
+  - REPO-STANDARDS
+capabilities:
+  - name: hypothesis-generation
+    description: Generation d'hypotheses de developpement non-redondantes via T1+T3 KEEL
+    parameters:
+      input: NEXUS state + AGENT_RAM
+      output: KEEL hypothesis
+      gate: FLUX-D4
+  - name: critique
+    description: Critique d'hypothese par diff0/diffscope sur la codebase
+    parameters:
+      tools:
+        - diff0-fork
+        - diffscope-fork
+      endorsement: required
+  - name: experiment
+    description: Experimentation isolee dans TRIX namespace avec metriques
+    parameters:
+      runtime: TRIX
+      metrics: per-phase latency
+  - name: forge-validation
+    description: Validation double-seed FORGE (noise-aware)
+    parameters:
+      seeds: 2
+      noise_detection: true
+      parallel: true
+  - name: promotion
+    description: Promotion P5 vers main sous controle FLUX D4 HITL
+    parameters:
+      score: phi_cps
+      uae_score: 1/sqrt(d)
+      coverage: required
+  - name: forum-update
+    description: Mise a jour shared state NEXUS + MIMIR + HERMES
+    parameters:
+      stores:
+        - NEXUS WAL
+        - MIMIR wiki
+        - HERMES MEMORY.md
+  - name: meta-loop
+    description: Meta-loop KEEL-R6 avec rerouting axe apres 10 cycles sans delta
+    parameters:
+      threshold_cycles: 10
+      reroute: required
+  - name: ecosystem-reuse
+    description: Capitalisation systematique des 102 repos actifs SOT
+    parameters:
+      coverage_target: 0.80
+      current_coverage: 0.23
+      reuse_policy: mandatory
+      duplication_policy: forbidden
+components:
+  - type: analyst
+    repo: gerivdb/auto-dev
+    path: agents/analyst.py
+  - type: critic
+    repo: gerivdb/auto-dev
+    path: agents/critic.py
+  - type: experiment
+    repo: gerivdb/auto-dev
+    path: agents/experiment_phase4.py
+  - type: forge
+    repo: gerivdb/auto-dev
+    path: agents/forge.py
+  - type: champion
+    repo: gerivdb/auto-dev
+    path: agents/champion_phase4.py
+  - type: forum
+    repo: gerivdb/auto-dev
+    path: agents/forum.py
+  - type: cycle-runner
+    repo: gerivdb/auto-dev
+    path: agents/cycle_runner.py
+  - type: coupling-metrics
+    repo: gerivdb/auto-dev
+    path: agents/coupling_metrics.py
+bridges:
+  - target: repo:NEXUS
+    role: consumer
+    protocol: wazaa-channel
+    status: active
+  - target: repo:TALEX
+    role: consumer
+    protocol: wazaa-channel
+    status: active
+  - target: repo:MIMIR
+    role: consumer
+    protocol: http
+    port: 8081
+    status: active
+  - target: repo:HERMES
+    role: consumer
+    protocol: wazaa-channel
+    status: active
+  - target: repo:FLUX
+    role: consumer
+    protocol: http
+    hitl_gate: D4
+    status: proposed
+  - target: repo:ARGUS
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:KG-L
+    role: consumer
+    protocol: http
+    port: 8082
+    status: active
+  - target: repo:VERSES
+    role: consumer
+    protocol: http
+    port: 8083
+    status: active
+  - target: repo:ECOS-CLI
+    role: consumer
+    protocol: cli
+    path: D:\DO\WEB\TOOLS\L1-INFRA\ECOS-CLI
+    status: proposed
+  - target: repo:KIVA-CLI
+    role: consumer
+    protocol: cli
+    path: D:\DO\WEB\TOOLS\L1-INFRA\KIVA-CLI
+    status: proposed
+  - target: repo:KIVA
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:TRIX
+    role: consumer
+    protocol: http
+    port: 7243
+    status: active
+  - target: repo:BRAIN
+    role: consumer
+    protocol: wazaa-channel
+    status: active
+  - target: repo:KEEL
+    role: consumer
+    protocol: wazaa-channel
+    status: active
+  - target: repo:PLIX
+    role: consumer
+    protocol: wazaa-channel
+    status: active
+  - target: repo:N243
+    role: consumer
+    protocol: http
+    port: 8093
+    status: active
+  - target: repo:WAZAA
+    role: consumer
+    protocol: wazaa-channel
+    status: active
+  - target: repo:EMIT
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:KIX
+    role: consumer
+    protocol: http
+    port: 8800
+    status: proposed
+  - target: repo:RLM-METRICS
+    role: consumer
+    protocol: http
+    port: 8802
+    status: proposed
+  - target: repo:ROOTX
+    role: consumer
+    protocol: http
+    port: 8792
+    status: proposed
+  - target: repo:KG-CAUSAL
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:CURX
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:DAG-3
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:OBS
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:UAE
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:VDB
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:PHOTON
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:PIANO
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:LOOPX
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:DevTools
+    role: system
+    protocol: local
+    path: C:\DevTools
+    status: proposed
+  - target: repo:SKILLS
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+  - target: repo:REPO-STANDARDS
+    role: consumer
+    protocol: wazaa-channel
+    status: proposed
+dependencies:
+  - repo: gerivdb/NEXUS
+  - repo: gerivdb/TALEX
+  - repo: gerivdb/MIMIR
+  - repo: gerivdb/HERMES
+  - repo: gerivdb/FLUX
+  - repo: gerivdb/ARGUS
+  - repo: gerivdb/KG-L
+  - repo: gerivdb/VERSES
+  - repo: gerivdb/ECOS-CLI
+  - repo: gerivdb/KIVA-CLI
+  - repo: gerivdb/KIVA
+  - repo: gerivdb/TRIX
+  - repo: gerivdb/BRAIN
+  - repo: gerivdb/KEEL
+  - repo: gerivdb/PLIX
+  - repo: gerivdb/N243
+  - repo: gerivdb/WAZAA
+  - repo: gerivdb/EMIT
+  - repo: gerivdb/KIX
+  - repo: gerivdb/RLM-METRICS
+  - repo: gerivdb/ROOTX
+  - repo: gerivdb/KG-CAUSAL
+  - repo: gerivdb/CURX
+  - repo: gerivdb/DAG-3
+  - repo: gerivdb/OBS
+  - repo: gerivdb/UAE
+  - repo: gerivdb/VDB
+  - repo: gerivdb/PHOTON
+  - repo: gerivdb/PIANO
+  - repo: gerivdb/LOOPX
+  - repo: gerivdb/DevTools
+  - repo: gerivdb/SKILLS
+  - repo: gerivdb/REPO-STANDARDS
+constraints:
+  cpu_only: true
+  ram_limit_mb: 24576
+  max_cycles_per_day: 10
+  reuse_policy: mandatory
+  duplication_policy: forbidden
+  hitl_gate: FLUX-D4
+  bdcp_mode: permanent

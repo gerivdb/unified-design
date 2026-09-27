@@ -1,0 +1,45 @@
+---
+cross_repo_flow:
+  name: kiva -> kiva-cli
+  provider: KIVA
+  consumers:
+    - KIVA-CLI
+  contract:
+    interface: cli
+    format: json
+    paths:
+      - KIVA/src/*
+      - KIVA-CLI/kiva/cli.py
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — KIVA → KIVA-CLI
+
+## Rôle
+KIVA-CLI est le **CLI souverain** qui encapsule les fonctionnalités de `KIVA` pour les utilisateurs et les agents.
+
+## Contrat
+- **Provider** : `KIVA` expose le runtime, les agents, le scheduler et le WAL.
+- **Consumer** : `KIVA-CLI` consomme ces services via :
+  - Appels Python directs (`import kiva`)
+  - Commandes CLI (`kiva run`, `kiva validate`, etc.)
+- **Boucle** : KIVA-CLI remonte les résultats à KIVA via WAL.
+
+## Validation
+- `provider_registered` : `KIVA` est dans `known_repositories.yaml`.
+- `consumer_registered` : `KIVA-CLI` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `KIVA → KIVA-CLI → KIVA`.
+- `contract_exists` : `KIVA-CLI/kiva/cli.py` existe.
+
+## Références
+- `KIVA-CLI/kiva/cli.py`
+- `KIVA/src/`

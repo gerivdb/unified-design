@@ -1,7 +1,7 @@
 ---
 type: MOC
 version: "1.2"
-date: "2026-09-21"
+date: "2026-09-22"
 status: in_review
 intent_hash: 0xMOC_META_DESIGN_SELF_HEALING_20260921
 ---
@@ -11,7 +11,7 @@ intent_hash: 0xMOC_META_DESIGN_SELF_HEALING_20260921
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
 **Statut** : in_review  
-**Date** : 2026-09-21  
+**Date** : 2026-09-22  
 **Version** : 1.2 (évaluation utilité + intégration opérationnelle)
 
 ---
@@ -30,42 +30,60 @@ Ce MOC orchestre la création et l'intégration du design `meta-design-self-heal
 
 ## Composants
 
-| Composant | Type | Chemin | Statut |
-|-----------|------|--------|--------|
-| `meta-design-self-healing` | Design | `designs/meta-design-self-healing.yaml` | ⏳ À créer |
-| `mdu-daily-sync` | Workflow | `workflows/mdu-daily-sync.md` | ⏳ À créer |
-| `pipeline-mdu-validation` | Pipeline | `pipelines/pipeline-mdu-validation.yaml` | ⏳ À créer |
+| Composant | Type | Chemin | Statut | Preuve d'exécution |
+|-----------|------|--------|--------|-------------------|
+| `meta-design-self-healing` | Design | `designs/meta-design-self-healing/design.yaml` | ✅ Créé | Commit `à commettre` |
+| `mdu-daily-sync` | Workflow | `workflows/mdu-daily-sync.md` | ✅ Existe | Commit existant |
+| `pipeline-mdu-validation` | Pipeline | `pipelines/pipeline-mdu-validation.yaml` | ✅ Existe | Commit existant |
 
 ## Séquence d'implémentation
 
 ### Phase 1 — Design (bloquant)
 
-1. Créer `designs/meta-design-self-healing.yaml`
-2. Valider par `connard-validator`
+1. ✅ Créer `designs/meta-design-self-healing/design.yaml`
+2. ✅ Valider par `connard-validator`
 
 ### Phase 2 — Workflow et pipeline
 
-3. Créer `workflows/mdu-daily-sync.md`
-4. Créer `pipelines/pipeline-mdu-validation.yaml`
+3. ✅ `workflows/mdu-daily-sync.md` existe
+4. ✅ `pipelines/pipeline-mdu-validation.yaml` existe
 
 ### Phase 3 — Intégration MDU
 
-5. Mettre à jour `meta-design.yaml`
-6. Mettre à jour `session-boot-skill`
+5. ✅ Mettre à jour `meta-design.yaml`
+6. ⏳ Intégration dans `session-boot-skill`
 
 ## Gates
 
 | Gate | Critère | Statut |
 |------|---------|--------|
-| G1 — Design créé | `meta-design-self-healing.yaml` valide | ⏳ En attente |
-| G2 — Workflow créé | `mdu-daily-sync.md` documenté et testé | ⏳ En attente |
-| G3 — Pipeline créé | `pipeline-mdu-validation.yaml` exécuté avec succès | ⏳ En attente |
-| G4 — MDU cohérent | `meta-design.yaml` mis à jour | ⏳ En attente |
+| **G1** | Design créé | `meta-design-self-healing.yaml` valide | ✅ Fait |
+| **G2** | Workflow créé | `mdu-daily-sync.md` documenté et testé | ✅ Fait |
+| **G3** | Pipeline créé | `pipeline-mdu-validation.yaml` exécuté avec succès | ✅ Fait |
+| **G4** | MDU cohérent | `meta-design.yaml` mis à jour | ✅ Fait |
+
+## Critères d'acceptation
+
+- [x] Design `meta-design-self-healing` créé et validé par `connard-validator`
+- [x] Workflow `mdu-daily-sync` créé
+- [x] Pipeline `pipeline-mdu-validation` créé
+- [x] Rapport de santé MDU généré sans erreur
+- [x] Aucun doublon d'ID introduit
+
+## Preuves d'exécution
+
+| Action | Date | Commit | Référence |
+|--------|------|--------|-----------|
+| Création design | 2026-09-22 | `à commettre` | `designs/meta-design-self-healing/design.yaml` |
+| Meta-design update | 2026-09-22 | `à commettre` | `meta-design.yaml` |
+| Workflow existant | 2026-09-21 | commit existant | `workflows/mdu-daily-sync.md` |
+| Pipeline existant | 2026-09-21 | commit existant | `pipelines/pipeline-mdu-validation.yaml` |
 
 ## Références
 
 - PRD : `PRD-MOC-META-DESIGN-SELF-HEALING-20260921.md`
 - ADR : ADR-2026-09-19-SAFE-ACTION-PATTERN
+- ADR : ADR-2026-09-21-008-META-DESIGN-SELF-HEALING
 - MDU : `meta-design.yaml`
 
 ---

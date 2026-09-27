@@ -42,6 +42,13 @@ repos:
         pass_filenames: true
         files: ^designs/.*\.yaml$
         stages: [pre-commit]
+      - id: meta-coherence-checker
+        name: Unified-Design structural metacoherence checker
+        entry: python .kilo/check_meta_coherence.py --strict
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
       - id: branch-taxonomy-check
         name: Validate branch taxonomy
         entry: python scripts/branch-taxonomy-validator.py

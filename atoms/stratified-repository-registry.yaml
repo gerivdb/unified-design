@@ -10,7 +10,7 @@ Pattern de registre de depots organise par strates logiques.
 
 ## Role
 
-Maintient une cartographie des repos par strates (L0-L9) avec validation d'appartenance et chemins locaux normalises.
+Maintient une cartographie des repos par strates (L0-L6) avec validation d'appartenance et chemins locaux normalises.
 
 ## Parametres
 

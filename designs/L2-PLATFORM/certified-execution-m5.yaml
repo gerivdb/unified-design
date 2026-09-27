@@ -1,4 +1,11 @@
+---
 name: certified-execution-m5
+version: 1.0.0
+status: proposed
+layer: L0
+description: certified-execution-m5
+consumers:
+
 description: "certified-execution-m5"
 version: "1.0.0"
 parent: unified-design

@@ -1,0 +1,88 @@
+---
+name: ATOM-MDU-CATALOG-SYNC
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xATOM_MDU_CATALOG_SYNC_20260921
+description: >
+  Atome de synchronisation catalogue MDU.
+  Encode les règles de canonicalité, de complétude et de cohérence
+  entre meta-design.yaml, les catalogues et l'arborescence physique.
+inherits:
+  - meta-design-self-healing
+  - ecosystem-meta-coherence
+  - design-ops-loop
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+states:
+  - name: IDLE
+    question: "Les catalogues sont-ils cohérents avec l'arborescence ?"
+  - name: SCAN
+    question: "Tous les artefacts physiques sont-ils catalogués ?"
+  - name: CLASSIFY
+    question: "Les écarts sont-ils classés (nouveau / manquant / ambigu) ?"
+  - name: PROPOSE
+    question: "Les corrections sont-elles proposées ?"
+  - name: APPLY
+    question: "Les corrections sont-elles appliquées (HITL) ?"
+functions:
+  - id: F1
+    name: SCAN_PHYSIQUE
+    description: "Scan de l'arborescence physique"
+  - id: F2
+    name: CLASSIFY_ÉCARTS
+    description: "Classification des écarts"
+  - id: F3
+    name: PROPOSER_CORRECTIONS
+    description: "Proposition de corrections atomiques"
+  - id: F4
+    name: VALIDER_CORRECTIONS
+    description: "Validation HITL des corrections"
+  - id: F5
+    name: APPLIQUER_CORRECTIONS
+    description: "Application des corrections validées"
+  - id: F6
+    name: ENREGISTRER_TRACE
+    description: "Enregistrement horodaté"
+invariant: "meta-design.yaml, les catalogues et l'arborescence physique sont mutuellement cohérents."
+genes:
+  - id: G1
+    name: canonicality
+    description: "1 ID = 1 artefact = 1 chemin"
+  - id: G2
+    name: completeness
+    description: "100% des artefacts physiques catalogués"
+  - id: G3
+    name: consistency
+    description: "meta-design.yaml ↔ catalogues ↔ arborescence cohérents"
+  - id: G4
+    name: traceability
+    description: "Toute correction est tracée et horodatée"
+anti_patterns:
+  - missing_gene: canonicality
+    pathology: "Doublons d'IDs, chemins ambigus"
+  - missing_gene: completeness
+    pathology: "Artefacts orphelins non découvervables"
+  - missing_gene: consistency
+    pathology: "Divergence MDU / catalogues / arborescence"
+  - missing_gene: traceability
+    pathology: "Corrections sans auditabilité"
+cross_references:
+  - design: meta-design-self-healing
+  - design: ecosystem-meta-coherence
+  - design: design-ops-loop
+  - atom: ATOM-PRIMITIVE-ATOMICITY-CONTRACT
+  - skill: mdu-integrity-checker
+  - tool: tools/mdu-lint.py
+  - script: scripts/sync-mdu-catalog.py
+  - workflow: workflow-mdu-daily-sync
+  - workflow: workflow-design-ops-loop
+  - prd_moc: PRD-MOC-ATOM-MDU-CATALOG-SYNC-20260921
+  - moc: MOC-ATOM-MDU-CATALOG-SYNC-20260921

@@ -1,0 +1,195 @@
+---
+registry_version: "1.0.0"
+generated_at_utc: "2026-09-21T20:14:30Z"
+source_of_truth: GOVERNANCE-HUB/known_repositories.yaml
+total_repos: 121
+total_flows: 23
+structural_repos:
+  - GOVERNANCE-HUB
+  - NEXUS
+  - ONTOLOGY
+  - unified-design
+  - HERMES
+  - VOLTX
+  - BRAIN
+  - TOPOS
+  - N243
+  - WAZAA
+  - VERSES
+  - INFX
+  - ARGUS
+  - KG-CAUSAL
+  - ROOTX
+  - TIMX
+
+flows:
+  - file: flows/govhub-unified-design.yaml
+    provider: GOVERNANCE-HUB
+    consumer: unified-design
+    priority: P0
+    status: active
+  - file: flows/govhub-nexus.yaml
+    provider: GOVERNANCE-HUB
+    consumer: NEXUS
+    priority: P0
+    status: active
+  - file: flows/govhub-topos.yaml
+    provider: GOVERNANCE-HUB
+    consumer: TOPOS
+    priority: P0
+    status: active
+  - file: flows/govhub-ecos-cli.yaml
+    provider: GOVERNANCE-HUB
+    consumer: ECOS-CLI
+    priority: P0
+    status: active
+  - file: flows/govhub-kiva-cli.yaml
+    provider: GOVERNANCE-HUB
+    consumer: KIVA-CLI
+    priority: P0
+    status: active
+  - file: flows/nexus-argus.yaml
+    provider: NEXUS
+    consumer: ARGUS
+    priority: P0
+    status: active
+  - file: flows/ontology-verses.yaml
+    provider: ONTOLOGY
+    consumer: VERSES
+    priority: P1
+    status: active
+  - file: flows/ontology-kgl.yaml
+    provider: ONTOLOGY
+    consumer: KG-L
+    priority: P1
+    status: active
+  - file: flows/ontology-kg-causal.yaml
+    provider: ONTOLOGY
+    consumer: KG-CAUSAL
+    priority: P1
+    status: active
+  - file: flows/kg-causal-rootx.yaml
+    provider: KG-CAUSAL
+    consumer: ROOTX
+    priority: P1
+    status: active
+  - file: flows/unified-design-repo-standards.yaml
+    provider: unified-design
+    consumer: REPO-STANDARDS
+    priority: P1
+    status: active
+  - file: flows/brain-fluence.yaml
+    provider: BRAIN
+    consumer: FLUENCE
+    priority: P1
+    status: active
+  - file: flows/brain-wazaa.yaml
+    provider: BRAIN
+    consumer: WAZAA
+    priority: P1
+    status: active
+  - file: flows/brain-voltx.yaml
+    provider: BRAIN
+    consumer: VOLTX
+    priority: P1
+    status: active
+  - file: flows/hermes-voltx.yaml
+    provider: HERMES
+    consumer: VOLTX
+    priority: P1
+    status: active
+  - file: flows/kiva-kiva-cli.yaml
+    provider: KIVA
+    consumer: KIVA-CLI
+    priority: P1
+    status: active
+  - file: flows/kiva-trix.yaml
+    provider: KIVA
+    consumer: TRIX
+    priority: P1
+    status: active
+  - file: flows/n243-kgl.yaml
+    provider: N243
+    consumer: KG-L
+    priority: P1
+    status: active
+  - file: flows/n243-verses.yaml
+    provider: N243
+    consumer: VERSES
+    priority: P1
+    status: active
+  - file: flows/batmcp-skills.yaml
+    provider: BatMCP
+    consumer: SKILLS
+    priority: P2
+    status: active
+  - file: flows/timx-llux.yaml
+    provider: TIMX
+    consumer: LLUX
+    priority: P1
+    status: active
+  - file: flows/timx-rlm243.yaml
+    provider: TIMX
+    consumer: RLM-243
+    priority: P1
+    status: active
+  - file: flows/timx-talex.yaml
+    provider: TIMX
+    consumer: TALEX
+    priority: P1
+    status: active
+
+structural_relations:
+  - file: layers/structural-overview.yaml
+    kinds:
+      - requires
+      - blocks
+      - stabilizes
+      - complements
+      - opposes
+      - supersedes
+      - evolves_to
+      - inherits
+    status: draft
+
+layers:
+  - file: layers/L0-CANON.yaml
+    layer: L0_CANON
+    repos_count: 8
+    flows_count: 7
+    status: draft
+  - file: layers/L0-CONSTITUTIONAL.yaml
+    layer: L0_CONSTITUTIONAL
+    repos_count: 2
+    flows_count: 0
+    status: draft
+  - file: layers/L1-INFRA.yaml
+    layer: L1_CAUSALITY
+    repos_count: 6
+    flows_count: 6
+    status: draft
+  - file: layers/L2-PLATFORM.yaml
+    layer: L2_PLATFORM
+    repos_count: 14
+    flows_count: 3
+    status: draft
+  - file: layers/L3-CITIZENS.yaml
+    layer: L3_CITIZENS
+    repos_count: 1
+    flows_count: 2
+    status: draft
+  - file: layers/L4-TOOLS.yaml
+    layer: L4_TOOLS
+    repos_count: 10
+    flows_count: 8
+    status: draft
+  - file: layers/L5-ARCHIVE.yaml
+    layer: L5_ARCHIVE
+    repos_count: 1
+    flows_count: 0
+    status: draft
+  - file: layers/L6-WORK.yaml
+    layer: L6_WORK
+    repos_count: 2
+    flows_count: 0
+    status: draft

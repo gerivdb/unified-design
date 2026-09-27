@@ -555,3 +555,13 @@ RSR est verifie par check-prd-structure.ps1 (croisement artefacts x roles).
 - inter-repo-migration
 - limbo-governance
 - recovery-tooling-governance
+
+---
+
+## Référence — Repo Identity Schema (2026-09-27)
+
+- **Schéma** : schemas/REPO_IDENTITY_v1.yaml
+- **IntentHash** : 0xHERMES_REPO_IDENTITY_SCHEMA_20260927
+- **Enum** : primitives/repo-identity-enum.yaml
+- **Règle** : tout repo actif doit avoir un .repo-identity.yaml conforme à REPO_IDENTITY_v1.
+- **Validation** : registry_sync_checker.py vérifie la cohérence .repo-identity.yaml ↔ known_repositories.yaml ↔ TOPOS/registry/repos.json.

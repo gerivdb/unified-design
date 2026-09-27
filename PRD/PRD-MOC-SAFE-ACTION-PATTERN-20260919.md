@@ -1,8 +1,8 @@
 ---
 type: PRD-MOC
 version: "1.0.0"
-date: "2026-09-19"
-status: proposed
+date: "2026-09-22"
+status: approved
 intent_hash: 0xPRD_MOC_SAFE_ACTION_PATTERN_20260919
 author: gerivdb
 source_repo: gerivdb/unified-design

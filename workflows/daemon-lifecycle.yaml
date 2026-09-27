@@ -1,0 +1,78 @@
+---
+type: WORKFLOW
+version: "1.0.0"
+date: "2026-09-25"
+status: draft
+intent_hash: 0xWORKFLOW_DAEMON_LIFECYCLE_20260925
+related_prd: PRD-MOC-GEN-041-windows-process-governance-2026-09-22.md
+related_moc: PRD-MOC-DAEMON-REGISTRY-20260925.md
+related_adr: ADR-2026-09-25-powershell-daemon-singleton.md
+---
+
+# WORKFLOW — Daemon Lifecycle
+
+## Contexte
+
+L'incident du 2026-09-25 a révélé 11 processus `auto-dispatcher.ps1` orphelins dans `GeriCode/.kilo/orchestrator/`, consommant ~1,1 Go RAM sans aucune mission à traiter.
+
+Ce workflow standardise le **cycle de vie complet** d'un daemon PowerShell :
+- **Start** : acquisition singleton + PID file + stop event + Swarm-Lease
+- **Status** : lecture PID file + vérification processus vivant + métriques
+- **Stop** : signal stop event + attente propre + cleanup
+- **Restart** : stop + start + vérification
+- **Prune** : nettoyage PID files orphelines
+
+## Étapes
+
+### Start
+1. Vérifier que le daemon n'est pas déjà en cours (mutex + PID file)
+2. Acquérir le bail Swarm-Lease sur `.lock/` directory (si `-SwarmLease` activé)
+3. Démarrer le daemon en mode singleton
+4. Écrire le PID file `.lock/instance.pid`
+5. Publier l'état dans `daemon-health.json`
+
+### Status
+1. Lire le PID file `.lock/instance.pid`
+2. Vérifier que le processus correspondant est vivant
+3. Collecter les métriques : uptime, CPU, RAM
+4. Retourner l'état : `running` / `stopped` / `orphaned`
+
+### Stop
+1. Envoyer le signal d'arrêt propre via `Global\GeriCode-AutoDispatcher-Stop`
+2. Attendre la fin du daemon (timeout 30s)
+3. Libérer le PID file et le mutex
+4. Libérer le bail Swarm-Lease
+
+### Restart
+1. Exécuter `stop`
+2. Attendre 2s
+3. Exécuter `start`
+
+### Prune
+1. Scanner tous les `.lock/*.pid`
+2. Vérifier si les processus correspondants sont vivants
+3. Supprimer les PID files orphelines
+4. Publier l'état dans `daemon-health.json`
+
+## Intégration
+
+| Composant | Rôle |
+|-----------|------|
+| **dispatcherctl.ps1** | Contrôleur start/stop/status/restart |
+| **daemon-registry.ps1** | Registry centralisé + prune |
+| **daemon-health-monitor.ps1** | Wrapper compatible |
+| **auto-dispatcher.ps1** | Daemon principal |
+
+## Proof-of-Life
+
+- [x] `2026-09-25T07:04:34+02:00` — 11 processus `auto-dispatcher.ps1` tués ; RAM libérée ~1,1 Go
+- [x] `2026-09-25T07:04:34+02:00` — `auto-dispatcher.ps1` singletonisé : mutex + PID file + stop event + WaitOne(timeout)
+- [x] `2026-09-25T07:04:34+02:00` — `dispatcherctl.ps1` créé : start/stop/status/restart fonctionnels
+- [x] `2026-09-25T07:04:34+02:00` — `daemon-registry.ps1` validé en mode read/prune
+- [x] `2026-09-25T07:04:34+02:00` — 9/9 tests passants (`verification/test-daemon-registry.ps1`)
+
+---
+
+**IntentHash** : 0xWORKFLOW_DAEMON_LIFECYCLE_20260925
+**Statut** : draft
+**Màj requise si** : statut passe à deprecated ou superseded

@@ -1,11 +1,9 @@
 version: 1.0.0
 intent_hash: 0xbps_20260801
 status: active
-description: 'Buzz@block comme infrastructure de persistance pour l''état système.
-
-  Tout événement est signé, loggué, et devient une ancre de vérité.
-
-  '
+description: "Buzz@block comme infrastructure de persistance pour l'\xE9tat syst\xE8\
+  me.\nTout \xE9v\xE9nement est sign\xE9, loggu\xE9, et devient une ancre de v\xE9\
+  rit\xE9.\n"
 architecture: "+---------------------------------------------------------------------+\n\
   |                    BUZZ@BLOCK (Upstream)                           |\n|  +-------------------------------------------------------------+\
   \   |\n|  |  buzZ-relay  |  buzz-acp  |  buzz-workflow  |  buzz-audit  |   |\n|\
@@ -21,7 +19,7 @@ architecture: "+----------------------------------------------------------------
 storage_layers:
 - layer: events
   component: buzz-relay
-  format: Nostr événement signé
+  format: "Nostr \xE9v\xE9nement sign\xE9"
   persistence: Postgres + Redis
 - layer: workflows
   component: buzz-workflow
@@ -38,20 +36,23 @@ storage_layers:
 rules:
 - id: BPS-001
   name: Single Source of Truth
-  description: Le relais Buzz est l'unique source de vérité pour les événements
+  description: "Le relais Buzz est l'unique source de v\xE9rit\xE9 pour les \xE9v\xE9\
+    nements"
   enforcement: design
 - id: BPS-002
-  name: Événement Signé
-  description: Tout événement est signé par une clé Schnorr (humain ou agent)
+  name: "\xC9v\xE9nement Sign\xE9"
+  description: "Tout \xE9v\xE9nement est sign\xE9 par une cl\xE9 Schnorr (humain ou\
+    \ agent)"
   enforcement: auto
 - id: BPS-003
-  name: Persistance immédiate
-  description: Toute information capturée est persistée dans le relais avant traitement
+  name: "Persistance imm\xE9diate"
+  description: "Toute information captur\xE9e est persist\xE9e dans le relais avant\
+    \ traitement"
   enforcement: auto
   pattern: First-Right Capture
 - id: BPS-004
   name: WAL ternaire
-  description: Les transitions d'état sont loggées dans un WAL ternaire
+  description: "Les transitions d'\xE9tat sont logg\xE9es dans un WAL ternaire"
   enforcement: auto
   states:
   - Convergence
@@ -59,3 +60,4 @@ rules:
   - Oscillation
 name: buzz-persistent-state
 layer: L1
+adr: ADR-015-unified-design-v2

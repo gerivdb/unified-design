@@ -3,6 +3,14 @@ ports:
     contract:
       input_schema: schemas/ports/symbol_retrieval_input.json
       output_schema: schemas/ports/symbol_retrieval_output.json
+  - port_id: causal-traceability
+    contract:
+      input_schema: schemas/ports/causal_traceability_input.json
+      output_schema: schemas/ports/causal_traceability_output.json
+  - port_id: design-validation
+    contract:
+      input_schema: schemas/ports/design_validation_input.json
+      output_schema: schemas/ports/design_validation_output.json
   - port_id: beads-sql-memory
     contract:
       input_schema: schemas/ports/beads_sql_memory_input.json

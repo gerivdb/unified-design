@@ -1,5 +1,8 @@
 name: plix-audio
 version: 1.0.0
 status: active
+layer: L0
+description: Design artifact for plix-audio.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_PLIX_AUDIO_20260923

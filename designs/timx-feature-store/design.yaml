@@ -1,5 +1,15 @@
 ---
 name: TIMX-FEATURE-STORE
+version: 1.0.0
+status: active
+layer: L0
+description: "TIMX-FEATURE-STORE — Feature store temporel pour TALEX. Stocke et sert les features temporelles.
+"
+consumers:
+  - talex
+  - timx
+
+name: TIMX-FEATURE-STORE
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM

@@ -39,7 +39,7 @@ function Test-Frontmatter {
 
 function Test-StratumPath {
     param([string]$Path)
-    $strates = @("L0-CANON","L1-INFRA","L2-PLATFORM","L3-CITIZENS","L4-TOOLS","L5-ARCHIVE")
+    $strates = @("L0-CANON","L1-INFRA","L2-PLATFORM","L3-CITIZENS","L4-TOOLS","L5-ARCHIVE","L6-WORK")
     foreach ($s in $strates) { if ($Path -like "*\$s\*") { return $true } }
     return $false
 }

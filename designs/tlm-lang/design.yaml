@@ -1,5 +1,15 @@
 ---
 name: TLM-LANG
+version: 1.0.0
+status: active
+layer: L0
+description: "TLM-LANG — Runner de langage topological. Valide les topologies TQL et detecte les ambiguites semantiques.
+"
+consumers:
+  - nodex
+  - topex
+
+name: TLM-LANG
 version: "1.0.0"
 status: active
 strate: L4-TOOLS

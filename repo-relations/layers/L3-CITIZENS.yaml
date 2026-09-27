@@ -1,0 +1,15 @@
+---
+layer: L3_CITIZENS
+description: "Repos L3-CITIZENS — composants citoyens, orchestration, routines"
+path_prefix: "D:/DO/WEB/TOOLS/L3-CITIZENS/"
+repos:
+  - name: WAZAA
+    description: "WAZAA — event bus"
+    status: ACTIVE
+    memory_role: event_bus
+    structural: true
+    flows:
+      - file: ../flows/brain-wazaa.yaml
+        direction: inbound
+
+structural_relations: []

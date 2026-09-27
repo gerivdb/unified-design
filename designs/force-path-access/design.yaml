@@ -1,5 +1,8 @@
 name: force-path-access
 version: 1.0.0
 status: active
+layer: L0
+description: Design artifact for force-path-access.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_FORCE_PATH_ACCESS_20260923

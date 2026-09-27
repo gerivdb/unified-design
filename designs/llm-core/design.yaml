@@ -1,5 +1,19 @@
 ---
 name: LLM-CORE
+version: 1.0.0
+status: active
+layer: L0
+description: "LLM-CORE — Moteur d'inference LLM pour l'ecosysteme. Gere l'inférence locale et distante.
+"
+consumers:
+  - kix
+  - bootstrap
+  - agent-manager
+  - conversation-cognitive
+  - llux-match
+  - llux-learn
+
+name: LLM-CORE
 version: "1.0.0"
 status: active
 strate: L4-TOOLS

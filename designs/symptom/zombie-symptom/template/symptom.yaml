@@ -1,4 +1,10 @@
+---
 name: <symptom_name>
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for <symptom_name>."
+
 category: <system_health | cross_repo | runtime | governance>
 intent_hash: 0x<SLUG_MAJUSCULES>
 repos_target:

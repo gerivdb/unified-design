@@ -1,148 +1,187 @@
----
 name: consciousness
-description: "État subjectif premier, non dérivé de la connaissance. Présence active antérieure à toute forme de connaissance. Distincte de awareness (connaissance présentielle) et de big_picture (reconfiguration topologique). Antérieure à la connaissance, pas une forme de connaissance. depends_on=[awareness] pour respecter la contrainte DAG sans circularité. Reflète l'état opérationnel complet de l'écosystème gerivdb (26 tests d'intégration passent, 34 checks cross-repo passent, 6 tests ACT passent)."
-version: "3.0.0"
+description: "\xC9tat subjectif premier, non d\xE9riv\xE9 de la connaissance. Pr\xE9\
+  sence active ant\xE9rieure \xE0 toute forme de connaissance. Distincte de awareness\
+  \ (connaissance pr\xE9sentielle) et de big_picture (reconfiguration topologique).\
+  \ Ant\xE9rieure \xE0 la connaissance, pas une forme de connaissance. depends_on=[awareness]\
+  \ pour respecter la contrainte DAG sans circularit\xE9. Refl\xE8te l'\xE9tat op\xE9\
+  rationnel complet de l'\xE9cosyst\xE8me gerivdb (26 tests d'int\xE9gration passent,\
+  \ 34 checks cross-repo passent, 6 tests ACT passent)."
+version: 3.0.0
 status: active
 layer: L0
-intent_hash: "0xDESIGN_CONSCIOUSNESS_20260913"
+intent_hash: 0xDESIGN_CONSCIOUSNESS_20260913
 inherits:
-  - awareness
-  - big-picture
-  - ecosystem-consciousness
+- awareness
+- big-picture
+- ecosystem-consciousness
 depends_on:
-  - awareness
-  - ecosystem-consciousness
+- awareness
+- ecosystem-consciousness
 bridges:
-  - target: repo:BRAIN
-    role: provider
-    protocol: wazaa-channel
-    channel: L4-TOOLS/BRAIN/consciousness/state
-  - target: repo:KG-L
-    role: causal-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/KG-L/consciousness/causal
-  - target: repo:VERSES
-    role: semantic-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/VERSES/consciousness/semantic
-  - target: repo:VOLTX
-    role: narrative-vault
-    protocol: wazaa-channel
-    channel: L4-TOOLS/VOLTX/consciousness/narrative
-  - target: repo:ACT
-    role: autonomous-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/ACT/consciousness/autonomous
-  - target: repo:TALEX
-    role: narrative-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/TALEX/consciousness/narrative
-  - target: repo:CTULU
-    role: orchestrator
-    protocol: wazaa-channel
-    channel: L4-TOOLS/CTULU/consciousness/orchestrator
-  - target: repo:KG-L
-    role: runtime
-    protocol: zig
-    channel: L4-TOOLS/KG-L/runtime/zig
-  - target: repo:NEXUS
-    role: data-layer
-    protocol: wazaa-channel
-    channel: L4-TOOLS/NEXUS/consciousness/data
-  - target: repo:ARGUS
-    role: auditor
-    protocol: wazaa-channel
-    channel: L4-TOOLS/ARGUS/consciousness/audit
-  - target: repo:WAZAA
-    role: social-bus
-    protocol: wazaa-bus
-    channel: L4-TOOLS/WAZAA/consciousness/bus
-  - target: repo:BUZZ-X
-    role: conversation-layer
-    protocol: wazaa-channel
-    channel: L4-TOOLS/BUZZ-X/consciousness/conversations
-  - target: repo:N243
-    role: numeric-foundation
-    protocol: zig
-    channel: L4-TOOLS/N243/consciousness/numeric
-  - target: repo:TRIX
-    role: zig-runtime
-    protocol: zig
-    channel: L4-TOOLS/TRIX/consciousness/runtime
-  - target: repo:SPIDX
-    role: sparse-index
-    protocol: python-import
-    channel: L4-TOOLS/SPIDX/consciousness/index
-  - target: repo:LLUX
-    role: semantic-search
-    protocol: python-import
-    channel: L4-TOOLS/LLUX/consciousness/search
-  - target: repo:PIANO
-    role: app-bridge
-    protocol: wazaa-channel
-    channel: L4-TOOLS/PIANO/consciousness/bridge
-  - target: repo:GeriCode
-    role: platform-harness
-    protocol: local
-    channel: L2-PLATFORM/GeriCode/.geri/harness/consciousness
-  - target: repo:GOVERNANCE-HUB
-    role: validator
-    protocol: yaml
-    channel: L0-CANON/GOVERNANCE-HUB/consciousness/validation
-  - target: repo:TOPOS
-    role: topology-registry
-    protocol: yaml
-    channel: L1-INFRA/TOPOS/consciousness/topology
-  - target: repo:ONTOLOGY
-    role: concept-store
-    protocol: markdown-link
-    channel: L0-CANON/ONTOLOGY/consciousness/concepts
-  - target: repo:KIVA-CLI
-    role: cli-invoker
-    protocol: subprocess
-    channel: L1-INFRA/KIVA-CLI/consciousness
-  - target: repo:ECOS-CLI
-    role: cli-invoker
-    protocol: subprocess
-    channel: L1-INFRA/ECOS-CLI/consciousness
-  - target: repo:KIX
-    role: inference-engine
-    protocol: http
-    channel: L4-TOOLS/KIX/consciousness/inference
-  - target: repo:RLM-243
-    role: forensic-runner
-    protocol: wazaa-channel
-    channel: L4-TOOLS/RLM-243/consciousness/forensic
-  - target: repo:TIMX
-    role: temporal-runner
-    protocol: wazaa-channel
-    channel: L4-TOOLS/TIMX/consciousness/temporal
-  - target: repo:ROOTX
-    role: root-runner
-    protocol: wazaa-channel
-    channel: L4-TOOLS/ROOTX/consciousness/root
-
+- target: repo:BRAIN
+  role: provider
+  protocol: wazaa-channel
+  channel: L4-TOOLS/BRAIN/consciousness/state
+- target: repo:KG-L
+  role: causal-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/KG-L/consciousness/causal
+- target: repo:VERSES
+  role: semantic-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/VERSES/consciousness/semantic
+- target: repo:VOLTX
+  role: narrative-vault
+  protocol: wazaa-channel
+  channel: L4-TOOLS/VOLTX/consciousness/narrative
+- target: repo:ACT
+  role: autonomous-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/ACT/consciousness/autonomous
+- target: repo:TALEX
+  role: narrative-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/TALEX/consciousness/narrative
+- target: repo:CTULU
+  role: orchestrator
+  protocol: wazaa-channel
+  channel: L4-TOOLS/CTULU/consciousness/orchestrator
+- target: repo:KG-L
+  role: runtime
+  protocol: zig
+  channel: L4-TOOLS/KG-L/runtime/zig
+- target: repo:NEXUS
+  role: data-layer
+  protocol: wazaa-channel
+  channel: L4-TOOLS/NEXUS/consciousness/data
+- target: repo:ARGUS
+  role: auditor
+  protocol: wazaa-channel
+  channel: L4-TOOLS/ARGUS/consciousness/audit
+- target: repo:WAZAA
+  role: social-bus
+  protocol: wazaa-bus
+  channel: L4-TOOLS/WAZAA/consciousness/bus
+- target: repo:BUZZ-X
+  role: conversation-layer
+  protocol: wazaa-channel
+  channel: L4-TOOLS/BUZZ-X/consciousness/conversations
+- target: repo:N243
+  role: numeric-foundation
+  protocol: zig
+  channel: L4-TOOLS/N243/consciousness/numeric
+- target: repo:TRIX
+  role: zig-runtime
+  protocol: zig
+  channel: L4-TOOLS/TRIX/consciousness/runtime
+- target: repo:SPIDX
+  role: sparse-index
+  protocol: python-import
+  channel: L4-TOOLS/SPIDX/consciousness/index
+- target: repo:LLUX
+  role: semantic-search
+  protocol: python-import
+  channel: L4-TOOLS/LLUX/consciousness/search
+- target: repo:PIANO
+  role: app-bridge
+  protocol: wazaa-channel
+  channel: L4-TOOLS/PIANO/consciousness/bridge
+- target: repo:GeriCode
+  role: platform-harness
+  protocol: local
+  channel: L2-PLATFORM/GeriCode/.geri/harness/consciousness
+- target: repo:GOVERNANCE-HUB
+  role: validator
+  protocol: yaml
+  channel: L0-CANON/GOVERNANCE-HUB/consciousness/validation
+- target: repo:TOPOS
+  role: topology-registry
+  protocol: yaml
+  channel: L1-INFRA/TOPOS/consciousness/topology
+- target: repo:ONTOLOGY
+  role: concept-store
+  protocol: markdown-link
+  channel: L0-CANON/ONTOLOGY/consciousness/concepts
+- target: repo:KIVA-CLI
+  role: cli-invoker
+  protocol: subprocess
+  channel: L1-INFRA/KIVA-CLI/consciousness
+- target: repo:ECOS-CLI
+  role: cli-invoker
+  protocol: subprocess
+  channel: L1-INFRA/ECOS-CLI/consciousness
+- target: repo:KIX
+  role: inference-engine
+  protocol: http
+  channel: L4-TOOLS/KIX/consciousness/inference
+- target: repo:RLM-243
+  role: forensic-runner
+  protocol: wazaa-channel
+  channel: L4-TOOLS/RLM-243/consciousness/forensic
+- target: repo:TIMX
+  role: temporal-runner
+  protocol: wazaa-channel
+  channel: L4-TOOLS/TIMX/consciousness/temporal
+- target: repo:ROOTX
+  role: root-runner
+  protocol: wazaa-channel
+  channel: L4-TOOLS/ROOTX/consciousness/root
 capabilities:
-  - name: think-consciousness
-    description: "Conscience de Think : veille, standards, conception, méta-KG"
-    parameters:
-      engines: [VOLTX, VERSES, KG-L, TALEX]
-  - name: do-consciousness
-    description: "Conscience de Do : exécution, pipelines, orchestration"
-    parameters:
-      engines: [CTULU, KG-CAUSAL, KIVA-CLI, ECOS-CLI, TRIX]
-  - name: check-consciousness
-    description: "Conscience de Check : vérification, conformité, traçabilité"
-    parameters:
-      engines: [ARGUS, GOVERNANCE-HUB, NEXUS, VOLTX]
-  - name: mdu-reflection
-    description: "MDU comme reflet élégant et structurant (topologique, sémantique, métier)"
-    parameters:
-      dimensions: [topological, semantic, business]
-      selection: true
-      organization: true
-  - name: engineering-ideas-integration
-    description: "Intégration des concepts opérationnels de GG-knox/engineering-ideas"
-    parameters:
-      source: GG-knox/engineering-ideas
-      concepts: [filetree-problematisation, value-machine, loop-engineering, external-verification-mandatory, gate-layers, delta-check, fresh-context-verifier, agent-engineering-maturity, context-engineering, ecosystem-feedback-loop, deployment-patterns, independent-sources-rule, confidence-threshold, meta-edit-loop, learning-curve-expectation, carry-forward-principle, reject-work-principle]
+- name: think-consciousness
+  description: "Conscience de Think : veille, standards, conception, m\xE9ta-KG"
+  parameters:
+    engines:
+    - VOLTX
+    - VERSES
+    - KG-L
+    - TALEX
+- name: do-consciousness
+  description: "Conscience de Do : ex\xE9cution, pipelines, orchestration"
+  parameters:
+    engines:
+    - CTULU
+    - KG-CAUSAL
+    - KIVA-CLI
+    - ECOS-CLI
+    - TRIX
+- name: check-consciousness
+  description: "Conscience de Check : v\xE9rification, conformit\xE9, tra\xE7abilit\xE9"
+  parameters:
+    engines:
+    - ARGUS
+    - GOVERNANCE-HUB
+    - NEXUS
+    - VOLTX
+- name: mdu-reflection
+  description: "MDU comme reflet \xE9l\xE9gant et structurant (topologique, s\xE9\
+    mantique, m\xE9tier)"
+  parameters:
+    dimensions:
+    - topological
+    - semantic
+    - business
+    selection: true
+    organization: true
+- name: engineering-ideas-integration
+  description: "Int\xE9gration des concepts op\xE9rationnels de GG-knox/engineering-ideas"
+  parameters:
+    source: GG-knox/engineering-ideas
+    concepts:
+    - filetree-problematisation
+    - value-machine
+    - loop-engineering
+    - external-verification-mandatory
+    - gate-layers
+    - delta-check
+    - fresh-context-verifier
+    - agent-engineering-maturity
+    - context-engineering
+    - ecosystem-feedback-loop
+    - deployment-patterns
+    - independent-sources-rule
+    - confidence-threshold
+    - meta-edit-loop
+    - learning-curve-expectation
+    - carry-forward-principle
+    - reject-work-principle
+adr: ADR-015-unified-design-v2

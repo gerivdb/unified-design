@@ -1,0 +1,45 @@
+---
+cross_repo_flow:
+  name: timx -> rlm-243
+  provider: TIMX
+  consumers:
+    - RLM-243
+  contract:
+    interface: http
+    format: json
+    paths:
+      - TIMX/tools/perimeter-awareness/*.py
+      - RLM-243/src/*.py
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — TIMX → RLM-243
+
+## Rôle
+RLM-243 est le **méta-orchestrateur ternaire** qui consomme les features de TIMX pour la validation PES.
+
+## Contrat
+- **Provider** : `TIMX` expose les features via API HTTP.
+- **Consumer** : `RLM-243` consomme ces features pour :
+  - Vote ternaire orchestration
+  - Validation PES
+- **Protocole** : HTTP REST
+
+## Validation
+- `provider_registered` : `TIMX` est dans `known_repositories.yaml`.
+- `consumer_registered` : `RLM-243` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `TIMX ↔ RLM-243`.
+- `contract_exists` : `RLM-243/src/` existe.
+
+## Références
+- `TIMX/design.yaml`
+- `RLM-243/`

@@ -1,0 +1,12 @@
+---
+name: meta.quality
+category: META
+version: v1.0.0
+description: "Quality patterns: atomic-fragmentation, ergonomics, extra-spection, generate-then-syntax-validate, incremental-discipline"
+entry_point: "scripts/loopx/meta_quality.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Quality pattern validation: atomic-fragmentation, entropy-search, ergonomics, extra-spection"
+examples:
+  - "loopx routine meta.quality"

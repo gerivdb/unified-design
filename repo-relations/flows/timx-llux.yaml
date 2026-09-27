@@ -1,0 +1,48 @@
+---
+cross_repo_flow:
+  name: timx -> llux
+  provider: TIMX
+  consumers:
+    - LLUX
+  contract:
+    interface: python-import
+    format: binary
+    paths:
+      - TIMX/tools/perimeter-awareness/*.py
+      - LLUX/src/*.zig
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — TIMX → LLUX
+
+## Rôle
+TIMX est le **TIMeline Event eXtractor / Feature Store** qui fournit des signatures temporelles et des features vectorielles à LLUX pour l'inférence.
+
+## Contrat
+- **Provider** : `TIMX` expose :
+  - `temporal-signature-store` : signatures temporelles pour LLM inference
+  - `feature-cache` : cache TTL pour feature vectors
+  - `rollup-engine` : agrégation de features par fenêtre temporelle
+- **Consumer** : `LLUX` consomme ces features pour :
+  - Moteur d'inférence LLM natif TRIX
+  - Indexation base 243
+- **Protocole** : `python-import` direct
+
+## Validation
+- `provider_registered` : `TIMX` est dans `known_repositories.yaml`.
+- `consumer_registered` : `LLUX` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `TIMX ↔ LLUX`.
+- `contract_exists` : `TIMX/tools/perimeter-awareness/` existe.
+
+## Références
+- `TIMX/design.yaml`
+- `LLUX/`

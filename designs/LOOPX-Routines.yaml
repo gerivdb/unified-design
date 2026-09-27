@@ -2,144 +2,144 @@ name: LOOPX-Routines
 version: 1.0.0
 status: active
 layer: L3-CITIZENS
+description: Design artifact for LOOPX-Routines.
 intent_hash: 0xLOOPX_ROUTINES_20260901
 inherits:
-  - fractal-engineering-strata
-  - meta-coherence
-  - clone-governance
+- fractal-engineering-strata
+- meta-coherence
+- clone-governance
 depends_on:
-  - INFX
-  - WAZAA
-  - CTULU
-  - ECOS-CLI
+- INFX
+- WAZAA
+- CTULU
+- ECOS-CLI
 bridges:
-  - target: INFX
-    role: consumer
-    protocol: python-package
-  - target: WAZAA
-    role: publisher
-    protocol: bus
-  - target: CTULU
-    role: tool-integration
-    protocol: cli
-  - target: ECOS-CLI
-    role: provider
-    protocol: provision
+- target: INFX
+  role: consumer
+  protocol: python-package
+- target: WAZAA
+  role: publisher
+  protocol: bus
+- target: CTULU
+  role: tool-integration
+  protocol: cli
+- target: ECOS-CLI
+  role: provider
+  protocol: provision
 parameters:
   routines_registry:
     categories:
-      - GIT
-      - TEST
-      - DEPLOY
-      - SYNC
-      - META
-    total_routines: 13
+    - GIT
+    - TEST
+    - DEPLOY
+    - SYNC
+    - META
+    - ZIG
+    - BREAKTHROUGH
+    - CITIZENS
+    - KG_L
+    - WAZAA
+    - CLOSEOUT
+    - LOOP_TYPES
+    - VERIFIERS
+    - SKILLS
+    - GRAPH_SHAPES
+    - ISOLATION
+    - BUDGET
+    - MEMORY
+    - DAILY_LOOPS
+    - OPS
+    - HOOKS
+    total_routines: 82
     git_ops:
-      - git.sync
-      - git.push
-      - git.commit
-      - git.branch
+    - git.sync
+    - git.push
+    - git.commit
+    - git.branch
     test_ops:
-      - test.run
-      - test.lint
-      - test.format
+    - test.run
+    - test.lint
+    - test.format
     deploy_ops:
-      - deploy.docker
-      - deploy.k8s
-      - deploy.systemd
+    - deploy.docker
+    - deploy.k8s
+    - deploy.systemd
     sync_ops:
-      - sync.all
-      - sync.watch
+    - sync.all
+    - sync.watch
     meta_ops:
-      - meta.install
-      - meta.version
-      - meta.list
-      - meta.manifest
+    - meta.install
+    - meta.version
+    - meta.list
+    - meta.manifest
+    zig_ops:
+    - zig.build
+    - zig.test
+    - zig.run
+    breakthrough_ops:
+    - breakthrough.diagnose
+    - breakthrough.fix
+    - breakthrough.verify
+    citizens_ops:
+    - citizens.list
+    - citizens.inspect
+    - citizens.promote
+    kg_l_ops:
+    - kg_l.export
+    - kg_l.validate
+    - kg_l.sync
+    wazaa_ops:
+    - wazaa.send
+    - wazaa.receive
+    - wazaa.inbox
+    closeout_ops:
+    - closeout.session
+    - closeout.cleanup
+    loop_types_ops:
+    - loop_types.daily
+    - loop_types.breakthrough
+    - loop_types.meta
+    verifiers_ops:
+    - verifiers.yaml
+    - verifiers.ontology
+    - verifiers.catalog
+    skills_ops:
+    - skills.list
+    - skills.invoke
+    - skills.validate
+    graph_shapes_ops:
+    - graph_shapes.dag
+    - graph_shapes.spider
+    - graph_shapes.tree
+    isolation_ops:
+    - isolation.worktree
+    - isolation.sandbox
+    budget_ops:
+    - budget.check
+    - budget.report
+    memory_ops:
+    - memory.recall
+    - memory.store
+    daily_loops_ops:
+    - daily_loops.scan
+    - daily_loops.sync
+    ops_ops:
+    - ops.health
+    - ops.status
+    - ops.logs
+    hooks_ops:
+    - hooks.install
+    - hooks.validate
   cli:
     framework: click
     entry_point: loopx
-    groups: [git, test, deploy, sync, meta]
-  quality_gates:
-    lint: ruff
-    format: black + ruff
-    types: mypy --strict
-    pre_commit: loopx-lint + loopx-format
-  schema:
-    routine_config_schema:
-      type: object
-      properties:
-        category:
-          type: string
-          enum: [git, test, deploy, sync, meta]
-        name:
-          type: string
-        version:
-          type: string
-        entry_point:
-          type: string
-        dependencies:
-          type: array
-          items:
-            type: string
-        config_schema:
-          type: object
-        examples:
-          type: array
-          items:
-            type: string
-        version_history:
-          type: array
-          items:
-            type: object
-            properties:
-              version:
-                type: string
-              date:
-                type: string
-              changes:
-                type: array
-                items:
-                  type: string
-              author:
-                type: string
-    manifest_schema:
-      type: object
-      properties:
-        routines:
-          type: array
-        generated_at:
-          type: string
-        registry_version:
-          type: string
-  provisioning:
-    method: pip_install_editable
-    source_path: D:\DO\WEB\TOOLS\L3-CITIZENS\LOOPX
-    package_name: loopx-routines
-    ecosystems_cli_command: ecos provision LOOPX
-  kg_l_integration:
-    fractal_engine: false
-    universal_functor: true
-    keel_r9_validation: false
-    guards:
-      - GF-1
-      - GF-2
-      - GF-3
-      - GF-4
-      - GF-5
-      - GF-6
-      - GF-7
-      - GF-8
-      - GF-9
-      - GF-10
-      - GF-11
-      - GF-12
-      - GF-13
-      - GF-14
-    meta_coherence:
-      mandatory_typing: true
-      no_implicit_optional: true
-      pre_commit_mypy_strict: true
-performance:
-  latency_p99: 100.0
-  power_max: 5.0
-  memory_mb: 50
+kg_l_integration:
+  keel_r9_validation: true
+  ontology_terms:
+  - LOOPX-Routines
+  - RoutineCategory
+  - RoutineRegistry
+  source_of_truth: unified-design/designs/LOOPX-Routines.yaml
+  routines_path: LOOPX/routines
+  total_routines_implemented: 58
+adr: ADR-015-unified-design-v2

@@ -1,0 +1,287 @@
+---
+name: strata-orchestrator-assignment
+version: 1.0.0
+status: active
+layer: L0
+intent_hash: 0xDESIGN_STRATA_ORCHESTRATOR_ASSIGNMENT_20260927
+inherits:
+  - fractal-engineering-strata
+  - ecosystem-meta-coherence
+  - meta-coherence
+  - safe-action-pattern
+description: >
+  Assigne un orchestrateur responsable par strate (L0-L4),
+  définit la mesure de complexité de charge, et détermine
+  quand, comment et selon quels seuils introduire des managers,
+  sous-managers, récursivité et délégation.
+---
+
+## Strates et orchestrateurs
+
+| Strates | Orchestrateur | Repo | Couche | Rôle |
+|---|---|---|---|---|
+| L0 | VOLTX | gerivdb/VOLTX | L0_CANON | Vault narratif, mémoire souveraine |
+| L1 | KIVA | gerivdb/KIVA | L1_CAUSALITY | Runtime, schedules, runners locaux |
+| L2 | KIX | gerivdb/KIX | L2_PLATFORM | Orchestrateur central runners RLM, alerting, dashboard |
+| L3 | VEX | gerivdb/VEX | L3_CITIZENS | Daemons L3, packaging, cycle de vie |
+| L4 | N243 | gerivdb/N243 | L4_TOOLS | Méta-orchestrateur workflows, gates, runners cognitifs |
+
+## Mesure de complexité de charge
+
+### Dimensions de mesure
+
+Tout orchestrateur de strate est évalué selon 4 dimensions :
+
+| Dimension | Métrique | Seuil d'alerte |
+|---|---|---|
+| **Nombre de membres** | `active_members_count` | > 20 |
+| **Débit de requêtes** | `requests_per_minute` | > 100 RPM |
+| **Complexité décisionnelle** | `decision_paths_count` | > 15 chemins |
+| **Volume d'état** | `state_size_mb` | > 50 MB |
+
+### Calcul du score de charge
+
+```
+load_score = (
+  (active_members / 20) * 0.3 +
+  (rpm / 100) * 0.3 +
+  (decision_paths / 15) * 0.25 +
+  (state_mb / 50) * 0.15
+)
+```
+
+### Interprétation
+
+| Score | Niveau | Action |
+|---|---|---|
+| 0.0 - 0.5 | **Léger** | Orchestrateur monolithique acceptable |
+| 0.5 - 0.8 | **Modéré** | Surveillance + optimisation |
+| 0.8 - 1.0 | **Élevé** | Planifier fragmentation |
+| > 1.0 | **Critique** | Déclencher migration vers managers |
+
+## Contrat d'interface commun
+
+Tout orchestrateur de strate doit exposer :
+
+| Interface | Méthode | Description |
+|---|---|---|
+| Health | `GET /health` | État de l'orchestrateur + scope de la strate |
+| Status | `GET /status/<scope>` | État des membres de la strate |
+| Start | `POST /start/<member>` | Démarrage d'un membre |
+| Stop | `POST /stop/<member>` | Arrêt d'un membre |
+| Deploy | `POST /deploy/<member>` | Déploiement système |
+| Metrics | `GET /metrics` | Métriques de la strate |
+| Load | `GET /load` | Score de charge + dimensions (NOUVEAU) |
+
+## Règles de gouvernance
+
+### Assignation et indépendance
+
+1. **Indépendance de couche** : un orchestrateur N ne dépend pas de l'orchestrateur N+1 pour fonctionner
+2. **Consommation optionnelle** : un orchestrateur N peut consommer l'orchestrateur N-1 pour enrichir sa propre strate
+3. **Pas d'orchestration croisée** : un repo qui n'est pas `primary_orchestrator` ne doit pas piloter la strate
+4. **Méta-cohérence** : `ecosystem-meta-coherence` valide la cohérence des assignations
+
+### Gestion de charge et délégation
+
+5. **Seuils de charge** : si `load_score > 0.8`, déclencher audit de fragmentation
+6. **Fragmentation fonctionnelle** : si une dimension dépasse son seuil, créer un manager fonctionnel
+7. **Délégation hiérarchique** : un manager peut déléguer à des sub-managers selon des sous-domaines
+8. **Récursivité limitée** : max 3 niveaux de managers par strate
+9. **Interface uniforme** : tout manager/sub-manager expose le même contrat d'interface
+10. **Observabilité** : chaque manager expose ses propres métriques de charge
+
+## Décision — quand introduire des managers ?
+
+### Critères de déclenchement
+
+Un orchestrateur doit être fragmenté en managers si :
+
+| Critère | Condition | Action |
+|---|---|---|
+| Membres actifs | `> 20` | Créer 2+ managers fonctionnels |
+| Débit | `> 100 RPM` | Ajouter load balancer |
+| Décisions | `> 15 chemins` | Splitter par domaine décisionnel |
+| État | `> 50 MB` | Externaliser le state management |
+| Score global | `> 0.8` | Audit complet + plan de fragmentation |
+
+### Pattern 1 — Manager fonctionnel
+
+**Quand** : un orchestrateur gère plusieurs domaines fonctionnels indépendants.
+
+**Exemple** : KIX gère à la fois runners RLM ET dashboard web. Si la charge augmente :
+- Créer `KIXRunnerManager` (gère runners)
+- Créer `KIXDashboardManager` (gère dashboard)
+- KIX devient un router entre les deux managers
+
+```
+KIX (primary)
+├── KIXRunnerManager (domain: runners)
+│   └── runners: [...]
+└── KIXDashboardManager (domain: dashboard)
+    └── dashboard: [...]
+```
+
+### Pattern 2 — Manager géographique/sharded
+
+**Quand** : les membres sont répartis en groupes logiques (region, datacenter, type).
+
+**Exemple** : VEX gère 19 clients d'intégration. Si la charge augmente :
+- Créer `VEXClientManagerA` (clients A-M)
+- Créer `VEXClientManagerB` (clients N-Z)
+- VEX route par préfixe de nom
+
+```
+VEX (primary)
+├── VEXClientManagerA (clients A-M)
+│   ├── brain_cognitive_client.py
+│   ├── ctulu_pipeline_client.py
+│   └── ...
+└── VEXClientManagerB (clients N-Z)
+    ├── n243_gate_client.py
+    ├── ontology_client.py
+    └── ...
+```
+
+### Pattern 3 — Manager hiérarchique (sub-managers)
+
+**Quand** : un domaine lui-même atteint sa charge critique.
+
+**Exemple** : N243 méta-orchestrateur doit gérer L0→L4. Si la charge augmente :
+- Créer `N243L0Manager` (gère L0)
+- Créer `N243L1Manager` (gère L1)
+- Créer `N243L2Manager` (gère L2)
+- Créer `N243L3Manager` (gère L3)
+- N243 agrège les 4 managers
+
+```
+N243 (primary)
+├── N243L0Manager (stratum L0)
+│   └── VOLTX
+├── N243L1Manager (stratum L1)
+│   └── KIVA
+├── N243L2Manager (stratum L2)
+│   └── KIX
+└── N243L3Manager (stratum L3)
+    └── VEX
+```
+
+### Pattern 4 — Load balancer
+
+**Quand** : le débit est la contrainte principale, pas la complexité fonctionnelle.
+
+**Exemple** : VEX reçoit 200 RPM sur 19 clients. Ajouter un load balancer :
+- Créer `VEXLoadBalancer` (répartit les requêtes)
+- 3 instances VEXWorker en parallèle
+- Load balancer round-robin par client
+
+```
+VEX (primary)
+├── VEXLoadBalancer
+│   ├── VEXWorker-1 (clients A-G)
+│   ├── VEXWorker-2 (clients H-N)
+│   └── VEXWorker-3 (clients O-Z)
+```
+
+## Règles de récursivité et délégation
+
+### Limites de récursivité
+
+| Niveau | Description | Limite |
+|---|---|---|
+| N+0 | Orchestrateur primaire | 1 par strate |
+| N+1 | Managers fonctionnels | Max 4 par orchestrateur |
+| N+2 | Sub-managers | Max 8 par manager |
+| N+3 | Workers/instances | Illimité (avec load balancer) |
+
+### Règles de délégation
+
+1. **Délégation par domaine** : un manager ne gère qu'un seul domaine fonctionnel
+2. **Interface uniforme** : tout manager expose le contrat d'interface complet
+3. **Responsabilité unique** : un manager ne délègue pas à un autre manager du même domaine
+4. **Éligibilité** : tout orchestrateur peut devenir manager si `load_score > 0.8`
+5. **Promotion** : un manager peut être promu orchestrateur primaire si l'orchestrateur primaire est supprimé
+6. **Dépréciation** : un manager dont le domaine est fusionné doit être déprécié, pas supprimé
+
+### Conditions d'apparition des managers
+
+| Condition | Pattern | Exemple |
+|---|---|---|
+| `active_members > 20` | Manager fonctionnel | VEX 19 clients → 2 managers |
+| `rpm > 100` | Load balancer | VEX 200 RPM → load balancer + 3 workers |
+| `decision_paths > 15` | Manager hiérarchique | N243 20+ workflows → 4 managers par strate |
+| `state_mb > 50` | Externalisation state | KIX state > 50 MB → KIXStateManager externe |
+| `load_score > 0.8` | Audit + fragmentation | Tous les orchestrateurs audités trimestriellement |
+
+## Traçabilité
+
+| Design | Rôle |
+|---|---|
+| `fractal-engineering-strata` | Pattern fractal par strate |
+| `ecosystem-meta-coherence` | Gouvernance adaptative Think/Do/Check |
+| `pseudo-lm-from-role` | Hiérarchie CLM/DLM/LOOPX validant les niveaux d'orchestration |
+| `kix` | Instance L2 du pattern |
+| `safe-action-pattern` | Gate d'action universelle |
+| `probe-budget-contract` | Contrat de sondage parallèle pour les health checks |
+| `win32-singleton-bind` | Preflight singleton avant tout bind TCP |
+
+## Anti-patterns
+
+| Anti-pattern | Description |
+|---|---|
+| `monolithic-orchestrator` | Un seul orchestrateur pour toutes les strates |
+| `cross-strate-control` | Un orchestrateur N+1 contrôle la strate N |
+| `orphan-stratum` | Une strate sans orchestrateur déclaré |
+| `manager-sprawl` | Trop de managers (> 4 par orchestrateur) créent de la complexité |
+| `recursive-infinite` | Récursivité sans limite, cascade de managers |
+| `load-unchecked` | Orchestrateur sans métriques de charge |
+| `domain-overlap` | Deux managers gèrent le même domaine |
+| `single-point-of-failure` | Un manager sans fallback ni réplica |
+
+## Exemples d'application
+
+### Exemple 1 — VEX actuel (score estimé)
+
+```
+VEX: 19 clients, ~50 RPM, ~10 chemins, ~10 MB
+load_score = (19/20)*0.3 + (50/100)*0.3 + (10/15)*0.25 + (10/50)*0.15
+           = 0.285 + 0.15 + 0.167 + 0.03
+           = 0.632 → LÉGER
+```
+
+→ Aucun manager nécessaire. Orchestrateur monolithique acceptable.
+
+### Exemple 2 — VEX futur (si 40 clients)
+
+```
+VEX: 40 clients, ~120 RPM, ~18 chemins, ~40 MB
+load_score = (40/20)*0.3 + (120/100)*0.3 + (18/15)*0.25 + (40/50)*0.15
+           = 0.6 + 0.36 + 0.3 + 0.12
+           = 1.38 → CRITIQUE
+```
+
+→ Déclencher fragmentation :
+- Créer `VEXClientManagerA` (clients A-M)
+- Créer `VEXClientManagerB` (clients N-Z)
+- VEX devient router
+
+### Exemple 3 — N243 méta-orchestrateur
+
+```
+N243: 5 strates, ~80 RPM, ~20 chemins, ~30 MB
+load_score = (5/20)*0.3 + (80/100)*0.3 + (20/15)*0.25 + (30/50)*0.15
+           = 0.075 + 0.24 + 0.333 + 0.09
+           = 0.738 → MODÉRÉ
+```
+
+→ Surveillance. Si ajout de L5/L6 :
+```
+N243: 7 strates, ~150 RPM, ~28 chemins, ~45 MB
+load_score = (7/20)*0.3 + (150/100)*0.3 + (28/15)*0.25 + (45/50)*0.15
+           = 0.105 + 0.45 + 0.467 + 0.135
+           = 1.157 → CRITIQUE
+```
+
+→ Déclencher fragmentation :
+- Créer `N243L0Manager`, `N243L1Manager`, `N243L2Manager`, `N243L3Manager`
+- N243 agrège les 4 managers

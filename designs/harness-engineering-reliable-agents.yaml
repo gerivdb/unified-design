@@ -1,59 +1,71 @@
----
 name: harness-engineering-reliable-agents
-description: "Harness Engineering : système de contrôle transformant un modèle probabiliste en exécutant déterministe. 6 couches : Contract Validator, Context Compiler, Policy Engine, State Manager, Verification Engine, Trace Recorder. Principes : fiabilité, contrôle, évolutivité, auditabilité, sécurité."
-version: "1.0.0"
+description: "Harness Engineering : syst\xE8me de contr\xF4le transformant un mod\xE8\
+  le probabiliste en ex\xE9cutant d\xE9terministe. 6 couches : Contract Validator,\
+  \ Context Compiler, Policy Engine, State Manager, Verification Engine, Trace Recorder.\
+  \ Principes : fiabilit\xE9, contr\xF4le, \xE9volutivit\xE9, auditabilit\xE9, s\xE9\
+  curit\xE9."
+version: 1.0.0
 status: active
 layer: L1
 intent_hash: 0xDESIGN_HARNESS_ENGINEERING_RELIABLE_AGENTS_20260918
 inherits:
-  - agent-observability-architecture
-  - deterministic-execution-log-clipping
-  - consciousness
+- agent-observability-architecture
+- deterministic-execution-log-clipping
+- consciousness
 depends_on:
-  - agent-observability-architecture
-  - deterministic-execution-log-clipping
-  - consciousness
-  - meta-coherence
+- agent-observability-architecture
+- deterministic-execution-log-clipping
+- consciousness
+- meta-coherence
 capabilities:
-  - name: contract-validator
-    description: "Valide le contrat de tâche avant exécution : entrées, sorties, préconditions, postconditions"
-    parameters:
-      validation_point: pre_execution
-      reject_on_invalid: true
-  - name: context-compiler
-    description: "Compile le contexte optimal pour l'agent : fenêtre glissante, fraîcheur, embedding drift"
-    parameters:
-      context_window: bounded
-      freshness_check: required
-      embedding_drift: monitored
-  - name: policy-engine
-    description: "Moteur de politiques : garde-fous, autorisations, interdictions, niveaux d'autonomie"
-    parameters:
-      policy_source: governance_hub
-      enforcement: mandatory
-      override: human_only
-  - name: state-manager
-    description: "Gestion d'état durable : persistance, rejeu, recovery, WAL"
-    parameters:
-      persistence: append_only_ledger
-      replay: deterministic
-      recovery: automatic
-  - name: verification-engine
-    description: "Moteur de vérification : capteurs déterministes, évaluateurs croisés, preuves d'exécution"
-    parameters:
-      deterministic_sensors: required
-      llm_judge_alone: forbidden
-      proof_of_execution: mandatory
-  - name: trace-recorder
-    description: "Enregistreur de traces : logs d'exécution, télémétrie, spans, DAG causal"
-    parameters:
-      trace_format: dag_causal
-      retention: policy_defined
-      export: unified
+- name: contract-validator
+  description: "Valide le contrat de t\xE2che avant ex\xE9cution : entr\xE9es, sorties,\
+    \ pr\xE9conditions, postconditions"
+  parameters:
+    validation_point: pre_execution
+    reject_on_invalid: true
+- name: context-compiler
+  description: "Compile le contexte optimal pour l'agent : fen\xEAtre glissante, fra\xEE\
+    cheur, embedding drift"
+  parameters:
+    context_window: bounded
+    freshness_check: required
+    embedding_drift: monitored
+- name: policy-engine
+  description: 'Moteur de politiques : garde-fous, autorisations, interdictions, niveaux
+    d''autonomie'
+  parameters:
+    policy_source: governance_hub
+    enforcement: mandatory
+    override: human_only
+- name: state-manager
+  description: "Gestion d'\xE9tat durable : persistance, rejeu, recovery, WAL"
+  parameters:
+    persistence: append_only_ledger
+    replay: deterministic
+    recovery: automatic
+- name: verification-engine
+  description: "Moteur de v\xE9rification : capteurs d\xE9terministes, \xE9valuateurs\
+    \ crois\xE9s, preuves d'ex\xE9cution"
+  parameters:
+    deterministic_sensors: required
+    llm_judge_alone: forbidden
+    proof_of_execution: mandatory
+- name: trace-recorder
+  description: "Enregistreur de traces : logs d'ex\xE9cution, t\xE9l\xE9m\xE9trie,\
+    \ spans, DAG causal"
+  parameters:
+    trace_format: dag_causal
+    retention: policy_defined
+    export: unified
 principles:
-  - P0_HARNESS_CONTROL: le harnais transforme un modèle probabiliste en exécutant déterministe
-  - P0_CONTRACT_FIRST: toute exécution passe par un contrat de tâche validé
-  - P0_CONTEXT_BOUNDED: le contexte est compilé, pas injecté brut
-  - P0_POLICY_ENFORCEMENT: les politiques sont appliquées par le harnais, pas par l'agent
-  - P0_STATE_DURABLE: l'état est durable et rejouable
-  - P0_VERIFICATION_BEFORE_TRUST: la confiance vient de la vérification, pas de la foi
+- P0_HARNESS_CONTROL: "le harnais transforme un mod\xE8le probabiliste en ex\xE9cutant\
+    \ d\xE9terministe"
+- P0_CONTRACT_FIRST: "toute ex\xE9cution passe par un contrat de t\xE2che valid\xE9"
+- P0_CONTEXT_BOUNDED: "le contexte est compil\xE9, pas inject\xE9 brut"
+- P0_POLICY_ENFORCEMENT: "les politiques sont appliqu\xE9es par le harnais, pas par\
+    \ l'agent"
+- P0_STATE_DURABLE: "l'\xE9tat est durable et rejouable"
+- P0_VERIFICATION_BEFORE_TRUST: "la confiance vient de la v\xE9rification, pas de\
+    \ la foi"
+adr: ADR-015-unified-design-v2

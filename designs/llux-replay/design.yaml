@@ -1,5 +1,15 @@
 ---
 name: LLUX-REPLAY
+version: 1.0.0
+status: active
+layer: L0
+description: "LLUX-REPLAY — Runner de replay LLUX. Rejoue des incidents historiques pour valider les corrections.
+"
+consumers:
+  - llux-learn
+  - conversation-cognitive
+
+name: LLUX-REPLAY
 version: "1.0.0"
 status: active
 strate: L3-CITIZENS

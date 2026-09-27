@@ -1,8 +1,8 @@
 ---
 type: PRD
 version: "1.1"
-date: "2026-09-21"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xPRD_MOC_META_DESIGN_SELF_HEALING_20260921
 ---
 
@@ -10,34 +10,34 @@ intent_hash: 0xPRD_MOC_META_DESIGN_SELF_HEALING_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
-**Date** : 2026-09-21  
-**Version** : 1.1 (évaluation utilité + périmètre)
+**Statut** : approved  
+**Date** : 2026-09-22  
+**Version** : 1.1 (implémentation design + intégration MDU)
 
 ---
 
 ## Contexte
 
-Le MDU accumule des écarts structurels qui nécessitent aujourd’hui une correction manuelle :
-- doublons d’IDs
+Le MDU accumule des écarts structurels qui nécessitent aujourd'hui une correction manuelle :
+- doublons d'IDs
 - chemins ambigus
 - atomes orphelins
 - `consumers: []` vide
 
-Il n’existe pas de mécanisme d’auto-détection et de proposition de correction atomique pour ces écarts.
+Il n'existe pas de mécanisme d'auto-détection et de proposition de correction atomique pour ces écarts.
 
 ## Mission
 
-Créer un design d’auto-guérison MDU qui détecte les gaps, classe leur criticité, et propose des patches atomiques sans mutation automatique du MDU.
+Créer un design d'auto-guérison MDU qui détecte les gaps, classe leur criticité, et propose des patches atomiques sans mutation automatique du MDU.
 
-## Évaluation d’utilité
+## Évaluation d'utilité
 
 | Composant | Utilité | Impact | Effort | Justification |
 |-----------|---------|--------|--------|---------------|
 | Auto-détection gaps | ⭐⭐⭐⭐⭐ | P0 | Minimal | Première étape de toute guérison |
 | Classification criticité | ⭐⭐⭐⭐ | P1 | Minimal | Priorise les corrections |
 | Proposition patches atomiques | ⭐⭐⭐⭐ | P1 | Minimal | Rend les corrections applicables |
-| Rapport de santé MDU | ⭐⭐⭐ | P1 | Minimal | Traçabilité de l’état du MDU |
+| Rapport de santé MDU | ⭐⭐⭐ | P1 | Minimal | Traçabilité de l'état du MDU |
 
 **Verdict** : 1 P0 + 3 P1. Effort minimal, valeur élevée. Réduit la dette de revue manuelle.
 
@@ -52,16 +52,16 @@ Créer un design d’auto-guérison MDU qui détecte les gaps, classe leur criti
 ## Livrables
 
 1. **Design `meta-design-self-healing`**
-   - États : `IDLE` → `SCAN` → `CLASSIFY` → `PROPOSE` → `APPLY`
-   - Règles de criticité : `CRITICAL`, `IMPORTANT`, `MEDIUM`, `LOW`
-   - Format de patch : diff unifié par artefact
+    - États : `IDLE` → `SCAN` → `CLASSIFY` → `PROPOSE` → `APPLY`
+    - Règles de criticité : `CRITICAL`, `IMPORTANT`, `MEDIUM`, `LOW`
+    - Format de patch : diff unifié par artefact
 
 2. **Workflow `workflows/mdu-daily-sync.md`**
-   - Intègre le scan de santé MDU
-   - Intégration dans `session-boot-skill`
+    - Intègre le scan de santé MDU
+    - Intégration dans `session-boot-skill`
 
 3. **Pipeline `pipelines/pipeline-mdu-validation.yaml`**
-   - Enchaîne lint → scan → classification → rapport
+    - Enchaîne lint → scan → classification → rapport
 
 ## Dépendances
 
@@ -70,21 +70,30 @@ Créer un design d’auto-guérison MDU qui détecte les gaps, classe leur criti
 | `tools/mdu-lint.py` | amont | Détection des écarts |
 | `skills/mdu-integrity-checker` | pair | Audit MDU |
 | `designs/design-ops-loop/design.yaml` | pair | Boucle THINK/DO/CHECK |
-| `workflows/session-boot-closeout.md` | pair | Workflow d’intégration |
+| `workflows/session-boot-closeout.md` | pair | Workflow d'intégration |
 
-## Critères d’acceptation
+## Critères d'acceptation
 
-- [ ] Design `meta-design-self-healing` créé et validé par `connard-validator`
-- [ ] Workflow `mdu-daily-sync` créé
-- [ ] Pipeline `pipeline-mdu-validation` créé
-- [ ] Rapport de santé MDU généré sans erreur
-- [ ] Aucun doublon d’ID introduit
+- [x] Design `meta-design-self-healing` créé et validé par `connard-validator`
+- [x] Workflow `mdu-daily-sync` créé
+- [x] Pipeline `pipeline-mdu-validation` créé
+- [x] Rapport de santé MDU généré sans erreur
+- [x] Aucun doublon d'ID introduit
+
+## Proof-of-Life
+
+| Item | Preuve | Horodatage |
+|------|--------|------------|
+| Design `meta-design-self-healing` | `designs/meta-design-self-healing/design.yaml` créé | 2026-09-22 |
+| Meta-design update | `meta-design.yaml` mis à jour | 2026-09-22 |
+| Workflow existant | `workflows/mdu-daily-sync.md` | 2026-09-21 |
+| Pipeline existant | `pipelines/pipeline-mdu-validation.yaml` | 2026-09-21 |
 
 ## Risques
 
 | Risque | Impact | Mitigation |
 |--------|--------|------------|
-| Mutation non autorisée du MDU | Élevé | Mode propose-only, pas d’apply automatique |
+| Mutation non autorisée du MDU | Élevé | Mode propose-only, pas d'apply automatique |
 | Faux négatifs sur chemins historiques | Moyen | Whitelist de chemins acceptés |
 | Performance sur arborescence large | Faible | Scan atomique par dossier |
 
@@ -94,7 +103,10 @@ Créer un design d’auto-guérison MDU qui détecte les gaps, classe leur criti
 - `skills/mdu-integrity-checker`
 - `designs/design-ops-loop/design.yaml`
 - `workflows/session-boot-closeout.md`
+- `workflows/mdu-daily-sync.md`
+- `pipelines/pipeline-mdu-validation.yaml`
 - ADR-2026-09-19-SAFE-ACTION-PATTERN
+- ADR-2026-09-21-008-META-DESIGN-SELF-HEALING
 
 ---
 

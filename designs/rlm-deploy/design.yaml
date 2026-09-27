@@ -1,5 +1,14 @@
 ---
 name: RLM-DEPLOY
+version: 1.0.0
+status: active
+layer: L0
+description: "RLM-DEPLOY — Service de deploiement pour les runners RLM.
+"
+consumers:
+  - rlm-config
+
+name: RLM-DEPLOY
 version: "1.0.0"
 status: active
 strate: L2-PLATFORM

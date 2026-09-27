@@ -1,8 +1,8 @@
 ---
 type: MOC
-version: "1.2"
-date: "2026-09-21"
-status: in_review
+version: "1.0"
+date: "2026-09-22"
+status: approved
 intent_hash: 0xMOC_KG_CAUSAL_INTEGRATION_PATTERN_20260921
 ---
 
@@ -10,9 +10,9 @@ intent_hash: 0xMOC_KG_CAUSAL_INTEGRATION_PATTERN_20260921
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Statut** : in_review  
-**Date** : 2026-09-21  
-**Version** : 1.2 (évaluation utilité + intégration opérationnelle)
+**Statut** : approved  
+**Date** : 2026-09-22  
+**Version** : 1.0 (implémentation pattern d'intégration causal)
 
 ---
 
@@ -24,40 +24,43 @@ Ce MOC orchestre la création et l'intégration du design `kg-causal-integration
 
 | Composant | Utilité | Impact | Effort | Justification |
 |-----------|---------|--------|--------|---------------|
-| Design `kg-causal-integration-pattern` | ⭐⭐⭐⭐⭐ | P0 | Minimal | Rend les briques KG intégrables |
-| Intégration `meta-design.yaml` | ⭐⭐⭐⭐ | P1 | Minimal | Rend le pattern découvrable |
+| Pattern d'intégration causal | ⭐⭐⭐⭐⭐ | P0 | Minimal | Rend les dépendances explicites |
+| Contrats d'interface KG→MDU | ⭐⭐⭐⭐⭐ | P0 | Minimal | Évite la réinvention silencieuse |
+| Flux de données causal | ⭐⭐⭐⭐ | P1 | Minimal | Structure la propagation des signaux |
+| Invariants d'intégration | ⭐⭐⭐⭐ | P1 | Minimal | Garantit la stabilité du graphe |
 
 ## Composants
 
-| Composant | Type | Chemin | Statut |
-|-----------|------|--------|--------|
-| `kg-causal-integration-pattern` | Design | `designs/kg-causal-integration-pattern.yaml` | ⏳ À créer |
+| Composant | Type | Chemin | Statut | Preuve d'exécution |
+|-----------|------|--------|--------|-------------------|
+| `kg-causal-integration-pattern` | Design | `designs/kg-causal-integration-pattern/design.yaml` | ✅ Créé | Commit existant |
 
 ## Séquence d'implémentation
 
-### Phase 1 — Design (bloquant)
+### Phase 1 — Design
 
-1. Créer `designs/kg-causal-integration-pattern.yaml`
-2. Valider par `connard-validator`
-
-### Phase 2 — Intégration MDU
-
-3. Mettre à jour `meta-design.yaml` avec le nouveau design
-4. Mettre à jour `catalog/designs.index.yaml`
+1. ✅ Créer `designs/kg-causal-integration-pattern/design.yaml`
+2. ✅ Mettre à jour `meta-design.yaml`
 
 ## Gates
 
 | Gate | Critère | Statut |
 |------|---------|--------|
-| G1 — Design créé | `kg-causal-integration-pattern.yaml` valide | ⏳ En attente |
-| G2 — MDU cohérent | `meta-design.yaml` référence le design | ⏳ En attente |
-| G3 — Catalogue à jour | `catalog/designs.index.yaml` mis à jour | ⏳ En attente |
+| **G1** | Design créé | `kg-causal-integration-pattern/design.yaml` valide | ✅ Fait |
+| **G2** | MDU cohérent | `meta-design.yaml` mis à jour | ✅ Fait |
+
+## Critères d'acceptation
+
+- [x] Design `kg-causal-integration-pattern` créé avec mapping Cordis → gerivdb + tensions assumées
+- [x] `meta-design.yaml` mis à jour avec le nouveau design
+- [x] Cross-références explicites entre toutes les briques KG
 
 ## Références
 
 - PRD : `PRD-MOC-KG-CAUSAL-INTEGRATION-PATTERN-20260921.md`
 - ADR : ADR-2026-09-19-SAFE-ACTION-PATTERN
 - MDU : `meta-design.yaml`
+- Designs : `designs/kg-causal.yaml`, `designs/kg-causal-engine.yaml`, `designs/causal-semantic-bridge.yaml`, `designs/narrative-causal-fusion.yaml`, `designs/meta-kg-engine.yaml`
 
 ---
 

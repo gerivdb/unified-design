@@ -1,4 +1,11 @@
+---
 name: agentic-swarm-git-coordination
+version: 1.0.0
+status: proposed
+layer: L0
+description: "Agentic Swarm Git Coordination"
+consumers:
+
 description: "Agentic Swarm Git Coordination"
 version: "1.0.0"
 parent: unified-design

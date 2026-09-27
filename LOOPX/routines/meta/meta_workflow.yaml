@@ -1,0 +1,12 @@
+---
+name: meta.workflow
+category: META
+version: v1.0.0
+description: "Workflow patterns: problem-structuring-method, value-machine, workflow orchestration"
+entry_point: "scripts/loopx/meta_workflow.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Workflow pattern validation: problem-structuring-method, value-machine"
+examples:
+  - "loopx routine meta.workflow"

@@ -1,0 +1,129 @@
+---
+name: kg-causal-integration-pattern
+version: "1.0.0"
+status: active
+layer: L0
+intent_hash: 0xDESIGN_KG_CAUSAL_INTEGRATION_PATTERN_20260921
+inherits:
+  - kg-causal
+  - kg-causal-engine
+  - causal-semantic-bridge
+  - narrative-causal-fusion
+  - meta-kg-engine
+  - design-ops-loop
+  - safe-action-pattern
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+  - ATOM-CONFIDENCE-THRESHOLD
+  - ATOM-INDEPENDENT-SOURCES-RULE
+  - ATOM-UMODEL-AGENT-READY-DATA
+  - ATOM-DELTA-CHECK
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+description: >
+  Pattern d'intégration causal unifié qui relie explicitement les designs et atomes KG existants.
+  Formalise les contrats d'interface, les flux de données et les invariants à respecter
+  pour produire de la métacohérence opérationnelle.
+capabilities:
+  - name: kg-to-mdu-interface
+    description: "Contrat d'interface entre KG et MDU"
+  - name: causal-data-flow
+    description: "Flux de données causal structuré"
+  - name: integration-invariants
+    description: "Invariants d'intégration du graphe"
+  - name: z600-env2-adaptation
+    description: "Adaptation aux contraintes hardware Z600/ENV2"
+states:
+  - name: IDLE
+    nature: en attente d'intégration
+    gate_to_next: CONTRACT
+    question: "Les contrats d'interface sont-ils définis ?"
+  - name: CONTRACT
+    nature: définition des contrats
+    gate_to_next: FLOW
+    question: "Les contrats sont-ils cohérents entre les briques ?"
+  - name: FLOW
+    nature: structuration des flux de données
+    gate_to_next: VALIDATE
+    question: "Les flux sont-ils tracés et vérifiables ?"
+  - name: VALIDATE
+    nature: validation de l'intégration
+    gate_to_next: IDLE
+    question: "Les invariants sont-ils respectés ?"
+functions:
+  - id: F1
+    name: DÉFINIR_CONTRATS
+    state: IDLE→CONTRACT
+    description: "Définition des contrats d'interface entre briques KG"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: F2
+    name: VÉRIFIER_COHÉRENCE
+    state: CONTRACT
+    description: "Vérification de la cohérence des contrats"
+    implements: ATOM-GATE-LAYERS
+  - id: F3
+    name: STRUCTURER_FLUX
+    state: FLOW
+    description: "Structuration des flux de données causal"
+    implements: ATOM-UMODEL-AGENT-READY-DATA
+  - id: F4
+    name: VALIDER_INVARIANTS
+    state: VALIDATE
+    description: "Validation des invariants d'intégration"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+    veto: true
+  - id: F5
+    name: BLOQUER_SI_NON_CONFORME
+    state: VALIDATE
+    description: "Blocage si invariants échouent"
+    implements: ATOM-STOP-CONDITION
+    veto: true
+  - id: F6
+    name: ENREGISTRER_TRACE
+    state: VALIDATE→IDLE
+    description: "Enregistrement horodaté de l'intégration"
+    implements: ATOM-DELTA-CHECK, ATOM-CARRY-FORWARD-PRINCIPLE
+invariant: "Toute intégration de brique KG respecte les contrats d'interface et les invariants du graphe causal."
+genes:
+  - id: G1
+    name: explicit-contracts
+    description: "Les contrats d'interface sont explicites et documentés"
+  - id: G2
+    name: traceability
+    description: "Toute intégration est tracée et horodatée"
+  - id: G3
+    name: invariant-protection
+    description: "Les invariants du graphe sont protégés"
+  - id: G4
+    name: z600-env2-adaptation
+    description: "Le pattern s'adapte aux contraintes hardware"
+anti_patterns:
+  - missing_gene: explicit-contracts
+    pathology: "Intégrations implicites → dettes techniques invisibles"
+  - missing_gene: traceability
+    pathology: "Intégrations sans traçabilité → impossibilité d'auditer"
+  - missing_gene: invariant-protection
+    pathology: "Invariants cassés → perte de métacohérence"
+  - missing_gene: z600-env2-adaptation
+    pathology: "Pattern non adapté au hardware → échec en production"
+inheritance_loop: |
+  IDLE → CONTRACT → FLOW → VALIDATE → IDLE
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - repo: gerivdb/KG-CAUSAL
+    relation: integrates
+  - repo: gerivdb/VOLTX
+    relation: stores_proofs
+  - design: kg-causal
+  - design: kg-causal-engine
+  - design: causal-semantic-bridge
+  - design: narrative-causal-fusion
+  - design: meta-kg-engine
+  - design: design-ops-loop
+  - design: safe-action-pattern
+  - atom: ATOM-PRIMITIVE-ATOMICITY-CONTRACT
+  - adr: ADR-2026-09-19-SAFE-ACTION-PATTERN
+  - prd_moc: PRD-MOC-KG-CAUSAL-INTEGRATION-PATTERN-20260921
+  - moc: MOC-KG-CAUSAL-INTEGRATION-PATTERN-20260921

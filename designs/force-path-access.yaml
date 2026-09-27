@@ -1,4 +1,10 @@
+---
+name: force-path-access
 version: 1.0.0
+status: draft
+layer: L0
+description: "Design artifact for force-path-access."
+
 intent_hash: 0xforcepath_20260801
 rules:
 - id: FPA-001

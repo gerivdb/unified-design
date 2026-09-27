@@ -1,0 +1,46 @@
+---
+cross_repo_flow:
+  name: governance-hub -> ecos-cli
+  provider: GOVERNANCE-HUB
+  consumers:
+    - ECOS-CLI
+  contract:
+    interface: file
+    format: yaml
+    paths:
+      - known_repositories.yaml
+      - ECOSYSTEME-1/*.yaml
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P0
+  status: active
+---
+
+# Flow — GOVERNANCE-HUB → ECOS-CLI
+
+## Rôle
+ECOS-CLI est le **CLI multi-repo** qui opère sur l'ensemble de l'écosystème. Il consomme `known_repositories.yaml` pour lister les repos, valider les chemins et exécuter les commands cross-repo.
+
+## Contrat
+- **Provider** : `GOVERNANCE-HUB` expose `known_repositories.yaml`.
+- **Consumer** : `ECOS-CLI` lit la SOT pour :
+  - `ecos registry` : lister tous les repos actifs
+  - `ecos health` : vérifier l'état de chaque repo
+  - `ecos sync` : synchroniser les repos
+- **Dérivation** : `local_path`, `layer`, `status` sont utilisés pour résoudre les chemins et filtrer les repos par strate.
+
+## Validation
+- `provider_registered` : `GOVERNANCE-HUB` est dans `known_repositories.yaml`.
+- `consumer_registered` : `ECOS-CLI` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `GOVERNANCE-HUB → ECOS-CLI → GOVERNANCE-HUB`.
+- `contract_exists` : `known_repositories.yaml` est lisible.
+
+## Références
+- `ECOS-CLI/bin/ecos.ps1`
+- `GOVERNANCE-HUB/known_repositories.yaml`

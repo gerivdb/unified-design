@@ -1,58 +1,68 @@
----
 name: fresh-context-verifier
-description: "Fresh-Context Vérificateur inspiré de GG-knox/engineering-ideas/300-kimi-k3/3.md. Vérifie que le contexte d'un agent est frais avant exécution : TTL, embedding drift, source integrity, cross-model agreement. Bloque l'exécution si le contexte est stale."
-version: "1.0.0"
+description: "Fresh-Context V\xE9rificateur inspir\xE9 de GG-knox/engineering-ideas/300-kimi-k3/3.md.\
+  \ V\xE9rifie que le contexte d'un agent est frais avant ex\xE9cution : TTL, embedding\
+  \ drift, source integrity, cross-model agreement. Bloque l'ex\xE9cution si le contexte\
+  \ est stale."
+version: 1.0.0
 status: active
 layer: L0
 intent_hash: 0xDESIGN_FRESH_CONTEXT_VERIFIER_20260917
 inherits:
-  - context-engineering
+- context-engineering
 depends_on:
-  - context-engineering
+- context-engineering
 bridges:
-  - target: repo:BRAIN
-    role: cognitive-layer
-    protocol: wazaa-channel
-    channel: L4-TOOLS/BRAIN/fresh-context-verifier/cognitive
-  - target: repo:KG-L
-    role: causal-engine
-    protocol: wazaa-channel
-    channel: L4-TOOLS/KG-L/fresh-context-verifier/causal
-  - target: repo:VOLTX
-    role: narrative-vault
-    protocol: wazaa-channel
-    channel: L0-CANON/VOLTX/fresh-context-verifier/narrative
-
+- target: repo:BRAIN
+  role: cognitive-layer
+  protocol: wazaa-channel
+  channel: L4-TOOLS/BRAIN/fresh-context-verifier/cognitive
+- target: repo:KG-L
+  role: causal-engine
+  protocol: wazaa-channel
+  channel: L4-TOOLS/KG-L/fresh-context-verifier/causal
+- target: repo:VOLTX
+  role: narrative-vault
+  protocol: wazaa-channel
+  channel: L0-CANON/VOLTX/fresh-context-verifier/narrative
 capabilities:
-  - name: ttl-check
-    description: "Vérifie que le contexte n'a pas dépassé son TTL"
-    parameters:
-      ttl_seconds: 3600
-      action_on_stale: block_execution
-  - name: embedding-drift-check
-    description: "Vérifie que l'embedding du contexte n'a pas drifté"
-    parameters:
-      drift_threshold: 0.15
-      action_on_drift: block_execution
-  - name: source-integrity-check
-    description: "Vérifie l'intégrité des sources du contexte (hash, signature)"
-    parameters:
-      hash_algorithm: sha256
-      action_on_mismatch: block_execution
-  - name: cross-model-agreement
-    description: "Vérifie l'accord entre modèles pour le contexte"
-    parameters:
-      models: [gpt-4, claude-3, gemini-pro]
-      agreement_threshold: 0.6
-      action_on_disagreement: warn_and_continue
-  - name: freshness-score
-    description: "Calcule un score de fraîcheur global du contexte"
-    parameters:
-      weights: {ttl: 0.4, embedding_drift: 0.3, source_integrity: 0.2, cross_model: 0.1}
-      block_threshold: 0.6
-
+- name: ttl-check
+  description: "V\xE9rifie que le contexte n'a pas d\xE9pass\xE9 son TTL"
+  parameters:
+    ttl_seconds: 3600
+    action_on_stale: block_execution
+- name: embedding-drift-check
+  description: "V\xE9rifie que l'embedding du contexte n'a pas drift\xE9"
+  parameters:
+    drift_threshold: 0.15
+    action_on_drift: block_execution
+- name: source-integrity-check
+  description: "V\xE9rifie l'int\xE9grit\xE9 des sources du contexte (hash, signature)"
+  parameters:
+    hash_algorithm: sha256
+    action_on_mismatch: block_execution
+- name: cross-model-agreement
+  description: "V\xE9rifie l'accord entre mod\xE8les pour le contexte"
+  parameters:
+    models:
+    - gpt-4
+    - claude-3
+    - gemini-pro
+    agreement_threshold: 0.6
+    action_on_disagreement: warn_and_continue
+- name: freshness-score
+  description: "Calcule un score de fra\xEEcheur global du contexte"
+  parameters:
+    weights:
+      ttl: 0.4
+      embedding_drift: 0.3
+      source_integrity: 0.2
+      cross_model: 0.1
+    block_threshold: 0.6
 principles:
-  - P0_STALE_BLOCK : contexte stale -> exécution bloquée
-  - P0_MULTI_SIGNAL : fraîcheur évaluée par multiples signaux (TTL, embedding, source, cross-model)
-  - P0_FAIL_SAFE : en cas de doute, bloquer plutôt que risquer une exécution sur contexte invalide
-  - P0_CROSS_MODEL : accord entre modèles requis pour les décisions critiques
+- P0_STALE_BLOCK: "contexte stale -> ex\xE9cution bloqu\xE9e"
+- P0_MULTI_SIGNAL: "fra\xEEcheur \xE9valu\xE9e par multiples signaux (TTL, embedding,\
+    \ source, cross-model)"
+- P0_FAIL_SAFE: "en cas de doute, bloquer plut\xF4t que risquer une ex\xE9cution sur\
+    \ contexte invalide"
+- P0_CROSS_MODEL: "accord entre mod\xE8les requis pour les d\xE9cisions critiques"
+adr: ADR-015-unified-design-v2

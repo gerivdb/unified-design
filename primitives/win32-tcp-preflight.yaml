@@ -1,0 +1,45 @@
+name: win32-tcp-preflight
+version: 1.0.0
+status: active
+profile: STANDARD
+layer: L2-PLATFORM
+intent_hash: 0xWIN32_TCP_PREFLIGHT_20260922
+inherits:
+  - fractal-engineering-strata
+  - meta-coherence
+description: >
+  Primitive de pré-vérification TCP Windows.
+  Évite les erreurs de binding multiple et les zombies de port.
+  Vérifie qu'aucun processus ne tient déjà le port cible avant bind.
+consumers:
+  - KIX
+  - RLM-METRICS
+  - ECOS-CLI
+  - KIVA-CLI
+capabilities:
+  - name: preflight-check
+    description: Vérifie qu'un port est libre avant bind
+    parameters:
+      timeout_ms: 2000
+      retry_count: 2
+  - name: singleton-guard
+    description: Garantit qu'une seule instance écoute sur le port
+    parameters:
+      fingerprint_build: true
+      auto_kill: false
+components:
+  - type: preflight
+    repo: gerivdb/KIX
+    path: KIX/src/preflight.py
+  - type: singleton-guard
+    repo: gerivdb/KIX
+    path: KIX/src/singleton.py
+bridges:
+  - target: repo:KIX
+    role: consumer
+    protocol: local
+dependencies:
+  - repo: gerivdb/KIX
+constraints:
+  - windows_only: true
+  - cpu_only: true

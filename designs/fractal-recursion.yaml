@@ -1,6 +1,6 @@
 name: fractal-recursion
 version: 1.0.0
-description: Récursion auto-similaire pour les designs fractals
+description: "R\xE9cursion auto-similaire pour les designs fractals"
 status: active
 owner: Bellard
 inherits: []
@@ -17,3 +17,4 @@ constraints:
 - La complexite DOIT rester O(DELTA)
 intent_hash: 0xfractal_recursion_20260730
 layer: L0-L4
+adr: ADR-015-unified-design-v2

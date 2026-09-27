@@ -1,5 +1,8 @@
 name: clone-governance
 version: 1.0.0
 status: active
+layer: L0
+description: Design artifact for clone-governance.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_CLONE_GOVERNANCE_20260923

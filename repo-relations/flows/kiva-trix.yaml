@@ -1,0 +1,43 @@
+---
+cross_repo_flow:
+  name: kiva -> trix
+  provider: KIVA
+  consumers:
+    - TRIX
+  contract:
+    interface: socket
+    format: binary
+    paths:
+      - KIVA/runtime/*
+      - TRIX/src/dispatch.zig
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — KIVA → TRIX
+
+## Rôle
+TRIX est le **runtime Zig** qui exécute les commandes système. KIVA l'utilise comme backend d'exécution pour les opérations privilégiées.
+
+## Contrat
+- **Provider** : `KIVA` expose le runtime et le scheduler.
+- **Consumer** : `TRIX` expose le dispatch Zig (`src/dispatch.zig`) et les handlers système.
+- **Boucle** : KIVA envoie des commandes à TRIX via socket, TRIX retourne le résultat via WAL.
+
+## Validation
+- `provider_registered` : `KIVA` est dans `known_repositories.yaml`.
+- `consumer_registered` : `TRIX` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `KIVA → TRIX → KIVA`.
+- `contract_exists` : `TRIX/src/dispatch.zig` existe.
+
+## Références
+- `TRIX/src/dispatch.zig`
+- `KIVA/runtime/`

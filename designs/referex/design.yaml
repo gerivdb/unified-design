@@ -1,5 +1,15 @@
 ---
 name: REFEREX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "REFEREX — Runner de references croisees. Verifie la coherence des references entre documents de gouvernance.
+"
+consumers:
+  - kix
+  - conversation-cognitive
+
+name: REFEREX
 version: "1.0.0"
 status: proposed
 strate: L0-CANON

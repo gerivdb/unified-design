@@ -1,5 +1,8 @@
 name: chain-engineering
 version: 1.0.0
 status: active
+layer: L0
+description: Design artifact for chain-engineering.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_CHAIN_ENGINEERING_20260923

@@ -1,0 +1,45 @@
+---
+cross_repo_flow:
+  name: brain -> fluence
+  provider: BRAIN
+  consumers:
+    - FLUENCE
+  contract:
+    interface: event
+    format: json
+    paths:
+      - BRAIN/agents/*
+      - FLUENCE/orchestration/*.yaml
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — BRAIN → FLUENCE
+
+## Rôle
+FLUENCE est le **composant transverse d'orchestration cognitive**. Il consomme les agents cognitifs de `BRAIN` pour orchestrer les workflows.
+
+## Contrat
+- **Provider** : `BRAIN` expose les agents cognitifs (`BRAIN/agents/`) et le MessageBus.
+- **Consumer** : `FLUENCE` consomme ces agents pour :
+  - Orchestrer les workflows cross-repo
+  - Détecter les drifts via `Obs(drift-tracking)`
+- **Boucle** : FLUENCE remonte les observations à BRAIN via WAZAA.
+
+## Validation
+- `provider_registered` : `BRAIN` est dans `known_repositories.yaml`.
+- `consumer_registered` : `FLUENCE` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `BRAIN → FLUENCE → BRAIN`.
+- `contract_exists` : `BRAIN/agents/` existe.
+
+## Références
+- `FLUENCE/orchestration/`
+- `BRAIN/agents/`

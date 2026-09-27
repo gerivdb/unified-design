@@ -1,0 +1,12 @@
+---
+name: ops.autonomous
+category: OPS
+version: v1.0.0
+description: "Autonomous ops cross-integration"
+entry_point: "scripts/loopx/ops_autonomous.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Autonomous operations: self-improving loop, citizen integration"
+examples:
+  - "loopx routine ops.autonomous"

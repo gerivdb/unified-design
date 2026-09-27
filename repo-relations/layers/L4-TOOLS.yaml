@@ -1,0 +1,86 @@
+---
+layer: L4_TOOLS
+description: "Repos L4-TOOLS — outils, SDKs, validators, runners spécialisés"
+path_prefix: "D:/DO/WEB/TOOLS/L4-TOOLS/"
+repos:
+  - name: KG-L
+    description: "KG-L — graphe causal, ontology anchors, domain links"
+    status: ACTIVE
+    memory_role: causal_graph
+    flows:
+      - file: ../flows/ontology-kgl.yaml
+        direction: inbound
+
+  - name: VERSES
+    description: "Ontologie / VERSES sync"
+    status: ACTIVE
+    memory_role: ontological_memory
+    flows:
+      - file: ../flows/ontology-verses.yaml
+        direction: inbound
+
+  - name: INFX
+    description: "toroidal_interface"
+    status: ACTIVE
+    memory_role: toroidal_interface
+    flows: []
+
+  - name: N243
+    description: "Méta-orchestrateur ternaire, gates L5/L6, WAL ternaire"
+    status: ACTIVE
+    memory_role: memory_gate
+    structural: true
+    flows:
+      - file: ../flows/n243-kgl.yaml
+        direction: outbound
+      - file: ../flows/n243-verses.yaml
+        direction: outbound
+
+  - name: KG-CAUSAL
+    description: "Graphe causal déterministe pour pipeline CLM"
+    status: ACTIVE
+    flows:
+      - file: ../flows/ontology-kg-causal.yaml
+        direction: inbound
+      - file: ../flows/kg-causal-rootx.yaml
+        direction: outbound
+
+  - name: ROOTX
+    description: "Validateur de causalité systémique (<50ms) pour pipeline CLM"
+    status: ACTIVE
+    flows:
+      - file: ../flows/kg-causal-rootx.yaml
+        direction: inbound
+
+  - name: LARQL-243
+    description: "LARQL-243 codec — composant PLIX pour graphes LARQL ↔ frames PLIX Q243"
+    status: ACTIVE
+    flows: []
+
+  - name: BatMCP
+    description: "MCP Gateway — outils TALEX intégrés"
+    status: ACTIVE
+    flows:
+      - file: ../flows/batmcp-skills.yaml
+        direction: outbound
+
+  - name: SKILLS
+    description: "Skill registry and execution library"
+    status: ACTIVE
+    flows:
+      - file: ../flows/batmcp-skills.yaml
+        direction: inbound
+
+  - name: REPO-STANDARDS
+    description: "Standards macro du meta-cluster"
+    status: ACTIVE
+    flows:
+      - file: ../flows/unified-design-repo-standards.yaml
+        direction: inbound
+
+  - name: localjev-upstream
+    description: "Upstream research prototype GitHub Next -- pont Jev/TypeSafe vers LLM local"
+    status: ACTIVE
+    flows: []
+
+structural_relations: []

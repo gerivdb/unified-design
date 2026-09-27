@@ -1,8 +1,8 @@
 ---
 type: PRD-MOC
 version: "1.0.0"
-date: "2026-09-20"
-status: proposed
+date: "2026-09-22"
+status: approved
 intent_hash: 0xPRD_MOC_ECOSYSTEM_META_COHERENCE_EXTENSION_20260920
 author: gerivdb
 source_repo: gerivdb/unified-design
@@ -155,16 +155,16 @@ Compléter l’écosystème `ecosystem-meta-coherence` par des **pipelines**, **
 
 ## 8. Proof-of-Life
 
-- [ ] 2026-09-20T22:21:00Z — Création PRD-MOC ECOSYSTEM-META-COHERENCE EXTENSION
-- [ ] 2026-09-20T22:21:00Z — Création pipelines E1-E5
-- [ ] 2026-09-20T22:21:00Z — Création workflows E6-E10
-- [ ] 2026-09-20T22:21:00Z — Création primitives E11-E14
-- [ ] 2026-09-20T22:21:00Z — Création skills E15-E20
-- [ ] 2026-09-20T22:21:00Z — Création citizens E21-E23
-- [ ] 2026-09-20T22:21:00Z — Création designs E24-E28
-- [ ] 2026-09-20T22:21:00Z — Mise à jour META-DESIGN.md, meta-design.yaml, catalogues
-- [ ] 2026-09-20T22:21:00Z — Dryrun causal : tous les livrables présents, YAML valide, frontmatter valide, hooks PASS
-- [ ] 2026-09-20T22:21:00Z — Push origin/main réussi
+- [x] 2026-09-22T21:47:00Z — Création PRD-MOC ECOSYSTEM-META-COHERENCE EXTENSION
+- [x] 2026-09-22T21:47:00Z — Création pipelines E1-E5
+- [x] 2026-09-22T21:47:00Z — Création workflows E6-E10
+- [x] 2026-09-22T21:47:00Z — Création primitives E11-E14
+- [x] 2026-09-22T21:47:00Z — Création skills E15-E20
+- [x] 2026-09-22T21:47:00Z — Création citizens E21-E23
+- [x] 2026-09-22T21:47:00Z — Création designs E24-E28
+- [x] 2026-09-22T21:47:00Z — Mise à jour META-DESIGN.md, meta-design.yaml, catalogues
+- [x] 2026-09-22T21:47:00Z — Dryrun causal : tous les livrables présents, YAML valide, frontmatter valide, hooks PASS
+- [x] 2026-09-22T21:47:00Z — Push origin/main réussi
 
 ## 9. Évaluation finale
 

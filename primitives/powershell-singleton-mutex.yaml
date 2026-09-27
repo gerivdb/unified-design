@@ -1,0 +1,94 @@
+---
+type: PRIMITIVE
+version: "1.0.0"
+date: "2026-09-25"
+status: draft
+intent_hash: 0xPRIMITIVE_POWERSHELL_SINGLETON_MUTEX_20260925
+related_prd: PRD-MOC-GEN-041-windows-process-governance-2026-09-22.md
+related_moc: PRD-MOC-DAEMON-REGISTRY-20260925.md
+related_adr: ADR-2026-09-25-powershell-daemon-singleton.md
+---
+
+# PRIMITIVE — PowerShell Daemon Singleton Mutex
+
+## Contexte
+
+L'incident du 2026-09-25 a révélé 11 processus `auto-dispatcher.ps1` orphelins dans `GeriCode/.kilo/orchestrator/`, consommant ~1,1 Go RAM sans aucune mission à traiter.
+
+Cette primitive encapsule le **pattern singleton OS** pour PowerShell :
+- **Mutex nommé** `Global\<name>` : garantit un seul instance OS
+- **PID file** `.lock/<name>.pid` : monitoring externe + détection orphelins
+- **EventWaitHandle** `Global\<name>-Stop` : arrêt propre inter-processus
+- **WaitOne(timeout)** : boucle interruptible, 0 CPU en idle
+
+## Implémentation
+
+```powershell
+$mutexName = "Global\GeriCode-AutoDispatcher-V1"
+$lockDir  = Join-Path $PSScriptRoot ".lock"
+$pidFile  = Join-Path $lockDir "instance.pid"
+$stopEventName = "Global\GeriCode-AutoDispatcher-Stop"
+
+if (-not (Test-Path $lockDir)) {
+    New-Item -ItemType Directory -Path $lockDir -Force | Out-Null
+}
+
+$mutex = $null
+$stopEvent = $null
+$createdNew = $false
+try {
+    $mutex = New-Object System.Threading.Mutex($false, $mutexName, [ref]$createdNew)
+    if (-not $createdNew) {
+        Write-Output "[DISPATCHER] Instance deja en cours (mutex $mutexName). Arret immediat."
+        exit 1
+    }
+
+    # PID file pour monitoring externe
+    $pidEntry = @{
+        pid = $PID
+        started_utc = (Get-Date).ToUniversalTime().ToString("o")
+        command = $MyInvocation.MyCommand.Path
+    } | ConvertTo-Json -Compress
+    Set-Content -Path $pidFile -Value $pidEntry -Encoding UTF8
+
+    # Stop event — permet un arret propre depuis un autre process
+    $stopEvent = New-Object System.Threading.EventWaitHandle($false, [System.Threading.EventResetMode]::ManualReset, $stopEventName)
+
+    Write-Output "[DISPATCHER] Singleton acquis. PID=$PID lock=$pidFile"
+} catch {
+    Write-Output "[DISPATCHER] ERREUR acquisition singleton: $_"
+    exit 1
+}
+```
+
+## Nettoyage
+
+```powershell
+$cleanup = {
+    if ($stopEvent) { $stopEvent.Close() | Out-Null }
+    if ($mutex) { $mutex.ReleaseMutex() | Out-Null; $mutex.Close() | Out-Null }
+    if (Test-Path $pidFile) { Remove-Item $pidFile -Force }
+}
+Register-ObjectEvent -InputObject $stopEvent -EventName WaitOne -Action $cleanup | Out-Null
+```
+
+## Intégration
+
+- `auto-dispatcher.ps1` : daemon principal
+- `dispatcherctl.ps1` : contrôleur start/stop/status/restart
+- `daemon-registry.ps1` : registry centralisé
+- `daemon-health-monitor.ps1` : wrapper compatible
+
+## Proof-of-Life
+
+- [x] `2026-09-25T07:04:34+02:00` — 11 processus `auto-dispatcher.ps1` tués ; RAM libérée ~1,1 Go
+- [x] `2026-09-25T07:04:34+02:00` — `auto-dispatcher.ps1` singletonisé : mutex + PID file + stop event + WaitOne(timeout)
+- [x] `2026-09-25T07:04:34+02:00` — `dispatcherctl.ps1` créé : start/stop/status/restart fonctionnels
+- [x] `2026-09-25T07:04:34+02:00` — `daemon-registry.ps1` validé en mode read/prune
+- [x] `2026-09-25T07:04:34+02:00` — 9/9 tests passants (`verification/test-daemon-registry.ps1`)
+
+---
+
+**IntentHash** : 0xPRIMITIVE_POWERSHELL_SINGLETON_MUTEX_20260925
+**Statut** : draft
+**Màj requise si** : statut passe à deprecated ou superseded

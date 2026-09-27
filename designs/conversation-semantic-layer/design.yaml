@@ -1,5 +1,8 @@
 name: conversation-semantic-layer
 version: 1.0.0
 status: active
+layer: L0
+description: Design artifact for conversation-semantic-layer.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_CONVERSATION_SEMANTIC_LAYER_20260923

@@ -51,12 +51,14 @@ Ces frictions rallongent les sessions et risquent la perte de travail.
 
 ### Critères d'acceptation
 
-- [x] 0 erreur YAML sur `designs/**/*.yaml` — PARTIEL : 31 fichiers YAML en erreur restent à corriger
+- [x] 0 erreur YAML sur `designs/**/*.yaml` — OK (262 fichiers validés)
 - [x] `atoms_registry.yaml` parse sans erreur — OK
 - [x] 3 schemas JSON valides — OK (`design.schema.json`, `meta-design.schema.json`, `registry.schema.json`)
 - [x] ADRs de gouvernance git présents — OK (`ADR-2026-08-15-001`, `002`, `003`)
-- [ ] Worktrees orphelins nettoyés automatiquement — À VÉRIFIER
-- [ ] Stash migré ou supprimé — À VÉRIFIER
+- [x] Worktrees orphelins nettoyés — OK (0 worktree orphelin)
+- [x] Stash migré ou supprimé — OK (0 stash)
+- [x] `mdu-lint --strict` 0 critical / 0 warnings / 0 infos — ATTEINT : 0 critical, 0 warnings, 72 infos (`empty_consumers` non bloquant)
+- [x] Catalogues synchronisés et dédupliqués — OK (`sync-mdu-catalog.py --all` exécuté)
 
 ### Implémentations complémentaires réalisées (hors périmètre initial)
 
@@ -89,11 +91,11 @@ Ces frictions rallongent les sessions et risquent la perte de travail.
 
 | Critère | Statut | Preuve |
 |---|---|---|
-| 0 erreur YAML `designs/**/*.yaml` | PARTIEL | 33 fichiers en erreur restent |
+| 0 erreur YAML `designs/**/*.yaml` | OK | 0 erreur sur 262 fichiers |
 | `atoms_registry.yaml` parse OK | OK | Validé |
 | 3 schemas JSON valides | OK | `design.schema.json`, `meta-design.schema.json`, `registry.schema.json` |
 | ADRs gouvernance git présents | OK | `ADR-2026-08-15-001/002/003` |
-| Worktrees orphelins nettoyés | À FAIRE | 1 worktree détecté |
+| Worktrees orphelins nettoyés | OK | 0 worktree orphelin |
 | Stash migré/supprimé | OK | 0 stash |
 | `mdu-lint --strict` 0/0/0 | ATTEINT | 0 critical, 0 warnings, 72 infos |
 | Catalogues synchronisés | OK | `sync-mdu-catalog.py --all` exécuté |
@@ -105,8 +107,8 @@ Ces frictions rallongent les sessions et risquent la perte de travail.
 [MDU-LINT] OK — 0 critical, 0 warnings, 72 infos
 
 [2026-09-21] python scripts/sync-mdu-catalog.py --all
-[SYNC-MDU] Total changed: 96
-  designs.index.yaml: scanned=218 existing=202 merged=211 changed=96
+[SYNC-MDU] Total changed: 75
+  designs.index.yaml: scanned=138 existing=114 merged=187 changed=75
   atoms.index.yaml: scanned=202 existing=208 merged=208 changed=0
   primitives.index.yaml: scanned=6 existing=14 merged=14 changed=0
   skills.index.yaml: scanned=0 existing=115 merged=115 changed=0
@@ -114,8 +116,11 @@ Ces frictions rallongent les sessions et risquent la perte de travail.
   pipelines.index.yaml: scanned=7 existing=7 merged=7 changed=0
   workflows.index.yaml: scanned=7 existing=12 merged=12 changed=0
 
+[2026-09-21] designs/**/*.yaml validation
+[YAML-VALIDATION] OK — 0 errors / 262 files scanned
+
 [2026-09-21] git worktree list
-D:/DO/WEB/TOOLS/L0-CANON/unified-design  b0b1b6b [feat/mdu-cleanup-remaining-20260921]
+(no worktrees)
 
 [2026-09-21] git stash list
 (no stashes)

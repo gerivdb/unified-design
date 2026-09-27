@@ -1,5 +1,7 @@
 name: gguf-probe-retention
-description: Gestion des artefacts GGUF et binaires lourds - probes metadata sans chargement des tenseurs, manifestes reproducibles, validation e2e aller-retour, politique de retention gitignore au-dela du seuil.
+description: Gestion des artefacts GGUF et binaires lourds - probes metadata sans
+  chargement des tenseurs, manifestes reproducibles, validation e2e aller-retour,
+  politique de retention gitignore au-dela du seuil.
 version: 1.0.0
 status: active
 layer: L4
@@ -15,10 +17,10 @@ bridges:
   path: PRD/PRD-GGUF-PROBES-RETENTION-2026-08-23.md
 - target: PLIX
   role: transport_consumer
-
 capabilities:
 - name: probe_gguf
-  description: lecture header + KV + N premiers tenseurs metadata, sans charger les data tensors
+  description: lecture header + KV + N premiers tenseurs metadata, sans charger les
+    data tensors
   implementation: PIANO/scripts/probe_real_gguf.py
 - name: manifest_generation
   description: manifeste reproducible read-only sha256 chunked, tables/tensores inventories
@@ -30,11 +32,11 @@ capabilities:
   parameters:
     gitignore_threshold_mb: 100
     rules:
-      - "models/*.gguf -> gitignore (cas vecu 1.1 GB)"
-      - "scripts/probe_*.py -> conserves dans le repo"
-      - "scripts/*e2e*.py -> conserves dans le repo"
-      - "scripts/*snapshot*.py -> evaluer ; outil gouvernance -> GOVERNANCE-HUB"
-
+    - models/*.gguf -> gitignore (cas vecu 1.1 GB)
+    - scripts/probe_*.py -> conserves dans le repo
+    - scripts/*e2e*.py -> conserves dans le repo
+    - scripts/*snapshot*.py -> evaluer ; outil gouvernance -> GOVERNANCE-HUB
 constraints:
   aucun_binaire_lourd_en_git: true
   stockage_modeles_hors_git: true
+adr: ADR-015-unified-design-v2

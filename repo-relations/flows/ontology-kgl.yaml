@@ -1,0 +1,45 @@
+---
+cross_repo_flow:
+  name: ontology -> kg-l
+  provider: ONTOLOGY
+  consumers:
+    - KG-L
+  contract:
+    interface: file
+    format: jsonl
+    paths:
+      - ONTOLOGY/concepts/*.md
+      - KG-L/ontology_anchors.jsonl
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — ONTOLOGY → KG-L
+
+## Rôle
+KG-L est le **graphe causal** qui utilise les termes ontologiques d'ONTOLOGY comme ancres sémantiques.
+
+## Contrat
+- **Provider** : `ONTOLOGY` expose les concepts canoniques.
+- **Consumer** : `KG-L` consomme ces concepts pour :
+  - `ontology_anchors.jsonl` : mapping terme → nœud graphe
+  - `domain_links.json` : liens sémantiques
+- **Boucle** : KG-L peut détecter des termes manquants et proposer leur création dans ONTOLOGY.
+
+## Validation
+- `provider_registered` : `ONTOLOGY` est dans `known_repositories.yaml`.
+- `consumer_registered` : `KG-L` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `ONTOLOGY ↔ KG-L`.
+- `contract_exists` : `ontology_anchors.jsonl` existe.
+
+## Références
+- `KG-L/ontology_anchors.jsonl`
+- `ONTOLOGY/concepts/`

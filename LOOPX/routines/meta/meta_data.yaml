@@ -1,0 +1,12 @@
+---
+name: meta.data
+category: META
+version: v1.0.0
+description: "Data patterns: buzz-persistent-state, assistant-load, task-planning, conversation-aggregator"
+entry_point: "scripts/loopx/meta_data.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Data pattern validation: assistant-load, buzz-persistent-state, gguf-probe-retention, ide-window-lifecycle"
+examples:
+  - "loopx routine meta.data"

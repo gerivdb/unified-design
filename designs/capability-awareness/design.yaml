@@ -1,5 +1,8 @@
 name: capability-awareness
 version: 1.0.0
 status: active
+layer: L0
+description: Design artifact for capability-awareness.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_CAPABILITY_AWARENESS_20260923

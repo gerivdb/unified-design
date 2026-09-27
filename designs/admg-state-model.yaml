@@ -1,11 +1,8 @@
 version: 1.0.0
 intent_hash: 0xadmg_20260801
 status: active
-description: 'ADMG (Array Dependence Matrix Graph) comme modèle de dépendances
-
-  pour les systèmes multi-agents avec variables latentes.
-
-  '
+description: "ADMG (Array Dependence Matrix Graph) comme mod\xE8le de d\xE9pendances\n\
+  pour les syst\xE8mes multi-agents avec variables latentes.\n"
 admg_illustration: "+----------+       +------------+       +-----------+\n|   A \
   \     | ----> |    B       | <---- |    C      |\n| (obs)    |       | (latent)\
   \   |       | (obs)     |\n+----------+       +------------+       +-----------+\n\
@@ -21,15 +18,15 @@ admg_illustration: "+----------+       +------------+       +-----------+\n|   A
 mapping:
 - node_type: observed
   examples:
-  - événement signé
-  - réaction agent
-  - résultat CI
+  - "\xE9v\xE9nement sign\xE9"
+  - "r\xE9action agent"
+  - "r\xE9sultat CI"
   storage: Buzz@block / WAL
   persistent: true
 - node_type: latent
   examples:
-  - inférence neuronale
-  - intention non formulée
+  - "inf\xE9rence neuronale"
+  - "intention non formul\xE9e"
   - contexte tacite
   storage: N243 / TLM-CORE
   persistent: false
@@ -37,7 +34,7 @@ mapping:
   examples:
   - merge decision
   - release
-  - décision ternaire
+  - "d\xE9cision ternaire"
   storage: RLM-243 / N243 workflow
   persistent: true
 - node_type: proxy
@@ -49,20 +46,22 @@ mapping:
   persistent: true
 rules:
 - id: ADMG-001
-  name: Arêtes Dirigées
-  description: Les relations causales directes sont représentées par ->
+  name: "Ar\xEAtes Dirig\xE9es"
+  description: "Les relations causales directes sont repr\xE9sent\xE9es par ->"
   enforcement: design
 - id: ADMG-002
   name: Confounding
-  description: Les dépendances non causales entre latents sont représentées par <->
+  description: "Les d\xE9pendances non causales entre latents sont repr\xE9sent\xE9\
+    es par <->"
   enforcement: design
 - id: ADMG-003
   name: DAG-3
-  description: Pas de cycles dirigés - le graphe est acyclique
+  description: "Pas de cycles dirig\xE9s - le graphe est acyclique"
   enforcement: design
 - id: ADMG-004
-  name: Observé -> Persistant
-  description: Toute variable observée est persistée dans Buzz@block ou WAL
+  name: "Observ\xE9 -> Persistant"
+  description: "Toute variable observ\xE9e est persist\xE9e dans Buzz@block ou WAL"
   enforcement: auto
 name: admg-state-model
 layer: L0
+adr: ADR-015-unified-design-v2

@@ -1,0 +1,71 @@
+---
+name: http-server-design
+version: "1.0.0"
+status: active
+layer: L3
+intent_hash: 0xVEX_HTTP_SERVER_DESIGN_20260926
+repo: gerivdb/VEX
+implementation_contract:
+  repo: gerivdb/VEX
+  repo_root: D:\DO\WEB\TOOLS\L3-CITIZENS\VEX
+  artifacts:
+    - path: src/vex/http_server.py
+      must_contain:
+        - "class VEXHealthHandler"
+        - "def do_GET"
+    - path: tests/test_http_server.py
+      must_contain:
+        - "def test_http_server_health_endpoint"
+  tests:
+    - tests/test_http_server.py::test_http_server_health_endpoint
+---
+
+# Design — VEX HTTP Server
+
+**IntentHash** : `0xVEX_HTTP_SERVER_DESIGN_20260926`
+**Repo** : `gerivdb/VEX`
+**Strate** : L3-CITIZENS
+**Profil** : TOOL
+**Statut** : implemented
+
+---
+
+## Contexte
+
+VEX expose un serveur HTTP optionnel pour permettre des health checks agrégés L3 accessibles depuis d'autres services de l'écosystème (KIX, CTULU, etc.).
+
+## Problème
+
+Besoin d'un endpoint standardisé pour interroger la santé de tous les daemons L3 gérés par VEX, sans avoir à utiliser la CLI.
+
+## Solution
+
+Serveur HTTP minimaliste basé sur `http.server` standard library, exposant `GET /health` qui retourne le health check agrégé de tous les citizens/daemons.
+
+## Architecture
+
+```
+VEX HTTP Server (port 8060 par défaut)
+├── GET /health → health check agrégé L3
+│   └── Retourne JSON : { citizen: { daemon_id: { status, pid, key } } }
+└── GET /unknown → 404
+```
+
+## Critères d'acceptation
+
+- [x] Serveur HTTP démarre sans erreur
+- [x] `GET /health` retourne 200 avec JSON valide
+- [x] `GET /unknown` retourne 404
+- [x] Serveur s'arrête proprement
+- [x] Tests passent
+
+## Références
+
+- `src/vex/http_server.py`
+- `src/main.py` (commande `serve`)
+- `tests/test_http_server.py`
+- `PRD-MOC-VEX-L3-ORCHESTRATOR-20260926.md`
+
+## Proof-of-Life
+
+- [x] 2026-09-26T07:23:00+02:00 — Serveur HTTP VEX implémenté et testé (44 tests passent)

@@ -1,5 +1,15 @@
 ---
 name: FLOWX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "FLOWX — Runner de flux de donnees. Analyse et optimise les flux de donnees entre repositories.
+"
+consumers:
+  - WAZAA
+  - KIX
+
+name: FLOWX
 version: "1.0.0"
 status: proposed
 strate: L4-TOOLS

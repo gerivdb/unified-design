@@ -1,5 +1,8 @@
 name: ecosystem-artifact-layers-design
 version: 1.0.0
 status: active
+layer: L0
+description: Design artifact for ecosystem-artifact-layers-design.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_ECOSYSTEM_ARTIFACT_LAYERS_DESIGN_20260923

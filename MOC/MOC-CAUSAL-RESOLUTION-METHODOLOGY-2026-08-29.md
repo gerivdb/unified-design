@@ -1,14 +1,16 @@
 ---
 type: MOC
 version: "1.0"
-date: "2026-08-29"
-status: active
+date: "2026-09-22"
+status: approved
 intent_hash: 0xMOC_CAUSAL_RESOLUTION_METHODOLOGY_20260829
 ---
 
 # MOC — Causal Resolution Methodology
 
-> Carte de contenu pour la méthodologie Causal-First Dev issue de la résolution du "silent fail" LLUX 7B .q243.
+**Repo** : `gerivdb/unified-design`  
+**Strate** : L0-CANON  
+**Statut** : approved
 
 ## PRD
 

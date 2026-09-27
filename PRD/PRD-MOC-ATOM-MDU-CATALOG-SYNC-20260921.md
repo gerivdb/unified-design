@@ -1,8 +1,8 @@
 ---
 type: PRD
 version: "1.1"
-date: "2026-09-21"
-status: in_review
+date: "2026-09-22"
+status: approved
 intent_hash: 0xPRD_MOC_ATOM_MDU_CATALOG_SYNC_20260921
 ---
 

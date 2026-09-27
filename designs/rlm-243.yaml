@@ -22,3 +22,4 @@ constraints:
 - memory: 243 * sizeof(float) * 3
 intent_hash: 0xrlm_243_design_20260730
 layer: L3-L4
+adr: ADR-015-unified-design-v2

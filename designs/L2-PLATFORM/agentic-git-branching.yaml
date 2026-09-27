@@ -1,4 +1,11 @@
+---
 name: agentic-git-branching
+version: 1.0.0
+status: proposed
+layer: L0
+description: "Agentic Git Branching Strategy"
+consumers:
+
 description: "Agentic Git Branching Strategy"
 version: "1.0.0"
 parent: unified-design

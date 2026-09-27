@@ -1,5 +1,14 @@
 ---
 name: SYNCX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "SYNCX — Runner de synchronisation. Coordonne la synchronisation entre depots locaux et distants.
+"
+consumers:
+  - kix
+
+name: SYNCX
 version: "1.0.0"
 status: proposed
 strate: L0-CANON

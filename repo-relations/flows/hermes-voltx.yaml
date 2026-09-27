@@ -1,0 +1,46 @@
+---
+cross_repo_flow:
+  name: hermes -> voltx
+  provider: HERMES
+  consumers:
+    - VOLTX
+  contract:
+    interface: file
+    format: markdown
+    paths:
+      - HERMES/MEMORY.md
+      - HERMES/USER.md
+      - VOLTX/vault/hierarchical/*
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — HERMES → VOLTX
+
+## Rôle
+HERMES est la **SOT mémoire hiérarchique** (`MEMORY.md`, `USER.md`, Skills, Facts DB). VOLTX consomme cette mémoire hiérarchique pour enrichir les récits narratifs.
+
+## Contrat
+- **Provider** : `HERMES` expose `MEMORY.md`, `USER.md`, Skills, Facts DB.
+- **Consumer** : `VOLTX` consomme ces fichiers pour :
+  - `vault/hierarchical/` : mémoire hiérarchique intégrée
+  - Contexte narratif enrichi
+- **Boucle** : VOLTX peut mettre à jour `MEMORY.md` via PR.
+
+## Validation
+- `provider_registered` : `HERMES` est dans `known_repositories.yaml`.
+- `consumer_registered` : `VOLTX` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `HERMES ↔ VOLTX`.
+- `contract_exists` : `HERMES/MEMORY.md` existe.
+
+## Références
+- `HERMES/`
+- `VOLTX/vault/`

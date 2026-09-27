@@ -1,0 +1,48 @@
+---
+cross_repo_flow:
+  name: unified-design -> repo-standards
+  provider: unified-design
+  consumers:
+    - REPO-STANDARDS
+  contract:
+    interface: file
+    format: yaml
+    paths:
+      - META-DESIGN.md
+      - atoms/*.yaml
+      - designs/*.yaml
+    version: "2.1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P1
+  status: active
+---
+
+# Flow — unified-design → REPO-STANDARDS
+
+## Rôle
+REPO-STANDARDS est le **repo des standards macro** du méta-cluster. Il consomme les designs et atomes de `unified-design` pour dériver les standards de développement applicables à tous les repos.
+
+## Contrat
+- **Provider** : `unified-design` expose `META-DESIGN.md`, `atoms/*.yaml`, `designs/*.yaml`.
+- **Consumer** : `REPO-STANDARDS` lit ces fichiers pour générer :
+  - Standards de nommage
+  - Standards de workflow git
+  - Standards de testing
+  - Standards de documentation
+- **Dérivation** : un changement dans `unified-design/atoms/*.yaml` doit être reflété dans `REPO-STANDARDS` dans les 48h.
+
+## Validation
+- `provider_registered` : `unified-design` est dans `known_repositories.yaml`.
+- `consumer_registered` : `REPO-STANDARDS` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `unified-design ↔ REPO-STANDARDS`.
+- `contract_exists` : `META-DESIGN.md` existe.
+
+## Références
+- `REPO-STANDARDS/`
+- `unified-design/META-DESIGN.md`

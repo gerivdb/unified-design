@@ -1,0 +1,12 @@
+---
+name: meta.plix
+category: META
+version: v1.0.0
+description: "PLIX codec operations"
+entry_point: "scripts/loopx/meta_plix.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "PLIX codec validation: audio codec, narrative encoding, semantic compression"
+examples:
+  - "loopx routine meta.plix"

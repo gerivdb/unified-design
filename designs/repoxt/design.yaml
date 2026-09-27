@@ -1,5 +1,14 @@
 ---
 name: REPOX
+version: 1.0.0
+status: proposed
+layer: L0
+description: "REPOX — Runner de sante des repositories. Verifie l'etat de tous les clones locaux et detecte les anomalies.
+"
+consumers:
+  - kix
+
+name: REPOX
 version: "1.0.0"
 status: proposed
 strate: L0-CANON

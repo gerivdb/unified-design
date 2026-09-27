@@ -1,0 +1,12 @@
+---
+name: meta.architectural
+category: META
+version: v1.0.0
+description: "Architectural structures: topos, viable-initial-state, ouroboros, contract-centrality"
+entry_point: "scripts/loopx/meta_architectural.py:run"
+dependencies: []
+config_schema:
+  properties: {}
+spec: "Architectural structure validation: topos, viable-initial-state, ouroboros, contract-centrality"
+examples:
+  - "loopx routine meta.architectural"

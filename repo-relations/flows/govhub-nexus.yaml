@@ -1,0 +1,43 @@
+---
+cross_repo_flow:
+  name: governance-hub -> nexus
+  provider: GOVERNANCE-HUB
+  consumers:
+    - NEXUS
+  contract:
+    interface: file
+    format: yaml
+    paths:
+      - OrgansRegistry.yaml
+      - BRIDGES.yaml
+    version: "1.0"
+  validation:
+    - provider_registered
+    - consumer_registered
+    - no_cycle
+    - contract_exists
+  wal_logging: required
+  inherits: [cross-repo-flow]
+  priority: P0
+  status: active
+---
+
+# Flow — GOVERNANCE-HUB → NEXUS
+
+## Rôle
+NEXUS est le **Mega-SOT** : registre des registres, gouvernance. Il consomme les registres de `GOVERNANCE-HUB` pour agréger les connexions inter-repos.
+
+## Contrat
+- **Provider** : `GOVERNANCE-HUB` expose `OrgansRegistry.yaml` et `BRIDGES.yaml`.
+- **Consumer** : `NEXUS` agrège ces registres pour fournir une vue unifiée de l'écosystème.
+- **Versionnement** : tout ajout de registre dans `GOVERNANCE-HUB` doit être propagé vers `NEXUS` dans les 24h.
+
+## Validation
+- `provider_registered` : `GOVERNANCE-HUB` est dans `known_repositories.yaml`.
+- `consumer_registered` : `NEXUS` est dans `known_repositories.yaml`.
+- `no_cycle` : aucun cycle `GOVERNANCE-HUB → NEXUS → GOVERNANCE-HUB`.
+- `contract_exists` : `OrgansRegistry.yaml` et `BRIDGES.yaml` existent.
+
+## Références
+- `NEXUS/OrgansRegistry.yaml`
+- `GOVERNANCE-HUB/BRIDGES.yaml`

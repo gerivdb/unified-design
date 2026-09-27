@@ -1,49 +1,59 @@
-
 name: dag3-triadic-workflow
-description: >
-  Workflow de delivery L6 modélisé comme DAG triadique dans DAG-3.
-  Quatre nœuds atomiques (build/test/package/audit) reliés par des transitions
-  base-243, invocables par CTULU delivery-engine et les CLI KIVA-CLI / ECOS-CLI.
+description: "Workflow de delivery L6 mod\xE9lis\xE9 comme DAG triadique dans DAG-3.\
+  \ Quatre n\u0153uds atomiques (build/test/package/audit) reli\xE9s par des transitions\
+  \ base-243, invocables par CTULU delivery-engine et les CLI KIVA-CLI / ECOS-CLI.\n"
 version: 1.0.0
 status: active
 owner: gerivdb
 intent_hash: 0xDAG3_TRIADIC_WORKFLOW_20260826
 layer: L2
 inherits:
-  - admg-dag3-hierarchy
-  - incremental-growth
-  - graceful-degradation-fallback
+- admg-dag3-hierarchy
+- incremental-growth
+- graceful-degradation-fallback
 parameters:
   max_nodes: 4
-  default_workflow: [build, test, package, audit]
-  node_trit_range: [-1, 0, +1]
-  edge_kinds: [sequential, conditional, feedback]
+  default_workflow:
+  - build
+  - test
+  - package
+  - audit
+  node_trit_range:
+  - -1
+  - 0
+  - 1
+  edge_kinds:
+  - sequential
+  - conditional
+  - feedback
   replayable: true
   singleton_preflight: true
 constraints:
-  - 'Chaque nœud est une étape atomique invocable par CTULU delivery-engine'
-  - 'Aucun nœud ne dépend d''un repo L6 spécifique (neutralité)'
-  - 'DAG-3 reste dans la strate L2-PLATFORM (pas de dépendance vers L3/L5)'
-  - 'Adapter CTULU existe pour invoquer le workflow depuis DAG-3'
+- "Chaque n\u0153ud est une \xE9tape atomique invocable par CTULU delivery-engine"
+- "Aucun n\u0153ud ne d\xE9pend d'un repo L6 sp\xE9cifique (neutralit\xE9)"
+- "DAG-3 reste dans la strate L2-PLATFORM (pas de d\xE9pendance vers L3/L5)"
+- Adapter CTULU existe pour invoquer le workflow depuis DAG-3
 performance:
   latency_p99: 45.0
   success_rate_target: 0.99
 mitigates:
-  - concept: dag-complexity-overhead
-    evidence: 'Workflow minimaliste 4 étapes, replayable, testé (100 tests DAG-3 verts)'
-  - concept: delivery-engine-runtime-leak
+- concept: dag-complexity-overhead
+  evidence: "Workflow minimaliste 4 \xE9tapes, replayable, test\xE9 (100 tests DAG-3\
+    \ verts)"
+- concept: delivery-engine-runtime-leak
 cross_references:
-  - repo: gerivdb/DAG-3
-    relation: hosts
-  - repo: gerivdb/CTULU
-    relation: invoked_by
-  - repo: gerivdb/KIVA-CLI
-    relation: invoked_by
-  - repo: gerivdb/ECOS-CLI
-    relation: invoked_by
-  - repo: gerivdb/KG-L
-    relation: traced_by
-  - design: delivery-engine
-    relation: governs
-  - adr: ADR-2026-08-25-001-L6-BOUNDARY-POLICY
-  - prd_moc: PRD-MOC-GEN-024-delivery-engine-mutualise-l6-2026-08-26
+- repo: gerivdb/DAG-3
+  relation: hosts
+- repo: gerivdb/CTULU
+  relation: invoked_by
+- repo: gerivdb/KIVA-CLI
+  relation: invoked_by
+- repo: gerivdb/ECOS-CLI
+  relation: invoked_by
+- repo: gerivdb/KG-L
+  relation: traced_by
+- design: delivery-engine
+  relation: governs
+- adr: ADR-2026-08-25-001-L6-BOUNDARY-POLICY
+- prd_moc: PRD-MOC-GEN-024-delivery-engine-mutualise-l6-2026-08-26
+adr: ADR-015-unified-design-v2

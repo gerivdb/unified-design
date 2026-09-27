@@ -1,4 +1,10 @@
+---
 name: <hook_name>
+version: 1.0.0
+status: active
+layer: L0
+description: "Design artifact for <hook_name>."
+
 type: <pre | post | on_error | on_timeout>
 events:
   - <session_start | session_end | worktree_create | worktree_remove | ci_start | ci_end>

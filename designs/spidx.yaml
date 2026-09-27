@@ -1,6 +1,13 @@
+name: spidx
+version: 1.0.0
+status: active
+layer: L0
+description: Design artifact for spidx.
 constraints:
-  - cpu_only: true
-  - memory_24gb: true
-  - requires_python: true
-  - requires_zig: true
-  - gpu_fallback: mandatory
+- cpu_only: true
+- memory_24gb: true
+- requires_python: true
+- requires_zig: true
+- gpu_fallback: mandatory
+intent_hash: 0xPRD_MOC_MDU_GAPS_20260816
+adr: ADR-015-unified-design-v2
