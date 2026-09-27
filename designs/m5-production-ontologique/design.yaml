@@ -1,13 +1,8 @@
----
 name: m5-production-ontologique
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for m5-production-ontologique."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for m5-production-ontologique.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_M5_PRODUCTION_ONTOLOGIQUE_20260923

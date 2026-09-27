@@ -1,13 +1,8 @@
----
 name: moc-governance
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for moc-governance."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for moc-governance.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_MOC_GOVERNANCE_20260923
