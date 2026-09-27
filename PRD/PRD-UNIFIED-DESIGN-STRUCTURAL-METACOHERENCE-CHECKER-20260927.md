@@ -97,5 +97,6 @@ Pas de vérification sémantique du code implémenté : ce PRD couvre uniquement
 - [x] P1-1 : CHECK_METACOHERENCE.md rédigé
 - [x] P1-2 : tests unitaires passent
 - [x] P1-3 : hook pre-commit intégré
-- [ ] P2-1 : run_meta_coherence_check.ps1 fonctionnel
-- [ ] P2-2 : aliases enrichis
+ - [ ] P2-1 : run_meta_coherence_check.ps1 fonctionnel
+ - [ ] P2-2 : aliases enrichis
+ - [x] 2026-09-28T00:48:21+02:00 — PR #81 mergée, merge commit `3e19ef3`
