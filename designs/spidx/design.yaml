@@ -1,13 +1,8 @@
----
 name: spidx
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for spidx."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for spidx.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_SPIDX_20260923

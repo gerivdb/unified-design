@@ -26,7 +26,7 @@ capabilities:
     description: "Valide les séquences d'échappement dans les patterns regex"
   - name: redos-detection
     description: "Détecte les patterns de regex vulnérables aux attaques ReDoS"
-  - name:跨-langage-normalization
+  - name: "跨-langage-normalization"
     description: "Normalise les patterns regex entre Python, PowerShell, JavaScript"
   - name: auto-fix-suggestion
     description: "Suggère les corrections pour les patterns invalides"
@@ -44,7 +44,7 @@ parameters:
   severity_matrix:
     invalid_escape: WARN
     redos_vulnerability: BLOCK
-   跨-langage_mismatch: WARN
+    跨-langage_mismatch: WARN
 states:
   - name: IDLE
     nature: validation non requise
@@ -105,7 +105,7 @@ genes:
     name: redos_immunity
     description: "Aucun pattern ne peut causer de backtracking exponentiel"
   - id: G3
-    name:跨-langage_consistency
+    name: "跨-langage_consistency"
     description: "Le pattern est cohérent entre langages"
   - id: G4
     name: actionable_fixes
@@ -115,7 +115,7 @@ anti_patterns:
     pathology: "Séquences invalides -> SyntaxWarning, comportement imprévisible"
   - missing_gene: redos_immunity
     pathology: "ReDoS -> déni de service, consommation CPU excessive"
-  - missing_gene:跨-langage_consistency
+  - missing_gene: "跨-langage_consistency"
     pathology: "Pattern跨-langage non cohérent -> bugs portabilité"
   - missing_gene: actionable_fixes
     pathology: "Suggestions vagues -> corrections non appliquées"
