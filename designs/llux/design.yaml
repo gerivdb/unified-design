@@ -255,3 +255,10 @@ meta_coherence_checks:
 
 # Intent Hash
 intent_hash: 0xLLUX_CAUSAL_RESOLUTION_DESIGN_20260829
+implementation_contract:
+  repo: LLUX
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\LLUX-wt-wazaa
+  artifacts:
+    - path: .gitignore
+      must_contain:
+        - "TOOLS"

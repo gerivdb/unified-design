@@ -38,3 +38,10 @@ capabilities:
 
 constraints:
   - cpu_only: true
+implementation_contract:
+  repo: Bootstrap
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\TRIX
+  artifacts:
+    - path: build.zig
+      must_contain:
+        - "trix"

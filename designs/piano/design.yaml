@@ -37,3 +37,10 @@ capabilities:
 
 constraints:
   - cpu_only: true
+implementation_contract:
+  repo: PIANO
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\PIANO
+  artifacts:
+    - path: ECOS_ROOT.json
+      must_contain:
+        - PIANO

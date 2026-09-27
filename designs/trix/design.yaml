@@ -39,3 +39,14 @@ capabilities:
 
 constraints:
   - cpu_only: true
+implementation_contract:
+  repo: TRIX
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\TRIX
+  artifacts:
+    - path: git_arbiter_server.py
+      must_contain:
+        - "git_arbiter_server.py"
+        - "GET /health"
+    - path: build.zig
+      must_contain:
+        - "trix"

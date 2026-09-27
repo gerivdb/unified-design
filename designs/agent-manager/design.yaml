@@ -35,3 +35,13 @@ capabilities:
 
 constraints:
   - cpu_only: true
+implementation_contract:
+  repo: AGENT-MANAGER
+  repo_root: C:\DevTools
+  artifacts:
+    - path: .gitignore
+      must_contain:
+        - "Kilo"
+    - path: SCRIPTS/verify-mcp-access.ps1
+      must_contain:
+        - "MCP"

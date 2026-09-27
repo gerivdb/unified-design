@@ -41,3 +41,13 @@ capabilities:
 
 constraints:
   - cpu_only: true
+implementation_contract:
+  repo: FLEX
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\FLEX
+  artifacts:
+    - path: REGISTRY.yaml
+      must_contain:
+        - "FLEX"
+    - path: build.zig
+      must_contain:
+        - "flex"

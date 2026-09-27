@@ -40,3 +40,13 @@ capabilities:
 
 constraints:
   - cpu_only: true
+implementation_contract:
+  repo: CodeDB-E5620
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\CodeDB-E5620
+  artifacts:
+    - path: build.zig
+      must_contain:
+        - "codedb"
+    - path: STRATUM_RELAY.md
+      must_contain:
+        - "CodeDB"

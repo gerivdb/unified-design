@@ -39,3 +39,13 @@ capabilities:
 
 constraints:
   - cpu_only: true
+implementation_contract:
+  repo: WAZAA
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\WAZAA
+  artifacts:
+    - path: src/wazaa_bus.py
+      must_contain:
+        - "class WazaaBus"
+    - path: scripts/wazaa_inbox.py
+      must_contain:
+        - "def main"

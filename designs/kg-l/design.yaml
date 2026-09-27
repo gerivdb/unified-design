@@ -1,3 +1,15 @@
+---
+implementation_contract:
+  repo: KG-L
+  repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\KG-L
+  artifacts:
+    - path: kg_l_server.py
+      must_contain:
+        - "def ingest():"
+        - "def query():"
+    - path: scripts/export_domain_links.py
+      must_contain:
+        - "domain_links"
 name: kg-l
 version: "10.0"
 status: active
