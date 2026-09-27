@@ -1,13 +1,8 @@
----
 name: circuit-breaker-pattern
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for circuit-breaker-pattern."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for circuit-breaker-pattern.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_CIRCUIT_BREAKER_PATTERN_20260923
