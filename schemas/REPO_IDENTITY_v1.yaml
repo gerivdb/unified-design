@@ -1,0 +1,135 @@
+schema_version: 1.0.0
+intent_hash: 0xHERMES_REPO_IDENTITY_SCHEMA_20260927
+description: Schéma canonicalique d'identité de repo pour l'écosystème gerivdb.
+type: REPO_IDENTITY
+required_fields:
+- repo
+- local_path
+- remote
+- entity_type
+- status
+- strate
+- layer
+- owner
+- author
+- created
+- updated
+- description
+- rss_version
+- profil
+- immutable_paths
+- semantic_clusters
+optional_fields:
+- rss_depth
+- pole_id
+- do_not_create
+fields:
+  repo:
+    type: string
+    pattern: ^gerivdb/[A-Z0-9_\-]+$
+    description: full_name GitHub du repo (identifiant canonique unique).
+  local_path:
+    type: string
+    pattern: ^D:\\DO\\WEB\\TOOLS\\(L0-CANON|L1-INFRA|L2-PLATFORM|L3-CITIZENS|L4-TOOLS|L5-ARCHIVE|L6-WORK)\\.+$
+    description: Chemin local canonique du repo sous D:\DO\WEB\TOOLS\.
+  remote:
+    type: string
+    pattern: ^https://github\.com/gerivdb/[A-Z0-9_\-]+\.git$
+    description: URL remote GitHub dérivée de repo.
+  entity_type:
+    type: string
+    enum:
+    - REPO
+    - TOOL
+    - CITIZEN
+    - ENGINE
+    - POLE
+    description: Type d'entité.
+  status:
+    type: string
+    enum:
+    - active
+    - dormant
+    - deprecated
+    - archived
+    description: Statut de vie du repo.
+  strate:
+    type: string
+    enum:
+    - L0-CANON
+    - L1-INFRA
+    - L2-PLATFORM
+    - L3-CITIZENS
+    - L4-TOOLS
+    - L5-ARCHIVE
+    - L6-WORK
+    description: Strate physique de stockage.
+  layer:
+    type: string
+    enum:
+    - N+1
+    - N+2
+    - N+3
+    - N+4
+    - N+3.5
+    description: Couche architecturale (N+1 à N+4).
+  owner:
+    type: string
+    description: Entité propriétaire du repo (strate ou nom logique).
+  author:
+    type: string
+    description: Auteur de la création du repo.
+  created:
+    type: string
+    format: date
+    description: Date de création (YYYY-MM-DD).
+  updated:
+    type: string
+    format: date
+    description: Date de dernière mise à jour (YYYY-MM-DD).
+  description:
+    type: string
+    minLength: 10
+    description: Description canonique du repo.
+  rss_version:
+    type: string
+    pattern: ^\d+\.\d+$
+    description: Version RSS.
+  rss_depth:
+    type: integer
+    minimum: 1
+    maximum: 5
+    description: Profondeur RSS (optionnel).
+  pole_id:
+    type: string
+    pattern: ^POLE-[A-Z0-9\-]+$
+    description: Identifiant du pôle métier HERMES (optionnel).
+  profil:
+    type: string
+    enum:
+    - CRITICAL
+    - TOOL
+    - MASTER
+    - CITIZEN
+    description: Profil RSS.
+  immutable_paths:
+    type: array
+    items:
+      type: string
+    description: Chemins protégés contre modification/suppression.
+  semantic_clusters:
+    type: array
+    items:
+      type: string
+    description: Tags sémantiques du repo.
+  do_not_create:
+    type: boolean
+    description: 'Verrou SOT : interdiction de créer ce repo sans ADR.'
+rules:
+- remote doit être https://github.com/<repo>.git sauf override explicite.
+- entity_type doit être cohérent avec le registre TOPOS.
+- layer est obligatoire dans .repo-identity.yaml, pas seulement dans les frontmatter.
+- pole_id est optionnel mais, si présent, doit être valide dans PRD-MOC-POLES-REGISTRY.
+- strate et layer ne doivent pas être confondus dans les scripts de validation.
+- description doit être propagée dans known_repositories.yaml mais pas dupliquée dans
+  les frontmatter.
