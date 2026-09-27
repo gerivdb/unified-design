@@ -122,6 +122,7 @@ unified-design/
  - [x] 2026-09-29 — CI step validé
  - [x] 2026-09-28T00:48:21+02:00 — PR #81 mergée, merge commit `3e19ef3`
  - [x] 2026-09-28T01:15:42+02:00 — PR #83 mergée, merge commit `aa855f0`
+ - [x] 2026-09-28T01:34:30+02:00 — PR #85 mergée, merge commit `3d70bfe`
 
 ## 6. Références
 
