@@ -1,0 +1,65 @@
+---
+type: SKILL
+version: "1.0.0"
+date: "2026-09-25"
+status: active
+intent_hash: 0xSKILL_DAEMON_REGISTRY_MANAGER_20260925
+related_prd: PRD-MOC-GEN-041-windows-process-governance-2026-09-22.md
+related_moc: PRD-MOC-DAEMON-REGISTRY-20260925.md
+related_adr: ADR-2026-09-25-powershell-daemon-singleton.md
+---
+
+# SKILL — Daemon Registry Manager
+
+## Contexte
+
+L'incident du 2026-09-25 a révélé 11 processus `auto-dispatcher.ps1` orphelins dans `GeriCode/.kilo/orchestrator/`, consommant ~1,1 Go RAM sans aucune mission à traiter.
+
+Ce skill fournit un **contrôleur standard** pour tout daemon PowerShell long-running, basé sur le pattern singleton OS + PID file + stop event.
+
+## Architecture
+
+```
+GeriCode/.kilo/orchestrator/
+├── auto-dispatcher.ps1          # Daemon singletonisé
+├── dispatcherctl.ps1            # Contrôleur start/stop/status/restart
+├── daemon-registry.ps1          # Registry centralisé
+├── daemon-health-monitor.ps1    # Wrapper compatible
+├── .lock/
+│   └── instance.pid             # PID file du dispatcher
+└── daemon-health.json           # État agrégé
+```
+
+## Mécanismes
+
+| Mécanisme | Objectif |
+|-----------|----------|
+| **Mutex `Global\GeriCode-AutoDispatcher-V1`** | Garantit un seul instance OS |
+| **PID file `.lock/instance.pid`** | Monitoring externe + détection orphelins |
+| **EventWaitHandle `Global\GeriCode-AutoDispatcher-Stop`** | Arrêt propre inter-processus |
+| **daemon-health.json** | Heartbeat consommé par `daemon-health-monitor.ps1` |
+| **WaitOne(timeout)** | Boucle interruptible, 0 CPU en idle |
+
+## Intégration Swarm-Lease
+
+| Composant | Rôle |
+|-----------|------|
+| **GeriCode** (`L2-PLATFORM`) | Hôte du daemon `auto-dispatcher.ps1` + contrôleur `dispatcherctl.ps1` |
+| **GOVERNANCE-HUB** (`L0-CANON`) | PRD-MOC GEN-041 backing + règles `daemon-health-monitor.ps1` |
+| **KIX** (`L2-PLATFORM`) | `ProcessManager` P0 — endpoint `/process/*` pour PID registry |
+| **LOOPX** (`L3-CITIZENS`) | `WindowVisibilityManager` + `AdminTaskCoordinator` (P1/P2) |
+| **Swarm-Lease** (GEN-013) | Bail sur `.lock/` directory avant start/stop |
+
+## Proof-of-Life
+
+- [x] `2026-09-25T07:04:34+02:00` — 11 processus `auto-dispatcher.ps1` tués ; RAM libérée ~1,1 Go
+- [x] `2026-09-25T07:04:34+02:00` — `auto-dispatcher.ps1` singletonisé : mutex + PID file + stop event + WaitOne(timeout)
+- [x] `2026-09-25T07:04:34+02:00` — `dispatcherctl.ps1` créé : start/stop/status/restart fonctionnels
+- [x] `2026-09-25T07:04:34+02:00` — `daemon-registry.ps1` validé en mode read/prune
+- [x] `2026-09-25T07:04:34+02:00` — 9/9 tests passants (`verification/test-daemon-registry.ps1`)
+
+---
+
+**IntentHash** : 0xSKILL_DAEMON_REGISTRY_MANAGER_20260925
+**Statut** : active
+**Màj requise si** : statut passe à deprecated ou superseded
