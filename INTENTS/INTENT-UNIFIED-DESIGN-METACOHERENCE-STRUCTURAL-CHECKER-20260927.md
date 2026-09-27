@@ -118,8 +118,9 @@ unified-design/
 - [ ] 2026-09-28 — Modes `--plan` et `--strict` validés
 - [ ] 2026-09-28 — Mode `--apply` testé sur un design non L0
 - [ ] 2026-09-28 — Alias registry peuplée si applicable
-- [ ] 2026-09-29 — Pre-commit hook intégré et testé
-- [ ] 2026-09-29 — CI step validé
+ - [ ] 2026-09-29 — Pre-commit hook intégré et testé
+ - [ ] 2026-09-29 — CI step validé
+ - [x] 2026-09-28T00:48:21+02:00 — PR #81 mergée, merge commit `3e19ef3`
 
 ## 6. Références
 
