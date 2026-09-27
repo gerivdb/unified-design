@@ -33,7 +33,7 @@ def scan_designs() -> list[dict[str, Any]]:
     items = []
     for path in DESIGNS_DIR.glob("*/design.yaml"):
         rel = path.relative_to(REPO_ROOT)
-        items.append({"name": path.parent.name, "path": str(rel), "status": "active"})
+        items.append({"name": path.parent.name, "path": str(rel), "status": "active", "source_repo": "unified-design"})
     return items
 
 
@@ -41,7 +41,7 @@ def scan_atoms() -> list[dict[str, Any]]:
     items = []
     for path in ATOMS_DIR.glob("*.md"):
         rel = path.relative_to(REPO_ROOT)
-        items.append({"name": path.stem, "path": str(rel), "status": "active"})
+        items.append({"name": path.stem, "path": str(rel), "status": "active", "source_repo": "unified-design"})
     return items
 
 

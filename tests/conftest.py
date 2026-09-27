@@ -1,3 +1,3 @@
-# Pytest Configuration
-
-Configuration for pytest test discovery and fixtures.
+"""
+Pytest configuration for unified-design test suite.
+"""

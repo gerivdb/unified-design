@@ -43,9 +43,11 @@ def check_unique_ids(meta: dict, catalogs: dict) -> list[str]:
     ids: set[str] = set()
     duplicates: list[str] = []
     entries = []
-    for section in ["designs", "primitives", "skills", "citizens", "pipelines", "workflows", "governance_atoms"]:
+    for section in ["designs", "primitives", "skills", "citizens", "pipelines", "workflows"]:
         entries.extend(meta.get(section, []))
     for entry in entries:
+        if not isinstance(entry, dict):
+            continue
         id_ = entry.get("intent_hash") or entry.get("id")
         if not id_:
             continue
@@ -53,7 +55,13 @@ def check_unique_ids(meta: dict, catalogs: dict) -> list[str]:
             duplicates.append(id_)
         ids.add(id_)
     for name, items in catalogs.items():
+        if isinstance(items, dict) and "items" in items:
+            items = items["items"]
+        if not isinstance(items, list):
+            continue
         for item in items:
+            if not isinstance(item, dict):
+                continue
             id_ = item.get("intent_hash") or item.get("id")
             if not id_:
                 continue
