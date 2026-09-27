@@ -1,13 +1,8 @@
----
 name: prd-moc-progress-sync
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for prd-moc-progress-sync."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for prd-moc-progress-sync.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_PRD_MOC_PROGRESS_SYNC_20260923

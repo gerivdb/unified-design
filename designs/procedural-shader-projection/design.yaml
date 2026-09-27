@@ -1,18 +1,22 @@
 name: procedural-shader-projection
-version: "1.0.0"
+version: 1.0.0
 status: draft
-description: |
-  Procedural Shader Projection — état compact (728 spins + shaders + centres RBF,
+description: 'Procedural Shader Projection — état compact (728 spins + shaders + centres
+  RBF,
+
   quelques ko) → rendu DOM/HTML/DB.
+
+  '
 parent: unified-design-learning-loop
 layer: L4
 capabilities:
-  - name: shader-projection
-    parameters:
-      spins_count: 728
-      shaders_max: 4
-      state_size_bytes: 4096
-      projection_time_ms: 1
+- name: shader-projection
+  parameters:
+    spins_count: 728
+    shaders_max: 4
+    state_size_bytes: 4096
+    projection_time_ms: 1
 dependencies:
-  - quasicrystal-lattice
-  - rbf-cluster
+- quasicrystal-lattice
+- rbf-cluster
+intent_hash: 0xDESIGN_PROCEDURAL_SHADER_PROJECTION_20260923
