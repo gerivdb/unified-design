@@ -43,6 +43,15 @@ Créer un skill MDU-integrity-checker capable de vérifier, avant tout push ou c
 
 **Verdict** : 2 composants P0 + 3 P1. Effort minimal, valeur élevée. Bloque les récidives de drift MDU.
 
+## État d'implémentation (2026-09-23)
+
+| Composant | État | Preuve |
+|-----------|------|--------|
+| `tools/mdu-lint.py` | ✅ Fonctionnel | `python tools/mdu-lint.py --strict` retourne 0 erreur, 52 warnings (empty consumers) |
+| `skills/mdu-integrity-checker` | ✅ Créé | `skills/mdu-integrity-checker/SKILL.md` existe |
+| Hook pre-commit | ✅ Configuré | `.pre-commit-config.yaml` contient `design-validate` et `kiva-pipeline-unified-design` |
+| Catalogues synchronisés | ✅ OK | `scripts/sync-mdu-catalog.py --all` exécuté, `designs.index.yaml` et `atoms.index.yaml` mis à jour avec `source_repo: unified-design` |
+
 ## Périmètre
 
 | Inclut | Exclut |
