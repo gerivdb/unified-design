@@ -104,3 +104,4 @@ Mettre en œuvre le PRD `PRD-UNIFIED-DESIGN-STRUCTURAL-METACOHERENCE-CHECKER-202
  - [x] 2026-09-28T01:15:42+02:00 — PR #83 mergée, merge commit `aa855f0`
  - [x] 2026-09-28T01:34:30+02:00 — PR #85 mergée, merge commit `3d70bfe`
  - [x] 2026-09-28T01:38:30+02:00 — PR #86 mergée, merge commit `8d73450`
+ - [x] 2026-09-28T01:42:04+02:00 — PR #87 mergée, merge commit `1a70f10`
