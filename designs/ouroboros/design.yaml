@@ -1,13 +1,8 @@
----
 name: ouroboros
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for ouroboros."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for ouroboros.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_OUROBOROS_20260923
