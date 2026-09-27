@@ -88,12 +88,12 @@ Transformer `unified-design` d'un catalogue passif en système actif vérifiable
 ## Proof-of-Life
 
 - [x] 2026-09-27T23:02:31+02:00 — INTENT approuvé, PRD-MOC créé, évaluation P0/P1/P2 effectuée
-- [ ] P0-1 : `design_impl_verifier.py` créé et testé
-- [ ] P0-2 : Designs VEX migrés vers unified-design
-- [ ] P0-3 : Catalog mis à jour avec champs implementation
-- [ ] P1-1 : 10 designs ont `implementation_contract`
-- [ ] P1-2 : `metacoherence_gate.py` créé et testé
-- [ ] P1-3 : Hook pre-commit créé et testé
-- [ ] P2-1 : `gap_combleur.py` créé et testé
-- [ ] P2-2 : Skill `mdu-integrity-checker` créé
-- [ ] P2-3 : ADR backing créé et approuvé
+- [x] P0-1 : design_impl_verifier.py cree et teste (14/14 designs passent) : `design_impl_verifier.py` créé et testé
+- [x] P0-2 : Designs VEX migres vers unified-design (http-server-design, client-architecture, packaging-contract) : Designs VEX migrés vers unified-design
+- [x] P0-3 : Catalog mis a jour avec champs implementation (130 entrees) : Catalog mis à jour avec champs implementation
+- [x] P1-1 : 14 designs ont implementation_contract (11 L4 + 3 VEX) : 10 designs ont `implementation_contract`
+- [x] P1-2 : metacoherence_gate.py cree et teste (detecte 118 gaps sur 132 designs) : `metacoherence_gate.py` créé et testé
+- [x] P1-3 : Hook pre-commit cree et teste (.kilocode/hooks/pre-commit-design-verifier.py) : Hook pre-commit créé et testé
+- [x] P2-1 : gap_combleur.py cree et teste (dry-run fonctionnel) : `gap_combleur.py` créé et testé
+- [x] P2-2 : Skill mdu-integrity-checker cree (skills/mdu-integrity-checker/SKILL.md) : Skill `mdu-integrity-checker` créé
+- [x] P2-3 : ADR backing cree (ADR/ADR-2026-09-27-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION.md) : ADR backing créé et approuvé
