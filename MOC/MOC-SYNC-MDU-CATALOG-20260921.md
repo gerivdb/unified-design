@@ -32,23 +32,23 @@ Ce MOC orchestre la création et l'intégration du script `sync-mdu-catalog.py` 
 
 | Composant | Type | Chemin | Statut |
 |-----------|------|--------|--------|
-| `sync-mdu-catalog.py` | Script | `scripts/sync-mdu-catalog.py` | ⏳ À créer |
-| `mdu-daily-sync` | Workflow | `workflows/mdu-daily-sync.md` | ⏳ À créer |
-| `pipeline-mdu-validation` | Pipeline | `pipelines/pipeline-mdu-validation.yaml` | ⏳ À créer |
+| `sync-mdu-catalog.py` | Script | `scripts/sync-mdu-catalog.py` | ✅ Fonctionnel |
+| `mdu-daily-sync` | Workflow | `workflows/mdu-daily-sync.md` | ✅ Créé |
+| `pipeline-mdu-validation` | Pipeline | `pipelines/pipeline-mdu-validation.yaml` | ✅ Créé |
 
 ## Séquence d'implémentation
 
-### Phase 1 — Script core (bloquant)
+### Phase 1 — Script core (bloquant) — ✅ Réalisé
 
 1. Créer `scripts/sync-mdu-catalog.py` avec modes `--designs`, `--atoms`, `--all`
 2. Tester en `--dry-run` sur `main`
 
-### Phase 2 — Workflow et pipeline
+### Phase 2 — Workflow et pipeline — ✅ Réalisé
 
 3. Créer `workflows/mdu-daily-sync.md`
 4. Créer `pipelines/pipeline-mdu-validation.yaml`
 
-### Phase 3 — Intégration MDU
+### Phase 3 — Intégration MDU — ✅ Réalisé
 
 5. Mettre à jour `meta-design.yaml` avec le workflow et le pipeline
 6. Mettre à jour `session-boot-skill` pour inclure le daily sync
@@ -57,7 +57,10 @@ Ce MOC orchestre la création et l'intégration du script `sync-mdu-catalog.py` 
 
 | Gate | Critère | Statut |
 |------|---------|--------|
-| G1 — Script créé | `sync-mdu-catalog.py --dry-run` retourne un rapport sans erreur | ⏳ En attente |
+| G1 — Script créé | `sync-mdu-catalog.py --dry-run` retourne un rapport sans erreur | ✅ OK |
+| G2 — Workflow créé | `mdu-daily-sync.md` documenté et testé | ✅ OK |
+| G3 — Pipeline créé | `pipeline-mdu-validation.yaml` exécuté avec succès | ✅ OK |
+| G4 — Catalogue à jour | `catalog/*.yaml` couvre 100% des artefacts après sync | ✅ OK |
 | G2 — Workflow créé | `mdu-daily-sync.md` documenté et testé | ⏳ En attente |
 | G3 — Pipeline créé | `pipeline-mdu-validation.yaml` exécuté avec succès | ⏳ En attente |
 | G4 — Catalogue à jour | `catalog/*.yaml` couvre 100% des artefacts après sync | ⏳ En attente |
