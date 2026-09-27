@@ -66,12 +66,12 @@ Mettre en œuvre le PRD `PRD-UNIFIED-DESIGN-STRUCTURAL-METACOHERENCE-CHECKER-202
 
 ## Critères d'acceptation globaux
 
-- [ ] `python .kilo/check_meta_coherence.py --mode check` : JSON valide sur 283 designs
-- [ ] `python .kilo/check_meta_coherence.py --mode plan` : fix-plan cohérent
+- [x] `python .kilo/check_meta_coherence.py --mode check` : JSON valide sur 283 designs
+- [x] `python .kilo/check_meta_coherence.py --mode plan` : fix-plan cohérent
 - [ ] `python .kilo/check_meta_coherence.py --mode strict` : exit 0 uniquement si 0 problème
-- [ ] `python .kilo/check_meta_coherence.py --mode apply` : backups créés, auto-fixes appliqués
-- [ ] Hook pre-commit bloque si `--strict` échoue
-- [ ] Tests unitaires passent : `pytest .kilo/tests/test_check_meta_coherence.py -q`
+- [x] `python .kilo/check_meta_coherence.py --mode apply` : backups créés, auto-fixes appliqués
+- [x] Hook pre-commit bloque si `--strict` échoue
+- [x] Tests unitaires passent : `pytest .kilo/tests/test_check_meta_coherence.py -q`
 
 ## Références
 
@@ -102,3 +102,4 @@ Mettre en œuvre le PRD `PRD-UNIFIED-DESIGN-STRUCTURAL-METACOHERENCE-CHECKER-202
  - [x] P2-2 : aliases enrichis
  - [x] 2026-09-28T00:48:21+02:00 — PR #81 mergée, merge commit `3e19ef3`
  - [x] 2026-09-28T01:15:42+02:00 — PR #83 mergée, merge commit `aa855f0`
+ - [x] 2026-09-28T01:34:30+02:00 — PR #85 mergée, merge commit `3d70bfe`
