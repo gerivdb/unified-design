@@ -82,7 +82,7 @@ bridges:
   - target: repo:localjev-upstream
     role: upstream-backend
     protocol: openai-chat-completions
-    channel: L5-ARCHIVE/localjev-upstream
+    channel: L4-TOOLS/localjev-upstream
 capabilities:
   - name: typed-decisions
     description: "Questions typées Jev : noul (yes/no), choice (classification), score (échelle)"

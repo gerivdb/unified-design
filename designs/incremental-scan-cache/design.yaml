@@ -1,13 +1,8 @@
----
 name: incremental-scan-cache
 version: 1.0.0
 status: active
 layer: L0
-description: "Design artifact for incremental-scan-cache."
-profile: STANDARD
-consumers:
-
-version: 1.0.0
-status: active
+description: Design artifact for incremental-scan-cache.
 profile: STANDARD
 consumers: []
+intent_hash: 0xDESIGN_INCREMENTAL_SCAN_CACHE_20260923
