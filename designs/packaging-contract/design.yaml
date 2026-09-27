@@ -1,0 +1,23 @@
+---
+name: packaging-contract
+version: "1.0.0"
+status: active
+layer: L3
+intent_hash: 0xVEX_PACKAGING_CONTRACT_20260927
+repo: gerivdb/VEX
+implementation_contract:
+  repo: gerivdb/VEX
+  repo_root: D:\DO\WEB\TOOLS\L3-CITIZENS\VEX
+  artifacts:
+    - path: pyproject.toml
+      must_contain:
+        - "[build-system]"
+        - "setuptools"
+    - path: src/vex/__init__.py
+      must_contain:
+        - "VEX"
+---
+
+**IntentHash** : `0xVEX_PACKAGING_CONTRACT_20260927`  
+**Statut** : proposed  
+**Màj requise si** : changement de politique de packaging

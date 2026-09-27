@@ -1,0 +1,175 @@
+---
+name: client-architecture
+version: "1.0.0"
+status: active
+layer: L3
+intent_hash: 0xVEX_CLIENT_ARCHITECTURE_DESIGN_20260927
+repo: gerivdb/VEX
+implementation_contract:
+  repo: gerivdb/VEX
+  repo_root: D:\DO\WEB\TOOLS\L3-CITIZENS\VEX
+  artifacts:
+    - path: src/vex/primitives/base_client.py
+      must_contain:
+        - "class BaseIntegrationClient"
+    - path: src/vex/clients/wazaa_bus_client.py
+      must_contain:
+        - "from vex.primitives import BaseIntegrationClient"
+  tests:
+    - tests/test_client_primitives.py
+---
+
+# Design — VEX Client Architecture
+
+**IntentHash** : `0xVEX_CLIENT_ARCHITECTURE_DESIGN_20260927`
+**Repo** : `gerivdb/VEX`
+**Strate** : L3-CITIZENS
+**Profil** : TOOL
+**Statut** : proposed
+
+---
+
+## Contexte
+
+VEX intègre 19 clients d'intégration vers les repos de l'écosystème gerivdb.
+Actuellement, chaque client duplique la même logique : `__init__(base_url)`, `self.base_url.rstrip("/")`, `self.contract = CONTRACT`, méthode `health()` quasi identique, gestion d'erreur `requests.RequestException` copiée 20 fois.
+
+## Problème
+
+- **Duplication** : 70% du code client est identique
+- **Incohérence** : chaque client gère les erreurs différemment
+- **Maintenance** : ajouter un client = copier-coller + adapter
+- **Testabilité** : tests d'intégration répétitifs non paramétrés
+
+## Solution
+
+### Primitives
+
+#### 1. from vex.primitives import BaseIntegrationClient (classe abstraite)
+
+```python
+class BaseIntegrationClient(ABC):
+    """Base class for all VEX integration clients."""
+
+    def __init__(self, base_url: str = CONTRACT.base_url) -> None:
+        self.base_url = base_url.rstrip("/")
+        self.contract = CONTRACT
+
+    @abstractmethod
+    def health(self) -> dict[str, Any]:
+        """Check service health."""
+        ...
+
+    def _request(
+        self,
+        method: str,
+        path: str,
+        *,
+        json: dict[str, Any] | None = None,
+        timeout: int | None = None,
+    ) -> dict[str, Any]:
+        """Centralized HTTP request with error handling."""
+        timeout = timeout or self.contract.timeout
+        try:
+            resp = requests.request(
+                method,
+                f"{self.base_url}{path}",
+                json=json,
+                timeout=timeout,
+            )
+            resp.raise_for_status()
+            return resp.json()
+        except requests.RequestException as exc:
+            return {"status": "error", "error": str(exc), "service": self.contract.service}
+
+    def _get(self, path: str, timeout: int | None = None) -> dict[str, Any]:
+        return self._request("GET", path, timeout=timeout)
+
+    def _post(self, path: str, json: dict[str, Any] | None = None, timeout: int | None = None) -> dict[str, Any]:
+        return self._request("POST", path, json=json, timeout=timeout)
+```
+
+**Gain** : -70% de duplication, gestion d'erreur centralisée, comportement cohérent.
+
+#### 2. StandardResponse (envelope)
+
+```python
+@dataclass
+class StandardResponse:
+    ok: bool
+    data: Any = None
+    error: str | None = None
+
+    @classmethod
+    def success(cls, data: Any) -> StandardResponse:
+        return cls(ok=True, data=data)
+
+    @classmethod
+    def failure(cls, error: str) -> StandardResponse:
+        return cls(ok=False, error=error)
+```
+
+**Gain** : consommateurs uniformes, pas de `if "error" in result` dispersé.
+
+#### 3. ContractRegistry (registry dynamique)
+
+```python
+class ContractRegistry:
+    """Dynamic registry of integration contracts."""
+
+    def __init__(self) -> None:
+        self._contracts: dict[str, ClientContract] = {}
+
+    def register(self, contract: ClientContract) -> None:
+        self._contracts[contract.service] = contract
+
+    def get(self, service: str) -> ClientContract | None:
+        return self._contracts.get(service)
+
+    def load_from_yaml(self, path: Path) -> None:
+        """Load contracts from YAML configuration."""
+        ...
+```
+
+**Gain** : ajout d'un client = fichier YAML, pas de code Python.
+
+#### 4. RetryPolicy (politique de retry)
+
+```python
+@dataclass
+class RetryPolicy:
+    max_retries: int = 3
+    backoff: float = 1.0
+    retry_on: tuple[type[Exception], ...] = (requests.Timeout,)
+
+    def execute(self, fn: Callable[..., T], *args: Any, **kwargs: Any) -> T:
+        ...
+```
+
+**Gain** : robustesse, optimisation appels réseau.
+
+### Migration
+
+1. Créer `src/vex/primitives/` avec `base_client.py`, `response.py`, `registry.py`, `retry.py`
+2. Refactorer 1 client exemple (`wazaa_bus_client.py`) pour valider le pattern
+3. Générer les 18 autres clients via `vex-client-generator` skill
+4. Mettre à jour les tests d'intégration avec `pytest.mark.parametrize`
+
+## Critères d'acceptation
+
+- [ ] `from vex.primitives import BaseIntegrationClient` implémenté et testé
+- [ ] `StandardResponse` utilisé par tous les clients
+- [ ] `ContractRegistry` remplace les constantes硬codées
+- [ ] `RetryPolicy` activé sur tous les clients
+- [ ] Tests d'intégration paramétrés
+- [ ] Documentation mise à jour
+
+## Références
+
+- `src/vex/clients/wazaa_bus_client.py` (client à refactorer)
+- `src/vex/contracts/__init__.py` (contrats actuels)
+- `tests/integration/test_client_contracts.py` (tests actuels)
+
+## Proof-of-Life
+
+- [ ] 2026-09-27T00:00:00+02:00 — from vex.primitives import BaseIntegrationClient créé et testé
