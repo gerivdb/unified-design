@@ -28,3 +28,8 @@
 | MOC-JEVX-MDU-INTEGRATION-FIX-20260922 | JEVX MDU Integration Fix | approved |
 | MOC-MDU-GAPS-2026-08-16 | MDU Gaps MOC | approved |
 | MOC-TALEX-FRICTION-ANALYZER-20260922 | TALEX Friction Analyzer | approved |
+| MOC-TEST-INFRASTRUCTURE-20260923 | Test Infrastructure Repair | approved |
+| MOC-FRONTMATTER-NORMALIZATION-20260923 | Frontmatter Normalization | approved |
+| MOC-SRC-MIGRATION-20260923 | Src Migration | approved |
+| MOC-DOCS-DEDUPLICATION-20260923 | Documentation Deduplication | approved |
+| MOC-LOCAL-CI-PIPELINE-20260923 | Local CI Pipeline | approved |
