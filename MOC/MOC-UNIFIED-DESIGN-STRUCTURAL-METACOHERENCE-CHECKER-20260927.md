@@ -99,5 +99,6 @@ Mettre en œuvre le PRD `PRD-UNIFIED-DESIGN-STRUCTURAL-METACOHERENCE-CHECKER-202
 - [x] P1-2 : tests unitaires passent
 - [x] P1-3 : hook pre-commit intégré
  - [x] P2-1 : run_meta_coherence_check.ps1 fonctionnel
- - [ ] P2-2 : aliases enrichis
+ - [x] P2-2 : aliases enrichis
  - [x] 2026-09-28T00:48:21+02:00 — PR #81 mergée, merge commit `3e19ef3`
+ - [x] 2026-09-28T01:15:42+02:00 — PR #83 mergée, merge commit `aa855f0`
