@@ -10,6 +10,14 @@ Vérifier la **métacohérence structurelle** des `designs/**/*.yaml` de `unifie
 
 **Pas** de vérification sémantique du code implémenté : ce checker valide uniquement la résolvabilité du graphe `inherits` / `depends_on` / `bridges` dans l’atlas local.
 
+### Validations couvertes
+
+- `inherits:` : parent déclaré existe dans `designs/**/*.yaml` ou alias
+- `depends_on:` : dépendance déclarée résoluble localement
+- `bridges:` : chaque entrée est une structure cohérente avec `target`, `role`, `protocol`
+- profondeur d’héritage ≤ 3
+- YAML valide
+
 ## 2. Pré-requis
 
 - Python 3.10+
@@ -63,6 +71,13 @@ python .kilo/check_meta_coherence.py --strict
   - `bad_yaml > 0`
 - Exit 0 uniquement si 0 problème détecté
 
+### 3.5 Codes d’erreur
+
+| Code | Condition |
+|------|-----------|
+| 0 | Aucun problème détecté |
+| 1 | `issues_total > 0` ou `bad_yaml > 0` en mode `strict` |
+
 ## 4. Aliases
 
 Le fichier `.kilo/meta_coherence_aliases.yaml` permet de résoudre des références courantes vers des designs dont le slug diffère du nom attendu.
@@ -106,6 +121,7 @@ if ($LASTEXITCODE -ne 0) { exit 1 }
 | Limite | Raison | Traitement |
 |--------|--------|-----------|
 | `depends_on:` orphelins non résolubles | Références vers ATOM/PRD/MOC hors `designs/` | Comptés, mais non corrigés en auto |
+| `bridges:` cibles hors atlas | Cibles peuvent être des repos/agents externes | Seule la structure `target/role/protocol` est vérifiée |
 | YAML invalides | Parsing impossible | Rapportés, correction manuelle |
 | Alias incomplets | Nombreux slugs manquants | Enrichir `.kilo/meta_coherence_aliases.yaml` |
 

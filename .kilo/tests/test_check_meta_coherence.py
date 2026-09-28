@@ -52,3 +52,20 @@ def test_aliases_loaded():
     import yaml
     data = yaml.safe_load(open(aliases_path, encoding="utf-8"))
     assert "aliases" in data
+
+
+def test_bridges_validation_detects_missing_fields():
+    import tempfile, shutil
+    tmpdir = tempfile.mkdtemp(dir=ROOT)
+    try:
+        design_dir = os.path.join(tmpdir, "designs", "bridge-test")
+        os.makedirs(design_dir, exist_ok=True)
+        path = os.path.join(design_dir, "design.yaml")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write("name: bridge-test\ninherits: []\nbridges:\n  - target: X\n")
+        mod = run_check(["--mode", "check"])
+        latest = os.path.join(ROOT, "reports", "meta-coherence", "latest.json")
+        data = json.load(open(latest, encoding="utf-8"))
+        assert data["bad_bridges"] >= 1
+    finally:
+        shutil.rmtree(tmpdir)

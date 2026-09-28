@@ -95,6 +95,28 @@ def compute_depth(slug, by_slug, aliases):
                 q.append((resolved, d + 1))
     return depth
 
+
+def validate_bridges(doc, slug, p):
+    bridges = doc.get("bridges")
+    if bridges is None:
+        return []
+    if not isinstance(bridges, list):
+        return [{"slug": slug, "type": "bad_bridges", "ref": "non-list", "file": p}]
+    issues = []
+    for idx, bridge in enumerate(bridges):
+        if not isinstance(bridge, dict):
+            issues.append({"slug": slug, "type": "bad_bridges", "ref": f"item[{idx}] non-dict", "file": p})
+            continue
+        for key in ("target", "role", "protocol"):
+            if key not in bridge:
+                issues.append({
+                    "slug": slug,
+                    "type": "bad_bridges",
+                    "ref": f"{slug}.bridges[{idx}].{key}",
+                    "file": p,
+                })
+    return issues
+
 # Chargement aliases
 aliases = load_aliases()
 
@@ -141,6 +163,7 @@ for slug, meta in data.items():
             issues.append({"slug": slug, "type": "missing_dependency", "ref": dep, "file": p})
             if not is_protected(doc):
                 manual_fixes.append({"slug": slug, "ref": dep, "file": p, "action": "remove_missing_dependency"})
+    issues.extend(validate_bridges(doc, slug, p))
     depth = compute_depth(slug, by_slug, aliases)
     if depth > 3:
         issues.append({"slug": slug, "type": "depth", "ref": str(depth), "file": p})
@@ -158,6 +181,7 @@ summary = {
     "missing_parents": len([i for i in issues if i["type"] == "missing_parent"]),
     "missing_dependencies": len([i for i in issues if i["type"] == "missing_dependency"]),
     "depth_violations": len([i for i in issues if i["type"] == "depth"]),
+    "bad_bridges": len([i for i in issues if i["type"] == "bad_bridges"]),
     "bad_yaml_files": bad,
     "sample_issues": issues[:50],
 }
@@ -260,5 +284,6 @@ print(json.dumps({
     "bad_yaml": summary["bad_yaml"],
     "depth_violations": summary["depth_violations"],
     "missing_parents": summary["missing_parents"],
-    "missing_dependencies": summary["missing_dependencies"]
+    "missing_dependencies": summary["missing_dependencies"],
+    "bad_bridges": summary["bad_bridges"]
 }, ensure_ascii=False, indent=2))
