@@ -181,9 +181,13 @@ class DesignTestHarness:
 - **Primitives** : `primitives/safe-action-gate-primitive.yaml`, `primitives/design-ops-loop-primitive.yaml`
 - **Consumers** : KIVA-CLI, ECOS-CLI, ARGUS, CTULU
 - **POC** : `D:\DO\WEB\TOOLS\L1-INFRA\KIVA-CLI\kiva_cli\safe_action_integration.py`
+- **Registry** : `PRD-MOC-UNIFIED-DESIGN-CONSUMERS-REGISTRY-20260928.md`
 - **CI Pipeline** : `PRD-MOC-CROSS-REPO-CI-PIPELINE-20260928.md`
 - **Traceability** : `PRD-MOC-ADR-DESIGN-INTEGRATION-TRACEABILITY-20260928.md`
 - **Usage** : `PRD-MOC-CONSUMER-INTEGRATION-USAGE-20260928.md`
+- **Auto-Promote** : `PRD-MOC-AUTO-PROMOTE-20260928.md`
+- **MOC Framework** : `MOC-INTEGRATION-FRAMEWORK-20260928.md`
+- **MOC Registry** : `MOC-UNIFIED-DESIGN-CONSUMERS-REGISTRY-20260928.md`
 
 ---
 

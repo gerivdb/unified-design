@@ -142,6 +142,8 @@ steps:
 - **Design** : `designs/integration-framework/design.yaml`
 - **Primitive** : `primitives/integration-framework-primitive.yaml`
 - **MOC** : `MOC-LOCAL-CI-PIPELINE-20260923.md`
+- **MOC Framework** : `MOC-INTEGRATION-FRAMEWORK-20260928.md`
+- **MOC Registry** : `MOC-UNIFIED-DESIGN-CONSUMERS-REGISTRY-20260928.md`
 - **ADR** : ADR-2026-09-27-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION
 
 ---

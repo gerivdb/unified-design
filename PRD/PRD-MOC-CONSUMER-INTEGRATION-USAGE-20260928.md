@@ -136,10 +136,13 @@ def verify_consumer_usage(consumer: str, design: str) -> dict:
 
 ## 7. Références
 
-- **Framework** : `PRD/PRD-MOC-INTEGRATION-FRAMEWORK-20260928.md`
+- **Framework** : `PRD-MOC-INTEGRATION-FRAMEWORK-20260928.md`
 - **Registry** : `PRD/PRD-MOC-UNIFIED-DESIGN-CONSUMERS-REGISTRY-20260928.md`
 - **CI Pipeline** : `PRD/PRD-MOC-CROSS-REPO-CI-PIPELINE-20260928.md`
 - **Traceability** : `PRD/PRD-MOC-ADR-DESIGN-INTEGRATION-TRACEABILITY-20260928.md`
+- **Auto-Promote** : `PRD-MOC-AUTO-PROMOTE-20260928.md`
+- **MOC Framework** : `MOC-INTEGRATION-FRAMEWORK-20260928.md`
+- **MOC Registry** : `MOC-UNIFIED-DESIGN-CONSUMERS-REGISTRY-20260928.md`
 
 ---
 
