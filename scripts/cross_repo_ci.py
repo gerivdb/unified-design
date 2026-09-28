@@ -132,7 +132,7 @@ def check_consumer(consumer: str, design: str) -> dict:
 def main():
     parser = argparse.ArgumentParser(description="Cross-Repo CI Pipeline")
     parser.add_argument("--all", action="store_true", help="Check all 126 pairs")
-    parser.add_argument("--consumer", help="Check specific consumer")
+    parser.add_argument("--consumer", nargs='+', help="Check specific consumer(s)")
     parser.add_argument("--design", help="Check specific design")
     parser.add_argument("--json-out", help="Output JSON report path")
     args = parser.parse_args()
@@ -140,10 +140,12 @@ def main():
     results = []
     
     if args.consumer and args.design:
-        results.append(check_consumer(args.consumer, args.design))
+        for consumer in args.consumer:
+            results.append(check_consumer(consumer, args.design))
     elif args.consumer:
-        for design in DESIGN_SLUGS.keys():
-            results.append(check_consumer(args.consumer, design))
+        for consumer in args.consumer:
+            for design in DESIGN_SLUGS.keys():
+                results.append(check_consumer(consumer, design))
     elif args.design:
         for consumer in CONSUMER_MAP.keys():
             results.append(check_consumer(consumer, args.design))
