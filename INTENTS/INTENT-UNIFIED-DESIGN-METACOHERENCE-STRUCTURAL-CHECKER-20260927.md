@@ -2,7 +2,7 @@
 type: INTENT
 version: "1.0.0"
 date: "2026-09-27"
-status: proposed
+status: approved
 intent_hash: 0xINTENT_UNIFIED_DESIGN_METACOHERENCE_STRUCTURAL_CHECKER_20260927
 parent_intent: INTENT-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION-20260927.md
 repo: "gerivdb/unified-design"

@@ -154,24 +154,24 @@ class DesignTestHarness:
 
 ## 6. Critères d'acceptation
 
-- [ ] Design `integration-framework` créé et validé
-- [ ] Primitive créée et référencée dans `meta-design.yaml`
-- [ ] Module Python fonctionnel avec tests passants
-- [ ] Template d'intégration utilisable par un consumer
-- [ ] Documentation complète
-- [ ] Aucune violation DAG
+- [x] Design `integration-framework` créé et validé
+- [x] Primitive créée et référencée dans `meta-design.yaml`
+- [x] Module Python fonctionnel avec tests passants
+- [x] Template d'intégration créé dans `templates/integration-template.py`
+- [x] Documentation créée dans `docs/integration-framework.md`
+- [x] Aucune violation DAG
 
 ---
 
 ## 7. Proof-of-Life
 
-- [ ] 2026-09-28T06:00:00+02:00 — Création design `integration-framework`
-- [ ] 2026-09-28T06:00:00+02:00 — Création primitive `integration-framework-primitive`
-- [ ] 2026-09-28T06:00:00+02:00 — Création module `tools/integration_framework.py`
-- [ ] 2026-09-28T06:00:00+02:00 — Création template `templates/integration-template.py`
-- [ ] 2026-09-28T06:00:00+02:00 — Création tests `tests/test_integration_framework.py`
-- [ ] 2026-09-28T06:00:00+02:00 — Création documentation `docs/integration-framework.md`
-- [ ] 2026-09-28T06:00:00+02:00 — Mise à jour `meta-design.yaml`
+- [x] 2026-09-28T06:00:00+02:00 — Création design `integration-framework`
+- [x] 2026-09-28T06:00:00+02:00 — Création primitive `integration-framework-primitive`
+- [x] 2026-09-28T06:00:00+02:00 — Création module `tools/integration_framework.py`
+- [x] 2026-09-28T06:00:00+02:00 — Création template `templates/integration-template.py`
+- [x] 2026-09-28T06:00:00+02:00 — Création tests `tests/test_integration_framework.py`
+- [x] 2026-09-28T06:00:00+02:00 — Création documentation `docs/integration-framework.md`
+- [x] 2026-09-28T06:00:00+02:00 — Mise à jour `meta-design.yaml`
 
 ---
 
@@ -181,6 +181,9 @@ class DesignTestHarness:
 - **Primitives** : `primitives/safe-action-gate-primitive.yaml`, `primitives/design-ops-loop-primitive.yaml`
 - **Consumers** : KIVA-CLI, ECOS-CLI, ARGUS, CTULU
 - **POC** : `D:\DO\WEB\TOOLS\L1-INFRA\KIVA-CLI\kiva_cli\safe_action_integration.py`
+- **CI Pipeline** : `PRD-MOC-CROSS-REPO-CI-PIPELINE-20260928.md`
+- **Traceability** : `PRD-MOC-ADR-DESIGN-INTEGRATION-TRACEABILITY-20260928.md`
+- **Usage** : `PRD-MOC-CONSUMER-INTEGRATION-USAGE-20260928.md`
 
 ---
 

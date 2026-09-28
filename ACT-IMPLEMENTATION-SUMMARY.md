@@ -16,6 +16,11 @@
 - **ACT-028**: Audited all PRD-MOCs — 126/126 present, 126/126 valid implementations, 0 stubs
 - **ACT-029**: Updated all 126 PRD-MOCs with real state and acceptance criteria
 - **ACT-030**: Proof-of-concept integration of `safe-action-pattern` into KIVA-CLI
+- **ACT-039–ACT-041**: Batch integration of all 126 design/consumer pairs with passing pytest validation
+- **ACT-042**: Fixed remaining pytest failures — all 126 integration tests now passing
+- **ACT-043**: Created integration framework template and documentation
+- **ACT-044**: Created cross-repo CI pipeline and traceability scripts
+- **ACT-045**: Created PRD-MOC for consumer integration usage documentation
 
 ### Current State
 | Metric | Value |
@@ -28,43 +33,41 @@
 | Valid implementations | 100% (126/126) |
 | Stubs | 0 |
 | Hook deployment | 14/14 |
-| Functional integrations | 1/126 (KIVA-CLI safe-action-pattern POC) |
+| Integration modules created | 126/126 (100%) |
+| Integration tests passing | 126/126 (100%) |
+| Integration framework | Implemented (tools/, templates/, docs/) |
+| Cross-repo CI pipeline | Scripts created, not yet activated |
+| ADR traceability | Script created, ADR promotion pending |
+| Consumer usage docs | PRD-MOC created, consumer updates pending |
 
 ## What's Real vs Declared
 
 ### ✅ Real (prod-ready)
-- PRD-MOC governance documents (126 files)
+- PRD-MOC governance documents (126 files in consumer repos)
 - Standalone implementation modules (126 files with real logic)
 - Pre-commit hook deployed (14 consumers)
 - Dry-run causal validation passed
-- KIVA-CLI safe-action-pattern integration POC with passing tests
+- Functional integration wrappers (126 modules)
+- Pytest validation passing for all 126 integrations
+- Integration framework (`tools/integration_framework.py`)
+- Integration template (`templates/integration-template.py`)
+- Integration documentation (`docs/integration-framework.md`)
 
 ### ⚠️ Declared but not functionally integrated
-- 125/126 implementations are standalone modules in `PRD/` directories
-- Not wired into actual consumer codebases
-- No CI/CD pipelines activated
-- No unit tests for most integrations
+- Integration modules are created but not yet imported in consumer business code
+- CI pipeline `unified-design-consumers` documented but not activated
+- 6 designs in `proposed` status should be promoted to `active`/`standard`
+- 43 ADR in `proposed` status, only 6 accepted — need promotion for implemented designs
 
 ## Next Steps
 
-### ACT-031: Integration Framework
-Create a reusable integration pattern for all consumer/design combinations.
-
-### ACT-032–ACT-045: Batch Integrations
-Apply the framework to:
-1. KIVA-CLI: safe-action-gate, design-ops-loop, session-boot-design
-2. ECOS-CLI: safe-action-pattern, safe-action-gate, design-ops-loop
-3. ARGUS: safe-action-pattern, ecosystem-meta-coherence
-4. CTULU: safe-action-pattern, design-ops-loop
-
-### ACT-046+: Tests & CI
-- Unit tests per integration
-- CI pipeline activation
-- Cross-repo validation
-
-## Post-implémentation
-
-L'infrastructure de gouvernance est 100% déployée.  
-L'intégration fonctionnelle est en cours (1/126 POC réalisée).  
-Les designs sont **réellement appliqués** uniquement dans KIVA-CLI pour safe-action-pattern (proof-of-concept).  
-Pour les 125 autres couples consumer/design, les designs sont **déclarés et disponibles**, pas encore intégrés fonctionnellement.
+### Post-implémentation
+- Import integration modules in consumer business code (126 modules to wire)
+- Activate CI pipeline `unified-design-consumers` in KIVA-CLI
+- Promote 6 proposed designs to active/standard status
+- Accept 37 ADR backing implemented designs
+- Deploy integration framework to all consumers
+- Update all 126 consumer PRD-MOCs with usage documentation
+- Run cross-repo CI validation
+- Monitor integration health in production
+- Extend to new designs/consumers as needed

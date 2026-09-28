@@ -1,0 +1,34 @@
+version: "1.0.0"
+date: "2026-09-28"
+
+adr:
+  auto_promote: true
+  conditions:
+    - status == "proposed"
+    - design_integrated == true
+    - tests_passing == true
+  target_status: "accepted"
+  cooldown_days: 0
+
+designs:
+  auto_promote: true
+  conditions:
+    - status in ["proposed", "draft"]
+    - consumer_count >= 1
+    - tests_passing == true
+  target_status: "active"
+  cooldown_days: 0
+
+intents:
+  auto_promote: true
+  conditions:
+    - status == "proposed"
+    - proof_of_life_complete == true
+  target_status: "approved"
+  cooldown_days: 0
+
+notify:
+  on_promotion: true
+  channels:
+    - wazaa_bus
+    - report_file

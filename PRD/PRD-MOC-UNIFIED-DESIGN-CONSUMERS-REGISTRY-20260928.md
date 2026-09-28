@@ -251,6 +251,10 @@ kiva pipeline run unified-design-consumers
 - **Design** : `designs/safe-action-pattern.yaml`
 - **Design** : `designs/ecosystem-meta-coherence/design.yaml`
 - **Design** : `designs/meta-design-self-healing/design.yaml`
+- **Framework** : `PRD-MOC-INTEGRATION-FRAMEWORK-20260928.md`
+- **CI Pipeline** : `PRD-MOC-CROSS-REPO-CI-PIPELINE-20260928.md`
+- **Traceability** : `PRD-MOC-ADR-DESIGN-INTEGRATION-TRACEABILITY-20260928.md`
+- **Usage** : `PRD-MOC-CONSUMER-INTEGRATION-USAGE-20260928.md`
 - **ADR** : ADR-2026-09-19-SAFE-ACTION-PATTERN
 - **ADR** : ADR-2026-09-21-005-SAFE-ACTION-GATE
 - **ADR** : ADR-2026-09-21-006-ECOSYSTEM-META-COHERENCE-GATE
