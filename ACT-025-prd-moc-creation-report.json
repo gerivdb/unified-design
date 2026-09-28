@@ -1,0 +1,323 @@
+{
+  "timestamp": "2026-09-28T03:16:53.158583+00:00",
+  "total_prd_mocs": 45,
+  "successful": 45,
+  "failed": 0,
+  "results": [
+    {
+      "consumer": "NEXUS",
+      "design": "safe-action-gate",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\PRD-MOC-NEXUS-SAFE-ACTION-GATE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "TRIX",
+      "design": "safe-action-gate",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\PRD-MOC-TRIX-SAFE-ACTION-GATE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "WAZAA",
+      "design": "safe-action-gate",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\PRD-MOC-WAZAA-SAFE-ACTION-GATE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KIVA-CLI",
+      "design": "ecosystem-meta-coherence",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\PRD-MOC-KIVA-CLI-ECOSYSTEM-META-COHERENCE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "ECOS-CLI",
+      "design": "ecosystem-meta-coherence",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\PRD-MOC-ECOS-CLI-ECOSYSTEM-META-COHERENCE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "TRIX",
+      "design": "ecosystem-meta-coherence",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\PRD-MOC-TRIX-ECOSYSTEM-META-COHERENCE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "WAZAA",
+      "design": "ecosystem-meta-coherence",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\PRD-MOC-WAZAA-ECOSYSTEM-META-COHERENCE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KIVA-CLI",
+      "design": "ecosystem-meta-coherence-gate",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\PRD-MOC-KIVA-CLI-ECOSYSTEM-META-COHERENCE-GATE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "ECOS-CLI",
+      "design": "ecosystem-meta-coherence-gate",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\PRD-MOC-ECOS-CLI-ECOSYSTEM-META-COHERENCE-GATE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KG-CAUSAL",
+      "design": "ecosystem-meta-coherence-gate",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\PRD-MOC-KG-CAUSAL-ECOSYSTEM-META-COHERENCE-GATE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KG-L",
+      "design": "ecosystem-meta-coherence-gate",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\PRD-MOC-KG-L-ECOSYSTEM-META-COHERENCE-GATE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "TRIX",
+      "design": "ecosystem-meta-coherence-gate",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\PRD-MOC-TRIX-ECOSYSTEM-META-COHERENCE-GATE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "WAZAA",
+      "design": "ecosystem-meta-coherence-gate",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\PRD-MOC-WAZAA-ECOSYSTEM-META-COHERENCE-GATE-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "TRIX",
+      "design": "design-ops-loop",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\PRD-MOC-TRIX-DESIGN-OPS-LOOP-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "WAZAA",
+      "design": "design-ops-loop",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\PRD-MOC-WAZAA-DESIGN-OPS-LOOP-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "ECOS-CLI",
+      "design": "session-boot-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\PRD-MOC-ECOS-CLI-SESSION-BOOT-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "ARGUS",
+      "design": "session-boot-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\PRD-MOC-ARGUS-SESSION-BOOT-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "CTULU",
+      "design": "session-boot-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\PRD-MOC-CTULU-SESSION-BOOT-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "NEXUS",
+      "design": "session-boot-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\PRD-MOC-NEXUS-SESSION-BOOT-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KG-L",
+      "design": "session-boot-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\PRD-MOC-KG-L-SESSION-BOOT-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "TRIX",
+      "design": "session-boot-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\PRD-MOC-TRIX-SESSION-BOOT-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "WAZAA",
+      "design": "session-boot-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\PRD-MOC-WAZAA-SESSION-BOOT-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KIVA-CLI",
+      "design": "artifact-layers-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\PRD-MOC-KIVA-CLI-ARTIFACT-LAYERS-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "ECOS-CLI",
+      "design": "artifact-layers-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\PRD-MOC-ECOS-CLI-ARTIFACT-LAYERS-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "ARGUS",
+      "design": "artifact-layers-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\PRD-MOC-ARGUS-ARTIFACT-LAYERS-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "CTULU",
+      "design": "artifact-layers-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\PRD-MOC-CTULU-ARTIFACT-LAYERS-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "LOOPX",
+      "design": "artifact-layers-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\PRD-MOC-LOOPX-ARTIFACT-LAYERS-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "NEXUS",
+      "design": "artifact-layers-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\PRD-MOC-NEXUS-ARTIFACT-LAYERS-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KG-L",
+      "design": "artifact-layers-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\PRD-MOC-KG-L-ARTIFACT-LAYERS-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "TRIX",
+      "design": "artifact-layers-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\PRD-MOC-TRIX-ARTIFACT-LAYERS-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "WAZAA",
+      "design": "artifact-layers-design",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\PRD-MOC-WAZAA-ARTIFACT-LAYERS-DESIGN-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KIVA-CLI",
+      "design": "meta-design-self-healing",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\PRD-MOC-KIVA-CLI-META-DESIGN-SELF-HEALING-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "ECOS-CLI",
+      "design": "meta-design-self-healing",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\PRD-MOC-ECOS-CLI-META-DESIGN-SELF-HEALING-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "CTULU",
+      "design": "meta-design-self-healing",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\PRD-MOC-CTULU-META-DESIGN-SELF-HEALING-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "NEXUS",
+      "design": "meta-design-self-healing",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\PRD-MOC-NEXUS-META-DESIGN-SELF-HEALING-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KG-L",
+      "design": "meta-design-self-healing",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\PRD-MOC-KG-L-META-DESIGN-SELF-HEALING-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "TRIX",
+      "design": "meta-design-self-healing",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\PRD-MOC-TRIX-META-DESIGN-SELF-HEALING-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "WAZAA",
+      "design": "meta-design-self-healing",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\PRD-MOC-WAZAA-META-DESIGN-SELF-HEALING-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KIVA-CLI",
+      "design": "talex-friction-analyzer",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\PRD-MOC-KIVA-CLI-TALEX-FRICTION-ANALYZER-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "ECOS-CLI",
+      "design": "talex-friction-analyzer",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\PRD-MOC-ECOS-CLI-TALEX-FRICTION-ANALYZER-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "CTULU",
+      "design": "talex-friction-analyzer",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\PRD-MOC-CTULU-TALEX-FRICTION-ANALYZER-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "NEXUS",
+      "design": "talex-friction-analyzer",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\PRD-MOC-NEXUS-TALEX-FRICTION-ANALYZER-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "KG-L",
+      "design": "talex-friction-analyzer",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\PRD-MOC-KG-L-TALEX-FRICTION-ANALYZER-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "TRIX",
+      "design": "talex-friction-analyzer",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\PRD-MOC-TRIX-TALEX-FRICTION-ANALYZER-CONSUMER-20260928.md",
+      "error": null
+    },
+    {
+      "consumer": "WAZAA",
+      "design": "talex-friction-analyzer",
+      "status": "CREATED",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\PRD-MOC-WAZAA-TALEX-FRICTION-ANALYZER-CONSUMER-20260928.md",
+      "error": null
+    }
+  ]
+}
