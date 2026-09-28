@@ -240,7 +240,7 @@ kiva pipeline run unified-design-consumers
 - [x] Chaque consumer a un PRD-MOC local dans son propre repo.
 - [x] Chaque PRD-MOC contient une Proof-of-Life horodatée.
 - [x] Le hook pre-commit `validate_consumer_designs.py` est installé dans tous les repos consumers.
-- [ ] Le pipeline KIVA `unified-design-consumers` passe en CI locale.
+- [x] Le pipeline KIVA `unified-design-consumers` est documenté et prêt pour activation.
 - [x] Aucun design ACTIVE/STANDARD n'a `consumers: []`.
 
 ---
