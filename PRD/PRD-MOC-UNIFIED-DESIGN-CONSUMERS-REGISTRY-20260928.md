@@ -229,8 +229,8 @@ kiva pipeline run unified-design-consumers
 - [x] 2026-09-28T03:13:33+02:00 — PRD-MOC ECOS-CLI créés.
 - [x] 2026-09-28T03:13:33+02:00 — PRD-MOC TALEX créés.
 - [x] 2026-09-28T03:13:33+02:00 — PRD-MOC ARGUS créés.
-- [x] 2026-09-28T05:42:00+02:00 — Hook pre-commit déployé cross-repo.
-- [x] 2026-09-28T05:42:00+02:00 — Pipeline KIVA `unified-design-consumers` passe.
+- [x] 2026-09-28T05:42:00+02:00 — Hook pre-commit déployé cross-repo (14/14 consumers).
+- [ ] 2026-09-28T05:42:00+02:00 — Pipeline KIVA `unified-design-consumers` passe.
 
 ---
 
@@ -239,7 +239,7 @@ kiva pipeline run unified-design-consumers
 - [x] Chaque design ACTIVE/STANDARD a au moins un consumer déclaré dans `meta-design.yaml`.
 - [x] Chaque consumer a un PRD-MOC local dans son propre repo.
 - [x] Chaque PRD-MOC contient une Proof-of-Life horodatée.
-- [ ] Le hook pre-commit `validate_consumer_designs.py` est installé dans tous les repos consumers.
+- [x] Le hook pre-commit `validate_consumer_designs.py` est installé dans tous les repos consumers.
 - [ ] Le pipeline KIVA `unified-design-consumers` passe en CI locale.
 - [x] Aucun design ACTIVE/STANDARD n'a `consumers: []`.
 
