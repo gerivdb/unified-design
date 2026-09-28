@@ -1,0 +1,93 @@
+{
+  "timestamp": "2026-09-28T03:49:03.906113+00:00",
+  "total_consumers": 14,
+  "deployed": 14,
+  "stub_created": 0,
+  "failed": 0,
+  "results": [
+    {
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    },
+    {
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "hook_path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\.git\\hooks\\validate_consumer_designs.py",
+      "error": null
+    }
+  ]
+}

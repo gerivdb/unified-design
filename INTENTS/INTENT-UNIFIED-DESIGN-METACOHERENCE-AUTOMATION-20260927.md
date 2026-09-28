@@ -2,7 +2,7 @@
 type: INTENT
 version: "1.0.0"
 date: "2026-09-27"
-status: proposed
+status: approved
 intent_hash: 0xINTENT_UNIFIED_DESIGN_METACOHERENCE_AUTOMATION_20260927
 parent_prd: PRD-MOC-VEX-HTTP-SERVER-20260927.md
 repo: "gerivdb/unified-design"
@@ -273,8 +273,8 @@ python scripts/gap_combleur.py --source unified-design --target VEX
 
 ## 8. Proof-of-Life (à compléter)
 
-- [ ] 2026-09-27T22:56:39+02:00 — INTENT créé, analyse causale/structurale documentée
-- [ ] `design_impl_verifier.py` — premier test sur 5 designs
+- [x] 2026-09-27T22:56:39+02:00 — INTENT créé, analyse causale/structurale documentée
+- [x] 2026-09-28T23:44:00+02:00 — `design_impl_verifier.py` — premier test sur 5 designs exécuté
 - [ ] `implementation_contract` — 10 designs migrés
 - [ ] `metacoherence_gate.py` — audit 30j exécuté
 - [ ] `gap_combleur.py` — dry-run sur VEX

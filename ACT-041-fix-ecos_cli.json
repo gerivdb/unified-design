@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-09-28T05:39:10.425891+00:00",
+  "task": "ACT-041",
+  "consumer": "ECOS-CLI",
+  "total_pairs": 9,
+  "integrated": 3,
+  "test_failed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "tests_passed": 3,
+  "tests_failed": 6,
+  "results": [
+    {
+      "design": "safe-action-pattern",
+      "consumer": "ECOS-CLI",
+      "status": "INTEGRATED",
+      "module_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\ecos_cli\\safe_action_pattern_integration.py",
+      "test_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\tests\\test_safe_action_pattern_integration.py",
+      "module_created": false,
+      "test_created": false,
+      "pytest_passed": true,
+      "pytest_output": "============================= test session starts =============================\nplatform win32 -- Python 3.12.7, pytest-9.0.2, pluggy-1.6.0 -- C:\\Users\\GG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\ncachedir: .pytest_cache\nbenchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nmetadata: {'Python': '3.12.7', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest'",
+      "error": null
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "ECOS-CLI",
+      "status": "INTEGRATED",
+      "module_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\ecos_cli\\safe_action_gate_integration.py",
+      "test_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\tests\\test_safe_action_gate_integration.py",
+      "module_created": false,
+      "test_created": false,
+      "pytest_passed": true,
+      "pytest_output": "============================= test session starts =============================\nplatform win32 -- Python 3.12.7, pytest-9.0.2, pluggy-1.6.0 -- C:\\Users\\GG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\ncachedir: .pytest_cache\nbenchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nmetadata: {'Python': '3.12.7', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest'",
+      "error": null
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "ECOS-CLI",
+      "status": "TEST_FAILED",
+      "module_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\ecos_cli\\ecosystem_meta_coherence_integration.py",
+      "test_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\tests\\test_ecosystem_meta_coherence_integration.py",
+      "module_created": false,
+      "test_created": false,
+      "pytest_passed": false,
+      "pytest_output": "============================= test session starts =============================\nplatform win32 -- Python 3.12.7, pytest-9.0.2, pluggy-1.6.0 -- C:\\Users\\GG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\ncachedir: .pytest_cache\nbenchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nmetadata: {'Python': '3.12.7', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest'",
+      "error": null
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "ECOS-CLI",
+      "status": "INTEGRATED",
+      "module_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\ecos_cli\\ecosystem_meta_coherence_gate_integration.py",
+      "test_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\tests\\test_ecosystem_meta_coherence_gate_integration.py",
+      "module_created": false,
+      "test_created": false,
+      "pytest_passed": true,
+      "pytest_output": "============================= test session starts =============================\nplatform win32 -- Python 3.12.7, pytest-9.0.2, pluggy-1.6.0 -- C:\\Users\\GG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\ncachedir: .pytest_cache\nbenchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nmetadata: {'Python': '3.12.7', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest'",
+      "error": null
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "ECOS-CLI",
+      "status": "TEST_FAILED",
+      "module_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\ecos_cli\\design_ops_loop_integration.py",
+      "test_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\tests\\test_design_ops_loop_integration.py",
+      "module_created": false,
+      "test_created": false,
+      "pytest_passed": false,
+      "pytest_output": "============================= test session starts =============================\nplatform win32 -- Python 3.12.7, pytest-9.0.2, pluggy-1.6.0 -- C:\\Users\\GG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\ncachedir: .pytest_cache\nbenchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nmetadata: {'Python': '3.12.7', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest'",
+      "error": null
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "ECOS-CLI",
+      "status": "TEST_FAILED",
+      "module_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\ecos_cli\\session_boot_design_integration.py",
+      "test_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\tests\\test_session_boot_design_integration.py",
+      "module_created": false,
+      "test_created": false,
+      "pytest_passed": false,
+      "pytest_output": "============================= test session starts =============================\nplatform win32 -- Python 3.12.7, pytest-9.0.2, pluggy-1.6.0 -- C:\\Users\\GG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\ncachedir: .pytest_cache\nbenchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nmetadata: {'Python': '3.12.7', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest'",
+      "error": null
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "ECOS-CLI",
+      "status": "TEST_FAILED",
+      "module_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\ecos_cli\\artifact_layers_design_integration.py",
+      "test_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\tests\\test_artifact_layers_design_integration.py",
+      "module_created": false,
+      "test_created": false,
+      "pytest_passed": false,
+      "pytest_output": "============================= test session starts =============================\nplatform win32 -- Python 3.12.7, pytest-9.0.2, pluggy-1.6.0 -- C:\\Users\\GG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\ncachedir: .pytest_cache\nbenchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nmetadata: {'Python': '3.12.7', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest'",
+      "error": null
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "ECOS-CLI",
+      "status": "TEST_FAILED",
+      "module_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\ecos_cli\\meta_design_self_healing_integration.py",
+      "test_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\tests\\test_meta_design_self_healing_integration.py",
+      "module_created": false,
+      "test_created": false,
+      "pytest_passed": false,
+      "pytest_output": "============================= test session starts =============================\nplatform win32 -- Python 3.12.7, pytest-9.0.2, pluggy-1.6.0 -- C:\\Users\\GG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\ncachedir: .pytest_cache\nbenchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nmetadata: {'Python': '3.12.7', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest'",
+      "error": null
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "ECOS-CLI",
+      "status": "TEST_FAILED",
+      "module_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\ecos_cli\\talex_friction_analyzer_integration.py",
+      "test_path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\tests\\test_talex_friction_analyzer_integration.py",
+      "module_created": false,
+      "test_created": false,
+      "pytest_passed": false,
+      "pytest_output": "============================= test session starts =============================\nplatform win32 -- Python 3.12.7, pytest-9.0.2, pluggy-1.6.0 -- C:\\Users\\GG\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\ncachedir: .pytest_cache\nbenchmark: 4.0.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nmetadata: {'Python': '3.12.7', 'Platform': 'Windows-10-10.0.19045-SP0', 'Packages': {'pytest'",
+      "error": null
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 intent_hash: 0xINTENT_REPO_RELATIONS_CARTOGRAPHY_V1
-status: proposed
+status: approved
 priority: P1
 ---
 
@@ -309,3 +309,11 @@ structural_relations:
 | `registry.yaml` | Vue agrégée de tous les flows par strate | Ce document |
 | `standalone` | Repo sans flux documenté vers un autre repo | Ce document |
 | `cycle_detection` | DFS sur le graphe de flows pour interdire les cycles | `atoms/cross-repo-flow.yaml` |
+
+---
+
+## 9. Proof-of-Life
+
+- [x] 2026-09-28T23:44:00+02:00 — Intent créé, cartographie des 121 repos SOT documentée
+- [x] 2026-09-28T23:44:00+02:00 — 18 flux obligatoires listés, registry.yaml cible définie
+- [x] 2026-09-28T23:44:00+02:00 — Cycle detection prévu via DFS sur `repo-relations/registry.yaml`

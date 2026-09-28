@@ -55,8 +55,28 @@ def verify_consumer_usage(consumer: str, design: str) -> dict:
     
     slug = DESIGN_SLUGS.get(design, design.replace("-", "_"))
     
-    # Find integration module
-    integration_files = list(consumer_path.rglob(f"{slug}_integration.py"))
+    # Find integration module - try multiple naming conventions
+    integration_files = []
+    
+    # Standard naming: <slug>_integration.py
+    standard_pattern = f"{slug}_integration.py"
+    integration_files = list(consumer_path.rglob(standard_pattern))
+    
+    # Legacy naming fallbacks
+    if not integration_files:
+        # Remove common suffixes/prefixes for legacy names
+        legacy_slugs = [
+            slug.replace("_pattern", "").replace("_gate", "").replace("_design", ""),
+            slug.replace("safe_action_pattern", "safe_action"),
+            slug.replace("meta_design_self_healing", "meta_design"),
+        ]
+        for legacy_slug in legacy_slugs:
+            if legacy_slug != slug:
+                legacy_pattern = f"{legacy_slug}_integration.py"
+                integration_files = list(consumer_path.rglob(legacy_pattern))
+                if integration_files:
+                    break
+    
     if not integration_files:
         return {
             "consumer": consumer,
@@ -70,15 +90,22 @@ def verify_consumer_usage(consumer: str, design: str) -> dict:
     
     # Find imports in business code (exclude tests and integrations dirs)
     try:
-        result = subprocess.run(
-            ["grep", "-r", f"{slug}_integration", str(consumer_path), "--include=*.py"],
-            capture_output=True, text=True, timeout=30
-        )
+        # Search for both standard and legacy import patterns
+        search_patterns = [
+            f"{slug}_integration",
+            integration_files[0].stem,
+        ]
+        
         imports = []
-        for line in result.stdout.split("\n"):
-            line = line.strip()
-            if line and "test" not in line.lower() and "integrations" not in line.lower():
-                imports.append(line)
+        for pattern in search_patterns:
+            result = subprocess.run(
+                ["grep", "-r", pattern, str(consumer_path), "--include=*.py"],
+                capture_output=True, text=True, timeout=30
+            )
+            for line in result.stdout.split("\n"):
+                line = line.strip()
+                if line and "test" not in line.lower() and "integrations" not in line.lower():
+                    imports.append(line)
     except Exception as e:
         imports = [f"Error: {e}"]
     
