@@ -1,6 +1,6 @@
-{
+﻿{
   "name": "oauth2-simulator",
-  "version": "1.0.0",
+  "version": "2.1.1",
   "description": "Simulated OAuth2 provider with JWT token generation",
   "main": "server.js",
   "scripts": {

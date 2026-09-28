@@ -1,45 +1,48 @@
-# unified-design — MetaCluster Design Unified (MDU)
+# unified-design â€” MetaCluster Design Unified (MDU)
 
 **Repo** : `gerivdb/unified-design`  
 **Strate** : L0-CANON  
-**Rôle** : Design unifié de l'écosystème gerivdb (N+1 à N+4)  
-**Version** : 1.0.0  
+**RÃ´le** : Design unifiÃ© de l'Ã©cosystÃ¨me gerivdb (N+1 Ã  N+4)  
+**Version** : 2.1.1  
 **Statut** : ACTIVE  
 
 ---
 
 ## Mission
 
-unified-design est le **repo de référence** pour tous les designs
-architecturaux de l'écosystème gerivdb. Il centralise :
+unified-design est le **repo de rÃ©fÃ©rence** pour tous les designs
+architecturaux de l'Ã©cosystÃ¨me gerivdb. Il centralise :
 
 - `META-DESIGN.md` : design global N+4
 - `designs/` : designs locaux par strate
 - `atoms/` : catalogue atoms universel
-- `schemas/` : schémas design.yaml
+- `schemas/` : schÃ©mas design.yaml
 - `validation/` : validateur `gerivdb design validate`
 
 ## Structure
 
 ```
 unified-design/
-├── META-DESIGN.md              # MDU complet (N+4)
-├── designs/                    # Designs par strate
-│   ├── L0-CANON/
-│   ├── L1-INFRA/
-│   ├── L2-PLATFORM/
-│   ├── L3-CITIZENS/
-│   └── L4-TOOLS/
-│       └── DESIGN-FLEX-001.md  # FLEX Harmony Topology Engine
-├── atoms/                      # Catalogue atoms universel
-├── schemas/                    # Schémas design.yaml
-├── validation/                 # Validateur designs
-└── README.md
+â”œâ”€â”€ META-DESIGN.md              # MDU complet (N+4)
+â”œâ”€â”€ designs/                    # Designs par strate
+â”‚   â”œâ”€â”€ L0-CANON/
+â”‚   â”œâ”€â”€ L1-INFRA/
+â”‚   â”œâ”€â”€ L2-PLATFORM/
+â”‚   â”œâ”€â”€ L3-CITIZENS/
+â”‚   â””â”€â”€ L4-TOOLS/
+â”‚       â””â”€â”€ DESIGN-FLEX-001.md  # FLEX Harmony Topology Engine
+â”œâ”€â”€ atoms/                      # Catalogue atoms universel
+â”œâ”€â”€ schemas/                    # SchÃ©mas design.yaml
+â”œâ”€â”€ validation/                 # Validateur designs
+â””â”€â”€ README.md
 ```
 
-## Références
+## RÃ©fÃ©rences
 
 - `REPO-STANDARDS/META-DESIGN.md` : source initiale MDU
-- `META-DESIGN.md` (racine et docs/) : décision architecturelle MDU
+- `META-DESIGN.md` (racine et docs/) : dÃ©cision architecturelle MDU
 - `INTENT-016` : magistral MDU
 - `PRD-MOC-FLEX-ENV2-TOPOLOGY-HARMONY.md` : DESIGN-FLEX-001
+
+
+
