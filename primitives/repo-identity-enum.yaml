@@ -1,44 +1,42 @@
-schema_version: 1.0.0
-intent_hash: 0xHERMES_REPO_IDENTITY_SCHEMA_20260927
-description: Enumérations canoniques pour le schéma REPO_IDENTITY_v1.
-enums:
-  entity_type:
-    values:
-    - REPO
-    - TOOL
-    - CITIZEN
-    - ENGINE
-    - POLE
-    description: Type d'entité du repo.
-  status:
-    values:
-    - active
-    - dormant
-    - deprecated
-    - archived
-    description: Statut de vie du repo.
-  strate:
-    values:
-    - L0-CANON
-    - L1-INFRA
-    - L2-PLATFORM
-    - L3-CITIZENS
-    - L4-TOOLS
-    - L5-ARCHIVE
-    - L6-WORK
-    description: Strate physique de stockage.
-  layer:
-    values:
-    - N+1
-    - N+2
-    - N+3
-    - N+4
-    - N+3.5
-    description: Couche architecturale.
-  profil:
-    values:
-    - CRITICAL
-    - TOOL
-    - MASTER
-    - CITIZEN
-    description: Profil RSS.
+---
+type: REPO_IDENTITY_ENUM
+version: "1.0.0"
+date: "2026-09-27"
+status: approved
+description: "Énumérations canoniques pour REPO_IDENTITY_v1."
+
+entity_type:
+  - REPO
+  - TOOL
+  - CITIZEN
+  - ENGINE
+  - POLE
+
+status:
+  - active
+  - dormant
+  - deprecated
+  - archived
+
+strate:
+  - L0-CANON
+  - L0-INFRASTRUCTURE
+  - L1-INFRA
+  - L2-PLATFORM
+  - L3-CITIZENS
+  - L4-TOOLS
+  - L5-ARCHIVE
+  - L6-WORK
+
+layer:
+  - N+1
+  - N+2
+  - N+3
+  - N+4
+  - N+3.5
+
+profil:
+  - CRITICAL
+  - TOOL
+  - MASTER
+  - CITIZEN

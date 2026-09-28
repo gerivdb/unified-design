@@ -1,0 +1,27 @@
+---
+type: REPO_IDENTITY
+repo: gerivdb/unified-design
+local_path: D:\DO\WEB\TOOLS\L0-CANON\unified-design
+remote: https://github.com/gerivdb/unified-design.git
+entity_type: REPO
+status: active
+strate: L0-CANON
+layer: N+4
+owner: L0-CANON
+author: gerivdb
+created: 2026-01-01
+updated: 2026-09-28
+description: Unified design schemas and primitives for the gerivdb ecosystem.
+rss_version: 2.1
+rss_depth: 4
+pole_id: POLE-DESIGN-001
+profil: TOOL
+immutable_paths:
+  - schemas/
+  - primitives/
+semantic_clusters:
+  - design
+  - schema
+  - primitives
+do_not_create: true
+do_not_edit: true
