@@ -56,7 +56,7 @@ def run_pytest(test_path: Path, cwd: Path) -> dict:
     
     try:
         result = subprocess.run(
-            [sys.executable, "-m", "pytest", str(test_path), "-v", "--tb=short"],
+            [sys.executable, "-m", "pytest", str(test_path), "-v", "--tb=short", "--no-cov"],
             capture_output=True, text=True, timeout=60, cwd=str(cwd)
         )
         return {
@@ -94,10 +94,29 @@ def check_consumer(consumer: str, design: str) -> dict:
     elif consumer == "WAZAA":
         pkg_dir = "wazaa"
     
-    if pkg_dir:
-        test_path = consumer_path / "tests" / f"test_{slug}_integration.py"
+    # Find test file - try multiple naming conventions
+    test_path = None
+    tests_dir = consumer_path / "tests"
+    
+    # Try standard naming: test_<slug>_integration.py
+    candidate = tests_dir / f"test_{slug}_integration.py"
+    if candidate.exists():
+        test_path = candidate
     else:
-        test_path = consumer_path / "tests" / f"test_{slug}_integration.py"
+        # Try alternative: test_<slug_without_pattern>_integration.py
+        # e.g., safe_action_pattern -> safe_action for KIVA-CLI POC naming
+        slug_alt = slug.replace("_pattern", "").replace("_gate", "").replace("_design", "")
+        candidate2 = tests_dir / f"test_{slug_alt}_integration.py"
+        if candidate2.exists():
+            test_path = candidate2
+    
+    if not test_path:
+        return {
+            "consumer": consumer,
+            "design": design,
+            "status": "MISSING",
+            "test_path": str(tests_dir / f"test_{slug}_integration.py"),
+        }
     
     result = run_pytest(test_path, consumer_path)
     
