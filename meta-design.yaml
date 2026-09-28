@@ -483,6 +483,12 @@ designs:
   intent_hash: 0xDESIGN_TALEX_FRICTION_ANALYZER_20260922
   consumers: []
   profile: ACTIVE
+- name: integration-framework
+  path: designs/integration-framework/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_INTEGRATION_FRAMEWORK_20260928
+  consumers: []
+  profile: ACTIVE
 piliers:
 - name: Sonar-Driven Design
   abbr: SDD
@@ -845,6 +851,11 @@ primitives:
   path: primitives/talex-friction-analyzer-primitive.yaml
   version: 1.0.0
   intent_hash: 0xPRIMITIVE_TALEX_FRICTION_ANALYZER_20260922
+  status: active
+- name: integration-framework-primitive
+  path: primitives/integration-framework-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_INTEGRATION_FRAMEWORK_20260928
   status: active
 skills:
 - name: design-ops-loop-skill
