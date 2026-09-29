@@ -25,18 +25,18 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-PHASE2-ECOSYSTEM-20260929.md` :
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P0-1 | Industrialisation NEXUS | `designs/nexus/auto-design.yaml` | ✅ |
-| P0-2 | Industrialisation CTULU | `designs/ctulu/auto-design.yaml` | ✅ |
-| P0-3 | Industrialisation BRAIN | `designs/brain/auto-design.yaml` | ✅ |
-| P0-4 | Industrialisation WAZAA | `designs/wazaa/auto-design.yaml` | ✅ |
+| P0-1 | Industrialisation NEXUS | `designs/nexus/auto-design.yaml` | ✅ commit `7f6ae0ea` |
+| P0-2 | Industrialisation CTULU | `designs/ctulu/auto-design.yaml` | ✅ commit `2dacde6a` |
+| P0-3 | Industrialisation BRAIN | `designs/brain/auto-design.yaml` | ✅ commit `84670ea66` |
+| P0-4 | Industrialisation WAZAA | `designs/wazaa/auto-design.yaml` | ✅ commit `f598619` |
 
 ### P1 — Important
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P1-1 | Industrialisation KG-L | `designs/kg-l/auto-design.yaml` | ✅ |
-| P1-2 | Industrialisation KG-CAUSAL | `designs/kg-causal/auto-design.yaml` | ✅ |
-| P1-3 | Industrialisation GATEWAY-MANAGER | `designs/gateway-manager/auto-design.yaml` | ✅ commit f98ac04 |
+| P1-1 | Industrialisation KG-L | `designs/kg-l/auto-design.yaml` | ✅ commit `7fced6d` |
+| P1-2 | Industrialisation KG-CAUSAL | `designs/kg-causal/auto-design.yaml` | ✅ commit `1c6df30` |
+| P1-3 | Industrialisation GATEWAY-MANAGER | `designs/gateway-manager/auto-design.yaml` | ✅ commit `f98ac04` |
 
 ### P2 — Nice-to-have
 
