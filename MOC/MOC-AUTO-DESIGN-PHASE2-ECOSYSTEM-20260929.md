@@ -36,14 +36,14 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-PHASE2-ECOSYSTEM-20260929.md` :
 |---|---|---|---|
 | P1-1 | Industrialisation KG-L | `designs/kg-l/auto-design.yaml` | ✅ |
 | P1-2 | Industrialisation KG-CAUSAL | `designs/kg-causal/auto-design.yaml` | ✅ |
-| P1-3 | Industrialisation GATEWAY-MANAGER | `designs/gateway-manager/auto-design.yaml` | ✅ |
+| P1-3 | Industrialisation GATEWAY-MANAGER | `designs/gateway-manager/auto-design.yaml` | ✅ commit f98ac04 |
 
 ### P2 — Nice-to-have
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P2-1 | Cross-bridges écosystémiques | `bridges/ecosystem-phase2.yaml` | 🔄 |
-| P2-2 | Rapport global Phase 2 | `reports/auto-design-phase2.json` | 🔄 |
+| P2-1 | Cross-bridges écosystémiques | `bridges/ecosystem-phase2.yaml` | ✅ |
+| P2-2 | Rapport global Phase 2 | `reports/auto-design-phase2.json` | ✅ |
 
 ## Plan d'exécution SLM
 

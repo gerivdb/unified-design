@@ -1,0 +1,21 @@
+citizen_phase3_bridges:
+  - from: FLUENCE
+    to: CANDIDATOR
+    type: citizen
+    status: active
+    intent_hash: 0xBRIDGE_FLUENCE_CANDIDATOR_CITIZEN
+  - from: FLUENCE
+    to: DATA-MINER
+    type: data
+    status: active
+    intent_hash: 0xBRIDGE_FLUENCE_DATA_MINER_DATA
+  - from: CANDIDATOR
+    to: TOOL-FACTORY-1
+    type: tool
+    status: active
+    intent_hash: 0xBRIDGE_CANDIDATOR_TOOL_FACTORY_TOOL
+  - from: DATA-MINER
+    to: TOOL-FACTORY-1
+    type: mining
+    status: active
+    intent_hash: 0xBRIDGE_DATA_MINER_TOOL_FACTORY_MINING

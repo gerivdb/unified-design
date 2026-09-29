@@ -48,7 +48,7 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-AUFHEBUNG-20260929.md` :
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P2-1 | CI step local | `scripts/run_auto_design_check.ps1` | ❌ manquant |
+| P2-1 | CI step local | `scripts/run_auto_design_check.ps1` | ✅ |
 | P2-2 | Documentation | `docs/auto-design/` | ✅ |
 | P2-3 | Auto-debug pathways | `designs/auto-design/auto_debug_pathways.yaml` | ✅ |
 
