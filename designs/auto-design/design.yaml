@@ -1,0 +1,81 @@
+name: auto-design
+version: "1.0.0"
+status: active
+intent_hash: 0xINTENT_AUTO_DESIGN_AUFHEBUNG_20260929
+description: |
+  Pattern d'industrialisation déclarative d'un repo : design.yaml canonique,
+  implementation_contract, bridges déclaratifs, runtimes cycle_runner + bridge_executor.
+  Matérialise l'Aufhebung : annulation dépendance humaine + conservation identité + élévation auto-gouvernance.
+
+auto_design:
+  components:
+    - engine/auto_design/analyzer.py
+    - engine/auto_design/generator.py
+    - engine/auto_design/industrializer.py
+    - engine/auto_design/verifier.py
+    - engine/auto_design/reporter.py
+    - scripts/auto_design_cli.py
+  auto_debug_pathways:
+    - observability
+    - automation
+    - infrastructure
+  scientific_reflection_protocols: []
+  cycle_runner_path: scripts/cycle_runner.py
+  bridge_executor_path: scripts/bridge_executor.py
+  pr_factory_path: scripts/pr_factory.py
+
+implementation_contract:
+  repo: gerivdb/unified-design
+  artifacts:
+    - path: engine/auto_design/analyzer.py
+      must_contain:
+        - "class AutoDesignAnalyzer"
+        - "def analyze"
+      tests: []
+    - path: engine/auto_design/generator.py
+      must_contain:
+        - "class AutoDesignGenerator"
+        - "def generate"
+      tests: []
+    - path: engine/auto_design/industrializer.py
+      must_contain:
+        - "class AutoDesignIndustrializer"
+        - "def deploy"
+      tests: []
+    - path: engine/auto_design/verifier.py
+      must_contain:
+        - "class AutoDesignVerifier"
+        - "def verify"
+      tests: []
+    - path: engine/auto_design/reporter.py
+      must_contain:
+        - "class AutoDesignReporter"
+        - "def report"
+      tests: []
+    - path: scripts/auto_design_cli.py
+      must_contain:
+        - "def main"
+        - "argparse"
+      tests: []
+    - path: templates/auto_design/cycle_runner.py
+      must_contain:
+        - "def run_cycle"
+      tests: []
+    - path: templates/auto_design/bridge_executor.py
+      must_contain:
+        - "def run_bridges"
+      tests: []
+    - path: templates/auto_design/pr_factory.py
+      must_contain:
+        - "def create_pr"
+      tests: []
+  verification:
+    - command: python scripts/auto_design_cli.py verify .
+      expected: "auto_design_score"
+
+bridges:
+  - from: unified-design/auto-design
+    to: AUTO-DEV/auto-design
+    type: declarative
+    status: active
+    intent_hash: 0xBRIDGE_UNIFIED_DESIGN_AUTO_DEV
