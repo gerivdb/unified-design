@@ -1,9 +1,9 @@
 {
   "phase": 3,
   "total_repos": 6,
-  "industrialized_repos": 4,
-  "mature_repos": 2,
-  "pending_repos": 2,
+  "industrialized_repos": 6,
+  "mature_repos": 3,
+  "pending_repos": 0,
   "repos": [
     {
       "name": "FLUENCE",
@@ -20,6 +20,20 @@
       "mature": false
     },
     {
+      "name": "GERIBOOKING",
+      "path": "D:\\DO\\WEB\\TOOLS\\L6-WORK\\GERIBOOKING",
+      "commit": "175e256",
+      "score": 60,
+      "mature": false
+    },
+    {
+      "name": "BANK-BUSTER",
+      "path": "D:\\DO\\WEB\\TOOLS\\L6-WORK\\BANK-BUSTER",
+      "commit": "3a10fe2",
+      "score": 80,
+      "mature": true
+    },
+    {
       "name": "DATA-MINER",
       "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\DATA-MINER",
       "commit": "89c42b5",
@@ -32,20 +46,8 @@
       "commit": "7627d39",
       "score": 60,
       "mature": false
-    },
-    {
-      "name": "GERIBOOKING",
-      "path": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\GERIBOOKING",
-      "status": "pending",
-      "reason": "path in SOT but repo absent localement"
-    },
-    {
-      "name": "BANK-BUSTER",
-      "path": "N/A",
-      "status": "pending",
-      "reason": "absent du SOT"
     }
   ],
   "cross_bridges": "bridges/citizen-phase3.yaml",
-  "generated_at": "2026-09-29T04:39:56+02:00"
+  "generated_at": "2026-09-29T05:23:05+02:00"
 }

@@ -27,13 +27,13 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-PHASE3-CITIZEN-20260929.md` :
 |---|---|---|---|
 | P0-1 | Industrialisation FLUENCE | `designs/fluence/auto-design.yaml` | ✅ commit `b81a71c6d` |
 | P0-2 | Industrialisation CANDIDATOR | `designs/candidator/auto-design.yaml` | ✅ commit `62bf36e` |
-| P0-3 | Industrialisation GERIBOOKING | `designs/geribooking/auto-design.yaml` | ❌ absent du SOT local |
+| P0-3 | Industrialisation GERIBOOKING | `designs/geribooking/auto-design.yaml` | ✅ commit `175e256` |
 
 ### P1 — Important
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P1-1 | Industrialisation BANK-BUSTER | `designs/bank-buster/auto-design.yaml` | ❌ absent du SOT |
+| P1-1 | Industrialisation BANK-BUSTER | `designs/bank-buster/auto-design.yaml` | ✅ commit `3a10fe2` |
 | P1-2 | Industrialisation DATA-MINER | `designs/data-miner/auto-design.yaml` | ✅ commit `89c42b5` |
 | P1-3 | Industrialisation TOOL-FACTORY-1 | `designs/tool-factory-1/auto-design.yaml` | ✅ commit `7627d39` |
 
