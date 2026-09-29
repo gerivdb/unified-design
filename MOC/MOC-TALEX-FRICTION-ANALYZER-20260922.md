@@ -12,7 +12,15 @@ slug: talex-friction-analyzer
 
 ## Contexte
 
-Ce MOC orchestre la détection, classification, analyse causale et résolution des frictions TALEX pour `unified-design`.
+Ce MOC orchestre la détection, classification, analyse causale et résolution des frictions TALEX pour `unified-design` et l’écosystème gerivdb.
+
+Analyse TALEX consolidée (2026-09-29) : 33 issues détectées dans 6 rapports `friction_analysis_*.json`, couvrant TALEX L4, unified-design, VEX, HERMES, SPIDX, SABRE, LOOPX, BRAIN-CLI, ARGUS, DMR, CLIP-FACTORY, COMET, BatMCP, BRAIN-DOCS, NEXUS, GOVERNANCE-HUB, KIVA-CLI, ECOS-CLI.
+
+4 gaps ontologiques comblés dans ONTOLOGY L0 :
+- `ATOM-CRM-TECH-DEBT-SCORE-20260929`
+- `ATOM-CROSS-REPO-TRACEABILITY-20260929`
+- `ATOM-SEVERITY-CLASSIFICATION-20260929`
+- `ATOM-REPO-IDENTITY-SCHEMA-20260929`
 
 ## Portée
 
@@ -35,12 +43,27 @@ Ce MOC orchestre la détection, classification, analyse causale et résolution d
 
 ## Workflow
 
-1. **Collecte** : Scanner `REPORTS/REPORT-TALEX-FRICTION-*.md`
-2. **Classification** : P0/P1/P2
-3. **Analyse causale** : 5 Pourquoi
-4. **Correction** : tâches atomiques
-5. **Vérification** : pre-commit + tests
-6. **Preuve** : enregistrement VOLTX
+ 1. **Collecte** : Scanner `REPORTS/REPORT-TALEX-FRICTION-*.md`
+ 2. **Classification** : P0/P1/P2
+ 3. **Analyse causale** : 5 Pourquoi
+ 4. **Correction** : tâches atomiques
+ 5. **Vérification** : pre-commit + tests
+ 6. **Preuve** : enregistrement VOLTX
+
+## Évaluation d'utilité
+
+| Artefact | Utilité | Impact |
+|----------|---------|--------|
+| `primitives/__init__.py` | Débloque l'import TALEX friction pipeline runner | P0 |
+| `tools/file_writer_helper.py` | Élimine les erreurs d'encoding PowerShell (ERR-120..ERR-124) | P1 |
+| `tools/fix_hitl_batch_v2.py` | Résout les références courtes de repo (ERR-SESSION-002) | P1 |
+| `workflows/talex-friction-pipeline.yaml` | Structure le pipeline d'analyse TALEX | P1 |
+| `schemas/REPO_IDENTITY_v1.yaml` | Garantit la cohérence SOT des repos (ERR-SESSION-003) | P1 |
+| `scripts/branch-cleanup-helper.sh` | Automatise le contournement BRGS (ERR-BRGS-001) | P2 |
+| ATOM `CRM Tech Debt Score` | Score de dette technique cross-repo | P1 |
+| ATOM `Cross-Repo Traceability` | Traçabilité inter-repos via intent_hash | P1 |
+| ATOM `Severity Classification` | Taxonomie des sévérités d'erreur | P1 |
+| ATOM `Repo Identity Schema` | Schéma d'identité canonique des repos | P1 |
 
 ## Référence ADR
 
