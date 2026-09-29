@@ -1,62 +1,75 @@
 ---
 type: MOC
 version: "1.0.0"
-date: "2026-09-28"
-status: approved
+date: "2026-09-29"
+status: draft
 intent_hash: 0xMOC_AUTO_PROMOTE_20260928
+parent_prd: PRD-MOC-AUTO-PROMOTE-20260928.md
+pole_id: POLE-MEMORY-001
+owner: L0-CANON
+repo: gerivdb/unified-design
 ---
 
-# MOC — Auto-Promote
+# MOC — Auto-Promote : promotion automatique des ADR/Designs/INTENTS
 
-**Repo** : `gerivdb/unified-design`  
-**Strate** : L0-CANON  
-**Statut** : approved  
-**Date** : 2026-09-28
+## Objectif
 
-## Vue d'ensemble
+Mettre en œuvre le PRD `PRD-MOC-AUTO-PROMOTE-20260928.md` :
+- moteur de promotion automatique des documents de gouvernance
+- critères objectifs de promotion ADR/Design/INTENT
+- intégration avec le moteur auto-design
 
-Ce MOC orchestre la promotion automatique des ADR, Designs et INTENTS quand les critères métier sont remplis.
+## Périmètre
 
-## Composants
+### P0 — Essentiel
 
-| Composant | Type | Chemin | Statut |
-|-----------|------|--------|--------|
-| `auto_promote.py` | Script | `scripts/auto_promote.py` | ✅ Créé |
-| `auto-promotion.yaml` | Politique | `policies/auto-promotion.yaml` | ⏳ À créer |
-| Tests | Script | `tests/test_auto_promote.py` | ⏳ À créer |
-| Documentation | Doc | `docs/auto-promote.md` | ⏳ À créer |
-| Hook pre-commit | Hook | `.kilocode/hooks/pre-commit-auto-promote.py` | ⏳ À créer |
+| ID | Livrable | Chemin cible | Statut |
+|---|---|---|---|
+| P0-1 | Moteur auto-promote | `engine/auto_design/auto_promote.py` | 🔄 |
+| P0-2 | Critères promotion ADR | `designs/auto-promote/adr-criteria.yaml` | 🔄 |
+| P0-3 | Critères promotion Design | `designs/auto-promote/design-criteria.yaml` | 🔄 |
+| P0-4 | Critères promotion INTENT | `designs/auto-promote/intent-criteria.yaml` | 🔄 |
 
-## Séquence d'implémentation
+### P1 — Important
 
-### Phase 1 — Script core (P0)
+| ID | Livrable | Chemin cible | Statut |
+|---|---|---|---|
+| P1-1 | Tests unitaires | `tests/test_auto_promote_*.py` | 🔄 |
+| P1-2 | Hook pre-commit | `.kilocode/hooks/pre-commit-auto-promote.py` | 🔄 |
 
-1. ✅ Créer `scripts/auto_promote.py`
-2. Créer `policies/auto-promotion.yaml`
-3. Tester dry-run
+### P2 — Nice-to-have
 
-### Phase 2 — Tests et documentation (P1)
+| ID | Livrable | Chemin cible | Statut |
+|---|---|---|---|
+| P2-1 | CI step local | `scripts/run_auto_promote_check.ps1` | 🔄 |
+| P2-2 | Documentation | `docs/auto-promote/README.md` | 🔄 |
 
-4. Créer `tests/test_auto_promote.py`
-5. Créer `docs/auto-promote.md`
+## Plan d'exécution SLM
 
-### Phase 3 — Intégration CI (P0)
+### Phase 1 — P0 (atomic, commits séparés)
 
-6. Intégrer dans `cross_repo_ci.py`
-7. Planifier exécution quotidienne
+1. `feat(engine): add auto_promote` — moteur de promotion
+2. `docs(design): add auto-promote criteria` — critères YAML
+3. `feat(hooks): add pre-commit-auto-promote` — hook
 
-## Gates
+### Phase 2 — P1 (atomic, commits séparés)
 
-| Gate | Critère | Statut |
-|------|---------|--------|
-| G1 — Dry-run valide | `python auto_promote.py --dry-run` propose ≥5 promotions | ✅ |
-| G2 — Apply sans erreur | `python auto_promote.py --apply` fonctionne | ⏳ En attente |
-| G3 — Tests passants | `pytest tests/test_auto_promote.py` passe | ⏳ En attente |
-| G4 — Politique respectée | Aucune promotion non autorisée | ⏳ En attente |
+4. `test(engine): add auto_promote unit tests` — pytest
+5. `docs(scripts): add run_auto_promote_check.ps1` — CI locale
+
+### Phase 3 — P2 (atomic, commits séparés)
+
+6. `docs(auto-promote): add README` — guide
+
+## Critères d'Acceptation
+
+1. `python scripts/auto_design_cli.py promote --dry-run` retourne liste des documents promouvables
+2. `python scripts/auto_design_cli.py promote --apply` applique les promotions avec preuve horodatée
+3. Hook pre-commit bloque si promotion manquée sur document `proposed` avec critères remplis
+4. Tests unitaires passent (pytest 5 passed)
 
 ## Références
 
-- PRD : `PRD/PRD-MOC-AUTO-PROMOTE-20260928.md`
-- Framework : `PRD/PRD-MOC-INTEGRATION-FRAMEWORK-20260928.md`
-- CI Pipeline : `PRD/PRD-MOC-CROSS-REPO-CI-PIPELINE-20260928.md`
-- Traceability : `PRD/PRD-MOC-ADR-DESIGN-INTEGRATION-TRACEABILITY-20260928.md`
+- **PRD** : `PRD-MOC-AUTO-PROMOTE-20260928.md`
+- **INTENT** : `INTENT-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION-20260927.md`
+- **Design** : `designs/auto-promote/`
