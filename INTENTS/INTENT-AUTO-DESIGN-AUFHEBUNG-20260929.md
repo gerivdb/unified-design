@@ -252,7 +252,17 @@ unified-design/
 
 ---
 
-## 7. Proof-of-Life
+## 8. Référence ADR
+
+- **ADR** : `ADR/ADR-2026-09-29-auto-design-aufhebung.md` (à créer)
+- **IntentHash** : `0xADR_AUTO_DESIGN_AUFHEBUNG_20260929`
+- **Dépôt** : gerivdb/unified-design
+- **Statut ADR** : proposed
+- **Màj requise si** : statut ADR passe à deprecated ou superseded
+
+---
+
+## 9. Proof-of-Life
 
 - [x] 2026-09-29T03:12:37+02:00 — INTENT créé, chemin architectural formalisé
 - [x] 2026-09-29T03:16:00+02:00 — 19 stubs ONTOLOGY créés, gate ontologique --strict passée (0 ABSENT)
