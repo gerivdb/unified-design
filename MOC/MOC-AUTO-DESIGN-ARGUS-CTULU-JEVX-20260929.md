@@ -21,7 +21,7 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-ARGUS-CTULU-JEVX-20260929.md` :
 
 ## État d'avancement
 
-### P0 — Essentiel (TERMINÉ)
+### P0 — Essentiel (IMPLÉMENTÉ)
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
@@ -31,7 +31,7 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-ARGUS-CTULU-JEVX-20260929.md` :
 | P0-4 | `_validate_bridges_argus()` | `engine/auto_design/verifier.py` | ✅ |
 | P0-5 | `_validate_crossrefs_argus()` | `engine/auto_design/verifier.py` | ✅ |
 
-### P1 — Important (TERMINÉ)
+### P1 — Important (IMPLÉMENTÉ)
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
@@ -41,15 +41,22 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-ARGUS-CTULU-JEVX-20260929.md` :
 | P1-4 | `create_pr()` avec branch coupling | `engine/auto_design/pr_factory.py` | ✅ |
 | P1-5 | Tests intégration | `tests/test_auto_design_argus_ctulu.py` | ✅ |
 
-### P2 — Nice-to-have (EN COURS)
+### P2 — Nice-to-have (IMPLÉMENTÉ)
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|:---|
-| P2-1 | `_check_meta_coherence()` | `engine/auto_design/verifier.py` | ⬜ |
-| P2-2 | `_validate_traceability()` | `engine/auto_design/verifier.py` | ⬜ |
-| P2-3 | `_classify_components_noded()` | `engine/auto_design/generator.py` | ⬜ |
-| P2-4 | JEVX projection templates | `templates/auto_design/jevi_projection/` | ⬜ |
-| P2-5 | Governance synthesizer integration | `engine/auto_design/auto_promote.py` | ⬜ |
+| P2-1 | `_check_meta_coherence()` | `engine/auto_design/verifier.py` | ✅ |
+| P2-2 | `_validate_traceability()` | `engine/auto_design/verifier.py` | ✅ |
+| P2-3 | `_classify_components_noded()` | `engine/auto_design/generator.py` | ✅ |
+| P2-4 | JEVX projection templates | `templates/auto_design/jevi_projection/` | ✅ |
+| P2-5 | Governance synthesizer integration | `engine/auto_design/auto_promote.py` | ✅ |
+
+### P3 — Auto PR workflow (PARTIEL)
+
+| ID | Livrable | Chemin cible | Statut |
+|---|---|---|---|
+| P3-1 | `pr_review_auto.py` | `engine/auto_design/pr_review_auto.py` | ❌ Non implémenté |
+| P3-2 | `auto_operator.py` | `engine/auto_design/auto_operator.py` | ❌ Non implémenté |
 
 ## Plan d'exécution SLM
 

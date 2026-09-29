@@ -34,6 +34,24 @@ Transformer `TASKS/` en système CRM de gestion de la dette technique, intégré
 | P1-2 | Workflow | `crm/workflow.py` | Orchestre détection → scoring → génération → notification |
 | P1-3 | Tests | `tests/test_crm_tech_debt.py` | 10 tests couvrant P0/P1 |
 
+## État d'avancement réel (dry-run causal 2026-09-30)
+
+### P0 — Essentiel (IMPLÉMENTÉ)
+
+| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
+|---|---|---|---|---|
+| P0-1 | Registry dette | `crm/tech_debt_registry.yaml` | Agrège la dette cross-repo | ✅ Implémenté |
+| P0-2 | Scoring dette | `engine/auto_design/analyzer.py` | `_score_conventional_commit_adherence()` retourne score 0-100 | ✅ Implémenté |
+| P0-3 | Génération CRM | `engine/auto_design/generator.py` | `generate_commit_message()` crée des messages conventionnels | ✅ Implémenté |
+
+### P1 — Important (IMPLÉMENTÉ)
+
+| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
+|---|---|---|---|---|
+| P1-1 | Notification | `crm/notifier.py` | Envoie notifications CRM | ✅ Implémenté |
+| P1-2 | Workflow | `crm/workflow.py` | Orchestre détection → scoring → génération → notification | ✅ Implémenté |
+| P1-3 | Tests | `tests/test_crm_tech_debt.py` | 10 tests couvrant P0/P1 | ✅ Implémenté |
+
 ## Architecture cible
 
 ```

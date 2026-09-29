@@ -37,64 +37,57 @@ Exploiter les capacités existantes d'**ARGUS** (couche N+2 de détection), **CT
 | P1-3 | Branch/commit coupling | `engine/auto_design/pr_factory.py` | `create_pr()` vérifie cohérence branch → commit |
 | P1-4 | Tests intégration | `tests/test_auto_design_argus_ctulu.py` | 8 tests couvrant les 5 intégrations P0 |
 
-## État d'avancement
+## État d'avancement réel (dry-run causal 2026-09-30, implémentation partielle)
 
-### P0 — Essentiel (TERMINÉ)
-
-| ID | Livrable | Chemin cible | Critère d'acceptation |
-|---|---|---|---|
-| P0-1 | `_score_conventional_commit_adherence()` | `engine/auto_design/analyzer.py` | Retourne score 0-100 via CTULU `trix-git-workflow.py` |
-| P0-2 | `_check_atomic_commits()` | `engine/auto_design/verifier.py` | Détecte commits >3 fichiers, retourne violations |
-| P0-3 | `generate_commit_message()` | `engine/auto_design/generator.py` | Génère message conventionnel `type(scope): description` |
-| P0-4 | `_validate_bridges_argus()` | `engine/auto_design/verifier.py` | Appelle ARGUS `bridge_check.py --json`, agrège findings |
-| P0-5 | `_validate_crossrefs_argus()` | `engine/auto_design/verifier.py` | Appelle ARGUS `crossref_check.py --json`, agrège findings |
-
-### P1 — Important (TERMINÉ)
-
-| ID | Livrable | Chemin cible | Critère d'acceptation |
-|---|---|---|---|
-| P1-1 | Templates commit | `templates/auto_design/commit_validator.py`, `templates/auto_design/commit_monitor.py` | Templates déployés dans `scripts/` |
-| P1-2 | Auto-commit on deploy | `engine/auto_design/industrializer.py` | `deploy_with_auto_commit()` commit + push après déploiement |
-| P1-3 | Branch/commit coupling | `engine/auto_design/pr_factory.py` | `create_pr()` vérifie cohérence branch → commit |
-| P1-4 | Tests intégration | `tests/test_auto_design_argus_ctulu.py` | 18 tests couvrant les 5 intégrations P0 |
-
-## État d'avancement
-
-### P0 — Essentiel (TERMINÉ)
+### P0 — Essentiel (IMPLÉMENTÉ)
 
 | ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
 |---|---|---|---|---|
-| P0-1 | `_score_conventional_commit_adherence()` | `engine/auto_design/analyzer.py` | Retourne score 0-100 via CTULU `trix-git-workflow.py` | ✅ |
-| P0-2 | `_check_atomic_commits()` | `engine/auto_design/verifier.py` | Détecte commits >3 fichiers, retourne violations | ✅ |
-| P0-3 | `generate_commit_message()` | `engine/auto_design/generator.py` | Génère message conventionnel `type(scope): description` | ✅ |
-| P0-4 | `_validate_bridges_argus()` | `engine/auto_design/verifier.py` | Appelle ARGUS `bridge_check.py --json`, agrège findings | ✅ |
-| P0-5 | `_validate_crossrefs_argus()` | `engine/auto_design/verifier.py` | Appelle ARGUS `crossref_check.py --json`, agrège findings | ✅ |
+| P0-1 | `_score_conventional_commit_adherence()` | `engine/auto_design/analyzer.py` | Retourne score 0-100 via CTULU `trix-git-workflow.py` | ✅ Implémenté |
+| P0-2 | `_check_atomic_commits()` | `engine/auto_design/verifier.py` | Détecte commits >3 fichiers, retourne violations | ✅ Implémenté |
+| P0-3 | `generate_commit_message()` | `engine/auto_design/generator.py` | Génère message conventionnel `type(scope): description` | ✅ Implémenté |
+| P0-4 | `_validate_bridges_argus()` | `engine/auto_design/verifier.py` | Appelle ARGUS `bridge_check.py --json`, agrège findings | ✅ Implémenté |
+| P0-5 | `_validate_crossrefs_argus()` | `engine/auto_design/verifier.py` | Appelle ARGUS `crossref_check.py --json`, agrège findings | ✅ Implémenté |
 
-### P1 — Important (TERMINÉ)
-
-| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
-|---|---|---|---|---|
-| P1-1 | Templates commit | `templates/auto_design/commit_validator.py`, `templates/auto_design/commit_monitor.py` | Templates déployés dans `scripts/` | ✅ |
-| P1-2 | Auto-commit on deploy | `engine/auto_design/industrializer.py` | `deploy_with_auto_commit()` commit + push après déploiement | ✅ |
-| P1-3 | Branch/commit coupling | `engine/auto_design/pr_factory.py` | `create_pr()` vérifie cohérence branch → commit | ✅ |
-| P1-4 | Tests intégration | `tests/test_auto_design_argus_ctulu.py` | 18 tests couvrant les 5 intégrations P0 | ✅ |
-
-### P2 — Nice-to-have (TERMINÉ)
-
-| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
-|---|---|---|---|:---|
-| P2-1 | Meta-coherence gate | `engine/auto_design/verifier.py` | `_check_meta_coherence()` bloque si ARGUS `status != OK` | ✅ |
-| P2-2 | Traceability validation | `engine/auto_design/verifier.py` | `_validate_traceability()` via CTULU `trace_graph.py` | ✅ |
-| P2-3 | NODEX component classification | `engine/auto_design/generator.py` | `_detect_components()` utilise ARGUS `nodex.py` + KG-L | ✅ |
-| P2-4 | JEVX projection templates | `templates/auto_design/jevi_projection/` | `design.yaml` → TALEX/CURX/narratives | ✅ |
-| P2-5 | Governance synthesizer integration | `engine/auto_design/auto_promote.py` | Appelle CTULU `vibe-governance-synthesizer` pour 6 artifacts + commit | ✅ |
-
-### P3 — Auto PR workflow (TERMINÉ)
+### P1 — Important (IMPLÉMENTÉ)
 
 | ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
 |---|---|---|---|---|
-| P3-1 | `pr_review_auto.py` | `engine/auto_design/pr_review_auto.py` | Workflow PR/review/merge automatique depuis n'importe quel repo | ✅ |
-| P3-2 | `auto_operator.py` | `engine/auto_design/auto_operator.py` | Orchestrateur full cycle analyze→generate→verify→deploy→PR→merge | ✅ |
+| P1-1 | Templates commit | `templates/auto_design/commit_validator.py`, `templates/auto_design/commit_monitor.py` | Templates déployés dans `scripts/` | ✅ Implémenté |
+| P1-2 | Auto-commit on deploy | `engine/auto_design/industrializer.py` | `deploy_with_auto_commit()` commit + push après déploiement | ✅ Implémenté |
+| P1-3 | Branch/commit coupling | `engine/auto_design/pr_factory.py` | `create_pr()` vérifie cohérence branch → commit | ✅ Implémenté |
+| P1-4 | Tests intégration | `tests/test_auto_design_argus_ctulu.py` | 8 tests couvrant les 5 intégrations P0 | ✅ Implémenté |
+
+### P2 — Nice-to-have (IMPLÉMENTÉ)
+
+| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
+|---|---|---|---|---|
+| P2-1 | Meta-coherence gate | `engine/auto_design/verifier.py` | `_check_meta_coherence()` bloque si ARGUS `status != OK` | ✅ Implémenté |
+| P2-2 | Traceability validation | `engine/auto_design/verifier.py` | `_validate_traceability()` via CTULU `trace_graph.py` | ✅ Implémenté |
+| P2-3 | NODEX component classification | `engine/auto_design/generator.py` | `_detect_components()` utilise ARGUS `nodex.py` + KG-L | ✅ Implémenté |
+| P2-4 | JEVX projection templates | `templates/auto_design/jevi_projection/` | `design.yaml` → TALEX/CURX/narratives | ✅ Implémenté |
+| P2-5 | Governance synthesizer integration | `engine/auto_design/auto_promote.py` | Appelle CTULU `vibe-governance-synthesizer` pour 6 artifacts + commit | ✅ Implémenté |
+
+### P3 — Auto PR workflow (PARTIEL)
+
+| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
+|---|---|---|---|---|
+| P3-1 | `pr_review_auto.py` | `engine/auto_design/pr_review_auto.py` | Workflow PR/review/merge automatique depuis n'importe quel repo | ❌ Non implémenté |
+| P3-2 | `auto_operator.py` | `engine/auto_design/auto_operator.py` | Orchestrateur full cycle analyze→generate→verify→deploy→PR→merge | ❌ Non implémenté |
+
+### Compléments implémentés
+
+| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
+|---|---|---|---|---|
+| EXT-1 | Reporter | `engine/auto_design/reporter.py` | Agrège findings bridges + crossrefs | ✅ Implémenté |
+| EXT-2 | Cycle runner template | `templates/auto_design/cycle_runner.py` | Séquence analyze->generate->verify->report | ✅ Implémenté |
+| EXT-3 | Bridge executor template | `templates/auto_design/bridge_executor.py` | Exécution bridges déclarés | ✅ Implémenté |
+| EXT-4 | Trace gate template | `templates/auto_design/trace_gate.py` | Vérifie traçabilité via CTULU | ✅ Implémenté |
+| EXT-5 | CRM registry | `crm/tech_debt_registry.yaml` | Agrège dette cross-repo | ✅ Implémenté |
+| EXT-6 | CRM notifier | `crm/notifier.py` | Envoie notifications CRM | ✅ Implémenté |
+| EXT-7 | CRM workflow | `crm/workflow.py` | Orchestre détection→scoring→génération→notification | ✅ Implémenté |
+| EXT-8 | Tests CRM | `tests/test_crm_tech_debt.py` | 10 tests couvrant P0/P1 CRM | ✅ Implémenté |
+| EXT-9 | Tests analyzer | `tests/test_auto_design_analyzer.py` | 6 tests unitaires analyzer | ✅ Implémenté |
 
 ## Architecture cible
 
