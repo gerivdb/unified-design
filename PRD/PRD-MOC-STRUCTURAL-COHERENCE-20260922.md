@@ -117,4 +117,4 @@ ontology:
 - [x] 2026-09-22T03:11:05+02:00 — Patterns L13-L15 créés et validés
 - [x] 2026-09-22T03:11:05+02:00 — Pipeline L16 et workflow L17 créés
 - [x] 2026-09-22T03:11:05+02:00 — Rapport TALEX L18 créé
-- [ ] 2026-09-22T03:11:05+02:00 — Patterns L19-L21 à créer
+- [x] 2026-09-30T01:29:00+02:00 — Patterns L19-L21 créés et validés
