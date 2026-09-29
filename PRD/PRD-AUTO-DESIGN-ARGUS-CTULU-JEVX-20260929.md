@@ -89,6 +89,13 @@ Exploiter les capacités existantes d'**ARGUS** (couche N+2 de détection), **CT
 | P2-4 | JEVX projection templates | `templates/auto_design/jevi_projection/` | `design.yaml` → TALEX/CURX/narratives | ✅ |
 | P2-5 | Governance synthesizer integration | `engine/auto_design/auto_promote.py` | Appelle CTULU `vibe-governance-synthesizer` pour 6 artifacts + commit | ✅ |
 
+### P3 — Auto PR workflow (TERMINÉ)
+
+| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
+|---|---|---|---|---|
+| P3-1 | `pr_review_auto.py` | `engine/auto_design/pr_review_auto.py` | Workflow PR/review/merge automatique depuis n'importe quel repo | ✅ |
+| P3-2 | `auto_operator.py` | `engine/auto_design/auto_operator.py` | Orchestrateur full cycle analyze→generate→verify→deploy→PR→merge | ✅ |
+
 ## Architecture cible
 
 ```

@@ -139,6 +139,13 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-ARGUS-CTULU-JEVX-20260929.md` :
 | ATOMIC-014 | JEVX projection templates | `templates/auto_design/jevi_projection/` | 2h | ✅ |
 | ATOMIC-015 | Governance synthesizer integration | `auto_promote.py` | 2h | ✅ |
 
+### Phase 4 — P3 (2 livrables, ~3h) — TERMINÉ
+
+| Tâche | Livrable | Fichier | Durée | Statut |
+|---|---|---|---|---|
+| ATOMIC-016 | `pr_review_auto.py` | `engine/auto_design/pr_review_auto.py` | 1h | ✅ |
+| ATOMIC-017 | `auto_operator.py` | `engine/auto_design/auto_operator.py` | 2h | ✅ |
+
 ## Plan d'exécution SLM détaillé
 
 ### Phase 1 — P0 (atomic, commits séparés)

@@ -433,3 +433,4 @@ def _detect_components(self) -> list[str]:
 - [x] 2026-09-29T20:05:00+02:00 — ATOMIC-015 implémenté : `governance_synthesizer()` dans `auto_promote.py`
 - [x] 2026-09-29T20:10:00+02:00 — Tests validés : 18/18 passés (`pytest tests/test_auto_design_argus_ctulu.py`)
 - [x] 2026-09-29T20:15:00+02:00 — Commit global : `feat(auto_design): integrate ARGUS/CTULU/JEVX P0-P2` (15 fichiers, 1830 insertions)
+- [x] 2026-09-29T20:32:00+02:00 — Fail ERR corrigé : workflow PR/review/merge automatique ajouté via `pr_review_auto.py` + `auto_operator.py`

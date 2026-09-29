@@ -163,3 +163,38 @@ def test_auto_promote_governance_synthesizer():
         promoter = AutoPromoter(tmp_path)
         result = promoter.governance_synthesizer()
         assert "status" in result
+
+
+def test_pr_review_auto_workflow():
+    from engine.auto_design.pr_review_auto import ensure_feat_branch, auto_commit, create_pr, resolve_and_merge
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp_path = Path(tmpdir)
+        subprocess.run(["git", "-C", str(tmp_path), "init"], capture_output=True, timeout=30)
+        subprocess.run(["git", "-C", str(tmp_path), "config", "user.email", "test@example.com"], capture_output=True, timeout=30)
+        subprocess.run(["git", "-C", str(tmp_path), "config", "user.name", "Test User"], capture_output=True, timeout=30)
+        (tmp_path / "README.md").write_text("x", encoding="utf-8")
+        subprocess.run(["git", "-C", str(tmp_path), "add", "README.md"], capture_output=True, timeout=30)
+        subprocess.run(["git", "-C", str(tmp_path), "commit", "-m", "init"], capture_output=True, timeout=30)
+        branch = ensure_feat_branch(tmp_path, "test-skill")
+        assert branch == "feat/auto-design-test-skill"
+        (tmp_path / "README.md").write_text("xy", encoding="utf-8")
+        assert auto_commit(tmp_path, "feat(auto_design): test-skill") is True
+        pr = create_pr(tmp_path, "test-skill", "body")
+        assert pr["status"] == "ready"
+        merge = resolve_and_merge(tmp_path, pr.get("number"))
+        assert merge["status"] in ("merged", "conflict")
+
+
+def test_auto_operator_full_cycle():
+    from engine.auto_design.auto_operator import AutoOperator
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp_path = Path(tmpdir)
+        (tmp_path / "design.yaml").write_text("status: active\n", encoding="utf-8")
+        (tmp_path / ".git").mkdir(parents=True, exist_ok=True)
+        operator = AutoOperator(tmp_path)
+        result = operator.run_full_cycle(apply=False)
+        assert result["repo"] == str(tmp_path)
+        assert "analysis" in result
+        assert "generated" in result
+        assert "verification" in result
+        assert "deployed" in result
