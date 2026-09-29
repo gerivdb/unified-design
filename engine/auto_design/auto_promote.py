@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -55,6 +56,22 @@ class AutoPromoter:
             return True
         except Exception:
             return False
+
+    def governance_synthesizer(self) -> dict[str, Any]:
+        """Appelle CTULU vibe-governance-synthesizer pour générer 6 artifacts + commit."""
+        try:
+            synthesizer = Path(r"D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\tools\vibe-governance-synthesizer\synthesizer.py")
+            if not synthesizer.exists():
+                return {"status": "skipped", "reason": "CTULU vibe-governance-synthesizer not found"}
+            result = subprocess.run(
+                ["python", str(synthesizer), "--repo", str(self.repo_root), "--json"],
+                capture_output=True, text=True, timeout=120
+            )
+            if result.stdout:
+                return json.loads(result.stdout)
+            return {"status": "error", "reason": result.stderr[:200]}
+        except Exception as exc:
+            return {"status": "error", "reason": str(exc)}
 
 
 def promote_repo(repo_root: Path, apply: bool = False) -> dict[str, Any]:

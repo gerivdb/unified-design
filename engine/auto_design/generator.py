@@ -67,6 +67,24 @@ class AutoDesignGenerator:
                     components.append(path.stem)
         return sorted(set(components))[:20]
 
+    def _classify_components_noded(self) -> dict[str, str]:
+        """Classifie les composants via NODEX + KG-L, avec fallback heuristique."""
+        try:
+            import importlib.util
+            script = r"D:\DO\WEB\TOOLS\L1-INFRA\ARGUS\scanners\nodex.py"
+            spec = importlib.util.spec_from_file_location("nodex", script)
+            if spec and spec.loader:
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                classified = module.classify(str(self.repo_root))
+                if isinstance(classified, dict):
+                    return classified
+        except Exception:
+            pass
+
+        components = self._detect_components()
+        return {name: "unknown" for name in components}
+
     def _build_design_yaml(self, components: list[str]) -> str:
         intent_hash = f"{self.repo_name.upper()}_AUTO_DESIGN".replace("-", "_")
         return TEMPLATE_DESIGN_YAML.format(
@@ -90,6 +108,18 @@ class AutoDesignGenerator:
                 )
             )
         return bridges
+
+    @staticmethod
+    def generate_commit_message(change_type: str, scope: str, description: str) -> str:
+        """Génère un message de commit conventionnel."""
+        valid_types = {"feat", "fix", "docs", "test", "refactor", "chore", "ci", "build", "revert", "style", "perf"}
+        change_type = change_type.lower().strip()
+        if change_type not in valid_types:
+            raise ValueError(f"Invalid change_type: {change_type}. Must be one of {sorted(valid_types)}")
+        scope = scope.strip()
+        if scope:
+            return f"{change_type}({scope}): {description.strip()}"
+        return f"{change_type}: {description.strip()}"
 
     def _apply(self, result: dict[str, Any]) -> None:
         design_path = self.repo_root / "design.yaml"

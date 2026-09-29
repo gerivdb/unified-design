@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +30,7 @@ class AutoDesignAnalyzer:
             "test_coverage": self._score_test_coverage(),
             "doc_coverage": self._score_doc_coverage(),
             "auto_debug_maturity": self._score_auto_debug_maturity(),
+            "conventional_commit_adherence": self._score_conventional_commit_adherence(),
         }
         global_score = int(sum(scores.values()) / len(scores))
         return {
@@ -96,6 +98,34 @@ class AutoDesignAnalyzer:
             score += 30
         return score
 
+    def _score_conventional_commit_adherence(self) -> int:
+        """Vérifie si le repo suit les conventional commits via CTULU ou git local."""
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location(
+                "trix_git_workflow",
+                r"D:\DO\WEB\TOOLS\L4-TOOLS\CTULU\tools\trix-box\trix-git-workflow.py"
+            )
+            if spec and spec.loader:
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+                commits = module.get_recent_commits(str(self.repo_root), count=20)
+            else:
+                raise ImportError("Cannot load trix-git-workflow")
+        except Exception:
+            # Fallback local via git log
+            try:
+                result = subprocess.run(
+                    ["git", "-C", str(self.repo_root), "log", "--oneline", "-20"],
+                    capture_output=True, text=True, timeout=30
+                )
+                commits = [{"message": line.split(" ", 1)[-1]} for line in result.stdout.strip().split("\n") if line]
+            except Exception:
+                return 0
+        pattern = re.compile(r'^(feat|fix|docs|test|refactor|chore|ci|build|revert|style|perf)')
+        compliant = sum(1 for c in commits if pattern.match(c.get("message", "")))
+        return int((compliant / len(commits)) * 100) if commits else 0
+
     def _recommendations(self, scores: dict[str, int]) -> list[str]:
         recommendations = []
         if scores["design_coverage"] < 80:
@@ -108,6 +138,8 @@ class AutoDesignAnalyzer:
             recommendations.append("Add docs/ + PRD/MOC documentation")
         if scores["auto_debug_maturity"] < 80:
             recommendations.append("Implement auto_debug_pathways in design.yaml")
+        if scores.get("conventional_commit_adherence", 100) < 80:
+            recommendations.append("Adopt conventional commits format: type(scope): description")
         return recommendations
 
 
