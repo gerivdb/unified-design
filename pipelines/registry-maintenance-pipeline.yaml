@@ -1,0 +1,33 @@
+---
+name: registry-maintenance-pipeline
+description: "Pipeline de maintenance automatique des registres d'écosystème. Corrige les dates, déduplique les entrées, valide le YAML, et détecte le museum effect."
+version: "1.0.0"
+status: active
+---
+
+# Pipeline — Registry Maintenance
+
+## Déclencheur
+
+- Cron quotidien
+- Post-commit sur `RUNTIME/ecosystem_repo_registry.yaml`
+
+## Étapes
+
+1. `python scripts/fix_registry_dates.py`
+2. `python scripts/dry_run_causal.py`
+3. `python scripts/museum_effect_detector.py --post-warn-mode auto_action`
+4. Si étape 2 échoue → `workflows/registry-maintenance.md`
+5. Si étape 3 lève des flags → `citizens/registry-auditor.yaml`
+
+## Artefacts
+
+- `designs/registry-date-fixer.md`
+- `skills/registry-date-fixer/SKILL.md`
+- `workflows/registry-maintenance.md`
+- `citizens/registry-auditor.yaml`
+
+## Validation
+
+- Pipeline doit être reproductible en mode `--dry-run`.
+- Tous les artefacts doivent passer `validate_designs.py --strict`.
