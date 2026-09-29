@@ -70,6 +70,7 @@ class AutoDesignVerifier:
             "proofs_up_to_date": proofs_up_to_date,
             "proofs_stale": proofs_stale,
             "mature": score >= 80,
+            "optimized": score >= 95,
         }
 
 

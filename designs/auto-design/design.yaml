@@ -24,6 +24,17 @@ auto_design:
   bridge_executor_path: scripts/bridge_executor.py
   pr_factory_path: scripts/pr_factory.py
 
+  scoring_policy:
+    max_score: 100
+    mature_threshold: 80
+    optimized_threshold: 95
+    rationale: |
+      100 est la borne supérieure de l'échelle, pas un objectif atteignable.
+      Au-delà de 80, les gains d'automatisation sont marginaux et le coût
+      d'amélioration augmente exponentiellement. Le seuil mature est donc
+      fixé à 80, et optimized à 95 pour les cas exceptionnels.
+      Atteindre 100/100 n'a pas de valeur opérationnelle ajoutée.
+
 implementation_contract:
   repo: gerivdb/unified-design
   artifacts:
