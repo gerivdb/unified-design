@@ -64,6 +64,7 @@ class AutoDesignVerifier:
         crossrefs_argus = self._validate_crossrefs_argus()
         meta_coherence = self._check_meta_coherence()
         traceability = self._validate_traceability()
+        crm_notification = self._notify_crm_tech_debt()
 
         return {
             "repo": str(self.repo_root),
@@ -83,6 +84,7 @@ class AutoDesignVerifier:
             "argus_crossrefs": crossrefs_argus,
             "meta_coherence": meta_coherence,
             "traceability": traceability,
+            "crm_notification": crm_notification,
         }
 
     def _check_atomic_commits(self) -> dict[str, Any]:
@@ -189,6 +191,14 @@ class AutoDesignVerifier:
                 "graph": json.loads(graph_result.stdout) if graph_result.stdout else {},
                 "validator": json.loads(validator_result.stdout) if validator_result.stdout else {},
             }
+        except Exception as exc:
+            return {"status": "error", "reason": str(exc)}
+
+    def _notify_crm_tech_debt(self) -> dict[str, Any]:
+        """Hook notification CRM vers crm/notifier.py."""
+        try:
+            from crm.workflow import run_tech_debt_workflow
+            return run_tech_debt_workflow(self.repo_root)
         except Exception as exc:
             return {"status": "error", "reason": str(exc)}
 
