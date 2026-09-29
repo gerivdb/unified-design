@@ -93,13 +93,14 @@ class AutoDesignGenerator:
 
     def _apply(self, result: dict[str, Any]) -> None:
         design_path = self.repo_root / "design.yaml"
+        design_path.parent.mkdir(parents=True, exist_ok=True)
         design_path.write_text(result["design_yaml"], encoding="utf-8")
         contracts_dir = self.repo_root / "implementation_contracts"
-        contracts_dir.mkdir(exist_ok=True)
+        contracts_dir.mkdir(parents=True, exist_ok=True)
         for name, content in result["contracts"].items():
             (contracts_dir / f"{name}.yaml").write_text(content, encoding="utf-8")
         bridges_dir = self.repo_root / "bridges"
-        bridges_dir.mkdir(exist_ok=True)
+        bridges_dir.mkdir(parents=True, exist_ok=True)
         for idx, content in enumerate(result["bridges"], start=1):
             (bridges_dir / f"bridge-{idx:03d}.yaml").write_text(content, encoding="utf-8")
 
