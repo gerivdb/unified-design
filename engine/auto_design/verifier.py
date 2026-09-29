@@ -50,11 +50,12 @@ class AutoDesignVerifier:
         tests_failing = 0
 
         score = 0
-        score += 30 if components_verified else 0
+        score += 20 if "status: active" in content else 0
+        score += 20 if "implementation_contract:" in content else 0
         score += 20 if bridges_active >= 1 else 0
         score += 20 if tests_passing >= 1 else 0
-        score += 15 if "cycle_runner_path:" in content else 0
-        score += 15 if "bridge_executor_path:" in content else 0
+        score += 10 if "cycle_runner_path:" in content else 0
+        score += 10 if "bridge_executor_path:" in content else 0
         score = min(100, score)
 
         return {
