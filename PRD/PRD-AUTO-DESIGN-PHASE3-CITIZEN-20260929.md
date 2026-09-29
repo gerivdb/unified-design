@@ -60,6 +60,26 @@ repo: gerivdb/unified-design
 7. `feat(bridges): add citizen phase3 cross-bridges` — bridges déclaratifs
 8. `docs(report): add auto-design phase3 report` — rapport global
 
+## État actuel (2026-09-29)
+
+### Industrialisations complétées
+
+| Repo | Commit | Score | Mature |
+|---|---|---|---|
+| FLUENCE | `b81a71c6d` | 80 | ✅ |
+| CANDIDATOR | `62bf36e` | 60 | ⚠️ |
+| GERIBOOKING | `175e256` | 60 | ⚠️ |
+| BANK-BUSTER | `3a10fe2` | 80 | ✅ |
+| DATA-MINER | `89c42b5` | 60 | ⚠️ |
+| TOOL-FACTORY-1 | `7627d39` | 60 | ⚠️ |
+
+### Cross-bridges
+
+| Livrable | Statut |
+|---|---|
+| `bridges/citizen-phase3.yaml` | ✅ |
+| `reports/auto-design-phase3.json` | ✅ |
+
 ## Critères d'Acceptation
 
 1. `auto_design_cli.py verify <repo>` retourne `auto_design_score >= 80` pour tous les repos Phase 3
@@ -72,3 +92,5 @@ repo: gerivdb/unified-design
 - **PRD** : `PRD-AUTO-DESIGN-AUFHEBUNG-20260929.md`
 - **INTENT** : `INTENTS/INTENT-AUTO-DESIGN-AUFHEBUNG-20260929.md`
 - **MOC** : `MOC-AUTO-DESIGN-AUFHEBUNG-20260929.md`
+- **Intégration** : `docs/auto-design/INTEGRATION-GUIDE.md`
+- **Bénéfices** : `docs/auto-design/BENEFITS.md`

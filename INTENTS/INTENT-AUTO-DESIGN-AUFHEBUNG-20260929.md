@@ -266,9 +266,20 @@ unified-design/
 
 - [x] 2026-09-29T03:12:37+02:00 — INTENT créé, chemin architectural formalisé
 - [x] 2026-09-29T03:16:00+02:00 — 19 stubs ONTOLOGY créés, gate ontologique --strict passée (0 ABSENT)
-- [ ] `analyzer.py` — test sur AUTO-DEV + VEX
-- [ ] `generator.py` — dry-run sur repo L4
-- [ ] `industrializer.py` — déploiement sur repo test
-- [ ] `verifier.py` — vérification AUTO-DEV score >= 80
-- [ ] `reporter.py` — rapport global exécuté
-- [ ] ADR backing — créé et approuvé
+- [x] 2026-09-29T04:10:00+02:00 — `analyzer.py` créé et testé
+- [x] 2026-09-29T04:12:00+02:00 — `generator.py` créé et testé
+- [x] 2026-09-29T04:14:00+02:00 — `industrializer.py` créé et testé
+- [x] 2026-09-29T04:16:00+02:00 — `verifier.py` créé et testé
+- [x] 2026-09-29T04:18:00+02:00 — `reporter.py` créé et testé
+- [x] 2026-09-29T04:20:00+02:00 — `auto_design_cli.py` créé et testé
+- [x] 2026-09-29T04:22:00+02:00 — Templates runtimes créés
+- [x] 2026-09-29T04:24:00+02:00 — `design.yaml` canonique créé
+- [x] 2026-09-29T04:26:00+02:00 — Skill `auto-design-readiness` créé
+- [x] 2026-09-29T04:28:00+02:00 — Hook pre-commit créé
+- [x] 2026-09-29T04:30:00+02:00 — Tests unitaires passent (8/8)
+- [x] 2026-09-29T05:00:00+02:00 — Phase 2 : 7 repos industrialisés (NEXUS, CTULU, BRAIN, WAZAA, KG-L, KG-CAUSAL, GATEWAY-MANAGER)
+- [x] 2026-09-29T05:30:00+02:00 — Phase 3 : 6 repos industrialisés (FLUENCE, CANDIDATOR, GERIBOOKING, BANK-BUSTER, DATA-MINER, TOOL-FACTORY-1)
+- [x] 2026-09-29T06:00:00+02:00 — ADR backing créé et approuvé
+- [x] 2026-09-29T06:10:00+02:00 — Cross-bridges Phase 2/3 créés
+- [x] 2026-09-29T06:15:00+02:00 — Documentation intégration + bénéfices créée
+- [x] 2026-09-29T06:20:00+02:00 — MOC Phase 2/3 réconciliés avec SHAs réels

@@ -62,6 +62,27 @@ repo: gerivdb/unified-design
 8. `feat(bridges): add ecosystem phase2 cross-bridges` — bridges déclaratifs
 9. `docs(report): add auto-design phase2 report` — rapport global
 
+## État actuel (2026-09-29)
+
+### Industrialisations complétées
+
+| Repo | Commit | Score | Mature |
+|---|---|---|---|
+| NEXUS | `7f6ae0ea` | 80 | ✅ |
+| CTULU | `2dacde6a` | 80 | ✅ |
+| BRAIN | `84670ea66` | 80 | ✅ |
+| WAZAA | `f598619` | 80 | ✅ |
+| KG-L | `7fced6d` | 80 | ✅ |
+| KG-CAUSAL | `1c6df30` | 80 | ✅ |
+| GATEWAY-MANAGER | `f98ac04` | 80 | ✅ |
+
+### Cross-bridges
+
+| Livrable | Statut |
+|---|---|
+| `bridges/ecosystem-phase2.yaml` | ✅ |
+| `reports/auto-design-phase2.json` | ✅ |
+
 ## Critères d'Acceptation
 
 1. `auto_design_cli.py verify <repo>` retourne `auto_design_score >= 80` pour tous les repos Phase 2
@@ -74,3 +95,5 @@ repo: gerivdb/unified-design
 - **PRD** : `PRD-AUTO-DESIGN-AUFHEBUNG-20260929.md`
 - **INTENT** : `INTENTS/INTENT-AUTO-DESIGN-AUFHEBUNG-20260929.md`
 - **MOC** : `MOC-AUTO-DESIGN-AUFHEBUNG-20260929.md`
+- **Intégration** : `docs/auto-design/INTEGRATION-GUIDE.md`
+- **Bénéfices** : `docs/auto-design/BENEFITS.md`

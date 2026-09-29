@@ -81,9 +81,62 @@ repo: gerivdb/unified-design
 5. Skill `auto-design-readiness` documenté et invocable
 6. Hook pre-commit bloque si `design.yaml` absent sur repo `active`
 
+## État actuel (2026-09-29)
+
+### Phase 1 — P0 complétée
+
+| Livrable | Statut |
+|---|---|
+| `engine/auto_design/analyzer.py` | ✅ |
+| `engine/auto_design/generator.py` | ✅ |
+| `engine/auto_design/industrializer.py` | ✅ |
+| `engine/auto_design/verifier.py` | ✅ |
+| `engine/auto_design/reporter.py` | ✅ |
+| `scripts/auto_design_cli.py` | ✅ |
+| `templates/auto_design/*.py` | ✅ |
+| `designs/auto-design/design.yaml` | ✅ |
+
+### Phase 2 — 7 repos industrialisés
+
+| Repo | Commit | Score | Mature |
+|---|---|---|---|
+| NEXUS | `7f6ae0ea` | 80 | ✅ |
+| CTULU | `2dacde6a` | 80 | ✅ |
+| BRAIN | `84670ea66` | 80 | ✅ |
+| WAZAA | `f598619` | 80 | ✅ |
+| KG-L | `7fced6d` | 80 | ✅ |
+| KG-CAUSAL | `1c6df30` | 80 | ✅ |
+| GATEWAY-MANAGER | `f98ac04` | 80 | ✅ |
+
+### Phase 3 — 6 repos industrialisés
+
+| Repo | Commit | Score | Mature |
+|---|---|---|---|
+| FLUENCE | `b81a71c6d` | 80 | ✅ |
+| CANDIDATOR | `62bf36e` | 60 | ⚠️ |
+| GERIBOOKING | `175e256` | 60 | ⚠️ |
+| BANK-BUSTER | `3a10fe2` | 80 | ✅ |
+| DATA-MINER | `89c42b5` | 60 | ⚠️ |
+| TOOL-FACTORY-1 | `7627d39` | 60 | ⚠️ |
+
+### Cross-bridges
+
+| Bridge | Statut |
+|---|---|
+| `bridges/ecosystem-phase2.yaml` | ✅ |
+| `bridges/citizen-phase3.yaml` | ✅ |
+
+### Tests
+
+```
+8 passed in 0.44s
+```
+
 ## Références
 
 - **INTENT** : `INTENTS/INTENT-AUTO-DESIGN-AUFHEBUNG-20260929.md`
 - **Design** : `designs/auto-design/design.yaml`
 - **ADR** : `ADR/ADR-2026-09-29-auto-design-aufhebung.md`
 - **Repo PoC** : `gerivdb/AUTO-DEV` (100% opérationnel)
+- **Intégration** : `docs/auto-design/INTEGRATION-GUIDE.md`
+- **Bénéfices** : `docs/auto-design/BENEFITS.md`

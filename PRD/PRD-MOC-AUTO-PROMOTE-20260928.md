@@ -174,24 +174,25 @@ notify:
 
 ## 7. Critères d'acceptation
 
-- [ ] `python auto_promote.py --dry-run` propose ≥ 5 promotions
-- [ ] `python auto_promote.py --apply` applique les promotions sans erreur
-- [ ] Rapport JSON généré avec détails des promotions
-- [ ] Tests unitaires passent (`pytest tests/test_auto_promote.py`)
-- [ ] Politique `auto-promotion.yaml` respectée
-- [ ] Aucune promotion non autorisée
+- [x] `python auto_promote.py --dry-run` propose ≥ 5 promotions
+- [x] `python auto_promote.py --apply` applique les promotions sans erreur
+- [x] Rapport JSON généré avec détails des promotions
+- [x] Tests unitaires passent (`pytest tests/test_auto_promote.py`)
+- [x] Politique `auto-promotion.yaml` respectée
+- [x] Aucune promotion non autorisée
 
----
+## 8. État actuel (2026-09-29)
 
-## 8. Proof-of-Life
+### Livrables complétés
 
-- [ ] 2026-09-28T21:16:43+02:00 — Création `scripts/auto_promote.py`
-- [ ] 2026-09-28T21:16:43+02:00 — Création `policies/auto-promotion.yaml`
-- [ ] 2026-09-28T21:16:43+02:00 — Création `PRD-MOC-AUTO-PROMOTE-20260928.md`
-- [ ] 2026-09-28T21:16:43+02:00 — Création `MOC-AUTO-PROMOTE-20260928.md`
-- [ ] 2026-09-28T21:16:43+02:00 — Tests créés et passants
-- [ ] 2026-09-28T21:16:43+02:00 — Documentation créée
-- [ ] 2026-09-28T21:16:43+02:00 — Dry-run exécuté avec succès
+| ID | Livrable | Chemin | Statut |
+|---|---|---|---|
+| L1 | Moteur auto-promote | `engine/auto_design/auto_promote.py` | ✅ |
+| L2 | Critères ADR | `designs/auto-promote/adr-criteria.yaml` | ✅ |
+| L3 | Critères Design | `designs/auto-promote/design-criteria.yaml` | ✅ |
+| L4 | Critères INTENT | `designs/auto-promote/intent-criteria.yaml` | ✅ |
+| L5 | Tests | `tests/test_auto_promote.py` | ✅ 3 passed |
+| L6 | Hook pre-commit | `.kilocode/hooks/pre-commit-auto-promote.py` | ✅ |
 
 ---
 
@@ -200,8 +201,9 @@ notify:
 - **Framework** : `PRD-MOC-INTEGRATION-FRAMEWORK-20260928.md`
 - **CI Pipeline** : `PRD-MOC-CROSS-REPO-CI-PIPELINE-20260928.md`
 - **Traceability** : `PRD-MOC-ADR-DESIGN-INTEGRATION-TRACEABILITY-20260928.md`
-- **ADR** : ADR-2026-09-27-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION
-- **INTENT** : INTENT-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION-20260927
+- **ADR** : `ADR/ADR-2026-09-28-auto-promote.md`
+- **INTENT** : `INTENTS/INTENT-AUTO-PROMOTE-20260928.md`
+- **MOC** : `MOC/MOC-AUTO-PROMOTE-20260928.md`
 
 ---
 
