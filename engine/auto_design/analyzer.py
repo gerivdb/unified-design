@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -31,6 +32,7 @@ class AutoDesignAnalyzer:
             "doc_coverage": self._score_doc_coverage(),
             "auto_debug_maturity": self._score_auto_debug_maturity(),
             "conventional_commit_adherence": self._score_conventional_commit_adherence(),
+            "tech_debt": self._score_tech_debt()["score"],
         }
         global_score = int(sum(scores.values()) / len(scores))
         return {
@@ -126,6 +128,28 @@ class AutoDesignAnalyzer:
         compliant = sum(1 for c in commits if pattern.match(c.get("message", "")))
         return int((compliant / len(commits)) * 100) if commits else 0
 
+    def _score_tech_debt(self, registry_path: Path | None = None) -> dict[str, Any]:
+        """Score la dette technique à partir du registry CRM."""
+        registry = registry_path or Path(__file__).resolve().parents[3] / "crm" / "tech_debt_registry.yaml"
+        if not registry.exists():
+            return {"score": 0, "open_items": 0, "items": []}
+        try:
+            import yaml
+            with registry.open("r", encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {}
+        except Exception:
+            return {"score": 0, "open_items": 0, "items": []}
+        items = data.get("items", [])
+        open_items = [item for item in items if item.get("status") == "open"]
+        if not open_items:
+            return {"score": 0, "open_items": 0, "items": []}
+        avg_score = int(sum(item.get("score", 0) for item in open_items) / len(open_items))
+        return {
+            "score": avg_score,
+            "open_items": len(open_items),
+            "items": open_items,
+        }
+
     def _recommendations(self, scores: dict[str, int]) -> list[str]:
         recommendations = []
         if scores["design_coverage"] < 80:
@@ -140,6 +164,8 @@ class AutoDesignAnalyzer:
             recommendations.append("Implement auto_debug_pathways in design.yaml")
         if scores.get("conventional_commit_adherence", 100) < 80:
             recommendations.append("Adopt conventional commits format: type(scope): description")
+        if scores.get("tech_debt", 0) > 50:
+            recommendations.append("Reduce tech debt via CRM workflow: crm/workflow.py")
         return recommendations
 
 

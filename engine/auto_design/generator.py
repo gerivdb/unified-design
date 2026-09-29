@@ -121,6 +121,35 @@ class AutoDesignGenerator:
             return f"{change_type}({scope}): {description.strip()}"
         return f"{change_type}: {description.strip()}"
 
+    def generate_crm_tasks(self, registry_path: Path | None = None) -> list[dict[str, Any]]:
+        """Génère des tickets CRM exploitables depuis le registry de dette."""
+        registry = registry_path or Path(__file__).resolve().parents[3] / "crm" / "tech_debt_registry.yaml"
+        if not registry.exists():
+            return []
+        try:
+            with registry.open("r", encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {}
+        except Exception:
+            return []
+        items = data.get("items", [])
+        tickets: list[dict[str, Any]] = []
+        for item in items:
+            if item.get("status") != "open":
+                continue
+            tickets.append({
+                "id": item.get("id"),
+                "repo": item.get("repo"),
+                "component": item.get("component"),
+                "description": item.get("description"),
+                "severity": item.get("severity"),
+                "score": item.get("score"),
+                "assignee": item.get("assignee"),
+                "labels": item.get("labels", []),
+                "type": "tech_debt",
+                "created_at": item.get("created_at"),
+            })
+        return tickets
+
     def _apply(self, result: dict[str, Any]) -> None:
         design_path = self.repo_root / "design.yaml"
         design_path.parent.mkdir(parents=True, exist_ok=True)
