@@ -51,12 +51,12 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-ARGUS-CTULU-JEVX-20260929.md` :
 | P2-4 | JEVX projection templates | `templates/auto_design/jevi_projection/` | ✅ |
 | P2-5 | Governance synthesizer integration | `engine/auto_design/auto_promote.py` | ✅ |
 
-### P3 — Auto PR workflow (PARTIEL)
+### P3 — Auto PR workflow (IMPLÉMENTÉ)
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P3-1 | `pr_review_auto.py` | `engine/auto_design/pr_review_auto.py` | ❌ Non implémenté |
-| P3-2 | `auto_operator.py` | `engine/auto_design/auto_operator.py` | ❌ Non implémenté |
+| P3-1 | `pr_review_auto.py` | `engine/auto_design/pr_review_auto.py` | ✅ |
+| P3-2 | `auto_operator.py` | `engine/auto_design/auto_operator.py` | ✅ |
 
 ## Plan d'exécution SLM
 
