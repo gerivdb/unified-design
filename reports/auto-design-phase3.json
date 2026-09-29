@@ -2,7 +2,7 @@
   "phase": 3,
   "total_repos": 6,
   "industrialized_repos": 6,
-  "mature_repos": 3,
+  "mature_repos": 2,
   "pending_repos": 0,
   "repos": [
     {
@@ -49,5 +49,5 @@
     }
   ],
   "cross_bridges": "bridges/citizen-phase3.yaml",
-  "generated_at": "2026-09-29T05:23:05+02:00"
+  "generated_at": "2026-09-29T05:38:01+02:00"
 }

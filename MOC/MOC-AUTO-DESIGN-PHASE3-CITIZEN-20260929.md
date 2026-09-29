@@ -70,6 +70,17 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-PHASE3-CITIZEN-20260929.md` :
 3. Tous les `implementation_contract` sont présents et vérifiés
 4. Cross-bridges citoyens actifs et médiés
 
+## Maturité Phase 3 (vérifiée)
+
+| Repo | Score | Mature |
+|---|---|---|
+| FLUENCE | 80 | ✅ |
+| CANDIDATOR | 60 | ⚠️ |
+| GERIBOOKING | 60 | ⚠️ |
+| BANK-BUSTER | 80 | ✅ |
+| DATA-MINER | 60 | ⚠️ |
+| TOOL-FACTORY-1 | 60 | ⚠️ |
+
 ## Références
 
 - **PRD** : `PRD-AUTO-DESIGN-PHASE3-CITIZEN-20260929.md`
