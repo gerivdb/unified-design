@@ -1,0 +1,7 @@
+adr:
+  current_status: proposed
+  target_status: accepted
+  conditions:
+    - design_integrated: true
+    - tests_passing: true
+    - consumer_count: ">=1"
