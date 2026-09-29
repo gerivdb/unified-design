@@ -1,0 +1,115 @@
+"""Analyze auto-design readiness for a target repo."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+DEFAULT_KNOWN_REPOS = Path(__file__).resolve().parents[3] / "GOVERNANCE-HUB" / "known_repositories.yaml"
+DIMENSIONS = (
+    "design_coverage",
+    "bridge_density",
+    "test_coverage",
+    "doc_coverage",
+    "auto_debug_maturity",
+)
+
+
+class AutoDesignAnalyzer:
+    def __init__(self, repo_root: Path, known_repos: Path = DEFAULT_KNOWN_REPOS) -> None:
+        self.repo_root = Path(repo_root)
+        self.known_repos = Path(known_repos)
+        self.cache: dict[str, Any] = {}
+
+    def analyze(self) -> dict[str, Any]:
+        scores = {
+            "design_coverage": self._score_design_coverage(),
+            "bridge_density": self._score_bridge_density(),
+            "test_coverage": self._score_test_coverage(),
+            "doc_coverage": self._score_doc_coverage(),
+            "auto_debug_maturity": self._score_auto_debug_maturity(),
+        }
+        global_score = int(sum(scores.values()) / len(scores))
+        return {
+            "repo": str(self.repo_root),
+            "scores": scores,
+            "auto_design_readiness": global_score,
+            "mature": global_score >= 80,
+            "recommendations": self._recommendations(scores),
+        }
+
+    def _score_design_coverage(self) -> int:
+        design_files = list(self.repo_root.glob("designs/*/design.yaml")) + list(
+            self.repo_root.glob("design/*.yaml")
+        )
+        if not design_files:
+            return 0
+        with_contract = 0
+        for design in design_files:
+            try:
+                content = design.read_text(encoding="utf-8")
+                if "implementation_contract:" in content:
+                    with_contract += 1
+            except Exception:
+                continue
+        return int((with_contract / len(design_files)) * 100)
+
+    def _score_bridge_density(self) -> int:
+        bridges = list(self.repo_root.glob("bridges/*.yaml"))
+        components = (
+            list(self.repo_root.glob("designs/*/design.yaml"))
+            + list(self.repo_root.glob("agents/*.py"))
+            + list(self.repo_root.glob("src/*.py"))
+        )
+        if not components:
+            return 0
+        return min(100, int((len(bridges) / len(components)) * 100))
+
+    def _score_test_coverage(self) -> int:
+        tests = (
+            list(self.repo_root.glob("tests/test_*.py"))
+            + list(self.repo_root.glob("scripts/test_*.py"))
+            + list(self.repo_root.glob("tests/**/test_*.py"))
+        )
+        return 100 if tests else 0
+
+    def _score_doc_coverage(self) -> int:
+        docs = list(self.repo_root.glob("docs/*.md")) + list(self.repo_root.glob("PRD/*.md")) + list(
+            self.repo_root.glob("MOC/*.md")
+        )
+        return 100 if docs else 0
+
+    def _score_auto_debug_maturity(self) -> int:
+        if not (self.repo_root / "design.yaml").exists():
+            return 0
+        try:
+            content = (self.repo_root / "design.yaml").read_text(encoding="utf-8")
+        except Exception:
+            return 0
+        score = 0
+        if "auto_debug_integrator" in content:
+            score += 40
+        if "auto_debug_pathways:" in content:
+            score += 30
+        if "scientific_reflection_protocols:" in content:
+            score += 30
+        return score
+
+    def _recommendations(self, scores: dict[str, int]) -> list[str]:
+        recommendations = []
+        if scores["design_coverage"] < 80:
+            recommendations.append("Add implementation_contract to active designs")
+        if scores["bridge_density"] < 40:
+            recommendations.append("Create bridges/*.yaml for cross-component mediation")
+        if scores["test_coverage"] == 0:
+            recommendations.append("Add tests/test_*.py integration tests")
+        if scores["doc_coverage"] == 0:
+            recommendations.append("Add docs/ + PRD/MOC documentation")
+        if scores["auto_debug_maturity"] < 80:
+            recommendations.append("Implement auto_debug_pathways in design.yaml")
+        return recommendations
+
+
+def analyze_repo(repo_root: Path, known_repos: Path = DEFAULT_KNOWN_REPOS) -> dict[str, Any]:
+    return AutoDesignAnalyzer(repo_root, known_repos).analyze()
