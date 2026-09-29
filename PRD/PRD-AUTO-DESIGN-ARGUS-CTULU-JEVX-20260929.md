@@ -58,15 +58,36 @@ Exploiter les capacités existantes d'**ARGUS** (couche N+2 de détection), **CT
 | P1-3 | Branch/commit coupling | `engine/auto_design/pr_factory.py` | `create_pr()` vérifie cohérence branch → commit |
 | P1-4 | Tests intégration | `tests/test_auto_design_argus_ctulu.py` | 18 tests couvrant les 5 intégrations P0 |
 
+## État d'avancement
+
+### P0 — Essentiel (TERMINÉ)
+
+| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
+|---|---|---|---|---|
+| P0-1 | `_score_conventional_commit_adherence()` | `engine/auto_design/analyzer.py` | Retourne score 0-100 via CTULU `trix-git-workflow.py` | ✅ |
+| P0-2 | `_check_atomic_commits()` | `engine/auto_design/verifier.py` | Détecte commits >3 fichiers, retourne violations | ✅ |
+| P0-3 | `generate_commit_message()` | `engine/auto_design/generator.py` | Génère message conventionnel `type(scope): description` | ✅ |
+| P0-4 | `_validate_bridges_argus()` | `engine/auto_design/verifier.py` | Appelle ARGUS `bridge_check.py --json`, agrège findings | ✅ |
+| P0-5 | `_validate_crossrefs_argus()` | `engine/auto_design/verifier.py` | Appelle ARGUS `crossref_check.py --json`, agrège findings | ✅ |
+
+### P1 — Important (TERMINÉ)
+
+| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
+|---|---|---|---|---|
+| P1-1 | Templates commit | `templates/auto_design/commit_validator.py`, `templates/auto_design/commit_monitor.py` | Templates déployés dans `scripts/` | ✅ |
+| P1-2 | Auto-commit on deploy | `engine/auto_design/industrializer.py` | `deploy_with_auto_commit()` commit + push après déploiement | ✅ |
+| P1-3 | Branch/commit coupling | `engine/auto_design/pr_factory.py` | `create_pr()` vérifie cohérence branch → commit | ✅ |
+| P1-4 | Tests intégration | `tests/test_auto_design_argus_ctulu.py` | 18 tests couvrant les 5 intégrations P0 | ✅ |
+
 ### P2 — Nice-to-have (TERMINÉ)
 
-| ID | Livrable | Chemin cible | Critère d'acceptation |
+| ID | Livrable | Chemin cible | Critère d'acceptation | Statut |
 |---|---|---|---|:---|
-| P2-1 | Meta-coherence gate | `engine/auto_design/verifier.py` | `_check_meta_coherence()` bloque si ARGUS `status != OK` |
-| P2-2 | Traceability validation | `engine/auto_design/verifier.py` | `_validate_traceability()` via CTULU `trace_graph.py` |
-| P2-3 | NODEX component classification | `engine/auto_design/generator.py` | `_detect_components()` utilise ARGUS `nodex.py` + KG-L |
-| P2-4 | JEVX projection templates | `templates/auto_design/jevi_projection/` | `design.yaml` → TALEX/CURX/narratives |
-| P2-5 | Governance synthesizer integration | `engine/auto_design/auto_promote.py` | Appelle CTULU `vibe-governance-synthesizer` pour 6 artifacts + commit |
+| P2-1 | Meta-coherence gate | `engine/auto_design/verifier.py` | `_check_meta_coherence()` bloque si ARGUS `status != OK` | ✅ |
+| P2-2 | Traceability validation | `engine/auto_design/verifier.py` | `_validate_traceability()` via CTULU `trace_graph.py` | ✅ |
+| P2-3 | NODEX component classification | `engine/auto_design/generator.py` | `_detect_components()` utilise ARGUS `nodex.py` + KG-L | ✅ |
+| P2-4 | JEVX projection templates | `templates/auto_design/jevi_projection/` | `design.yaml` → TALEX/CURX/narratives | ✅ |
+| P2-5 | Governance synthesizer integration | `engine/auto_design/auto_promote.py` | Appelle CTULU `vibe-governance-synthesizer` pour 6 artifacts + commit | ✅ |
 
 ## Architecture cible
 

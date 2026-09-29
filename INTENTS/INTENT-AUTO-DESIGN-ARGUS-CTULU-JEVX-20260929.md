@@ -417,3 +417,19 @@ def _detect_components(self) -> list[str]:
 - [x] 2026-09-29T18:42:00+02:00 — 14 TASKs créés dans `TASKS/`
 - [x] 2026-09-29T18:43:00+02:00 — Évaluation enrichie avec capacités ARGUS/CTULU/JEVX documentée
 - [x] 2026-09-29T18:44:00+02:00 — Plan d'intégration écosystémique complet défini
+- [x] 2026-09-29T19:05:00+02:00 — ATOMIC-001 implémenté : `_score_conventional_commit_adherence()` dans `analyzer.py`
+- [x] 2026-09-29T19:10:00+02:00 — ATOMIC-002 implémenté : `_check_atomic_commits()` dans `verifier.py`
+- [x] 2026-09-29T19:15:00+02:00 — ATOMIC-003 implémenté : `generate_commit_message()` dans `generator.py`
+- [x] 2026-09-29T19:20:00+02:00 — ATOMIC-004 implémenté : `_validate_bridges_argus()` dans `verifier.py`
+- [x] 2026-09-29T19:25:00+02:00 — ATOMIC-005 implémenté : `_validate_crossrefs_argus()` dans `verifier.py`
+- [x] 2026-09-29T19:30:00+02:00 — ATOMIC-006/007 créés : `commit_validator.py` + `commit_monitor.py` dans `templates/auto_design/`
+- [x] 2026-09-29T19:32:00+02:00 — ATOMIC-008 implémenté : `deploy_with_auto_commit()` dans `industrializer.py`
+- [x] 2026-09-29T19:35:00+02:00 — ATOMIC-009 créé : `pr_factory.py` dans `templates/auto_design/`
+- [x] 2026-09-29T19:40:00+02:00 — ATOMIC-010 créé : `tests/test_auto_design_argus_ctulu.py` (18 tests couvrant P0/P1/P2)
+- [x] 2026-09-29T19:45:00+02:00 — ATOMIC-011 implémenté : `_check_meta_coherence()` dans `verifier.py`
+- [x] 2026-09-29T19:50:00+02:00 — ATOMIC-012 implémenté : `_validate_traceability()` dans `verifier.py`
+- [x] 2026-09-29T19:55:00+02:00 — ATOMIC-013 implémenté : `_classify_components_noded()` dans `generator.py`
+- [x] 2026-09-29T20:00:00+02:00 — ATOMIC-014 créé : `templates/auto_design/jevi_projection/__init__.py`
+- [x] 2026-09-29T20:05:00+02:00 — ATOMIC-015 implémenté : `governance_synthesizer()` dans `auto_promote.py`
+- [x] 2026-09-29T20:10:00+02:00 — Tests validés : 18/18 passés (`pytest tests/test_auto_design_argus_ctulu.py`)
+- [x] 2026-09-29T20:15:00+02:00 — Commit global : `feat(auto_design): integrate ARGUS/CTULU/JEVX P0-P2` (15 fichiers, 1830 insertions)
