@@ -255,6 +255,7 @@ unified-design/
 ## 7. Proof-of-Life
 
 - [x] 2026-09-29T03:12:37+02:00 — INTENT créé, chemin architectural formalisé
+- [x] 2026-09-29T03:16:00+02:00 — 19 stubs ONTOLOGY créés, gate ontologique --strict passée (0 ABSENT)
 - [ ] `analyzer.py` — test sur AUTO-DEV + VEX
 - [ ] `generator.py` — dry-run sur repo L4
 - [ ] `industrializer.py` — déploiement sur repo test
