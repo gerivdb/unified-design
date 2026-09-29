@@ -1,0 +1,73 @@
+# bridge-transport-sync-pipeline — Pipeline
+
+## Rôle
+
+`bridge-transport-sync-pipeline` est un pipeline qui orchestre
+la synchronisation des bridges avec transport WAZAA/BOINC-LLM-P2P.
+
+## Étapes
+
+```yaml
+pipeline:
+  name: bridge-transport-sync
+  version: "1.0.0"
+  steps:
+    - id: load_bridges
+      action: read
+      path: bridges/*.yaml
+      filter: "transport exists"
+      output: active_bridges
+
+    - id: validate_transport_fields
+      action: evaluate
+      condition: "active_bridges have transport_topic or transport_endpoint"
+      output: valid_bridges
+
+    - id: execute_bridges
+      action: execute
+      command: python agents/bridge_executor.py execute_all
+      input: valid_bridges
+      output: execution_results
+
+    - id: check_fallbacks
+      action: evaluate
+      condition: "execution_results contains None"
+      output: fallback_entries
+
+    - id: write_wal
+      action: write
+      path: wal/transport-fallback.jsonl
+      input: fallback_entries
+      output: wal_written
+
+    - id: retry_fallbacks
+      action: execute
+      command: python agents/bridge_executor.py retry_wal
+      input: wal_written
+      output: retry_results
+
+    - id: publish_drift_alerts
+      action: execute
+      command: python agents/drift_alerter.py --wazaa
+      output: drift_published
+
+    - id: validate_tests
+      action: execute
+      command: pytest tests/test_wazaa_transport.py tests/test_boinc_transport.py tests/test_drift_alerter_wazaa.py tests/test_wazaa_e2e.py tests/test_boinc_e2e.py tests/test_transport_fallback.py -v
+      output: test_results
+
+    - id: report
+      action: report
+      message: "Bridge transport sync complete: published=<N>, wal=<M>, drift=<K>, tests=<PASS|FAIL>"
+```
+
+## Garde-fous
+- Un bridge sans transport → local only, pas de publication
+- Transport down → WAL obligatoire avant retry
+- drift_alerter → WAZAA uniquement pour critical
+- Tests pass obligatoire avant déclaration PROD-READY
+
+## Sortie attendue
+```
+[BRIDGE_TRANSPORT_SYNC] published=<N> wal=<M> drift=<K> tests=PASS
+```
