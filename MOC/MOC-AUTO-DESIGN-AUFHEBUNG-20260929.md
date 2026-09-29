@@ -41,16 +41,16 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-AUFHEBUNG-20260929.md` :
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
 | P1-1 | Skill | `skills/auto-design-readiness/SKILL.md` | ✅ |
-| P1-2 | Tests unitaires | `tests/test_auto_design_*.py` | 🔄 |
-| P1-3 | Hook pre-commit | `.kilocode/hooks/pre-commit-auto-design-verifier.py` | 🔄 |
+| P1-2 | Tests unitaires | `tests/test_auto_design_*.py` | ✅ |
+| P1-3 | Hook pre-commit | `.kilocode/hooks/pre-commit-auto-design-verifier.py` | ✅ |
 
 ### P2 — Nice-to-have
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P2-1 | CI step local | `scripts/run_auto_design_check.ps1` | 🔄 |
-| P2-2 | Documentation | `docs/auto-design/` | 🔄 |
-| P2-3 | Auto-debug pathways | `designs/auto-design/auto_debug_pathways.yaml` | 🔄 |
+| P2-1 | CI step local | `scripts/run_auto_design_check.ps1` | ❌ manquant |
+| P2-2 | Documentation | `docs/auto-design/` | ✅ |
+| P2-3 | Auto-debug pathways | `designs/auto-design/auto_debug_pathways.yaml` | ✅ |
 
 ## Plan d'exécution SLM
 
@@ -89,4 +89,4 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-AUFHEBUNG-20260929.md` :
 - **PRD** : `PRD-AUTO-DESIGN-AUFHEBUNG-20260929.md`
 - **INTENT** : `INTENTS/INTENT-AUTO-DESIGN-AUFHEBUNG-20260929.md`
 - **Design** : `designs/auto-design/design.yaml`
-- **ADR** : `ADR/ADR-2026-09-29-auto-design-aufhebung.md` (à créer)
+- **ADR** : `ADR/ADR-2026-09-29-auto-design-aufhebung.md`

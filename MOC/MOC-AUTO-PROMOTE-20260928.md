@@ -25,17 +25,17 @@ Mettre en œuvre le PRD `PRD-MOC-AUTO-PROMOTE-20260928.md` :
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P0-1 | Moteur auto-promote | `engine/auto_design/auto_promote.py` | 🔄 |
-| P0-2 | Critères promotion ADR | `designs/auto-promote/adr-criteria.yaml` | 🔄 |
-| P0-3 | Critères promotion Design | `designs/auto-promote/design-criteria.yaml` | 🔄 |
-| P0-4 | Critères promotion INTENT | `designs/auto-promote/intent-criteria.yaml` | 🔄 |
+| P0-1 | Moteur auto-promote | `engine/auto_design/auto_promote.py` | ✅ |
+| P0-2 | Critères promotion ADR | `designs/auto-promote/adr-criteria.yaml` | ✅ |
+| P0-3 | Critères promotion Design | `designs/auto-promote/design-criteria.yaml` | ✅ |
+| P0-4 | Critères promotion INTENT | `designs/auto-promote/intent-criteria.yaml` | ✅ |
 
 ### P1 — Important
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P1-1 | Tests unitaires | `tests/test_auto_promote_*.py` | 🔄 |
-| P1-2 | Hook pre-commit | `.kilocode/hooks/pre-commit-auto-promote.py` | 🔄 |
+| P1-1 | Tests unitaires | `tests/test_auto_promote_*.py` | ✅ |
+| P1-2 | Hook pre-commit | `.kilocode/hooks/pre-commit-auto-promote.py` | ✅ |
 
 ### P2 — Nice-to-have
 

@@ -25,17 +25,17 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-PHASE3-CITIZEN-20260929.md` :
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P0-1 | Industrialisation FLUENCE | `designs/fluence/auto-design.yaml` | 🔄 |
-| P0-2 | Industrialisation CANDIDATOR | `designs/candidator/auto-design.yaml` | 🔄 |
-| P0-3 | Industrialisation GERIBOOKING | `designs/geribooking/auto-design.yaml` | 🔄 |
+| P0-1 | Industrialisation FLUENCE | `designs/fluence/auto-design.yaml` | ✅ |
+| P0-2 | Industrialisation CANDIDATOR | `designs/candidator/auto-design.yaml` | ❌ chemin non confirmé (L6-WORK) |
+| P0-3 | Industrialisation GERIBOOKING | `designs/geribooking/auto-design.yaml` | ❌ absent du SOT local |
 
 ### P1 — Important
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P1-1 | Industrialisation BANK-BUSTER | `designs/bank-buster/auto-design.yaml` | 🔄 |
-| P1-2 | Industrialisation DATA-MINER | `designs/data-miner/auto-design.yaml` | 🔄 |
-| P1-3 | Industrialisation TOOL-FACTORY-1 | `designs/tool-factory-1/auto-design.yaml` | 🔄 |
+| P1-1 | Industrialisation BANK-BUSTER | `designs/bank-buster/auto-design.yaml` | ❌ absent du SOT |
+| P1-2 | Industrialisation DATA-MINER | `designs/data-miner/auto-design.yaml` | ✅ |
+| P1-3 | Industrialisation TOOL-FACTORY-1 | `designs/tool-factory-1/auto-design.yaml` | ✅ |
 
 ### P2 — Nice-to-have
 

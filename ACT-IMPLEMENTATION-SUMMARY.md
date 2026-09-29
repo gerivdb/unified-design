@@ -42,6 +42,8 @@
 | ADR traceability | Script created, 4 ADR + 5 INTENTS auto-promoted |
 | Consumer usage docs | 172 PRD-MOC files updated with usage sections |
 | Consumer commits pushed | 14/14 (NEXUS, TALEX, TRIX, VERSES, VOLTX, WAZAA, KIVA-CLI, ECOS-CLI, CTULU, KG-CAUSAL, KG-L, ARGUS, LOOPX, NEXUS) |
+| Windows bugfix | verify_integration_usage.py corrigé (grep absent sur Windows) |
+| KIVA-CLI pipeline | unified-design-consumers.yaml créé dans .kiva/pipelines/ (non commitable car .kiva/ est gitignored) |
 
 ## What's Real vs Declared
 
@@ -60,10 +62,12 @@
 - Cross-repo CI validated: all consumers 9/9 PASS
 - 4 ADR auto-promoted to accepted
 - 5 INTENTS auto-promoted to approved
+- Windows bugfix: `verify_integration_usage.py` now uses pure-Python scan instead of `grep`
+- KIVA-CLI pipeline `unified-design-consumers` defined in `.kiva/pipelines/` (cannot be committed because `.kiva/` is gitignored)
 
 ### ⚠️ Declared but not functionally integrated
 - Integration modules are created but not yet imported in consumer business code
-- CI pipeline `unified-design-consumers` documented but not activated
+- CI pipeline `unified-design-consumers` defined locally but not versioned in git
 - 6 designs in `proposed` status should be promoted to `active`/`standard`
 - 43 ADR in `proposed` status, only 6 accepted — need promotion for implemented designs
 
@@ -71,7 +75,7 @@
 
 ### Post-implémentation
 - Import integration modules in consumer business code (126 modules to wire)
-- Activate CI pipeline `unified-design-consumers` in KIVA-CLI
+- Versionner le pipeline KIVA-CLI `unified-design-consumers` (hors `.kiva/` gitignored)
 - Promote 6 proposed designs to active/standard status
 - Accept 37 ADR backing implemented designs
 - Deploy integration framework to all consumers
@@ -84,3 +88,5 @@
 - [x] Cross-repo CI validated for all consumers
 - [x] ADR/INTENTS auto-promotion executed
 - [x] Encoding fix applied to all consumer PRD-MOCs
+- [x] Windows bugfix: `verify_integration_usage.py` corrected (grep unavailable)
+- [x] KIVA-CLI pipeline `unified-design-consumers` created (`.kiva/pipelines/`, gitignored)

@@ -89,25 +89,25 @@ def verify_consumer_usage(consumer: str, design: str) -> dict:
     integration_path = str(integration_files[0])
     
     # Find imports in business code (exclude tests and integrations dirs)
-    try:
-        # Search for both standard and legacy import patterns
-        search_patterns = [
-            f"{slug}_integration",
-            integration_files[0].stem,
-        ]
-        
-        imports = []
-        for pattern in search_patterns:
-            result = subprocess.run(
-                ["grep", "-r", pattern, str(consumer_path), "--include=*.py"],
-                capture_output=True, text=True, timeout=30
-            )
-            for line in result.stdout.split("\n"):
-                line = line.strip()
-                if line and "test" not in line.lower() and "integrations" not in line.lower():
-                    imports.append(line)
-    except Exception as e:
-        imports = [f"Error: {e}"]
+    search_patterns = [
+        f"{slug}_integration",
+        integration_files[0].stem,
+    ]
+    imports = []
+    for pattern in search_patterns:
+        for py_file in consumer_path.rglob("*.py"):
+            # Skip test files and integrations directory
+            file_str = str(py_file)
+            if "test" in file_str.lower() or "integrations" in file_str.lower():
+                continue
+            try:
+                content = py_file.read_text(encoding="utf-8")
+                for line in content.splitlines():
+                    if pattern in line and line.strip().startswith(("from ", "import ")):
+                        imports.append(f"{py_file.relative_to(consumer_path)}: {line.strip()}")
+                        break
+            except Exception:
+                continue
     
     return {
         "consumer": consumer,

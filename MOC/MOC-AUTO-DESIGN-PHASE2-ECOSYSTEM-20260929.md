@@ -25,18 +25,18 @@ Mettre en œuvre le PRD `PRD-AUTO-DESIGN-PHASE2-ECOSYSTEM-20260929.md` :
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P0-1 | Industrialisation NEXUS | `designs/nexus/auto-design.yaml` | 🔄 |
-| P0-2 | Industrialisation CTULU | `designs/ctulu/auto-design.yaml` | 🔄 |
-| P0-3 | Industrialisation BRAIN | `designs/brain/auto-design.yaml` | 🔄 |
-| P0-4 | Industrialisation WAZAA | `designs/wazaa/auto-design.yaml` | 🔄 |
+| P0-1 | Industrialisation NEXUS | `designs/nexus/auto-design.yaml` | ✅ |
+| P0-2 | Industrialisation CTULU | `designs/ctulu/auto-design.yaml` | ✅ |
+| P0-3 | Industrialisation BRAIN | `designs/brain/auto-design.yaml` | ✅ |
+| P0-4 | Industrialisation WAZAA | `designs/wazaa/auto-design.yaml` | ✅ |
 
 ### P1 — Important
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P1-1 | Industrialisation KG-L | `designs/kg-l/auto-design.yaml` | 🔄 |
-| P1-2 | Industrialisation KG-CAUSAL | `designs/kg-causal/auto-design.yaml` | 🔄 |
-| P1-3 | Industrialisation GATEWAY-MANAGER | `designs/gateway-manager/auto-design.yaml` | 🔄 |
+| P1-1 | Industrialisation KG-L | `designs/kg-l/auto-design.yaml` | ✅ |
+| P1-2 | Industrialisation KG-CAUSAL | `designs/kg-causal/auto-design.yaml` | ✅ |
+| P1-3 | Industrialisation GATEWAY-MANAGER | `designs/gateway-manager/auto-design.yaml` | ✅ |
 
 ### P2 — Nice-to-have
 

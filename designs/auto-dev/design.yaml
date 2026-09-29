@@ -224,9 +224,6 @@ components:
   - type: auto-debug-integrator
     repo: gerivdb/AUTO-DEV
     path: src/auto_debug_integrator.py
-  - type: pathway-selector
-    repo: gerivdb/AUTO-DEV
-    path: src/pathway_selector.py
   - type: breakthrough-analyzer
     repo: gerivdb/AUTO-DEV
     path: src/breakthrough_analyzer.py
@@ -301,13 +298,13 @@ components:
     path: tests/test_auto_debug_sot_causal.py
   - type: test-breakthrough-analysis
     repo: gerivdb/AUTO-DEV
-    path: tests/test_breakthrough_analysis.py
+    path: scripts/test_breakthrough_analysis.py
   - type: test-full-analysis
     repo: gerivdb/AUTO-DEV
-    path: tests/test_full_analysis.py
+    path: scripts/test_full_analysis.py
   - type: docs-research-directions
     repo: gerivdb/AUTO-DEV
-    path: docs/RESEARCH_DIRECTIONS.md
+    path: RESEARCH_DIRECTIONS.md
   - type: docs-scientific-reflection-protocols
     repo: gerivdb/AUTO-DEV
     path: docs/scientific-reflection-protocols.md

@@ -85,5 +85,5 @@ repo: gerivdb/unified-design
 
 - **INTENT** : `INTENTS/INTENT-AUTO-DESIGN-AUFHEBUNG-20260929.md`
 - **Design** : `designs/auto-design/design.yaml`
-- **ADR** : `ADR/ADR-2026-09-29-auto-design-aufhebung.md` (à créer)
+- **ADR** : `ADR/ADR-2026-09-29-auto-design-aufhebung.md`
 - **Repo PoC** : `gerivdb/AUTO-DEV` (100% opérationnel)
