@@ -1,0 +1,20 @@
+---
+name: kg-l-auto-design
+description: "Design auto-design pour KG-L. Vérifie la readiness écosystémique du repo KG-L via analyze_repo(), generate_repo(), verify_repo()."
+version: "1.0.0"
+status: active
+---
+
+# Design — KG-L Auto-Design
+
+## Ontologie
+
+- repo: gerivdb/KG-L
+- layer: L4_TOOLS
+- status: ACTIVE
+
+## Contrat
+
+- `analyze_repo(KG-L)` retourne `auto_design_readiness >= 80`
+- `verify_repo(KG-L)` retourne `auto_design_score >= 80`
+- Bridges : `bridges/ecosystem-phase2.yaml`
