@@ -1,17 +1,5 @@
 ---
 name: CodeDB-E5620
-version: 1.0.0
-status: active
-layer: L0
-description: "CodeDB-E5620 — Base de connaissances code pour le processeur Xeon E5620. Stocke patterns, optimisations et contraintes hardware.
-"
-consumers:
-  - kix
-  - infx
-  - flex
-  - llux
-
-name: CodeDB-E5620
 version: "1.0.0"
 status: active
 strate: L4-TOOLS
@@ -20,9 +8,15 @@ intent_hash: 0xCODEDB_E5620_20260612
 description: >
   CodeDB-E5620 — Base de connaissances code pour le processeur Xeon E5620. Stocke patterns, optimisations et contraintes hardware.
 
+cpu:
+  model: Xeon E5620
+  cores: 8
+  threads: 16
+  frequency: "2.4 GHz"
+
 dependencies:
-    - ontology
-    - slm-hardware-environment
+  - ontology
+  - slm-hardware-environment
 
 consumers:
   - kix
@@ -39,7 +33,8 @@ capabilities:
       - result: object
 
 constraints:
-  - cpu_only: true
+  cpu_only: true
+
 implementation_contract:
   repo: CodeDB-E5620
   repo_root: D:\DO\WEB\TOOLS\L4-TOOLS\CodeDB-E5620
