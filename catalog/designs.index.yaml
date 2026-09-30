@@ -1,8 +1,4 @@
 items:
-- name: DAG-3-Design
-  path: designs\DAG-3-Design\design.yaml
-  status: active
-  source_repo: unified-design
 - name: admg-dag3-hierarchy
   path: designs\admg-dag3-hierarchy\design.yaml
   status: active
@@ -25,6 +21,14 @@ items:
   source_repo: unified-design
 - name: artifact-ownership-routing
   path: designs\artifact-ownership-routing\design.yaml
+  status: active
+  source_repo: unified-design
+- name: auto-design
+  path: designs\auto-design\design.yaml
+  status: active
+  source_repo: unified-design
+- name: auto-dev
+  path: designs\auto-dev\design.yaml
   status: active
   source_repo: unified-design
 - name: bootstrap
@@ -63,10 +67,6 @@ items:
   path: designs\client-architecture\design.yaml
   status: active
   source_repo: unified-design
-  intent_hash: 0xVEX_CLIENT_ARCHITECTURE_DESIGN_20260927
-  implemented: true
-  coverage_pct: 100.0
-  last_verified: '2026-09-27T23:00:00+02:00'
 - name: clm-pipeline
   path: designs\clm-pipeline\design.yaml
   status: active
@@ -105,6 +105,10 @@ items:
   source_repo: unified-design
 - name: ctulu-zig-fmt-auto
   path: designs\ctulu-zig-fmt-auto\design.yaml
+  status: active
+  source_repo: unified-design
+- name: DAG-3-Design
+  path: designs\DAG-3-Design\design.yaml
   status: active
   source_repo: unified-design
 - name: deployex
@@ -187,10 +191,6 @@ items:
   path: designs\http-server-design\design.yaml
   status: active
   source_repo: unified-design
-  intent_hash: 0xVEX_HTTP_SERVER_DESIGN_20260926
-  implemented: true
-  coverage_pct: 100.0
-  last_verified: '2026-09-27T23:00:00+02:00'
 - name: identx
   path: designs\identx\design.yaml
   status: active
@@ -205,6 +205,10 @@ items:
   source_repo: unified-design
 - name: infx
   path: designs\infx\design.yaml
+  status: active
+  source_repo: unified-design
+- name: integration-framework
+  path: designs\integration-framework\design.yaml
   status: active
   source_repo: unified-design
 - name: kg-causal
@@ -347,10 +351,6 @@ items:
   path: designs\packaging-contract\design.yaml
   status: active
   source_repo: unified-design
-  intent_hash: 0xVEX_PACKAGING_CONTRACT_20260927
-  implemented: true
-  coverage_pct: 100.0
-  last_verified: '2026-09-27T23:00:00+02:00'
 - name: pattern-first-right-capture
   path: designs\pattern-first-right-capture\design.yaml
   status: active
@@ -457,6 +457,10 @@ items:
   source_repo: unified-design
 - name: spidx
   path: designs\spidx\design.yaml
+  status: active
+  source_repo: unified-design
+- name: strata-orchestrator-assignment
+  path: designs\strata-orchestrator-assignment\design.yaml
   status: active
   source_repo: unified-design
 - name: syncx
