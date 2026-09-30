@@ -5,8 +5,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from engine.auto_design.analyzer import AutoDesignAnalyzer
-from engine.auto_design.generator import AutoDesignGenerator
+from src.engines.auto_design.analyzer import AutoDesignAnalyzer
+from src.engines.auto_design.generator import AutoDesignGenerator
 
 from crm.notifier import TechDebtNotifier
 
