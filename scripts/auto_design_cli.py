@@ -9,11 +9,11 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-from engine.auto_design.analyzer import analyze_repo
-from engine.auto_design.generator import generate_repo
-from engine.auto_design.industrializer import deploy_repo
-from engine.auto_design.reporter import report_global
-from engine.auto_design.verifier import verify_repo
+from src.engines.auto_design.analyzer import analyze_repo
+from src.engines.auto_design.generator import generate_repo
+from src.engines.auto_design.industrializer import deploy_repo
+from src.engines.auto_design.reporter import report_global
+from src.engines.auto_design.verifier import verify_repo
 
 
 def _json(result: dict[str, object]) -> str:

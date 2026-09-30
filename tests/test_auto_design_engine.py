@@ -11,11 +11,11 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-from engine.auto_design.analyzer import AutoDesignAnalyzer
-from engine.auto_design.generator import AutoDesignGenerator
-from engine.auto_design.industrializer import AutoDesignIndustrializer
-from engine.auto_design.verifier import AutoDesignVerifier
-from engine.auto_design.reporter import AutoDesignReporter
+from src.engines.auto_design.analyzer import AutoDesignAnalyzer
+from src.engines.auto_design.generator import AutoDesignGenerator
+from src.engines.auto_design.industrializer import AutoDesignIndustrializer
+from src.engines.auto_design.verifier import AutoDesignVerifier
+from src.engines.auto_design.reporter import AutoDesignReporter
 
 
 def test_analyzer_returns_scores(tmp_path: Path) -> None:

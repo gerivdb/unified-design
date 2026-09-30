@@ -9,9 +9,9 @@ from unittest import mock
 
 import pytest
 
-from engine.auto_design.analyzer import AutoDesignAnalyzer
-from engine.auto_design.generator import AutoDesignGenerator
-from engine.auto_design.verifier import AutoDesignVerifier
+from src.engines.auto_design.analyzer import AutoDesignAnalyzer
+from src.engines.auto_design.generator import AutoDesignGenerator
+from src.engines.auto_design.verifier import AutoDesignVerifier
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -118,7 +118,7 @@ def test_pr_factory_template():
 
 
 def test_industrializer_deploy():
-    from engine.auto_design.industrializer import AutoDesignIndustrializer
+    from src.engines.auto_design.industrializer import AutoDesignIndustrializer
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp_path = Path(tmpdir)
         (tmp_path / "scripts").mkdir(parents=True, exist_ok=True)
@@ -129,7 +129,7 @@ def test_industrializer_deploy():
 
 
 def test_industrializer_auto_commit():
-    from engine.auto_design.industrializer import AutoDesignIndustrializer
+    from src.engines.auto_design.industrializer import AutoDesignIndustrializer
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp_path = Path(tmpdir)
         (tmp_path / "scripts").mkdir(parents=True, exist_ok=True)
@@ -140,7 +140,7 @@ def test_industrializer_auto_commit():
 
 
 def test_generator_classify_components_noded():
-    from engine.auto_design.generator import AutoDesignGenerator
+    from src.engines.auto_design.generator import AutoDesignGenerator
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp_path = Path(tmpdir)
         (tmp_path / "src").mkdir(parents=True, exist_ok=True)
@@ -157,7 +157,7 @@ def test_jevi_projection_templates():
 
 
 def test_auto_promote_governance_synthesizer():
-    from engine.auto_design.auto_promote import AutoPromoter
+    from src.engines.auto_design.auto_promote import AutoPromoter
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp_path = Path(tmpdir)
         promoter = AutoPromoter(tmp_path)
@@ -166,7 +166,7 @@ def test_auto_promote_governance_synthesizer():
 
 
 def test_pr_review_auto_workflow():
-    from engine.auto_design.pr_review_auto import ensure_feat_branch, auto_commit, create_pr, resolve_and_merge
+    from src.engines.auto_design.pr_review_auto import ensure_feat_branch, auto_commit, create_pr, resolve_and_merge
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp_path = Path(tmpdir)
         subprocess.run(["git", "-C", str(tmp_path), "init"], capture_output=True, timeout=30)
@@ -186,7 +186,7 @@ def test_pr_review_auto_workflow():
 
 
 def test_auto_operator_full_cycle():
-    from engine.auto_design.auto_operator import AutoOperator
+    from src.engines.auto_design.auto_operator import AutoOperator
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp_path = Path(tmpdir)
         (tmp_path / "design.yaml").write_text("status: active\n", encoding="utf-8")

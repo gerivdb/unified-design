@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from engine.auto_design.auto_promote import AutoPromoter
+from src.engines.auto_design.auto_promote import AutoPromoter
 
 
 def test_auto_promoter_detects_proposed_with_proof_of_life(tmp_path: Path) -> None:
