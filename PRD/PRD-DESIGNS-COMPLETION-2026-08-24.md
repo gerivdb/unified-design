@@ -2,7 +2,7 @@
 type: PRD
 version: "1.0"
 date: "2026-08-24"
-status: proposed
+status: approved
 intent_hash: 0xPRD_MOC_UNIFIED_DESIGN_GOVERNANCE_AUTOCOMPLETE_20260823
 citizen: "unified-design"
 layer: "L0"
