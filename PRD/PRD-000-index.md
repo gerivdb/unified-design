@@ -39,8 +39,8 @@
 | PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | approved |
 | PRD-MOC-STRUCTURAL-COHERENCE-20260922 | Structural Coherence | approved |
 | PRD-UNIFIED-DESIGN-GOVERNANCE-GAPS-2026-08-16 | Unified Design Governance Gaps | approved |
-| PRD-MOC-TEST-INFRASTRUCTURE-20260923 | Test Infrastructure Repair | draft |
-| PRD-MOC-FRONTMATTER-NORMALIZATION-20260923 | Frontmatter Normalization | draft |
-| PRD-MOC-SRC-MIGRATION-20260923 | Src Migration (RSS-v2.3) | draft |
+| PRD-MOC-TEST-INFRASTRUCTURE-20260923 | Test Infrastructure Repair | approved |
+| PRD-MOC-FRONTMATTER-NORMALIZATION-20260923 | Frontmatter Normalization | approved |
+| PRD-MOC-SRC-MIGRATION-20260923 | Src Migration (RSS-v2.3) | approved |
 | PRD-MOC-DOCS-DEDUPLICATION-20260923 | Documentation Deduplication | draft |
 | PRD-MOC-LOCAL-CI-PIPELINE-20260923 | Local CI Pipeline | draft |

@@ -34,14 +34,18 @@ Migrer progressivement les moteurs vers `src/engines/` et `src/generators/` sans
 
 **Verdict** : 2 P1 + 1 P2. Effort moyen, valeur architecturale.
 
-## État d'implémentation (2026-09-23)
+## État d'implémentation (2026-09-30)
 
 | Composant | État | Preuve |
 |-----------|------|--------|
 | `src/core/__init__.py` | ✅ Créé | Fichier existe |
-| `src/engines/` | ⏳ À créer | — |
-| `src/generators/` | ⏳ À créer | — |
-| Compatibility imports | ⏳ À créer | — |
+| `src/engines/auto_design/` | ✅ Migré | 8 modules réexportés vers src/ |
+| `src/engines/loop_engine/` | ✅ Migré | graph + detector réexportés |
+| `src/engines/validator.py` | ✅ Migré | Réexporté vers src/ |
+| `src/generators/create_design.py` | ✅ Migré | Réexporté vers src/ |
+| `src/generators/validate_inheritance.py` | ✅ Migré | Réexporté vers src/ |
+| Compatibility imports | ✅ Créés | engine/__init__.py, generator/__init__.py, src/engines/* réexports |
+| Aucun import cassé | ✅ Vérifié | 52 tests passent, 8 skips |
 
 ## Livrables
 
@@ -51,8 +55,8 @@ Migrer progressivement les moteurs vers `src/engines/` et `src/generators/` sans
 
 ## Critères d'acceptation
 
-- [x] `src/` contient au moins `core/`, `engines/`, `generators/` — PARTIEL (`core/` créé)
-- [ ] Aucun import cassé après migration d'un engine
+- [x] `src/` contient au moins `core/`, `engines/`, `generators/` — ATTEINT
+- [x] Aucun import cassé après migration d'un engine — ATTEINT (52 tests passent)
 
 ## Références
 
