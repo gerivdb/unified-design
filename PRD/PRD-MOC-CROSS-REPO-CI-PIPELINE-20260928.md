@@ -1,0 +1,151 @@
+---
+type: PRD-MOC
+version: "1.0.0"
+date: "2026-09-28"
+status: approved
+intent_hash: 0xPRD_MOC_CROSS_REPO_CI_PIPELINE_20260928
+author: gerivdb
+source_repo: gerivdb/unified-design
+source_path: PRD/PRD-MOC-CROSS-REPO-CI-PIPELINE-20260928.md
+parent_doc: PRD-MOC-INTEGRATION-FRAMEWORK-20260928.md
+related_adr: ADR-2026-09-27-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION.md
+related_intent: INTENT-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION-20260927.md
+related_moc: MOC-LOCAL-CI-PIPELINE-20260923.md
+governance:
+  strate: L0-CANON
+  profil: master
+  rss_depth: 0
+---
+
+# PRD-MOC — Cross-Repo CI Pipeline : validation unifiée des intégrations
+
+> **Parent** : PRD-MOC-INTEGRATION-FRAMEWORK-20260928.md
+> **Périmètre** : pipeline CI local qui valide automatiquement que tous les consumers ont correctement intégré les designs unified-design.
+
+---
+
+## 1. Contexte
+
+Le repo `unified-design` dispose de 126 designs intégrés (126/126 modules créés, 126/126 tests passants). Cependant :
+
+- Aucun pipeline automatisé ne vérifie quotidiennement que les intégrations restent fonctionnelles
+- Aucune alerte n'est émise quand un consumer casse son intégration
+- La validation est manuelle (pytest local) — pas de garde cross-repo
+
+### État actuel
+
+| Composant | État |
+|-----------|------|
+| Modules d'intégration (126) | ✅ Créés |
+| Tests d'intégration (126) | ✅ Passants |
+| Hook pre-commit | ✅ Déployé (14 consumers) |
+| Pipeline CI cross-repo | ❌ Non existant |
+| Alertes automatiques | ❌ Non existantes |
+| Rapport d'intégrité global | ❌ Non existant |
+
+---
+
+## 2. Mission
+
+Créer un pipeline CI local qui valide quotidiennement l'intégrité de toutes les intégrations unified-design across all 14 consumer repos.
+
+---
+
+## 3. Architecture
+
+```
+unified-design/
+├── scripts/
+│   └── cross_repo_ci.py          # Pipeline CI principal
+├── pipeline/
+│   ├── validate-all.sh           # Script d'orchestration
+│   ├── report-generator.py       # Génération de rapports
+│   └── alert-dispatcher.py       # Dispatch d'alertes
+├── tests/
+│   └── test_cross_repo_ci.py     # Tests du pipeline
+└── docs/
+    └── cross-repo-ci.md          # Documentation
+```
+
+### Flux du pipeline
+
+```yaml
+steps:
+  - name: discover_consumers
+    action: Lire known_repositories.yaml + meta-design.yaml
+    output: Liste des 14 consumers avec leurs designs consommés
+
+  - name: validate_designs
+    action: Pour chaque consumer, exécuter validate_consumer_designs.py
+    output: Résultat PASS/FAIL par design/consumer
+
+  - name: run_integration_tests
+    action: Pour chaque consumer, exécuter pytest sur tests/test_*_integration.py
+    output: Résultat PASS/FAIL par test
+
+  - name: check_hooks
+    action: Vérifier que le hook pre-commit est présent dans chaque consumer
+    output: Liste des hooks manquants
+
+  - name: generate_report
+    action: Agréger les résultats en JSON + Markdown
+    output: reports/cross-repo-ci-report-<date>.json
+
+  - name: dispatch_alerts
+    action: Si FAIL détecté, envoyer alerte via WAZAA bus
+    output: Message swarm.alert
+```
+
+---
+
+## 4. Livrables
+
+| ID | Livrable | Chemin cible | Type |
+|---|---|---|
+| L1 | Pipeline CI principal | `scripts/cross_repo_ci.py` | Créer |
+| L2 | Script d'orchestration | `pipeline/validate-all.sh` | Créer |
+| L3 | Générateur de rapports | `pipeline/report-generator.py` | Créer |
+| L4 | Dispatch d'alertes | `pipeline/alert-dispatcher.py` | Créer |
+| L5 | Tests du pipeline | `tests/test_cross_repo_ci.py` | Créer |
+| L6 | Documentation | `docs/cross-repo-ci.md` | Créer |
+| L7 | Integration dans KIVA-CLI | `KIVA-CLI` pipeline `unified-design-consumers` | Modifier |
+
+---
+
+## 5. Critères d'acceptation
+
+- [ ] `python scripts/cross_repo_ci.py --all` passe pour tous les 14 consumers
+- [ ] Rapport JSON généré avec `global_status: PASS`
+- [ ] Alertes WAZAA envoyées en cas d'échec
+- [ ] Pipeline KIVA `unified-design-consumers` passe en CI
+- [ ] Tests du pipeline passent (`pytest tests/test_cross_repo_ci.py`)
+- [ ] Documentation complète
+
+---
+
+## 6. Proof-of-Life
+
+- [ ] 2026-09-28T06:00:00+02:00 — Création `scripts/cross_repo_ci.py`
+- [ ] 2026-09-28T06:00:00+02:00 — Création `pipeline/validate-all.sh`
+- [ ] 2026-09-28T06:00:00+02:00 — Création `pipeline/report-generator.py`
+- [ ] 2026-09-28T06:00:00+02:00 — Création `pipeline/alert-dispatcher.py`
+- [ ] 2026-09-28T06:00:00+02:00 — Création `tests/test_cross_repo_ci.py`
+- [ ] 2026-09-28T06:00:00+02:00 — Création `docs/cross-repo-ci.md`
+- [ ] 2026-09-28T06:00:00+02:00 — Pipeline KIVA `unified-design-consumers` passe
+
+---
+
+## 7. Références
+
+- **Framework** : `PRD-MOC-INTEGRATION-FRAMEWORK-20260928.md`
+- **Registry** : `PRD-MOC-UNIFIED-DESIGN-CONSUMERS-REGISTRY-20260928.md`
+- **Design** : `designs/integration-framework/design.yaml`
+- **Primitive** : `primitives/integration-framework-primitive.yaml`
+- **MOC** : `MOC-LOCAL-CI-PIPELINE-20260923.md`
+- **MOC Framework** : `MOC-INTEGRATION-FRAMEWORK-20260928.md`
+- **MOC Registry** : `MOC-UNIFIED-DESIGN-CONSUMERS-REGISTRY-20260928.md`
+- **ADR** : ADR-2026-09-27-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION
+
+---
+
+*Generated by governance-doc-writer skill — Pattern C*

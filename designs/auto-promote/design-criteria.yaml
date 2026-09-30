@@ -1,0 +1,8 @@
+design:
+  current_status:
+    - proposed
+    - draft
+  target_status: active
+  conditions:
+    - integration_count: ">=1"
+    - integration_tests_passing: true

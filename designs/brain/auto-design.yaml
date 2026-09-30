@@ -1,0 +1,20 @@
+---
+name: brain-auto-design
+description: "Design auto-design pour BRAIN. Vérifie la readiness écosystémique du repo BRAIN via analyze_repo(), generate_repo(), verify_repo()."
+version: "1.0.0"
+status: active
+---
+
+# Design — BRAIN Auto-Design
+
+## Ontologie
+
+- repo: gerivdb/BRAIN
+- layer: L0_CANON
+- status: ACTIVE
+
+## Contrat
+
+- `analyze_repo(BRAIN)` retourne `auto_design_readiness >= 80`
+- `verify_repo(BRAIN)` retourne `auto_design_score >= 80`
+- Bridges : `bridges/ecosystem-phase2.yaml`

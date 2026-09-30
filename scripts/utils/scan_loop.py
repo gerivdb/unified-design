@@ -3,8 +3,8 @@ from pathlib import Path
 
 sys.path.insert(0, r'D:\DO\WEB\TOOLS\L0-CANON\unified-design')
 
-from loop_engine.graph import build_graph_from_designs
-from loop_engine.detector import detect_cycles
+from src.engines.loop_engine.graph import build_graph_from_designs
+from src.engines.loop_engine.detector import detect_cycles
 
 roots = [Path(r'D:\DO\WEB\TOOLS\L0-CANON')]
 graph = build_graph_from_designs(roots, design_only=True)

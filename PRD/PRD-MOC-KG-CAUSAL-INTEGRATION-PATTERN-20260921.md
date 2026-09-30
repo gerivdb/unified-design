@@ -2,7 +2,7 @@
 type: PRD
 version: "1.1"
 date: "2026-09-21"
-status: in_review
+status: approved
 intent_hash: 0xPRD_MOC_KG_CAUSAL_INTEGRATION_PATTERN_20260921
 ---
 

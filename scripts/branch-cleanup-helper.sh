@@ -1,33 +1,21 @@
-#!/usr/bin/env bash
-# branch-cleanup-helper.sh — Contourne BRGS pour supprimer des branches distantes
-# Usage: ./scripts/branch-cleanup-helper.sh <branch-to-delete> [cleanup-slug]
-#
-# BRGS interdit à main de supprimer des branches distantes.
-# Ce script crée une branche temporaire feat/cleanup-<slug>, supprime la branche cible,
-# puis supprime la temporaire.
+#!/usr/bin/env sh
+# BRGS-compliant remote branch deletion helper.
+# BRGS forbids deleting remote branches directly from main.
+# This script creates a temporary cleanup branch, deletes the target, then returns to main.
+set -e
 
-set -euo pipefail
-
-if [ $# -lt 1 ]; then
-    echo "Usage: $0 <branch-to-delete> [cleanup-slug]"
-    exit 1
+TARGET_BRANCH="${1:-}"
+if [ -z "$TARGET_BRANCH" ]; then
+  echo "Usage: $0 <remote-branch-name>" >&2
+  exit 1
 fi
 
-BRANCH_TO_DELETE="$1"
-CLEANUP_SLUG="${2:-cleanup-$(date +%Y%m%d%H%M%S)}"
-CLEANUP_BRANCH="feat/${CLEANUP_SLUG}"
-
-echo "[INFO] Deleting remote branch: ${BRANCH_TO_DELETE}"
-echo "[INFO] Using temporary branch: ${CLEANUP_BRANCH}"
-
-# Créer la branche temporaire
-git checkout -b "${CLEANUP_BRANCH}"
-
-# Supprimer la branche distante
-git push origin --delete "${BRANCH_TO_DELETE}"
-
-# Revenir sur main et supprimer la temporaire
 git checkout main
-git branch -d "${CLEANUP_BRANCH}"
-
-echo "[OK] Branch '${BRANCH_TO_DELETE}' deleted successfully"
+git pull origin main
+git checkout -b "cleanup/${TARGET_BRANCH}"
+git push origin "cleanup/${TARGET_BRANCH}"
+git push origin --delete "${TARGET_BRANCH}"
+git checkout main
+git branch -d "cleanup/${TARGET_BRANCH}"
+git push origin --delete "cleanup/${TARGET_BRANCH}"
+echo "Deleted remote branch: ${TARGET_BRANCH}"

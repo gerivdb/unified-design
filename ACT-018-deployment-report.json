@@ -1,0 +1,988 @@
+{
+  "timestamp": "2026-09-28T02:10:53.570958+00:00",
+  "total_deployments": 126,
+  "successful": 112,
+  "failed": 14,
+  "deployments": [
+    {
+      "design": "safe-action-pattern",
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\PRD-MOC\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\PRD-MOC\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-pattern",
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_pattern.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\safe_action_pattern.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "KIVA-CLI",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "ECOS-CLI",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "ARGUS",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "CTULU",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "KG-CAUSAL",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "VOLTX",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "LOOPX",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "KIX",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "TALEX",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "NEXUS",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "KG-L",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "VERSES",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "TRIX",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "WAZAA",
+      "status": "FAILED",
+      "error": "Source file not found: D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\PRD-MOC\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\PRD-MOC\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence",
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\ecosystem_meta_coherence.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\PRD-MOC\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\PRD-MOC\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "ecosystem-meta-coherence-gate",
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\ecosystem_meta_coherence_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\ecosystem_meta_coherence_gate.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\PRD-MOC\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\PRD-MOC\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "design-ops-loop",
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\design_ops_loop.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\design_ops_loop.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\PRD-MOC\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\PRD-MOC\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "session-boot-design",
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\session_boot_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\session_boot_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\PRD-MOC\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\PRD-MOC\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "artifact-layers-design",
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\artifact_layers_design.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\artifact_layers_design.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\PRD-MOC\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\PRD-MOC\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "meta-design-self-healing",
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\meta_design_self_healing.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\meta_design_self_healing.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\PRD-MOC\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\PRD-MOC\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\PRD\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\PRD\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\talex_friction_analyzer.py"
+    },
+    {
+      "design": "talex-friction-analyzer",
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\talex_friction_analyzer.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\talex_friction_analyzer.py"
+    }
+  ]
+}

@@ -1,76 +1,33 @@
----
-type: REPO_IDENTITY_SCHEMA
+schema: repo-identity
 version: "1.0.0"
-date: "2026-09-27"
-status: approved
-schema: REPO_IDENTITY_v1
-description: Schema canonicalique pour la désignation des repos de l'écosystème gerivdb.
+status: active
+intent_hash: 0xREPO_IDENTITY_SCHEMA_V1_20260929
 
-# Champs obligatoires
-required_fields:
-  - type
-  - repo
-  - local_path
-  - remote
-  - entity_type
-  - status
-  - strate
-  - layer
-  - owner
-  - author
-  - created
-  - updated
-  - description
-
-# Champs optionnels
-optional_fields:
-  - rss_version
-  - rss_depth
-  - pole_id
-  - profil
-  - immutable_paths
-  - semantic_clusters
-  - do_not_create
-  - do_not_edit
-
-# Valeurs autorisées
-enum_values:
-  entity_type:
-    - REPO
-    - TOOL
-    - CITIZEN
-    - ENGINE
-    - POLE
-  status:
-    - active
-    - dormant
-    - deprecated
-    - archived
-  strate:
-    - L0-CANON
-    - L0-INFRASTRUCTURE
-    - L1-INFRA
-    - L2-PLATFORM
-    - L3-CITIZENS
-    - L4-TOOLS
-    - L5-ARCHIVE
-    - L6-WORK
-  layer:
-    - N+1
-    - N+2
-    - N+3
-    - N+4
-    - N+3.5
-  profil:
-    - CRITICAL
-    - TOOL
-    - MASTER
-    - CITIZEN
-
-# Contraintes
-constraints:
-  repo_format: "gerivdb/<REPO_NAME>"
-  local_path_format: "D:\\DO\\WEB\\TOOLS\\<STRATE>\\<REPO_NAME>"
-  remote_format: "https://github.com/gerivdb/<REPO_NAME>.git"
-  date_format: "YYYY-MM-DD"
-  updated_format: "YYYY-MM-DD"
+fields:
+  - name: full_name
+    type: string
+    required: true
+    pattern: "^gerivdb/[A-Za-z0-9._-]+$"
+  - name: local_path
+    type: string
+    required: true
+    pattern: "^D:\\\\DO\\\\WEB\\\\TOOLS\\\\(L0-CANON|L0-INFRASTRUCTURE|L1-INFRA|L2-PLATFORM|L3-CITIZENS|L4-TOOLS|L5-ARCHIVE|L6-WORK)\\\\[^\\\\]+$"
+  - name: remote
+    type: string
+    required: true
+    pattern: "^https://github\\.com/gerivdb/[A-Za-z0-9._-]+\\.git$"
+  - name: status
+    type: string
+    required: true
+    enum: [active, dormant, deprecated, archived]
+  - name: do_not_create
+    type: boolean
+    required: true
+  - name: entity_type
+    type: string
+    required: false
+    enum: [REPO, TOOL, PIPELINE, CITIZEN, SKILL]
+  - name: strate
+    type: string
+    required: false
+    pattern: "^L[0-6]"

@@ -1,0 +1,10 @@
+auto_debug_pathways:
+  - name: Observability
+    description: Surveillance continue des métriques d'auto-design (scores, bridges actifs, tests passants)
+    threshold: 0.85
+  - name: Automation
+    description: Correction automatique des gaps détectés par verifier.py
+    threshold: 0.78
+  - name: Infrastructure
+    description: Déploiement et maintenance des runtimes auto-design
+    threshold: 0.62

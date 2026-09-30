@@ -1,0 +1,31 @@
+ecosystem_phase2_bridges:
+  - from: NEXUS
+    to: CTULU
+    type: orchestration
+    status: active
+    intent_hash: 0xBRIDGE_NEXUS_CTULU_ORCHESTRATION
+  - from: NEXUS
+    to: BRAIN
+    type: governance
+    status: active
+    intent_hash: 0xBRIDGE_NEXUS_BRAIN_GOVERNANCE
+  - from: CTULU
+    to: WAZAA
+    type: routing
+    status: active
+    intent_hash: 0xBRIDGE_CTULU_WAZAA_ROUTING
+  - from: BRAIN
+    to: WAZAA
+    type: messaging
+    status: active
+    intent_hash: 0xBRIDGE_BRAIN_WAZAA_MESSAGING
+  - from: KG-L
+    to: KG-CAUSAL
+    type: knowledge_graph
+    status: active
+    intent_hash: 0xBRIDGE_KG_L_KG_CAUSAL_GRAPH
+  - from: GATEWAY-MANAGER
+    to: NEXUS
+    type: gateway
+    status: active
+    intent_hash: 0xBRIDGE_GATEWAY_NEXUS_GATEWAY

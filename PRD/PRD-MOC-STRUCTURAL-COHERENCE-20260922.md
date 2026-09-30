@@ -19,6 +19,9 @@ ontology:
     - design-code-sync
     - catalog-consumer-auditor
     - dry-run-causal
+    - registry-date-fixer
+    - registry-maintenance
+    - registry-auditor
     - jevx-mdu-integration-fix
   repo: gerivdb/ONTOLOGY
 ---
@@ -55,6 +58,11 @@ ontology:
 | L19 | Pattern `ontology-dedup-auditor` | `designs/ontology-dedup-auditor.md` | Créer | ✅ |
 | L20 | Pattern `design-code-sync` | `designs/design-code-sync.md` | Créer | ✅ |
 | L21 | Pattern `catalog-consumer-auditor` | `designs/catalog-consumer-auditor.md` | Créer | ✅ |
+| L22 | Pattern `registry-date-fixer` | `designs/registry-date-fixer.md` | Créer | ✅ |
+| L23 | Skill `registry-date-fixer` | `skills/registry-date-fixer/SKILL.md` | Créer | ✅ |
+| L24 | Workflow `registry-maintenance` | `workflows/registry-maintenance.md` | Créer | ✅ |
+| L25 | Citizen `registry-auditor` | `citizens/registry-auditor.yaml` | Créer | ✅ |
+| L26 | Pipeline `registry-maintenance-pipeline` | `pipelines/registry-maintenance-pipeline.yaml` | Créer | ✅ |
 
 ## 3. Tâches
 
@@ -74,6 +82,14 @@ ontology:
 6. **L19** : `designs/ontology-dedup-auditor.md` — détecter et fusionner les doublons ontologiques.
 7. **L20** : `designs/design-code-sync.md` — vérifier la synchronisation design/code.
 8. **L21** : `designs/catalog-consumer-auditor.md` — vérifier que les consumers sont documentés.
+
+### Phase D — Registry maintenance
+
+9. **L22** : `designs/registry-date-fixer.md` — corriger les dates `changement_effectif` manquantes.
+10. **L23** : `skills/registry-date-fixer/SKILL.md` — skill de correction de registre.
+11. **L24** : `workflows/registry-maintenance.md` — workflow de maintenance automatique.
+12. **L25** : `citizens/registry-auditor.yaml` — citizen d'audit automatique.
+13. **L26** : `pipelines/registry-maintenance-pipeline.yaml` — pipeline de maintenance.
 
 ## 4. Contraintes
 
@@ -95,6 +111,11 @@ ontology:
 | `feat(patterns): add ontology-dedup-auditor` | `designs/ontology-dedup-auditor.md` | L19 |
 | `feat(patterns): add design-code-sync` | `designs/design-code-sync.md` | L20 |
 | `feat(patterns): add catalog-consumer-auditor` | `designs/catalog-consumer-auditor.md` | L21 |
+| `feat(patterns): add registry-date-fixer` | `designs/registry-date-fixer.md` | L22 |
+| `feat(skill): add registry-date-fixer` | `skills/registry-date-fixer/SKILL.md` | L23 |
+| `feat(workflow): add registry-maintenance` | `workflows/registry-maintenance.md` | L24 |
+| `feat(citizen): add registry-auditor` | `citizens/registry-auditor.yaml` | L25 |
+| `feat(pipeline): add registry-maintenance-pipeline` | `pipelines/registry-maintenance-pipeline.yaml` | L26 |
 
 ## 6. Adossement (PF2)
 
@@ -117,4 +138,5 @@ ontology:
 - [x] 2026-09-22T03:11:05+02:00 — Patterns L13-L15 créés et validés
 - [x] 2026-09-22T03:11:05+02:00 — Pipeline L16 et workflow L17 créés
 - [x] 2026-09-22T03:11:05+02:00 — Rapport TALEX L18 créé
-- [ ] 2026-09-22T03:11:05+02:00 — Patterns L19-L21 à créer
+- [x] 2026-09-30T01:29:00+02:00 — Patterns L19-L21 créés et validés
+- [x] 2026-09-30T01:51:00+02:00 — Patterns L22-L26 créés et validés

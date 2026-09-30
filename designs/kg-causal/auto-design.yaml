@@ -1,0 +1,20 @@
+---
+name: kg-causal-auto-design
+description: "Design auto-design pour KG-CAUSAL. Vérifie la readiness écosystémique du repo KG-CAUSAL via analyze_repo(), generate_repo(), verify_repo()."
+version: "1.0.0"
+status: active
+---
+
+# Design — KG-CAUSAL Auto-Design
+
+## Ontologie
+
+- repo: gerivdb/KG-CAUSAL
+- layer: L4_TOOLS
+- status: ACTIVE
+
+## Contrat
+
+- `analyze_repo(KG-CAUSAL)` retourne `auto_design_readiness >= 80`
+- `verify_repo(KG-CAUSAL)` retourne `auto_design_score >= 80`
+- Bridges : `bridges/ecosystem-phase2.yaml`

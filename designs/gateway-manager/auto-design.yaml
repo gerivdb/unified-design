@@ -1,0 +1,20 @@
+---
+name: gateway-manager-auto-design
+description: "Design auto-design pour GATEWAY-MANAGER. Vérifie la readiness écosystémique du repo GATEWAY-MANAGER via analyze_repo(), generate_repo(), verify_repo()."
+version: "1.0.0"
+status: active
+---
+
+# Design — GATEWAY-MANAGER Auto-Design
+
+## Ontologie
+
+- repo: gerivdb/GATEWAY-MANAGER
+- layer: L1_CAUSALITY
+- status: ACTIVE
+
+## Contrat
+
+- `analyze_repo(GATEWAY-MANAGER)` retourne `auto_design_readiness >= 80`
+- `verify_repo(GATEWAY-MANAGER)` retourne `auto_design_score >= 80`
+- Bridges : `bridges/ecosystem-phase2.yaml`

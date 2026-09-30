@@ -14,13 +14,16 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from engine.validator import DesignValidator
 from typing import Any
 
 import yaml
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+
+from src.engines.validator import DesignValidator
+
 DESIGNS_DIR = REPO_ROOT / "designs"
 SCHEMA_PATH = REPO_ROOT / "schemas" / "design.schema.json"
 INTEGRATION_DIR = REPO_ROOT / "integration"
@@ -131,6 +134,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-
-
-

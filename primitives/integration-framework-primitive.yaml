@@ -1,0 +1,90 @@
+---
+name: integration-framework-primitive
+version: "1.0.0"
+status: proposed
+layer: L0
+intent_hash: 0xPRIMITIVE_INTEGRATION_FRAMEWORK_20260928
+description: >
+  Primitive d'intégration réutilisable pour appliquer les designs `unified-design`
+  dans les repos consumers. Fournit les composants de base :
+  DesignGate, DesignOpsLoop, DesignInjector, DesignTestHarness.
+inherits:
+  - safe-action-gate-primitive
+  - design-ops-loop-primitive
+  - session-boot-primitive
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-THINK-DO-CHECK-CONSCIOUSNESS
+  - ATOM-STOP-CONDITION
+  - ATOM-TDD-AIRAIN-LAW
+  - ATOM-CARRY-FORWARD-PRINCIPLE
+states:
+  - name: IDLE
+    question: "Le framework est-il initialisé ?"
+  - name: REGISTER
+    question: "Le design est-il enregistré ?"
+  - name: INJECT
+    question: "L'injection est-elle complète ?"
+  - name: VERIFY
+    question: "L'intégration est-elle vérifiée ?"
+  - name: TEST
+    question: "Les tests passent-ils ?"
+  - name: DONE
+    question: "La documentation est-elle à jour ?"
+functions:
+  - id: F1
+    name: REGISTER_DESIGN
+    description: "Enregistre un design dans le registry du framework"
+  - id: F2
+    name: CREATE_GATE
+    description: "Crée une DesignGate pour un design"
+  - id: F3
+    name: CREATE_OPS_LOOP
+    description: "Crée une DesignOpsLoop pour un design"
+  - id: F4
+    name: CREATE_TEST_HARNESS
+    description: "Crée un DesignTestHarness pour un design"
+  - id: F5
+    name: INJECT
+    description: "Injecte le design dans le codebase consumer"
+  - id: F6
+    name: VERIFY
+    description: "Vérifie que l'injection est correcte"
+  - id: F7
+    name: TEST
+    description: "Exécute les tests d'intégration"
+  - id: F8
+    name: DOCUMENT
+    description: "Génère la documentation d'intégration"
+invariant: "Toute intégration de design DOIT passer par REGISTER → CREATE → INJECT → VERIFY → TEST → DOCUMENT."
+genes:
+  - id: G1
+    name: reusability
+    description: "Le framework est réutilisable par tous les consumers"
+  - id: G2
+    name: traceability
+    description: "Toute intégration est tracée et horodatée"
+  - id: G3
+    name: testability
+    description: "Toute intégration a des tests automatisés"
+  - id: G4
+    name: documentation
+    description: "Toute intégration est documentée"
+anti_patterns:
+  - missing_gene: reusability
+    pathology: "Chaque consumer réinvente l'intégration"
+  - missing_gene: traceability
+    pathology: "Intégrations non tracées"
+  - missing_gene: testability
+    pathology: "Pas de tests → régressions"
+  - missing_gene: documentation
+    pathology: "Intégrations non documentées"
+cross_references:
+  - design: integration-framework
+  - design: safe-action-pattern
+  - design: design-ops-loop
+  - design: session-boot-design
+  - atom: ATOM-GATE-LAYERS
+  - atom: ATOM-THINK-DO-CHECK-CONSCIOUSNESS
+  - skill: design-ops-loop-skill
+  - skill: session-boot-skill

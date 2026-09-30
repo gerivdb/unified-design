@@ -66,3 +66,5 @@ tmp_collect_probe.py
 interception-log.txt
 
 reports/meta-coherence/
+reports/verify-talex-fixed.json
+reports/verify-talex.json

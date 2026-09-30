@@ -1,0 +1,60 @@
+{
+  "phase": 2,
+  "total_repos": 7,
+  "industrialized_repos": 7,
+  "mature_repos": 7,
+  "pending_repos": 0,
+  "repos": [
+    {
+      "name": "NEXUS",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS",
+      "commit": "7f6ae0ea",
+      "score": 80,
+      "mature": true
+    },
+    {
+      "name": "CTULU",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU",
+      "commit": "2dacde6a",
+      "score": 80,
+      "mature": true
+    },
+    {
+      "name": "BRAIN",
+      "path": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\BRAIN",
+      "commit": "84670ea66",
+      "score": 80,
+      "mature": true
+    },
+    {
+      "name": "WAZAA",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA",
+      "commit": "f598619",
+      "score": 80,
+      "mature": true
+    },
+    {
+      "name": "KG-L",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L",
+      "commit": "7fced6d",
+      "score": 80,
+      "mature": true
+    },
+    {
+      "name": "KG-CAUSAL",
+      "path": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL",
+      "commit": "1c6df30",
+      "score": 80,
+      "mature": true
+    },
+    {
+      "name": "GATEWAY-MANAGER",
+      "path": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\GATEWAY-MANAGER",
+      "commit": "f98ac04",
+      "score": 80,
+      "mature": true
+    }
+  ],
+  "cross_bridges": "bridges/ecosystem-phase2.yaml",
+  "generated_at": "2026-09-29T05:23:05+02:00"
+}

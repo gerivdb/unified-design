@@ -2,7 +2,7 @@
 type: PRD
 version: "1.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xPRD_MOC_FRONTMATTER_NORMALIZATION_20260923
 ---
 
@@ -55,7 +55,11 @@ Normaliser tous les frontmatters des designs YAML pour garantir la conformité a
 ## Critères d'acceptation
 
 - [x] 100% des designs ont `intent_hash`, `version`, `status` — ATTEINT (0 FAIL)
-- [x] `validate_designs.py --strict` passe sur `designs/` — ATTEINT
+- [x] `validate_designs.py --strict` passe sur `designs/` — ATTEINT (267/267 OK, 2026-09-30T03:44:58+02:00)
+
+## Proof-of-Life
+
+- [x] 2026-09-30T03:44:58+02:00 — `python scripts/validate_designs.py --strict` → 267/267 designs valid, 0 FAIL
 
 ## Références
 

@@ -4,6 +4,8 @@ version: "1.0.0"
 status: active
 layer: L3
 intent_hash: 0xVEX_HTTP_SERVER_DESIGN_20260926
+description: |
+  Serveur HTTP minimaliste pour VEX exposant GET /health pour les health checks agrégés L3.
 repo: gerivdb/VEX
 implementation_contract:
   repo: gerivdb/VEX

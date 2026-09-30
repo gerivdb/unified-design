@@ -1,0 +1,135 @@
+name: auto-design
+version: "1.0.0"
+status: active
+layer: L3
+intent_hash: 0xINTENT_AUTO_DESIGN_AUFHEBUNG_20260929
+description: |
+  Pattern d'industrialisation déclarative d'un repo : design.yaml canonique,
+  implementation_contract, bridges déclaratifs, runtimes cycle_runner + bridge_executor.
+  Matérialise l'Aufhebung : annulation dépendance humaine + conservation identité + élévation auto-gouvernance.
+
+auto_design:
+  components:
+    - engine/auto_design/analyzer.py
+    - engine/auto_design/generator.py
+    - engine/auto_design/industrializer.py
+    - engine/auto_design/verifier.py
+    - engine/auto_design/reporter.py
+    - scripts/auto_design_cli.py
+  auto_debug_pathways:
+    - observability
+    - automation
+    - infrastructure
+  scientific_reflection_protocols: []
+  cycle_runner_path: scripts/cycle_runner.py
+  bridge_executor_path: scripts/bridge_executor.py
+  pr_factory_path: scripts/pr_factory.py
+
+  scoring_policy:
+    max_score: 100
+    mature_threshold: 80
+    optimized_threshold: 95
+    rationale: |
+      100 est la borne supérieure de l'échelle, pas un objectif atteignable.
+      Au-delà de 80, les gains d'automatisation sont marginaux et le coût
+      d'amélioration augmente exponentiellement. Le seuil mature est donc
+      fixé à 80, et optimized à 95 pour les cas exceptionnels.
+      Atteindre 100/100 n'a pas de valeur opérationnelle ajoutée.
+
+implementation_contract:
+  repo: gerivdb/unified-design
+  artifacts:
+    - path: engine/auto_design/analyzer.py
+      must_contain:
+        - "class AutoDesignAnalyzer"
+        - "def analyze"
+      tests:
+        - path: tests/test_auto_design_analyzer.py
+          framework: pytest
+          min_coverage: 80
+    - path: engine/auto_design/generator.py
+      must_contain:
+        - "class AutoDesignGenerator"
+        - "def generate"
+      tests:
+        - path: tests/test_auto_design_generator.py
+          framework: pytest
+          min_coverage: 80
+    - path: engine/auto_design/industrializer.py
+      must_contain:
+        - "class AutoDesignIndustrializer"
+        - "def deploy"
+      tests:
+        - path: tests/test_auto_design_industrializer.py
+          framework: pytest
+          min_coverage: 80
+    - path: engine/auto_design/verifier.py
+      must_contain:
+        - "class AutoDesignVerifier"
+        - "def verify"
+      tests:
+        - path: tests/test_auto_design_verifier.py
+          framework: pytest
+          min_coverage: 80
+    - path: engine/auto_design/reporter.py
+      must_contain:
+        - "class AutoDesignReporter"
+        - "def report"
+      tests:
+        - path: tests/test_auto_design_reporter.py
+          framework: pytest
+          min_coverage: 80
+    - path: scripts/auto_design_cli.py
+      must_contain:
+        - "def main"
+        - "argparse"
+      tests:
+        - path: tests/test_auto_design_cli.py
+          framework: pytest
+          min_coverage: 80
+    - path: templates/auto_design/cycle_runner.py
+      must_contain:
+        - "def run_cycle"
+      tests:
+        - path: tests/test_templates_cycle_runner.py
+          framework: pytest
+          min_coverage: 80
+    - path: templates/auto_design/bridge_executor.py
+      must_contain:
+        - "def run_bridges"
+      tests:
+        - path: tests/test_templates_bridge_executor.py
+          framework: pytest
+          min_coverage: 80
+    - path: templates/auto_design/pr_factory.py
+      must_contain:
+        - "def create_pr"
+      tests:
+        - path: tests/test_templates_pr_factory.py
+          framework: pytest
+          min_coverage: 80
+  test_policy:
+    framework: pytest
+    min_coverage: 80
+    timeout: 300
+    timeout_method: thread
+    addopts: "-v --tb=short"
+    markers:
+      - unit
+      - integration
+      - e2e
+    verification:
+      - command: pytest tests/ -q --tb=short
+        expected: "passed"
+      - command: pytest --cov=src --cov-report=term --cov-fail-under=80
+        expected: "coverage >= 80%"
+  verification:
+    - command: python scripts/auto_design_cli.py verify .
+      expected: "auto_design_score"
+
+bridges:
+  - from: unified-design/auto-design
+    to: AUTO-DEV/auto-design
+    type: declarative
+    status: active
+    intent_hash: 0xBRIDGE_UNIFIED_DESIGN_AUTO_DEV

@@ -1,0 +1,26 @@
+---
+name: prd-status-verification-pipeline
+description: "Pipeline qui vérifie la cohérence des statuts PRD/MOC et génère un rapport d'audit."
+version: "1.0.0"
+status: active
+---
+
+# Pipeline — PRD Status Verification
+
+## Étapes
+
+1. Découvrir tous les PRD/MOC
+2. Vérifier les chemins déclarés
+3. Détecter les incohérences
+4. Générer un rapport JSON
+5. Proposer les corrections
+
+## Déclencheur
+
+- Pre-commit sur `PRD/`, `MOC/`, `designs/`
+- Manuel : `python scripts/verify_prd_status.py --check-all`
+
+## Sortie
+
+- `reports/prd-status-audit.json`
+- Code sortie : 0 = OK, 1 = incohérences détectées

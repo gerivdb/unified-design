@@ -1,5 +1,5 @@
 ---
-status: proposed
+status: accepted
 date: "2026-09-21"
 intent_hash: 0xADR_2026_09_21_005_SAFE_ACTION_GATE
 ---

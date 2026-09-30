@@ -1,0 +1,39 @@
+# Citizen: drift-alerter-wazaa
+
+## IntentHash
+0x_CITIZEN_DRIFT_ALERTER_WAZAA_20260930
+
+## Rôle
+Publie en temps réel sur WAZAA bus les alertes drift critiques détectées
+par `agents/drift_alerter.py`. Garantit la notification écosystémique immédiate.
+
+## Déclencheur
+- Après chaque scan de drift par `drift_alerter.py`
+- Quand un bridge dépasse un seuil critique
+- À la fin de chaque cycle de bridge_executor.execute_all()
+
+## Actions
+
+1. Exécuter `drift_alerter.py` pour détecter les drifts.
+2. Filtrer les drifts avec `severity == "critical"`.
+3. Pour chaque drift critique :
+   - Construire le payload WAZAA avec `transport_topic: drift.critical`
+   - Publier via `BridgeExecutor._publish_wazaa()`
+   - Si WAZAA down → écrire dans `wal/drift_alerter_wazaa_wal.jsonl`
+4. Journaliser chaque action avec IntentHash.
+
+## Sortie attendue
+```
+[DRIFT_ALERTER_WAZAA] published=<N> wal=<M> critical=<K>
+```
+
+## Anti-patterns
+- Publier des drifts non critiques sur WAZAA (spam écosystémique).
+- Oublier le fallback WAL si WAZAA injoignable.
+- Utiliser un `bridge_name` générique sans préfixe AUTO-DEV-.
+
+## Référence
+- `primitives/drift-alerter-wazaa.md`
+- `primitives/transport-fallback-wal.md`
+- `agents/drift_alerter.py`
+- `agents/bridge_executor.py`

@@ -2,7 +2,7 @@
 type: INTENT
 version: "1.0.0"
 date: "2026-09-19"
-status: proposed
+status: approved
 intent_hash: 0xINTENT_SAFE_ACTION_PATTERN_20260919
 parent_prd: null
 repo: "gerivdb/unified-design"

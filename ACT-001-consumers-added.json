@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-09-28T02:01:13.864100+00:00",
+  "total_capabilities": 9,
+  "consumers_added_count": 9,
+  "consumers_added": [
+    {
+      "port_id": "latency-bound",
+      "consumers_added": [
+        "KIX",
+        "TRIX",
+        "CTULU"
+      ],
+      "timestamp": "2026-09-28T02:01:13.659418+00:00"
+    },
+    {
+      "port_id": "power-capped",
+      "consumers_added": [
+        "KIX",
+        "TRIX",
+        "CTULU"
+      ],
+      "timestamp": "2026-09-28T02:01:13.659418+00:00"
+    },
+    {
+      "port_id": "attention-mechanism",
+      "consumers_added": [
+        "TALEX",
+        "NEXUS",
+        "KIX"
+      ],
+      "timestamp": "2026-09-28T02:01:13.659418+00:00"
+    },
+    {
+      "port_id": "symbol-retrieval",
+      "consumers_added": [
+        "KIVA-CLI",
+        "ECOS-CLI",
+        "ARGUS",
+        "NEXUS"
+      ],
+      "timestamp": "2026-09-28T02:01:13.659418+00:00"
+    },
+    {
+      "port_id": "worktree-isolation",
+      "consumers_added": [
+        "KIVA-CLI",
+        "ECOS-CLI",
+        "LOOPX",
+        "NEXUS"
+      ],
+      "timestamp": "2026-09-28T02:01:13.659418+00:00"
+    },
+    {
+      "port_id": "beads-sql-memory",
+      "consumers_added": [
+        "KIVA-CLI",
+        "ECOS-CLI",
+        "LOOPX",
+        "NEXUS"
+      ],
+      "timestamp": "2026-09-28T02:01:13.659418+00:00"
+    },
+    {
+      "port_id": "exit-interceptor",
+      "consumers_added": [
+        "KIVA-CLI",
+        "ECOS-CLI",
+        "LOOPX",
+        "NEXUS"
+      ],
+      "timestamp": "2026-09-28T02:01:13.659418+00:00"
+    },
+    {
+      "port_id": "tdd-airain-law",
+      "consumers_added": [
+        "KIVA-CLI",
+        "ECOS-CLI",
+        "ARGUS",
+        "CTULU",
+        "LOOPX",
+        "NEXUS"
+      ],
+      "timestamp": "2026-09-28T02:01:13.659418+00:00"
+    },
+    {
+      "port_id": "trace-replay-proof",
+      "consumers_added": [
+        "KIVA-CLI",
+        "ECOS-CLI",
+        "VOLTX",
+        "NEXUS"
+      ],
+      "timestamp": "2026-09-28T02:01:13.659418+00:00"
+    }
+  ]
+}

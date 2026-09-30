@@ -39,8 +39,14 @@
 | PRD-MOC-COMMAND-RESOLUTION-PROTOCOL-20260922 | Command Resolution Protocol | approved |
 | PRD-MOC-STRUCTURAL-COHERENCE-20260922 | Structural Coherence | approved |
 | PRD-UNIFIED-DESIGN-GOVERNANCE-GAPS-2026-08-16 | Unified Design Governance Gaps | approved |
-| PRD-MOC-TEST-INFRASTRUCTURE-20260923 | Test Infrastructure Repair | draft |
-| PRD-MOC-FRONTMATTER-NORMALIZATION-20260923 | Frontmatter Normalization | draft |
-| PRD-MOC-SRC-MIGRATION-20260923 | Src Migration (RSS-v2.3) | draft |
-| PRD-MOC-DOCS-DEDUPLICATION-20260923 | Documentation Deduplication | draft |
-| PRD-MOC-LOCAL-CI-PIPELINE-20260923 | Local CI Pipeline | draft |
+| PRD-MOC-TEST-INFRASTRUCTURE-20260923 | Test Infrastructure Repair | approved |
+| PRD-MOC-FRONTMATTER-NORMALIZATION-20260923 | Frontmatter Normalization | approved |
+| PRD-MOC-SRC-MIGRATION-20260923 | Src Migration (RSS-v2.3) | approved |
+| PRD-MOC-DOCS-DEDUPLICATION-20260923 | Documentation Deduplication | approved |
+| PRD-MOC-LOCAL-CI-PIPELINE-20260923 | Local CI Pipeline | approved |
+| PRD-MOC-AUTO-PROMOTE-20260928 | Auto-Promote | approved |
+| PRD-MOC-UNIFIED-DESIGN-CONSUMERS-REGISTRY-20260928 | Unified-Design Consumers Registry | approved |
+| PRD-MOC-INTEGRATION-FRAMEWORK-20260928 | Integration Framework | approved |
+| PRD-MOC-ADR-DESIGN-INTEGRATION-TRACEABILITY-20260928 | ADR-Design-Integration Traceability | approved |
+| PRD-MOC-CONSUMER-INTEGRATION-USAGE-20260928 | Consumer Integration Usage | approved |
+| PRD-MOC-CROSS-REPO-CI-PIPELINE-20260928 | Cross-Repo CI Pipeline | approved |

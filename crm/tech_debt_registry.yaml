@@ -1,0 +1,97 @@
+---
+version: "1.0.0"
+date: "2026-09-29"
+status: active
+owner: L0-CANON
+repo: gerivdb/unified-design
+---
+
+# CRM Tech Debt Registry
+
+## Description
+
+Source de vérité de la dette technique cross-repo. Chaque item est scoré 0-100, assigné à un repo cible, et suivi jusqu’à résolution.
+
+## Structure
+
+```yaml
+items:
+  - id: DEBT-001
+    repo: gerivdb/unified-design
+    component: engine/auto_design/analyzer.py
+    description: Missing tech debt scoring in analyzer
+    severity: high
+    score: 85
+    status: open
+    created_at: "2026-09-29T21:00:00+02:00"
+    updated_at: "2026-09-29T21:00:00+02:00"
+    assignee: L0-CANON
+    labels: [auto-design, crm, tech-debt]
+```
+
+## Items
+
+### DEBT-001 — Tech debt scoring missing in analyzer
+
+- **repo** : `gerivdb/unified-design`
+- **component** : `engine/auto_design/analyzer.py`
+- **description** : `_score_tech_debt()` manquant
+- **severity** : high
+- **score** : 85
+- **status** : open
+- **created_at** : "2026-09-29T21:00:00+02:00"
+- **updated_at** : "2026-09-29T21:00:00+02:00"
+- **assignee** : L0-CANON
+- **labels** : [auto-design, crm, tech-debt]
+
+### DEBT-002 — CRM task generation missing in generator
+
+- **repo** : `gerivdb/unified-design`
+- **component** : `engine/auto_design/generator.py`
+- **description** : `generate_crm_tasks()` manquant
+- **severity** : high
+- **score** : 80
+- **status** : open
+- **created_at** : "2026-09-29T21:00:00+02:00"
+- **updated_at** : "2026-09-29T21:00:00+02:00"
+- **assignee** : L0-CANON
+- **labels** : [auto-design, crm, tech-debt]
+
+### DEBT-003 — CRM notifier missing
+
+- **repo** : `gerivdb/unified-design`
+- **component** : `crm/notifier.py`
+- **description** : Notifications CRM non implémentées
+- **severity** : medium
+- **score** : 70
+- **status** : open
+- **created_at** : "2026-09-29T21:00:00+02:00"
+- **updated_at** : "2026-09-29T21:00:00+02:00"
+- **assignee** : L0-CANON
+- **labels** : [auto-design, crm, tech-debt]
+
+### DEBT-004 — CRM workflow missing
+
+- **repo** : `gerivdb/unified-design`
+- **component** : `crm/workflow.py`
+- **description** : Workflow end-to-end non implémenté
+- **severity** : medium
+- **score** : 65
+- **status** : open
+- **created_at** : "2026-09-29T21:00:00+02:00"
+- **updated_at** : "2026-09-29T21:00:00+02:00"
+- **assignee** : L0-CANON
+- **labels** : [auto-design, crm, tech-debt]
+
+### DEBT-005 — Cross-repo debt visibility
+
+- **repo** : `gerivdb/unified-design`
+- **component** : `crm/tech_debt_registry.yaml`
+- **description** : Dette cross-repo non agrégée
+- **severity** : high
+- **score** : 90
+- **status** : open
+- **created_at** : "2026-09-29T21:00:00+02:00"
+- **updated_at** : "2026-09-29T21:00:00+02:00"
+- **assignee** : L0-CANON
+- **labels** : [auto-design, crm, tech-debt, cross-repo]

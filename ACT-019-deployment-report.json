@@ -1,0 +1,120 @@
+{
+  "timestamp": "2026-09-28T02:23:50.185191+00:00",
+  "total_deployments": 14,
+  "successful": 14,
+  "failed": 0,
+  "deployments": [
+    {
+      "design": "safe-action-gate",
+      "consumer": "KIVA-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\KIVA-CLI\\PRD\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "ECOS-CLI",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ECOS-CLI\\PRD\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "ARGUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\ARGUS\\PRD\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "CTULU",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\CTULU\\PRD\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "KG-CAUSAL",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-CAUSAL\\PRD-MOC\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "VOLTX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\VOLTX\\PRD-MOC\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "LOOPX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L3-CITIZENS\\LOOPX\\PRD\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "KIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L2-PLATFORM\\KIX\\PRD-MOC\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "TALEX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TALEX\\PRD\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "NEXUS",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L1-INFRA\\NEXUS\\PRD-MOC\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "KG-L",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\KG-L\\PRD\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "VERSES",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\VERSES\\PRD\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "TRIX",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\TRIX\\PRD\\safe_action_gate.py"
+    },
+    {
+      "design": "safe-action-gate",
+      "consumer": "WAZAA",
+      "status": "DEPLOYED",
+      "error": null,
+      "src": "D:\\DO\\WEB\\TOOLS\\L0-CANON\\unified-design\\scripts\\validators\\implementations\\safe_action_gate.py",
+      "dest": "D:\\DO\\WEB\\TOOLS\\L4-TOOLS\\WAZAA\\PRD\\safe_action_gate.py"
+    }
+  ]
+}

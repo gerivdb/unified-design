@@ -1,26 +1,119 @@
-# ONTOLOGY_DECLARATION.yaml - schema RSS-v2.3
-version: "1.0"
-repo: "unified-design"
-type: "producer"
+version: '1.0'
+repo: unified-design
+type: producer
 concepts:
-  - id: "meta-design"
-    status: "actif"
-    description: "Atlas global des invariants architecturaux de l'ecosysteme gerivdb"
-    nexus_index: "gerivdb/NEXUS/concepts/meta-design"
-    last_updated: "2026-07-15"
-    definition_source: "META-DESIGN.md"
-  - id: "unified-design-atlas"
-    status: "actif"
-    description: "Structure hierarchique des quatre piliers de design"
-    nexus_index: "gerivdb/NEXUS/concepts/unified-design-atlas"
-    last_updated: "2026-07-15"
-    definition_source: "META-DESIGN.md"
-  - id: "tool-availability-verification"
-    status: "actif"
-    description: "Principe gouvernant toute affirmation sur la disponibilité d'un élément : aucune conclusion sans preuve issue d'une exécution réelle."
-    nexus_index: "gerivdb/NEXUS/concepts/tool-availability-verification"
-    last_updated: "2026-09-12"
-    definition_source: "ONTOLOGY/tool-availability-verification.md"
-ontology_lifecycle: "SPEC/ontology-lifecycle-protocol.md"
-nexus_indexer: "SPEC/nexus-concept-indexer-protocol.md"
-argus_wiring: "SPEC/argus-wiring-protocol.md"
+- id: meta-design
+  status: actif
+  description: Atlas global des invariants architecturaux de l'ecosysteme gerivdb
+  nexus_index: gerivdb/NEXUS/concepts/meta-design
+  last_updated: '2026-07-15'
+  definition_source: META-DESIGN.md
+- id: unified-design-atlas
+  status: actif
+  description: Structure hierarchique des quatre piliers de design
+  nexus_index: gerivdb/NEXUS/concepts/unified-design-atlas
+  last_updated: '2026-07-15'
+  definition_source: META-DESIGN.md
+- id: tool-availability-verification
+  status: actif
+  description: 'Principe gouvernant toute affirmation sur la disponibilité d''un élément
+    : aucune conclusion sans preuve issue d''une exécution réelle.'
+  nexus_index: gerivdb/NEXUS/concepts/tool-availability-verification
+  last_updated: '2026-09-12'
+  definition_source: ONTOLOGY/tool-availability-verification.md
+- id: auto-design
+  status: actif
+  description: Capacité d'un système à générer automatiquement des designs architecturaux
+    valides à partir de concepts ontologiques et de requirements déclaratifs. Couche
+    N+1/N+2/N+3 qui consomme ONTOLOGY, orchestre AUTO-DEV et produit des designs conformes
+    au MDU.
+  nexus_index: gerivdb/NEXUS/concepts/auto-design
+  last_updated: '2026-09-29'
+  definition_source: ONTOLOGY/concepts/core/auto-design.md
+- id: spidx-graph
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/spidx-graph
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_SPIDX_GRAPH_20260930
+  domain: unknown
+  definition: ''
+- id: narrative-arc
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/narrative-arc
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_NARRATIVE_ARC_20260930
+  domain: unknown
+  definition: ''
+- id: dag3-graph
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/dag3-graph
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_DAG3_GRAPH_20260930
+  domain: unknown
+  definition: ''
+- id: meta-governance-auto
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/meta-governance-auto
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_META_GOVERNANCE_AUTO_20260930
+  domain: unknown
+  definition: ''
+- id: friction-analyzer
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/friction-analyzer
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_FRICTION_ANALYZER_20260930
+  domain: unknown
+  definition: ''
+- id: structural-remediation
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/structural-remediation
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_STRUCTURAL_REMEDIATION_20260930
+  domain: unknown
+  definition: ''
+- id: dry-run-causal
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/dry-run-causal
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_DRY_RUN_CAUSAL_20260930
+  domain: unknown
+  definition: ''
+- id: meta-detector
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/meta-detector
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_META_DETECTOR_20260930
+  domain: unknown
+  definition: ''
+- id: meta-planner
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/meta-planner
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_META_PLANNER_20260930
+  domain: unknown
+  definition: ''
+- id: meta-executor
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/meta-executor
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_META_EXECUTOR_20260930
+  domain: unknown
+  definition: ''
+- id: meta-trace
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/meta-trace
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_META_TRACE_20260930
+  domain: unknown
+  definition: ''
+- id: S0-meta-detection
+  status: actif
+  nexus_index: gerivdb/NEXUS/concepts/S0-meta-detection
+  last_updated: '2026-09-30'
+  intent_hash: 0xCONCEPT_S0_META_DETECTION_20260930
+  domain: unknown
+  definition: ''
+ontology_lifecycle: SPEC/ontology-lifecycle-protocol.md
+nexus_indexer: SPEC/nexus-concept-indexer-protocol.md
+argus_wiring: SPEC/argus-wiring-protocol.md

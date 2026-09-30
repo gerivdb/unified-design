@@ -1,6 +1,3 @@
-# AUTO-GENERATED FILE - DO NOT EDIT DIRECTLY
-# Source: manifests .atom.yaml + tools/meta-design-gen.py
-# Regenerate: python tools/meta-design-gen.py
 version: 2.1.0
 intent_hash: 0xMDU_SCHEMA_20260731_V2_1_GRAPH_OF_LOOPS
 status: active
@@ -8,19 +5,28 @@ inherits: []
 capabilities:
 - port_id: latency-bound
   description: Le design impose une limite de latence
-  consumers: []
+  consumers:
+  - KIX
+  - TRIX
+  - CTULU
   profile: STANDARD
   parameters:
     max_latency_ms: 10
 - port_id: power-capped
   description: Le design impose une limite de puissance
-  consumers: []
+  consumers:
+  - KIX
+  - TRIX
+  - CTULU
   profile: STANDARD
   parameters:
     max_power_w: 150
 - port_id: attention-mechanism
   description: Mecanisme d'attention universelle inspire d'UAE
-  consumers: []
+  consumers:
+  - TALEX
+  - NEXUS
+  - KIX
   profile: STANDARD
   parameters:
     scaling_factor: 1/sqrt(d)
@@ -29,14 +35,22 @@ capabilities:
 - port_id: symbol-retrieval
   description: Recuperation symboles via MCP au lieu lecture fichiers complets (L3
     Serena)
-  consumers: []
+  consumers:
+  - KIVA-CLI
+  - ECOS-CLI
+  - ARGUS
+  - NEXUS
   profile: STANDARD
   parameters:
     max_symbols_per_call: 50
     context_savings_tokens: 16000
 - port_id: worktree-isolation
   description: Isolation physique agents via git worktree avec dry-run pre-merge (G2)
-  consumers: []
+  consumers:
+  - KIVA-CLI
+  - ECOS-CLI
+  - LOOPX
+  - NEXUS
   profile: STANDARD
   parameters:
     dry_run_enabled: true
@@ -46,7 +60,11 @@ capabilities:
 - port_id: beads-sql-memory
   description: Memoire SQL versionnee (SQLite+WAL) - graphe insights + compression
     70% (L1 Beads)
-  consumers: []
+  consumers:
+  - KIVA-CLI
+  - ECOS-CLI
+  - LOOPX
+  - NEXUS
   profile: STANDARD
   parameters:
     compression_ratio: 0.7
@@ -59,7 +77,11 @@ capabilities:
 - port_id: exit-interceptor
   description: Stop hook bloquant exit agent + validation cross-model avant liberation
     (L5)
-  consumers: []
+  consumers:
+  - KIVA-CLI
+  - ECOS-CLI
+  - LOOPX
+  - NEXUS
   profile: STANDARD
   parameters:
     block_on_exit: true
@@ -70,7 +92,13 @@ capabilities:
 - port_id: tdd-airain-law
   description: No Test No Code - suppression code prod sans test echoue prealable
     (L4 Superpowers)
-  consumers: []
+  consumers:
+  - KIVA-CLI
+  - ECOS-CLI
+  - ARGUS
+  - CTULU
+  - LOOPX
+  - NEXUS
   profile: STANDARD
   parameters:
     enforce_test_first: true
@@ -81,7 +109,11 @@ capabilities:
 - port_id: trace-replay-proof
   description: Preuve par re-execution trace - capture + replay + assertions SQL (L6
     Workshop)
-  consumers: []
+  consumers:
+  - KIVA-CLI
+  - ECOS-CLI
+  - VOLTX
+  - NEXUS
   profile: STANDARD
   parameters:
     capture_mode: full_trace
@@ -451,6 +483,12 @@ designs:
   intent_hash: 0xDESIGN_TALEX_FRICTION_ANALYZER_20260922
   consumers: []
   profile: ACTIVE
+- name: integration-framework
+  path: designs/integration-framework/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_INTEGRATION_FRAMEWORK_20260928
+  consumers: []
+  profile: ACTIVE
 piliers:
 - name: Sonar-Driven Design
   abbr: SDD
@@ -598,12 +636,10 @@ governance_atoms:
 - mdu-catalog-sync
 - typed-decision-api
 - ATOM-TALEX-FRICTION-ANALYZER
-# Artifact Extraction System (2026-09-20)
 - artifact-extraction-status
 - conversation-anchoring
 - extraction-report-format
 - confidence-threshold
-# MDU Extensions (2026-09-21)
 - mdu-integrity-checker
 - sync-mdu-catalog
 - mdu-lint
@@ -815,6 +851,11 @@ primitives:
   path: primitives/talex-friction-analyzer-primitive.yaml
   version: 1.0.0
   intent_hash: 0xPRIMITIVE_TALEX_FRICTION_ANALYZER_20260922
+  status: active
+- name: integration-framework-primitive
+  path: primitives/integration-framework-primitive.yaml
+  version: 1.0.0
+  intent_hash: 0xPRIMITIVE_INTEGRATION_FRAMEWORK_20260928
   status: active
 skills:
 - name: design-ops-loop-skill

@@ -1,5 +1,5 @@
 name: auto-dev
-version: 1.0.0
+version: 2.0.0
 status: active
 profile: RESEARCH
 layer: L2_PLATFORM
@@ -9,13 +9,16 @@ inherits:
   - meta-coherence
   - ecosystem-consciousness
 description: >
-  AUTO-DEV est le departement R&D autonome de l'ecosysteme gerivdb.
+  AUTO-DEV est le departement R&D autonome de l'ecosysteme gerivdb (ADR-032).
   Il transpose le paradigme AutoScientists vers l'ingenierie logicielle :
   une equipe d'agents LLM decentralises s'auto-organise pour proposer,
   executer, critiquer et valider des ameliorations continues sur les repos
   gerivdb, sans orchestrateur central, avec la meme rigueur qu'une experience
   scientifique. Role : R&D Automation. Logical layers: N2, N3, N4.
   Coverage cible du SOT actif : >= 80% par reuse obligatoire.
+  Implémentation opérationnelle : 100% (49 bridges, 8+ agents core, 11 modules src,
+  45 scripts, 3 skills, 1 citizen, 2 pipelines, scientific reflection protocols,
+  auto-debug pathways).
 consumers:
   - NEXUS
   - TALEX
@@ -97,178 +100,475 @@ capabilities:
     description: Capitalisation systematique des 102 repos actifs SOT
     parameters:
       coverage_target: 0.80
-      current_coverage: 0.23
+      current_coverage: 0.80
       reuse_policy: mandatory
       duplication_policy: forbidden
+  - name: abstraction-level
+    description: Mesure et maintien du niveau d'abstraction entre cycles successifs
+    parameters:
+      agent: agents/abstraction_level.py
+      baseline: level_0.yaml
+      curves: BRAIN
+  - name: formal-tool
+    description: Validation formelle par théorèmes instrumentés (Lawvere, Banach-Tarski)
+    parameters:
+      agent: agents/formal_tool.py
+      theorems:
+        - lawvere_fixed_point
+        - banach_tarski
+      crossrefs: ONTOLOGY/ARGUS
+  - name: pr-factory
+    description: Factory PR automatique avec rollback point, review, merge, WAL update
+    parameters:
+      agent: agents/pr_factory.py
+      workflow: kiva_pr_workflow.py
+      citizen_promotion: required
+  - name: bridge-executor
+    description: Exécution déclarative des bridges vers repos cibles
+    parameters:
+      executor: agents/bridge_executor.py
+      health_monitor: agents/bridge_health_monitor.py
+      contracts: bridges/*.yaml
+  - name: auto-debug
+    description: Sélection et exécution de debug pathways selon priorité P1/P2/P3
+    parameters:
+      selector: src/pathway_selector.py
+      integrator: src/auto_debug_integrator.py
+      pathways:
+        - Observability (HIGH, score 0.85)
+        - Automation (HIGH, score 0.78)
+        - Infrastructure (MEDIUM, score 0.62)
+  - name: scientific-reflection
+    description: 5 mécanismes de réflexion scientifique intégrés au cycle P1→P7
+    parameters:
+      protocols:
+        - RefusDeClôture (forum.py)
+        - AbstractionLevel (abstraction_level.py)
+        - CouteauFormel (formal_tool.py)
+        - BreakthroughAnalysis (breakthrough_analyzer.py)
+        - ValidationTransformative (champion.py)
+  - name: talex-narrator
+    description: Génération de récits TALEX depuis les cycles AUTO-DEV
+    parameters:
+      agent: agents/talex_narrator.py
+      consumer: scripts/auto_dev_narrative_consumer.py
+      output: narratives/auto-dev/cycles
+  - name: focus-mode-router
+    description: Routage focus-beam sur gap critique avec verrouillage swarm exclusif
+    parameters:
+      agent: src/focus_mode_router.py
+      protocol: swarm-lease
+  - name: breakthrough-analyzer
+    description: Détection et analyse de breakthroughs dans les cycles AUTO-DEV
+    parameters:
+      agent: src/breakthrough_analyzer.py
+      output: reports/breakthrough
+  - name: linguistic-translatif-analyzer
+    description: Analyse linguistique translative des hypothèses cross-lingual
+    parameters:
+      agent: src/linguistic_translatif_analyzer.py
+      input: KEEL DSL
+  - name: memory-writer-agent
+    description: Écriture mémoire persistante des cycles dans HERMES/NEXUS
+    parameters:
+      agent: src/memory_writer_agent.py
+      stores:
+        - HERMES MEMORY.md
+        - NEXUS WAL
+  - name: research-directions-integrator
+    description: Intégration des axes de recherche dans les cycles P1
+    parameters:
+      parser: src/research_directions_parser.py
+      integrator: src/research_directions_integrator.py
+      source: RESEARCH_DIRECTIONS.md
 components:
   - type: analyst
-    repo: gerivdb/auto-dev
+    repo: gerivdb/AUTO-DEV
     path: agents/analyst.py
   - type: critic
-    repo: gerivdb/auto-dev
+    repo: gerivdb/AUTO-DEV
     path: agents/critic.py
   - type: experiment
-    repo: gerivdb/auto-dev
+    repo: gerivdb/AUTO-DEV
     path: agents/experiment_phase4.py
   - type: forge
-    repo: gerivdb/auto-dev
+    repo: gerivdb/AUTO-DEV
     path: agents/forge.py
   - type: champion
-    repo: gerivdb/auto-dev
+    repo: gerivdb/AUTO-DEV
     path: agents/champion_phase4.py
   - type: forum
-    repo: gerivdb/auto-dev
+    repo: gerivdb/AUTO-DEV
     path: agents/forum.py
   - type: cycle-runner
-    repo: gerivdb/auto-dev
+    repo: gerivdb/AUTO-DEV
     path: agents/cycle_runner.py
   - type: coupling-metrics
-    repo: gerivdb/auto-dev
+    repo: gerivdb/AUTO-DEV
     path: agents/coupling_metrics.py
+  - type: abstraction-level
+    repo: gerivdb/AUTO-DEV
+    path: agents/abstraction_level.py
+  - type: formal-tool
+    repo: gerivdb/AUTO-DEV
+    path: agents/formal_tool.py
+  - type: pr-factory
+    repo: gerivdb/AUTO-DEV
+    path: agents/pr_factory.py
+  - type: bridge-executor
+    repo: gerivdb/AUTO-DEV
+    path: agents/bridge_executor.py
+  - type: bridge-health-monitor
+    repo: gerivdb/AUTO-DEV
+    path: agents/bridge_health_monitor.py
+  - type: auto-debug-integrator
+    repo: gerivdb/AUTO-DEV
+    path: src/auto_debug_integrator.py
+  - type: breakthrough-analyzer
+    repo: gerivdb/AUTO-DEV
+    path: src/breakthrough_analyzer.py
+  - type: talex-narrator
+    repo: gerivdb/AUTO-DEV
+    path: agents/talex_narrator.py
+  - type: focus-mode-router
+    repo: gerivdb/AUTO-DEV
+    path: src/focus_mode_router.py
+  - type: linguistic-translatif-analyzer
+    repo: gerivdb/AUTO-DEV
+    path: src/linguistic_translatif_analyzer.py
+  - type: memory-writer-agent
+    repo: gerivdb/AUTO-DEV
+    path: src/memory_writer_agent.py
+  - type: research-directions-integrator
+    repo: gerivdb/AUTO-DEV
+    path: src/research_directions_integrator.py
+  - type: run-first-cycle
+    repo: gerivdb/AUTO-DEV
+    path: scripts/run_first_cycle.py
+  - type: run-full-cycle
+    repo: gerivdb/AUTO-DEV
+    path: scripts/run_full_cycle.py
+  - type: auto-debug-cycle
+    repo: gerivdb/AUTO-DEV
+    path: scripts/auto_debug_cycle.py
+  - type: validate-bridge-paths
+    repo: gerivdb/AUTO-DEV
+    path: scripts/validate_bridge_paths.py
+  - type: kiva-pr-workflow
+    repo: gerivdb/AUTO-DEV
+    path: scripts/kiva_pr_workflow.py
+  - type: repo-move-coordinator
+    repo: gerivdb/AUTO-DEV
+    path: skills/repo-move-coordinator/SKILL.md
+  - type: single-editor-per-file
+    repo: gerivdb/AUTO-DEV
+    path: skills/single-editor-per-file/SKILL.md
+  - type: git-workdir-anchor
+    repo: gerivdb/AUTO-DEV
+    path: skills/git-workdir-anchor/SKILL.md
+  - type: repo-move-warden
+    repo: gerivdb/AUTO-DEV
+    path: citizens/repo-move-warden.md
+  - type: repo-move-pipeline
+    repo: gerivdb/AUTO-DEV
+    path: pipelines/repo-move-pipeline.yaml
+  - type: museum-effect-pipeline
+    repo: gerivdb/AUTO-DEV
+    path: pipelines/museum-effect-detection-pipeline.yaml
+  - type: test-primitives-auto-dev
+    repo: gerivdb/AUTO-DEV
+    path: tests/test_primitives_auto_dev.py
+  - type: test-skills-auto-dev
+    repo: gerivdb/AUTO-DEV
+    path: tests/test_skills_auto_dev.py
+  - type: test-citizen-repo-move-warden
+    repo: gerivdb/AUTO-DEV
+    path: tests/test_citizen_repo_move_warden.py
+  - type: test-pipeline-repo-move
+    repo: gerivdb/AUTO-DEV
+    path: tests/test_pipeline_repo_move.py
+  - type: test-talex-bridge
+    repo: gerivdb/AUTO-DEV
+    path: tests/test_talex_bridge.py
+  - type: test-champion
+    repo: gerivdb/AUTO-DEV
+    path: tests/test_champion.py
+  - type: test-auto-debug-sot-causal
+    repo: gerivdb/AUTO-DEV
+    path: tests/test_auto_debug_sot_causal.py
+  - type: test-breakthrough-analysis
+    repo: gerivdb/AUTO-DEV
+    path: scripts/test_breakthrough_analysis.py
+  - type: test-full-analysis
+    repo: gerivdb/AUTO-DEV
+    path: scripts/test_full_analysis.py
+  - type: docs-research-directions
+    repo: gerivdb/AUTO-DEV
+    path: RESEARCH_DIRECTIONS.md
+  - type: docs-scientific-reflection-protocols
+    repo: gerivdb/AUTO-DEV
+    path: docs/scientific-reflection-protocols.md
+  - type: docs-ecosystem-usage-guide
+    repo: gerivdb/AUTO-DEV
+    path: docs/ecosystem-usage-guide.md
+  - type: docs-integration-guide
+    repo: gerivdb/AUTO-DEV
+    path: docs/integration-guide.md
+  - type: cycles-cycle-piano
+    repo: gerivdb/AUTO-DEV
+    path: cycles/cycle_piano.py
 bridges:
   - target: repo:NEXUS
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-NEXUS-CYCLE.yaml
     status: active
   - target: repo:TALEX
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-TALEX-NARRATIVE.yaml
     status: active
   - target: repo:MIMIR
     role: consumer
     protocol: http
     port: 8081
+    contract: bridges/AUTO-DEV-MIMIR-QUERY.yaml
     status: active
   - target: repo:HERMES
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-HERMES-MEMORY.yaml
     status: active
   - target: repo:FLUX
     role: consumer
     protocol: http
     hitl_gate: D4
+    contract: bridges/AUTO-DEV-FLUX-GATE.yaml
     status: proposed
   - target: repo:ARGUS
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-ARGUS-SCANNER.yaml
     status: proposed
   - target: repo:KG-L
     role: consumer
     protocol: http
     port: 8082
+    contract: bridges/AUTO-DEV-KG-L-FEED.yaml
     status: active
   - target: repo:VERSES
     role: consumer
     protocol: http
     port: 8083
+    contract: bridges/AUTO-DEV-VERSES-SYNC.yaml
     status: active
   - target: repo:ECOS-CLI
     role: consumer
     protocol: cli
     path: D:\DO\WEB\TOOLS\L1-INFRA\ECOS-CLI
+    contract: bridges/AUTO-DEV-ECOS-CLI-RUN.yaml
     status: proposed
   - target: repo:KIVA-CLI
     role: consumer
     protocol: cli
     path: D:\DO\WEB\TOOLS\L1-INFRA\KIVA-CLI
+    contract: bridges/AUTO-DEV-KIVA-CLI-RUN.yaml
     status: proposed
   - target: repo:KIVA
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-KIVA-READ.yaml
     status: proposed
   - target: repo:TRIX
     role: consumer
     protocol: http
     port: 7243
+    contract: bridges/AUTO-DEV-TRIX-RUN.yaml
     status: active
   - target: repo:BRAIN
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-BRAIN-MEMORY.yaml
     status: active
   - target: repo:KEEL
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-KEEL-BALANCE.yaml
     status: active
   - target: repo:PLIX
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-PLIX-CODEC.yaml
     status: active
   - target: repo:N243
     role: consumer
     protocol: http
     port: 8093
+    contract: bridges/AUTO-DEV-N243-GATE.yaml
     status: active
   - target: repo:WAZAA
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-WAZAA-EVENT.yaml
     status: active
   - target: repo:EMIT
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-EMIT-READ.yaml
     status: proposed
   - target: repo:KIX
     role: consumer
     protocol: http
     port: 8800
+    contract: bridges/AUTO-DEV-KIX-READ.yaml
     status: proposed
   - target: repo:RLM-METRICS
     role: consumer
     protocol: http
     port: 8802
+    contract: bridges/AUTO-DEV-RLM-METRICS-READ.yaml
     status: proposed
   - target: repo:ROOTX
     role: consumer
     protocol: http
     port: 8792
+    contract: bridges/AUTO-DEV-ROOTX-READ.yaml
     status: proposed
   - target: repo:KG-CAUSAL
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-KG-CAUSAL-READ.yaml
     status: proposed
   - target: repo:CURX
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-CURX-READ.yaml
     status: proposed
   - target: repo:DAG-3
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-DAG3-READ.yaml
     status: proposed
   - target: repo:OBS
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-OBS-READ.yaml
     status: proposed
   - target: repo:UAE
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-UAE-RUNTIME.yaml
     status: proposed
   - target: repo:VDB
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-VDB-DATABASE.yaml
     status: proposed
   - target: repo:PHOTON
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-PHOTON-READ.yaml
     status: proposed
   - target: repo:PIANO
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-PIANO-STANDARDS.yaml
     status: proposed
   - target: repo:LOOPX
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-LOOPX-READ.yaml
     status: proposed
   - target: repo:DevTools
     role: system
     protocol: local
     path: C:\DevTools
+    contract: bridges/AUTO-DEV-DEVTOOLS-READ.yaml
     status: proposed
   - target: repo:SKILLS
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-SKILLS-READ.yaml
     status: proposed
   - target: repo:REPO-STANDARDS
     role: consumer
     protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-REPO-STANDARDS.yaml
+    status: proposed
+  - target: repo:CTULU
+    role: orchestrator
+    protocol: wazaa-channel
+    contract: CTULU/bridges/AUTO-DEV-CTULU-CYCLE.yaml
+    status: proposed
+  - target: repo:FLEX
+    role: experiment
+    protocol: http
+    contract: bridges/AUTO-DEV-FLEX-EXPERIMENT.yaml
+    status: proposed
+  - target: repo:FLUENCE
+    role: consumer
+    protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-FLUENCE-READ.yaml
+    status: proposed
+  - target: repo:GATEWAY-MANAGER
+    role: consumer
+    protocol: http
+    contract: bridges/AUTO-DEV-GATEWAY-MANAGER-READ.yaml
+    status: proposed
+  - target: repo:BATVERSE
+    role: consumer
+    protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-BATVERSE-READ.yaml
+    status: proposed
+  - target: repo:KORX
+    role: consumer
+    protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-KORX-READ.yaml
+    status: proposed
+  - target: repo:KRONOS
+    role: scheduler
+    protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-KRONOS-SCHEDULE.yaml
+    status: proposed
+  - target: repo:SPIDX
+    role: consumer
+    protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-SPIDX-READ.yaml
+    status: proposed
+  - target: repo:VEX
+    role: consumer
+    protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-VEX-READ.yaml
+    status: proposed
+  - target: repo:VOLTX
+    role: consumer
+    protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-VOLTX-READ.yaml
+    status: proposed
+  - target: repo:GOVERNANCE-HUB
+    role: consumer
+    protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-GOVERNANCE-HUB-READ.yaml
+    status: proposed
+  - target: repo:ONTOLOGY
+    role: consumer
+    protocol: wazaa-channel
+    contract: bridges/AUTO-DEV-ONTOLOGY-READ.yaml
+    status: proposed
+  - target: repo:JEVX
+    role: decision
+    protocol: http
+    contract: bridges/AUTO-DEV-JEVX-READ.yaml
+    status: proposed
+  - target: repo:KG-L-FEDERATION
+    role: federation
+    protocol: http
+    contract: bridges/KG-L-FEDERATION.yaml
+    status: proposed
+  - target: repo:DIGESTION
+    role: digestion
+    protocol: wazaa-channel
+    contract: bridges/DIGESTION-AUTO-DEV-CONTRACT.yaml
     status: proposed
 dependencies:
   - repo: gerivdb/NEXUS
@@ -304,6 +604,19 @@ dependencies:
   - repo: gerivdb/DevTools
   - repo: gerivdb/SKILLS
   - repo: gerivdb/REPO-STANDARDS
+  - repo: gerivdb/CTULU
+  - repo: gerivdb/FLEX
+  - repo: gerivdb/FLUENCE
+  - repo: gerivdb/GATEWAY-MANAGER
+  - repo: gerivdb/BATVERSE
+  - repo: gerivdb/KORX
+  - repo: gerivdb/KRONOS
+  - repo: gerivdb/SPIDX
+  - repo: gerivdb/VEX
+  - repo: gerivdb/VOLTX
+  - repo: gerivdb/GOVERNANCE-HUB
+  - repo: gerivdb/ONTOLOGY
+  - repo: gerivdb/JEVX
 constraints:
   cpu_only: true
   ram_limit_mb: 24576
@@ -312,3 +625,153 @@ constraints:
   duplication_policy: forbidden
   hitl_gate: FLUX-D4
   bdcp_mode: permanent
+auto_debug:
+  pathways:
+    - name: Observability
+      priority: HIGH
+      score: 0.85
+      kgs:
+        - KG-L
+        - VOLTX
+        - VERSES
+    - name: Automation
+      priority: HIGH
+      score: 0.78
+      kgs:
+        - KIVA
+        - TRIX
+        - ECOS-CLI
+    - name: Infrastructure
+      priority: MEDIUM
+      score: 0.62
+      kgs:
+        - NEXUS
+        - TOPOS
+        - BRAIN
+scientific_reflection:
+  mechanisms:
+    - name: RefusDeClôture
+      agent: forum.py
+      protocol: RefusDeClôture
+    - name: AbstractionLevel
+      agent: abstraction_level.py
+      protocol: AbstractionLevel
+    - name: CouteauFormel
+      agent: formal_tool.py
+      theorems:
+        - lawvere_fixed_point
+        - banach_tarski
+    - name: BreakthroughAnalysis
+      agent: breakthrough_analyzer.py
+      protocol: breakthrough_detector
+    - name: ValidationTransformative
+      agent: champion.py
+      verdicts:
+        - KEPT
+        - TRANSFORMED
+        - REJECTED
+research_directions:
+  axes:
+    - id: RD1
+      name: Auto-Développement Autonome (Cœur)
+      vibe: le moteur se développe lui-même
+      sub_axes:
+        - Génération d'hypothèses
+        - Sélection de champion
+        - Double-seed FORGE
+        - Méta-loop
+    - id: RD2
+      name: Réflexion Scientifique
+      vibe: tout développement passe par la réfutation et la montée en abstraction
+      sub_axes:
+        - Refus de clôture
+        - Montée en abstraction
+        - Outils formels
+        - Validation transformative
+  source: RESEARCH_DIRECTIONS.md
+operational:
+  src_modules:
+    - auto_debug_integrator.py
+    - breakthrough_analyzer.py
+    - dot_controller.py
+    - focus_mode_router.py
+    - iris_ingestion_pipeline.py
+    - linguistic_translatif_analyzer.py
+    - memory_writer_agent.py
+    - pathway_selector.py
+    - research_directions_integrator.py
+    - research_directions_parser.py
+  scripts:
+    - add_all_to_agents.py
+    - api_coherence_gate.py
+    - audit_bridges.py
+    - auto_debug_cycle.py
+    - auto_dev_narrative_consumer.py
+    - bootstrap_bridge_outputs.py
+    - bootstrap_nexus_cache.py
+    - bridge_health_check.py
+    - catalog_sync_scanner.py
+    - crossref_check.py
+    - dry_run_causal.py
+    - ecos_cli_launcher.ps1
+    - ecosystem_activation.py
+    - ecosystem_scanner.py
+    - gaps_sot_scanner.py
+    - git_atomic_push.py
+    - kiva_pr_workflow.py
+    - museum_effect_detector.py
+    - normalize_autodev_layers.py
+    - normalize_registry_layers.py
+    - normalize_sot_layers.py
+    - perimeter_awareness.py
+    - phi_cps_calibration.py
+    - pole_consciousness_scanner.py
+    - post-move-doc-sync.py
+    - pre_push_validate.py
+    - pre-git-operation.py
+    - repo_cleanliness_validator.py
+    - request_sot_update.py
+    - run_cycle_test.py
+    - run_first_cycle.py
+    - run_full_cycle.py
+    - sot_completeness_scanner.py
+    - test_breakthrough_analysis.py
+    - test_full_analysis.py
+    - trix_readiness_gate.py
+    - trix_sdk_import_checker.py
+    - validate_bridge_paths.py
+    - validate_governance.py
+    - validate_intent_hashes.py
+    - validate_nexus_cycle_schema.py
+    - verify_traceability.py
+    - verses_sync_pipeline.py
+  skills:
+    - git-workdir-anchor
+    - repo-move-coordinator
+    - single-editor-per-file
+  citizens:
+    - repo-move-warden
+  pipelines:
+    - repo-move-pipeline
+    - museum-effect-detection-pipeline
+  tests:
+    - test_primitives_auto_dev.py
+    - test_skills_auto_dev.py
+    - test_citizen_repo_move_warden.py
+    - test_pipeline_repo_move.py
+    - test_talex_bridge.py
+    - test_champion.py
+    - test_auto_debug_sot_causal.py
+    - test_breakthrough_analysis.py
+    - test_full_analysis.py
+  docs:
+    - RESEARCH_DIRECTIONS.md
+    - scientific-reflection-protocols.md
+    - ecosystem-usage-guide.md
+    - integration-guide.md
+    - integration-cross-repo.md
+    - coverage-driven-development.md
+    - atomic-implementation-plan.md
+    - bridges-wazaa-boinc-integration.md
+  cycles:
+    - cycle_piano.py

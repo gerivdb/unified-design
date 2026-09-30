@@ -1,0 +1,135 @@
+name: integration-framework
+version: 1.0.0
+status: proposed
+layer: L0
+intent_hash: 0xDESIGN_INTEGRATION_FRAMEWORK_20260928
+inherits:
+  - safe-action-pattern
+  - design-ops-loop
+  - session-boot-design
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-THINK-DO-CHECK-CONSCIOUSNESS
+  - ATOM-STOP-CONDITION
+description: >
+  Framework d'intégration réutilisable pour appliquer les designs `unified-design`
+  dans les repos consumers. Standardise l'injection de designs, l'exécution de gates,
+  et les tests d'intégration.
+  
+  Ce design résout le problème de la duplication d'efforts : au lieu de réinventer
+  l'intégration pour chaque consumer/design, le framework fournit des primitives
+  réutilisables (DesignGate, DesignOpsLoop, DesignInjector, DesignTestHarness).
+states:
+  - name: IDLE
+    nature: framework non initialisé
+    gate_to_next: INIT
+    question: "Le framework est-il initialisé ?"
+  - name: INIT
+    nature: configuration chargée
+    gate_to_next: READY
+    question: "Les designs sont-ils enregistrés ?"
+  - name: READY
+    nature: opérationnel
+    gate_to_next: EXECUTE
+    question: "Le consumer est-il prêt ?"
+  - name: EXECUTE
+    nature: intégration en cours
+    gate_to_next: VERIFY
+    question: "L'intégration est-elle complète ?"
+  - name: VERIFY
+    nature: tests en cours
+    gate_to_next: DONE
+    question: "Les tests passent-ils ?"
+  - name: DONE
+    nature: intégration terminée
+    question: "La documentation est-elle à jour ?"
+functions:
+  - id: F1
+    name: REGISTER_DESIGN
+    state: INIT
+    description: "Enregistre un design dans le registry du framework"
+    implements: ATOM-GATE-LAYERS
+  - id: F2
+    name: CREATE_GATE
+    state: INIT→READY
+    description: "Crée une gate d'action pour un design"
+    implements: safe-action-pattern
+  - id: F3
+    name: CREATE_OPS_LOOP
+    state: INIT→READY
+    description: "Crée une boucle THINK/DO/CHECK pour un design"
+    implements: design-ops-loop
+  - id: F4
+    name: INJECT_DESIGN
+    state: READY→EXECUTE
+    description: "Injecte le design dans le codebase consumer"
+    implements: ATOM-DEPLOYMENT-PATTERNS
+  - id: F5
+    name: VERIFY_INTEGRATION
+    state: EXECUTE→VERIFY
+    description: "Vérifie que l'intégration est correcte"
+    implements: ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - id: F6
+    name: RUN_TESTS
+    state: VERIFY→DONE
+    description: "Exécute les tests d'intégration"
+    implements: ATOM-TDD-AIRAIN-LAW
+  - id: F7
+    name: DOCUMENT
+    state: DONE
+    description: "Génère la documentation d'intégration"
+    implements: ATOM-CARRY-FORWARD-PRINCIPLE
+invariant: "Toute intégration de design DOIT passer par les phases REGISTER → CREATE → INJECT → VERIFY → TEST."
+genes:
+  - id: G1
+    name: réutilisabilité
+    description: "Le framework doit être utilisable par tous les consumers"
+    implements: ATOM-INDEPENDENT-SOURCES-RULE
+  - id: G2
+    name: traçabilité
+    description: "Toute intégration est tracée et horodatée"
+    implements: ATOM-DELTA-CHECK
+  - id: G3
+    name: testabilité
+    description: "Toute intégration a des tests automatisés"
+    implements: ATOM-TDD-AIRAIN-LAW
+  - id: G4
+    name: documentation
+    description: "Toute intégration est documentée"
+    implements: ATOM-CARRY-FORWARD-PRINCIPLE
+anti_patterns:
+  - missing_gene: réutilisabilité
+    pathology: "Chaque consumer réinvente l'intégration → duplication, incohérences"
+    mdu_atom: ATOM-INDEPENDENT-SOURCES-RULE
+  - missing_gene: traçabilité
+    pathology: "Intégrations non tracées → impossible de auditer"
+    mdu_atom: ATOM-DELTA-CHECK
+  - missing_gene: testabilité
+    pathology: "Pas de tests → régressions silencieuses"
+    mdu_atom: ATOM-TDD-AIRAIN-LAW
+  - missing_gene: documentation
+    pathology: "Intégrations non documentées → dette knowledge"
+    mdu_atom: ATOM-CARRY-FORWARD-PRINCIPLE
+inheritance_loop: |
+  IDLE → INIT → READY → EXECUTE → VERIFY → DONE
+                                            │
+                                            ▼
+                               injecté dans le consumer
+                                            │
+                                            ▼
+                               nouveau design → IDLE
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: defines
+  - repo: gerivdb/KIVA-CLI
+    relation: consumer
+  - repo: gerivdb/ECOS-CLI
+    relation: consumer
+  - repo: gerivdb/ARGUS
+    relation: consumer
+  - repo: gerivdb/CTULU
+    relation: consumer
+  - adr: ADR-2026-09-19-SAFE-ACTION-PATTERN
+  - adr: ADR-2026-09-21-005-SAFE-ACTION-GATE
+  - intent: INTENT-2026-09-19-SAFE-ACTION-PATTERN
+  - prd_moc: PRD-MOC-INTEGRATION-FRAMEWORK-20260928

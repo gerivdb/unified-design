@@ -1,0 +1,6 @@
+intent:
+  current_status: proposed
+  target_status: approved
+  conditions:
+    - proof_of_life_present: true
+    - all_deliverables_completed: true

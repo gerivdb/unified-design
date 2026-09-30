@@ -1,0 +1,20 @@
+---
+name: tool-factory-1-auto-design
+description: "Design auto-design pour TOOL-FACTORY-1. Vérifie la readiness citoyenne du repo TOOL-FACTORY-1 via analyze_repo(), generate_repo(), verify_repo()."
+version: "1.0.0"
+status: active
+---
+
+# Design — TOOL-FACTORY-1 Auto-Design
+
+## Ontologie
+
+- repo: gerivdb/TOOL-FACTORY-1
+- layer: L3_CITIZEN
+- status: ACTIVE
+
+## Contrat
+
+- `analyze_repo(TOOL-FACTORY-1)` retourne `auto_design_readiness >= 80`
+- `verify_repo(TOOL-FACTORY-1)` retourne `auto_design_score >= 80`
+- Bridges : `bridges/citizen-phase3.yaml`

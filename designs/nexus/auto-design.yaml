@@ -1,0 +1,20 @@
+---
+name: nexus-auto-design
+description: "Design auto-design pour NEXUS. Vérifie la readiness écosystémique du repo NEXUS via analyze_repo(), generate_repo(), verify_repo()."
+version: "1.0.0"
+status: active
+---
+
+# Design — NEXUS Auto-Design
+
+## Ontologie
+
+- repo: gerivdb/NEXUS
+- layer: L3_EMERGENCE
+- status: ACTIVE
+
+## Contrat
+
+- `analyze_repo(NEXUS)` retourne `auto_design_readiness >= 80`
+- `verify_repo(NEXUS)` retourne `auto_design_score >= 80`
+- Bridges : `bridges/ecosystem-phase2.yaml`
