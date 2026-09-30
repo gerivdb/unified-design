@@ -43,32 +43,50 @@ implementation_contract:
       must_contain:
         - "class AutoDesignAnalyzer"
         - "def analyze"
-      tests: []
+      tests:
+        - path: tests/test_auto_design_analyzer.py
+          framework: pytest
+          min_coverage: 80
     - path: engine/auto_design/generator.py
       must_contain:
         - "class AutoDesignGenerator"
         - "def generate"
-      tests: []
+      tests:
+        - path: tests/test_auto_design_generator.py
+          framework: pytest
+          min_coverage: 80
     - path: engine/auto_design/industrializer.py
       must_contain:
         - "class AutoDesignIndustrializer"
         - "def deploy"
-      tests: []
+      tests:
+        - path: tests/test_auto_design_industrializer.py
+          framework: pytest
+          min_coverage: 80
     - path: engine/auto_design/verifier.py
       must_contain:
         - "class AutoDesignVerifier"
         - "def verify"
-      tests: []
+      tests:
+        - path: tests/test_auto_design_verifier.py
+          framework: pytest
+          min_coverage: 80
     - path: engine/auto_design/reporter.py
       must_contain:
         - "class AutoDesignReporter"
         - "def report"
-      tests: []
+      tests:
+        - path: tests/test_auto_design_reporter.py
+          framework: pytest
+          min_coverage: 80
     - path: scripts/auto_design_cli.py
       must_contain:
         - "def main"
         - "argparse"
-      tests: []
+      tests:
+        - path: tests/test_auto_design_cli.py
+          framework: pytest
+          min_coverage: 80
     - path: templates/auto_design/cycle_runner.py
       must_contain:
         - "def run_cycle"
@@ -81,6 +99,21 @@ implementation_contract:
       must_contain:
         - "def create_pr"
       tests: []
+  test_policy:
+    framework: pytest
+    min_coverage: 80
+    timeout: 300
+    timeout_method: thread
+    addopts: "-v --tb=short"
+    markers:
+      - unit
+      - integration
+      - e2e
+    verification:
+      - command: pytest tests/ -q --tb=short
+        expected: "passed"
+      - command: pytest --cov=src --cov-report=term --cov-fail-under=80
+        expected: "coverage >= 80%"
   verification:
     - command: python scripts/auto_design_cli.py verify .
       expected: "auto_design_score"

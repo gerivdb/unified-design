@@ -1,0 +1,35 @@
+"""
+Template conftest.py pour repos industrialisés auto-design.
+
+Ce fichier fournit les fixtures partagées standardisées pour tous les repos
+utilisant le motif auto-design.
+"""
+
+import pytest
+from pathlib import Path
+
+
+@pytest.fixture
+def project_root() -> Path:
+    """Retourne la racine du projet."""
+    return Path(__file__).parent.parent
+
+
+@pytest.fixture
+def tests_dir(project_root: Path) -> Path:
+    """Retourne le répertoire tests/."""
+    return project_root / "tests"
+
+
+@pytest.fixture
+def src_dir(project_root: Path) -> Path:
+    """Retourne le répertoire src/."""
+    return project_root / "src"
+
+
+@pytest.fixture
+def output_dir(project_root: Path) -> Path:
+    """Retourne le répertoire output/ (créé si absent)."""
+    output = project_root / "output"
+    output.mkdir(parents=True, exist_ok=True)
+    return output
