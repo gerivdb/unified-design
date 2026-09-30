@@ -1,6 +1,7 @@
 name: auto-design
 version: "1.0.0"
 status: active
+layer: L3
 intent_hash: 0xINTENT_AUTO_DESIGN_AUFHEBUNG_20260929
 description: |
   Pattern d'industrialisation déclarative d'un repo : design.yaml canonique,

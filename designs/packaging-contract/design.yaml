@@ -4,6 +4,9 @@ version: "1.0.0"
 status: active
 layer: L3
 intent_hash: 0xVEX_PACKAGING_CONTRACT_20260927
+description: |
+  Contrat de packaging Python pour VEX : pyproject.toml, build-system setuptools,
+  src/vex/__init__.py. Garantit la distribution et l'installabilité du package.
 repo: gerivdb/VEX
 implementation_contract:
   repo: gerivdb/VEX

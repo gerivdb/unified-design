@@ -4,6 +4,9 @@ version: "1.0.0"
 status: active
 layer: L3
 intent_hash: 0xVEX_CLIENT_ARCHITECTURE_DESIGN_20260927
+description: |
+  Architecture client unifiée pour VEX : BaseIntegrationClient, StandardResponse,
+  ContractRegistry, RetryPolicy. Réduit la duplication de 70% et normalise la gestion d'erreur.
 repo: gerivdb/VEX
 implementation_contract:
   repo: gerivdb/VEX
