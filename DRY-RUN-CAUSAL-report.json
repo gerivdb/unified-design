@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-28T03:54:05.087033+00:00",
+  "timestamp": "2026-09-30T02:42:52.087128+00:00",
   "total_checks": 126,
   "implemented": 126,
   "prd_moc_only": 0,
@@ -92,7 +92,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 2050
+      "impl_size": 2025
     },
     {
       "design": "safe-action-pattern",
@@ -260,7 +260,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 1802
+      "impl_size": 1777
     },
     {
       "design": "safe-action-gate",
@@ -428,7 +428,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 1780
+      "impl_size": 1755
     },
     {
       "design": "ecosystem-meta-coherence",
@@ -596,7 +596,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 2181
+      "impl_size": 2198
     },
     {
       "design": "ecosystem-meta-coherence-gate",
@@ -764,7 +764,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 2368
+      "impl_size": 2343
     },
     {
       "design": "design-ops-loop",
@@ -932,7 +932,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 2090
+      "impl_size": 2079
     },
     {
       "design": "session-boot-design",
@@ -1100,7 +1100,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 1889
+      "impl_size": 1911
     },
     {
       "design": "artifact-layers-design",
@@ -1268,7 +1268,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 1811
+      "impl_size": 1832
     },
     {
       "design": "meta-design-self-healing",
@@ -1436,7 +1436,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 1757
+      "impl_size": 1732
     },
     {
       "design": "talex-friction-analyzer",
@@ -1460,7 +1460,7 @@
       "implementation_valid": true,
       "status": "IMPLEMENTED",
       "prod_ready": true,
-      "impl_size": 1757
+      "impl_size": 4135
     },
     {
       "design": "talex-friction-analyzer",
