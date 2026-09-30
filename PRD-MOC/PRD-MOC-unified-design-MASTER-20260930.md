@@ -23,11 +23,21 @@ This document defines the integration requirements for unified-design within the
 ## Integration Matrix
 | Component | Purpose | Status |
 |-----------|---------|--------|
-| causal_validator | Causal chain validation | proposed |
-| curriculum_validator | Curriculum validation | proposed |
-| meta_coherence_fixer | Meta-coherence repair | proposed |
-| narrative_generator | Narrative generation | proposed |
-| rootx_client | ROOTX client integration | proposed |
+| causal_validator | Causal chain validation | implemented |
+| curriculum_validator | Curriculum validation | implemented |
+| meta_coherence_fixer | Meta-coherence repair | implemented |
+| narrative_generator | Narrative generation | implemented |
+| rootx_client | ROOTX client integration | implemented |
+
+## Implementation Status
+- [x] All 5 subcomponents implemented in src/
+- [x] All 20 test files present in tests/
+- [x] Tests passing: 95 passed, 8 skipped (2026-10-01)
+- [x] design.yaml fixed: cpu model Xeon E5620, single YAML document
+
+## Proof-of-Life
+- [x] 2026-10-01T00:08:00+02:00 — Tests unified-design: 95 passed, 8 skipped, 0 failed
+- [x] 2026-10-01T00:08:00+02:00 — design.yaml repaired (cpu section added, duplicate YAML removed)
 
 ## Subcomponents
 - [PRD-MOC-unified-design-causal_validator-20260930.md](./subcomponents/PRD-MOC-unified-design-causal_validator-20260930.md)
