@@ -1,0 +1,29 @@
+---
+name: prd-status-auditor
+description: "Citizen qui audite les statuts PRD/MOC et signale les incohérences entre statut déclaré et livrables présents."
+version: "1.0.0"
+status: active
+---
+
+# Citizen — PRD Status Auditor
+
+## Mission
+
+Auditer les PRD/MOC de `unified-design` et détecter les incohérences :
+- Statut `proposed` avec livrables présents
+- Statut `draft` avec livrables présents
+- Statut `approved` avec livrables manquants
+
+## Fréquence
+
+- À chaque fin de session
+- Sur déclenchement `dry_run_causal.py`
+
+## Sortie
+
+- Rapport JSON `reports/prd-status-audit.json`
+- Journal `[PRD_STATUS_AUDIT]`
+
+## Validation
+
+- `python scripts/verify_prd_status.py --check-all`
