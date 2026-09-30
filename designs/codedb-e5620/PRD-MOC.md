@@ -4,7 +4,7 @@ version: "1.0"
 date: "2026-09-18"
 intent_hash: 0xPRD_MOC_CODEDB_E5620_DESIGN_20260918
 governance: gerivdb/REPO-STANDARDS
-status: proposed
+status: approved
 strate: L0-CANONICAL
 profil: TOOL
 rss_depth: 4
