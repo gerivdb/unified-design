@@ -1,0 +1,20 @@
+---
+name: data-miner-auto-design
+description: "Design auto-design pour DATA-MINER. Vérifie la readiness citoyenne du repo DATA-MINER via analyze_repo(), generate_repo(), verify_repo()."
+version: "1.0.0"
+status: active
+---
+
+# Design — DATA-MINER Auto-Design
+
+## Ontologie
+
+- repo: gerivdb/DATA-MINER
+- layer: L3_CITIZEN
+- status: ACTIVE
+
+## Contrat
+
+- `analyze_repo(DATA-MINER)` retourne `auto_design_readiness >= 80`
+- `verify_repo(DATA-MINER)` retourne `auto_design_score >= 80`
+- Bridges : `bridges/citizen-phase3.yaml`
