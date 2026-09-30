@@ -2,7 +2,7 @@
 type: PRD-MOC
 version: "1.0.0"
 date: "2026-09-28"
-status: proposed
+status: approved
 intent_hash: 0xPRD_MOC_AUTO_PROMOTE_20260928
 author: gerivdb
 source_repo: gerivdb/unified-design
