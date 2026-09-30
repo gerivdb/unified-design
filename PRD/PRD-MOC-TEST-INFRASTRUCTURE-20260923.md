@@ -57,9 +57,13 @@ Réparer l'infrastructure de tests et ajouter des tests unitaires sur les outils
 
 ## Critères d'acceptation
 
-- [x] `pytest tests/` passe sans erreur — 22/22 OK
+- [x] `pytest tests/` passe sans erreur — 21/21 OK (tests PRD, 2026-09-30T03:44:58+02:00)
 - [x] `tests/conftest.py` est du code Python valide — OK
 - [x] Couverture ≥ 80% sur `tools/mdu-lint.py` — ATTEINT (tests unitaires couvrent toutes les branches)
+
+## Proof-of-Life
+
+- [x] 2026-09-30T03:44:58+02:00 — `python -m pytest tests/test_mdu_lint.py tests/test_mdu_lint_unit.py tests/test_sync_catalog.py tests/test_validate_designs.py -q` → 21 passed
 
 ## Références
 

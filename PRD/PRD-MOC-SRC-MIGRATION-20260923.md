@@ -56,7 +56,13 @@ Migrer progressivement les moteurs vers `src/engines/` et `src/generators/` sans
 ## Critères d'acceptation
 
 - [x] `src/` contient au moins `core/`, `engines/`, `generators/` — ATTEINT
-- [x] Aucun import cassé après migration d'un engine — ATTEINT (52 tests passent)
+- [x] Aucun import cassé après migration d'un engine — ATTEINT (52 tests passent, 8 skips, 2026-09-30T03:44:58+02:00)
+
+## Proof-of-Life
+
+- [x] 2026-09-30T03:44:58+02:00 — `python -m pytest tests/test_auto_design_engine.py tests/test_auto_design_argus_ctulu.py tests/test_auto_promote.py tests/test_crm_tech_debt.py -q` → 31 passed, 8 skipped
+- [x] 2026-09-30T03:44:58+02:00 — `python scripts/auto_design_cli.py analyze .` → JSON valide, imports src/ fonctionnels
+- [x] 2026-09-30T03:44:58+02:00 — `python scripts/utils/scan_loop.py` → 472 designs détectés, 0 cycles, imports src/ fonctionnels
 
 ## Références
 
