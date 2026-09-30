@@ -90,15 +90,24 @@ implementation_contract:
     - path: templates/auto_design/cycle_runner.py
       must_contain:
         - "def run_cycle"
-      tests: []
+      tests:
+        - path: tests/test_templates_cycle_runner.py
+          framework: pytest
+          min_coverage: 80
     - path: templates/auto_design/bridge_executor.py
       must_contain:
         - "def run_bridges"
-      tests: []
+      tests:
+        - path: tests/test_templates_bridge_executor.py
+          framework: pytest
+          min_coverage: 80
     - path: templates/auto_design/pr_factory.py
       must_contain:
         - "def create_pr"
-      tests: []
+      tests:
+        - path: tests/test_templates_pr_factory.py
+          framework: pytest
+          min_coverage: 80
   test_policy:
     framework: pytest
     min_coverage: 80
