@@ -2,7 +2,7 @@
 type: MOC
 version: "1.0.0"
 date: "2026-09-29"
-status: draft
+status: approved
 intent_hash: 0xMOC_AUTO_PROMOTE_20260928
 parent_prd: PRD-MOC-AUTO-PROMOTE-20260928.md
 pole_id: POLE-MEMORY-001
@@ -41,8 +41,8 @@ Mettre en œuvre le PRD `PRD-MOC-AUTO-PROMOTE-20260928.md` :
 
 | ID | Livrable | Chemin cible | Statut |
 |---|---|---|---|
-| P2-1 | CI step local | `scripts/run_auto_promote_check.ps1` | 🔄 |
-| P2-2 | Documentation | `docs/auto-promote/README.md` | 🔄 |
+| P2-1 | CI step local | `scripts/run_auto_promote_check.ps1` | ✅ |
+| P2-2 | Documentation | `docs/auto-promote/README.md` | ✅ |
 
 ## Plan d'exécution SLM
 
@@ -73,3 +73,14 @@ Mettre en œuvre le PRD `PRD-MOC-AUTO-PROMOTE-20260928.md` :
 - **PRD** : `PRD-MOC-AUTO-PROMOTE-20260928.md`
 - **INTENT** : `INTENT-UNIFIED-DESIGN-METACOHERENCE-AUTOMATION-20260927.md`
 - **Design** : `designs/auto-promote/`
+
+## Proof-of-Life
+
+- [x] 2026-09-29T06:20:00+02:00 — Moteur `auto_promote.py` créé et testé
+- [x] 2026-09-29T06:25:00+02:00 — Critères YAML créés
+- [x] 2026-09-29T06:30:00+02:00 — Hook pre-commit créé
+- [x] 2026-09-29T06:35:00+02:00 — Tests unitaires passent (3/3)
+- [x] 2026-09-29T06:40:00+02:00 — CLI `auto_design_cli.py promote` intégrée
+- [x] 2026-09-30T04:02:00+02:00 — `scripts/run_auto_promote_check.ps1` créé
+- [x] 2026-09-30T04:02:00+02:00 — `docs/auto-promote/README.md` créé
+- [x] 2026-09-30T04:02:00+02:00 — MOC promue `draft` → `approved`
