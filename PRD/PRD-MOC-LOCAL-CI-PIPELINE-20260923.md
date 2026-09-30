@@ -2,7 +2,7 @@
 type: PRD
 version: "1.0"
 date: "2026-09-23"
-status: draft
+status: approved
 intent_hash: 0xPRD_MOC_LOCAL_CI_PIPELINE_20260923
 ---
 
