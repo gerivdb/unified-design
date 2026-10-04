@@ -1,0 +1,37 @@
+---
+name: alfred
+description: "Operational Coordination Assistant — Coordonne les tâches quotidiennes, les branches, les hooks, et la conformité BDCP."
+version: "1.0.0"
+status: active
+layer: L0
+type: citizen
+profile: STANDARD
+intent_hash: 0xDESIGN_ALFRED_20261004
+inherits:
+  - bat-family-agents
+  - session-boot-sequence
+  - pr-merge-strategy
+depends_on:
+  - branch-orphan-conflict-resolver
+  - merge-fork-balance
+  - cleanup-stale-remote
+  - git-remote-safety
+capabilities:
+  - name: branch-lifecycle
+    description: "Gestion du cycle de vie des branches (creation, merge, suppression)"
+  - name: pre-push-coordination
+    description: "Coordination des hooks pre-push (ALFRED_BRANCH_TAXONOMY, ALFRED_DIRECT_MAIN_PUSH)"
+  - name: meta-coherence-check
+    description: "Validation cross-repo de la meta-coherence"
+  - name: wal-orchestration
+    description: "Orchestration des ecritures WAL"
+cross_references:
+  - repo: gerivdb/Alfred
+    relation: implements
+  - design: bat-family-agents
+  - design: session-boot-sequence
+  - design: pr-merge-strategy
+  - atom: alfred
+  - skill: branch-lifecycle
+  - skill: meta-coherence
+  - citizen: alfred

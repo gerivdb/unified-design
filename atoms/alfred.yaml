@@ -1,0 +1,59 @@
+---
+name: alfred
+description: "Atome ALFRED — Operational Coordination Assistant"
+parameters:
+  role: execution
+  scope: metacluster
+inherits: [bat-family-agents, session-boot-sequence]
+states:
+  - name: IDLE
+    gate_to_next: COORDINATION_TRIGGERED
+  - name: COORDINATION
+    gate_to_next: TASK_DISPATCHED
+  - name: EXECUTION
+    gate_to_next: RESULT_VERIFIED
+  - name: VERIFICATION
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: COORDINATE_BRANCHES
+    state: COORDINATION
+    description: "Coordonne les operations de branche (creation, merge, suppression)"
+  - id: F2
+    name: DISPATCH_TASKS
+    state: COORDINATION
+    description: "Repartit les taches atomiques vers les citoyens"
+  - id: F3
+    name: EXECUTE_COORDINATION
+    state: EXECUTION
+    description: "Execute les plans de coordination"
+  - id: F4
+    name: VERIFY_META_COHERENCE
+    state: VERIFICATION
+    description: "Verifie la meta-coherence post-execution"
+invariant: "Toute coordination est tracee dans la WAL et verifiee par meta-coherence."
+genes:
+  - id: G1
+    name: coordination-first
+    description: "Toute mutation passe par ALFRED"
+  - id: G2
+    name: wal-tracing
+    description: "Toute action est tracee dans la WAL"
+  - id: G3
+    name: verification-real
+    description: "Le succes n'existe que constate"
+anti_patterns:
+  - missing_gene: coordination-first
+    pathology: "Mutations sauvages → meta-coherence cassee"
+  - missing_gene: wal-tracing
+    pathology: "Actions sans tracabilite → impossibilite d'auditer"
+  - missing_gene: verification-real
+    pathology: "Coordination declaree reussie sans preuve → echec silencieux"
+cross_references:
+  - design: alfred
+  - design: bat-family-agents
+  - skill: branch-lifecycle
+  - skill: meta-coherence
+  - citizen: alfred
+  - workflow: workflow-session-boot-closeout
+  - pipeline: pipeline-session-boot-closeout
