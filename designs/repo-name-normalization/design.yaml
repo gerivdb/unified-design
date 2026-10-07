@@ -1,0 +1,76 @@
+name: repo-name-normalization
+version: 1.0.0
+status: active
+description: >
+  Normalisation d identité des repos gerivdb autour du schéma `ss` (sans underscore)
+  pour les noms de repo, slugs et chemons logiques. Ce design garantit la métacohérence
+  MDU entre known_repositories.yaml, .repo-identity.yaml et les conventions REPO-STANDARDS.
+layer: N+4
+owner: L0-CANON
+author: gerivdb
+created: 2026-10-07
+updated: 2026-10-07
+intent_hash: 0xDESIGN_REPO_NAME_NORMALIZATION_20261007
+
+parent: unified-design
+inherits:
+  - unified-design
+
+capabilities:
+  - name: ss_normalization
+    description: "Applique la règle sans underscore aux noms de repo, slugs et chemins logiques"
+    parameters:
+      pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"
+      apply_to: [repo_name, slug, local_path_basename]
+  
+  - name: identity_alignment
+    description: "Alignement known_repositories.yaml <-> .repo-identity.yaml <-> MDU"
+    parameters:
+      sources:
+        - known_repositories.yaml
+        - .repo-identity.yaml
+        - unified-design/designs/*/design.yaml
+
+rules:
+  - id: SS-001
+    description: "Tout repo actif doit avoir un slug ss dans .repo-identity.yaml"
+    severity: required
+    check: "slug matches ^[a-z0-9]+(-[a-z0-9]+)*$"
+  
+  - id: SS-002
+    description: "known_repositories.yaml et .repo-identity.yaml doivent être cohérents sur repo/local_path/remote"
+    severity: required
+    check: "cross_repo_identity_consistency"
+  
+  - id: SS-003
+    description: "Le nom de dossier local doit être en ss si le repo est renommé"
+    severity: recommended
+    check: "local_path_basename matches ^[a-z0-9]+(-[a-z0-9]+)*$"
+
+dependencies:
+  - unified-design
+  - REPO-STANDARDS
+  - GOVERNANCE-HUB
+
+mdu_integration:
+  checker: CHECK_METACOHERENCE.md
+  alias_file: .kilo/meta_coherence_aliases.yaml
+  validation: python .kilo/check_meta_coherence.py --strict
+
+migration:
+  phase_1:
+    - repo: gerivdb/RAGX
+      slug: ragx
+      adr: ADR-2026-10-07-002-ragx-identity-normalization
+      design: unified-design/designs/repo-name-normalization/design.yaml
+  
+  phase_2:
+    - audit: argus scan all repos
+    - apply: progressive normalization
+    - validate: CHECK_METACOHERENCE.md
+
+references:
+  - unified-design/META-DESIGN.md
+  - REPO-STANDARDS/schemas/REPO_IDENTITY_v1.yaml
+  - REPO-STANDARDS/docs/BRANCH-GOVERNOR.md
+  - GOVERNANCE-HUB/known_repositories.yaml
