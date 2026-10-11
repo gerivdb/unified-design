@@ -1,0 +1,138 @@
+# topology.dag3
+---
+metadata:
+  name: "KIX-Orchestrator-Topology"
+  version: "1.0.0"
+  description: "KIX orchestrator with RLM services integration"
+  author: "gerivdb"
+  created: "2026-07-28"
+
+---
+nodes:
+  KIX: {
+    type: ORCHESTRATOR,
+    trits: [1, 1, 0, 0, 1],
+    phase: 0.0,
+    capacity: 100,
+    properties: {
+      port: 8800,
+      jwt_enabled: true
+    }
+  }
+  
+  RLM_DEPLOY: {
+    type: RUNNER,
+    trits: [1, 0, -1, 0, 1],
+    phase: 0.785,
+    capacity: 10,
+    properties: {
+      port: 8795,
+      service: "RLM-DEPLOY"
+    }
+  }
+  
+  RLM_SECURE: {
+    type: RUNNER,
+    trits: [1, 1, 0, 0, 1],
+    phase: 1.57,
+    capacity: 8,
+    properties: {
+      port: 8796,
+      service: "RLM-SECURE"
+    }
+  }
+  
+  RLM_INCIDENT: {
+    type: RUNNER,
+    trits: [1, 0, 1, 0, 1],
+    phase: 2.35,
+    capacity: 12,
+    properties: {
+      port: 8798,
+      service: "RLM-INCIDENT"
+    }
+  }
+  
+  RLM_RELEASE: {
+    type: RUNNER,
+    trits: [1, 1, -1, 0, 1],
+    phase: 3.14,
+    capacity: 5,
+    properties: {
+      port: 8799,
+      service: "RLM-RELEASE"
+    }
+  }
+
+---
+edges:
+  KIX -> RLM_DEPLOY: {
+    weight: 0.9,
+    constraint: VALIDATE,
+    type: CONTROL
+  }
+  
+  KIX -> RLM_SECURE: {
+    weight: 0.85,
+    constraint: MINIMIZE,
+    type: DATA
+  }
+  
+  RLM_SECURE -> RLM_INCIDENT: {
+    weight: 0.7,
+    constraint: SEQUENCE,
+    type: FEEDBACK
+  }
+  
+  KIX -> RLM_RELEASE: {
+    weight: 0.6,
+    constraint: BALANCE,
+    type: CONTROL
+  }
+
+---
+invariants:
+  ACYCLICITY: {
+    type: ACYCLICITY,
+    enforced: true,
+    scope: GLOBAL
+  }
+  
+  HAMMING_DIST: {
+    type: HAMMING_DIST,
+    threshold: 2,
+    enforced: true,
+    scope: GLOBAL
+  }
+  
+  LOAD_BALANCE: {
+    type: LOAD_BALANCE,
+    threshold: 0.3,
+    enforced: true,
+    scope: RUNNER
+  }
+  
+  RESONANCE: {
+    type: RESONANCE,
+    threshold: 1.57,
+    enforced: false,
+    scope: GLOBAL
+  }
+
+---
+transitions:
+  SERVICE_START: {
+    from: "STOPPED",
+    to: "RUNNING",
+    trigger: VOTE_APPROVED,
+    conditions: [ACYCLICITY],
+    actions: [START_SERVICE, UPDATE_METRICS]
+  }
+  
+  SERVICE_STOP: {
+    from: "RUNNING",
+    to: "STOPPED",
+    trigger: VOTE_APPROVED,
+    conditions: [LOAD_BALANCE],
+    actions: [STOP_SERVICE, CLEANUP]
+  }
