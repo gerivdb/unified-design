@@ -5,11 +5,16 @@
 set -euo pipefail
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
-ALLOWED_PREFIXES="^(feat|fix|chore|docs|refactor|test|hotfix)/"
+
+# Taxonomie canonique unifiée (session 2026-10-11).
+# Cette liste DOIT rester identique aux types acceptés par .githooks/commit-msg,
+# sinon un message de commit valide peut porter un préfixe de branche refusé ici.
+# Référence : ADR-2026-10-11-002 (safe-deletion-subsystems), outillage.
+ALLOWED_PREFIXES="^(feat|fix|refactor|docs|chore|adr|break|test|style|wip|hotfix)/"
 
 if [[ ! "$BRANCH" =~ $ALLOWED_PREFIXES ]]; then
   echo "[HOOK] Branche '$BRANCH' ne respecte pas la taxonomy autorisée."
-  echo "[HOOK] Préfixes autorisés: feat/, fix/, chore/, docs/, refactor/, test/, hotfix/"
+  echo "[HOOK] Préfixes autorisés: feat/ | fix/ | refactor/ | docs/ | chore/ | adr/ | break/ | test/ | style/ | wip/ | hotfix/"
   exit 1
 fi
 

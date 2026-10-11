@@ -9,7 +9,10 @@ COMMIT_MSG_FILE="${1}"
 COMMIT_MSG=$(cat "${COMMIT_MSG_FILE}")
 
 # Patterns valides
-VALID_PATTERN="^(feat|fix|refactor|docs|chore|adr|break|test|style|wip)(\(.+\))?: .{1,72}"
+# Taxonomie canonique unifiée (session 2026-10-11).
+# Cette liste DOIT rester identique aux préfixes acceptés par .githooks/pre-push.
+# 'hotfix' ajouté ici car accepté comme préfixe de branche et refusé comme type.
+VALID_PATTERN="^(feat|fix|refactor|docs|chore|adr|break|test|style|wip|hotfix)(\(.+\))?: .{1,72}"
 
 # Ignorer les messages de merge (tout format)
 if echo "${COMMIT_MSG}" | grep -qE "^Merge "; then
@@ -31,7 +34,7 @@ if ! echo "${FIRST_LINE}" | grep -qE "${VALID_PATTERN}"; then
     echo ""
     echo "Format: <type>(<scope>): <description>"
     echo ""
-    echo "Types valides: feat | fix | refactor | docs | chore | adr | break | test | style | wip"
+    echo "Types valides: feat | fix | refactor | docs | chore | adr | break | test | style | wip | hotfix"
     echo ""
     echo "Votre message: ${FIRST_LINE}"
     echo ""
