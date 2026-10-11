@@ -1,0 +1,12 @@
+# Normalisation des fins de ligne -- unified-design
+# Contexte : session 2026-10-11. Sept hooks shell de .githooks/ etaient
+# entierement en CRLF dans le working tree, donc syntaxiquement casses
+# (bash lisait 'fi\r' comme une commande inconnue). core.autocrlf=input
+# normalise a l'entree mais pas a la sortie : la pollution revenait.
+# Ref : harmonisation outillage, feuille de route revisee etape 2.
+
+# Hooks et scripts shell : LF impose, aucune conversion en CRLF au checkout
+.githooks/*        text eol=lf
+*.sh               text eol=lf
+
+# Hooks installes localement hors depot (.git/hooks n'est pas versionne)
