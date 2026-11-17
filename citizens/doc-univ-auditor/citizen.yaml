@@ -1,0 +1,68 @@
+---
+name: doc-univ-auditor
+description: >
+  Citoyen passif qui audite la documentation universitaire de DOC-UNIV-DEV.
+  Vérifie la présence des layers docs/*, la rigueur académique (citations),
+  et l'absence de duplication avec BRAIN-DOCS.
+version: "1.0.0"
+status: active
+layer: L3-CITIZENS
+intent_hash: 0xCITIZEN_DOC_UNIV_AUDITOR_20261117
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+capabilities:
+  - name: audit-univ-doc
+    description: "Audite la structure docs/* de DOC-UNIV-DEV"
+  - name: detect-missing-citations
+    description: "Détecte les concepts sans citation académique"
+  - name: detect-tech-duplication
+    description: "Détecte le contenu dupliqué depuis BRAIN-DOCS"
+states:
+  - name: IDLE
+    gate_to_next: AUDIT_REQUESTED
+  - name: AUDITING
+    gate_to_next: AUDIT_COMPLETE
+  - name: REMEDIATING
+    gate_to_next: REMEDIATION_VERIFIED
+  - name: DONE
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: AUDIT_UNIV_DOCS
+    state: IDLE→AUDITING
+    description: "Audite les layers docs/* de DOC-UNIV-DEV"
+  - id: F2
+    name: DETECT_MISSING_CITATIONS
+    state: AUDITING→REMEDIATING
+    description: "Détecte les concepts sans citation académique"
+  - id: F3
+    name: DETECT_TECH_DUPLICATION
+    state: REMEDIATING
+    description: "Détecte le contenu dupliqué depuis BRAIN-DOCS"
+  - id: F4
+    name: PROPOSE_FIXES
+    state: REMEDIATING→DONE
+    description: "Propose les corrections (ajout de citations ou suppression de doublons)"
+invariant: "Tout concept dans DOC-UNIV-DEV doit être sourcé par une citation académique et ne pas dupliquer BRAIN-DOCS."
+genes:
+  - id: G1
+    name: academic_rigor
+    description: "Chaque concept doit être sourcé par une citation académique valide"
+  - id: G2
+    name: no_duplication
+    description: "Aucun contenu ne doit être dupliqué depuis BRAIN-DOCS"
+anti_patterns:
+  - missing_gene: academic_rigor
+    pathology: "Concept sans source académique → diffusion d'informations non vérifiées"
+  - missing_gene: no_duplication
+    pathology: "Duplication avec BRAIN-DOCS → redondance et incohérence"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: audits
+  - design: documentation-universitaire
+  - skill: doc-univ-validator
+  - workflow: workflow-doc-sync
