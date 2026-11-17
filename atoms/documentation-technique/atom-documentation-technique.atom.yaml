@@ -1,0 +1,11 @@
+atom_id: atom-documentation-technique
+version: 1.0.0
+type: atom
+description: Interface canonique pour la documentation technique (BRAIN-DOCS, L2-PLATFORM). Définit la structure docs/*, les règles de synchronisation avec les repos source, et le gate de cohérence doc ↔ code.
+profile: STANDARD
+consumers:
+  - BRAIN-DOCS
+  - ECOS-CLI
+  - KIVA-CLI
+  - TOPOS
+last_verified: '2026-11-17'
