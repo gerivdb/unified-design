@@ -1,0 +1,78 @@
+---
+name: documentation-sync-gate
+version: "1.0.0"
+status: proposed
+layer: L0-CANON
+intent_hash: 0xDESIGN_DOC_SYNC_GATE_20261117
+description: >
+  Design du gate de cohérence documentation ↔ implémentation.
+  Avant tout push modifiant une interface publique, vérifie que la
+  documentation correspondante dans BRAIN-DOCS ou DOC-UNIV-DEV est à jour.
+  Empêche la drift entre le code et sa documentation.
+inherits:
+  - workflow-pre-push-validation
+  - safe-action-gate
+depends_on:
+  - documentation-technique
+  - documentation-universitaire
+bridges:
+  - target: repo:BRAIN-DOCS
+    role: doc_target
+    protocol: file-watch
+  - target: repo:DOC-UNIV-DEV
+    role: doc_target
+    protocol: file-watch
+layers:
+  - name: docs/gate-rules.yaml
+    description: "Règles de gate de synchronisation doc ↔ code"
+    required: true
+  - name: docs/changed-files-tracker.yaml
+    description: "Suivi des fichiers modifiés impactant la doc"
+    required: true
+capabilities:
+  - name: check-doc-updated-on-api-change
+    description: "Vérifie que la doc est mise à jour sur changement d'API"
+  - name: check-doc-intent-hash
+    description: "Vérifie que chaque doc a un IntentHash valide"
+  - name: check-cross-repo-doc-link
+    description: "Vérifie que chaque doc technique link vers son repo source"
+states:
+  - name: CHECK
+    gate_to_next: CHECK_DONE
+  - name: BLOCK
+    gate_to_next: UNBLOCK
+  - name: ALLOW
+    gate_to_next: PUSH_ALLOWED
+functions:
+  - id: F1
+    name: CHECK_DOC_SYNC
+    state: CHECK
+    description: "Vérifie si un changement d'API nécessite une mise à jour de doc"
+  - id: F2
+    name: BLOCK_PUSH
+    state: BLOCK
+    description: "Bloque le push si la doc n'est pas à jour"
+  - id: F3
+    name: ALLOW_PUSH
+    state: ALLOW
+    description: "Autorise le push si la doc est cohérente"
+invariant: "Aucun push modifiant une interface publique n'est autorisé sans mise à jour correspondante de la documentation."
+genes:
+  - id: G1
+    name: no_drift
+    description: "Zéro drift entre code et documentation"
+  - id: G2
+    name: intent_hash_valid
+    description: "Chaque document possède un IntentHash valide"
+anti_patterns:
+  - missing_gene: no_drift
+    pathology: "Code et doc divergent → documentation obsolète, erreurs d'intégration"
+  - missing_gene: intent_hash_valid
+    pathology: "Documentation sans traçabilité → impossibilité d'audit"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: governs
+  - skill: doc-sync-gate-skill
+  - citizen: doc-tech-auditor
+  - citizen: doc-univ-auditor
+  - workflow: workflow-doc-sync
