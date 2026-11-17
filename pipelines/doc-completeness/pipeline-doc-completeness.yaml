@@ -1,0 +1,73 @@
+---
+name: pipeline-doc-completeness
+version: "1.0.0"
+status: active
+layer: L0-CANON
+intent_hash: 0xPIPELINE_DOC_COMPLETENESS_20261117
+description: >
+  Pipeline de complétude de documentation : détecte les champs doc manquants
+  dans les repos actifs, propose les corrections, et valide avant merge.
+  S'assure que tout repo actif possède sa documentation technique (BRAIN-DOCS)
+  ou universitaire (DOC-UNIV-DEV) à jour.
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: detect-missing-docs
+    description: "Détecte les repos actifs sans documentation associée"
+  - name: propose-doc-fixes
+    description: "Propose les corrections structurelles de doc"
+  - name: validate-doc-completeness
+    description: "Valide que la doc est complète et à jour"
+states:
+  - name: SCAN
+    gate_to_next: SCAN_DONE
+  - name: ANALYZE
+    gate_to_next: ANALYSIS_DONE
+  - name: PROPOSE
+    gate_to_next: PROPOSAL_DONE
+  - name: VALIDATE
+    gate_to_next: VALIDATED
+functions:
+  - id: F1
+    name: SCAN_REPOS
+    state: SCAN
+    description: "Scanne tous les repos actifs pour détecter les docs manquantes"
+  - id: F2
+    name: ANALYZE_GAPS
+    state: ANALYZE
+    description: "Analyse les écarts de documentation par repo"
+  - id: F3
+    name: PROPOSE_FIXES
+    state: PROPOSE
+    description: "Propose les corrections de doc par repo"
+  - id: F4
+    name: VALIDATE_COMPLETENESS
+    state: VALIDATE
+    description: "Valide que la doc est complète pour tous les repos actifs"
+invariant: "Tout repo actif doit avoir sa documentation correspondante à jour dans BRAIN-DOCS ou DOC-UNIV-DEV."
+genes:
+  - id: G1
+    name: completeness
+    description: "Tout repo actif doit avoir sa doc associée"
+  - id: G2
+    name: freshness
+    description: "La doc doit être à jour par rapport au code source"
+anti_patterns:
+  - missing_gene: completeness
+    pathology: "Repo actif sans doc associée → perte de connaissances"
+  - missing_gene: freshness
+    pathology: "Doc obsolète → erreurs d'intégration"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: validates
+  - design: documentation-technique
+  - design: documentation-universitaire
+  - skill: doc-tech-validator
+  - skill: doc-univ-validator
+  - skill: doc-sync-gate-skill
+  - workflow: workflow-doc-sync
