@@ -1,0 +1,10 @@
+atom_id: atom-documentation-universitaire
+version: 1.0.0
+type: atom
+description: Interface canonique pour la documentation universitaire R&D (DOC-UNIV-DEV, L3-CITIZENS). Définit la structure glossaire/papers/patterns/tendances/ressources, les règles de rigueur académique, et la séparation avec BRAIN-DOCS.
+profile: STANDARD
+consumers:
+  - DOC-UNIV-DEV
+  - VERSES
+  - BRAIN-DOCS
+last_verified: '2026-11-17'
