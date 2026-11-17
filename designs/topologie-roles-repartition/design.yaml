@@ -1,0 +1,86 @@
+---
+name: topologie-roles-repartition
+version: "1.0.0"
+status: proposed
+layer: L1-INFRA
+intent_hash: 0xDESIGN_TOPO_ROLES_20261117
+description: >
+  Design de la topologie et de la répartition des rôles par repo dans
+  l'écosystème metacluster ENV2. TOPOS est le propriétaire de cette
+  cartographie. Définit comment chaque repo de known_repositories.yaml
+  se voit attribuer un rôle unique, une strate, un pôle, et un profil,
+  en garantissant le non-chevauchement des responsabilités.
+inherits:
+  - topos
+  - meta-cluster-design
+depends_on:
+  - topos
+bridges:
+  - target: repo:TOPOS
+    role: topology_provider
+    protocol: json-export
+    path: exports/topology.json
+  - target: repo:GOVERNANCE-HUB
+    role: sot_consumer
+    protocol: yaml-read
+    path: known_repositories.yaml
+layers:
+  - name: exports/topology.json
+    description: "Export JSON de la topologie complète (rôles, strates, pôles)"
+    required: true
+  - name: exports/roles-matrix.yaml
+    description: "Matrice rôles × repos × strates × pôles"
+    required: true
+  - name: exports/role-conflicts.yaml
+    description: "Détection des chevauchements de rôles et des trous"
+    required: true
+capabilities:
+  - name: assign-role-to-repo
+    description: "Attribue un rôle unique à un repo dans le SOT"
+  - name: detect-role-overlap
+    description: "Détecte si deux repos ont le même rôle"
+  - name: detect-role-gap
+    description: "Détecte un repo actif sans rôle déclaré"
+  - name: validate-strate-role-coherence
+    description: "Vérifie que le rôle est cohérent avec la strate"
+states:
+  - name: AUDIT
+    gate_to_next: AUDIT_DONE
+  - name: FIX
+    gate_to_next: FIXED
+  - name: VALIDATE
+    gate_to_next: VALIDATED
+functions:
+  - id: F1
+    name: AUDIT_TOPOLOGY
+    state: AUDIT
+    description: "Audite la cohérence rôle/strate/pôle pour tous les repos"
+  - id: F2
+    name: FIX_TOPOLOGY
+    state: FIX
+    description: "Corrige les rôles manquants, les chevauchements, les incohérences"
+  - id: F3
+    name: VALIDATE_TOPOLOGY
+    state: VALIDATE
+    description: "Valide que la topologie est complète et cohérente"
+invariant: "Tout repo actif dans known_repositories.yaml possède un rôle unique, une strate cohérente, un pôle attribué, et aucun chevauchement de rôle."
+genes:
+  - id: G1
+    name: uniqueness
+    description: "Chaque repo a un rôle unique, non partagé"
+  - id: G2
+    name: coherence
+    description: "Le rôle est cohérent avec la strate et le pôle"
+anti_patterns:
+  - missing_gene: uniqueness
+    pathology: "Deux repos avec le même rôle → duplication de responsabilités"
+  - missing_gene: coherence
+    pathology: "Rôle incohérent avec la strate → confusion organisationnelle"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - primitive: atom-topologie-roles
+  - skill: doc-sync-gate-skill
+  - citizen: doc-tech-auditor
+  - citizen: doc-univ-auditor
+  - workflow: workflow-doc-sync
