@@ -1,0 +1,91 @@
+---
+name: documentation-universitaire
+version: "1.0.0"
+status: proposed
+layer: L3-CITIZENS
+intent_hash: 0xDESIGN_DOC_UNIV_20261117
+description: >
+  Design de la documentation universitaire R&D (DOC-UNIV-DEV).
+  Définit la structure canonique d'une base de connaissances recherche :
+  glossaire, papers fondamentaux, patterns d'implémentation, tendances,
+  ressources qualifiées. Séparation stricte avec BRAIN-DOCS (technique).
+inherits:
+  - artifact-layers-design
+  - meta-coherence
+depends_on:
+  - topos
+  - documentation-technique
+bridges:
+  - target: repo:BRAIN-DOCS
+    role: consumes_tech_specs
+    protocol: markdown-link
+    path: ../BRAIN-DOCS/docs/
+  - target: repo:VERSES
+    role: semantic_layer
+    protocol: wazaa-channel
+    channel: L4-TOOLS/VERSES/verses/updated
+layers:
+  - name: docs/glossaire
+    description: "Glossaire des concepts (ML, architecture, sécurité, etc.)"
+    required: true
+  - name: docs/papers
+    description: "Papers fondamentaux annotés par domaine"
+    required: true
+  - name: docs/patterns
+    description: "Patterns d'implémentation pratique"
+    required: true
+  - name: docs/tendances
+    description: "Veille technologique structurée"
+    required: true
+  - name: docs/ressources
+    description: "Sources qualifiées (papers, implémentations, veille)"
+    required: true
+capabilities:
+  - name: validate-univ-doc-structure
+    description: "Valide la présence des layers docs/* requis"
+  - name: check-academic-rigor
+    description: "Vérifie que chaque concept est sourcé (citation)"
+  - name: check-trend-freshness
+    description: "Vérifie que la veille est révisée trimestriellement"
+  - name: check-no-tech-duplication
+    description: "Vérifie qu'il n'y a pas de duplication avec BRAIN-DOCS"
+states:
+  - name: AUDIT
+    gate_to_next: AUDIT_DONE
+  - name: FIX
+    gate_to_next: FIXED
+  - name: VALIDATE
+    gate_to_next: VALIDATED
+functions:
+  - id: F1
+    name: AUDIT_UNIV_DOC
+    state: AUDIT
+    description: "Audite la structure docs/* et les citations académiques"
+  - id: F2
+    name: FIX_UNIV_DOC
+    state: FIX
+    description: "Corrige les layers manquants et les sources absentes"
+  - id: F3
+    name: VALIDATE_UNIV_DOC
+    state: VALIDATE
+    description: "Valide la cohérence académique et la séparation technique"
+invariant: "Tout repo de documentation universitaire possède les layers docs/* requis, cite ses sources, et ne duplique pas BRAIN-DOCS."
+genes:
+  - id: G1
+    name: completeness
+    description: "Tous les layers docs requis doivent être présents"
+  - id: G2
+    name: academic_rigor
+    description: "Chaque concept doit être sourcé par une citation valide"
+anti_patterns:
+  - missing_gene: completeness
+    pathology: "Repo de doc universitaire incomplet → perte de connaissances"
+  - missing_gene: academic_rigor
+    pathology: "Concept sans source académique → diffusion d'informations non vérifiées"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - primitive: atom-documentation-universitaire
+  - skill: doc-univ-validator
+  - citizen: doc-univ-auditor
+  - workflow: workflow-doc-sync
