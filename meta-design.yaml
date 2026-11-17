@@ -489,6 +489,30 @@ designs:
   intent_hash: 0xDESIGN_INTEGRATION_FRAMEWORK_20260928
   consumers: []
   profile: ACTIVE
+- name: documentation-technique
+  path: designs/documentation-technique/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_DOC_TECH_20261117
+  consumers: []
+  profile: STANDARD
+- name: documentation-universitaire
+  path: designs/documentation-universitaire/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_DOC_UNIV_20261117
+  consumers: []
+  profile: STANDARD
+- name: topologie-roles-repartition
+  path: designs/topologie-roles-repartition/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_TOPO_ROLES_20261117
+  consumers: []
+  profile: STANDARD
+- name: documentation-sync-gate
+  path: designs/documentation-sync-gate/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_DOC_SYNC_GATE_20261117
+  consumers: []
+  profile: STANDARD
 piliers:
 - name: Sonar-Driven Design
   abbr: SDD
