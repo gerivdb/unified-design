@@ -1,0 +1,12 @@
+atom_id: atom-topologie-roles
+version: 1.0.0
+type: atom
+description: Interface canonique pour la topologie et la répartition des rôles par repo (TOPOS, L1-INFRA). Définit l'attribution de rôle unique, strate, pôle et profil pour chaque repo de known_repositories.yaml, avec détection des chevauchements et des trous.
+profile: STANDARD
+consumers:
+  - TOPOS
+  - GOVERNANCE-HUB
+  - BRAIN-DOCS
+  - DOC-UNIV-DEV
+  - BRAIN
+last_verified: '2026-11-17'
