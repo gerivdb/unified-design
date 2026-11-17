@@ -513,6 +513,12 @@ designs:
   intent_hash: 0xDESIGN_DOC_SYNC_GATE_20261117
   consumers: []
   profile: STANDARD
+- name: documentation-ragx-integration
+  path: designs/documentation-ragx-integration/design.yaml
+  version: 1.0.0
+  intent_hash: 0xDESIGN_DOC_RAGX_INTEGRATION_20261117
+  consumers: []
+  profile: STANDARD
 piliers:
 - name: Sonar-Driven Design
   abbr: SDD

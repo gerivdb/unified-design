@@ -1,0 +1,146 @@
+---
+name: documentation-ragx-integration
+version: "1.0.0"
+status: proposed
+layer: L0-CANON
+intent_hash: 0xDESIGN_DOC_RAGX_INTEGRATION_20261117
+description: >
+  Design de l'intégration entre la documentation technique/universitaire (BRAIN-DOCS,
+  DOC-UNIV-DEV), le navigateur abstrat (BAL), le pont RAGX (ENV2 ↔ ENV3) et les
+  Knowledge Items (KI). Définit le flux de connaissance depuis les documents de
+  gouvernance vers NotebookLM/Gemini (ENV3) et retour, avec traçabilité WAL et
+  cohérence topologique CUBE-A/SPIDX.
+inherits:
+  - artifact-layers-design
+  - meta-coherence
+  - documentation-technique
+  - documentation-universitaire
+depends_on:
+  - documentation-technique
+  - documentation-universitaire
+  - browser-abstraction-layer
+  - raglx-core
+  - spidx-core
+  - cube-a-core
+bridges:
+  - target: repo:BRAIN-DOCS
+    role: source_technique
+    protocol: markdown-link
+    path: docs/api, docs/guides, docs/runbooks, docs/adr, docs/changelog
+  - target: repo:DOC-UNIV-DEV
+    role: source_universitaire
+    protocol: markdown-link
+    path: docs/glossaire, docs/papers, docs/patterns, docs/tendances, docs/ressources
+  - target: repo:TOPOS
+    role: topologie_cartographie
+    protocol: json-export
+    path: exports/topology.json, exports/roles-matrix.yaml
+  - target: repo:RAGX
+    role: pont_env2_env3
+    protocol: http-ragx-bridge
+    path: ragx_bridge.py, context/current_session.json
+  - target: repo:GOVERNANCE-HUB
+    role: sot_reference
+    protocol: yaml-read
+    path: known_repositories.yaml
+layers:
+  - name: docs/ki-sources
+    description: "Sources de Knowledge Items extraites des docs techniques et universitaires"
+    required: true
+  - name: docs/ki-bundles
+    description: "Bundles KI prêts pour ingestion RAGX (Markdown/YAML + IntentHash)"
+    required: true
+  - name: docs/ki-context
+    description: "Contexte ENV2 injecté dans RAGX via /context endpoint"
+    required: true
+  - name: docs/ki-feedback
+    description: "Retour Gemini/NotebookLM vers ENV2 via /query et /conversations/search"
+    required: true
+capabilities:
+  - name: extract-ki-from-docs
+    description: "Extrait les Knowledge Items depuis BRAIN-DOCS et DOC-UNIV-DEV"
+  - name: build-ki-bundle
+    description: "Constitue un bundle KI avec IntentHash et TTL"
+  - name: inject-ki-context
+    description: "Injecte le contexte KI dans RAGX via POST /context"
+  - name: query-ki-ternary
+    description: "Recherche sémantique ternaire via POST /conversations/search"
+  - name: sync-ki-notebooklm
+    description: "Synchronise les KI vers NotebookLM via POST /sync (mode hors-bande)"
+states:
+  - name: IDLE
+    gate_to_next: KI_EXTRACTED
+  - name: KI_EXTRACTED
+    gate_to_next: KI_BUNDLED
+  - name: KI_BUNDLED
+    gate_to_next: KI_INJECTED
+  - name: KI_INJECTED
+    gate_to_next: KI_QUERIED
+  - name: KI_QUERIED
+    gate_to_next: KI_SYNCED
+  - name: KI_SYNCED
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: EXTRACT_KI
+    state: IDLE→KI_EXTRACTED
+    description: "Extrait les Knowledge Items depuis les docs techniques et universitaires"
+  - id: F2
+    name: BUILD_KI_BUNDLE
+    state: KI_EXTRACTED→KI_BUNDLED
+    description: "Constitue un bundle KI avec IntentHash, TTL et métadonnées de provenance"
+  - id: F3
+    name: INJECT_KI_CONTEXT
+    state: KI_BUNDLED→KI_INJECTED
+    description: "Injecte le contexte KI dans RAGX via POST /context"
+  - id: F4
+    name: QUERY_KI_TERNARY
+    state: KI_INJECTED→KI_QUERIED
+    description: "Recherche sémantique ternaire dans RAGX via POST /conversations/search"
+  - id: F5
+    name: SYNC_KI_NOTEBOOKLM
+    state: KI_QUERIED→KI_SYNCED
+    description: "Synchronise les KI vers NotebookLM via POST /sync (mode hors-bande, ADR-0209)"
+invariant: "Tout Knowledge Item extrait des docs techniques ou universitaires doit posséder un IntentHash, un TTL et une provenance traçable avant injection dans RAGX."
+genes:
+  - id: G1
+    name: ki_provenance
+    description: "Chaque KI doit citer son repo source (BRAIN-DOCS ou DOC-UNIV-DEV) et son fichier d'origine"
+  - id: G2
+    name: ki_intent_hash
+    description: "Chaque KI doit posséder un IntentHash valide et référençable"
+  - id: G3
+    name: ki_topological_coherence
+    description: "Chaque KI injectée doit passer par SPIDX/CUBE-A pour cohérence topologique"
+anti_patterns:
+  - missing_gene: ki_provenance
+    pathology: "KI sans provenance → perte de traçabilité, impossible d'auditer la source"
+  - missing_gene: ki_intent_hash
+    pathology: "KI sans IntentHash → impossible de vérifier l'intégrité et la version"
+  - missing_gene: ki_topological_coherence
+    pathology: "KI sans cohérence CUBE-A → risque d'hallucination dans Gemini"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - repo: gerivdb/BRAIN-DOCS
+    relation: source_technique
+  - repo: gerivdb/DOC-UNIV-DEV
+    relation: source_universitaire
+  - repo: gerivdb/RAGX
+    relation: pont_env2_env3
+  - repo: gerivdb/TOPOS
+    relation: topologie_cartographie
+  - design: documentation-technique
+  - design: documentation-universitaire
+  - design: browser-abstraction-layer
+  - design: documentation-sync-gate
+  - primitive: atom-documentation-technique
+  - primitive: atom-documentation-universitaire
+  - primitive: atom-topologie-roles
+  - skill: doc-tech-validator
+  - skill: doc-univ-validator
+  - skill: doc-sync-gate-skill
+  - citizen: doc-tech-auditor
+  - citizen: doc-univ-auditor
+  - workflow: workflow-doc-sync
+  - pipeline: pipeline-doc-completeness
