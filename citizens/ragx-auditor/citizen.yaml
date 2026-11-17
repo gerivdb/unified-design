@@ -1,0 +1,75 @@
+---
+name: ragx-auditor
+description: >
+  Citoyen passif qui audite la cohérence des Knowledge Items (KI) entre
+  BRAIN-DOCS / DOC-UNIV-DEV et RAGX / NotebookLM. Vérifie que chaque KI
+  injectée possède un IntentHash, une provenance traçable, et une cohérence
+  topologique CUBE-A/SPIDX.
+version: "1.0.0"
+status: active
+layer: L0-CANON
+intent_hash: 0xCITIZEN_RAGX_AUDITOR_20261117
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+capabilities:
+  - name: audit-ki-provenance
+    description: "Audite que chaque KI injectée dans RAGX cite son repo source"
+  - name: audit-ki-intent-hash
+    description: "Vérifie que chaque KI possède un IntentHash valide"
+  - name: audit-ki-topological-coherence
+    description: "Vérifie que chaque KI a passé SPIDX/CUBE-A avant injection"
+states:
+  - name: IDLE
+    gate_to_next: AUDIT_REQUESTED
+  - name: AUDITING
+    gate_to_next: AUDIT_COMPLETE
+  - name: REMEDIATING
+    gate_to_next: REMEDIATION_VERIFIED
+  - name: DONE
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: AUDIT_KI_PROVENANCE
+    state: IDLE→AUDITING
+    description: "Audite que chaque KI cite son repo source (BRAIN-DOCS ou DOC-UNIV-DEV)"
+  - id: F2
+    name: AUDIT_KI_INTENT_HASH
+    state: AUDITING→REMEDIATING
+    description: "Vérifie que chaque KI possède un IntentHash valide"
+  - id: F3
+    name: AUDIT_KI_TOPOLOGICAL
+    state: REMEDIATING
+    description: "Vérifie la cohérence topologique CUBE-A/SPIDX"
+  - id: F4
+    name: PROPOSE_FIXES
+    state: REMEDIATING→DONE
+    description: "Propose les corrections (ajout de provenance, réinjection)"
+invariant: "Tout KI dans RAGX doit posséder provenance, IntentHash et cohérence topologique."
+genes:
+  - id: G1
+    name: ki_provenance
+    description: "Chaque KI doit citer son repo source et son fichier d'origine"
+  - id: G2
+    name: ki_intent_hash
+    description: "Chaque KI doit posséder un IntentHash valide"
+  - id: G3
+    name: ki_topological_coherence
+    description: "Chaque KI doit avoir passé SPIDX/CUBE-A"
+anti_patterns:
+  - missing_gene: ki_provenance
+    pathology: "KI sans provenance → perte de traçabilité"
+  - missing_gene: ki_intent_hash
+    pathology: "KI sans IntentHash → impossible de vérifier l'intégrité"
+  - missing_gene: ki_topological_coherence
+    pathology: "KI sans cohérence topologique → risque d'hallucination"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: audits
+  - design: documentation-ragx-integration
+  - skill: ragx-bridge-skill
+  - skill: ragx-query-skill
+  - workflow: workflow-ragx-sync
