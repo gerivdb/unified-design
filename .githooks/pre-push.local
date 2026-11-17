@@ -1,0 +1,17 @@
+#!/bin/bash
+# pre-push hook — Branch Taxonomy Enforcement
+# Bloque le push si la branche ne respecte pas la taxonomy autorisée.
+
+set -euo pipefail
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+ALLOWED_PREFIXES="^(feat|fix|chore|docs|refactor|test|hotfix)/"
+
+if [[ ! "$BRANCH" =~ $ALLOWED_PREFIXES ]]; then
+  echo "[HOOK] Branche '$BRANCH' ne respecte pas la taxonomy autorisée."
+  echo "[HOOK] Préfixes autorisés: feat/, fix/, chore/, docs/, refactor/, test/, hotfix/"
+  exit 1
+fi
+
+echo "[HOOK] Branch taxonomy OK: $BRANCH"
+exit 0
