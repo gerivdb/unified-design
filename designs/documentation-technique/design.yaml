@@ -1,0 +1,97 @@
+---
+name: documentation-technique
+version: "1.0.0"
+status: proposed
+layer: L2-PLATFORM
+intent_hash: 0xDESIGN_DOC_TECH_20261117
+description: >
+  Design de la documentation technique centralisée (BRAIN-DOCS).
+  Définit la structure canonique, les règles de synchronisation avec les
+  repos source, et le gate de cohérence doc ↔ code.
+inherits:
+  - artifact-layers-design
+  - meta-coherence
+depends_on:
+  - topos
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+bridges:
+  - target: repo:BRAIN
+    role: documents
+    protocol: markdown-link
+    path: docs/brain/
+  - target: repo:ECOS-CLI
+    role: documents
+    protocol: markdown-link
+    path: docs/ecos-cli/
+  - target: repo:KIVA-CLI
+    role: documents
+    protocol: markdown-link
+    path: docs/kiva-cli/
+  - target: repo:TOPOS
+    role: documents_topology
+    protocol: markdown-link
+    path: docs/topos/
+layers:
+  - name: docs/api
+    description: "Référence API des repos source"
+    required: true
+  - name: docs/guides
+    description: "Guides d'intégration et d'utilisation"
+    required: true
+  - name: docs/runbooks
+    description: "Runbooks opérationnels"
+    required: true
+  - name: docs/adr
+    description: "Décisions d'architecture documentées"
+    required: true
+  - name: docs/changelog
+    description: "Historique des modifications par version"
+    required: true
+capabilities:
+  - name: validate-tech-doc-structure
+    description: "Valide la présence des layers docs/* requis"
+  - name: check-doc-source-link
+    description: "Vérifie que chaque doc cite son repo source"
+  - name: check-version-alignment
+    description: "Vérifie que la version de la doc correspond au repo source"
+states:
+  - name: AUDIT
+    gate_to_next: AUDIT_DONE
+  - name: FIX
+    gate_to_next: FIXED
+  - name: VALIDATE
+    gate_to_next: VALIDATED
+functions:
+  - id: F1
+    name: AUDIT_TECH_DOC
+    state: AUDIT
+    description: "Audite la structure docs/* et les liens vers repos source"
+  - id: F2
+    name: FIX_TECH_DOC
+    state: FIX
+    description: "Corrige les layers docs manquants et les liens brisés"
+  - id: F3
+    name: VALIDATE_TECH_DOC
+    state: VALIDATE
+    description: "Valide la cohérence doc ↔ code via version-alignment"
+invariant: "Tout repo de documentation technique possède les layers docs/* requis et cite ses repos source."
+genes:
+  - id: G1
+    name: completeness
+    description: "Tous les layers docs requis doivent être présents"
+  - id: G2
+    name: consistency
+    description: "La structure doit être cohérente across repos de doc technique"
+anti_patterns:
+  - missing_gene: completeness
+    pathology: "Repo de doc technique incomplet → difficulté de maintenance"
+  - missing_gene: consistency
+    pathology: "Structure variable → confusion cross-repo"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: documents
+  - primitive: atom-documentation-technique
+  - skill: doc-tech-validator
+  - citizen: doc-tech-auditor
+  - workflow: workflow-doc-sync
