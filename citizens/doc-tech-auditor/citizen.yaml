@@ -1,0 +1,68 @@
+---
+name: doc-tech-auditor
+description: >
+  Citoyen passif qui audite la documentation technique de BRAIN-DOCS.
+  Vérifie la présence des layers docs/*, les liens vers les repos source,
+  et l'absence de docs orphelines ou obsolètes.
+version: "1.0.0"
+status: active
+layer: L2-PLATFORM
+intent_hash: 0xCITIZEN_DOC_TECH_AUDITOR_20261117
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+capabilities:
+  - name: audit-tech-doc
+    description: "Audite la structure docs/* de BRAIN-DOCS"
+  - name: detect-orphan-docs
+    description: "Détecte les docs techniques sans repo source"
+  - name: detect-stale-docs
+    description: "Détecte les docs techniques obsolètes par rapport au code source"
+states:
+  - name: IDLE
+    gate_to_next: AUDIT_REQUESTED
+  - name: AUDITING
+    gate_to_next: AUDIT_COMPLETE
+  - name: REMEDIATING
+    gate_to_next: REMEDIATION_VERIFIED
+  - name: DONE
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: AUDIT_TECH_DOCS
+    state: IDLE→AUDITING
+    description: "Audite les layers docs/* de BRAIN-DOCS"
+  - id: F2
+    name: DETECT_ORPHANS
+    state: AUDITING→REMEDIATING
+    description: "Détecte les docs techniques sans repo source"
+  - id: F3
+    name: DETECT_STALE
+    state: REMEDIATING
+    description: "Détecte les docs techniques obsolètes"
+  - id: F4
+    name: PROPOSE_FIXES
+    state: REMEDIATING→DONE
+    description: "Propose les corrections (mise à jour ou suppression)"
+invariant: "Tout document technique dans BRAIN-DOCS cite un repo source valide et est à jour."
+genes:
+  - id: G1
+    name: completeness
+    description: "Tous les docs techniques doivent avoir un repo source cité"
+  - id: G2
+    name: freshness
+    description: "Tous les docs techniques doivent être à jour par rapport à leur source"
+anti_patterns:
+  - missing_gene: completeness
+    pathology: "Doc technique orpheline → confusion et perte d'information"
+  - missing_gene: freshness
+    pathology: "Doc technique obsolète → erreurs d'intégration"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: audits
+  - design: documentation-technique
+  - skill: doc-tech-validator
+  - workflow: workflow-doc-sync
