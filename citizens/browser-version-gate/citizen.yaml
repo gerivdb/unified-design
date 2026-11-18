@@ -1,0 +1,65 @@
+---
+name: browser-version-gate
+description: >
+  Citoyen passif qui verifie periodiquement la version Chromium/ungoogled-chromium
+  installee et alerte si elle est hors politique (tested_versions, allowed_versions).
+  Applique la politique fail_closed si la version est interdite.
+version: "1.0.0"
+status: active
+layer: L0-CANON
+intent_hash: 0xCITIZEN_BROWSER_VERSION_GATE_20261117
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+capabilities:
+  - name: audit-browser-version
+    description: "Verifie la version Chromium/ungoogled-chromium installee"
+  - name: check-version-policy
+    description: "Verifie que la version est dans tested_versions ou allowed_versions"
+  - name: alert-version-mismatch
+    description: "Alerte si la version est hors politique (forbidden_below ou forbidden_above)"
+states:
+  - name: IDLE
+    gate_to_next: CHECK_REQUESTED
+  - name: CHECKING
+    gate_to_next: CHECK_COMPLETE
+  - name: ALERTING
+    gate_to_next: ALERT_COMPLETE
+  - name: DONE
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: AUDIT_BROWSER_VERSION
+    state: IDLE->CHECKING
+    description: "Recupere la version installee de Chromium/ungoogled-chromium"
+  - id: F2
+    name: CHECK_VERSION_POLICY
+    state: CHECKING->ALERTING
+    description: "Verifie que la version est dans la plage autorisee"
+  - id: F3
+    name: ALERT_VERSION_MISMATCH
+    state: ALERTING->DONE
+    description: "Genere une alerte si la version est hors politique"
+invariant: "La version Chromium/ungoogled-chromium installee doit etre dans tested_versions ou allowed_versions, et jamais en dessous de forbidden_below ni au-dessus de forbidden_above."
+genes:
+  - id: G1
+    name: version_compliance
+    description: "Chaque version installee doit etre dans la plage autorisee"
+  - id: G2
+    name: fail_closed
+    description: "Toute version hors politique doit bloquer l'injection de KI"
+anti_patterns:
+  - missing_gene: version_compliance
+    pathology: "Version non testee utilisee -> risque d'incompatibilite"
+  - missing_gene: fail_closed
+    pathology: "Version interdite utilisee sans alerte -> risque d'echec silencieux"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: audits
+  - design: documentation-ragx-integration
+  - design: documentation-technique
+  - skill: browser-version-gate
+  - workflow: doc-full-pipeline
