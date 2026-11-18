@@ -1,0 +1,66 @@
+---
+name: ki-sync
+description: >
+  Citoyen passif qui surveille les dossiers docs/ki-bundles/ des depots
+  BRAIN-DOCS et DOC-UNIV-DEV (et tous les repos avec dossier ki-bundles/).
+  Detecte les nouveaux bundles KI et les injecte dans RAGX via le skill
+  ki-injector (POST /context sur le port 8853).
+version: "1.0.0"
+status: active
+layer: L0-CANON
+intent_hash: 0xCITIZEN_KI_SYNC_20261117
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+capabilities:
+  - name: scan-ki-bundles
+    description: "Surveille les dossiers docs/ki-bundles/ pour detecter les nouveaux bundles"
+  - name: inject-ki-to-ragx
+    description: "Injecte chaque nouveau bundle KI dans RAGX via POST /context"
+  - name: track-injected-kis
+    description: "Tient a jour la liste des KI deja injectees pour éviter les doublons"
+states:
+  - name: IDLE
+    gate_to_next: SCAN_REQUESTED
+  - name: SCANNING
+    gate_to_next: SCAN_COMPLETE
+  - name: INJECTING
+    gate_to_next: INJECT_COMPLETE
+  - name: DONE
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: SCAN_KI_BUNDLES
+    state: IDLE->SCANNING
+    description: "Surveille les dossiers docs/ki-bundles/ pour detecter les nouveaux bundles"
+  - id: F2
+    name: INJECT_KI_TO_RAGX
+    state: SCANNING->INJECTING
+    description: "Injecte chaque nouveau bundle KI dans RAGX via POST /context"
+  - id: F3
+    name: TRACK_INJECTED_KIS
+    state: INJECTING->DONE
+    description: "Tient a jour la liste des KI deja injectees"
+invariant: "Tout nouveau fichier dans docs/ki-bundles/ doit etre injecte dans RAGX dans les 5 minutes."
+genes:
+  - id: G1
+    name: ki_completeness
+    description: "Chaque bundle KI doit etre injecte dans RAGX"
+  - id: G2
+    name: no_duplicate_injection
+    description: "Chaque KI doit etre injecte une seule fois"
+anti_patterns:
+  - missing_gene: ki_completeness
+    pathology: "KI non injectee -> connaissances non disponibles dans RAGX"
+  - missing_gene: no_duplicate_injection
+    pathology: "Doublon d'injection -> incoherence dans RAGX"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: audits
+  - design: documentation-ragx-integration
+  - skill: ragx-bridge-skill
+  - skill: ki-injector
+  - workflow: workflow-ragx-sync
