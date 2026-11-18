@@ -1,0 +1,66 @@
+---
+name: doc-metadata-auditor
+description: >
+  Citoyen passif qui audite periodiquement les fichiers .md des depots de
+  documentation (BRAIN-DOCS, DOC-UNIV-DEV et tous les repos avec dossier docs/).
+  Verifie la presence des metadonnees obligatoires : intent_hash, profil,
+  source_repo. Signale les fichiers non conformes.
+version: "1.0.0"
+status: active
+layer: L0-CANON
+intent_hash: 0xCITIZEN_DOC_METADATA_AUDITOR_20261117
+inherits:
+  - meta-coherence
+  - ecosystem-meta-coherence
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+capabilities:
+  - name: audit-doc-metadata
+    description: "Audite la presence des metadonnees (intent_hash, profil, source_repo) sur chaque fichier .md"
+  - name: detect-missing-metadata
+    description: "Detecte les fichiers .md sans metadonnees obligatoires"
+  - name: generate-audit-report
+    description: "Genere un rapport JSON des fichiers non conformes"
+states:
+  - name: IDLE
+    gate_to_next: AUDIT_REQUESTED
+  - name: AUDITING
+    gate_to_next: AUDIT_COMPLETE
+  - name: REPORTING
+    gate_to_next: REPORT_COMPLETE
+  - name: DONE
+    gate_to_next: IDLE
+functions:
+  - id: F1
+    name: AUDIT_DOC_METADATA
+    state: IDLE->AUDITING
+    description: "Audite les metadonnees de chaque fichier .md"
+  - id: F2
+    name: DETECT_MISSING
+    state: AUDITING->REPORTING
+    description: "Detecte les fichiers sans metadonnees obligatoires"
+  - id: F3
+    name: GENERATE_REPORT
+    state: REPORTING->DONE
+    description: "Genere le rapport d'audit final"
+invariant: "Tout fichier .md dans un depot de documentation doit posseder intent_hash, profil et source_repo."
+genes:
+  - id: G1
+    name: metadata_completeness
+    description: "Chaque fichier .md doit posseder intent_hash, profil et source_repo"
+  - id: G2
+    name: provenance
+    description: "Chaque fichier .md doit citer son repo source"
+anti_patterns:
+  - missing_gene: metadata_completeness
+    pathology: "Fichier .md sans metadonnees -> perte de traçabilite"
+  - missing_gene: provenance
+    pathology: "Fichier .md sans source_repo -> impossible d'identifier l'origine"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: audits
+  - design: documentation-technique
+  - design: documentation-universitaire
+  - skill: doc-metadata-auditor
+  - workflow: doc-full-pipeline
