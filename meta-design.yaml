@@ -519,6 +519,82 @@ designs:
   intent_hash: 0xDESIGN_DOC_RAGX_INTEGRATION_20261117
   consumers: []
   profile: STANDARD
+skills:
+  - name: doc-metadata-auditor
+    path: skills/doc-metadata-auditor/SKILL.md
+    version: 1.0.0
+    intent_hash: 0xSKILL_DOC_METADATA_AUDITOR_20261117
+    consumers: []
+    profile: STANDARD
+  - name: doc-structure-creator
+    path: skills/doc-structure-creator/SKILL.md
+    version: 1.0.0
+    intent_hash: 0xSKILL_DOC_STRUCTURE_CREATOR_20261117
+    consumers: []
+    profile: STANDARD
+  - name: ki-injector
+    path: skills/ki-injector/SKILL.md
+    version: 1.0.0
+    intent_hash: 0xSKILL_KI_INJECTOR_20261117
+    consumers: []
+    profile: STANDARD
+  - name: browser-version-gate
+    path: skills/browser-version-gate/SKILL.md
+    version: 1.0.0
+    intent_hash: 0xSKILL_BROWSER_VERSION_GATE_20261117
+    consumers: []
+    profile: STANDARD
+  - name: repo-push-manager
+    path: skills/repo-push-manager/SKILL.md
+    version: 1.0.0
+    intent_hash: 0xSKILL_REPO_PUSH_MANAGER_20261117
+    consumers: []
+    profile: STANDARD
+citizens:
+  - name: doc-metadata-auditor
+    path: citizens/doc-metadata-auditor/citizen.yaml
+    version: 1.0.0
+    intent_hash: 0xCITIZEN_DOC_METADATA_AUDITOR_20261117
+    consumers: []
+    profile: STANDARD
+  - name: ki-sync
+    path: citizens/ki-sync/citizen.yaml
+    version: 1.0.0
+    intent_hash: 0xCITIZEN_KI_SYNC_20261117
+    consumers: []
+    profile: STANDARD
+  - name: browser-version-gate
+    path: citizens/browser-version-gate/citizen.yaml
+    version: 1.0.0
+    intent_hash: 0xCITIZEN_BROWSER_VERSION_GATE_20261117
+    consumers: []
+    profile: STANDARD
+workflows:
+  - name: doc-full-pipeline
+    path: workflows/doc-full-pipeline.md
+    version: 1.0.0
+    intent_hash: 0xWORKFLOW_DOC_FULL_PIPELINE_20261117
+    consumers: []
+    profile: STANDARD
+  - name: doc-pre-push-doc-guard
+    path: workflows/doc-pre-push-doc-guard.md
+    version: 1.0.0
+    intent_hash: 0xWORKFLOW_DOC_SYNC_20261117
+    consumers: []
+    profile: STANDARD
+pipelines:
+  - name: doc-completeness
+    path: pipelines/ki-completeness.yaml
+    version: 1.0.0
+    intent_hash: 0xPIPELINE_DOC_COMPLETENESS_20261117
+    consumers: []
+    profile: STANDARD
+  - name: ragx-completeness
+    path: pipelines/ragx-completeness.yaml
+    version: 1.0.0
+    intent_hash: 0xPIPELINE_RAGX_COMPLETENESS_20261117
+    consumers: []
+    profile: STANDARD
 piliers:
 - name: Sonar-Driven Design
   abbr: SDD
