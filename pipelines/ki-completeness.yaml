@@ -1,0 +1,73 @@
+---
+name: pipeline-doc-completeness
+version: "1.0.0"
+status: active
+layer: L0-CANON
+intent_hash: 0xPIPELINE_DOC_COMPLETENESS_20261117
+description: >
+  Pipeline de complétude de documentation : détecte les fichiers .md sans
+  KI associé dans RAGX, propose les corrections, et valide avant merge
+  que chaque doc actif a son KI injecté dans RAGX.
+inherits:
+  - ecosystem-meta-coherence
+  - chain-fluidity
+depends_on:
+  - ATOM-GATE-LAYERS
+  - ATOM-EXTERNAL-VERIFICATION-MANDATORY
+  - ATOM-STOP-CONDITION
+capabilities:
+  - name: detect-missing-ki
+    description: "Détecte les docs sans KI correspondante dans RAGX"
+  - name: propose-ki-fixes
+    description: "Propose les corrections pour les docs sans KI"
+  - name: validate-ki-completeness
+    description: "Valide que chaque doc actif a son KI injecté dans RAGX"
+states:
+  - name: SCAN
+    gate_to_next: SCAN_DONE
+  - name: ANALYZE
+    gate_to_next: ANALYSIS_DONE
+  - name: PROPOSE
+    gate_to_next: PROPOSAL_DONE
+  - name: VALIDATE
+    gate_to_next: VALIDATED
+functions:
+  - id: F1
+    name: SCAN_DOCS
+    state: SCAN
+    description: "Scanne tous les docs de BRAIN-DOCS et DOC-UNIV-DEV"
+  - id: F2
+    name: ANALYZE_GAPS
+    state: ANALYZE
+    description: "Analyse les écarts entre docs et KI injectées dans RAGX"
+  - id: F3
+    name: PROPOSE_FIXES
+    state: PROPOSE
+    description: "Propose les corrections pour les docs sans KI"
+  - id: F4
+    name: VALIDATE_COMPLETENESS
+    state: VALIDATE
+    description: "Valide que chaque doc actif a son KI injecté dans RAGX"
+invariant: "Tout doc technique ou universitaire actif doit avoir son KI injecté dans RAGX avec IntentHash valide."
+genes:
+  - id: G1
+    name: completeness
+    description: "Tout doc actif doit avoir son KI associé"
+  - id: G2
+    name: freshness
+    description: "Le KI doit être à jour par rapport au doc source"
+anti_patterns:
+  - missing_gene: completeness
+    pathology: "Doc actif sans KI associé → perte de connaissances"
+  - missing_gene: freshness
+    pathology: "KI obsolète → réponses Gemini inexactes"
+cross_references:
+  - repo: gerivdb/unified-design
+    relation: validates
+  - design: documentation-technique
+  - design: documentation-universitaire
+  - design: documentation-ragx-integration
+  - skill: doc-tech-validator
+  - skill: doc-univ-validator
+  - skill: ragx-bridge-skill
+  - workflow: workflow-doc-sync
