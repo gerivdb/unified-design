@@ -1,3 +1,11 @@
+---
+intent_hash: 0x8f13d6008c9896e5
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # ADR-Design-Integration Traceability — Documentation
 
 ## Objectif

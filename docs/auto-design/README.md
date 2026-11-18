@@ -1,3 +1,11 @@
+---
+intent_hash: 0xf7d963ad859069a8
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # Auto-Design
 
 ## Principe

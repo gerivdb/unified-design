@@ -1,3 +1,11 @@
+---
+intent_hash: 0xd531f95b5520defe
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # Meta-Coherence Checker — Unified-Design
 
 > **Script** : `.kilo/check_meta_coherence.py`  

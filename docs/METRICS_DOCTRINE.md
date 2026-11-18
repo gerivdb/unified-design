@@ -40,3 +40,6 @@ Toute proposition de nouvelle métrique de gouvernance passe ce questionnaire av
 implémentation. Une métrique rejetée peut être citée en annexe avec sa raison de rejet —
 pour éviter sa redécouverte par une session future enthousiaste (cf. entropie H, réintroduite
 deux fois en une session avant filtrage définitif).
+
+
+*Source : gerivdb/gerivdb/unified-design*

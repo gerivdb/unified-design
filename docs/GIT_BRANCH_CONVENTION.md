@@ -53,3 +53,5 @@ Cette convention fait partie des ATOM SOTA suivants :
 ## Documentation complète
 
 Voir le [README des conventions SOTA](../conventions/README.md) pour une vue d'ensemble.
+
+*Source : gerivdb/gerivdb/unified-design*

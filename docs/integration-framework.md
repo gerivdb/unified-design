@@ -1,3 +1,11 @@
+---
+intent_hash: 0x8be5dbd2b76c22ae
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # Integration Framework — Documentation
 
 ## Objectif

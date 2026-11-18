@@ -36,3 +36,4 @@
 | MOC-STRUCTURAL-COHERENCE-20260922 | Structural Coherence | approved |
 | MOC-UNIFIED-DESIGN-STRUCTURAL-METACOHERENCE-CHECKER-20260927 | Unified-Design Structural Metacoherence Checker | approved |
 | MOC-AUTO-PROMOTE-20260928 | Auto-Promote | approved |
+| MOC-LOOPX-PROOF-OF-LIFE-AUTOMATION-20261001 | LOOPX Proof-of-Life Automation | proposed |

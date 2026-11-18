@@ -1,3 +1,11 @@
+---
+intent_hash: 0xb888c7eb61cde828
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # Unified-Design Automation Scripts
 
 Scripts d'automatisation pour l'écosystème unified-design.

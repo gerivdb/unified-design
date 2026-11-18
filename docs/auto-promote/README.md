@@ -1,3 +1,11 @@
+---
+intent_hash: 0x5871dc4e9cca078e
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # Auto-Promote
 
 Promotion automatique des documents de gouvernance (ADR, Designs, INTENTS) quand les critères objectifs sont remplis.

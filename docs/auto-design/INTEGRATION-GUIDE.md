@@ -1,3 +1,11 @@
+---
+intent_hash: 0xdc79df2b06d31e41
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # Integration Guide — Auto-Design Écosystémique
 
 ## Vue d'ensemble

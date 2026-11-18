@@ -33,3 +33,6 @@ Toujours utiliser les cmdlets PowerShell natives.
 
 - TALEX friction #7 : `head` inexistant dans PowerShell
 - Source : `REPORTS/REPORT-TALEX-FRICTION-SESSION-20260921.md`
+
+
+*Source : gerivdb/gerivdb/unified-design*

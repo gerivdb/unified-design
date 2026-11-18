@@ -1,3 +1,11 @@
+---
+intent_hash: 0x80996e1a7d134603
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # Benefits — Auto-Design Écosystémique
 
 ## Résumé

@@ -1,3 +1,11 @@
+---
+intent_hash: 0x4b2e7af3995b13ae
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # Cross-Repo CI Pipeline — Documentation
 
 ## Objectif

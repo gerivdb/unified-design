@@ -1,3 +1,11 @@
+---
+intent_hash: 0x054220ca4f94be6e
+created: 2026-11-18T01:18:12Z
+profil: TOOL
+role: outil_ecosysteme
+source_repo: gerivdb/unified-design
+status: active
+---
 # Exemples de fiches Artifact Extraction Card
 
 > **IntentHash** : `0xEXAMPLE_ARTIFACT_EXTRACTION_CARD_20260921`  

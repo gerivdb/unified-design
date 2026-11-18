@@ -70,3 +70,5 @@ Ce fichier doit être mis à jour lorsqu'une nouvelle couche est ajoutée ou lor
 
 **Statut** : actif
 **Dernière mise à jour** : 2026-07-17
+
+*Source : gerivdb/gerivdb/unified-design*
